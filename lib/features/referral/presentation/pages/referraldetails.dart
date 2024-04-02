@@ -214,6 +214,15 @@ class ReferralDetailsPage extends StatelessWidget {
                                   },
                                 ),
                                 const SizedBox(height: kPadding * 2),
+                                // ReactiveValueListenableBuilder<String?>(
+                                //     formControlName: 'key_population',
+                                //     builder: (context, control, child) =>
+                                //         Visibility(
+                                //           visible: (formGroup
+                                //                   .control('key_population')
+                                //                   .value) ==
+                                //               'PW',
+                                //           child:
                                 ChipRadioButtons(
                                   crossAxisCount: 2,
                                   label: 'Trimester Of PW',
@@ -230,6 +239,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                         value;
                                   },
                                 ),
+                                //  )),
                                 const SizedBox(height: kPadding * 2),
                                 const PrimaryTextField(
                                   formControlName: 'referred_by',

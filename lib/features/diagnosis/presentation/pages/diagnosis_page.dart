@@ -230,33 +230,47 @@ class DiagnosisPage extends StatelessWidget {
                           selected: formGroup.control('naat_test').value,
                         ),
                         const SizedBox(height: kPadding * 2),
-                        TextFieldWithList(
-                          controlName: 'naat_machine',
-                          label: 'NAAT Machine',
-                          padding: EdgeInsets.zero,
-                          prefixIcon: Icons.account_circle_outlined,
-                          listData: const ['Item 1', 'Item 2', 'Item 3'],
-                          allowMultiSelection: false,
-                          onSelected: (value) {},
-                          emptyString: '',
-                        ),
-                        const SizedBox(height: kPadding * 2),
-                        TextFieldWithList(
-                          controlName: 'naat_site',
-                          label: ' NAAT Site',
-                          padding: EdgeInsets.zero,
-                          prefixIcon: Icons.account_circle_outlined,
-                          listData: const ['Item 1', 'Item 2', 'Item 3'],
-                          allowMultiSelection: false,
-                          onSelected: (value) {},
-                          emptyString: '',
-                        ),
-                        const SizedBox(height: kPadding * 2),
-                        const PrimaryTextField(
-                          formControlName: 'naat_lab_number',
-                          label: 'NAAT Lab Number',
-                          prefixIcon: Icons.account_circle_outlined,
-                        ),
+                        ReactiveValueListenableBuilder<String>(
+                            formControlName: 'naat_test',
+                            builder: (context, control, child) => Visibility(
+                                visible: (control.value == 'Yes'),
+                                child: Column(children: [
+                                  TextFieldWithList(
+                                    controlName: 'naat_machine',
+                                    label: 'NAAT Machine',
+                                    padding: EdgeInsets.zero,
+                                    prefixIcon: Icons.account_circle_outlined,
+                                    listData: const [
+                                      'Item 1',
+                                      'Item 2',
+                                      'Item 3'
+                                    ],
+                                    allowMultiSelection: false,
+                                    onSelected: (value) {},
+                                    emptyString: '',
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  TextFieldWithList(
+                                    controlName: 'naat_site',
+                                    label: ' NAAT Site',
+                                    padding: EdgeInsets.zero,
+                                    prefixIcon: Icons.account_circle_outlined,
+                                    listData: const [
+                                      'Item 1',
+                                      'Item 2',
+                                      'Item 3'
+                                    ],
+                                    allowMultiSelection: false,
+                                    onSelected: (value) {},
+                                    emptyString: '',
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  const PrimaryTextField(
+                                    formControlName: 'naat_lab_number',
+                                    label: 'NAAT Lab Number',
+                                    prefixIcon: Icons.account_circle_outlined,
+                                  ),
+                                ]))),
                         const SizedBox(height: kPadding * 2),
                         DateTextInput(
                           firstDate: DateTime(2002),
