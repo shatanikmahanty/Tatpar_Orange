@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "762173822440",
+    "project_id": "tatpar-acf",
+    "storage_bucket": "tatpar-acf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762173822440:android:bde5b3247b9c87f980805d",
+        "android_client_info": {
+          "package_name": "com.example.tatpar_acf"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB8BalbnWbYbYqOe3tylnWLJLtu4s4Fs08"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
