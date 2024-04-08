@@ -22,18 +22,18 @@ class ReferralDetailsPage extends StatelessWidget {
   FormGroup _basicDetailsFormBuilder() {
     return fb.group({
       'referral_id': FormControl<int>(
-        value: 1,
+        validators: [Validators.required],
       ),
       'referral_date': FormControl<DateTime>(validators: [Validators.required]),
       'referral_name': FormControl<String>(
         validators: [Validators.required],
       ),
-      'age': FormControl<int>(),
+      'age': FormControl<int>(validators: [Validators.required]),
       'gender': FormControl<String>(
-        value: '',
+        validators: [Validators.required],
       ),
       'referral_block': FormControl<String>(
-        value: '',
+        validators: [Validators.required],
       ),
       'district': FormControl<String>(
         validators: [Validators.required],
@@ -44,37 +44,37 @@ class ReferralDetailsPage extends StatelessWidget {
       'ward': FormControl<int>(
         validators: [
           Validators.required,
-          Validators.max(40),
           Validators.min(1),
+          Validators.max(40),
         ],
       ),
       'guardian_name': FormControl<String>(
-        value: '',
+        validators: [Validators.required],
       ),
       'guardian_phone_number':
-          FormControl<String>(validators: [Validators.required], value: ''),
+          FormControl<String>(validators: [Validators.required]),
       'caste_category': FormControl<String?>(
-        value: '',
+        validators: [Validators.required],
       ),
-      'key_population': FormControl<String?>(
-        value: '',
+      'key_population': FormControl<List<String>>(
+        validators: [Validators.required],
       ),
-      'trimester': FormControl<String?>(
-        value: '',
-      ),
+      'trimester': FormControl<String?>(),
       'referred_by': FormControl<String?>(
-        value: '',
+        validators: [Validators.required],
       ),
       'referrer_source': FormControl<String?>(
-        value: '',
+        validators: [Validators.required],
       ),
       'referred_ward': FormControl<String?>(
-        value: '',
+        validators: [Validators.required],
       ),
       'referrer_panchayat_code': FormControl<String?>(
-        value: '',
+        validators: [Validators.required],
       ),
-      'source': FormControl<String>(),
+      'source': FormControl<String>(
+        validators: [Validators.required],
+      ),
     });
   }
 
@@ -161,6 +161,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                   label: 'Guardian Name',
                                   prefixIcon: Icons.account_circle_outlined,
                                 ),
+                                const SizedBox(height: kPadding * 2),
                                 PrimaryTextField(
                                   formControlName: 'guardian_phone_number',
                                   label: 'Guardian Phone Number',
@@ -172,7 +173,6 @@ class ReferralDetailsPage extends StatelessWidget {
                                     LengthLimitingTextInputFormatter(10)
                                   ],
                                 ),
-                                const SizedBox(height: kPadding * 2),
                                 ChipRadioButtons(
                                   crossAxisCount: 2,
                                   label: 'Caste Category',
@@ -209,46 +209,61 @@ class ReferralDetailsPage extends StatelessWidget {
                                   selected:
                                       formGroup.control('key_population').value,
                                   onChanged: (value) {
+                                    if (value.isEmpty) {
+                                      formGroup
+                                          .control('key_population')
+                                          .value = null;
+                                      return;
+                                    }
+                                    final listOfValues = value.split(',');
                                     formGroup.control('key_population').value =
-                                        value;
+                                        listOfValues;
                                   },
                                 ),
                                 const SizedBox(height: kPadding * 2),
-                                // ReactiveValueListenableBuilder<String?>(
-                                //     formControlName: 'key_population',
-                                //     builder: (context, control, child) =>
-                                //         Visibility(
-                                //           visible: (formGroup
-                                //                   .control('key_population')
-                                //                   .value) ==
-                                //               'PW',
-                                //           child:
-                                ChipRadioButtons(
-                                  crossAxisCount: 2,
-                                  label: 'Trimester Of PW',
-                                  options: const [
-                                    '1 st',
-                                    '2 nd',
-                                    '3 rd',
-                                    'N/A'
-                                  ],
-                                  selected:
-                                      formGroup.control('trimester').value,
-                                  onChanged: (value) {
-                                    formGroup.control('trimester').value =
-                                        value;
-                                  },
-                                ),
-                                //  )),
-                                const SizedBox(height: kPadding * 2),
+                                ReactiveValueListenableBuilder<List<String>>(
+                                    formControlName: 'key_population',
+                                    builder: (context, control, child) =>
+                                        Visibility(
+                                          visible: (formGroup
+                                                  .control('key_population')
+                                                  .value)
+                                              .toString()
+                                              .contains('PW'),
+                                          child: Column(
+                                            children: [
+                                              ChipRadioButtons(
+                                                crossAxisCount: 2,
+                                                label: 'Trimester Of PW',
+                                                options: const [
+                                                  '1 st',
+                                                  '2 nd',
+                                                  '3 rd',
+                                                  'N/A'
+                                                ],
+                                                selected: formGroup
+                                                    .control('trimester')
+                                                    .value,
+                                                onChanged: (value) {
+                                                  formGroup
+                                                      .control('trimester')
+                                                      .value = value;
+                                                },
+                                              ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
+                                            ],
+                                          ),
+                                        )),
                                 const PrimaryTextField(
                                   formControlName: 'referred_by',
                                   label: 'Referred by Name',
                                   prefixIcon: Icons.location_city_outlined,
                                 ),
+                                const SizedBox(height: kPadding * 2),
                                 ChipRadioButtons(
                                   crossAxisCount: 2,
-                                  label: 'Referrer Source',
+                                  label: 'Referred Source',
                                   options: const [
                                     'ASHA',
                                     'AWW',

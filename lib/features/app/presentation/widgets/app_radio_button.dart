@@ -16,7 +16,7 @@ class AppRadioButton extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(label, style: Theme.of(context).textTheme.titleSmall),
+            Text(label, style: Theme.of(context).textTheme.titleMedium),
             const SizedBox(
               height: kPadding,
             ),

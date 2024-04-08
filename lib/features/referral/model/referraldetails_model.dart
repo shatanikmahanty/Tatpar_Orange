@@ -1,16 +1,14 @@
 import 'dart:convert';
 
-ReferralDetailsModel referralDetailsFromJson(String str) =>
-    ReferralDetailsModel.fromJson(json.decode(str));
+DistrictsModel districtsFromJson(String str) =>
+    DistrictsModel.fromJson(json.decode(str));
 
-String referralDetailsToJson(ReferralDetailsModel data) =>
-    json.encode(data.toJson());
+String districtsToJson(DistrictsModel data) => json.encode(data.toJson());
 
-class ReferralDetailsModel {
-  ReferralDetailsModel({this.panchayatCode});
+class DistrictsModel {
+  DistrictsModel({this.panchayatCode});
   final List<PanchayatModel>? panchayatCode;
-  factory ReferralDetailsModel.fromJson(Map<String, dynamic> json) =>
-      ReferralDetailsModel(
+  factory DistrictsModel.fromJson(Map<String, dynamic> json) => DistrictsModel(
         panchayatCode: List<PanchayatModel>.from(
             json["Panchayat Code"].map((x) => PanchayatModel.fromJson(x))),
       );

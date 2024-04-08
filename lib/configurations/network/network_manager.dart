@@ -29,7 +29,8 @@ class NetworkManager {
       // Authorization
       final bool isAuthorized = options.extra['isAuthorized'] as bool;
       if (isAuthorized) {
-        final String? token = await FirebaseAuth.instance.currentUser!.getIdToken();
+        final String? token =
+            await FirebaseAuth.instance.currentUser!.getIdToken();
         options.headers['Authorization'] = '$token';
       }
       // Language
@@ -41,7 +42,11 @@ class NetworkManager {
       return handler.next(options);
     }));
     _dio.interceptors.add(PrettyDioLogger(
-        requestHeader: true, requestBody: true, responseBody: true, responseHeader: true, compact: false));
+        requestHeader: true,
+        requestBody: true,
+        responseBody: true,
+        responseHeader: true,
+        compact: false));
   }
 
   Future<ApiResponse<T>> perform<T>(NetworkRequest request) async {
@@ -55,7 +60,8 @@ class NetworkManager {
       return ApiResponse.success(response);
     } catch (e, s) {
       debugPrint('$e\n $s');
-      return ApiResponse.failed(getApplicationErrorFromDioError(e as DioException));
+      return ApiResponse.failed(
+          getApplicationErrorFromDioError(e as DioException));
     }
   }
 

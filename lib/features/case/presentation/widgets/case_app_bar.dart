@@ -31,7 +31,7 @@ class CaseAppBar extends StatelessWidget implements PreferredSizeWidget {
           preferredSize: Size.fromHeight(kToolbarHeight + kPadding * 2.5),
           child: UserNameBar(
             //  context.read<CaseCubit>().state.caseWorkedUpon.patient?.name ??
-            'Unknown',
+            '',
           ),
         ),
       );

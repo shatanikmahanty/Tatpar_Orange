@@ -22,45 +22,49 @@ class TBScreeningPage extends StatelessWidget {
       'screening_date': FormControl<DateTime>(
           validators: [Validators.required],
           value: tbScreeningModel?.screeningDate ?? DateTime(2002)),
-      'screened_by': FormControl<String?>(value: tbScreeningModel?.screenedBy),
+      'screened_by': FormControl<String?>(
+        value: tbScreeningModel?.screenedBy,
+        validators: [Validators.required],
+      ),
       'trimester': FormControl<String?>(
         value: tbScreeningModel?.trimester,
+        validators: [Validators.required],
       ),
       'cough': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.cough ?? 'No',
+        value: tbScreeningModel?.cough,
       ),
       'sputum': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.sputum ?? 'No',
+        value: tbScreeningModel?.sputum,
       ),
       'hemoptysis': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.hemoptysis ?? 'No',
+        value: tbScreeningModel?.hemoptysis,
       ),
       'fever': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.fever ?? 'No',
+        value: tbScreeningModel?.fever,
       ),
       'night_sweats': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.nightSweats ?? 'No',
+        value: tbScreeningModel?.nightSweats,
       ),
       'chest_pain': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.chestPain ?? 'No',
+        value: tbScreeningModel?.chestPain,
       ),
       'weight_loss': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.weightLoss ?? 'No',
+        value: tbScreeningModel?.weightLoss,
       ),
       'swollen_gland': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.swollenGland ?? 'No',
+        value: tbScreeningModel?.swollenGland,
       ),
       'tb_medicine': FormControl<String?>(
         validators: [Validators.required],
-        value: tbScreeningModel?.tbMedicine ?? 'No',
+        value: tbScreeningModel?.tbMedicine,
       ),
       'screening_outcome': FormControl<String>(
           validators: [Validators.required],
@@ -269,37 +273,65 @@ class TBScreeningPage extends StatelessWidget {
                                           },
                                         ),
                                         const SizedBox(height: kPadding * 2),
+                                        BlocBuilder<TBScreeningStateCubit,
+                                                TBScreeningState>(
+                                            buildWhen: ((previous, current) =>
+                                                (previous.screeningOutcome !=
+                                                    current.screeningOutcome) ||
+                                                previous.tbScreeningModel !=
+                                                    current.tbScreeningModel),
+                                            builder: (context, state) {
+                                              return ChipRadioButtons(
+                                                  label: 'Screening Outcome ?',
+                                                  options: const [
+                                                    'DRTB',
+                                                    'DSTB',
+                                                    'EPTB',
+                                                    'No Symptom'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'screening_outcome')
+                                                        .value = value;
+                                                    extractFormData(
+                                                        formGroup, context);
+                                                  },
+                                                  selected:
+                                                      state.screeningOutcome ??
+                                                          '');
+                                            }),
                                         SecondaryTextField(
                                             label: 'Screening Outcome',
                                             text: state.screeningOutcome ?? ''),
-                                        // PrimaryTextField(
-                                        //   formControlName: 'screening_outcome',
-                                        //   label: state.screeningOutcome,
-                                        //   prefixIcon:
-                                        //       Icons.location_city_outlined,
-                                        // ),
-                                        //  ChipRadioButtons(
-                                        //     crossAxisCount: 2,
-                                        //     label: 'Screening outcome',
-                                        //     options: [
-                                        //       'DRTB',
-                                        //       'DSTB',
-                                        //       'EPTB',
-                                        //       'No Symptom'
-                                        //     ],
-                                        //     selected: state.screeningOutcome),
                                         const SizedBox(height: kPadding * 2),
-                                        const PrimaryTextField(
-                                          formControlName: 'comments',
-                                          label: 'Comments',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                        ),
+                                        ReactiveValueListenableBuilder<String>(
+                                            formControlName:
+                                                'screening_outcome',
+                                            builder: (context, control,
+                                                    child) =>
+                                                Visibility(
+                                                    visible: (formGroup
+                                                            .control(
+                                                                'screening_outcome')
+                                                            .value) !=
+                                                        null,
+                                                    child:
+                                                        const Column(children: [
+                                                      PrimaryTextField(
+                                                        formControlName:
+                                                            'comments',
+                                                        label: 'Comments',
+                                                        prefixIcon: Icons
+                                                            .account_circle_outlined,
+                                                      ),
+                                                    ]))),
                                       ])))),
                           BottomButtonBar(
                             onSave: (_) async =>
                                 await _onSave(context, formGroup),
-                            nextPage: const MentalHealthRouterRoute(),
+                            nextPage: const DiagnosisRoute(),
                           ),
                           const SizedBox(height: kPadding * 2),
                         ]));
@@ -308,16 +340,7 @@ class TBScreeningPage extends StatelessWidget {
   }
 }
 
-// void _updateScreeningOutcome(FormGroup formGroup) {
-//   final controls = formGroup.controls.values;
-//   final allYes = controls.every((control) => control.value == 'Yes');
-//   if (allYes) {
-//     formGroup.control('screening_outcome').value = 'EPTB';
-//   }
-// }
-
 void extractFormData(FormGroup formGroup, BuildContext context) {
-//  print('extractFormDatacalled');
   final tbscreeningCubit = context.read<TBScreeningStateCubit>();
 
   final tbScreeningModel = TBScreeningModel(

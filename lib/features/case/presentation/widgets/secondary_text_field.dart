@@ -18,7 +18,7 @@ class SecondaryTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) =>
       Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-        Text(label, style: Theme.of(context).textTheme.titleSmall?.copyWith()),
+        Text(label, style: Theme.of(context).textTheme.titleMedium?.copyWith()),
         const SizedBox(
           height: kPadding,
         ),

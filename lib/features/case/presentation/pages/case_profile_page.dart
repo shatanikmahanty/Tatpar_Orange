@@ -38,7 +38,7 @@ class CaseProfilePage extends StatelessWidget {
                           'Active',
                           style: Theme.of(context)
                               .textTheme
-                              .titleSmall
+                              .titleMedium
                               ?.copyWith(
                                 fontSize: 12,
                                 height: 2.4,
@@ -118,7 +118,7 @@ class CaseProfilePage extends StatelessWidget {
                   const SizedBox(height: kPadding * 2),
                   Text(
                     'Work Flow',
-                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                    style: Theme.of(context).textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w600,
                         height: 1.7,
                         letterSpacing: 0.5),

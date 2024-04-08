@@ -2,7 +2,9 @@ import 'package:djangoflow_app/djangoflow_app.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
+import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/app_bar_action.dart';
 
 @RoutePage()
@@ -58,7 +60,7 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                     children: [
                       Text(
                         'Welcome,',
-                        style: AppTextStyle.titleSmall.copyWith(
+                        style: AppTextStyle.titleMedium.copyWith(
                             fontWeight: FontWeight.w400,
                             height: 2,
                             color: AppColors.grey50),
@@ -102,7 +104,7 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                           ElevatedButton(
                             onPressed: () {
                               Navigator.pop(context);
-                              //context.read<AuthCubit>().logout();
+                              context.read<AuthCubit>().logout();
                             },
                             child: const Text('Yes'),
                           ),
