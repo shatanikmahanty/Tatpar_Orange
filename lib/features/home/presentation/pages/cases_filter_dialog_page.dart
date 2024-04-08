@@ -83,7 +83,7 @@ class _CasesFilterDialogPageState extends State<CasesFilterDialogPage> {
                             'Filter ',
                             style: Theme.of(context)
                                 .textTheme
-                                .titleSmall
+                                .titleMedium
                                 ?.copyWith(
                                     color: AppColors.neutralBlack,
                                     fontWeight: FontWeight.w700,

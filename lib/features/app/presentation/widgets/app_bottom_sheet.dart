@@ -30,7 +30,7 @@ class AppBottomSheet extends StatelessWidget {
                     ),
                     Text(
                       items[index].title,
-                      style: Theme.of(context).textTheme.titleSmall!.copyWith(
+                      style: Theme.of(context).textTheme.titleMedium!.copyWith(
                           color: AppColors.black2,
                           fontWeight: FontWeight.w600,
                           height: 1.85,

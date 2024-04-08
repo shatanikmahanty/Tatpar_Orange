@@ -44,7 +44,7 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(widget.label,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   // color: Theme.of(context).primaryColorDark
                   )),
           const SizedBox(

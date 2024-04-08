@@ -2,7 +2,6 @@ import 'dart:async';
 
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:hydrated_bloc/hydrated_bloc.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
 

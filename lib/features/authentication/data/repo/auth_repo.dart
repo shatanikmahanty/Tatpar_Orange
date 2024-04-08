@@ -30,7 +30,11 @@ class AuthRepo {
       verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
         final userCredentials =
             await _auth.signInWithCredential(phoneAuthCredential);
-        handlePostLogin(userCredentials, register);
+
+        // Get the authentication token
+        String? token = await _auth.currentUser!.getIdToken();
+        // handlePostLogin(userCredentials, register);
+        print('sendOTPCredential========================$token');
       },
       verificationFailed: (FirebaseAuthException error) {
         onError();
@@ -38,6 +42,7 @@ class AuthRepo {
       },
       codeSent: (String verificationId, int? forceResendingToken) {
         _resendToken = forceResendingToken;
+        print('TOKEN===========================${_resendToken.toString()}');
         _verificationId = verificationId;
         if (_resendToken != null) {
           isCodeSent(_resendToken!);
@@ -57,7 +62,9 @@ class AuthRepo {
     final credential = PhoneAuthProvider.credential(
         verificationId: _verificationId ?? '', smsCode: otp);
     final userCredential = await _auth.signInWithCredential(credential);
-    handlePostLogin(userCredential, register);
+    String? token = await _auth.currentUser!.getIdToken();
+    print('verifyOTPCredential========================$token');
+    //handlePostLogin(userCredential, register);
   }
 
   Future<void> handlePostLogin(
@@ -68,12 +75,16 @@ class AuthRepo {
       if (userCredential.additionalUserInfo!.isNewUser) {
         register(userCredential.user!.uid);
       } else {
-        final user =
-            await _getUserDetails(await _auth.currentUser!.getIdToken());
-        if (user == null) {
-          return;
-        }
-        AuthCubit.instance.login(user);
+        // final user =
+        //     await _getUserDetails(await _auth.currentUser!.getIdToken());
+        final token = _auth.currentUser!.getIdToken();
+        print(token);
+        // print('USER+++++++++++++$user');
+        // if (user == null) {
+        //   print('User nullllll');
+        //   return;
+        // }
+        // AuthCubit.instance.login(user);
       }
     }
   }

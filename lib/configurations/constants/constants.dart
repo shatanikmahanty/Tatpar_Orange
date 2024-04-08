@@ -88,5 +88,5 @@ Map<String, ValidationMessageFunction> reactiveFormValidators(
       ValidationMessage.min: (error) =>
           'The $label must be at least ${(error as Map)['min']}',
       ValidationMessage.max: (error) =>
-          'The $label must be above ${(error as Map)['min']}'
+          'The $label must be below ${(error as Map)['max']}'
     };

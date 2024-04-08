@@ -100,6 +100,7 @@ class RegisterPage extends StatelessWidget {
                       keyboardType: TextInputType.phone,
                       maxLength: 10,
                     ),
+                    const SizedBox(height: kPadding * 2),
                     const PrimaryTextField(
                       formControlName: 'alt_phone',
                       label: 'Alternate Phone number',

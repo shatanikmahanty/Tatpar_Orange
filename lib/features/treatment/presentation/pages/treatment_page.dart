@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
@@ -13,16 +14,15 @@ class TreatmentPage extends StatelessWidget {
   const TreatmentPage({super.key});
   FormGroup _treatmentFormBuilder() {
     return fb.group({
-      'case_definition':
-          FormControl<String>(validators: [Validators.required], value: 'CD'),
+      'case_definition': FormControl<String>(validators: [Validators.required]),
       'previously_tb_treated':
           FormControl<String>(validators: [Validators.required]),
       'rif_sensitivity': FormControl<String>(validators: [Validators.required]),
       'ihv_date': FormControl<DateTime>(
         validators: [Validators.required],
       ),
-      'treatment_regimen': FormControl<String>(
-          validators: [Validators.required], value: 'Previous'),
+      'treatment_regimen':
+          FormControl<String>(validators: [Validators.required]),
       'patient_occupation':
           FormControl<String>(validators: [Validators.required]),
       'treatment_supporter_name':
@@ -41,26 +41,40 @@ class TreatmentPage extends StatelessWidget {
       'ipt_start_date': FormControl<DateTime>(
         validators: [Validators.required],
       ),
-      'hiv_done':
-          FormControl<String>(validators: [Validators.required], value: 'No'),
-      'hiv_result': FormControl<String>(
-          validators: [Validators.required], value: 'Non Reactive'),
+      'hiv_done': FormControl<String>(validators: [Validators.required]),
+      'hiv_result': FormControl<String>(validators: [Validators.required]),
       'hiv_date': FormControl<DateTime>(
         validators: [Validators.required],
       ),
-      'hb_done':
-          FormControl<String>(validators: [Validators.required], value: 'No'),
+      'hb_done': FormControl<String>(validators: [Validators.required]),
       'hb_result': FormControl<String>(validators: [Validators.required]),
       'hb_date': FormControl<DateTime>(
         validators: [Validators.required],
       ),
       'blood_sugar_done':
-          FormControl<String>(validators: [Validators.required], value: 'No'),
-      'blood_sugar_result': FormControl<String>(
-          validators: [Validators.required], value: 'Negative'),
+          FormControl<String>(validators: [Validators.required]),
+      'blood_sugar_result':
+          FormControl<String>(validators: [Validators.required]),
       'blood_sugar_date': FormControl<DateTime>(
         validators: [Validators.required],
       ),
+      'alcohol': FormControl<String>(validators: [Validators.required]),
+      'tb_consumption': FormControl<String>(validators: [Validators.required]),
+      'nutrition': FormControl<String>(validators: [Validators.required]),
+      'screening_date_nutrition': FormControl<DateTime>(
+        validators: [Validators.required],
+      ),
+      'nutrition_linkage': FormControl<DateTime>(
+        validators: [Validators.required],
+      ),
+      'ip_nat_test': FormControl<String>(validators: [Validators.required]),
+      'ip_afb_date': FormControl<DateTime>(validators: [Validators.required]),
+      'ip_afb_lab_no': FormControl<String>(validators: [Validators.required]),
+      'ip_nat_result': FormControl<String>(validators: [Validators.required]),
+      'ip_lab_no': FormControl<String>(validators: [Validators.required]),
+      'ip_chest_xray': FormControl<String>(validators: [Validators.required]),
+      'ip_nutrition_support':
+          FormControl<String>(validators: [Validators.required]),
     });
   }
 
@@ -173,13 +187,6 @@ class TreatmentPage extends StatelessWidget {
                                         onSelected: (value) {},
                                         emptyString: '',
                                       ),
-                                      const PrimaryTextField(
-                                        formControlName:
-                                            'treatment_supporter_name',
-                                        label: 'Treatment Supporter Name',
-                                        prefixIcon:
-                                            Icons.account_circle_outlined,
-                                      ),
                                       const SizedBox(height: kPadding * 2),
                                       TextFieldWithList(
                                         controlName:
@@ -280,7 +287,7 @@ class TreatmentPage extends StatelessWidget {
                                           child: Column(
                                             children: [
                                               ChipRadioButtons(
-                                                label: 'HIV Result',
+                                                label: 'HIV Result?',
                                                 options: const [
                                                   'Reactive',
                                                   'Non Reactive'
@@ -302,11 +309,12 @@ class TreatmentPage extends StatelessWidget {
                                                 controlName: 'hiv_date',
                                                 label: 'HIV Date',
                                               ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: kPadding * 2),
                                       ChipRadioButtons(
                                         label: 'Hb Done?',
                                         options: const ['Yes', 'No'],
@@ -326,11 +334,19 @@ class TreatmentPage extends StatelessWidget {
                                           visible: (control.value == 'Yes'),
                                           child: Column(
                                             children: [
-                                              const PrimaryTextField(
+                                              PrimaryTextField(
                                                 formControlName: 'hb_result',
-                                                label: 'Hb Result',
+                                                label: 'Hb Result?',
                                                 prefixIcon: Icons
                                                     .account_circle_outlined,
+                                                keyboardType:
+                                                    TextInputType.number,
+                                                inputFormatter: [
+                                                  FilteringTextInputFormatter
+                                                      .digitsOnly,
+                                                  LengthLimitingTextInputFormatter(
+                                                      2)
+                                                ],
                                               ),
                                               const SizedBox(
                                                   height: kPadding * 2),
@@ -339,11 +355,12 @@ class TreatmentPage extends StatelessWidget {
                                                 controlName: 'hb_date',
                                                 label: 'Hb Date',
                                               ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
                                             ],
                                           ),
                                         ),
                                       ),
-                                      const SizedBox(height: kPadding * 2),
                                       ChipRadioButtons(
                                         label: 'Blood Sugar Done?',
                                         options: const ['Yes', 'No'],
@@ -390,15 +407,170 @@ class TreatmentPage extends StatelessWidget {
                                                 controlName: 'blood_sugar_date',
                                                 label: 'Blood Sugar Date?',
                                               ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
                                             ],
                                           ),
                                         ),
                                       ),
+                                      ChipRadioButtons(
+                                        label: 'Alcohol',
+                                        options: const ['Yes', 'No'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup.control('alcohol').value =
+                                              value;
+                                        },
+                                        selected:
+                                            formGroup.control('alcohol').value,
+                                      ),
                                       const SizedBox(height: kPadding * 2),
+                                      ChipRadioButtons(
+                                        label: 'TB Consumption',
+                                        options: const ['Yes', 'No'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup
+                                              .control('tb_consumption')
+                                              .value = value;
+                                        },
+                                        selected: formGroup
+                                            .control('tb_consumption')
+                                            .value,
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      ChipRadioButtons(
+                                        label: 'Screening for Nutrition?',
+                                        options: const ['Yes', 'No'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup.control('nutrition').value =
+                                              value;
+                                        },
+                                        selected: formGroup
+                                            .control('nutrition')
+                                            .value,
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      DateTextInput(
+                                        firstDate: DateTime(2002),
+                                        controlName: 'screening_date_nutrition',
+                                        label:
+                                            'Date Of Screening for Nutrition',
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      ChipRadioButtons(
+                                        label: 'Nutrition Linkage Done?',
+                                        options: const ['Yes', 'No'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup
+                                              .control('nutrition_linkage')
+                                              .value = value;
+                                        },
+                                        selected: formGroup
+                                            .control('nutrition_linkage')
+                                            .value,
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      DateTextInput(
+                                        firstDate: DateTime(2002),
+                                        controlName: 'ip_afb_date',
+                                        label: 'IP Follow-up AFB date',
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      TextFieldWithList(
+                                        controlName: 'ip_afb_lab_no',
+                                        label: 'IP Follow-up AFB Lab No.',
+                                        padding: EdgeInsets.zero,
+                                        prefixIcon:
+                                            Icons.account_circle_outlined,
+                                        listData: const [
+                                          'Item 1',
+                                          'Item 2',
+                                          'Item 3'
+                                        ],
+                                        allowMultiSelection: false,
+                                        onSelected: (value) {},
+                                        emptyString: '',
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      ChipRadioButtons(
+                                        label: 'IP Follow-up NAT Test Done?',
+                                        options: const ['Yes', 'No'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup
+                                              .control('ip_nat_test')
+                                              .value = value;
+                                        },
+                                        selected: formGroup
+                                            .control('ip_nat_test')
+                                            .value,
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      ChipRadioButtons(
+                                        label: 'IP Follow-up NAT Result?',
+                                        options: const ['Positive', 'Negative'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup
+                                              .control('ip_nat_result')
+                                              .value = value;
+                                        },
+                                        selected: formGroup
+                                            .control('ip_nat_result')
+                                            .value,
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      TextFieldWithList(
+                                        controlName: 'ip_lab_no',
+                                        label: 'IP Follow-up Lab No.',
+                                        padding: EdgeInsets.zero,
+                                        prefixIcon:
+                                            Icons.account_circle_outlined,
+                                        listData: const [
+                                          'Item 1',
+                                          'Item 2',
+                                          'Item 3'
+                                        ],
+                                        allowMultiSelection: false,
+                                        onSelected: (value) {},
+                                        emptyString: '',
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      ChipRadioButtons(
+                                        label: 'IP Follow-up Chest-Xray?',
+                                        options: const ['Yes', 'No'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup
+                                              .control('ip_chest_xray')
+                                              .value = value;
+                                        },
+                                        selected: formGroup
+                                            .control('ip_chest_xray')
+                                            .value,
+                                      ),
+                                      const SizedBox(height: kPadding * 2),
+                                      ChipRadioButtons(
+                                        label:
+                                            'IP Follow-up Nutrition Support?',
+                                        options: const ['Yes', 'No'],
+                                        crossAxisCount: 2,
+                                        onChanged: (value) {
+                                          formGroup
+                                              .control('ip_nutrition_support')
+                                              .value = value;
+                                        },
+                                        selected: formGroup
+                                            .control('ip_nutrition_support')
+                                            .value,
+                                      ),
                                     ])))),
                     BottomButtonBar(
                       onSave: (_) async => await _onSave(context, formGroup),
-                      nextPage: const AppHomeRoute(),
+                      nextPage: const ContactTracingRoute(),
                     ),
                     const SizedBox(height: kPadding * 2),
                   ]),

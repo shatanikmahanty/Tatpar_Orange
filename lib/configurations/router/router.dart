@@ -64,8 +64,16 @@ class AppRouter extends $AppRouter {
       page: TreatmentRoute.page,
     ),
     AutoRoute(
+      path: '/tb_screening_page',
+      page: TBScreeningRoute.page,
+    ),
+    AutoRoute(
       path: '/outcome_page',
       page: OutcomeRoute.page,
+    ),
+    AutoRoute(
+      path: '/contact_tracing_page',
+      page: ContactTracingRoute.page,
     ),
   ];
 }

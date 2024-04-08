@@ -79,8 +79,20 @@ class HomePage extends StatelessWidget {
               ),
               CardButton(
                 icon: Icons.note_add,
+                title: 'Contact Tracing',
+                subText: 'Steps of Contact tracing',
+                isPrimary: false,
+                action: () {
+                  context.router.navigate(const ContactTracingRoute());
+                },
+              ),
+              const SizedBox(
+                height: kPadding * 2,
+              ),
+              CardButton(
+                icon: Icons.note_add,
                 title: 'Outcome',
-                subText: 'Steps of treatment',
+                subText: 'Steps of outcome',
                 isPrimary: false,
                 action: () {
                   context.router.navigate(const OutcomeRoute());

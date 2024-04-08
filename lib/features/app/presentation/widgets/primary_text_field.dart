@@ -51,7 +51,7 @@ class PrimaryTextField<T> extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             if (label != null)
-              Text(label!, style: Theme.of(context).textTheme.titleSmall),
+              Text(label!, style: Theme.of(context).textTheme.titleMedium),
             if (label != null)
               const SizedBox(
                 height: kPadding,

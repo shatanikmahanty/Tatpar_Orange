@@ -15,94 +15,87 @@ class WHOSRQPage extends StatelessWidget {
   FormGroup _whoSrqFormBuilder({required WHOSrqModel? whoSrqModel}) {
     return fb.group({
       'headache': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.headache ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.headache),
       'apetite': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.apetite ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.apetite),
       'sleep': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.sleep ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.sleep),
       'frightened': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.frightened ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.frightened),
       'hands_shake': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.handsShake ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.handsShake),
       'nervous': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.nervous ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.nervous),
       'digestion_poor': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.digestionPoor ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.digestionPoor),
       'trouble_thinking': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.troubleThinking ?? 'No'),
+          value: whoSrqModel?.troubleThinking),
       'unhappy': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.unhappy ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.unhappy),
       'cry_more': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.cryMore ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.cryMore),
       'daily_activities': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.dailyActivities ?? 'No'),
+          value: whoSrqModel?.dailyActivities),
       'decision_making': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.decisionMaking ?? 'No'),
+          value: whoSrqModel?.decisionMaking),
       'daily_work_suffering': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.dailyWorkSuffering ?? 'No'),
+          value: whoSrqModel?.dailyWorkSuffering),
       'play_a_useful_part': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.playAUsefulPart ?? 'No'),
+          value: whoSrqModel?.playAUsefulPart),
       'lost_interest': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.lostInterest ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.lostInterest),
       'worthless_person': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.worthlessPerson ?? 'No'),
+          value: whoSrqModel?.worthlessPerson),
       'ending_your_life': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.endingLife ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.endingLife),
       'tired_all_the_time': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.tiredAllTheTime ?? 'No'),
+          value: whoSrqModel?.tiredAllTheTime),
       'uncomfortable_feelings': FormControl<String>(
           validators: [Validators.required],
-          value: whoSrqModel?.uncomfortableFeelings ?? 'No'),
+          value: whoSrqModel?.uncomfortableFeelings),
       'easily_tired': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.easilyTired ?? 'No'),
+          validators: [Validators.required], value: whoSrqModel?.easilyTired),
     });
   }
 
-  Map<String, dynamic> _onSave(BuildContext context, FormGroup formGroup) {
+  Map<String, dynamic>? _onSave(BuildContext context, FormGroup formGroup) {
     final whoSrqCubit = context.read<WHOSrqStateCubit>();
-    final whoSrqModel = WHOSrqModel(
-        headache: formGroup.control('headache').value,
-        apetite: formGroup.control('apetite').value,
-        sleep: formGroup.control('sleep').value,
-        frightened: formGroup.control('frightened').value,
-        handsShake: formGroup.control('hands_shake').value,
-        nervous: formGroup.control('nervous').value,
-        digestionPoor: formGroup.control('digestion_poor').value,
-        troubleThinking: formGroup.control('trouble_thinking').value,
-        unhappy: formGroup.control('unhappy').value,
-        cryMore: formGroup.control('cry_more').value,
-        dailyActivities: formGroup.control('daily_activities').value,
-        decisionMaking: formGroup.control('decision_making').value,
-        dailyWorkSuffering: formGroup.control('daily_work_suffering').value,
-        playAUsefulPart: formGroup.control('play_a_useful_part').value,
-        lostInterest: formGroup.control('lost_interest').value,
-        worthlessPerson: formGroup.control('worthless_person').value,
-        endingLife: formGroup.control('ending_your_life').value,
-        tiredAllTheTime: formGroup.control('tired_all_the_time').value,
-        uncomfortableFeelings:
-            formGroup.control('uncomfortable_feelings').value,
-        easilyTired: formGroup.control('easily_tired').value);
-    whoSrqCubit.updateWhoSrqModel(whoSrqModel);
-    Map<String, dynamic> result = whoSrqCubit.calculateYesCounter(formGroup);
-    return result;
+    if (formGroup.valid) {
+      final whoSrqModel = WHOSrqModel(
+          headache: formGroup.control('headache').value,
+          apetite: formGroup.control('apetite').value,
+          sleep: formGroup.control('sleep').value,
+          frightened: formGroup.control('frightened').value,
+          handsShake: formGroup.control('hands_shake').value,
+          nervous: formGroup.control('nervous').value,
+          digestionPoor: formGroup.control('digestion_poor').value,
+          troubleThinking: formGroup.control('trouble_thinking').value,
+          unhappy: formGroup.control('unhappy').value,
+          cryMore: formGroup.control('cry_more').value,
+          dailyActivities: formGroup.control('daily_activities').value,
+          decisionMaking: formGroup.control('decision_making').value,
+          dailyWorkSuffering: formGroup.control('daily_work_suffering').value,
+          playAUsefulPart: formGroup.control('play_a_useful_part').value,
+          lostInterest: formGroup.control('lost_interest').value,
+          worthlessPerson: formGroup.control('worthless_person').value,
+          endingLife: formGroup.control('ending_your_life').value,
+          tiredAllTheTime: formGroup.control('tired_all_the_time').value,
+          uncomfortableFeelings:
+              formGroup.control('uncomfortable_feelings').value,
+          easilyTired: formGroup.control('easily_tired').value);
+      whoSrqCubit.updateWhoSrqModel(whoSrqModel);
+      Map<String, dynamic> result = whoSrqCubit.calculateYesCounter(formGroup);
+      return result;
+    } else {
+      formGroup.markAllAsTouched();
+    }
   }
 
   @override
@@ -411,7 +404,7 @@ class WHOSRQPage extends StatelessWidget {
                                       AuthButton(
                                           text: 'Next',
                                           onClick: () {
-                                            Map<String, dynamic>
+                                            Map<String, dynamic>?
                                                 calculatedValue =
                                                 _onSave(context, formGroup);
 

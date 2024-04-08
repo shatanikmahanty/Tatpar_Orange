@@ -29,7 +29,7 @@ class DateTextInput extends StatelessWidget {
         children: [
           Text(
             label,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(
             height: kPadding,
@@ -96,7 +96,7 @@ class TimeTextInput extends StatelessWidget {
         children: [
           Text(
             label,
-            style: Theme.of(context).textTheme.titleSmall,
+            style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(
             height: kPadding,

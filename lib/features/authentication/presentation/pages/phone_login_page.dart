@@ -50,7 +50,7 @@ class PhoneLoginPage extends StatelessWidget {
             height: kPadding * 4,
           ),
           ReactiveFormBuilder(
-            form: _formBuilder,
+            form: authCubit.formBuilder,
             builder: (context, form, child) => AutofillGroup(
               child: Column(
                 children: [
@@ -82,21 +82,20 @@ class PhoneLoginPage extends StatelessWidget {
                         );
                       }
                       return AuthButton(
-                        text: 'Login',
-                        onClick:
-                            //  () {
-                            //   context.router.navigate(
-                            //     const PhoneVerifyRoute(),
-                            //   );
-                            // }
-                            (ReactiveForm.of(context)?.valid ?? false)
-                                ? () async {
-                                    final phoneControl = form.control('phone');
-                                    await authCubit
-                                        .loginWithPhone(phoneControl.value);
-                                  }
-                                : null,
-                      );
+                          text: 'Login',
+                          onClick: () {
+                            context.router.navigate(
+                              const PhoneVerifyRoute(),
+                            );
+                          }
+                          // (ReactiveForm.of(context)?.valid ?? false)
+                          //     ? () async {
+                          //         final phoneControl = form.control('phone');
+                          //         await authCubit
+                          //             .loginWithPhone(phoneControl.value);
+                          //       }
+                          //     : null,
+                          );
                     },
                   ),
                   const SizedBox(
@@ -114,13 +113,4 @@ class PhoneLoginPage extends StatelessWidget {
       ),
     );
   }
-
-  FormGroup _formBuilder() => fb.group({
-        'phone': FormControl<String>(
-          validators: [
-            Validators.required,
-            Validators.minLength(10),
-          ],
-        ),
-      });
 }

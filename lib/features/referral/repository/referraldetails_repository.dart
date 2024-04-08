@@ -6,11 +6,11 @@ class ReferralDetailsRepository {
   final String file;
   final BuildContext context;
   ReferralDetailsRepository({required this.context, required this.file});
-  ReferralDetailsModel referralDetailsModel = ReferralDetailsModel();
-  Future<ReferralDetailsModel> buildDistrictFields() async {
+  DistrictsModel districtsModel = DistrictsModel();
+  Future<DistrictsModel> buildDistrictFields() async {
     var resp = await Utility().readJsonFromFile(context, Assets.json.districts);
-    referralDetailsModel = referralDetailsFromJson(resp);
-    return referralDetailsModel;
+    districtsModel = districtsFromJson(resp);
+    return districtsModel;
   }
 }
 
