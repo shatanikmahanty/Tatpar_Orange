@@ -1,8 +1,9 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tatpar_acf/features/referral/model/referraldetails_model.dart';
+import 'package:tatpar_acf/features/referral/model/districts_model.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 part 'referral_details_cubit.freezed.dart';
+part 'referral_details_cubit.g.dart';
 
 @freezed
 class ReferralDetailsState with _$ReferralDetailsState {
@@ -11,8 +12,8 @@ class ReferralDetailsState with _$ReferralDetailsState {
           @Default([]) List<PanchayatModel>? panchayatModel}) =
       _ReferralDetailsState;
 
-  // factory ReferralDetailsState.fromJson(Map<String, dynamic> json) =>
-  //     _$ReferralDetailsStateFromJson(json);
+  factory ReferralDetailsState.fromJson(Map<String, dynamic> json) =>
+      _$ReferralDetailsStateFromJson(json);
 }
 
 class ReferralDetailsCubit extends Cubit<ReferralDetailsState> {

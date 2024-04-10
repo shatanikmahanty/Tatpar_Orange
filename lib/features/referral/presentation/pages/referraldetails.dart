@@ -32,15 +32,17 @@ class ReferralDetailsPage extends StatelessWidget {
       'gender': FormControl<String>(
         validators: [Validators.required],
       ),
-      'referral_block': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'district': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'panchayat_code': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'location': fb.group({
+        'district': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'referral_block': FormControl<String>(
+          validators: [Validators.required],
+        ),
+        'panchayat_code': FormControl<String>(
+          validators: [Validators.required],
+        ),
+      }),
       'ward': FormControl<int>(
         validators: [
           Validators.required,
@@ -337,14 +339,14 @@ class ReferralDetailsPage extends StatelessWidget {
           return Column(
             children: [
               TextFieldWithList(
-                controlName: 'district',
+                controlName: 'location.district',
                 label: 'District',
                 padding: EdgeInsets.zero,
                 prefixIcon: Icons.account_circle_outlined,
                 listData: districts,
                 allowMultiSelection: false,
                 onSelected: (value) {
-                  formGroup.control('district').value = value[0];
+                  formGroup.control('location.district').value = value[0];
                   blocks.clear();
 
                   blocks.addAll(state.panchayatModel!
@@ -357,14 +359,14 @@ class ReferralDetailsPage extends StatelessWidget {
               ),
               const SizedBox(height: kPadding * 2),
               TextFieldWithList(
-                controlName: 'referral_block',
+                controlName: 'location.referral_block',
                 label: 'Referral Block',
                 padding: EdgeInsets.zero,
                 prefixIcon: Icons.account_circle_outlined,
                 listData: blocks,
                 allowMultiSelection: false,
                 onSelected: (value) {
-                  formGroup.control('referral_block').value = value[0];
+                  formGroup.control('location.referral_block').value = value[0];
                   panchayatCodes.clear();
 
                   panchayatCodes.addAll(state.panchayatModel!
@@ -377,14 +379,14 @@ class ReferralDetailsPage extends StatelessWidget {
               ),
               const SizedBox(height: kPadding * 2),
               TextFieldWithList(
-                controlName: 'panchayat_code',
+                controlName: 'location.panchayat_code',
                 label: 'Panchayat Code',
                 padding: EdgeInsets.zero,
                 prefixIcon: Icons.account_circle_outlined,
                 listData: panchayatCodes,
                 allowMultiSelection: false,
                 onSelected: (value) {
-                  formGroup.control('panchayat_code').value = value[0];
+                  formGroup.control('location.panchayat_code').value = value[0];
                 },
                 emptyString: '',
               ),
