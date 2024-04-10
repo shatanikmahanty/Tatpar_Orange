@@ -14,12 +14,17 @@ T _$identity<T>(T value) => value;
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
 
+ReferralDetailsState _$ReferralDetailsStateFromJson(Map<String, dynamic> json) {
+  return _ReferralDetailsState.fromJson(json);
+}
+
 /// @nodoc
 mixin _$ReferralDetailsState {
   bool? get isLoading => throw _privateConstructorUsedError;
   List<PanchayatModel>? get panchayatModel =>
       throw _privateConstructorUsedError;
 
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
   $ReferralDetailsStateCopyWith<ReferralDetailsState> get copyWith =>
       throw _privateConstructorUsedError;
@@ -103,12 +108,15 @@ class __$$ReferralDetailsStateImplCopyWithImpl<$Res>
 }
 
 /// @nodoc
-
+@JsonSerializable()
 class _$ReferralDetailsStateImpl implements _ReferralDetailsState {
   const _$ReferralDetailsStateImpl(
       {this.isLoading = false,
       final List<PanchayatModel>? panchayatModel = const []})
       : _panchayatModel = panchayatModel;
+
+  factory _$ReferralDetailsStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$ReferralDetailsStateImplFromJson(json);
 
   @override
   @JsonKey()
@@ -140,6 +148,7 @@ class _$ReferralDetailsStateImpl implements _ReferralDetailsState {
                 .equals(other._panchayatModel, _panchayatModel));
   }
 
+  @JsonKey(ignore: true)
   @override
   int get hashCode => Object.hash(runtimeType, isLoading,
       const DeepCollectionEquality().hash(_panchayatModel));
@@ -151,12 +160,22 @@ class _$ReferralDetailsStateImpl implements _ReferralDetailsState {
       get copyWith =>
           __$$ReferralDetailsStateImplCopyWithImpl<_$ReferralDetailsStateImpl>(
               this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$ReferralDetailsStateImplToJson(
+      this,
+    );
+  }
 }
 
 abstract class _ReferralDetailsState implements ReferralDetailsState {
   const factory _ReferralDetailsState(
       {final bool? isLoading,
       final List<PanchayatModel>? panchayatModel}) = _$ReferralDetailsStateImpl;
+
+  factory _ReferralDetailsState.fromJson(Map<String, dynamic> json) =
+      _$ReferralDetailsStateImpl.fromJson;
 
   @override
   bool? get isLoading;

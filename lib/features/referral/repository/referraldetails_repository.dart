@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tatpar_acf/configurations/constants/assets.gen.dart';
-import 'package:tatpar_acf/features/referral/model/referraldetails_model.dart';
+import 'package:tatpar_acf/features/referral/model/districts_model.dart';
 
 class ReferralDetailsRepository {
   final String file;
