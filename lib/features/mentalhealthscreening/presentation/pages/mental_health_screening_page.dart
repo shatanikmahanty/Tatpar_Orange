@@ -64,261 +64,242 @@ class MentalHealthScreeningPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<WHOSrqStateCubit>(
-      create: (context) => WHOSrqStateCubit(),
-      child: Scaffold(
-          appBar: const CaseAppBar('Mental Health Screening'),
-          body: BlocBuilder<WHOSrqStateCubit, WHOSrqState>(
-              buildWhen: (previous, current) =>
-                  (previous.isLoading != current.isLoading) ||
-                  (previous.mentalHealthScreeningModel !=
-                      current.mentalHealthScreeningModel),
-              builder: (context, state) {
-                return ReactiveFormBuilder(
-                    form: () => _mentalHealthScreeningFormBuilder(
-                        mentalHealthScreeningModel:
-                            state.mentalHealthScreeningModel),
-                    builder:
-                        (BuildContext context, FormGroup formGroup,
-                                Widget? child) =>
-                            AutofillGroup(
-                                child: Column(children: [
-                              const SizedBox(height: kPadding * 2),
-                              Expanded(
-                                  child: SingleChildScrollView(
-                                      child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: kPadding * 2),
-                                          child: Column(
-                                              crossAxisAlignment:
-                                                  CrossAxisAlignment.start,
-                                              children: [
-                                                ChipRadioButtons(
-                                                  label: 'Stage',
-                                                  options: const [
-                                                    'IP',
-                                                    'IPFU',
-                                                    'CP'
-                                                  ],
-                                                  crossAxisCount: 3,
-                                                  onChanged: (value) {
-                                                    formGroup
-                                                        .control('stage')
-                                                        .value = value;
-                                                  },
-                                                  selected: formGroup
-                                                      .control('stage')
-                                                      .value,
-                                                ),
-                                                const SizedBox(
-                                                    height: kPadding * 2),
-                                                ReactiveValueListenableBuilder<
-                                                    String>(
-                                                  formControlName: 'stage',
-                                                  builder: (context, control,
-                                                          child) =>
-                                                      Visibility(
+    return Scaffold(
+        appBar: const CaseAppBar('Mental Health Screening'),
+        body: BlocBuilder<WHOSrqStateCubit, WHOSrqState>(
+            buildWhen: (previous, current) =>
+                (previous.isLoading != current.isLoading) ||
+                (previous.mentalHealthScreeningModel !=
+                    current.mentalHealthScreeningModel),
+            builder: (context, state) {
+              return ReactiveFormBuilder(
+                  form: () => _mentalHealthScreeningFormBuilder(
+                      mentalHealthScreeningModel:
+                          state.mentalHealthScreeningModel),
+                  builder: (BuildContext context, FormGroup formGroup,
+                          Widget? child) =>
+                      AutofillGroup(
+                          child: Column(children: [
+                        const SizedBox(height: kPadding * 2),
+                        Expanded(
+                            child: SingleChildScrollView(
+                                child: Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        horizontal: kPadding * 2),
+                                    child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          ChipRadioButtons(
+                                            label: 'Stage',
+                                            options: const ['IP', 'IPFU', 'CP'],
+                                            crossAxisCount: 3,
+                                            onChanged: (value) {
+                                              formGroup.control('stage').value =
+                                                  value;
+                                            },
+                                            selected: formGroup
+                                                .control('stage')
+                                                .value,
+                                          ),
+                                          const SizedBox(height: kPadding * 2),
+                                          ReactiveValueListenableBuilder<
+                                              String>(
+                                            formControlName: 'stage',
+                                            builder:
+                                                (context, control, child) =>
+                                                    Visibility(
+                                              visible: (control.valid),
+                                              child: DateTextInput(
+                                                firstDate: DateTime.now(),
+                                                controlName: 'screening_date',
+                                                label: ' SRQ Screening Date',
+                                              ),
+                                            ),
+                                          ),
+                                          const SizedBox(height: kPadding * 2),
+                                          ReactiveValueListenableBuilder<
+                                                  DateTime>(
+                                              formControlName: 'screening_date',
+                                              builder: (context, control,
+                                                      child) =>
+                                                  Visibility(
                                                     visible: (control.valid),
-                                                    child: DateTextInput(
-                                                      firstDate: DateTime.now(),
-                                                      controlName:
-                                                          'screening_date',
-                                                      label:
-                                                          ' SRQ Screening Date',
-                                                    ),
-                                                  ),
-                                                ),
-                                                const SizedBox(
-                                                    height: kPadding * 2),
-                                                ReactiveValueListenableBuilder<
-                                                        DateTime>(
-                                                    formControlName:
-                                                        'screening_date',
-                                                    builder: (context, control,
-                                                            child) =>
-                                                        Visibility(
-                                                          visible:
-                                                              (control.valid),
-                                                          child: ElevatedButton(
-                                                            onPressed: () {
-                                                              (context.router.push(
-                                                                      const WHOSRQRoute()))
-                                                                  .then(
-                                                                      (value) {
-                                                                if (value !=
-                                                                        null &&
-                                                                    value is Map<
-                                                                        String,
-                                                                        dynamic>) {
-                                                                  int yesCounter =
-                                                                      value['yesCounter']
-                                                                          as int;
+                                                    child: ElevatedButton(
+                                                      onPressed: () {
+                                                        (context.router.push(
+                                                                const WHOSRQRoute()))
+                                                            .then((value) {
+                                                          if (value != null &&
+                                                              value is Map<
+                                                                  String,
+                                                                  dynamic>) {
+                                                            int yesCounter =
+                                                                value['yesCounter']
+                                                                    as int;
 
-                                                                  String
-                                                                      screeningStatus =
-                                                                      value['screeningStatus']
-                                                                          as String;
-                                                                  formGroup
-                                                                      .control(
-                                                                          'screening_score')
-                                                                      .value = yesCounter;
-                                                                  formGroup
-                                                                      .control(
-                                                                          'screening_status')
-                                                                      .value = screeningStatus;
-                                                                  _onSave(
-                                                                      context,
-                                                                      formGroup);
-                                                                }
-                                                              });
-                                                            },
-                                                            child: const Text(
-                                                                'Take WHO SRQ'),
-                                                          ),
-                                                        )),
-                                                const SizedBox(
-                                                    height: kPadding * 2),
-                                                ReactiveValueListenableBuilder<
-                                                        String>(
-                                                    formControlName:
-                                                        'screening_status',
-                                                    builder: (context, control,
-                                                            child) =>
-                                                        Visibility(
-                                                            visible: (formGroup
+                                                            String
+                                                                screeningStatus =
+                                                                value['screeningStatus']
+                                                                    as String;
+                                                            formGroup
+                                                                .control(
+                                                                    'screening_score')
+                                                                .value = yesCounter;
+                                                            formGroup
                                                                     .control(
                                                                         'screening_status')
-                                                                    .value) !=
-                                                                null,
-                                                            child: Column(
-                                                              children: [
-                                                                Row(
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                          SecondaryTextField(
-                                                                        text: formGroup
-                                                                            .control('screening_score')
-                                                                            .value
-                                                                            .toString(),
-                                                                        label:
-                                                                            'Screening Score',
-                                                                      ),
-                                                                    ),
-                                                                    const SizedBox(
-                                                                        width: kPadding *
-                                                                            1.25),
-                                                                    Expanded(
-                                                                      child:
-                                                                          SecondaryTextField(
-                                                                        text: formGroup
-                                                                            .control('screening_status')
-                                                                            .value
-                                                                            .toString(),
-                                                                        label:
-                                                                            'Screening Status',
-                                                                      ),
-                                                                    ),
-                                                                    const SizedBox(
-                                                                        height:
-                                                                            kPadding *
-                                                                                2),
-                                                                  ],
-                                                                ),
-                                                                const SizedBox(
-                                                                    height:
-                                                                        kPadding *
-                                                                            2),
-                                                                Row(
-                                                                  children: [
-                                                                    Expanded(
-                                                                      child:
-                                                                          DateTextInput(
-                                                                        firstDate:
-                                                                            DateTime(2000),
-                                                                        controlName:
-                                                                            'counselling_linked',
-                                                                        label:
-                                                                            'Counselling Linked',
-                                                                      ),
-                                                                    ),
-                                                                    const SizedBox(
-                                                                        width: kPadding *
-                                                                            1.25),
-                                                                    Expanded(
-                                                                      child:
-                                                                          DateTextInput(
-                                                                        firstDate:
-                                                                            DateTime(2002),
-                                                                        controlName:
-                                                                            'psychiatrist_linked',
-                                                                        label:
-                                                                            'Psychiatrist Linked',
-                                                                      ),
-                                                                    ),
-                                                                  ],
-                                                                ),
-                                                                const SizedBox(
-                                                                    height:
-                                                                        kPadding *
-                                                                            2),
-                                                                ChipRadioButtons(
-                                                                  label:
-                                                                      'Feeling better after linkage',
-                                                                  options: const [
-                                                                    'Yes',
-                                                                    'No'
-                                                                  ],
-                                                                  crossAxisCount:
-                                                                      2,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    formGroup
-                                                                        .control(
-                                                                            'feeling_better_after_linkage')
-                                                                        .value = value;
-                                                                  },
-                                                                  selected: formGroup
+                                                                    .value =
+                                                                screeningStatus;
+                                                            _onSave(context,
+                                                                formGroup);
+                                                          }
+                                                        });
+                                                      },
+                                                      child: const Text(
+                                                          'Take WHO SRQ'),
+                                                    ),
+                                                  )),
+                                          const SizedBox(height: kPadding * 2),
+                                          ReactiveValueListenableBuilder<
+                                                  String>(
+                                              formControlName:
+                                                  'screening_status',
+                                              builder: (context, control,
+                                                      child) =>
+                                                  Visibility(
+                                                      visible: (formGroup
+                                                              .control(
+                                                                  'screening_status')
+                                                              .value) !=
+                                                          null,
+                                                      child: Column(
+                                                        children: [
+                                                          Row(
+                                                            children: [
+                                                              Expanded(
+                                                                child:
+                                                                    SecondaryTextField(
+                                                                  text: formGroup
                                                                       .control(
-                                                                          'feeling_better_after_linkage')
-                                                                      .value,
-                                                                ),
-                                                                const SizedBox(
-                                                                    height:
-                                                                        kPadding *
-                                                                            2),
-                                                                ChipRadioButtons(
+                                                                          'screening_score')
+                                                                      .value
+                                                                      .toString(),
                                                                   label:
-                                                                      'Talk to helpline again',
-                                                                  options: const [
-                                                                    'Yes',
-                                                                    'No'
-                                                                  ],
-                                                                  crossAxisCount:
-                                                                      2,
-                                                                  onChanged:
-                                                                      (value) {
-                                                                    formGroup
-                                                                        .control(
-                                                                            'talk_to_helpline')
-                                                                        .value = value;
-                                                                  },
-                                                                  selected: formGroup
-                                                                      .control(
-                                                                          'talk_to_helpline')
-                                                                      .value,
+                                                                      'Screening Score',
                                                                 ),
-                                                              ],
-                                                            ))),
-                                              ])))),
-                              BottomButtonBar(
-                                onSave: (_) async =>
-                                    await _onSave(context, formGroup),
-                                nextPage: const AppHomeRoute(),
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                            ])));
-              })),
-    );
+                                                              ),
+                                                              const SizedBox(
+                                                                  width:
+                                                                      kPadding *
+                                                                          1.25),
+                                                              Expanded(
+                                                                child:
+                                                                    SecondaryTextField(
+                                                                  text: formGroup
+                                                                      .control(
+                                                                          'screening_status')
+                                                                      .value
+                                                                      .toString(),
+                                                                  label:
+                                                                      'Screening Status',
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  height:
+                                                                      kPadding *
+                                                                          2),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                          Row(
+                                                            children: [
+                                                              Expanded(
+                                                                child:
+                                                                    DateTextInput(
+                                                                  firstDate:
+                                                                      DateTime(
+                                                                          2000),
+                                                                  controlName:
+                                                                      'counselling_linked',
+                                                                  label:
+                                                                      'Counselling Linked',
+                                                                ),
+                                                              ),
+                                                              const SizedBox(
+                                                                  width:
+                                                                      kPadding *
+                                                                          1.25),
+                                                              Expanded(
+                                                                child:
+                                                                    DateTextInput(
+                                                                  firstDate:
+                                                                      DateTime(
+                                                                          2002),
+                                                                  controlName:
+                                                                      'psychiatrist_linked',
+                                                                  label:
+                                                                      'Psychiatrist Linked',
+                                                                ),
+                                                              ),
+                                                            ],
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                          ChipRadioButtons(
+                                                            label:
+                                                                'Feeling better after linkage',
+                                                            options: const [
+                                                              'Yes',
+                                                              'No'
+                                                            ],
+                                                            crossAxisCount: 2,
+                                                            onChanged: (value) {
+                                                              formGroup
+                                                                  .control(
+                                                                      'feeling_better_after_linkage')
+                                                                  .value = value;
+                                                            },
+                                                            selected: formGroup
+                                                                .control(
+                                                                    'feeling_better_after_linkage')
+                                                                .value,
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                          ChipRadioButtons(
+                                                            label:
+                                                                'Talk to helpline again',
+                                                            options: const [
+                                                              'Yes',
+                                                              'No'
+                                                            ],
+                                                            crossAxisCount: 2,
+                                                            onChanged: (value) {
+                                                              formGroup
+                                                                  .control(
+                                                                      'talk_to_helpline')
+                                                                  .value = value;
+                                                            },
+                                                            selected: formGroup
+                                                                .control(
+                                                                    'talk_to_helpline')
+                                                                .value,
+                                                          ),
+                                                        ],
+                                                      ))),
+                                        ])))),
+                        BottomButtonBar(
+                          onSave: (_) async =>
+                              await _onSave(context, formGroup),
+                          nextPage: const AppHomeRoute(),
+                        ),
+                        const SizedBox(height: kPadding * 2),
+                      ])));
+            }));
   }
 }

@@ -15,14 +15,14 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
       xrayOutcome: json['xray_outcome'] as String?,
       outcome: json['outcome'] as String?,
       patientDetailsStatus: json['patient_details_status'] as bool? ?? false,
-      diseaseStatus: json['disease_status'] as bool? ?? false,
-      xrayStatus: json['xray_status'] as bool? ?? false,
-      udstStatus: json['udst_status'] as bool? ?? false,
-      nikshayStatus: json['nikshay_status'] as bool? ?? false,
-      comorbidityStatus: json['comorbidity_status'] as bool? ?? false,
-      dbtStatus: json['dbt_status'] as bool? ?? false,
-      contractCasingStatus: json['contract_casing_status'] as bool? ?? false,
       treatmentStatus: json['treatment_status'] as bool? ?? false,
+      referralDetailsStatus: json['referral_details_status'] as bool? ?? false,
+      tbScreeningStatus: json['tb_screening_status'] as bool? ?? false,
+      mentalHealthScreeningStatus:
+          json['mental_health_screening_status'] as bool? ?? false,
+      diagnosisStatus: json['diagnosis_status'] as bool? ?? false,
+      outcomeStatus: json['outcome_status'] as bool? ?? false,
+      contactTracingStatus: json['contact_tracing_status'] as bool? ?? false,
       createdAt: fromJsonToDateTime(json['created_at'] as String?),
       updatedAt: fromJsonToDateTime(json['updated_at'] as String?),
       sourceVisited: json['source_visited'] as int?,
@@ -71,14 +71,13 @@ Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) {
   writeNotNull('xray_outcome', instance.xrayOutcome);
   writeNotNull('outcome', instance.outcome);
   val['patient_details_status'] = instance.patientDetailsStatus;
-  val['disease_status'] = instance.diseaseStatus;
-  val['xray_status'] = instance.xrayStatus;
-  val['udst_status'] = instance.udstStatus;
-  val['nikshay_status'] = instance.nikshayStatus;
-  val['comorbidity_status'] = instance.comorbidityStatus;
-  val['dbt_status'] = instance.dbtStatus;
-  val['contract_casing_status'] = instance.contractCasingStatus;
   val['treatment_status'] = instance.treatmentStatus;
+  val['referral_details_status'] = instance.referralDetailsStatus;
+  val['tb_screening_status'] = instance.tbScreeningStatus;
+  val['mental_health_screening_status'] = instance.mentalHealthScreeningStatus;
+  val['diagnosis_status'] = instance.diagnosisStatus;
+  val['outcome_status'] = instance.outcomeStatus;
+  val['contact_tracing_status'] = instance.contactTracingStatus;
   writeNotNull('created_at', _dateTimeToJson(instance.createdAt));
   writeNotNull('updated_at', _dateTimeToJson(instance.updatedAt));
   val['source_visited'] = instance.sourceVisited;

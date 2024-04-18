@@ -17,45 +17,14 @@ const loginLink =
     'https://sso.nikshay.in/v1/sso/login?returnUrl=https://www.nikshay.in/Home&clientId=29';
 const registerLink = 'https://www.nikshay.in/Home/UserFacility';
 
-final quickAction = [
-  // 'X-Ray',
-  // 'UDST',
-  'DBT',
-  'HIV-DM',
-  'Nikshay ID',
-  'Treatment',
-  'Case Closure',
-  'Other',
-];
-
-final negativeFilterList = [
-  'All',
-  'Not X-Ray',
-  'Not UDST',
-  'Not NI',
-
-  /// HIV & DM are comorbidities
-  'Not HIV',
-  'Not DM',
-  'Not DBT',
-
-  /// TT & TO both are treatmentStatus
-  'Not TT',
-  'Not TO',
-  // CL full from needed
-  'Not CL',
-];
-
 final workingStatusList = [
-  'XR',
-  'UD',
-  'NI',
-  'DBT',
-  'HIV',
-  'DM',
-  'TT',
-  'TO',
-  'CL',
+  'Referral',
+  'TB Screening',
+  'Mental Health Screening',
+  'Diagnosis',
+  'Treatment',
+  'Outcome',
+  'Contact Tracing',
 ];
 
 const caseOutcomeList = [
@@ -78,7 +47,7 @@ const udstOptions = [
 ];
 
 Map<String, ValidationMessageFunction> reactiveFormValidators(
-        {String? label = 'Filed', int? maxLength}) =>
+        {String? label = 'Field', int? maxLength}) =>
     {
       ValidationMessage.required: (error) => 'The $label must not be empty',
       ValidationMessage.minLength: (error) =>

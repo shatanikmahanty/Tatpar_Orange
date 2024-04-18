@@ -20,6 +20,7 @@ class TBScreeningState with _$TBScreeningState {
 class TBScreeningStateCubit extends Cubit<TBScreeningState> {
   TBScreeningStateCubit() : super(const TBScreeningState(isLoading: true));
   void updateTBScreeningModel(TBScreeningModel model) {
+    print(model);
     emit(state.copyWith(isLoading: false, tbScreeningModel: model));
   }
 
@@ -43,7 +44,7 @@ class TBScreeningStateCubit extends Cubit<TBScreeningState> {
         swollenGland == 'No') {
       emit(state.copyWith(screeningOutcome: 'No Symptom'));
       return 'No Symptom';
-    } else if (swollenGland == 'Yes' && tbMedicine == 'No') {
+    } else if (swollenGland == 'Yes') {
       emit(state.copyWith(screeningOutcome: 'EPTB'));
       return 'EPTB';
     } else if ((cough == 'Yes' ||

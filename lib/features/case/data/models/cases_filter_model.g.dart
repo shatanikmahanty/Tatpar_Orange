@@ -49,13 +49,11 @@ Map<String, dynamic> _$$CasesFilterModelImplToJson(
 
 const _$FilterShortCutEnumMap = {
   FilterShortCut.all: 'all',
-  FilterShortCut.notXRay: 'notXRay',
-  FilterShortCut.notUDST: 'notUDST',
-  FilterShortCut.notNI: 'notNI',
-  FilterShortCut.notHIV: 'notHIV',
-  FilterShortCut.notDM: 'notDM',
-  FilterShortCut.notDBT: 'notDBT',
-  FilterShortCut.notTT: 'notTT',
-  FilterShortCut.notTO: 'notTO',
-  FilterShortCut.notCL: 'notCL',
+  FilterShortCut.referralDetails: 'referralDetails',
+  FilterShortCut.tbScreening: 'tbScreening',
+  FilterShortCut.mentalHealthScreening: 'mentalHealthScreening',
+  FilterShortCut.treatment: 'treatment',
+  FilterShortCut.diagnosis: 'diagnosis',
+  FilterShortCut.outcome: 'outcome',
+  FilterShortCut.contactTracing: 'contactTracing',
 };

@@ -31,22 +31,20 @@ mixin _$Case {
   String? get outcome => throw _privateConstructorUsedError;
   @JsonKey(name: 'patient_details_status')
   bool get patientDetailsStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'disease_status')
-  bool get diseaseStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'xray_status')
-  bool get xrayStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'udst_status')
-  bool get udstStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'nikshay_status')
-  bool get nikshayStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'comorbidity_status')
-  bool get comorbidityStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'dbt_status')
-  bool get dbtStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'contract_casing_status')
-  bool get contractCasingStatus => throw _privateConstructorUsedError;
   @JsonKey(name: 'treatment_status')
   bool get treatmentStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_details_status')
+  bool get referralDetailsStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tb_screening_status')
+  bool get tbScreeningStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'mental_health_screening_status')
+  bool get mentalHealthScreeningStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'diagnosis_status')
+  bool get diagnosisStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'outcome_status')
+  bool get outcomeStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'contact_tracing_status')
+  bool get contactTracingStatus => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'created_at',
       fromJson: fromJsonToDateTime,
@@ -109,14 +107,14 @@ abstract class $CaseCopyWith<$Res> {
       @JsonKey(name: 'xray_outcome', includeIfNull: false) String? xrayOutcome,
       @JsonKey(name: 'outcome', includeIfNull: false) String? outcome,
       @JsonKey(name: 'patient_details_status') bool patientDetailsStatus,
-      @JsonKey(name: 'disease_status') bool diseaseStatus,
-      @JsonKey(name: 'xray_status') bool xrayStatus,
-      @JsonKey(name: 'udst_status') bool udstStatus,
-      @JsonKey(name: 'nikshay_status') bool nikshayStatus,
-      @JsonKey(name: 'comorbidity_status') bool comorbidityStatus,
-      @JsonKey(name: 'dbt_status') bool dbtStatus,
-      @JsonKey(name: 'contract_casing_status') bool contractCasingStatus,
       @JsonKey(name: 'treatment_status') bool treatmentStatus,
+      @JsonKey(name: 'referral_details_status') bool referralDetailsStatus,
+      @JsonKey(name: 'tb_screening_status') bool tbScreeningStatus,
+      @JsonKey(name: 'mental_health_screening_status')
+      bool mentalHealthScreeningStatus,
+      @JsonKey(name: 'diagnosis_status') bool diagnosisStatus,
+      @JsonKey(name: 'outcome_status') bool outcomeStatus,
+      @JsonKey(name: 'contact_tracing_status') bool contactTracingStatus,
       @JsonKey(
           name: 'created_at',
           fromJson: fromJsonToDateTime,
@@ -176,14 +174,13 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
     Object? xrayOutcome = freezed,
     Object? outcome = freezed,
     Object? patientDetailsStatus = null,
-    Object? diseaseStatus = null,
-    Object? xrayStatus = null,
-    Object? udstStatus = null,
-    Object? nikshayStatus = null,
-    Object? comorbidityStatus = null,
-    Object? dbtStatus = null,
-    Object? contractCasingStatus = null,
     Object? treatmentStatus = null,
+    Object? referralDetailsStatus = null,
+    Object? tbScreeningStatus = null,
+    Object? mentalHealthScreeningStatus = null,
+    Object? diagnosisStatus = null,
+    Object? outcomeStatus = null,
+    Object? contactTracingStatus = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? sourceVisited = freezed,
@@ -228,37 +225,33 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.patientDetailsStatus
           : patientDetailsStatus // ignore: cast_nullable_to_non_nullable
               as bool,
-      diseaseStatus: null == diseaseStatus
-          ? _value.diseaseStatus
-          : diseaseStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      xrayStatus: null == xrayStatus
-          ? _value.xrayStatus
-          : xrayStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      udstStatus: null == udstStatus
-          ? _value.udstStatus
-          : udstStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      nikshayStatus: null == nikshayStatus
-          ? _value.nikshayStatus
-          : nikshayStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      comorbidityStatus: null == comorbidityStatus
-          ? _value.comorbidityStatus
-          : comorbidityStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      dbtStatus: null == dbtStatus
-          ? _value.dbtStatus
-          : dbtStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      contractCasingStatus: null == contractCasingStatus
-          ? _value.contractCasingStatus
-          : contractCasingStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
       treatmentStatus: null == treatmentStatus
           ? _value.treatmentStatus
           : treatmentStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      referralDetailsStatus: null == referralDetailsStatus
+          ? _value.referralDetailsStatus
+          : referralDetailsStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tbScreeningStatus: null == tbScreeningStatus
+          ? _value.tbScreeningStatus
+          : tbScreeningStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mentalHealthScreeningStatus: null == mentalHealthScreeningStatus
+          ? _value.mentalHealthScreeningStatus
+          : mentalHealthScreeningStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      diagnosisStatus: null == diagnosisStatus
+          ? _value.diagnosisStatus
+          : diagnosisStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      outcomeStatus: null == outcomeStatus
+          ? _value.outcomeStatus
+          : outcomeStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      contactTracingStatus: null == contactTracingStatus
+          ? _value.contactTracingStatus
+          : contactTracingStatus // ignore: cast_nullable_to_non_nullable
               as bool,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -410,14 +403,14 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
       @JsonKey(name: 'xray_outcome', includeIfNull: false) String? xrayOutcome,
       @JsonKey(name: 'outcome', includeIfNull: false) String? outcome,
       @JsonKey(name: 'patient_details_status') bool patientDetailsStatus,
-      @JsonKey(name: 'disease_status') bool diseaseStatus,
-      @JsonKey(name: 'xray_status') bool xrayStatus,
-      @JsonKey(name: 'udst_status') bool udstStatus,
-      @JsonKey(name: 'nikshay_status') bool nikshayStatus,
-      @JsonKey(name: 'comorbidity_status') bool comorbidityStatus,
-      @JsonKey(name: 'dbt_status') bool dbtStatus,
-      @JsonKey(name: 'contract_casing_status') bool contractCasingStatus,
       @JsonKey(name: 'treatment_status') bool treatmentStatus,
+      @JsonKey(name: 'referral_details_status') bool referralDetailsStatus,
+      @JsonKey(name: 'tb_screening_status') bool tbScreeningStatus,
+      @JsonKey(name: 'mental_health_screening_status')
+      bool mentalHealthScreeningStatus,
+      @JsonKey(name: 'diagnosis_status') bool diagnosisStatus,
+      @JsonKey(name: 'outcome_status') bool outcomeStatus,
+      @JsonKey(name: 'contact_tracing_status') bool contactTracingStatus,
       @JsonKey(
           name: 'created_at',
           fromJson: fromJsonToDateTime,
@@ -479,14 +472,13 @@ class __$$CaseImplCopyWithImpl<$Res>
     Object? xrayOutcome = freezed,
     Object? outcome = freezed,
     Object? patientDetailsStatus = null,
-    Object? diseaseStatus = null,
-    Object? xrayStatus = null,
-    Object? udstStatus = null,
-    Object? nikshayStatus = null,
-    Object? comorbidityStatus = null,
-    Object? dbtStatus = null,
-    Object? contractCasingStatus = null,
     Object? treatmentStatus = null,
+    Object? referralDetailsStatus = null,
+    Object? tbScreeningStatus = null,
+    Object? mentalHealthScreeningStatus = null,
+    Object? diagnosisStatus = null,
+    Object? outcomeStatus = null,
+    Object? contactTracingStatus = null,
     Object? createdAt = freezed,
     Object? updatedAt = freezed,
     Object? sourceVisited = freezed,
@@ -531,37 +523,33 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.patientDetailsStatus
           : patientDetailsStatus // ignore: cast_nullable_to_non_nullable
               as bool,
-      diseaseStatus: null == diseaseStatus
-          ? _value.diseaseStatus
-          : diseaseStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      xrayStatus: null == xrayStatus
-          ? _value.xrayStatus
-          : xrayStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      udstStatus: null == udstStatus
-          ? _value.udstStatus
-          : udstStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      nikshayStatus: null == nikshayStatus
-          ? _value.nikshayStatus
-          : nikshayStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      comorbidityStatus: null == comorbidityStatus
-          ? _value.comorbidityStatus
-          : comorbidityStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      dbtStatus: null == dbtStatus
-          ? _value.dbtStatus
-          : dbtStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      contractCasingStatus: null == contractCasingStatus
-          ? _value.contractCasingStatus
-          : contractCasingStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
       treatmentStatus: null == treatmentStatus
           ? _value.treatmentStatus
           : treatmentStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      referralDetailsStatus: null == referralDetailsStatus
+          ? _value.referralDetailsStatus
+          : referralDetailsStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      tbScreeningStatus: null == tbScreeningStatus
+          ? _value.tbScreeningStatus
+          : tbScreeningStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      mentalHealthScreeningStatus: null == mentalHealthScreeningStatus
+          ? _value.mentalHealthScreeningStatus
+          : mentalHealthScreeningStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      diagnosisStatus: null == diagnosisStatus
+          ? _value.diagnosisStatus
+          : diagnosisStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      outcomeStatus: null == outcomeStatus
+          ? _value.outcomeStatus
+          : outcomeStatus // ignore: cast_nullable_to_non_nullable
+              as bool,
+      contactTracingStatus: null == contactTracingStatus
+          ? _value.contactTracingStatus
+          : contactTracingStatus // ignore: cast_nullable_to_non_nullable
               as bool,
       createdAt: freezed == createdAt
           ? _value.createdAt
@@ -650,15 +638,16 @@ class _$CaseImpl implements _Case {
       @JsonKey(name: 'outcome', includeIfNull: false) this.outcome,
       @JsonKey(name: 'patient_details_status')
       this.patientDetailsStatus = false,
-      @JsonKey(name: 'disease_status') this.diseaseStatus = false,
-      @JsonKey(name: 'xray_status') this.xrayStatus = false,
-      @JsonKey(name: 'udst_status') this.udstStatus = false,
-      @JsonKey(name: 'nikshay_status') this.nikshayStatus = false,
-      @JsonKey(name: 'comorbidity_status') this.comorbidityStatus = false,
-      @JsonKey(name: 'dbt_status') this.dbtStatus = false,
-      @JsonKey(name: 'contract_casing_status')
-      this.contractCasingStatus = false,
       @JsonKey(name: 'treatment_status') this.treatmentStatus = false,
+      @JsonKey(name: 'referral_details_status')
+      this.referralDetailsStatus = false,
+      @JsonKey(name: 'tb_screening_status') this.tbScreeningStatus = false,
+      @JsonKey(name: 'mental_health_screening_status')
+      this.mentalHealthScreeningStatus = false,
+      @JsonKey(name: 'diagnosis_status') this.diagnosisStatus = false,
+      @JsonKey(name: 'outcome_status') this.outcomeStatus = false,
+      @JsonKey(name: 'contact_tracing_status')
+      this.contactTracingStatus = false,
       @JsonKey(
           name: 'created_at',
           fromJson: fromJsonToDateTime,
@@ -709,29 +698,26 @@ class _$CaseImpl implements _Case {
   @JsonKey(name: 'patient_details_status')
   final bool patientDetailsStatus;
   @override
-  @JsonKey(name: 'disease_status')
-  final bool diseaseStatus;
-  @override
-  @JsonKey(name: 'xray_status')
-  final bool xrayStatus;
-  @override
-  @JsonKey(name: 'udst_status')
-  final bool udstStatus;
-  @override
-  @JsonKey(name: 'nikshay_status')
-  final bool nikshayStatus;
-  @override
-  @JsonKey(name: 'comorbidity_status')
-  final bool comorbidityStatus;
-  @override
-  @JsonKey(name: 'dbt_status')
-  final bool dbtStatus;
-  @override
-  @JsonKey(name: 'contract_casing_status')
-  final bool contractCasingStatus;
-  @override
   @JsonKey(name: 'treatment_status')
   final bool treatmentStatus;
+  @override
+  @JsonKey(name: 'referral_details_status')
+  final bool referralDetailsStatus;
+  @override
+  @JsonKey(name: 'tb_screening_status')
+  final bool tbScreeningStatus;
+  @override
+  @JsonKey(name: 'mental_health_screening_status')
+  final bool mentalHealthScreeningStatus;
+  @override
+  @JsonKey(name: 'diagnosis_status')
+  final bool diagnosisStatus;
+  @override
+  @JsonKey(name: 'outcome_status')
+  final bool outcomeStatus;
+  @override
+  @JsonKey(name: 'contact_tracing_status')
+  final bool contactTracingStatus;
   @override
   @JsonKey(
       name: 'created_at',
@@ -797,7 +783,7 @@ class _$CaseImpl implements _Case {
 
   @override
   String toString() {
-    return 'Case(id: $id, healthworkerId: $healthworkerId, patient: $patient, xrayOutcome: $xrayOutcome, outcome: $outcome, patientDetailsStatus: $patientDetailsStatus, diseaseStatus: $diseaseStatus, xrayStatus: $xrayStatus, udstStatus: $udstStatus, nikshayStatus: $nikshayStatus, comorbidityStatus: $comorbidityStatus, dbtStatus: $dbtStatus, contractCasingStatus: $contractCasingStatus, treatmentStatus: $treatmentStatus, createdAt: $createdAt, updatedAt: $updatedAt, sourceVisited: $sourceVisited, hub: $hub, drugsPurchased: $drugsPurchased, referredTo: $referredTo, assignedTo: $assignedTo, filledForm: $filledForm, disease: $disease, xray: $xray, udst: $udst, nikshay: $nikshay, comorbidity: $comorbidity, dbt: $dbt, contractCasing: $contractCasing, treatment: $treatment, createdBy: $createdBy, updatedBy: $updatedBy)';
+    return 'Case(id: $id, healthworkerId: $healthworkerId, patient: $patient, xrayOutcome: $xrayOutcome, outcome: $outcome, patientDetailsStatus: $patientDetailsStatus, treatmentStatus: $treatmentStatus, referralDetailsStatus: $referralDetailsStatus, tbScreeningStatus: $tbScreeningStatus, mentalHealthScreeningStatus: $mentalHealthScreeningStatus, diagnosisStatus: $diagnosisStatus, outcomeStatus: $outcomeStatus, contactTracingStatus: $contactTracingStatus, createdAt: $createdAt, updatedAt: $updatedAt, sourceVisited: $sourceVisited, hub: $hub, drugsPurchased: $drugsPurchased, referredTo: $referredTo, assignedTo: $assignedTo, filledForm: $filledForm, disease: $disease, xray: $xray, udst: $udst, nikshay: $nikshay, comorbidity: $comorbidity, dbt: $dbt, contractCasing: $contractCasing, treatment: $treatment, createdBy: $createdBy, updatedBy: $updatedBy)';
   }
 
   @override
@@ -814,22 +800,22 @@ class _$CaseImpl implements _Case {
             (identical(other.outcome, outcome) || other.outcome == outcome) &&
             (identical(other.patientDetailsStatus, patientDetailsStatus) ||
                 other.patientDetailsStatus == patientDetailsStatus) &&
-            (identical(other.diseaseStatus, diseaseStatus) ||
-                other.diseaseStatus == diseaseStatus) &&
-            (identical(other.xrayStatus, xrayStatus) ||
-                other.xrayStatus == xrayStatus) &&
-            (identical(other.udstStatus, udstStatus) ||
-                other.udstStatus == udstStatus) &&
-            (identical(other.nikshayStatus, nikshayStatus) ||
-                other.nikshayStatus == nikshayStatus) &&
-            (identical(other.comorbidityStatus, comorbidityStatus) ||
-                other.comorbidityStatus == comorbidityStatus) &&
-            (identical(other.dbtStatus, dbtStatus) ||
-                other.dbtStatus == dbtStatus) &&
-            (identical(other.contractCasingStatus, contractCasingStatus) ||
-                other.contractCasingStatus == contractCasingStatus) &&
             (identical(other.treatmentStatus, treatmentStatus) ||
                 other.treatmentStatus == treatmentStatus) &&
+            (identical(other.referralDetailsStatus, referralDetailsStatus) ||
+                other.referralDetailsStatus == referralDetailsStatus) &&
+            (identical(other.tbScreeningStatus, tbScreeningStatus) ||
+                other.tbScreeningStatus == tbScreeningStatus) &&
+            (identical(other.mentalHealthScreeningStatus,
+                    mentalHealthScreeningStatus) ||
+                other.mentalHealthScreeningStatus ==
+                    mentalHealthScreeningStatus) &&
+            (identical(other.diagnosisStatus, diagnosisStatus) ||
+                other.diagnosisStatus == diagnosisStatus) &&
+            (identical(other.outcomeStatus, outcomeStatus) ||
+                other.outcomeStatus == outcomeStatus) &&
+            (identical(other.contactTracingStatus, contactTracingStatus) ||
+                other.contactTracingStatus == contactTracingStatus) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt) &&
             (identical(other.updatedAt, updatedAt) ||
@@ -872,14 +858,13 @@ class _$CaseImpl implements _Case {
         xrayOutcome,
         outcome,
         patientDetailsStatus,
-        diseaseStatus,
-        xrayStatus,
-        udstStatus,
-        nikshayStatus,
-        comorbidityStatus,
-        dbtStatus,
-        contractCasingStatus,
         treatmentStatus,
+        referralDetailsStatus,
+        tbScreeningStatus,
+        mentalHealthScreeningStatus,
+        diagnosisStatus,
+        outcomeStatus,
+        contactTracingStatus,
         createdAt,
         updatedAt,
         sourceVisited,
@@ -923,14 +908,15 @@ abstract class _Case implements Case {
       final String? xrayOutcome,
       @JsonKey(name: 'outcome', includeIfNull: false) final String? outcome,
       @JsonKey(name: 'patient_details_status') final bool patientDetailsStatus,
-      @JsonKey(name: 'disease_status') final bool diseaseStatus,
-      @JsonKey(name: 'xray_status') final bool xrayStatus,
-      @JsonKey(name: 'udst_status') final bool udstStatus,
-      @JsonKey(name: 'nikshay_status') final bool nikshayStatus,
-      @JsonKey(name: 'comorbidity_status') final bool comorbidityStatus,
-      @JsonKey(name: 'dbt_status') final bool dbtStatus,
-      @JsonKey(name: 'contract_casing_status') final bool contractCasingStatus,
       @JsonKey(name: 'treatment_status') final bool treatmentStatus,
+      @JsonKey(name: 'referral_details_status')
+      final bool referralDetailsStatus,
+      @JsonKey(name: 'tb_screening_status') final bool tbScreeningStatus,
+      @JsonKey(name: 'mental_health_screening_status')
+      final bool mentalHealthScreeningStatus,
+      @JsonKey(name: 'diagnosis_status') final bool diagnosisStatus,
+      @JsonKey(name: 'outcome_status') final bool outcomeStatus,
+      @JsonKey(name: 'contact_tracing_status') final bool contactTracingStatus,
       @JsonKey(
           name: 'created_at',
           fromJson: fromJsonToDateTime,
@@ -984,29 +970,26 @@ abstract class _Case implements Case {
   @JsonKey(name: 'patient_details_status')
   bool get patientDetailsStatus;
   @override
-  @JsonKey(name: 'disease_status')
-  bool get diseaseStatus;
-  @override
-  @JsonKey(name: 'xray_status')
-  bool get xrayStatus;
-  @override
-  @JsonKey(name: 'udst_status')
-  bool get udstStatus;
-  @override
-  @JsonKey(name: 'nikshay_status')
-  bool get nikshayStatus;
-  @override
-  @JsonKey(name: 'comorbidity_status')
-  bool get comorbidityStatus;
-  @override
-  @JsonKey(name: 'dbt_status')
-  bool get dbtStatus;
-  @override
-  @JsonKey(name: 'contract_casing_status')
-  bool get contractCasingStatus;
-  @override
   @JsonKey(name: 'treatment_status')
   bool get treatmentStatus;
+  @override
+  @JsonKey(name: 'referral_details_status')
+  bool get referralDetailsStatus;
+  @override
+  @JsonKey(name: 'tb_screening_status')
+  bool get tbScreeningStatus;
+  @override
+  @JsonKey(name: 'mental_health_screening_status')
+  bool get mentalHealthScreeningStatus;
+  @override
+  @JsonKey(name: 'diagnosis_status')
+  bool get diagnosisStatus;
+  @override
+  @JsonKey(name: 'outcome_status')
+  bool get outcomeStatus;
+  @override
+  @JsonKey(name: 'contact_tracing_status')
+  bool get contactTracingStatus;
   @override
   @JsonKey(
       name: 'created_at',

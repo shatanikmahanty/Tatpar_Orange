@@ -1,18 +1,14 @@
 enum FilterShortCut {
   all('All'),
-  notXRay('Not X-Ray'),
-  notUDST('Not UDST'),
-  notNI('Not NI'),
+  referralDetails('Referral Details'),
+  tbScreening('TB Screening'),
+  mentalHealthScreening('Mental Health Screening'),
 
-  /// HIV & DM are comorbidities
-  notHIV('Not HIV'),
-  notDM('Not DM'),
-  notDBT('Not DBT'),
+  treatment('Treatment'),
+  diagnosis('Diagnosis'),
+  outcome('Outcome'),
 
-  /// TT & TO both are treatmentStatus
-  notTT('Not TT'),
-  notTO('Not TO'),
-  notCL('Not CL');
+  contactTracing('Contact Tracing');
 
   final String label;
   const FilterShortCut(this.label);

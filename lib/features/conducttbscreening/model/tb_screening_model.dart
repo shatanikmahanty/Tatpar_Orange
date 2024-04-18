@@ -20,7 +20,7 @@ class TBScreeningModel with _$TBScreeningModel {
     @JsonKey(name: 'Swollen_gland_now') required String? swollenGland,
     @JsonKey(name: 'TB_medication_before_yes_no') required String? tbMedicine,
     @JsonKey(name: 'Screening_outcome') required String? screeningOutcome,
-    @JsonKey(name: 'Comments') required String? comments,
+    @JsonKey(name: 'Comments') String? comments,
   }) = _TBScreeningModel;
 
   factory TBScreeningModel.fromJson(Map<String, dynamic> json) =>

@@ -95,6 +95,7 @@ class WHOSRQPage extends StatelessWidget {
       return result;
     } else {
       formGroup.markAllAsTouched();
+      return {};
     }
   }
 
