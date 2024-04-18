@@ -85,7 +85,7 @@ class ReferralDetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return RepositoryProvider(
-        create: (_) => ReferralDetailsRepository(
+        create: (context) => ReferralDetailsRepository(
             context: context, file: Assets.json.districts),
         child: BlocProvider(
             create: (context) => ReferralDetailsCubit(
@@ -313,86 +313,86 @@ class ReferralDetailsPage extends StatelessWidget {
               ),
             )));
   }
+}
 
-  _loadDistricts(FormGroup formGroup, BuildContext context) {
-    context.read<ReferralDetailsCubit>().loadDistricts();
-    return BlocBuilder<ReferralDetailsCubit, ReferralDetailsState>(
-        buildWhen: ((previous, current) =>
-            (previous.isLoading != current.isLoading) ||
-            previous.panchayatModel != current.panchayatModel),
-        builder: (context, state) {
-          List<String> districts = (state.panchayatModel != null)
-              ? state.panchayatModel!.map((e) => e.district).toSet().toList()
-              : [];
-          List<String> blocks = [];
-          List<String> panchayatCodes = [];
-          if (state.isLoading ?? false) {
-            return const SizedBox(
-              height: 15,
-              width: 15,
-              child: Center(
-                child: CircularProgressIndicator(),
-              ),
-            );
-          }
-
-          return Column(
-            children: [
-              TextFieldWithList(
-                controlName: 'location.district',
-                label: 'District',
-                padding: EdgeInsets.zero,
-                prefixIcon: Icons.account_circle_outlined,
-                listData: districts,
-                allowMultiSelection: false,
-                onSelected: (value) {
-                  formGroup.control('location.district').value = value[0];
-                  blocks.clear();
-
-                  blocks.addAll(state.panchayatModel!
-                      .where((e) => e.district == value[0])
-                      .map((e) => e.block)
-                      .toSet()
-                      .toList());
-                },
-                emptyString: 'District',
-              ),
-              const SizedBox(height: kPadding * 2),
-              TextFieldWithList(
-                controlName: 'location.referral_block',
-                label: 'Referral Block',
-                padding: EdgeInsets.zero,
-                prefixIcon: Icons.account_circle_outlined,
-                listData: blocks,
-                allowMultiSelection: false,
-                onSelected: (value) {
-                  formGroup.control('location.referral_block').value = value[0];
-                  panchayatCodes.clear();
-
-                  panchayatCodes.addAll(state.panchayatModel!
-                      .where((e) => e.block == value[0])
-                      .map((e) => e.panchayatCode)
-                      .toSet()
-                      .toList());
-                },
-                emptyString: '',
-              ),
-              const SizedBox(height: kPadding * 2),
-              TextFieldWithList(
-                controlName: 'location.panchayat_code',
-                label: 'Panchayat Code',
-                padding: EdgeInsets.zero,
-                prefixIcon: Icons.account_circle_outlined,
-                listData: panchayatCodes,
-                allowMultiSelection: false,
-                onSelected: (value) {
-                  formGroup.control('location.panchayat_code').value = value[0];
-                },
-                emptyString: '',
-              ),
-              const SizedBox(height: kPadding * 2),
-            ],
+_loadDistricts(FormGroup formGroup, BuildContext context) {
+  context.read<ReferralDetailsCubit>().loadDistricts();
+  return BlocBuilder<ReferralDetailsCubit, ReferralDetailsState>(
+      buildWhen: ((previous, current) =>
+          (previous.isLoading != current.isLoading) ||
+          previous.panchayatModel != current.panchayatModel),
+      builder: (context, state) {
+        List<String> districts = (state.panchayatModel != null)
+            ? state.panchayatModel!.map((e) => e.district).toSet().toList()
+            : [];
+        List<String> blocks = [];
+        List<String> panchayatCodes = [];
+        if (state.isLoading ?? false) {
+          return const SizedBox(
+            height: 15,
+            width: 15,
+            child: Center(
+              child: CircularProgressIndicator(),
+            ),
           );
-        });
-  }
+        }
+
+        return Column(
+          children: [
+            TextFieldWithList(
+              controlName: 'location.district',
+              label: 'District',
+              padding: EdgeInsets.zero,
+              prefixIcon: Icons.account_circle_outlined,
+              listData: districts,
+              allowMultiSelection: false,
+              onSelected: (value) {
+                formGroup.control('location.district').value = value[0];
+                blocks.clear();
+
+                blocks.addAll(state.panchayatModel!
+                    .where((e) => e.district == value[0])
+                    .map((e) => e.block)
+                    .toSet()
+                    .toList());
+              },
+              emptyString: 'District',
+            ),
+            const SizedBox(height: kPadding * 2),
+            TextFieldWithList(
+              controlName: 'location.referral_block',
+              label: 'Referral Block',
+              padding: EdgeInsets.zero,
+              prefixIcon: Icons.account_circle_outlined,
+              listData: blocks,
+              allowMultiSelection: false,
+              onSelected: (value) {
+                formGroup.control('location.referral_block').value = value[0];
+                panchayatCodes.clear();
+
+                panchayatCodes.addAll(state.panchayatModel!
+                    .where((e) => e.block == value[0])
+                    .map((e) => e.panchayatCode)
+                    .toSet()
+                    .toList());
+              },
+              emptyString: '',
+            ),
+            const SizedBox(height: kPadding * 2),
+            TextFieldWithList(
+              controlName: 'location.panchayat_code',
+              label: 'Panchayat Code',
+              padding: EdgeInsets.zero,
+              prefixIcon: Icons.account_circle_outlined,
+              listData: panchayatCodes,
+              allowMultiSelection: false,
+              onSelected: (value) {
+                formGroup.control('location.panchayat_code').value = value[0];
+              },
+              emptyString: '',
+            ),
+            const SizedBox(height: kPadding * 2),
+          ],
+        );
+      });
 }

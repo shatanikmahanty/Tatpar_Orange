@@ -175,10 +175,10 @@ class DiagnosisPage extends StatelessWidget {
                         ),
                         const SizedBox(height: kPadding * 2),
                         ReactiveValueListenableBuilder<String>(
-                            formControlName: 'first_consultation',
+                            formControlName: 'diagnosis_initiated',
                             builder: (context, control, child) => Visibility(
                                 visible: (formGroup
-                                        .control('first_consultation')
+                                        .control('diagnosis_initiated')
                                         .value) ==
                                     'Yes',
                                 child: Column(children: [
@@ -249,6 +249,7 @@ class DiagnosisPage extends StatelessWidget {
                                     selected:
                                         formGroup.control('afb_done').value,
                                   ),
+                                  const SizedBox(height: kPadding * 2),
                                   ReactiveValueListenableBuilder<String>(
                                       formControlName: 'afb_done',
                                       builder: (context, control, child) =>
@@ -258,8 +259,6 @@ class DiagnosisPage extends StatelessWidget {
                                                       .value) ==
                                                   'Yes',
                                               child: Column(children: [
-                                                const SizedBox(
-                                                    height: kPadding * 2),
                                                 const PrimaryTextField(
                                                   formControlName:
                                                       'afb_lab_number',
@@ -321,8 +320,9 @@ class DiagnosisPage extends StatelessWidget {
                                                       'afb2_result_date',
                                                   label: 'AFB2 Result Date',
                                                 ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
                                               ]))),
-                                  const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
                                     label: 'NAAT Test',
                                     options: const ['Yes', 'No'],
@@ -382,79 +382,98 @@ class DiagnosisPage extends StatelessWidget {
                                                   prefixIcon: Icons
                                                       .account_circle_outlined,
                                                 ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                DateTextInput(
+                                                  firstDate: DateTime(2002),
+                                                  controlName:
+                                                      'sample_collection_date',
+                                                  label:
+                                                      'Sample Collection Date',
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                DateTextInput(
+                                                  firstDate: DateTime(2002),
+                                                  controlName:
+                                                      'naat_result_date',
+                                                  label: 'NAAT Result Date',
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                TextFieldWithList(
+                                                  controlName: 'mtb_result',
+                                                  label: 'MTB Result',
+                                                  padding: EdgeInsets.zero,
+                                                  prefixIcon: Icons
+                                                      .account_circle_outlined,
+                                                  listData: const [
+                                                    'MTB Detected ',
+                                                    'MTB Trace Detected ',
+                                                    'MTB not Detected ',
+                                                    'Error',
+                                                    'Invalid',
+                                                    'No Result'
+                                                  ],
+                                                  allowMultiSelection: false,
+                                                  onSelected: (value) {},
+                                                  emptyString: '',
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                TextFieldWithList(
+                                                  controlName: 'rif_resistance',
+                                                  label: 'RIF Resistance',
+                                                  padding: EdgeInsets.zero,
+                                                  prefixIcon: Icons
+                                                      .account_circle_outlined,
+                                                  listData: const [
+                                                    'Detected',
+                                                    'Indeterminate',
+                                                    'Not Detected'
+                                                  ],
+                                                  allowMultiSelection: false,
+                                                  onSelected: (value) {},
+                                                  emptyString: '',
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'Drug Resistance',
+                                                  options: const [
+                                                    'Sensitive',
+                                                    'Resistant'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'drug_resistance')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control(
+                                                          'drug_resistance')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'XDR Done',
+                                                  options: const ['Yes', 'No'],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control('xdr_done')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control('xdr_done')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
                                               ]))),
-                                  const SizedBox(height: kPadding * 2),
-                                  DateTextInput(
-                                    firstDate: DateTime(2002),
-                                    controlName: 'sample_collection_date',
-                                    label: 'Sample Collection Date',
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  DateTextInput(
-                                    firstDate: DateTime(2002),
-                                    controlName: 'naat_result_date',
-                                    label: 'NAAT Result Date',
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  TextFieldWithList(
-                                    controlName: 'mtb_result',
-                                    label: 'MTB Result',
-                                    padding: EdgeInsets.zero,
-                                    prefixIcon: Icons.account_circle_outlined,
-                                    listData: const [
-                                      'MTB Detected ',
-                                      'MTB Trace Detected ',
-                                      'MTB not Detected ',
-                                      'Error',
-                                      'Invalid',
-                                      'No Result'
-                                    ],
-                                    allowMultiSelection: false,
-                                    onSelected: (value) {},
-                                    emptyString: '',
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  TextFieldWithList(
-                                    controlName: 'rif_resistance',
-                                    label: 'RIF Resistance',
-                                    padding: EdgeInsets.zero,
-                                    prefixIcon: Icons.account_circle_outlined,
-                                    listData: const [
-                                      'Detected',
-                                      'Indeterminate',
-                                      'Not Detected'
-                                    ],
-                                    allowMultiSelection: false,
-                                    onSelected: (value) {},
-                                    emptyString: '',
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'Drug Resistance',
-                                    options: const ['Sensitive', 'Resistant'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('drug_resistance')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('drug_resistance')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'XDR Done',
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('xdr_done').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('xdr_done').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
                                   ReactiveValueListenableBuilder<String>(
                                       formControlName: 'xdr_done',
                                       builder: (context, control, child) =>
@@ -511,92 +530,123 @@ class DiagnosisPage extends StatelessWidget {
                                                       .control('xdr_site')
                                                       .value,
                                                 ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'INH Resistance',
+                                                  options: const [
+                                                    'Sensitive',
+                                                    'Resistant'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'inh_resistance')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control('inh_resistance')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'FLQ Resistance',
+                                                  options: const [
+                                                    'Sensitive',
+                                                    'Resistant'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'flq_resistance')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control('flq_resistance')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'AMK Resistance',
+                                                  options: const [
+                                                    'Sensitive',
+                                                    'Resistant'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'amk_resistance')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control('amk_resistance')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'KAN Resistance',
+                                                  options: const [
+                                                    'Sensitive',
+                                                    'Resistant'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'kan_resistance')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control('kan_resistance')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'CAP Resistance',
+                                                  options: const [
+                                                    'Sensitive',
+                                                    'Resistant'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'cap_resistance')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control('cap_resistance')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  label: 'ETH Resistance',
+                                                  options: const [
+                                                    'Sensitive',
+                                                    'Resistant'
+                                                  ],
+                                                  crossAxisCount: 2,
+                                                  onChanged: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'eth_resistance')
+                                                        .value = value;
+                                                  },
+                                                  selected: formGroup
+                                                      .control('eth_resistance')
+                                                      .value,
+                                                ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
                                               ]))),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'INH Resistance',
-                                    options: const ['Sensitive', 'Resistant'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('inh_resistance')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('inh_resistance')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'FLQ Resistance',
-                                    options: const ['Sensitive', 'Resistant'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('flq_resistance')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('flq_resistance')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'AMK Resistance',
-                                    options: const ['Sensitive', 'Resistant'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('amk_resistance')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('amk_resistance')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'KAN Resistance',
-                                    options: const ['Sensitive', 'Resistant'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('kan_resistance')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('kan_resistance')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'CAP Resistance',
-                                    options: const ['Sensitive', 'Resistant'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('cap_resistance')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('cap_resistance')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: 'ETH Resistance',
-                                    options: const ['Sensitive', 'Resistant'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('eth_resistance')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('eth_resistance')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
                                     label: 'FNAC',
                                     options: const ['Yes', 'No'],
@@ -643,11 +693,11 @@ class DiagnosisPage extends StatelessWidget {
                                             prefixIcon:
                                                 Icons.account_circle_outlined,
                                           ),
+                                          const SizedBox(height: kPadding * 2),
                                         ],
                                       ),
                                     ),
                                   ),
-                                  const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
                                     label: 'USG',
                                     options: const ['Yes', 'No'],
@@ -743,8 +793,9 @@ class DiagnosisPage extends StatelessWidget {
                                                           'other_test_result')
                                                       .value,
                                                 ),
+                                                const SizedBox(
+                                                    height: kPadding * 2),
                                               ]))),
-                                  const SizedBox(height: kPadding * 2),
                                   const PrimaryTextField(
                                     formControlName: 'diagnosis',
                                     label: 'Diagnosis Name',

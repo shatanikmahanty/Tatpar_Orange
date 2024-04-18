@@ -296,7 +296,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
       @JsonKey(name: 'Swollen_gland_now') required this.swollenGland,
       @JsonKey(name: 'TB_medication_before_yes_no') required this.tbMedicine,
       @JsonKey(name: 'Screening_outcome') required this.screeningOutcome,
-      @JsonKey(name: 'Comments') required this.comments});
+      @JsonKey(name: 'Comments') this.comments});
 
   factory _$TBScreeningModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TBScreeningModelImplFromJson(json);
@@ -433,7 +433,7 @@ abstract class _TBScreeningModel implements TBScreeningModel {
       @JsonKey(name: 'Screening_outcome')
       required final String? screeningOutcome,
       @JsonKey(name: 'Comments')
-      required final String? comments}) = _$TBScreeningModelImpl;
+      final String? comments}) = _$TBScreeningModelImpl;
 
   factory _TBScreeningModel.fromJson(Map<String, dynamic> json) =
       _$TBScreeningModelImpl.fromJson;
