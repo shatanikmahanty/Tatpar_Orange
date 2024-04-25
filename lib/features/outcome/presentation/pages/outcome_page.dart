@@ -12,17 +12,12 @@ class OutcomePage extends StatelessWidget {
   const OutcomePage({super.key});
   FormGroup _outcomeFormBuilder() {
     return fb.group({
-      'treatment_completion_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'nikshay_id': FormControl<String>(validators: [Validators.required]),
-      'fc_name': FormControl<String>(validators: [Validators.required]),
-      'nutrition_provided':
-          FormControl<String>(validators: [Validators.required]),
-      'treatment_outcome': FormControl<String>(
-          validators: [Validators.required], value: 'Not Evaluated'),
-      'treatment_comments':
-          FormControl<String>(validators: [Validators.required]),
+      'treatment_completion_date': FormControl<DateTime>(),
+      'nikshay_id': FormControl<String>(),
+      'fc_name': FormControl<String>(),
+      'nutrition_provided': FormControl<String>(),
+      'treatment_outcome': FormControl<String>(value: 'Not Evaluated'),
+      'treatment_comments': FormControl<String>(),
     });
   }
 

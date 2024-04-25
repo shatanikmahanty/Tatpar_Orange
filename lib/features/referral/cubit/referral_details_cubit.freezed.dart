@@ -21,8 +21,7 @@ ReferralDetailsState _$ReferralDetailsStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$ReferralDetailsState {
   bool? get isLoading => throw _privateConstructorUsedError;
-  List<PanchayatModel>? get panchayatModel =>
-      throw _privateConstructorUsedError;
+  List<StateData>? get panchayatModel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -36,7 +35,7 @@ abstract class $ReferralDetailsStateCopyWith<$Res> {
           $Res Function(ReferralDetailsState) then) =
       _$ReferralDetailsStateCopyWithImpl<$Res, ReferralDetailsState>;
   @useResult
-  $Res call({bool? isLoading, List<PanchayatModel>? panchayatModel});
+  $Res call({bool? isLoading, List<StateData>? panchayatModel});
 }
 
 /// @nodoc
@@ -64,7 +63,7 @@ class _$ReferralDetailsStateCopyWithImpl<$Res,
       panchayatModel: freezed == panchayatModel
           ? _value.panchayatModel
           : panchayatModel // ignore: cast_nullable_to_non_nullable
-              as List<PanchayatModel>?,
+              as List<StateData>?,
     ) as $Val);
   }
 }
@@ -77,7 +76,7 @@ abstract class _$$ReferralDetailsStateImplCopyWith<$Res>
       __$$ReferralDetailsStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool? isLoading, List<PanchayatModel>? panchayatModel});
+  $Res call({bool? isLoading, List<StateData>? panchayatModel});
 }
 
 /// @nodoc
@@ -102,7 +101,7 @@ class __$$ReferralDetailsStateImplCopyWithImpl<$Res>
       panchayatModel: freezed == panchayatModel
           ? _value._panchayatModel
           : panchayatModel // ignore: cast_nullable_to_non_nullable
-              as List<PanchayatModel>?,
+              as List<StateData>?,
     ));
   }
 }
@@ -112,7 +111,7 @@ class __$$ReferralDetailsStateImplCopyWithImpl<$Res>
 class _$ReferralDetailsStateImpl implements _ReferralDetailsState {
   const _$ReferralDetailsStateImpl(
       {this.isLoading = false,
-      final List<PanchayatModel>? panchayatModel = const []})
+      final List<StateData>? panchayatModel = const []})
       : _panchayatModel = panchayatModel;
 
   factory _$ReferralDetailsStateImpl.fromJson(Map<String, dynamic> json) =>
@@ -121,10 +120,10 @@ class _$ReferralDetailsStateImpl implements _ReferralDetailsState {
   @override
   @JsonKey()
   final bool? isLoading;
-  final List<PanchayatModel>? _panchayatModel;
+  final List<StateData>? _panchayatModel;
   @override
   @JsonKey()
-  List<PanchayatModel>? get panchayatModel {
+  List<StateData>? get panchayatModel {
     final value = _panchayatModel;
     if (value == null) return null;
     if (_panchayatModel is EqualUnmodifiableListView) return _panchayatModel;
@@ -172,7 +171,7 @@ class _$ReferralDetailsStateImpl implements _ReferralDetailsState {
 abstract class _ReferralDetailsState implements ReferralDetailsState {
   const factory _ReferralDetailsState(
       {final bool? isLoading,
-      final List<PanchayatModel>? panchayatModel}) = _$ReferralDetailsStateImpl;
+      final List<StateData>? panchayatModel}) = _$ReferralDetailsStateImpl;
 
   factory _ReferralDetailsState.fromJson(Map<String, dynamic> json) =
       _$ReferralDetailsStateImpl.fromJson;
@@ -180,7 +179,7 @@ abstract class _ReferralDetailsState implements ReferralDetailsState {
   @override
   bool? get isLoading;
   @override
-  List<PanchayatModel>? get panchayatModel;
+  List<StateData>? get panchayatModel;
   @override
   @JsonKey(ignore: true)
   _$$ReferralDetailsStateImplCopyWith<_$ReferralDetailsStateImpl>

@@ -21,27 +21,17 @@ class ReferralDetailsPage extends StatelessWidget {
   const ReferralDetailsPage({super.key});
   FormGroup _basicDetailsFormBuilder() {
     return fb.group({
-      'referral_id': FormControl<int>(
-        validators: [Validators.required],
-      ),
-      'referral_date': FormControl<DateTime>(validators: [Validators.required]),
-      'referral_name': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'referral_id': FormControl<int>(),
+      'referral_date': FormControl<DateTime>(),
+      'referral_name': FormControl<String>(),
       'age': FormControl<int>(validators: [Validators.required]),
-      'gender': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'gender': FormControl<String>(),
       'location': fb.group({
-        'district': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'referral_block': FormControl<String>(
-          validators: [Validators.required],
-        ),
-        'panchayat_code': FormControl<String>(
-          validators: [Validators.required],
-        ),
+        'district': FormControl<String>(validators: [Validators.required]),
+        'referral_block':
+            FormControl<String>(validators: [Validators.required]),
+        'panchayat_code':
+            FormControl<String>(validators: [Validators.required]),
       }),
       'ward': FormControl<int>(
         validators: [
@@ -50,33 +40,17 @@ class ReferralDetailsPage extends StatelessWidget {
           Validators.max(40),
         ],
       ),
-      'guardian_name': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'guardian_name': FormControl<String>(),
       'guardian_phone_number':
           FormControl<String>(validators: [Validators.required]),
-      'caste_category': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'key_population': FormControl<List<String>>(
-        validators: [Validators.required],
-      ),
+      'caste_category': FormControl<String?>(),
+      'key_population': FormControl<List<String>>(),
       'trimester': FormControl<String?>(),
-      'referred_by': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'referrer_source': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'referred_ward': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'referrer_panchayat_code': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'source': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'referred_by': FormControl<String?>(),
+      'referrer_source': FormControl<String?>(),
+      'referred_ward': FormControl<String?>(),
+      'referrer_panchayat_code': FormControl<String?>(),
+      'source': FormControl<String>(),
     });
   }
 
@@ -322,9 +296,9 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
           (previous.isLoading != current.isLoading) ||
           previous.panchayatModel != current.panchayatModel),
       builder: (context, state) {
-        List<String> districts = (state.panchayatModel != null)
-            ? state.panchayatModel!.map((e) => e.district).toSet().toList()
-            : [];
+        // List<String> districts = (state.panchayatModel != null)
+        //     ? state.panchayatModel!.map((e) => e.districts).toSet().toList()
+        //     : [];
         List<String> blocks = [];
         List<String> panchayatCodes = [];
         if (state.isLoading ?? false) {
@@ -341,20 +315,20 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
           children: [
             TextFieldWithList(
               controlName: 'location.district',
-              label: 'District',
+              label: ' Referral District',
               padding: EdgeInsets.zero,
               prefixIcon: Icons.account_circle_outlined,
-              listData: districts,
+              listData: [],
               allowMultiSelection: false,
               onSelected: (value) {
                 formGroup.control('location.district').value = value[0];
                 blocks.clear();
 
-                blocks.addAll(state.panchayatModel!
-                    .where((e) => e.district == value[0])
-                    .map((e) => e.block)
-                    .toSet()
-                    .toList());
+                // blocks.addAll(state.panchayatModel!
+                //     .where((e) => e.district == value[0])
+                //     .map((e) => e.block)
+                //     .toSet()
+                //     .toList());
               },
               emptyString: 'District',
             ),
@@ -370,18 +344,18 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
                 formGroup.control('location.referral_block').value = value[0];
                 panchayatCodes.clear();
 
-                panchayatCodes.addAll(state.panchayatModel!
-                    .where((e) => e.block == value[0])
-                    .map((e) => e.panchayatCode)
-                    .toSet()
-                    .toList());
+                // panchayatCodes.addAll(state.panchayatModel!
+                //     .where((e) => e.block == value[0])
+                //     .map((e) => e.panchayatCode)
+                //     .toSet()
+                //     .toList());
               },
               emptyString: '',
             ),
             const SizedBox(height: kPadding * 2),
             TextFieldWithList(
               controlName: 'location.panchayat_code',
-              label: 'Panchayat Code',
+              label: 'Refferal Panchayat Code',
               padding: EdgeInsets.zero,
               prefixIcon: Icons.account_circle_outlined,
               listData: panchayatCodes,

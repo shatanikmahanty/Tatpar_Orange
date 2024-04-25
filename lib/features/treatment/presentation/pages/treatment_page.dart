@@ -14,67 +14,40 @@ class TreatmentPage extends StatelessWidget {
   const TreatmentPage({super.key});
   FormGroup _treatmentFormBuilder() {
     return fb.group({
-      'case_definition': FormControl<String>(validators: [Validators.required]),
-      'previously_tb_treated':
-          FormControl<String>(validators: [Validators.required]),
-      'rif_sensitivity': FormControl<String>(validators: [Validators.required]),
-      'ihv_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'treatment_regimen':
-          FormControl<String>(validators: [Validators.required]),
-      'patient_occupation':
-          FormControl<String>(validators: [Validators.required]),
-      'treatment_supporter_name':
-          FormControl<String>(validators: [Validators.required]),
-      'treatment_supporter_position':
-          FormControl<String>(validators: [Validators.required]),
-      'treatment_supporter_phone':
-          FormControl<String>(validators: [Validators.required]),
-      'treatment_supporter_panchayat':
-          FormControl<String>(validators: [Validators.required]),
-      'treatment_supporter_ward':
-          FormControl<String>(validators: [Validators.required]),
-      'date_of_home_visit': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'ipt_start_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'hiv_done': FormControl<String>(validators: [Validators.required]),
-      'hiv_result': FormControl<String>(validators: [Validators.required]),
-      'hiv_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'hb_done': FormControl<String>(validators: [Validators.required]),
-      'hb_result': FormControl<String>(validators: [Validators.required]),
-      'hb_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'blood_sugar_done':
-          FormControl<String>(validators: [Validators.required]),
-      'blood_sugar_result':
-          FormControl<String>(validators: [Validators.required]),
-      'blood_sugar_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'alcohol': FormControl<String>(validators: [Validators.required]),
-      'tb_consumption': FormControl<String>(validators: [Validators.required]),
-      'nutrition': FormControl<String>(validators: [Validators.required]),
-      'screening_date_nutrition': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'nutrition_linkage': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'ip_nat_test': FormControl<String>(validators: [Validators.required]),
-      'ip_afb_date': FormControl<DateTime>(validators: [Validators.required]),
-      'ip_afb_lab_no': FormControl<String>(validators: [Validators.required]),
-      'ip_nat_result': FormControl<String>(validators: [Validators.required]),
-      'ip_lab_no': FormControl<String>(validators: [Validators.required]),
-      'ip_chest_xray': FormControl<String>(validators: [Validators.required]),
-      'ip_nutrition_support':
-          FormControl<String>(validators: [Validators.required]),
+      'case_definition': FormControl<String>(),
+      'previously_tb_treated': FormControl<String>(),
+      'rif_sensitivity': FormControl<String>(),
+      'ihv_date': FormControl<DateTime>(),
+      'treatment_regimen': FormControl<String>(),
+      'patient_occupation': FormControl<String>(),
+      'treatment_supporter_name': FormControl<String>(),
+      'treatment_supporter_position': FormControl<String>(),
+      'treatment_supporter_phone': FormControl<String>(),
+      'treatment_supporter_panchayat': FormControl<String>(),
+      'treatment_supporter_ward': FormControl<String>(),
+      'date_of_home_visit': FormControl<DateTime>(),
+      'ipt_start_date': FormControl<DateTime>(),
+      'hiv_done': FormControl<String>(),
+      'hiv_result': FormControl<String>(),
+      'hiv_date': FormControl<DateTime>(),
+      'hb_done': FormControl<String>(),
+      'hb_result': FormControl<String>(),
+      'hb_date': FormControl<DateTime>(),
+      'blood_sugar_done': FormControl<String>(),
+      'blood_sugar_result': FormControl<String>(),
+      'blood_sugar_date': FormControl<DateTime>(),
+      'alcohol': FormControl<String>(),
+      'tb_consumption': FormControl<String>(),
+      'nutrition': FormControl<String>(),
+      'screening_date_nutrition': FormControl<DateTime>(),
+      'nutrition_linkage': FormControl<DateTime>(),
+      'ip_nat_test': FormControl<String>(),
+      'ip_afb_date': FormControl<DateTime>(),
+      'ip_afb_lab_no': FormControl<String>(),
+      'ip_nat_result': FormControl<String>(),
+      'ip_lab_no': FormControl<String>(),
+      'ip_chest_xray': FormControl<String>(),
+      'ip_nutrition_support': FormControl<String>(),
     });
   }
 
@@ -172,20 +145,12 @@ class TreatmentPage extends StatelessWidget {
                                             Icons.account_circle_outlined,
                                       ),
                                       const SizedBox(height: kPadding * 2),
-                                      TextFieldWithList(
-                                        controlName: 'treatment_supporter_name',
+                                      const PrimaryTextField(
+                                        formControlName:
+                                            'treatment_supporter_name',
                                         label: 'Treatment Supporter Name',
-                                        padding: EdgeInsets.zero,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
-                                        listData: const [
-                                          'Item 1',
-                                          'Item 2',
-                                          'Item 3'
-                                        ],
-                                        allowMultiSelection: false,
-                                        onSelected: (value) {},
-                                        emptyString: '',
                                       ),
                                       const SizedBox(height: kPadding * 2),
                                       TextFieldWithList(
@@ -479,20 +444,11 @@ class TreatmentPage extends StatelessWidget {
                                         label: 'IP Follow-up AFB date',
                                       ),
                                       const SizedBox(height: kPadding * 2),
-                                      TextFieldWithList(
-                                        controlName: 'ip_afb_lab_no',
+                                      const PrimaryTextField(
+                                        formControlName: 'ip_afb_lab_no',
                                         label: 'IP Follow-up AFB Lab No.',
-                                        padding: EdgeInsets.zero,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
-                                        listData: const [
-                                          'Item 1',
-                                          'Item 2',
-                                          'Item 3'
-                                        ],
-                                        allowMultiSelection: false,
-                                        onSelected: (value) {},
-                                        emptyString: '',
                                       ),
                                       const SizedBox(height: kPadding * 2),
                                       ChipRadioButtons(
@@ -523,20 +479,11 @@ class TreatmentPage extends StatelessWidget {
                                             .value,
                                       ),
                                       const SizedBox(height: kPadding * 2),
-                                      TextFieldWithList(
-                                        controlName: 'ip_lab_no',
+                                      const PrimaryTextField(
+                                        formControlName: 'ip_lab_no',
                                         label: 'IP Follow-up Lab No.',
-                                        padding: EdgeInsets.zero,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
-                                        listData: const [
-                                          'Item 1',
-                                          'Item 2',
-                                          'Item 3'
-                                        ],
-                                        allowMultiSelection: false,
-                                        onSelected: (value) {},
-                                        emptyString: '',
                                       ),
                                       const SizedBox(height: kPadding * 2),
                                       ChipRadioButtons(

@@ -14,118 +14,52 @@ class DiagnosisPage extends StatelessWidget {
   const DiagnosisPage({super.key});
   FormGroup _diagnosisFormBuilder() {
     return fb.group({
-      'diagnosis_initiated': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'first_consultation': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'first_consultation_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'chest_xray': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'chest_xray_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'chest_xray_result':
-          FormControl<String>(validators: [Validators.required]),
-      'afb_done': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'afb_lab_number': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'afb1_result': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'afb1_result_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'afb2_result': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'afb2_result_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'naat_test': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'naat_machine': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'naat_site': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'naat_lab_number': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'sample_collection_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'naat_result_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'mtb_result': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'rif_resistance': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'drug_resistance': FormControl<String>(validators: [Validators.required]),
-      'xdr_done': FormControl<String>(validators: [Validators.required]),
-      'xdr_result': FormControl<String>(validators: [Validators.required]),
-      'xdr_result_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'xdr_lab_number': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'xdr_site': FormControl<String>(validators: [Validators.required]),
-      'inh_resistance': FormControl<String>(validators: [Validators.required]),
-      'flq_resistance': FormControl<String>(validators: [Validators.required]),
-      'amk_resistance': FormControl<String>(validators: [Validators.required]),
-      'kan_resistance': FormControl<String>(validators: [Validators.required]),
-      'cap_resistance': FormControl<String>(validators: [Validators.required]),
-      'eth_resistance': FormControl<String>(validators: [Validators.required]),
-      'fnac': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'fnac_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'fnac_result': FormControl<String>(validators: [Validators.required]),
-      'fnac_comments': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'usg': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'usg_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'usg_result': FormControl<String>(validators: [Validators.required]),
-      'usg_comments': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'other_test': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'test_name': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'other_test_result':
-          FormControl<String>(validators: [Validators.required]),
-      'diagnosis': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'diagnosis_date': FormControl<DateTime>(
-        validators: [Validators.required],
-      ),
-      'diagnosis_comments': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'diagnosis_initiated': FormControl<String>(),
+      'first_consultation': FormControl<String>(),
+      'first_consultation_date': FormControl<DateTime>(),
+      'chest_xray': FormControl<String>(),
+      'chest_xray_date': FormControl<DateTime>(),
+      'chest_xray_result': FormControl<String>(),
+      'afb_done': FormControl<String>(),
+      'afb_lab_number': FormControl<String>(),
+      'afb1_result': FormControl<String>(),
+      'afb1_result_date': FormControl<DateTime>(),
+      'afb2_result': FormControl<String>(),
+      'afb2_result_date': FormControl<DateTime>(),
+      'naat_test': FormControl<String>(),
+      'naat_machine': FormControl<String>(),
+      'naat_site': FormControl<String>(),
+      'naat_lab_number': FormControl<String>(),
+      'sample_collection_date': FormControl<DateTime>(),
+      'naat_result_date': FormControl<DateTime>(),
+      'mtb_result': FormControl<String>(),
+      'rif_resistance': FormControl<String>(),
+      'drug_resistance': FormControl<String>(),
+      'xdr_done': FormControl<String>(),
+      'xdr_result': FormControl<String>(),
+      'xdr_result_date': FormControl<DateTime>(),
+      'xdr_lab_number': FormControl<String>(),
+      'xdr_site': FormControl<String>(),
+      'inh_resistance': FormControl<String>(),
+      'flq_resistance': FormControl<String>(),
+      'amk_resistance': FormControl<String>(),
+      'kan_resistance': FormControl<String>(),
+      'cap_resistance': FormControl<String>(),
+      'eth_resistance': FormControl<String>(),
+      'fnac': FormControl<String>(),
+      'fnac_date': FormControl<DateTime>(),
+      'fnac_result': FormControl<String>(),
+      'fnac_comments': FormControl<String>(),
+      'usg': FormControl<String>(),
+      'usg_date': FormControl<DateTime>(),
+      'usg_result': FormControl<String>(),
+      'usg_comments': FormControl<String>(),
+      'other_test': FormControl<String>(),
+      'test_name': FormControl<String>(),
+      'other_test_result': FormControl<String>(),
+      'diagnosis': FormControl<String>(),
+      'diagnosis_date': FormControl<DateTime>(),
+      'diagnosis_comments': FormControl<String>(),
     });
   }
 
@@ -175,6 +109,18 @@ class DiagnosisPage extends StatelessWidget {
                         ),
                         const SizedBox(height: kPadding * 2),
                         ReactiveValueListenableBuilder<String>(
+                            formControlName: 'first_consultation',
+                            builder: (context, control, child) => Visibility(
+                                visible: (control.value == 'Yes'),
+                                child: Column(children: [
+                                  DateTextInput(
+                                    firstDate: DateTime(2002),
+                                    controlName: 'first_consultation_date',
+                                    label: 'First Consultation Date',
+                                  ),
+                                  // const SizedBox(height: kPadding * 2),
+                                ]))),
+                        ReactiveValueListenableBuilder<String>(
                             formControlName: 'diagnosis_initiated',
                             builder: (context, control, child) => Visibility(
                                 visible: (formGroup
@@ -182,11 +128,6 @@ class DiagnosisPage extends StatelessWidget {
                                         .value) ==
                                     'Yes',
                                 child: Column(children: [
-                                  DateTextInput(
-                                    firstDate: DateTime(2002),
-                                    controlName: 'first_consultation_date',
-                                    label: 'First Consultation Date',
-                                  ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
                                     label: 'Chest Xray',
@@ -365,9 +306,8 @@ class DiagnosisPage extends StatelessWidget {
                                                   prefixIcon: Icons
                                                       .account_circle_outlined,
                                                   listData: const [
-                                                    'Item 1',
-                                                    'Item 2',
-                                                    'Item 3'
+                                                    'Government',
+                                                    'Internal',
                                                   ],
                                                   allowMultiSelection: false,
                                                   onSelected: (value) {},
@@ -798,7 +738,7 @@ class DiagnosisPage extends StatelessWidget {
                                               ]))),
                                   const PrimaryTextField(
                                     formControlName: 'diagnosis',
-                                    label: 'Diagnosis Name',
+                                    label: 'Diagnosis',
                                     prefixIcon: Icons.account_circle_outlined,
                                   ),
                                   const SizedBox(height: kPadding * 2),

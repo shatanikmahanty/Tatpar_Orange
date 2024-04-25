@@ -29,75 +29,7 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: kPadding * 2,
               ),
-              CardButton(
-                icon: Icons.note_add,
-                title: 'Conduct TB Screening',
-                subText: 'TB Screening',
-                isPrimary: false,
-                action: () {
-                  context.router.navigate(const TBScreeningRoute());
-                },
-              ),
-              const SizedBox(
-                height: kPadding * 2,
-              ),
-              CardButton(
-                icon: Icons.note_add,
-                title: 'Mental health Screening',
-                subText: 'WHO Questionairre',
-                isPrimary: false,
-                action: () {
-                  context.router.navigate(const MentalHealthRouterRoute());
-                },
-              ),
-              const SizedBox(
-                height: kPadding * 2,
-              ),
-              CardButton(
-                icon: Icons.note_add,
-                title: 'Diagnosis',
-                subText: 'Steps of diagnosis',
-                isPrimary: false,
-                action: () {
-                  context.router.navigate(const DiagnosisRoute());
-                },
-              ),
-              const SizedBox(
-                height: kPadding * 2,
-              ),
-              CardButton(
-                icon: Icons.note_add,
-                title: 'Treatment',
-                subText: 'Steps of treatment',
-                isPrimary: false,
-                action: () {
-                  context.router.navigate(const TreatmentRoute());
-                },
-              ),
-              const SizedBox(
-                height: kPadding * 2,
-              ),
-              CardButton(
-                icon: Icons.note_add,
-                title: 'Contact Tracing',
-                subText: 'Steps of Contact tracing',
-                isPrimary: false,
-                action: () {
-                  context.router.navigate(const ContactTracingRoute());
-                },
-              ),
-              const SizedBox(
-                height: kPadding * 2,
-              ),
-              CardButton(
-                icon: Icons.note_add,
-                title: 'Outcome',
-                subText: 'Steps of outcome',
-                isPrimary: false,
-                action: () {
-                  context.router.navigate(const OutcomeRoute());
-                },
-              ),
+
               const SizedBox(
                 height: kPadding * 5,
               ),

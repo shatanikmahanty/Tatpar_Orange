@@ -6,15 +6,16 @@ class ApiResponse<T> {
   T? data;
   Response? response;
   late Status status;
+  late bool? success;
   ApplicationError? error;
 
   ApiResponse.success(this.response) {
-    status = Status.ok;
+    success = true;
     data = response?.data;
   }
 
   ApiResponse.failed(ApplicationError this.error) {
-    status = Status.failed;
+    success = false;
   }
 
   handleResponse({Function? onSuccess, Function? onFailed}) async {

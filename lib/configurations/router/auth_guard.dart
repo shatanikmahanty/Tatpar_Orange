@@ -5,25 +5,21 @@
 
 // bool get isAuthenticated => AuthCubit.instance.state.user != null;
 
-// class AuthGuard extends AutoRedirectGuard {
+// class AuthGuard extends AutoRouteGuard {
 //   late StreamSubscription<AuthState> _subscription;
+//   late final StackRouter router;
 
 //   AuthGuard() {
+//     print('Checking Auth Guard');
 //     _subscription = AuthCubit.instance.stream.listen(
 //       (state) {
 //         //Listener to the auth state to redirect to the appropriate page
 //         if (state.user != null) {
-//           reevaluate(
-//             strategy: const ReevaluationStrategy.removeAllAndPush(
-//               AppHomeRoute(),
-//             ),
-//           );
+//           router.maybePop();
+//           router.push(const AppHomeRoute());
 //         } else if (state.user == null) {
-//           reevaluate(
-//             strategy: const ReevaluationStrategy.removeAllAndPush(
-//               AuthRouter(),
-//             ),
-//           );
+//           router.maybePop();
+//           router.push(const PhoneLoginRoute());
 //         }
 //       },
 //     );
@@ -35,14 +31,14 @@
 //     if (await canNavigate(resolver.route)) {
 //       resolver.next();
 //     } else {
-//       redirect(const AuthRouter(), resolver: resolver);
+//       router.maybePop();
+//       router.push(const AuthRouter());
 //     }
 //   }
 
 //   @override
 //   void dispose() {
 //     _subscription.cancel();
-//     super.dispose();
 //   }
 
 //   @override

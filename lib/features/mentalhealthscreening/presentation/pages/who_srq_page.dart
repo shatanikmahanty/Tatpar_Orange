@@ -14,54 +14,34 @@ class WHOSRQPage extends StatelessWidget {
 
   FormGroup _whoSrqFormBuilder({required WHOSrqModel? whoSrqModel}) {
     return fb.group({
-      'headache': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.headache),
-      'apetite': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.apetite),
-      'sleep': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.sleep),
-      'frightened': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.frightened),
-      'hands_shake': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.handsShake),
-      'nervous': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.nervous),
-      'digestion_poor': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.digestionPoor),
-      'trouble_thinking': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.troubleThinking),
-      'unhappy': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.unhappy),
-      'cry_more': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.cryMore),
-      'daily_activities': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.dailyActivities),
-      'decision_making': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.decisionMaking),
-      'daily_work_suffering': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.dailyWorkSuffering),
-      'play_a_useful_part': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.playAUsefulPart),
-      'lost_interest': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.lostInterest),
-      'worthless_person': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.worthlessPerson),
-      'ending_your_life': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.endingLife),
-      'tired_all_the_time': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.tiredAllTheTime),
-      'uncomfortable_feelings': FormControl<String>(
-          validators: [Validators.required],
-          value: whoSrqModel?.uncomfortableFeelings),
-      'easily_tired': FormControl<String>(
-          validators: [Validators.required], value: whoSrqModel?.easilyTired),
+      'headache': FormControl<String>(value: whoSrqModel?.headache),
+      'apetite': FormControl<String>(value: whoSrqModel?.apetite),
+      'sleep': FormControl<String>(value: whoSrqModel?.sleep),
+      'frightened': FormControl<String>(value: whoSrqModel?.frightened),
+      'hands_shake': FormControl<String>(value: whoSrqModel?.handsShake),
+      'nervous': FormControl<String>(value: whoSrqModel?.nervous),
+      'digestion_poor': FormControl<String>(value: whoSrqModel?.digestionPoor),
+      'trouble_thinking':
+          FormControl<String>(value: whoSrqModel?.troubleThinking),
+      'unhappy': FormControl<String>(value: whoSrqModel?.unhappy),
+      'cry_more': FormControl<String>(value: whoSrqModel?.cryMore),
+      'daily_activities':
+          FormControl<String>(value: whoSrqModel?.dailyActivities),
+      'decision_making':
+          FormControl<String>(value: whoSrqModel?.decisionMaking),
+      'daily_work_suffering':
+          FormControl<String>(value: whoSrqModel?.dailyWorkSuffering),
+      'play_a_useful_part':
+          FormControl<String>(value: whoSrqModel?.playAUsefulPart),
+      'lost_interest': FormControl<String>(value: whoSrqModel?.lostInterest),
+      'worthless_person':
+          FormControl<String>(value: whoSrqModel?.worthlessPerson),
+      'ending_your_life': FormControl<String>(value: whoSrqModel?.endingLife),
+      'tired_all_the_time':
+          FormControl<String>(value: whoSrqModel?.tiredAllTheTime),
+      'uncomfortable_feelings':
+          FormControl<String>(value: whoSrqModel?.uncomfortableFeelings),
+      'easily_tired': FormControl<String>(value: whoSrqModel?.easilyTired),
     });
   }
 

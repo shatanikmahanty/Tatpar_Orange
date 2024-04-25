@@ -75,16 +75,16 @@ class AuthRepo {
       if (userCredential.additionalUserInfo!.isNewUser) {
         register(userCredential.user!.uid);
       } else {
-        // final user =
-        //     await _getUserDetails(await _auth.currentUser!.getIdToken());
+        final user =
+            await _getUserDetails(await _auth.currentUser!.getIdToken());
         final token = _auth.currentUser!.getIdToken();
         print(token);
-        // print('USER+++++++++++++$user');
-        // if (user == null) {
-        //   print('User nullllll');
-        //   return;
-        // }
-        // AuthCubit.instance.login(user);
+        print('USER+++++++++++++$user');
+        if (user == null) {
+          print('User nullllll');
+          return;
+        }
+        AuthCubit.instance.login(user);
       }
     }
   }

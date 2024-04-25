@@ -13,39 +13,24 @@ import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_
 class ContactTracingPage extends StatelessWidget {
   const ContactTracingPage({super.key});
 
-  FormGroup _diagnosisFormBuilder() {
+  FormGroup _contactTracingFormBuilder() {
     return fb.group({
-      'tb_contact_name': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'age': FormControl<int?>(
-        validators: [Validators.required],
-      ),
-      'screening_outcome': FormControl<String>(
-        validators: [Validators.required],
-      ),
-      'test_conducted': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'tpt_eligible': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'tpt_regimen': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'tpt_start_date':
-          FormControl<DateTime>(validators: [Validators.required]),
-      'weight': FormControl<int?>(
-        validators: [Validators.required],
-      ),
-      'tpt_side_effects': FormControl<String?>(
-        validators: [Validators.required],
-      ),
-      'tpt_outcome_date':
-          FormControl<DateTime>(validators: [Validators.required]),
-      'tpt_outcome': FormControl<String>(
-        validators: [Validators.required],
-      ),
+      'tb_contact_name': FormControl<String?>(),
+      'age': FormControl<int?>(),
+      'screening_outcome': FormControl<String>(),
+      'test_conducted': FormControl<String?>(),
+      'cxr_date': FormControl<DateTime>(),
+      'cxr_result': FormControl<String>(),
+      'tbi_date': FormControl<DateTime>(),
+      'tbi_result': FormControl<String>(),
+      'nikshay_id': FormControl<String>(),
+      'tpt_eligible': FormControl<String?>(),
+      'tpt_regimen': FormControl<String?>(),
+      'tpt_start_date': FormControl<DateTime>(),
+      'weight': FormControl<int?>(),
+      'tpt_side_effects': FormControl<String?>(),
+      'tpt_outcome_date': FormControl<DateTime>(),
+      'tpt_outcome': FormControl<String>(),
     });
   }
 
@@ -56,7 +41,7 @@ class ContactTracingPage extends StatelessWidget {
     return Scaffold(
         appBar: const CaseAppBar('Contact Tracing'),
         body: ReactiveFormBuilder(
-            form: () => _diagnosisFormBuilder(),
+            form: () => _contactTracingFormBuilder(),
             builder: (BuildContext context, FormGroup formGroup,
                     Widget? child) =>
                 AutofillGroup(
@@ -117,6 +102,73 @@ class ContactTracingPage extends StatelessWidget {
                                           .value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
+                                    ReactiveValueListenableBuilder<String?>(
+                                        formControlName: 'test_conducted',
+                                        builder: (context, control, child) =>
+                                            Visibility(
+                                                visible:
+                                                    (control.value == 'Yes'),
+                                                child: Column(children: [
+                                                  DateTextInput(
+                                                    firstDate: DateTime(2002),
+                                                    controlName: 'cxr_date',
+                                                    label: 'CXR Date',
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  ChipRadioButtons(
+                                                    label: 'CXR Result',
+                                                    options: const [
+                                                      'Normal',
+                                                      'Abnormal'
+                                                    ],
+                                                    crossAxisCount: 2,
+                                                    onChanged: (value) {
+                                                      formGroup
+                                                          .control('cxr_result')
+                                                          .value = value;
+                                                    },
+                                                    selected: formGroup
+                                                        .control('cxr_result')
+                                                        .value,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  DateTextInput(
+                                                    firstDate: DateTime(2002),
+                                                    controlName: 'tbi_date',
+                                                    label: 'TBI Date',
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  ChipRadioButtons(
+                                                    label: 'TBI Result',
+                                                    options: const [
+                                                      'Negatuve',
+                                                      'Positive'
+                                                    ],
+                                                    crossAxisCount: 2,
+                                                    onChanged: (value) {
+                                                      formGroup
+                                                          .control('tbi_result')
+                                                          .value = value;
+                                                    },
+                                                    selected: formGroup
+                                                        .control('tbi_result')
+                                                        .value,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  const PrimaryTextField(
+                                                    formControlName:
+                                                        'nikshay_id',
+                                                    label: 'Nikashay ID',
+                                                    prefixIcon: Icons
+                                                        .account_circle_outlined,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                ]))),
                                     ChipRadioButtons(
                                       label: 'TPT eligible',
                                       options: const ['Yes', 'No'],

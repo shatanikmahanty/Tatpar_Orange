@@ -12,6 +12,7 @@ class ChipRadioButtons extends StatefulWidget {
     this.onChanged,
     this.optionIcons,
     this.allowMultiSelect = false,
+    this.validationMessages,
   });
 
   final List<String> options;
@@ -21,6 +22,7 @@ class ChipRadioButtons extends StatefulWidget {
   final int crossAxisCount;
   final void Function(String)? onChanged;
   final bool allowMultiSelect;
+  final Map<String, String Function(Object)>? validationMessages;
 
   @override
   State<ChipRadioButtons> createState() => _ChipRadioButtonsState();
@@ -28,6 +30,7 @@ class ChipRadioButtons extends StatefulWidget {
 
 class _ChipRadioButtonsState extends State<ChipRadioButtons> {
   final List<String> _selected = [];
+  bool hasError = false;
 
   @override
   void initState() {
@@ -130,6 +133,11 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
             },
             itemCount: widget.options.length,
           ),
+          if (_selected.isEmpty && widget.validationMessages != null)
+            Text(
+              'Field is Required',
+              style: TextStyle(color: Colors.red),
+            ),
         ],
       );
 }

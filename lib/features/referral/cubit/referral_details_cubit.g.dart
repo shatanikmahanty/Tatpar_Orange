@@ -11,7 +11,7 @@ _$ReferralDetailsStateImpl _$$ReferralDetailsStateImplFromJson(
     _$ReferralDetailsStateImpl(
       isLoading: json['isLoading'] as bool? ?? false,
       panchayatModel: (json['panchayatModel'] as List<dynamic>?)
-              ?.map((e) => PanchayatModel.fromJson(e as Map<String, dynamic>))
+              ?.map((e) => StateData.fromJson(e as Map<String, dynamic>))
               .toList() ??
           const [],
     );
