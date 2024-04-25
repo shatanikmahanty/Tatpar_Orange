@@ -90,11 +90,12 @@ class CaseProfilePage extends StatelessWidget {
                         children: [
                           CaseProfileCard(
                             patientName:
-                                caseWorkedUpon.patient?.name ?? 'Unknown',
+                                caseWorkedUpon.patient?.name ?? 'Kalyani',
                             mobileNumber:
-                                caseWorkedUpon.patient?.mobileNumber ?? '',
+                                caseWorkedUpon.patient?.mobileNumber ??
+                                    '8143163280',
                             caseWorker: (caseWorkedUpon.assignedTo?.fullName ??
-                                    'Not Assigned')
+                                    'Kalyani Kilaparthi')
                                 .toString(),
                             hub: 'Hub: Andheri(W)',
                             //(caseWorkedUpon.hub ?? '').toString(), //TODO remove hardcode once data is available
@@ -103,7 +104,7 @@ class CaseProfilePage extends StatelessWidget {
                           ),
                           Positioned(
                             child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
+                              mainAxisAlignment: MainAxisAlignment.start,
                               children: [
                                 Container(
                                   padding: const EdgeInsets.symmetric(
@@ -117,10 +118,10 @@ class CaseProfilePage extends StatelessWidget {
                                     'Active',
                                     style: Theme.of(context)
                                         .textTheme
-                                        .titleSmall
+                                        .titleMedium
                                         ?.copyWith(
-                                          fontSize: 10,
-                                          height: 2.4,
+                                          fontSize: 13,
+                                          // height: 2.4,
                                           fontFamily: FontFamily.poppins,
                                           color: Theme.of(context)
                                               .colorScheme

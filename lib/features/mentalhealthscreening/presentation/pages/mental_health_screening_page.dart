@@ -18,29 +18,20 @@ class MentalHealthScreeningPage extends StatelessWidget {
   FormGroup _mentalHealthScreeningFormBuilder(
       {required MentalHealthScreeningModel? mentalHealthScreeningModel}) {
     return fb.group({
-      'stage': FormControl<String>(
-          validators: [Validators.required],
-          value: mentalHealthScreeningModel?.stage),
+      'stage': FormControl<String>(value: mentalHealthScreeningModel?.stage),
       'screening_date': FormControl<DateTime>(
-          validators: [Validators.required],
           value: mentalHealthScreeningModel?.screeningDate),
       'screening_status': FormControl<String>(
-          validators: [Validators.required],
           value: mentalHealthScreeningModel?.screeningStatus),
-      'screening_score': FormControl<int>(
-          validators: [Validators.required],
-          value: mentalHealthScreeningModel?.screeningScore),
+      'screening_score':
+          FormControl<int>(value: mentalHealthScreeningModel?.screeningScore),
       'counselling_linked': FormControl<DateTime>(
-          validators: [Validators.required],
           value: mentalHealthScreeningModel?.counsellingLinked),
       'psychiatrist_linked': FormControl<DateTime>(
-          validators: [Validators.required],
           value: mentalHealthScreeningModel?.psychiatristLinked),
-      'feeling_better_after_linkage': FormControl<String>(
-          validators: [Validators.required],
-          value: mentalHealthScreeningModel?.feelingBetter),
+      'feeling_better_after_linkage':
+          FormControl<String>(value: mentalHealthScreeningModel?.feelingBetter),
       'talk_to_helpline': FormControl<String>(
-          validators: [Validators.required],
           value: mentalHealthScreeningModel?.talkToHelpline),
     });
   }
@@ -296,7 +287,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                         BottomButtonBar(
                           onSave: (_) async =>
                               await _onSave(context, formGroup),
-                          nextPage: const AppHomeRoute(),
+                          nextPage: const DiagnosisRoute(),
                         ),
                         const SizedBox(height: kPadding * 2),
                       ])));

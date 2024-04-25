@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
 
@@ -27,12 +26,12 @@ class NetworkManager {
       RequestInterceptorHandler handler,
     ) async {
       // Authorization
-      final bool isAuthorized = options.extra['isAuthorized'] as bool;
-      if (isAuthorized) {
-        final String? token =
-            await FirebaseAuth.instance.currentUser!.getIdToken();
-        options.headers['Authorization'] = '$token';
-      }
+      // final bool isAuthorized = options.extra['isAuthorized'] as bool;
+      // if (isAuthorized) {
+      //   final String? token =
+      //       await FirebaseAuth.instance.currentUser!.getIdToken();
+      //   options.headers['Authorization'] = '$token';
+      // }
       // Language
       // todo add language interceptor
       /*final AppLocale locale = Get.find<LocalizationService>().currentLocale;

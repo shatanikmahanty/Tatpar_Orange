@@ -13,8 +13,7 @@ import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/conducttbscreening/bloc/conduct_tb_screening_cubit.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/bloc/who_srq_cubit.dart';
-import 'package:tatpar_acf/features/referral/cubit/referral_details_cubit.dart';
-import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
+
 import 'configurations/configurations.dart';
 
 class TatparAcfAppBuilder extends AppBuilder {
@@ -119,6 +118,9 @@ class TatparAcfAppBuilder extends AppBuilder {
                       ],
                       routeInformationParser: appRouter.defaultRouteParser(),
                       routerDelegate: appRouter.delegate(),
+                      // routerConfig: appRouter.config(
+                      //   reevaluateListenable: authProvider,
+                      // ),
                       builder: (context, child) => AppResponsiveLayoutBuilder(
                         child: SandboxBanner(
                           isSandbox:

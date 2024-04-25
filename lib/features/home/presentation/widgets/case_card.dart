@@ -2,10 +2,12 @@
 
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:progress_builder/progress_builder.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:intl/intl.dart';
+import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
@@ -48,30 +50,73 @@ class CaseCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: EdgeInsets.symmetric(
-                  horizontal: kPadding * 1.5, vertical: kPadding),
+              padding: const EdgeInsets.only(left: kPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  DiseaseChip('Referral', color: AppColors.blueLight),
-                  Spacer(),
+                  const DiseaseChip('Referral', color: AppColors.blueLight),
+                  const Spacer(),
                   Text(
-                    'Created on ${getFormattedDate(caseModel.createdAt)}',
+                    'Created on 21/12/2002 ${getFormattedDate(caseModel.createdAt)}',
                     style: textTheme.labelMedium?.copyWith(
-                      fontSize: 9,
-                      height: 1.7,
-                      letterSpacing: 0.2,
+                      // fontSize: 9,
+                      // height: 1.7,
+                      // letterSpacing: 0.2,
                       color: AppColors.grey30,
                     ),
                   ),
-                  const SizedBox(width: kPadding),
-                  const Icon(Icons.more_horiz_rounded),
-                  const SizedBox(width: kPadding * 0.5)
+                  // const SizedBox(width: kPadding),
+                  PopupMenuButton<String>(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    icon: const Icon(Icons.more_vert),
+                    offset: const Offset(30, 30), // Kebab icon
+                    onSelected: (String value) {
+                      // Handle item selection here
+                      print('Selected: $value');
+                    },
+                    itemBuilder: (BuildContext context) =>
+                        <PopupMenuEntry<String>>[
+                      PopupMenuItem<String>(
+                        value: 'reassign',
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Reassign',
+                            style: textTheme.labelMedium?.copyWith(
+                              fontSize: 14,
+                              height: 1.7,
+                              letterSpacing: 0.2,
+                              color: AppColors.grey30,
+                            ),
+                          ),
+                        ),
+                      ),
+                      PopupMenuItem<String>(
+                        value: 'edit',
+                        child: Container(
+                          width: double.infinity,
+                          alignment: Alignment.center,
+                          child: Text(
+                            'Edit',
+                            style: textTheme.labelMedium?.copyWith(
+                              fontSize: 14,
+                              height: 1.7,
+                              letterSpacing: 0.2,
+                              color: AppColors.grey30,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: kPadding),
+              padding: const EdgeInsets.symmetric(horizontal: kPadding),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [

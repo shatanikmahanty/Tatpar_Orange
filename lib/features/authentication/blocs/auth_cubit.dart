@@ -24,7 +24,7 @@ class AuthState with _$AuthState {
       _$AuthStateFromJson(json);
 }
 
-class AuthCubit extends Cubit<AuthState> with CubitMaybeEmit {
+class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
   ///Singleton
   static AuthCubit get instance => _instance;
   static final AuthCubit _instance = AuthCubit._internal();
