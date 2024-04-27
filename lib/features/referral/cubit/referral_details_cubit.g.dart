@@ -10,15 +10,14 @@ _$ReferralDetailsStateImpl _$$ReferralDetailsStateImplFromJson(
         Map<String, dynamic> json) =>
     _$ReferralDetailsStateImpl(
       isLoading: json['isLoading'] as bool? ?? false,
-      panchayatModel: (json['panchayatModel'] as List<dynamic>?)
-              ?.map((e) => StateData.fromJson(e as Map<String, dynamic>))
-              .toList() ??
-          const [],
+      dataModel: json['dataModel'] == null
+          ? null
+          : DataModel.fromJson(json['dataModel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$ReferralDetailsStateImplToJson(
         _$ReferralDetailsStateImpl instance) =>
     <String, dynamic>{
       'isLoading': instance.isLoading,
-      'panchayatModel': instance.panchayatModel,
+      'dataModel': instance.dataModel,
     };

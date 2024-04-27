@@ -6,10 +6,10 @@ part 'key_population_model.g.dart';
 @freezed
 class KeyPopulation with _$KeyPopulation {
   const factory KeyPopulation({
-    int? id,
-    String? name,
-    String? updatedOn,
-    String? createdOn,
+    @JsonKey(name: 'id') int? id,
+    @JsonKey(name: 'name') String? name,
+    @JsonKey(name: 'updated_on') String? updatedOn,
+    @JsonKey(name: 'created_on') String? createdOn,
   }) = _KeyPopulation;
 
   factory KeyPopulation.fromJson(Map<String, dynamic> json) =>

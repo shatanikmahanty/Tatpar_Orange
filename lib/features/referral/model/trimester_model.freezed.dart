@@ -20,9 +20,13 @@ Trimester _$TrimesterFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Trimester {
+  @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_on')
   String? get updatedOn => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_on')
   String? get createdOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -36,7 +40,11 @@ abstract class $TrimesterCopyWith<$Res> {
   factory $TrimesterCopyWith(Trimester value, $Res Function(Trimester) then) =
       _$TrimesterCopyWithImpl<$Res, Trimester>;
   @useResult
-  $Res call({int? id, String? name, String? updatedOn, String? createdOn});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'updated_on') String? updatedOn,
+      @JsonKey(name: 'created_on') String? createdOn});
 }
 
 /// @nodoc
@@ -86,7 +94,11 @@ abstract class _$$TrimesterImplCopyWith<$Res>
       __$$TrimesterImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? name, String? updatedOn, String? createdOn});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'updated_on') String? updatedOn,
+      @JsonKey(name: 'created_on') String? createdOn});
 }
 
 /// @nodoc
@@ -129,18 +141,26 @@ class __$$TrimesterImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$TrimesterImpl implements _Trimester {
-  const _$TrimesterImpl({this.id, this.name, this.updatedOn, this.createdOn});
+  const _$TrimesterImpl(
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'updated_on') this.updatedOn,
+      @JsonKey(name: 'created_on') this.createdOn});
 
   factory _$TrimesterImpl.fromJson(Map<String, dynamic> json) =>
       _$$TrimesterImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
   final int? id;
   @override
+  @JsonKey(name: 'name')
   final String? name;
   @override
+  @JsonKey(name: 'updated_on')
   final String? updatedOn;
   @override
+  @JsonKey(name: 'created_on')
   final String? createdOn;
 
   @override
@@ -181,21 +201,25 @@ class _$TrimesterImpl implements _Trimester {
 
 abstract class _Trimester implements Trimester {
   const factory _Trimester(
-      {final int? id,
-      final String? name,
-      final String? updatedOn,
-      final String? createdOn}) = _$TrimesterImpl;
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'name') final String? name,
+      @JsonKey(name: 'updated_on') final String? updatedOn,
+      @JsonKey(name: 'created_on') final String? createdOn}) = _$TrimesterImpl;
 
   factory _Trimester.fromJson(Map<String, dynamic> json) =
       _$TrimesterImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
   int? get id;
   @override
+  @JsonKey(name: 'name')
   String? get name;
   @override
+  @JsonKey(name: 'updated_on')
   String? get updatedOn;
   @override
+  @JsonKey(name: 'created_on')
   String? get createdOn;
   @override
   @JsonKey(ignore: true)

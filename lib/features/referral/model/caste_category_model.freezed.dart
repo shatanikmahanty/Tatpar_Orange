@@ -20,9 +20,13 @@ CasteCategory _$CasteCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CasteCategory {
+  @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_on')
   String? get updatedOn => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_on')
   String? get createdOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +41,11 @@ abstract class $CasteCategoryCopyWith<$Res> {
           CasteCategory value, $Res Function(CasteCategory) then) =
       _$CasteCategoryCopyWithImpl<$Res, CasteCategory>;
   @useResult
-  $Res call({int? id, String? name, String? updatedOn, String? createdOn});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'updated_on') String? updatedOn,
+      @JsonKey(name: 'created_on') String? createdOn});
 }
 
 /// @nodoc
@@ -87,7 +95,11 @@ abstract class _$$CasteCategoryImplCopyWith<$Res>
       __$$CasteCategoryImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? name, String? updatedOn, String? createdOn});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'updated_on') String? updatedOn,
+      @JsonKey(name: 'created_on') String? createdOn});
 }
 
 /// @nodoc
@@ -131,18 +143,25 @@ class __$$CasteCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CasteCategoryImpl implements _CasteCategory {
   const _$CasteCategoryImpl(
-      {this.id, this.name, this.updatedOn, this.createdOn});
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'updated_on') this.updatedOn,
+      @JsonKey(name: 'created_on') this.createdOn});
 
   factory _$CasteCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CasteCategoryImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
   final int? id;
   @override
+  @JsonKey(name: 'name')
   final String? name;
   @override
+  @JsonKey(name: 'updated_on')
   final String? updatedOn;
   @override
+  @JsonKey(name: 'created_on')
   final String? createdOn;
 
   @override
@@ -183,21 +202,26 @@ class _$CasteCategoryImpl implements _CasteCategory {
 
 abstract class _CasteCategory implements CasteCategory {
   const factory _CasteCategory(
-      {final int? id,
-      final String? name,
-      final String? updatedOn,
-      final String? createdOn}) = _$CasteCategoryImpl;
+          {@JsonKey(name: 'id') final int? id,
+          @JsonKey(name: 'name') final String? name,
+          @JsonKey(name: 'updated_on') final String? updatedOn,
+          @JsonKey(name: 'created_on') final String? createdOn}) =
+      _$CasteCategoryImpl;
 
   factory _CasteCategory.fromJson(Map<String, dynamic> json) =
       _$CasteCategoryImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
   int? get id;
   @override
+  @JsonKey(name: 'name')
   String? get name;
   @override
+  @JsonKey(name: 'updated_on')
   String? get updatedOn;
   @override
+  @JsonKey(name: 'created_on')
   String? get createdOn;
   @override
   @JsonKey(ignore: true)

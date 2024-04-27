@@ -20,9 +20,13 @@ ReferrerSource _$ReferrerSourceFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReferrerSource {
+  @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
+  @JsonKey(name: 'updated_on')
   String? get updatedOn => throw _privateConstructorUsedError;
+  @JsonKey(name: 'created_on')
   String? get createdOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -37,7 +41,11 @@ abstract class $ReferrerSourceCopyWith<$Res> {
           ReferrerSource value, $Res Function(ReferrerSource) then) =
       _$ReferrerSourceCopyWithImpl<$Res, ReferrerSource>;
   @useResult
-  $Res call({int? id, String? name, String? updatedOn, String? createdOn});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'updated_on') String? updatedOn,
+      @JsonKey(name: 'created_on') String? createdOn});
 }
 
 /// @nodoc
@@ -87,7 +95,11 @@ abstract class _$$ReferrerSourceImplCopyWith<$Res>
       __$$ReferrerSourceImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({int? id, String? name, String? updatedOn, String? createdOn});
+  $Res call(
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'name') String? name,
+      @JsonKey(name: 'updated_on') String? updatedOn,
+      @JsonKey(name: 'created_on') String? createdOn});
 }
 
 /// @nodoc
@@ -131,18 +143,25 @@ class __$$ReferrerSourceImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReferrerSourceImpl implements _ReferrerSource {
   const _$ReferrerSourceImpl(
-      {this.id, this.name, this.updatedOn, this.createdOn});
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'name') this.name,
+      @JsonKey(name: 'updated_on') this.updatedOn,
+      @JsonKey(name: 'created_on') this.createdOn});
 
   factory _$ReferrerSourceImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReferrerSourceImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id')
   final int? id;
   @override
+  @JsonKey(name: 'name')
   final String? name;
   @override
+  @JsonKey(name: 'updated_on')
   final String? updatedOn;
   @override
+  @JsonKey(name: 'created_on')
   final String? createdOn;
 
   @override
@@ -184,21 +203,26 @@ class _$ReferrerSourceImpl implements _ReferrerSource {
 
 abstract class _ReferrerSource implements ReferrerSource {
   const factory _ReferrerSource(
-      {final int? id,
-      final String? name,
-      final String? updatedOn,
-      final String? createdOn}) = _$ReferrerSourceImpl;
+          {@JsonKey(name: 'id') final int? id,
+          @JsonKey(name: 'name') final String? name,
+          @JsonKey(name: 'updated_on') final String? updatedOn,
+          @JsonKey(name: 'created_on') final String? createdOn}) =
+      _$ReferrerSourceImpl;
 
   factory _ReferrerSource.fromJson(Map<String, dynamic> json) =
       _$ReferrerSourceImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id')
   int? get id;
   @override
+  @JsonKey(name: 'name')
   String? get name;
   @override
+  @JsonKey(name: 'updated_on')
   String? get updatedOn;
   @override
+  @JsonKey(name: 'created_on')
   String? get createdOn;
   @override
   @JsonKey(ignore: true)

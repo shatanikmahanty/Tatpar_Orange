@@ -1,7 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tatpar_acf/features/referral/model/districts_model.dart';
-import 'package:tatpar_acf/features/referral/model/states_model.dart';
+import 'package:tatpar_acf/features/referral/model/data_model.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 part 'referral_details_cubit.freezed.dart';
 part 'referral_details_cubit.g.dart';
@@ -10,7 +9,7 @@ part 'referral_details_cubit.g.dart';
 class ReferralDetailsState with _$ReferralDetailsState {
   const factory ReferralDetailsState(
       {@Default(false) bool? isLoading,
-      @Default([]) List<StateData>? panchayatModel}) = _ReferralDetailsState;
+      DataModel? dataModel}) = _ReferralDetailsState;
 
   factory ReferralDetailsState.fromJson(Map<String, dynamic> json) =>
       _$ReferralDetailsStateFromJson(json);
@@ -25,8 +24,8 @@ class ReferralDetailsCubit extends Cubit<ReferralDetailsState> {
     emit(state.copyWith(isLoading: true));
     try {
       print('calling repo');
-      final model = await repository.buildDistrictFields();
-      emit(state.copyWith(isLoading: false, panchayatModel: []));
+      final model = await repository.buildDataFields();
+      emit(state.copyWith(isLoading: false, dataModel: model));
     } on Exception {
       emit(
         state.copyWith(
