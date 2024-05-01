@@ -24,10 +24,6 @@ mixin _$CasteCategory {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_on')
-  String? get updatedOn => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_on')
-  String? get createdOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,10 +38,7 @@ abstract class $CasteCategoryCopyWith<$Res> {
       _$CasteCategoryCopyWithImpl<$Res, CasteCategory>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'updated_on') String? updatedOn,
-      @JsonKey(name: 'created_on') String? createdOn});
+      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -63,8 +56,6 @@ class _$CasteCategoryCopyWithImpl<$Res, $Val extends CasteCategory>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? updatedOn = freezed,
-    Object? createdOn = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -74,14 +65,6 @@ class _$CasteCategoryCopyWithImpl<$Res, $Val extends CasteCategory>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -96,10 +79,7 @@ abstract class _$$CasteCategoryImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'updated_on') String? updatedOn,
-      @JsonKey(name: 'created_on') String? createdOn});
+      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -115,8 +95,6 @@ class __$$CasteCategoryImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? updatedOn = freezed,
-    Object? createdOn = freezed,
   }) {
     return _then(_$CasteCategoryImpl(
       id: freezed == id
@@ -127,14 +105,6 @@ class __$$CasteCategoryImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -143,10 +113,7 @@ class __$$CasteCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CasteCategoryImpl implements _CasteCategory {
   const _$CasteCategoryImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'name') this.name,
-      @JsonKey(name: 'updated_on') this.updatedOn,
-      @JsonKey(name: 'created_on') this.createdOn});
+      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name});
 
   factory _$CasteCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CasteCategoryImplFromJson(json);
@@ -157,16 +124,10 @@ class _$CasteCategoryImpl implements _CasteCategory {
   @override
   @JsonKey(name: 'name')
   final String? name;
-  @override
-  @JsonKey(name: 'updated_on')
-  final String? updatedOn;
-  @override
-  @JsonKey(name: 'created_on')
-  final String? createdOn;
 
   @override
   String toString() {
-    return 'CasteCategory(id: $id, name: $name, updatedOn: $updatedOn, createdOn: $createdOn)';
+    return 'CasteCategory(id: $id, name: $name)';
   }
 
   @override
@@ -175,16 +136,12 @@ class _$CasteCategoryImpl implements _CasteCategory {
         (other.runtimeType == runtimeType &&
             other is _$CasteCategoryImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.updatedOn, updatedOn) ||
-                other.updatedOn == updatedOn) &&
-            (identical(other.createdOn, createdOn) ||
-                other.createdOn == createdOn));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, updatedOn, createdOn);
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
@@ -202,11 +159,8 @@ class _$CasteCategoryImpl implements _CasteCategory {
 
 abstract class _CasteCategory implements CasteCategory {
   const factory _CasteCategory(
-          {@JsonKey(name: 'id') final int? id,
-          @JsonKey(name: 'name') final String? name,
-          @JsonKey(name: 'updated_on') final String? updatedOn,
-          @JsonKey(name: 'created_on') final String? createdOn}) =
-      _$CasteCategoryImpl;
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'name') final String? name}) = _$CasteCategoryImpl;
 
   factory _CasteCategory.fromJson(Map<String, dynamic> json) =
       _$CasteCategoryImpl.fromJson;
@@ -217,12 +171,6 @@ abstract class _CasteCategory implements CasteCategory {
   @override
   @JsonKey(name: 'name')
   String? get name;
-  @override
-  @JsonKey(name: 'updated_on')
-  String? get updatedOn;
-  @override
-  @JsonKey(name: 'created_on')
-  String? get createdOn;
   @override
   @JsonKey(ignore: true)
   _$$CasteCategoryImplCopyWith<_$CasteCategoryImpl> get copyWith =>

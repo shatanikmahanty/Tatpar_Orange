@@ -133,11 +133,6 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
             },
             itemCount: widget.options.length,
           ),
-          if (_selected.isEmpty && widget.validationMessages != null)
-            Text(
-              'Field is Required',
-              style: TextStyle(color: Colors.red),
-            ),
         ],
       );
 }

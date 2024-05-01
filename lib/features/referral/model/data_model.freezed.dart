@@ -20,18 +20,19 @@ DataModel _$DataModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DataModel {
-  @JsonKey(name: 'Caste Category')
+  @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Key Population')
+  @JsonKey(name: 'key_population')
   List<KeyPopulation>? get keyPopulation => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Referrer Source')
+  @JsonKey(name: 'referrer_source')
   List<ReferrerSource>? get referrerSource =>
       throw _privateConstructorUsedError;
-  @JsonKey(name: 'Trimester of PW')
+  @JsonKey(name: 'trimester_of_pw')
   List<Trimester>? get trimester => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Panchayat Code')
-  List<PanchayatCodeModel>? get panchayatModel =>
-      throw _privateConstructorUsedError;
+  @JsonKey(name: 'districts')
+  List<District>? get districts => throw _privateConstructorUsedError;
+  @JsonKey(name: 'blocks')
+  List<Block>? get blocks => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -45,12 +46,12 @@ abstract class $DataModelCopyWith<$Res> {
       _$DataModelCopyWithImpl<$Res, DataModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Caste Category') List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'Key Population') List<KeyPopulation>? keyPopulation,
-      @JsonKey(name: 'Referrer Source') List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'Trimester of PW') List<Trimester>? trimester,
-      @JsonKey(name: 'Panchayat Code')
-      List<PanchayatCodeModel>? panchayatModel});
+      {@JsonKey(name: 'caste_category') List<CasteCategory>? casteCategory,
+      @JsonKey(name: 'key_population') List<KeyPopulation>? keyPopulation,
+      @JsonKey(name: 'referrer_source') List<ReferrerSource>? referrerSource,
+      @JsonKey(name: 'trimester_of_pw') List<Trimester>? trimester,
+      @JsonKey(name: 'districts') List<District>? districts,
+      @JsonKey(name: 'blocks') List<Block>? blocks});
 }
 
 /// @nodoc
@@ -70,7 +71,8 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
     Object? keyPopulation = freezed,
     Object? referrerSource = freezed,
     Object? trimester = freezed,
-    Object? panchayatModel = freezed,
+    Object? districts = freezed,
+    Object? blocks = freezed,
   }) {
     return _then(_value.copyWith(
       casteCategory: freezed == casteCategory
@@ -89,10 +91,14 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
           ? _value.trimester
           : trimester // ignore: cast_nullable_to_non_nullable
               as List<Trimester>?,
-      panchayatModel: freezed == panchayatModel
-          ? _value.panchayatModel
-          : panchayatModel // ignore: cast_nullable_to_non_nullable
-              as List<PanchayatCodeModel>?,
+      districts: freezed == districts
+          ? _value.districts
+          : districts // ignore: cast_nullable_to_non_nullable
+              as List<District>?,
+      blocks: freezed == blocks
+          ? _value.blocks
+          : blocks // ignore: cast_nullable_to_non_nullable
+              as List<Block>?,
     ) as $Val);
   }
 }
@@ -106,12 +112,12 @@ abstract class _$$DataModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Caste Category') List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'Key Population') List<KeyPopulation>? keyPopulation,
-      @JsonKey(name: 'Referrer Source') List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'Trimester of PW') List<Trimester>? trimester,
-      @JsonKey(name: 'Panchayat Code')
-      List<PanchayatCodeModel>? panchayatModel});
+      {@JsonKey(name: 'caste_category') List<CasteCategory>? casteCategory,
+      @JsonKey(name: 'key_population') List<KeyPopulation>? keyPopulation,
+      @JsonKey(name: 'referrer_source') List<ReferrerSource>? referrerSource,
+      @JsonKey(name: 'trimester_of_pw') List<Trimester>? trimester,
+      @JsonKey(name: 'districts') List<District>? districts,
+      @JsonKey(name: 'blocks') List<Block>? blocks});
 }
 
 /// @nodoc
@@ -129,7 +135,8 @@ class __$$DataModelImplCopyWithImpl<$Res>
     Object? keyPopulation = freezed,
     Object? referrerSource = freezed,
     Object? trimester = freezed,
-    Object? panchayatModel = freezed,
+    Object? districts = freezed,
+    Object? blocks = freezed,
   }) {
     return _then(_$DataModelImpl(
       casteCategory: freezed == casteCategory
@@ -148,10 +155,14 @@ class __$$DataModelImplCopyWithImpl<$Res>
           ? _value._trimester
           : trimester // ignore: cast_nullable_to_non_nullable
               as List<Trimester>?,
-      panchayatModel: freezed == panchayatModel
-          ? _value._panchayatModel
-          : panchayatModel // ignore: cast_nullable_to_non_nullable
-              as List<PanchayatCodeModel>?,
+      districts: freezed == districts
+          ? _value._districts
+          : districts // ignore: cast_nullable_to_non_nullable
+              as List<District>?,
+      blocks: freezed == blocks
+          ? _value._blocks
+          : blocks // ignore: cast_nullable_to_non_nullable
+              as List<Block>?,
     ));
   }
 }
@@ -160,26 +171,27 @@ class __$$DataModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DataModelImpl implements _DataModel {
   const _$DataModelImpl(
-      {@JsonKey(name: 'Caste Category')
+      {@JsonKey(name: 'caste_category')
       final List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'Key Population') final List<KeyPopulation>? keyPopulation,
-      @JsonKey(name: 'Referrer Source')
+      @JsonKey(name: 'key_population') final List<KeyPopulation>? keyPopulation,
+      @JsonKey(name: 'referrer_source')
       final List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'Trimester of PW') final List<Trimester>? trimester,
-      @JsonKey(name: 'Panchayat Code')
-      final List<PanchayatCodeModel>? panchayatModel})
+      @JsonKey(name: 'trimester_of_pw') final List<Trimester>? trimester,
+      @JsonKey(name: 'districts') final List<District>? districts,
+      @JsonKey(name: 'blocks') final List<Block>? blocks})
       : _casteCategory = casteCategory,
         _keyPopulation = keyPopulation,
         _referrerSource = referrerSource,
         _trimester = trimester,
-        _panchayatModel = panchayatModel;
+        _districts = districts,
+        _blocks = blocks;
 
   factory _$DataModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DataModelImplFromJson(json);
 
   final List<CasteCategory>? _casteCategory;
   @override
-  @JsonKey(name: 'Caste Category')
+  @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory {
     final value = _casteCategory;
     if (value == null) return null;
@@ -190,7 +202,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<KeyPopulation>? _keyPopulation;
   @override
-  @JsonKey(name: 'Key Population')
+  @JsonKey(name: 'key_population')
   List<KeyPopulation>? get keyPopulation {
     final value = _keyPopulation;
     if (value == null) return null;
@@ -201,7 +213,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<ReferrerSource>? _referrerSource;
   @override
-  @JsonKey(name: 'Referrer Source')
+  @JsonKey(name: 'referrer_source')
   List<ReferrerSource>? get referrerSource {
     final value = _referrerSource;
     if (value == null) return null;
@@ -212,7 +224,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<Trimester>? _trimester;
   @override
-  @JsonKey(name: 'Trimester of PW')
+  @JsonKey(name: 'trimester_of_pw')
   List<Trimester>? get trimester {
     final value = _trimester;
     if (value == null) return null;
@@ -221,20 +233,31 @@ class _$DataModelImpl implements _DataModel {
     return EqualUnmodifiableListView(value);
   }
 
-  final List<PanchayatCodeModel>? _panchayatModel;
+  final List<District>? _districts;
   @override
-  @JsonKey(name: 'Panchayat Code')
-  List<PanchayatCodeModel>? get panchayatModel {
-    final value = _panchayatModel;
+  @JsonKey(name: 'districts')
+  List<District>? get districts {
+    final value = _districts;
     if (value == null) return null;
-    if (_panchayatModel is EqualUnmodifiableListView) return _panchayatModel;
+    if (_districts is EqualUnmodifiableListView) return _districts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<Block>? _blocks;
+  @override
+  @JsonKey(name: 'blocks')
+  List<Block>? get blocks {
+    final value = _blocks;
+    if (value == null) return null;
+    if (_blocks is EqualUnmodifiableListView) return _blocks;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
   @override
   String toString() {
-    return 'DataModel(casteCategory: $casteCategory, keyPopulation: $keyPopulation, referrerSource: $referrerSource, trimester: $trimester, panchayatModel: $panchayatModel)';
+    return 'DataModel(casteCategory: $casteCategory, keyPopulation: $keyPopulation, referrerSource: $referrerSource, trimester: $trimester, districts: $districts, blocks: $blocks)';
   }
 
   @override
@@ -251,7 +274,8 @@ class _$DataModelImpl implements _DataModel {
             const DeepCollectionEquality()
                 .equals(other._trimester, _trimester) &&
             const DeepCollectionEquality()
-                .equals(other._panchayatModel, _panchayatModel));
+                .equals(other._districts, _districts) &&
+            const DeepCollectionEquality().equals(other._blocks, _blocks));
   }
 
   @JsonKey(ignore: true)
@@ -262,7 +286,8 @@ class _$DataModelImpl implements _DataModel {
       const DeepCollectionEquality().hash(_keyPopulation),
       const DeepCollectionEquality().hash(_referrerSource),
       const DeepCollectionEquality().hash(_trimester),
-      const DeepCollectionEquality().hash(_panchayatModel));
+      const DeepCollectionEquality().hash(_districts),
+      const DeepCollectionEquality().hash(_blocks));
 
   @JsonKey(ignore: true)
   @override
@@ -280,33 +305,36 @@ class _$DataModelImpl implements _DataModel {
 
 abstract class _DataModel implements DataModel {
   const factory _DataModel(
-      {@JsonKey(name: 'Caste Category')
+      {@JsonKey(name: 'caste_category')
       final List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'Key Population') final List<KeyPopulation>? keyPopulation,
-      @JsonKey(name: 'Referrer Source')
+      @JsonKey(name: 'key_population') final List<KeyPopulation>? keyPopulation,
+      @JsonKey(name: 'referrer_source')
       final List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'Trimester of PW') final List<Trimester>? trimester,
-      @JsonKey(name: 'Panchayat Code')
-      final List<PanchayatCodeModel>? panchayatModel}) = _$DataModelImpl;
+      @JsonKey(name: 'trimester_of_pw') final List<Trimester>? trimester,
+      @JsonKey(name: 'districts') final List<District>? districts,
+      @JsonKey(name: 'blocks') final List<Block>? blocks}) = _$DataModelImpl;
 
   factory _DataModel.fromJson(Map<String, dynamic> json) =
       _$DataModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'Caste Category')
+  @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory;
   @override
-  @JsonKey(name: 'Key Population')
+  @JsonKey(name: 'key_population')
   List<KeyPopulation>? get keyPopulation;
   @override
-  @JsonKey(name: 'Referrer Source')
+  @JsonKey(name: 'referrer_source')
   List<ReferrerSource>? get referrerSource;
   @override
-  @JsonKey(name: 'Trimester of PW')
+  @JsonKey(name: 'trimester_of_pw')
   List<Trimester>? get trimester;
   @override
-  @JsonKey(name: 'Panchayat Code')
-  List<PanchayatCodeModel>? get panchayatModel;
+  @JsonKey(name: 'districts')
+  List<District>? get districts;
+  @override
+  @JsonKey(name: 'blocks')
+  List<Block>? get blocks;
   @override
   @JsonKey(ignore: true)
   _$$DataModelImplCopyWith<_$DataModelImpl> get copyWith =>

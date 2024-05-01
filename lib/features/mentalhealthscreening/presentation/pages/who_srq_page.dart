@@ -389,7 +389,8 @@ class WHOSRQPage extends StatelessWidget {
                                                 calculatedValue =
                                                 _onSave(context, formGroup);
 
-                                            context.router.pop(calculatedValue);
+                                            context.router
+                                                .maybePop(calculatedValue);
                                           }),
                                     ])))),
                         const SizedBox(height: kPadding * 2),

@@ -1,12 +1,14 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:reactive_image_picker/reactive_image_picker.dart';
+import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
+import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
+import 'package:tatpar_acf/features/referral/model/data_model.dart';
+import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 
-import '../../app/data/repos/storage_repo.dart';
 import '../data/models/workflow_item.dart';
 
 part 'case_cubit.freezed.dart';
@@ -17,7 +19,10 @@ class CaseState with _$CaseState {
   const factory CaseState({
     bool? isLoading,
     required Case caseWorkedUpon,
-    // XRay? xRayFormData,
+    DataModel? dataModel,
+    ReferralDetailsModel? referralDetailsModel,
+    TBScreeningModel? tbScreeningModel,
+    String? screeningOutcome,
     // UdModel? udstFormData,
     // NikshayIdentityModel? nikshayFormData,
     // ComorbidityModel? comorbidityFormData,
@@ -34,9 +39,9 @@ class CaseCubit extends Cubit<CaseState> {
 
   CaseCubit({required this.caseRepo, required Case caseModel})
       : super(CaseState(caseWorkedUpon: caseModel)) {
-    //   if (caseModel.xray != null) {
-    //     getXRayFormData(caseModel.xray);
-    //   }
+    // if (caseModel.referralDetailsStatus != null) {
+    //   getXRayFormData(caseModel.xray);
+    // }
     //   if (caseModel.udst != null) {
     //     getUDSTFormData(caseModel.udst);
     //   }
@@ -60,11 +65,86 @@ class CaseCubit extends Cubit<CaseState> {
     //   //   getTreatmentFormData(caseModel.treatment);
     //   // }
   }
+  int? _selectedDistrictId;
+  int? _selectedBlockId;
+  int? _selectedPanchayatCodeId;
+  set selectDistrictId(int? selectedDistrictId) =>
+      _selectedDistrictId = selectedDistrictId;
+  set selectBlockId(int? selectedBlockId) => _selectedBlockId = selectedBlockId;
+  set selectPanchayatCodeId(int? selectedPanchayatCodeId) =>
+      _selectedPanchayatCodeId = selectedPanchayatCodeId;
+
+  int? get selectedBlockId => _selectedBlockId;
+  int? get selectedDistrictId => _selectedDistrictId;
+  int? get selectedPanchayatCodeId => _selectedPanchayatCodeId;
+
+  Future<void> loadDistricts() async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final model = await caseRepo.buildDataFields();
+      emit(state.copyWith(isLoading: false, dataModel: model));
+    } on Exception {
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
+    }
+  }
+
+  String? updateScreeningOutcome(FormGroup formGroup) {
+    final cough = formGroup.control('cough').value;
+    final sputum = formGroup.control('sputum').value;
+    final hemoptysis = formGroup.control('hemoptysis').value;
+    final fever = formGroup.control('fever').value;
+    final nightSweats = formGroup.control('night_sweats').value;
+    final chestPain = formGroup.control('chest_pain').value;
+    final weightLoss = formGroup.control('weight_loss').value;
+    final swollenGland = formGroup.control('swollen_gland').value;
+    final tbMedicine = formGroup.control('tb_medicine').value;
+    if (cough == 'No' &&
+        sputum == 'No' &&
+        hemoptysis == 'No' &&
+        fever == 'No' &&
+        nightSweats == 'No' &&
+        chestPain == 'No' &&
+        weightLoss == 'No' &&
+        swollenGland == 'No') {
+      emit(state.copyWith(screeningOutcome: 'No Symptom'));
+      return 'No Symptom';
+    } else if (swollenGland == 'Yes') {
+      emit(state.copyWith(screeningOutcome: 'EPTB'));
+      return 'EPTB';
+    } else if ((cough == 'Yes' ||
+            sputum == 'Yes' ||
+            hemoptysis == 'Yes' ||
+            fever == 'Yes' ||
+            chestPain == 'Yes' ||
+            weightLoss == 'Yes' ||
+            swollenGland == 'Yes') &&
+        tbMedicine == 'Yes') {
+      emit(state.copyWith(screeningOutcome: 'DRTB'));
+      return 'DRTB';
+    } else if ((cough == 'Yes' ||
+            sputum == 'Yes' ||
+            hemoptysis == 'Yes' ||
+            fever == 'Yes' ||
+            chestPain == 'Yes' ||
+            weightLoss == 'Yes') &&
+        swollenGland == 'No' &&
+        tbMedicine == 'No') {
+      emit(state.copyWith(screeningOutcome: 'DSTB'));
+      return 'DSTB';
+    } else {
+      emit(state.copyWith(screeningOutcome: 'No Symptom'));
+      return 'No Symptom';
+    }
+  }
   // common update these values from UI
-  int? _selectedLabId;
-  int? _selectedDoctorId;
-  int? _collectionAgentId;
-  int? sourceID;
+  // int? _selectedLabId;
+  // int? _selectedDoctorId;
+  // int? _collectionAgentId;
+  // int? sourceID;
 
   // int? get selectedLabId => _selectedLabId;
   // int? get selectedDoctorId => _selectedDoctorId;
@@ -132,169 +212,29 @@ class CaseCubit extends Cubit<CaseState> {
   //   });
   // }
 
-  //
-  // Future<void> getDiseaseFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getDiseaseFormData(diseaseFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(diseaseFormData: value),
-  //     );
-  //   });
-  // }
-  //
-  // Future<void> getDBTFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getDBTFormData(dbtFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(dbtFormData: value),
-  //     );
-  //   });
-  // }
-  //
-  // Future<void> getContractCasingFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getContractCasingFormData(contractCasingFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(contractCasingFormData: value),
-  //     );
-  //   });
-  // }
-  //
-  // Future<void> getTreatmentFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getTreatmentFormData(treatmentFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(treatmentFormData: value),
-  //     );
-  //   });
-  // }
-
-  Future<void> updateBasicDetails(Case caseData) async {
-    final isUpdateSuccess =
-        await caseRepo.updateBasicDetails(caseData.toJson());
-    if (isUpdateSuccess) {
-      emit(
-        state.copyWith(
-          caseWorkedUpon: caseData,
-        ),
-      );
-    }
+  Future<void> updateReferralDetailsData(
+      ReferralDetailsModel referralDetailsModel) async {
+    final response = await caseRepo.saveReferralDetails(
+        referralDetailsModel: referralDetailsModel);
+    emit(
+      state.copyWith(
+        caseWorkedUpon:
+            state.caseWorkedUpon.copyWith(referralDetails: response.referralID),
+        referralDetailsModel: response,
+      ),
+    );
   }
 
-  Future<void> updateDiseaseDetails(dynamic json) async {
-    await caseRepo.saveDisease(json);
+  Future<void> updateTbScreeningData(TBScreeningModel tbScreeningModel) async {
+    final response =
+        await caseRepo.saveTbScreeningData(tbScreeningModel: tbScreeningModel);
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(tbScreening: 1),
+        tbScreeningModel: response,
+      ),
+    );
   }
-
-  // Future<void> updateXRay(
-  //     XRay xrayForm, SelectedFile? prescription, SelectedFile? xray) async {
-  //   String? prescriptionUrl;
-  //   String? xRayUrl;
-  //   if (prescription?.file != null) {
-  //     prescriptionUrl = await StorageRepo().uploadFile(
-  //         file: prescription!.file!,
-  //         path: StorageRepo.getHealthWorkerStoragePath(
-  //             'XRAY/DoctorPrescription',
-  //             state.caseWorkedUpon.id.toString() + DateTime.now().toString()));
-  //   }
-
-  //   if (xray?.file != null) {
-  //     xRayUrl = await StorageRepo().uploadFile(
-  //         file: xray!.file!,
-  //         path: StorageRepo.getHealthWorkerStoragePath('XRAY/XRAYResult',
-  //             state.caseWorkedUpon.id.toString() + DateTime.now().toString()));
-  //   }
-
-  //   final response = await caseRepo.saveXRay(
-  //     xRayForm: xrayForm.copyWith(
-  //         uploadPrescription: prescriptionUrl, uploadReport: xRayUrl),
-  //     caseId: state.caseWorkedUpon.id!,
-  //     xRayId: state.caseWorkedUpon.xray,
-  //   );
-  //   emit(state.copyWith(
-  //       caseWorkedUpon: state.caseWorkedUpon.copyWith(xray: response.id)));
-  //   getXRayFormData(state.caseWorkedUpon.xray);
-  // }
-
-  // Future<void> updateContactTracing(
-  //   Map<String, dynamic> json,
-  // ) async {
-  //   final response = await caseRepo.saveContractCase(
-  //     contractCasingDetails: json,
-  //     caseId: state.caseWorkedUpon.id!,
-  //     contractCasingsId: state.caseWorkedUpon.contractCasing,
-  //   );
-  //   if (response.status == Status.ok) {
-  //     emit(
-  //       state.copyWith(
-  //         caseWorkedUpon: state.caseWorkedUpon
-  //             .copyWith(contractCasing: response.data['contractcasing']),
-  //       ),
-  //     );
-  //     getContactCasingData(state.caseWorkedUpon.contractCasing);
-  //   }
-  // }
-
-  // Future<void> updateNikshay(
-  //   NikshayIdentityModel nikshayIdentity,
-  // ) async {
-  //   final response = await caseRepo.saveNikshay(
-  //     nikshayDetails: nikshayIdentity,
-  //     caseId: state.caseWorkedUpon.id!,
-  //     nikshayId: state.caseWorkedUpon.nikshay,
-  //   );
-  //   emit(
-  //     state.copyWith(
-  //       caseWorkedUpon: state.caseWorkedUpon.copyWith(nikshay: response.id),
-  //       nikshayFormData: response,
-  //     ),
-  //   );
-  // }
-
-  // Future<void> updateDbt(
-  //   DBTModel dbtForm,
-  // ) async {
-  //   final response = await caseRepo.saveDbt(
-  //     dbtDetails: dbtForm,
-  //     caseId: state.caseWorkedUpon.id!,
-  //     dbtId: state.caseWorkedUpon.dbt,
-  //   );
-  //   emit(
-  //     state.copyWith(
-  //       caseWorkedUpon: state.caseWorkedUpon.copyWith(dbt: response.id),
-  //     ),
-  //   );
-  // }
-
-  // Future<void> updateUDST(
-  //     UdModel model, SelectedFile? prescription, SelectedFile? report) async {
-  //   String? prescriptionUrl;
-  //   String? reportUrl;
-  //   if (prescription?.file != null) {
-  //     prescriptionUrl = await StorageRepo().uploadFile(
-  //         file: prescription!.file!,
-  //         path: StorageRepo.getHealthWorkerStoragePath(
-  //             'UDST/DoctorPrescription',
-  //             state.caseWorkedUpon.id.toString() + DateTime.now().toString()));
-  //   }
-  //   if (report?.file != null) {
-  //     reportUrl = await StorageRepo().uploadFile(
-  //         file: report!.file!,
-  //         path: StorageRepo.getHealthWorkerStoragePath('UDST/UploadReport',
-  //             state.caseWorkedUpon.id.toString() + DateTime.now().toString()));
-  //   }
-
-  //   final newUDST = await caseRepo.saveUDST(
-  //     udstDetails: model.copyWith(
-  //         uploadPrescription: prescriptionUrl, uploadReport: reportUrl),
-  //     caseId: state.caseWorkedUpon.id!,
-  //     udstId: state.caseWorkedUpon.udst,
-  //   );
-
-  //   emit(state.copyWith(
-  //     caseWorkedUpon: state.caseWorkedUpon.copyWith(udst: newUDST.id),
-  //     udstFormData: newUDST,
-  //   ));
-  // }
 
   List<WorkflowItem> workflows(Case workingCase) {
     final workflows = [

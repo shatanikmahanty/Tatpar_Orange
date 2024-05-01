@@ -7,20 +7,20 @@ part 'tb_screening_model.g.dart';
 @freezed
 class TBScreeningModel with _$TBScreeningModel {
   const factory TBScreeningModel({
-    @JsonKey(name: 'Scr_date') required DateTime? screeningDate,
-    @JsonKey(name: 'Screened_by') required String? screenedBy,
-    @JsonKey(name: 'trimester') required String? trimester,
-    @JsonKey(name: 'Cough_2wk') required String? cough,
-    @JsonKey(name: 'Sputum_2wk') required String? sputum,
-    @JsonKey(name: 'Hemoptysis_6mo') required String? hemoptysis,
-    @JsonKey(name: 'Fever_2wk') required String? fever,
-    @JsonKey(name: 'Night_Sweats_2wk') required String? nightSweats,
-    @JsonKey(name: 'Chest_pain_1mo') required String? chestPain,
-    @JsonKey(name: 'Weight_loss_3mo') required String? weightLoss,
-    @JsonKey(name: 'Swollen_gland_now') required String? swollenGland,
-    @JsonKey(name: 'TB_medication_before_yes_no') required String? tbMedicine,
-    @JsonKey(name: 'Screening_outcome') required String? screeningOutcome,
-    @JsonKey(name: 'Comments') String? comments,
+    @JsonKey(name: 'Scr_date') DateTime? screeningDate,
+    @JsonKey(name: 'screened_by') String? screenedBy,
+    @JsonKey(name: 'trimester_of_pw') String? trimester,
+    @JsonKey(name: 'cough_2_weeks') String? cough,
+    @JsonKey(name: 'sputum_2_weeks') String? sputum,
+    @JsonKey(name: 'hemoptysis') String? hemoptysis,
+    @JsonKey(name: 'fever_2_weeks') String? fever,
+    @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
+    @JsonKey(name: 'chest_pain_2_months') String? chestPain,
+    @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
+    @JsonKey(name: 'swollen_gland') String? swollenGland,
+    @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
+    @JsonKey(name: 'screening_outcome') String? screeningOutcome,
+    @JsonKey(name: 'comments') String? comments,
   }) = _TBScreeningModel;
 
   factory TBScreeningModel.fromJson(Map<String, dynamic> json) =>

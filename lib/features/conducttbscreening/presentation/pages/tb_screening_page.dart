@@ -1,12 +1,11 @@
-import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
+import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_field.dart';
-import 'package:tatpar_acf/features/conducttbscreening/bloc/conduct_tb_screening_cubit.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 
@@ -62,37 +61,36 @@ class TBScreeningPage extends StatelessWidget {
   }
 
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
-    final tbscreeningCubit = context.read<TBScreeningStateCubit>();
-
     if (formGroup.valid) {
-      final model = tbscreeningCubit.state.tbScreeningModel;
-      final tbScreeningModel = model!.copyWith(
-          screeningDate: formGroup.control('screening_date').value,
-          screenedBy: formGroup.control('screened_by').value,
-          trimester: formGroup.control('trimester').value,
-          cough: formGroup.control('cough').value,
-          sputum: formGroup.control('sputum').value,
-          hemoptysis: formGroup.control('hemoptysis').value,
-          fever: formGroup.control('fever').value,
-          nightSweats: formGroup.control('night_sweats').value,
-          chestPain: formGroup.control('chest_pain').value,
-          weightLoss: formGroup.control('weight_loss').value,
-          swollenGland: formGroup.control('swollen_gland').value,
-          tbMedicine: formGroup.control('tb_medicine').value,
-          screeningOutcome: tbscreeningCubit.state.screeningOutcome,
-          comments: formGroup.control('comments').value);
-      print(tbScreeningModel);
-      tbscreeningCubit.updateTBScreeningModel(tbScreeningModel);
+      print('IN Save Method');
+      final formData = formGroup.value;
+      final cubit = context.read<CaseCubit>();
+      final model = cubit.state.tbScreeningModel;
+      final tbScreeningModel = TBScreeningModel(
+          screeningDate: formData['screening_date'] as DateTime,
+          screenedBy: formData['screened_by'] as String?,
+          trimester: formData['trimester'] as String?,
+          cough: formData['cough'] as String?,
+          sputum: formData['sputum'] as String?,
+          hemoptysis: formData['hemoptysis'] as String?,
+          fever: formData['fever'] as String?,
+          nightSweats: formData['night_sweats'] as String?,
+          chestPain: formData['chest_pain'] as String?,
+          weightLoss: formData['weight_loss'] as String?,
+          swollenGland: formData['swollen_gland'] as String?,
+          tbMedicine: formData['tb_medicine'] as String?,
+          screeningOutcome: formData['screening_outcome'] as String?,
+          comments: formData['comments'] as String?);
+      await cubit.updateTbScreeningData(tbScreeningModel);
     } else {
-      print('in not valid');
-      final fields = [];
-      formGroup.controls.forEach((key, value) {
-        if (value.invalid) {
-          fields.add(key.replaceFirst('patient_', ''));
-        }
-      });
-      DjangoflowAppSnackbar.showError(
-          'please enter the fields: ${fields.join(', ')}');
+      //  final fields = [];
+      // formGroup.controls.forEach((key, value) {
+      //   if (value.invalid) {
+      //     fields.add(key.replaceFirst('patient_', ''));
+      //   }
+      // });
+      // DjangoflowAppSnackbar.showError(
+      //     'please enter the fields: ${fields.join(', ')}');
 
       formGroup.markAllAsTouched();
     }
@@ -100,266 +98,238 @@ class TBScreeningPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<TBScreeningStateCubit>(
-        create: (context) => TBScreeningStateCubit(),
-        child: Scaffold(
+    return BlocBuilder<CaseCubit, CaseState>(
+        builder: (context, state) => Scaffold(
             appBar: const CaseAppBar('TB Screening'),
-            body: BlocBuilder<TBScreeningStateCubit, TBScreeningState>(
-                buildWhen: ((previous, current) =>
-                    (previous.screeningOutcome != current.screeningOutcome) ||
-                    previous.tbScreeningModel != current.tbScreeningModel),
-                builder: (context, state) {
-                  return ReactiveFormBuilder(
-                      form: () => _tbScreeningDetailsFormBuilder(
-                          tbScreeningModel: state.tbScreeningModel),
-                      builder: (BuildContext context, FormGroup formGroup,
-                          Widget? child) {
-                        return AutofillGroup(
-                            child: Column(children: [
-                          const SizedBox(height: kPadding * 2),
-                          Expanded(
-                              child: SingleChildScrollView(
-                                  child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          horizontal: kPadding * 2),
-                                      child: Column(children: [
-                                        DateTextInput(
-                                          firstDate: DateTime(2002),
-                                          controlName: 'screening_date',
-                                          label: 'Screening Date',
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        const PrimaryTextField(
-                                          formControlName: 'screened_by',
-                                          label: 'Screened By',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label: '1.1 Cough for 2 weeks ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup.control('cough').value =
-                                                value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected:
-                                              formGroup.control('cough').value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label: '1.2 Sputum for 2 weeks ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup.control('sputum').value =
-                                                value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected:
-                                              formGroup.control('sputum').value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label: '1.3 Hemoptysis ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('hemoptysis')
-                                                .value = value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected: formGroup
-                                              .control('hemoptysis')
-                                              .value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label: '1.4 Fever for 2 weeks ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup.control('fever').value =
-                                                value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected:
-                                              formGroup.control('fever').value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label:
-                                              '1.5 Night sweats for 2 weeks ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('night_sweats')
-                                                .value = value;
+            body: ReactiveFormBuilder(
+                form: () => _tbScreeningDetailsFormBuilder(
+                    tbScreeningModel: state.tbScreeningModel),
+                builder:
+                    (BuildContext context, FormGroup formGroup, Widget? child) {
+                  formGroup.valueChanges.listen((_) {
+                    context.read<CaseCubit>().updateScreeningOutcome(formGroup);
+                  });
 
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected: formGroup
-                                              .control('night_sweats')
-                                              .value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label: '1.6 Chest pain for 1 month ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('chest_pain')
-                                                .value = value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected: formGroup
-                                              .control('chest_pain')
-                                              .value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label:
-                                              '1.7 Weight loss for 2 weeks ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('weight_loss')
-                                                .value = value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected: formGroup
-                                              .control('weight_loss')
-                                              .value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label: '1.8 Swollen gland ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('swollen_gland')
-                                                .value = value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected: formGroup
-                                              .control('swollen_gland')
-                                              .value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          label: '2. TB medicine before ?',
-                                          options: const ['Yes', 'No'],
-                                          crossAxisCount: 2,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('tb_medicine')
-                                                .value = value;
-                                            extractFormData(formGroup, context);
-                                          },
-                                          selected: formGroup
-                                              .control('tb_medicine')
-                                              .value,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        ChipRadioButtons(
-                                          crossAxisCount: 2,
-                                          label: '3. Trimester Of PW ',
-                                          options: const [
-                                            '1 st',
-                                            '2 nd',
-                                            '3 rd',
-                                            'N/A'
+                  return AutofillGroup(
+                      child: Column(children: [
+                    const SizedBox(height: kPadding * 2),
+                    Expanded(
+                        child: SingleChildScrollView(
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: kPadding * 2),
+                                child: Column(children: [
+                                  DateTextInput(
+                                    firstDate: DateTime(2002),
+                                    controlName: 'screening_date',
+                                    label: 'Screening Date',
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  const PrimaryTextField(
+                                    formControlName: 'screened_by',
+                                    label: 'Screened By',
+                                    prefixIcon: Icons.account_circle_outlined,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.1 Cough for 2 weeks ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('cough').value = value;
+                                    },
+                                    selected: formGroup.control('cough').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.2 Sputum for 2 weeks ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('sputum').value = value;
+                                    },
+                                    selected: formGroup.control('sputum').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.3 Hemoptysis ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('hemoptysis').value =
+                                          value;
+                                    },
+                                    selected:
+                                        formGroup.control('hemoptysis').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.4 Fever for 2 weeks ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('fever').value = value;
+                                    },
+                                    selected: formGroup.control('fever').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.5 Night sweats for 2 weeks ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('night_sweats').value =
+                                          value;
+                                    },
+                                    selected:
+                                        formGroup.control('night_sweats').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.6 Chest pain for 1 month ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('chest_pain').value =
+                                          value;
+                                    },
+                                    selected:
+                                        formGroup.control('chest_pain').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.7 Weight loss for 2 weeks ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('weight_loss').value =
+                                          value;
+                                      // extractFormData(formGroup, context);
+                                    },
+                                    selected:
+                                        formGroup.control('weight_loss').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '1.8 Swollen gland ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('swollen_gland').value =
+                                          value;
+                                    },
+                                    selected: formGroup
+                                        .control('swollen_gland')
+                                        .value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: '2. TB medicine before ?',
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('tb_medicine').value =
+                                          value;
+                                      // extractFormData(formGroup, context);
+                                    },
+                                    selected:
+                                        formGroup.control('tb_medicine').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  BlocBuilder<CaseCubit, CaseState>(
+                                      buildWhen: ((previous, current) =>
+                                          (previous.isLoading !=
+                                              current.isLoading) ||
+                                          previous.dataModel !=
+                                              current.dataModel),
+                                      builder: (context, state) {
+                                        List<String> list =
+                                            (state.dataModel != null)
+                                                ? state.dataModel!.trimester!
+                                                    .map((e) =>
+                                                        '${e.id}:\t${e.name}')
+                                                    .toList()
+                                                : [];
+                                        if (state.isLoading ?? false) {
+                                          return const SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            ),
+                                          );
+                                        }
+                                        return Column(
+                                          children: [
+                                            ChipRadioButtons(
+                                              crossAxisCount: 2,
+                                              label: 'Trimester Of PW',
+                                              options: list,
+                                              selected: formGroup
+                                                  .control('trimester')
+                                                  .value,
+                                              onChanged: (value) {
+                                                final selectedId = int.tryParse(
+                                                    value.split(':')[0]);
+                                                formGroup
+                                                    .control('trimester')
+                                                    .value = selectedId;
+                                              },
+                                            ),
+                                            const SizedBox(
+                                                height: kPadding * 2),
                                           ],
-                                          selected: formGroup
-                                              .control('trimester')
-                                              .value,
-                                          onChanged: (value) {
-                                            formGroup
-                                                .control('trimester')
-                                                .value = value;
-                                          },
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        // ChipRadioButtons(
-                                        //     label: 'Screening Outcome ?',
-                                        //     options: const [
-                                        //       'DRTB',
-                                        //       'DSTB',
-                                        //       'EPTB',
-                                        //       'No Symptom'
-                                        //     ],
-                                        //     crossAxisCount: 2,
-                                        //     onChanged: (value) {
-                                        //       formGroup
-                                        //           .control('screening_outcome')
-                                        //           .value = state.screeningOutcome;
-                                        //       extractFormData(
-                                        //           formGroup, context);
-                                        //     },
-                                        //     selected: state.screeningOutcome),
-                                        SecondaryTextField(
+                                        );
+                                      }),
+                                  const SizedBox(height: kPadding * 2),
+                                  // ChipRadioButtons(
+                                  //     label: 'Screening Outcome ?',
+                                  //     options: const [
+                                  //       'DRTB',
+                                  //       'DSTB',
+                                  //       'EPTB',
+                                  //       'No Symptom'
+                                  //     ],
+                                  //     crossAxisCount: 2,
+                                  //     onChanged: (value) {
+                                  //       formGroup
+                                  //           .control('screening_outcome')
+                                  //           .value = state.screeningOutcome;
+                                  //       extractFormData(
+                                  //           formGroup, context);
+                                  //     },
+                                  //     selected: state.screeningOutcome),
+                                  BlocBuilder<CaseCubit, CaseState>(
+                                      buildWhen: ((previous, current) =>
+                                          (previous.screeningOutcome !=
+                                              current.screeningOutcome) ||
+                                          previous.tbScreeningModel !=
+                                              current.tbScreeningModel),
+                                      builder: (context, state) {
+                                        print(state.screeningOutcome);
+                                        formGroup
+                                            .control('screening_outcome')
+                                            .value = state.screeningOutcome;
+                                        return SecondaryTextField(
                                             label: 'Screening Outcome',
-                                            text: state.screeningOutcome ?? ''),
-                                        const SizedBox(height: kPadding * 2),
-                                        ReactiveValueListenableBuilder<String>(
-                                            formControlName:
-                                                'screening_outcome',
-                                            builder: (context, control,
-                                                    child) =>
-                                                Visibility(
-                                                    visible: (formGroup
-                                                            .control(
-                                                                'screening_outcome')
-                                                            .value) !=
-                                                        null,
-                                                    child:
-                                                        const Column(children: [
-                                                      PrimaryTextField(
-                                                        formControlName:
-                                                            'comments',
-                                                        label: 'Comments',
-                                                        prefixIcon: Icons
-                                                            .account_circle_outlined,
-                                                      ),
-                                                    ]))),
-                                      ])))),
-                          BottomButtonBar(
-                            onSave: (_) async =>
-                                await _onSave(context, formGroup),
-                            nextPage: const MentalHealthRouterRoute(),
-                          ),
-                          const SizedBox(height: kPadding * 2),
-                        ]));
-                      });
+                                            text: state.screeningOutcome ?? '');
+                                      }),
+                                  const SizedBox(height: kPadding * 2),
+                                  const Column(children: [
+                                    PrimaryTextField(
+                                      formControlName: 'comments',
+                                      label: 'Comments',
+                                      prefixIcon: Icons.account_circle_outlined,
+                                    ),
+                                  ]),
+                                ])))),
+                    BottomButtonBar(
+                      onSave: (_) async => await _onSave(context, formGroup),
+                      nextPage: const MentalHealthRouterRoute(),
+                    ),
+                    const SizedBox(height: kPadding * 2),
+                  ]));
                 })));
   }
-}
-
-void extractFormData(FormGroup formGroup, BuildContext context) {
-  final tbscreeningCubit = context.read<TBScreeningStateCubit>();
-
-  final tbScreeningModel = TBScreeningModel(
-      screeningDate: formGroup.control('screening_date').value,
-      screenedBy: formGroup.control('screened_by').value,
-      trimester: formGroup.control('trimester').value,
-      cough: formGroup.control('cough').value,
-      sputum: formGroup.control('sputum').value,
-      hemoptysis: formGroup.control('hemoptysis').value,
-      fever: formGroup.control('fever').value,
-      nightSweats: formGroup.control('night_sweats').value,
-      chestPain: formGroup.control('chest_pain').value,
-      weightLoss: formGroup.control('weight_loss').value,
-      swollenGland: formGroup.control('swollen_gland').value,
-      tbMedicine: formGroup.control('tb_medicine').value,
-      screeningOutcome: tbscreeningCubit.updateScreeningOutcome(formGroup),
-      comments: formGroup.control('comments').value);
-  print(tbScreeningModel);
-  tbscreeningCubit.updateTBScreeningModel(tbScreeningModel);
 }

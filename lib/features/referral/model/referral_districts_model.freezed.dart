@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'panchayat_code_model.dart';
+part of 'referral_districts_model.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -13,195 +13,6 @@ T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
     'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
-
-PanchayatCodeModel _$PanchayatCodeModelFromJson(Map<String, dynamic> json) {
-  return _PanchayatCodeModel.fromJson(json);
-}
-
-/// @nodoc
-mixin _$PanchayatCodeModel {
-  @JsonKey(name: 'districts')
-  List<District>? get districts => throw _privateConstructorUsedError;
-  @JsonKey(name: 'blocks')
-  List<Block>? get blocks => throw _privateConstructorUsedError;
-
-  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
-  $PanchayatCodeModelCopyWith<PanchayatCodeModel> get copyWith =>
-      throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class $PanchayatCodeModelCopyWith<$Res> {
-  factory $PanchayatCodeModelCopyWith(
-          PanchayatCodeModel value, $Res Function(PanchayatCodeModel) then) =
-      _$PanchayatCodeModelCopyWithImpl<$Res, PanchayatCodeModel>;
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'districts') List<District>? districts,
-      @JsonKey(name: 'blocks') List<Block>? blocks});
-}
-
-/// @nodoc
-class _$PanchayatCodeModelCopyWithImpl<$Res, $Val extends PanchayatCodeModel>
-    implements $PanchayatCodeModelCopyWith<$Res> {
-  _$PanchayatCodeModelCopyWithImpl(this._value, this._then);
-
-  // ignore: unused_field
-  final $Val _value;
-  // ignore: unused_field
-  final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? districts = freezed,
-    Object? blocks = freezed,
-  }) {
-    return _then(_value.copyWith(
-      districts: freezed == districts
-          ? _value.districts
-          : districts // ignore: cast_nullable_to_non_nullable
-              as List<District>?,
-      blocks: freezed == blocks
-          ? _value.blocks
-          : blocks // ignore: cast_nullable_to_non_nullable
-              as List<Block>?,
-    ) as $Val);
-  }
-}
-
-/// @nodoc
-abstract class _$$PanchayatCodeModelImplCopyWith<$Res>
-    implements $PanchayatCodeModelCopyWith<$Res> {
-  factory _$$PanchayatCodeModelImplCopyWith(_$PanchayatCodeModelImpl value,
-          $Res Function(_$PanchayatCodeModelImpl) then) =
-      __$$PanchayatCodeModelImplCopyWithImpl<$Res>;
-  @override
-  @useResult
-  $Res call(
-      {@JsonKey(name: 'districts') List<District>? districts,
-      @JsonKey(name: 'blocks') List<Block>? blocks});
-}
-
-/// @nodoc
-class __$$PanchayatCodeModelImplCopyWithImpl<$Res>
-    extends _$PanchayatCodeModelCopyWithImpl<$Res, _$PanchayatCodeModelImpl>
-    implements _$$PanchayatCodeModelImplCopyWith<$Res> {
-  __$$PanchayatCodeModelImplCopyWithImpl(_$PanchayatCodeModelImpl _value,
-      $Res Function(_$PanchayatCodeModelImpl) _then)
-      : super(_value, _then);
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? districts = freezed,
-    Object? blocks = freezed,
-  }) {
-    return _then(_$PanchayatCodeModelImpl(
-      districts: freezed == districts
-          ? _value._districts
-          : districts // ignore: cast_nullable_to_non_nullable
-              as List<District>?,
-      blocks: freezed == blocks
-          ? _value._blocks
-          : blocks // ignore: cast_nullable_to_non_nullable
-              as List<Block>?,
-    ));
-  }
-}
-
-/// @nodoc
-@JsonSerializable()
-class _$PanchayatCodeModelImpl implements _PanchayatCodeModel {
-  const _$PanchayatCodeModelImpl(
-      {@JsonKey(name: 'districts') final List<District>? districts,
-      @JsonKey(name: 'blocks') final List<Block>? blocks})
-      : _districts = districts,
-        _blocks = blocks;
-
-  factory _$PanchayatCodeModelImpl.fromJson(Map<String, dynamic> json) =>
-      _$$PanchayatCodeModelImplFromJson(json);
-
-  final List<District>? _districts;
-  @override
-  @JsonKey(name: 'districts')
-  List<District>? get districts {
-    final value = _districts;
-    if (value == null) return null;
-    if (_districts is EqualUnmodifiableListView) return _districts;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  final List<Block>? _blocks;
-  @override
-  @JsonKey(name: 'blocks')
-  List<Block>? get blocks {
-    final value = _blocks;
-    if (value == null) return null;
-    if (_blocks is EqualUnmodifiableListView) return _blocks;
-    // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(value);
-  }
-
-  @override
-  String toString() {
-    return 'PanchayatCodeModel(districts: $districts, blocks: $blocks)';
-  }
-
-  @override
-  bool operator ==(Object other) {
-    return identical(this, other) ||
-        (other.runtimeType == runtimeType &&
-            other is _$PanchayatCodeModelImpl &&
-            const DeepCollectionEquality()
-                .equals(other._districts, _districts) &&
-            const DeepCollectionEquality().equals(other._blocks, _blocks));
-  }
-
-  @JsonKey(ignore: true)
-  @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      const DeepCollectionEquality().hash(_districts),
-      const DeepCollectionEquality().hash(_blocks));
-
-  @JsonKey(ignore: true)
-  @override
-  @pragma('vm:prefer-inline')
-  _$$PanchayatCodeModelImplCopyWith<_$PanchayatCodeModelImpl> get copyWith =>
-      __$$PanchayatCodeModelImplCopyWithImpl<_$PanchayatCodeModelImpl>(
-          this, _$identity);
-
-  @override
-  Map<String, dynamic> toJson() {
-    return _$$PanchayatCodeModelImplToJson(
-      this,
-    );
-  }
-}
-
-abstract class _PanchayatCodeModel implements PanchayatCodeModel {
-  const factory _PanchayatCodeModel(
-          {@JsonKey(name: 'districts') final List<District>? districts,
-          @JsonKey(name: 'blocks') final List<Block>? blocks}) =
-      _$PanchayatCodeModelImpl;
-
-  factory _PanchayatCodeModel.fromJson(Map<String, dynamic> json) =
-      _$PanchayatCodeModelImpl.fromJson;
-
-  @override
-  @JsonKey(name: 'districts')
-  List<District>? get districts;
-  @override
-  @JsonKey(name: 'blocks')
-  List<Block>? get blocks;
-  @override
-  @JsonKey(ignore: true)
-  _$$PanchayatCodeModelImplCopyWith<_$PanchayatCodeModelImpl> get copyWith =>
-      throw _privateConstructorUsedError;
-}
 
 District _$DistrictFromJson(Map<String, dynamic> json) {
   return _District.fromJson(json);
@@ -435,8 +246,6 @@ mixin _$Block {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'block')
   String? get block => throw _privateConstructorUsedError;
-  @JsonKey(name: 'block_code')
-  String? get blockCode => throw _privateConstructorUsedError;
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat => throw _privateConstructorUsedError;
 
@@ -453,7 +262,6 @@ abstract class $BlockCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'block') String? block,
-      @JsonKey(name: 'block_code') String? blockCode,
       @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
 }
 
@@ -472,7 +280,6 @@ class _$BlockCopyWithImpl<$Res, $Val extends Block>
   $Res call({
     Object? id = freezed,
     Object? block = freezed,
-    Object? blockCode = freezed,
     Object? panchayat = freezed,
   }) {
     return _then(_value.copyWith(
@@ -483,10 +290,6 @@ class _$BlockCopyWithImpl<$Res, $Val extends Block>
       block: freezed == block
           ? _value.block
           : block // ignore: cast_nullable_to_non_nullable
-              as String?,
-      blockCode: freezed == blockCode
-          ? _value.blockCode
-          : blockCode // ignore: cast_nullable_to_non_nullable
               as String?,
       panchayat: freezed == panchayat
           ? _value.panchayat
@@ -506,7 +309,6 @@ abstract class _$$BlockImplCopyWith<$Res> implements $BlockCopyWith<$Res> {
   $Res call(
       {@JsonKey(name: 'id') int? id,
       @JsonKey(name: 'block') String? block,
-      @JsonKey(name: 'block_code') String? blockCode,
       @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
 }
 
@@ -523,7 +325,6 @@ class __$$BlockImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? block = freezed,
-    Object? blockCode = freezed,
     Object? panchayat = freezed,
   }) {
     return _then(_$BlockImpl(
@@ -534,10 +335,6 @@ class __$$BlockImplCopyWithImpl<$Res>
       block: freezed == block
           ? _value.block
           : block // ignore: cast_nullable_to_non_nullable
-              as String?,
-      blockCode: freezed == blockCode
-          ? _value.blockCode
-          : blockCode // ignore: cast_nullable_to_non_nullable
               as String?,
       panchayat: freezed == panchayat
           ? _value._panchayat
@@ -553,7 +350,6 @@ class _$BlockImpl implements _Block {
   const _$BlockImpl(
       {@JsonKey(name: 'id') this.id,
       @JsonKey(name: 'block') this.block,
-      @JsonKey(name: 'block_code') this.blockCode,
       @JsonKey(name: 'panchayat') final List<Panchayat>? panchayat})
       : _panchayat = panchayat;
 
@@ -566,9 +362,6 @@ class _$BlockImpl implements _Block {
   @override
   @JsonKey(name: 'block')
   final String? block;
-  @override
-  @JsonKey(name: 'block_code')
-  final String? blockCode;
   final List<Panchayat>? _panchayat;
   @override
   @JsonKey(name: 'panchayat')
@@ -582,7 +375,7 @@ class _$BlockImpl implements _Block {
 
   @override
   String toString() {
-    return 'Block(id: $id, block: $block, blockCode: $blockCode, panchayat: $panchayat)';
+    return 'Block(id: $id, block: $block, panchayat: $panchayat)';
   }
 
   @override
@@ -592,16 +385,14 @@ class _$BlockImpl implements _Block {
             other is _$BlockImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.block, block) || other.block == block) &&
-            (identical(other.blockCode, blockCode) ||
-                other.blockCode == blockCode) &&
             const DeepCollectionEquality()
                 .equals(other._panchayat, _panchayat));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, block, blockCode,
-      const DeepCollectionEquality().hash(_panchayat));
+  int get hashCode => Object.hash(
+      runtimeType, id, block, const DeepCollectionEquality().hash(_panchayat));
 
   @JsonKey(ignore: true)
   @override
@@ -621,7 +412,6 @@ abstract class _Block implements Block {
   const factory _Block(
           {@JsonKey(name: 'id') final int? id,
           @JsonKey(name: 'block') final String? block,
-          @JsonKey(name: 'block_code') final String? blockCode,
           @JsonKey(name: 'panchayat') final List<Panchayat>? panchayat}) =
       _$BlockImpl;
 
@@ -633,9 +423,6 @@ abstract class _Block implements Block {
   @override
   @JsonKey(name: 'block')
   String? get block;
-  @override
-  @JsonKey(name: 'block_code')
-  String? get blockCode;
   @override
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat;
@@ -655,8 +442,6 @@ mixin _$Panchayat {
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'panchayat')
   String? get panchayat => throw _privateConstructorUsedError;
-  @JsonKey(name: 'panchayat_code')
-  String? get panchayatCode => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -671,8 +456,7 @@ abstract class $PanchayatCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'panchayat') String? panchayat,
-      @JsonKey(name: 'panchayat_code') String? panchayatCode});
+      @JsonKey(name: 'panchayat') String? panchayat});
 }
 
 /// @nodoc
@@ -690,7 +474,6 @@ class _$PanchayatCopyWithImpl<$Res, $Val extends Panchayat>
   $Res call({
     Object? id = freezed,
     Object? panchayat = freezed,
-    Object? panchayatCode = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -700,10 +483,6 @@ class _$PanchayatCopyWithImpl<$Res, $Val extends Panchayat>
       panchayat: freezed == panchayat
           ? _value.panchayat
           : panchayat // ignore: cast_nullable_to_non_nullable
-              as String?,
-      panchayatCode: freezed == panchayatCode
-          ? _value.panchayatCode
-          : panchayatCode // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -719,8 +498,7 @@ abstract class _$$PanchayatImplCopyWith<$Res>
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'panchayat') String? panchayat,
-      @JsonKey(name: 'panchayat_code') String? panchayatCode});
+      @JsonKey(name: 'panchayat') String? panchayat});
 }
 
 /// @nodoc
@@ -736,7 +514,6 @@ class __$$PanchayatImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? panchayat = freezed,
-    Object? panchayatCode = freezed,
   }) {
     return _then(_$PanchayatImpl(
       id: freezed == id
@@ -747,10 +524,6 @@ class __$$PanchayatImplCopyWithImpl<$Res>
           ? _value.panchayat
           : panchayat // ignore: cast_nullable_to_non_nullable
               as String?,
-      panchayatCode: freezed == panchayatCode
-          ? _value.panchayatCode
-          : panchayatCode // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -760,8 +533,7 @@ class __$$PanchayatImplCopyWithImpl<$Res>
 class _$PanchayatImpl implements _Panchayat {
   const _$PanchayatImpl(
       {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'panchayat') this.panchayat,
-      @JsonKey(name: 'panchayat_code') this.panchayatCode});
+      @JsonKey(name: 'panchayat') this.panchayat});
 
   factory _$PanchayatImpl.fromJson(Map<String, dynamic> json) =>
       _$$PanchayatImplFromJson(json);
@@ -772,13 +544,10 @@ class _$PanchayatImpl implements _Panchayat {
   @override
   @JsonKey(name: 'panchayat')
   final String? panchayat;
-  @override
-  @JsonKey(name: 'panchayat_code')
-  final String? panchayatCode;
 
   @override
   String toString() {
-    return 'Panchayat(id: $id, panchayat: $panchayat, panchayatCode: $panchayatCode)';
+    return 'Panchayat(id: $id, panchayat: $panchayat)';
   }
 
   @override
@@ -788,14 +557,12 @@ class _$PanchayatImpl implements _Panchayat {
             other is _$PanchayatImpl &&
             (identical(other.id, id) || other.id == id) &&
             (identical(other.panchayat, panchayat) ||
-                other.panchayat == panchayat) &&
-            (identical(other.panchayatCode, panchayatCode) ||
-                other.panchayatCode == panchayatCode));
+                other.panchayat == panchayat));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, panchayat, panchayatCode);
+  int get hashCode => Object.hash(runtimeType, id, panchayat);
 
   @JsonKey(ignore: true)
   @override
@@ -813,10 +580,8 @@ class _$PanchayatImpl implements _Panchayat {
 
 abstract class _Panchayat implements Panchayat {
   const factory _Panchayat(
-          {@JsonKey(name: 'id') final int? id,
-          @JsonKey(name: 'panchayat') final String? panchayat,
-          @JsonKey(name: 'panchayat_code') final String? panchayatCode}) =
-      _$PanchayatImpl;
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'panchayat') final String? panchayat}) = _$PanchayatImpl;
 
   factory _Panchayat.fromJson(Map<String, dynamic> json) =
       _$PanchayatImpl.fromJson;
@@ -827,9 +592,6 @@ abstract class _Panchayat implements Panchayat {
   @override
   @JsonKey(name: 'panchayat')
   String? get panchayat;
-  @override
-  @JsonKey(name: 'panchayat_code')
-  String? get panchayatCode;
   @override
   @JsonKey(ignore: true)
   _$$PanchayatImplCopyWith<_$PanchayatImpl> get copyWith =>

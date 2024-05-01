@@ -28,13 +28,12 @@ class AuthRepo {
       phoneNumber: '+91${phoneNo.trim()}',
       timeout: const Duration(seconds: 30),
       verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
-        final userCredentials =
-            await _auth.signInWithCredential(phoneAuthCredential);
+        // final userCredentials =
+        //     await _auth.signInWithCredential(phoneAuthCredential);
 
         // Get the authentication token
         String? token = await _auth.currentUser!.getIdToken();
         // handlePostLogin(userCredentials, register);
-        print('sendOTPCredential========================$token');
       },
       verificationFailed: (FirebaseAuthException error) {
         onError();
@@ -42,7 +41,6 @@ class AuthRepo {
       },
       codeSent: (String verificationId, int? forceResendingToken) {
         _resendToken = forceResendingToken;
-        print('TOKEN===========================${_resendToken.toString()}');
         _verificationId = verificationId;
         if (_resendToken != null) {
           isCodeSent(_resendToken!);
@@ -59,11 +57,10 @@ class AuthRepo {
     String otp,
     void Function(String) register,
   ) async {
-    final credential = PhoneAuthProvider.credential(
-        verificationId: _verificationId ?? '', smsCode: otp);
-    final userCredential = await _auth.signInWithCredential(credential);
+    //final credential = PhoneAuthProvider.credential(
+    // verificationId: _verificationId ?? '', smsCode: otp);
+    // final userCredential = await _auth.signInWithCredential(credential);
     String? token = await _auth.currentUser!.getIdToken();
-    print('verifyOTPCredential========================$token');
     //handlePostLogin(userCredential, register);
   }
 
@@ -79,9 +76,7 @@ class AuthRepo {
             await _getUserDetails(await _auth.currentUser!.getIdToken());
         final token = _auth.currentUser!.getIdToken();
         print(token);
-        print('USER+++++++++++++$user');
         if (user == null) {
-          print('User nullllll');
           return;
         }
         AuthCubit.instance.login(user);

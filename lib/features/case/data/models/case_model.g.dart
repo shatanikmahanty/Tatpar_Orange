@@ -38,10 +38,10 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
               json['assigned_to'] as Map<String, dynamic>),
       filledForm: json['filled_form'] as int?,
       disease: json['disease'] as int?,
-      xray: json['xray'] as int?,
-      udst: json['udst'] as int?,
-      nikshay: json['nikshay'] as int?,
-      comorbidity: json['comorbidity'] as int?,
+      referralDetails: json['xray'] as int?,
+      tbScreening: json['udst'] as int?,
+      whoSrq: json['nikshay'] as int?,
+      diagnosis: json['comorbidity'] as int?,
       dbt: json['Dbt'] as int?,
       contractCasing: json['contractcasing'] as int?,
       treatment: json['treatment'] as int?,
@@ -87,10 +87,10 @@ Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) {
   val['assigned_to'] = healthWorkerToJson(instance.assignedTo);
   val['filled_form'] = instance.filledForm;
   val['disease'] = instance.disease;
-  val['xray'] = instance.xray;
-  val['udst'] = instance.udst;
-  val['nikshay'] = instance.nikshay;
-  val['comorbidity'] = instance.comorbidity;
+  val['xray'] = instance.referralDetails;
+  val['udst'] = instance.tbScreening;
+  val['nikshay'] = instance.whoSrq;
+  val['comorbidity'] = instance.diagnosis;
   val['Dbt'] = instance.dbt;
   val['contractcasing'] = instance.contractCasing;
   val['treatment'] = instance.treatment;

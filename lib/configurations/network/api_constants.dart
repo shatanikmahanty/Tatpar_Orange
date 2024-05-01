@@ -3,7 +3,9 @@ import 'package:flutter/foundation.dart';
 const baseUrl =
     kDebugMode ? 'http://35.154.215.58:8000' : 'http://35.154.215.58:8000/';
 
-const referralDetailsApi = '$baseUrl/api/referral-data';
+const districtsUrl = '$baseUrl/api/referral-data';
+const referralDetailsUrl = '$baseUrl/api/referral';
+const tbScreeningUrl = '$baseUrl/api/tb-screening';
 const loginUrl = '$baseUrl/healthworker/login/';
 const healthWorkerApiUrl = '$baseUrl/healthworker/';
 const patientsUrl = '$baseUrl/patient/patients/';

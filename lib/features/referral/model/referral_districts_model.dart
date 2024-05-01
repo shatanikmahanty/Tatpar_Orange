@@ -1,18 +1,8 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'panchayat_code_model.freezed.dart';
-part 'panchayat_code_model.g.dart';
-
-@freezed
-class PanchayatCodeModel with _$PanchayatCodeModel {
-  const factory PanchayatCodeModel({
-    @JsonKey(name: 'districts') List<District>? districts,
-    @JsonKey(name: 'blocks') List<Block>? blocks,
-  }) = _PanchayatCodeModel;
-
-  factory PanchayatCodeModel.fromJson(Map<String, dynamic> json) =>
-      _$PanchayatCodeModelFromJson(json);
-}
+part 'referral_districts_model.freezed.dart';
+part 'referral_districts_model.g.dart';
 
 @freezed
 class District with _$District {
@@ -32,7 +22,6 @@ class Block with _$Block {
   const factory Block({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'block') String? block,
-    @JsonKey(name: 'block_code') String? blockCode,
     @JsonKey(name: 'panchayat') List<Panchayat>? panchayat,
   }) = _Block;
 
@@ -44,7 +33,6 @@ class Panchayat with _$Panchayat {
   const factory Panchayat({
     @JsonKey(name: 'id') int? id,
     @JsonKey(name: 'panchayat') String? panchayat,
-    @JsonKey(name: 'panchayat_code') String? panchayatCode,
   }) = _Panchayat;
 
   factory Panchayat.fromJson(Map<String, dynamic> json) =>

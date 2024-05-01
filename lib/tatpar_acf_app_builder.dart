@@ -9,10 +9,12 @@ import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/repo/auth_repo.dart';
 import 'package:tatpar_acf/features/authentication/presentation/listeners/login_listener_wrapper.dart';
 import 'package:tatpar_acf/features/case/blocs/assign_case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
+import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
-import 'package:tatpar_acf/features/conducttbscreening/bloc/conduct_tb_screening_cubit.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/bloc/who_srq_cubit.dart';
+import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 
 import 'configurations/configurations.dart';
 
@@ -36,6 +38,9 @@ class TatparAcfAppBuilder extends AppBuilder {
               RepositoryProvider<AuthRepo>(
                 create: (context) => AuthRepo(FirebaseAuth.instance),
               ),
+              RepositoryProvider<ReferralDetailsRepository>(
+                create: (context) => ReferralDetailsRepository(),
+              )
             ],
             providers: [
               BlocProvider<AppCubit>(
@@ -52,9 +57,9 @@ class TatparAcfAppBuilder extends AppBuilder {
               BlocProvider<WHOSrqStateCubit>(
                 create: (context) => WHOSrqStateCubit(),
               ),
-              BlocProvider<TBScreeningStateCubit>(
-                create: (context) => TBScreeningStateCubit(),
-              ),
+              // BlocProvider<TBScreeningStateCubit>(
+              //   create: (context) => TBScreeningStateCubit(),
+              // ),
               // BlocProvider<AppLinksCubit>(
               //   create: (context) => AppLinksCubit(
               //     null,
@@ -72,11 +77,17 @@ class TatparAcfAppBuilder extends AppBuilder {
               // BlocProvider(
               //   create: (_) => SplashBloc(),
               // ),
+
               BlocProvider<CaseListCubit>(
                 create: (context) => CaseListCubit(
                   caseRepo: context.read<CaseRepo>(),
                 ),
               ),
+              BlocProvider<CaseCubit>(
+                create: (context) => CaseCubit(
+                    caseRepo: context.read<CaseRepo>(),
+                    caseModel: const Case()),
+              )
               // BlocProvider<LogVisitCubit>(create: (context) => LogVisitCubit()),
             ],
             builder: (context) => LoginListenerWrapper(

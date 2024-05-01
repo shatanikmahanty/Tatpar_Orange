@@ -9,47 +9,64 @@ part of 'referral_details_model.dart';
 _$ReferralDetailsModelImpl _$$ReferralDetailsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ReferralDetailsModelImpl(
-      referralID: json['referralID'] as int?,
-      referralDate: json['referralDate'] == null
-          ? null
-          : DateTime.parse(json['referralDate'] as String),
-      referralName: json['referralName'] as String?,
+      referralID: json['referral_id'] as int?,
+      referralDate: fromJsonToDateTime(json['referral_date'] as String?),
+      referralName: json['referral_name'] as String?,
       age: json['age'] as int?,
       gender: json['gender'] as String?,
-      location: json['location'] == null
-          ? null
-          : PanchayatModel.fromJson(json['location'] as Map<String, dynamic>),
-      ward: json['ward'] as int?,
-      guardianName: json['guardianName'] as String?,
-      guardianPhoneNumber: json['guardianPhoneNumber'] as String?,
-      casteCategory: json['casteCategory'] as String?,
-      keyPopulation: json['keyPopulation'] as String?,
-      trimester: json['trimester'] as String?,
-      referredBy: json['referredBy'] as String?,
-      referrerSource: json['referrerSource'] as String?,
-      referredWard: json['referredWard'] as String?,
-      referrerPanchayatCode: json['referrerPanchayatCode'] as String?,
+      selectedDistrict: json['referral_district'] as int?,
+      selectedBlock: json['referral_block'] as int?,
+      selectedPanchayatCode: json['referral_panchayat'] as int?,
+      district: json['district'] as String?,
+      block: json['block'] as String?,
+      panchayatCode: json['panchayatCode'] as String?,
+      ward: json['referral_ward'] as int?,
+      guardianName: json['guardian_name'] as String?,
+      guardianPhoneNumber: json['guardian_phone_number'] as String?,
+      casteCategory: json['caste_category'] as int?,
+      keyPopulation: (json['key_population'] as List<dynamic>?)
+          ?.map((e) => e as int)
+          .toList(),
+      trimester: json['trimester_of_pw'] as int?,
+      referredBy: json['referred_by_name'] as String?,
+      referrerSource: json['referrer_source'] as int?,
+      referredWard: json['referred_ward'] as String?,
+      referrerPanchayatCode: json['referrer_panchayat_code'] as String?,
       source: json['source'] as String?,
     );
 
 Map<String, dynamic> _$$ReferralDetailsModelImplToJson(
-        _$ReferralDetailsModelImpl instance) =>
-    <String, dynamic>{
-      'referralID': instance.referralID,
-      'referralDate': instance.referralDate?.toIso8601String(),
-      'referralName': instance.referralName,
-      'age': instance.age,
-      'gender': instance.gender,
-      'location': instance.location,
-      'ward': instance.ward,
-      'guardianName': instance.guardianName,
-      'guardianPhoneNumber': instance.guardianPhoneNumber,
-      'casteCategory': instance.casteCategory,
-      'keyPopulation': instance.keyPopulation,
-      'trimester': instance.trimester,
-      'referredBy': instance.referredBy,
-      'referrerSource': instance.referrerSource,
-      'referredWard': instance.referredWard,
-      'referrerPanchayatCode': instance.referrerPanchayatCode,
-      'source': instance.source,
-    };
+    _$ReferralDetailsModelImpl instance) {
+  final val = <String, dynamic>{
+    'referral_id': instance.referralID,
+    'referral_date': _dateTimeToJson(instance.referralDate),
+    'referral_name': instance.referralName,
+    'age': instance.age,
+    'gender': instance.gender,
+    'referral_district': instance.selectedDistrict,
+    'referral_block': instance.selectedBlock,
+    'referral_panchayat': instance.selectedPanchayatCode,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('district', instance.district);
+  writeNotNull('block', instance.block);
+  writeNotNull('panchayatCode', instance.panchayatCode);
+  val['referral_ward'] = instance.ward;
+  val['guardian_name'] = instance.guardianName;
+  val['guardian_phone_number'] = instance.guardianPhoneNumber;
+  val['caste_category'] = instance.casteCategory;
+  val['key_population'] = instance.keyPopulation;
+  val['trimester_of_pw'] = instance.trimester;
+  val['referred_by_name'] = instance.referredBy;
+  val['referrer_source'] = instance.referrerSource;
+  val['referred_ward'] = instance.referredWard;
+  val['referrer_panchayat_code'] = instance.referrerPanchayatCode;
+  val['source'] = instance.source;
+  return val;
+}

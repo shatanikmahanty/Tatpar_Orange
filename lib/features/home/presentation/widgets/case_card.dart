@@ -1,17 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
-import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:progress_builder/progress_builder.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:intl/intl.dart';
-import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
-import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
-import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
-import 'package:tatpar_acf/features/case/data/models/subordinates_model.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/disease_chips.dart';
 
 class CaseCard extends StatelessWidget {
@@ -23,7 +15,7 @@ class CaseCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
-    final primaryColor = theme.primaryColor;
+    //final primaryColor = theme.primaryColor;
 
     return InkWell(
       onTap: () {
@@ -74,7 +66,6 @@ class CaseCard extends StatelessWidget {
                     offset: const Offset(30, 30), // Kebab icon
                     onSelected: (String value) {
                       // Handle item selection here
-                      print('Selected: $value');
                     },
                     itemBuilder: (BuildContext context) =>
                         <PopupMenuEntry<String>>[

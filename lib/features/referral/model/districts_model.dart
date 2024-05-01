@@ -19,30 +19,17 @@ class DistrictsModel {
 }
 
 class PanchayatModel {
-  PanchayatModel(
-      {required this.district,
-      required this.block,
-      required this.blockCode,
-      required this.panchayat,
-      required this.panchayatCode});
-  final String district;
-  final String block;
-  final String blockCode;
-  final String panchayat;
-  final String panchayatCode;
+  PanchayatModel({this.district, this.block, this.panchayatCode});
+  final String? district;
+  final String? block;
+
+  final String? panchayatCode;
 
   factory PanchayatModel.fromJson(Map<String, dynamic> json) => PanchayatModel(
       district: json['District'],
       block: json['Block'],
-      blockCode: json['Block_code'],
-      panchayat: json['Panchayat'],
       panchayatCode: json['Panch_code']);
 
-  Map<String, dynamic> toJson() => {
-        "District": district,
-        "Block": block,
-        "Block_code": blockCode,
-        "Panchayat": panchayat,
-        "Panch_code": panchayatCode
-      };
+  Map<String, dynamic> toJson() =>
+      {"District": district, "Block": block, "Panch_code": panchayatCode};
 }

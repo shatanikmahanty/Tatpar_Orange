@@ -20,22 +20,52 @@ ReferralDetailsModel _$ReferralDetailsModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReferralDetailsModel {
+  @JsonKey(name: 'referral_id')
   int? get referralID => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'referral_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get referralDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_name')
   String? get referralName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'age')
   int? get age => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gender')
   String? get gender => throw _privateConstructorUsedError;
-  PanchayatModel? get location => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_district')
+  int? get selectedDistrict => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_block')
+  int? get selectedBlock => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_panchayat')
+  int? get selectedPanchayatCode => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
+  String? get district => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
+  String? get block => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
+  String? get panchayatCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_ward')
   int? get ward => throw _privateConstructorUsedError;
+  @JsonKey(name: 'guardian_name')
   String? get guardianName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'guardian_phone_number')
   String? get guardianPhoneNumber => throw _privateConstructorUsedError;
-  String? get casteCategory => throw _privateConstructorUsedError;
-  String? get keyPopulation => throw _privateConstructorUsedError;
-  String? get trimester => throw _privateConstructorUsedError;
+  @JsonKey(name: 'caste_category')
+  int? get casteCategory => throw _privateConstructorUsedError;
+  @JsonKey(name: 'key_population')
+  List<int>? get keyPopulation => throw _privateConstructorUsedError;
+  @JsonKey(name: 'trimester_of_pw')
+  int? get trimester => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referred_by_name')
   String? get referredBy => throw _privateConstructorUsedError;
-  String? get referrerSource => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referrer_source')
+  int? get referrerSource => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referred_ward')
   String? get referredWard => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referrer_panchayat_code')
   String? get referrerPanchayatCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'source')
   String? get source => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -51,23 +81,32 @@ abstract class $ReferralDetailsModelCopyWith<$Res> {
       _$ReferralDetailsModelCopyWithImpl<$Res, ReferralDetailsModel>;
   @useResult
   $Res call(
-      {int? referralID,
+      {@JsonKey(name: 'referral_id') int? referralID,
+      @JsonKey(
+          name: 'referral_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? referralDate,
-      String? referralName,
-      int? age,
-      String? gender,
-      PanchayatModel? location,
-      int? ward,
-      String? guardianName,
-      String? guardianPhoneNumber,
-      String? casteCategory,
-      String? keyPopulation,
-      String? trimester,
-      String? referredBy,
-      String? referrerSource,
-      String? referredWard,
-      String? referrerPanchayatCode,
-      String? source});
+      @JsonKey(name: 'referral_name') String? referralName,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'gender') String? gender,
+      @JsonKey(name: 'referral_district') int? selectedDistrict,
+      @JsonKey(name: 'referral_block') int? selectedBlock,
+      @JsonKey(name: 'referral_panchayat') int? selectedPanchayatCode,
+      @JsonKey(includeIfNull: false) String? district,
+      @JsonKey(includeIfNull: false) String? block,
+      @JsonKey(includeIfNull: false) String? panchayatCode,
+      @JsonKey(name: 'referral_ward') int? ward,
+      @JsonKey(name: 'guardian_name') String? guardianName,
+      @JsonKey(name: 'guardian_phone_number') String? guardianPhoneNumber,
+      @JsonKey(name: 'caste_category') int? casteCategory,
+      @JsonKey(name: 'key_population') List<int>? keyPopulation,
+      @JsonKey(name: 'trimester_of_pw') int? trimester,
+      @JsonKey(name: 'referred_by_name') String? referredBy,
+      @JsonKey(name: 'referrer_source') int? referrerSource,
+      @JsonKey(name: 'referred_ward') String? referredWard,
+      @JsonKey(name: 'referrer_panchayat_code') String? referrerPanchayatCode,
+      @JsonKey(name: 'source') String? source});
 }
 
 /// @nodoc
@@ -89,7 +128,12 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
     Object? referralName = freezed,
     Object? age = freezed,
     Object? gender = freezed,
-    Object? location = freezed,
+    Object? selectedDistrict = freezed,
+    Object? selectedBlock = freezed,
+    Object? selectedPanchayatCode = freezed,
+    Object? district = freezed,
+    Object? block = freezed,
+    Object? panchayatCode = freezed,
     Object? ward = freezed,
     Object? guardianName = freezed,
     Object? guardianPhoneNumber = freezed,
@@ -123,10 +167,30 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as PanchayatModel?,
+      selectedDistrict: freezed == selectedDistrict
+          ? _value.selectedDistrict
+          : selectedDistrict // ignore: cast_nullable_to_non_nullable
+              as int?,
+      selectedBlock: freezed == selectedBlock
+          ? _value.selectedBlock
+          : selectedBlock // ignore: cast_nullable_to_non_nullable
+              as int?,
+      selectedPanchayatCode: freezed == selectedPanchayatCode
+          ? _value.selectedPanchayatCode
+          : selectedPanchayatCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      district: freezed == district
+          ? _value.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as String?,
+      block: freezed == block
+          ? _value.block
+          : block // ignore: cast_nullable_to_non_nullable
+              as String?,
+      panchayatCode: freezed == panchayatCode
+          ? _value.panchayatCode
+          : panchayatCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       ward: freezed == ward
           ? _value.ward
           : ward // ignore: cast_nullable_to_non_nullable
@@ -142,15 +206,15 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
       casteCategory: freezed == casteCategory
           ? _value.casteCategory
           : casteCategory // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       keyPopulation: freezed == keyPopulation
           ? _value.keyPopulation
           : keyPopulation // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<int>?,
       trimester: freezed == trimester
           ? _value.trimester
           : trimester // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       referredBy: freezed == referredBy
           ? _value.referredBy
           : referredBy // ignore: cast_nullable_to_non_nullable
@@ -158,7 +222,7 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
       referrerSource: freezed == referrerSource
           ? _value.referrerSource
           : referrerSource // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       referredWard: freezed == referredWard
           ? _value.referredWard
           : referredWard // ignore: cast_nullable_to_non_nullable
@@ -184,23 +248,32 @@ abstract class _$$ReferralDetailsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {int? referralID,
+      {@JsonKey(name: 'referral_id') int? referralID,
+      @JsonKey(
+          name: 'referral_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? referralDate,
-      String? referralName,
-      int? age,
-      String? gender,
-      PanchayatModel? location,
-      int? ward,
-      String? guardianName,
-      String? guardianPhoneNumber,
-      String? casteCategory,
-      String? keyPopulation,
-      String? trimester,
-      String? referredBy,
-      String? referrerSource,
-      String? referredWard,
-      String? referrerPanchayatCode,
-      String? source});
+      @JsonKey(name: 'referral_name') String? referralName,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'gender') String? gender,
+      @JsonKey(name: 'referral_district') int? selectedDistrict,
+      @JsonKey(name: 'referral_block') int? selectedBlock,
+      @JsonKey(name: 'referral_panchayat') int? selectedPanchayatCode,
+      @JsonKey(includeIfNull: false) String? district,
+      @JsonKey(includeIfNull: false) String? block,
+      @JsonKey(includeIfNull: false) String? panchayatCode,
+      @JsonKey(name: 'referral_ward') int? ward,
+      @JsonKey(name: 'guardian_name') String? guardianName,
+      @JsonKey(name: 'guardian_phone_number') String? guardianPhoneNumber,
+      @JsonKey(name: 'caste_category') int? casteCategory,
+      @JsonKey(name: 'key_population') List<int>? keyPopulation,
+      @JsonKey(name: 'trimester_of_pw') int? trimester,
+      @JsonKey(name: 'referred_by_name') String? referredBy,
+      @JsonKey(name: 'referrer_source') int? referrerSource,
+      @JsonKey(name: 'referred_ward') String? referredWard,
+      @JsonKey(name: 'referrer_panchayat_code') String? referrerPanchayatCode,
+      @JsonKey(name: 'source') String? source});
 }
 
 /// @nodoc
@@ -219,7 +292,12 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
     Object? referralName = freezed,
     Object? age = freezed,
     Object? gender = freezed,
-    Object? location = freezed,
+    Object? selectedDistrict = freezed,
+    Object? selectedBlock = freezed,
+    Object? selectedPanchayatCode = freezed,
+    Object? district = freezed,
+    Object? block = freezed,
+    Object? panchayatCode = freezed,
     Object? ward = freezed,
     Object? guardianName = freezed,
     Object? guardianPhoneNumber = freezed,
@@ -253,10 +331,30 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
           ? _value.gender
           : gender // ignore: cast_nullable_to_non_nullable
               as String?,
-      location: freezed == location
-          ? _value.location
-          : location // ignore: cast_nullable_to_non_nullable
-              as PanchayatModel?,
+      selectedDistrict: freezed == selectedDistrict
+          ? _value.selectedDistrict
+          : selectedDistrict // ignore: cast_nullable_to_non_nullable
+              as int?,
+      selectedBlock: freezed == selectedBlock
+          ? _value.selectedBlock
+          : selectedBlock // ignore: cast_nullable_to_non_nullable
+              as int?,
+      selectedPanchayatCode: freezed == selectedPanchayatCode
+          ? _value.selectedPanchayatCode
+          : selectedPanchayatCode // ignore: cast_nullable_to_non_nullable
+              as int?,
+      district: freezed == district
+          ? _value.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as String?,
+      block: freezed == block
+          ? _value.block
+          : block // ignore: cast_nullable_to_non_nullable
+              as String?,
+      panchayatCode: freezed == panchayatCode
+          ? _value.panchayatCode
+          : panchayatCode // ignore: cast_nullable_to_non_nullable
+              as String?,
       ward: freezed == ward
           ? _value.ward
           : ward // ignore: cast_nullable_to_non_nullable
@@ -272,15 +370,15 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
       casteCategory: freezed == casteCategory
           ? _value.casteCategory
           : casteCategory // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       keyPopulation: freezed == keyPopulation
-          ? _value.keyPopulation
+          ? _value._keyPopulation
           : keyPopulation // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as List<int>?,
       trimester: freezed == trimester
           ? _value.trimester
           : trimester // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       referredBy: freezed == referredBy
           ? _value.referredBy
           : referredBy // ignore: cast_nullable_to_non_nullable
@@ -288,7 +386,7 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
       referrerSource: freezed == referrerSource
           ? _value.referrerSource
           : referrerSource // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       referredWard: freezed == referredWard
           ? _value.referredWard
           : referredWard // ignore: cast_nullable_to_non_nullable
@@ -309,65 +407,118 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
   const _$ReferralDetailsModelImpl(
-      {required this.referralID,
-      required this.referralDate,
-      required this.referralName,
-      required this.age,
-      required this.gender,
-      required this.location,
-      required this.ward,
-      required this.guardianName,
-      required this.guardianPhoneNumber,
-      required this.casteCategory,
-      required this.keyPopulation,
-      required this.trimester,
-      required this.referredBy,
-      required this.referrerSource,
-      required this.referredWard,
-      required this.referrerPanchayatCode,
-      required this.source});
+      {@JsonKey(name: 'referral_id') this.referralID,
+      @JsonKey(
+          name: 'referral_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.referralDate,
+      @JsonKey(name: 'referral_name') this.referralName,
+      @JsonKey(name: 'age') this.age,
+      @JsonKey(name: 'gender') this.gender,
+      @JsonKey(name: 'referral_district') this.selectedDistrict,
+      @JsonKey(name: 'referral_block') this.selectedBlock,
+      @JsonKey(name: 'referral_panchayat') this.selectedPanchayatCode,
+      @JsonKey(includeIfNull: false) this.district,
+      @JsonKey(includeIfNull: false) this.block,
+      @JsonKey(includeIfNull: false) this.panchayatCode,
+      @JsonKey(name: 'referral_ward') this.ward,
+      @JsonKey(name: 'guardian_name') this.guardianName,
+      @JsonKey(name: 'guardian_phone_number') this.guardianPhoneNumber,
+      @JsonKey(name: 'caste_category') this.casteCategory,
+      @JsonKey(name: 'key_population') final List<int>? keyPopulation,
+      @JsonKey(name: 'trimester_of_pw') this.trimester,
+      @JsonKey(name: 'referred_by_name') this.referredBy,
+      @JsonKey(name: 'referrer_source') this.referrerSource,
+      @JsonKey(name: 'referred_ward') this.referredWard,
+      @JsonKey(name: 'referrer_panchayat_code') this.referrerPanchayatCode,
+      @JsonKey(name: 'source') this.source})
+      : _keyPopulation = keyPopulation;
 
   factory _$ReferralDetailsModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ReferralDetailsModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'referral_id')
   final int? referralID;
   @override
+  @JsonKey(
+      name: 'referral_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? referralDate;
   @override
+  @JsonKey(name: 'referral_name')
   final String? referralName;
   @override
+  @JsonKey(name: 'age')
   final int? age;
   @override
+  @JsonKey(name: 'gender')
   final String? gender;
   @override
-  final PanchayatModel? location;
+  @JsonKey(name: 'referral_district')
+  final int? selectedDistrict;
   @override
+  @JsonKey(name: 'referral_block')
+  final int? selectedBlock;
+  @override
+  @JsonKey(name: 'referral_panchayat')
+  final int? selectedPanchayatCode;
+  @override
+  @JsonKey(includeIfNull: false)
+  final String? district;
+  @override
+  @JsonKey(includeIfNull: false)
+  final String? block;
+  @override
+  @JsonKey(includeIfNull: false)
+  final String? panchayatCode;
+  @override
+  @JsonKey(name: 'referral_ward')
   final int? ward;
   @override
+  @JsonKey(name: 'guardian_name')
   final String? guardianName;
   @override
+  @JsonKey(name: 'guardian_phone_number')
   final String? guardianPhoneNumber;
   @override
-  final String? casteCategory;
+  @JsonKey(name: 'caste_category')
+  final int? casteCategory;
+  final List<int>? _keyPopulation;
   @override
-  final String? keyPopulation;
+  @JsonKey(name: 'key_population')
+  List<int>? get keyPopulation {
+    final value = _keyPopulation;
+    if (value == null) return null;
+    if (_keyPopulation is EqualUnmodifiableListView) return _keyPopulation;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
-  final String? trimester;
+  @JsonKey(name: 'trimester_of_pw')
+  final int? trimester;
   @override
+  @JsonKey(name: 'referred_by_name')
   final String? referredBy;
   @override
-  final String? referrerSource;
+  @JsonKey(name: 'referrer_source')
+  final int? referrerSource;
   @override
+  @JsonKey(name: 'referred_ward')
   final String? referredWard;
   @override
+  @JsonKey(name: 'referrer_panchayat_code')
   final String? referrerPanchayatCode;
   @override
+  @JsonKey(name: 'source')
   final String? source;
 
   @override
   String toString() {
-    return 'ReferralDetailsModel(referralID: $referralID, referralDate: $referralDate, referralName: $referralName, age: $age, gender: $gender, location: $location, ward: $ward, guardianName: $guardianName, guardianPhoneNumber: $guardianPhoneNumber, casteCategory: $casteCategory, keyPopulation: $keyPopulation, trimester: $trimester, referredBy: $referredBy, referrerSource: $referrerSource, referredWard: $referredWard, referrerPanchayatCode: $referrerPanchayatCode, source: $source)';
+    return 'ReferralDetailsModel(referralID: $referralID, referralDate: $referralDate, referralName: $referralName, age: $age, gender: $gender, selectedDistrict: $selectedDistrict, selectedBlock: $selectedBlock, selectedPanchayatCode: $selectedPanchayatCode, district: $district, block: $block, panchayatCode: $panchayatCode, ward: $ward, guardianName: $guardianName, guardianPhoneNumber: $guardianPhoneNumber, casteCategory: $casteCategory, keyPopulation: $keyPopulation, trimester: $trimester, referredBy: $referredBy, referrerSource: $referrerSource, referredWard: $referredWard, referrerPanchayatCode: $referrerPanchayatCode, source: $source)';
   }
 
   @override
@@ -383,8 +534,17 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
                 other.referralName == referralName) &&
             (identical(other.age, age) || other.age == age) &&
             (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.location, location) ||
-                other.location == location) &&
+            (identical(other.selectedDistrict, selectedDistrict) ||
+                other.selectedDistrict == selectedDistrict) &&
+            (identical(other.selectedBlock, selectedBlock) ||
+                other.selectedBlock == selectedBlock) &&
+            (identical(other.selectedPanchayatCode, selectedPanchayatCode) ||
+                other.selectedPanchayatCode == selectedPanchayatCode) &&
+            (identical(other.district, district) ||
+                other.district == district) &&
+            (identical(other.block, block) || other.block == block) &&
+            (identical(other.panchayatCode, panchayatCode) ||
+                other.panchayatCode == panchayatCode) &&
             (identical(other.ward, ward) || other.ward == ward) &&
             (identical(other.guardianName, guardianName) ||
                 other.guardianName == guardianName) &&
@@ -392,8 +552,8 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
                 other.guardianPhoneNumber == guardianPhoneNumber) &&
             (identical(other.casteCategory, casteCategory) ||
                 other.casteCategory == casteCategory) &&
-            (identical(other.keyPopulation, keyPopulation) ||
-                other.keyPopulation == keyPopulation) &&
+            const DeepCollectionEquality()
+                .equals(other._keyPopulation, _keyPopulation) &&
             (identical(other.trimester, trimester) ||
                 other.trimester == trimester) &&
             (identical(other.referredBy, referredBy) ||
@@ -409,25 +569,31 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      referralID,
-      referralDate,
-      referralName,
-      age,
-      gender,
-      location,
-      ward,
-      guardianName,
-      guardianPhoneNumber,
-      casteCategory,
-      keyPopulation,
-      trimester,
-      referredBy,
-      referrerSource,
-      referredWard,
-      referrerPanchayatCode,
-      source);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        referralID,
+        referralDate,
+        referralName,
+        age,
+        gender,
+        selectedDistrict,
+        selectedBlock,
+        selectedPanchayatCode,
+        district,
+        block,
+        panchayatCode,
+        ward,
+        guardianName,
+        guardianPhoneNumber,
+        casteCategory,
+        const DeepCollectionEquality().hash(_keyPopulation),
+        trimester,
+        referredBy,
+        referrerSource,
+        referredWard,
+        referrerPanchayatCode,
+        source
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -447,60 +613,106 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
 
 abstract class _ReferralDetailsModel implements ReferralDetailsModel {
   const factory _ReferralDetailsModel(
-      {required final int? referralID,
-      required final DateTime? referralDate,
-      required final String? referralName,
-      required final int? age,
-      required final String? gender,
-      required final PanchayatModel? location,
-      required final int? ward,
-      required final String? guardianName,
-      required final String? guardianPhoneNumber,
-      required final String? casteCategory,
-      required final String? keyPopulation,
-      required final String? trimester,
-      required final String? referredBy,
-      required final String? referrerSource,
-      required final String? referredWard,
-      required final String? referrerPanchayatCode,
-      required final String? source}) = _$ReferralDetailsModelImpl;
+      {@JsonKey(name: 'referral_id') final int? referralID,
+      @JsonKey(
+          name: 'referral_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? referralDate,
+      @JsonKey(name: 'referral_name') final String? referralName,
+      @JsonKey(name: 'age') final int? age,
+      @JsonKey(name: 'gender') final String? gender,
+      @JsonKey(name: 'referral_district') final int? selectedDistrict,
+      @JsonKey(name: 'referral_block') final int? selectedBlock,
+      @JsonKey(name: 'referral_panchayat') final int? selectedPanchayatCode,
+      @JsonKey(includeIfNull: false) final String? district,
+      @JsonKey(includeIfNull: false) final String? block,
+      @JsonKey(includeIfNull: false) final String? panchayatCode,
+      @JsonKey(name: 'referral_ward') final int? ward,
+      @JsonKey(name: 'guardian_name') final String? guardianName,
+      @JsonKey(name: 'guardian_phone_number') final String? guardianPhoneNumber,
+      @JsonKey(name: 'caste_category') final int? casteCategory,
+      @JsonKey(name: 'key_population') final List<int>? keyPopulation,
+      @JsonKey(name: 'trimester_of_pw') final int? trimester,
+      @JsonKey(name: 'referred_by_name') final String? referredBy,
+      @JsonKey(name: 'referrer_source') final int? referrerSource,
+      @JsonKey(name: 'referred_ward') final String? referredWard,
+      @JsonKey(name: 'referrer_panchayat_code')
+      final String? referrerPanchayatCode,
+      @JsonKey(name: 'source')
+      final String? source}) = _$ReferralDetailsModelImpl;
 
   factory _ReferralDetailsModel.fromJson(Map<String, dynamic> json) =
       _$ReferralDetailsModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'referral_id')
   int? get referralID;
   @override
+  @JsonKey(
+      name: 'referral_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get referralDate;
   @override
+  @JsonKey(name: 'referral_name')
   String? get referralName;
   @override
+  @JsonKey(name: 'age')
   int? get age;
   @override
+  @JsonKey(name: 'gender')
   String? get gender;
   @override
-  PanchayatModel? get location;
+  @JsonKey(name: 'referral_district')
+  int? get selectedDistrict;
   @override
+  @JsonKey(name: 'referral_block')
+  int? get selectedBlock;
+  @override
+  @JsonKey(name: 'referral_panchayat')
+  int? get selectedPanchayatCode;
+  @override
+  @JsonKey(includeIfNull: false)
+  String? get district;
+  @override
+  @JsonKey(includeIfNull: false)
+  String? get block;
+  @override
+  @JsonKey(includeIfNull: false)
+  String? get panchayatCode;
+  @override
+  @JsonKey(name: 'referral_ward')
   int? get ward;
   @override
+  @JsonKey(name: 'guardian_name')
   String? get guardianName;
   @override
+  @JsonKey(name: 'guardian_phone_number')
   String? get guardianPhoneNumber;
   @override
-  String? get casteCategory;
+  @JsonKey(name: 'caste_category')
+  int? get casteCategory;
   @override
-  String? get keyPopulation;
+  @JsonKey(name: 'key_population')
+  List<int>? get keyPopulation;
   @override
-  String? get trimester;
+  @JsonKey(name: 'trimester_of_pw')
+  int? get trimester;
   @override
+  @JsonKey(name: 'referred_by_name')
   String? get referredBy;
   @override
-  String? get referrerSource;
+  @JsonKey(name: 'referrer_source')
+  int? get referrerSource;
   @override
+  @JsonKey(name: 'referred_ward')
   String? get referredWard;
   @override
+  @JsonKey(name: 'referrer_panchayat_code')
   String? get referrerPanchayatCode;
   @override
+  @JsonKey(name: 'source')
   String? get source;
   @override
   @JsonKey(ignore: true)
