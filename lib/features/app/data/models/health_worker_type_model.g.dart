@@ -9,7 +9,7 @@ part of 'health_worker_type_model.dart';
 _$HealthWorkerTypeModelImpl _$$HealthWorkerTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$HealthWorkerTypeModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       typeText: json['type_text'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,

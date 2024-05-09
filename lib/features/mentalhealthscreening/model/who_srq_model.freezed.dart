@@ -20,25 +20,45 @@ WHOSrqModel _$WHOSrqModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WHOSrqModel {
+  @JsonKey(name: 'have_headaches')
   String? get headache => throw _privateConstructorUsedError;
+  @JsonKey(name: 'appetite_poor')
   String? get apetite => throw _privateConstructorUsedError;
+  @JsonKey(name: 'sleep_badly')
   String? get sleep => throw _privateConstructorUsedError;
+  @JsonKey(name: 'easily_frightened')
   String? get frightened => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hands_shake')
   String? get handsShake => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feel_nervous')
   String? get nervous => throw _privateConstructorUsedError;
+  @JsonKey(name: 'digestion_poor')
   String? get digestionPoor => throw _privateConstructorUsedError;
+  @JsonKey(name: 'trouble_thinking')
   String? get troubleThinking => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feel_unhappy')
   String? get unhappy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cry')
   String? get cryMore => throw _privateConstructorUsedError;
+  @JsonKey(name: 'daily_activities')
   String? get dailyActivities => throw _privateConstructorUsedError;
+  @JsonKey(name: 'decisions')
   String? get decisionMaking => throw _privateConstructorUsedError;
+  @JsonKey(name: 'daily_work')
   String? get dailyWorkSuffering => throw _privateConstructorUsedError;
+  @JsonKey(name: 'useful_part_life')
   String? get playAUsefulPart => throw _privateConstructorUsedError;
+  @JsonKey(name: 'lost_interest')
   String? get lostInterest => throw _privateConstructorUsedError;
+  @JsonKey(name: 'worthless_person')
   String? get worthlessPerson => throw _privateConstructorUsedError;
+  @JsonKey(name: 'end_life')
   String? get endingLife => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feel_tired')
   String? get tiredAllTheTime => throw _privateConstructorUsedError;
+  @JsonKey(name: 'uncomfortable_stomach')
   String? get uncomfortableFeelings => throw _privateConstructorUsedError;
+  @JsonKey(name: 'easily_tired')
   String? get easilyTired => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -54,26 +74,26 @@ abstract class $WHOSrqModelCopyWith<$Res> {
       _$WHOSrqModelCopyWithImpl<$Res, WHOSrqModel>;
   @useResult
   $Res call(
-      {String? headache,
-      String? apetite,
-      String? sleep,
-      String? frightened,
-      String? handsShake,
-      String? nervous,
-      String? digestionPoor,
-      String? troubleThinking,
-      String? unhappy,
-      String? cryMore,
-      String? dailyActivities,
-      String? decisionMaking,
-      String? dailyWorkSuffering,
-      String? playAUsefulPart,
-      String? lostInterest,
-      String? worthlessPerson,
-      String? endingLife,
-      String? tiredAllTheTime,
-      String? uncomfortableFeelings,
-      String? easilyTired});
+      {@JsonKey(name: 'have_headaches') String? headache,
+      @JsonKey(name: 'appetite_poor') String? apetite,
+      @JsonKey(name: 'sleep_badly') String? sleep,
+      @JsonKey(name: 'easily_frightened') String? frightened,
+      @JsonKey(name: 'hands_shake') String? handsShake,
+      @JsonKey(name: 'feel_nervous') String? nervous,
+      @JsonKey(name: 'digestion_poor') String? digestionPoor,
+      @JsonKey(name: 'trouble_thinking') String? troubleThinking,
+      @JsonKey(name: 'feel_unhappy') String? unhappy,
+      @JsonKey(name: 'cry') String? cryMore,
+      @JsonKey(name: 'daily_activities') String? dailyActivities,
+      @JsonKey(name: 'decisions') String? decisionMaking,
+      @JsonKey(name: 'daily_work') String? dailyWorkSuffering,
+      @JsonKey(name: 'useful_part_life') String? playAUsefulPart,
+      @JsonKey(name: 'lost_interest') String? lostInterest,
+      @JsonKey(name: 'worthless_person') String? worthlessPerson,
+      @JsonKey(name: 'end_life') String? endingLife,
+      @JsonKey(name: 'feel_tired') String? tiredAllTheTime,
+      @JsonKey(name: 'uncomfortable_stomach') String? uncomfortableFeelings,
+      @JsonKey(name: 'easily_tired') String? easilyTired});
 }
 
 /// @nodoc
@@ -204,26 +224,26 @@ abstract class _$$WHOSrqModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? headache,
-      String? apetite,
-      String? sleep,
-      String? frightened,
-      String? handsShake,
-      String? nervous,
-      String? digestionPoor,
-      String? troubleThinking,
-      String? unhappy,
-      String? cryMore,
-      String? dailyActivities,
-      String? decisionMaking,
-      String? dailyWorkSuffering,
-      String? playAUsefulPart,
-      String? lostInterest,
-      String? worthlessPerson,
-      String? endingLife,
-      String? tiredAllTheTime,
-      String? uncomfortableFeelings,
-      String? easilyTired});
+      {@JsonKey(name: 'have_headaches') String? headache,
+      @JsonKey(name: 'appetite_poor') String? apetite,
+      @JsonKey(name: 'sleep_badly') String? sleep,
+      @JsonKey(name: 'easily_frightened') String? frightened,
+      @JsonKey(name: 'hands_shake') String? handsShake,
+      @JsonKey(name: 'feel_nervous') String? nervous,
+      @JsonKey(name: 'digestion_poor') String? digestionPoor,
+      @JsonKey(name: 'trouble_thinking') String? troubleThinking,
+      @JsonKey(name: 'feel_unhappy') String? unhappy,
+      @JsonKey(name: 'cry') String? cryMore,
+      @JsonKey(name: 'daily_activities') String? dailyActivities,
+      @JsonKey(name: 'decisions') String? decisionMaking,
+      @JsonKey(name: 'daily_work') String? dailyWorkSuffering,
+      @JsonKey(name: 'useful_part_life') String? playAUsefulPart,
+      @JsonKey(name: 'lost_interest') String? lostInterest,
+      @JsonKey(name: 'worthless_person') String? worthlessPerson,
+      @JsonKey(name: 'end_life') String? endingLife,
+      @JsonKey(name: 'feel_tired') String? tiredAllTheTime,
+      @JsonKey(name: 'uncomfortable_stomach') String? uncomfortableFeelings,
+      @JsonKey(name: 'easily_tired') String? easilyTired});
 }
 
 /// @nodoc
@@ -347,69 +367,89 @@ class __$$WHOSrqModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WHOSrqModelImpl implements _WHOSrqModel {
   const _$WHOSrqModelImpl(
-      {required this.headache,
-      required this.apetite,
-      required this.sleep,
-      required this.frightened,
-      required this.handsShake,
-      required this.nervous,
-      required this.digestionPoor,
-      required this.troubleThinking,
-      required this.unhappy,
-      required this.cryMore,
-      required this.dailyActivities,
-      required this.decisionMaking,
-      required this.dailyWorkSuffering,
-      required this.playAUsefulPart,
-      required this.lostInterest,
-      required this.worthlessPerson,
-      required this.endingLife,
-      required this.tiredAllTheTime,
-      required this.uncomfortableFeelings,
-      required this.easilyTired});
+      {@JsonKey(name: 'have_headaches') this.headache,
+      @JsonKey(name: 'appetite_poor') this.apetite,
+      @JsonKey(name: 'sleep_badly') this.sleep,
+      @JsonKey(name: 'easily_frightened') this.frightened,
+      @JsonKey(name: 'hands_shake') this.handsShake,
+      @JsonKey(name: 'feel_nervous') this.nervous,
+      @JsonKey(name: 'digestion_poor') this.digestionPoor,
+      @JsonKey(name: 'trouble_thinking') this.troubleThinking,
+      @JsonKey(name: 'feel_unhappy') this.unhappy,
+      @JsonKey(name: 'cry') this.cryMore,
+      @JsonKey(name: 'daily_activities') this.dailyActivities,
+      @JsonKey(name: 'decisions') this.decisionMaking,
+      @JsonKey(name: 'daily_work') this.dailyWorkSuffering,
+      @JsonKey(name: 'useful_part_life') this.playAUsefulPart,
+      @JsonKey(name: 'lost_interest') this.lostInterest,
+      @JsonKey(name: 'worthless_person') this.worthlessPerson,
+      @JsonKey(name: 'end_life') this.endingLife,
+      @JsonKey(name: 'feel_tired') this.tiredAllTheTime,
+      @JsonKey(name: 'uncomfortable_stomach') this.uncomfortableFeelings,
+      @JsonKey(name: 'easily_tired') this.easilyTired});
 
   factory _$WHOSrqModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WHOSrqModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'have_headaches')
   final String? headache;
   @override
+  @JsonKey(name: 'appetite_poor')
   final String? apetite;
   @override
+  @JsonKey(name: 'sleep_badly')
   final String? sleep;
   @override
+  @JsonKey(name: 'easily_frightened')
   final String? frightened;
   @override
+  @JsonKey(name: 'hands_shake')
   final String? handsShake;
   @override
+  @JsonKey(name: 'feel_nervous')
   final String? nervous;
   @override
+  @JsonKey(name: 'digestion_poor')
   final String? digestionPoor;
   @override
+  @JsonKey(name: 'trouble_thinking')
   final String? troubleThinking;
   @override
+  @JsonKey(name: 'feel_unhappy')
   final String? unhappy;
   @override
+  @JsonKey(name: 'cry')
   final String? cryMore;
   @override
+  @JsonKey(name: 'daily_activities')
   final String? dailyActivities;
   @override
+  @JsonKey(name: 'decisions')
   final String? decisionMaking;
   @override
+  @JsonKey(name: 'daily_work')
   final String? dailyWorkSuffering;
   @override
+  @JsonKey(name: 'useful_part_life')
   final String? playAUsefulPart;
   @override
+  @JsonKey(name: 'lost_interest')
   final String? lostInterest;
   @override
+  @JsonKey(name: 'worthless_person')
   final String? worthlessPerson;
   @override
+  @JsonKey(name: 'end_life')
   final String? endingLife;
   @override
+  @JsonKey(name: 'feel_tired')
   final String? tiredAllTheTime;
   @override
+  @JsonKey(name: 'uncomfortable_stomach')
   final String? uncomfortableFeelings;
   @override
+  @JsonKey(name: 'easily_tired')
   final String? easilyTired;
 
   @override
@@ -501,69 +541,91 @@ class _$WHOSrqModelImpl implements _WHOSrqModel {
 
 abstract class _WHOSrqModel implements WHOSrqModel {
   const factory _WHOSrqModel(
-      {required final String? headache,
-      required final String? apetite,
-      required final String? sleep,
-      required final String? frightened,
-      required final String? handsShake,
-      required final String? nervous,
-      required final String? digestionPoor,
-      required final String? troubleThinking,
-      required final String? unhappy,
-      required final String? cryMore,
-      required final String? dailyActivities,
-      required final String? decisionMaking,
-      required final String? dailyWorkSuffering,
-      required final String? playAUsefulPart,
-      required final String? lostInterest,
-      required final String? worthlessPerson,
-      required final String? endingLife,
-      required final String? tiredAllTheTime,
-      required final String? uncomfortableFeelings,
-      required final String? easilyTired}) = _$WHOSrqModelImpl;
+          {@JsonKey(name: 'have_headaches') final String? headache,
+          @JsonKey(name: 'appetite_poor') final String? apetite,
+          @JsonKey(name: 'sleep_badly') final String? sleep,
+          @JsonKey(name: 'easily_frightened') final String? frightened,
+          @JsonKey(name: 'hands_shake') final String? handsShake,
+          @JsonKey(name: 'feel_nervous') final String? nervous,
+          @JsonKey(name: 'digestion_poor') final String? digestionPoor,
+          @JsonKey(name: 'trouble_thinking') final String? troubleThinking,
+          @JsonKey(name: 'feel_unhappy') final String? unhappy,
+          @JsonKey(name: 'cry') final String? cryMore,
+          @JsonKey(name: 'daily_activities') final String? dailyActivities,
+          @JsonKey(name: 'decisions') final String? decisionMaking,
+          @JsonKey(name: 'daily_work') final String? dailyWorkSuffering,
+          @JsonKey(name: 'useful_part_life') final String? playAUsefulPart,
+          @JsonKey(name: 'lost_interest') final String? lostInterest,
+          @JsonKey(name: 'worthless_person') final String? worthlessPerson,
+          @JsonKey(name: 'end_life') final String? endingLife,
+          @JsonKey(name: 'feel_tired') final String? tiredAllTheTime,
+          @JsonKey(name: 'uncomfortable_stomach')
+          final String? uncomfortableFeelings,
+          @JsonKey(name: 'easily_tired') final String? easilyTired}) =
+      _$WHOSrqModelImpl;
 
   factory _WHOSrqModel.fromJson(Map<String, dynamic> json) =
       _$WHOSrqModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'have_headaches')
   String? get headache;
   @override
+  @JsonKey(name: 'appetite_poor')
   String? get apetite;
   @override
+  @JsonKey(name: 'sleep_badly')
   String? get sleep;
   @override
+  @JsonKey(name: 'easily_frightened')
   String? get frightened;
   @override
+  @JsonKey(name: 'hands_shake')
   String? get handsShake;
   @override
+  @JsonKey(name: 'feel_nervous')
   String? get nervous;
   @override
+  @JsonKey(name: 'digestion_poor')
   String? get digestionPoor;
   @override
+  @JsonKey(name: 'trouble_thinking')
   String? get troubleThinking;
   @override
+  @JsonKey(name: 'feel_unhappy')
   String? get unhappy;
   @override
+  @JsonKey(name: 'cry')
   String? get cryMore;
   @override
+  @JsonKey(name: 'daily_activities')
   String? get dailyActivities;
   @override
+  @JsonKey(name: 'decisions')
   String? get decisionMaking;
   @override
+  @JsonKey(name: 'daily_work')
   String? get dailyWorkSuffering;
   @override
+  @JsonKey(name: 'useful_part_life')
   String? get playAUsefulPart;
   @override
+  @JsonKey(name: 'lost_interest')
   String? get lostInterest;
   @override
+  @JsonKey(name: 'worthless_person')
   String? get worthlessPerson;
   @override
+  @JsonKey(name: 'end_life')
   String? get endingLife;
   @override
+  @JsonKey(name: 'feel_tired')
   String? get tiredAllTheTime;
   @override
+  @JsonKey(name: 'uncomfortable_stomach')
   String? get uncomfortableFeelings;
   @override
+  @JsonKey(name: 'easily_tired')
   String? get easilyTired;
   @override
   @JsonKey(ignore: true)

@@ -6,14 +6,17 @@ class ApiResponse<T> {
   T? data;
   Response? response;
   late Status status;
+  late bool? success;
   ApplicationError? error;
 
   ApiResponse.success(this.response) {
+    success = true;
     status = Status.ok;
     data = response?.data;
   }
 
   ApiResponse.failed(ApplicationError this.error) {
+    success = false;
     status = Status.failed;
   }
 

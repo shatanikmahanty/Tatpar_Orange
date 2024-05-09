@@ -8,22 +8,22 @@ part of 'patient_model.dart';
 
 _$PatientModelImpl _$$PatientModelImplFromJson(Map<String, dynamic> json) =>
     _$PatientModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       location: json['location'] == null
           ? null
           : Location.fromJson(json['location'] as Map<String, dynamic>),
       name: json['name'] as String,
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
       gender: json['gender'] as String?,
       mobileNumber: json['mobile_number'] as String,
       alternateNumber: json['alternate_number'] as String?,
       email: json['email'] as String?,
       profession: json['profession'] as String?,
       education: json['education'] as String?,
-      weight: json['weight'] as int?,
-      height: json['height'] as int?,
-      createdBy: json['created_by'] as int?,
-      updatedBy: json['updated_by'] as int?,
+      weight: (json['weight'] as num?)?.toInt(),
+      height: (json['height'] as num?)?.toInt(),
+      createdBy: (json['created_by'] as num?)?.toInt(),
+      updatedBy: (json['updated_by'] as num?)?.toInt(),
       createdAt: fromJsonToDateTime(json['created_at'] as String?),
       updatedAt: fromJsonToDateTime(json['updated_at'] as String?),
     );

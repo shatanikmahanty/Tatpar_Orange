@@ -21,14 +21,32 @@ MentalHealthScreeningModel _$MentalHealthScreeningModelFromJson(
 
 /// @nodoc
 mixin _$MentalHealthScreeningModel {
+  @JsonKey(name: 'stage')
   String? get stage => throw _privateConstructorUsedError;
-  DateTime get screeningDate => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get screeningDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'case_status')
   String? get screeningStatus => throw _privateConstructorUsedError;
-  int? get screeningScore => throw _privateConstructorUsedError;
-  DateTime get counsellingLinked => throw _privateConstructorUsedError;
-  DateTime get psychiatristLinked => throw _privateConstructorUsedError;
+  @JsonKey(name: 'score')
+  String? get screeningScore => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'counselling_linked',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get counsellingLinked => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'psychiatrist_linked',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get psychiatristLinked => throw _privateConstructorUsedError;
+  @JsonKey(name: 'feeling_better_linkage')
   String? get feelingBetter => throw _privateConstructorUsedError;
+  @JsonKey(name: 'talk_helpline_again')
   String? get talkToHelpline => throw _privateConstructorUsedError;
+  WHOSrqModel? get whoSrqModel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -44,14 +62,29 @@ abstract class $MentalHealthScreeningModelCopyWith<$Res> {
           MentalHealthScreeningModel>;
   @useResult
   $Res call(
-      {String? stage,
-      DateTime screeningDate,
-      String? screeningStatus,
-      int? screeningScore,
-      DateTime counsellingLinked,
-      DateTime psychiatristLinked,
-      String? feelingBetter,
-      String? talkToHelpline});
+      {@JsonKey(name: 'stage') String? stage,
+      @JsonKey(
+          name: 'screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? screeningDate,
+      @JsonKey(name: 'case_status') String? screeningStatus,
+      @JsonKey(name: 'score') String? screeningScore,
+      @JsonKey(
+          name: 'counselling_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? counsellingLinked,
+      @JsonKey(
+          name: 'psychiatrist_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? psychiatristLinked,
+      @JsonKey(name: 'feeling_better_linkage') String? feelingBetter,
+      @JsonKey(name: 'talk_helpline_again') String? talkToHelpline,
+      WHOSrqModel? whoSrqModel});
+
+  $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
 }
 
 /// @nodoc
@@ -69,23 +102,24 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
   @override
   $Res call({
     Object? stage = freezed,
-    Object? screeningDate = null,
+    Object? screeningDate = freezed,
     Object? screeningStatus = freezed,
     Object? screeningScore = freezed,
-    Object? counsellingLinked = null,
-    Object? psychiatristLinked = null,
+    Object? counsellingLinked = freezed,
+    Object? psychiatristLinked = freezed,
     Object? feelingBetter = freezed,
     Object? talkToHelpline = freezed,
+    Object? whoSrqModel = freezed,
   }) {
     return _then(_value.copyWith(
       stage: freezed == stage
           ? _value.stage
           : stage // ignore: cast_nullable_to_non_nullable
               as String?,
-      screeningDate: null == screeningDate
+      screeningDate: freezed == screeningDate
           ? _value.screeningDate
           : screeningDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       screeningStatus: freezed == screeningStatus
           ? _value.screeningStatus
           : screeningStatus // ignore: cast_nullable_to_non_nullable
@@ -93,15 +127,15 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
       screeningScore: freezed == screeningScore
           ? _value.screeningScore
           : screeningScore // ignore: cast_nullable_to_non_nullable
-              as int?,
-      counsellingLinked: null == counsellingLinked
+              as String?,
+      counsellingLinked: freezed == counsellingLinked
           ? _value.counsellingLinked
           : counsellingLinked // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      psychiatristLinked: null == psychiatristLinked
+              as DateTime?,
+      psychiatristLinked: freezed == psychiatristLinked
           ? _value.psychiatristLinked
           : psychiatristLinked // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       feelingBetter: freezed == feelingBetter
           ? _value.feelingBetter
           : feelingBetter // ignore: cast_nullable_to_non_nullable
@@ -110,7 +144,23 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
           ? _value.talkToHelpline
           : talkToHelpline // ignore: cast_nullable_to_non_nullable
               as String?,
+      whoSrqModel: freezed == whoSrqModel
+          ? _value.whoSrqModel
+          : whoSrqModel // ignore: cast_nullable_to_non_nullable
+              as WHOSrqModel?,
     ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WHOSrqModelCopyWith<$Res>? get whoSrqModel {
+    if (_value.whoSrqModel == null) {
+      return null;
+    }
+
+    return $WHOSrqModelCopyWith<$Res>(_value.whoSrqModel!, (value) {
+      return _then(_value.copyWith(whoSrqModel: value) as $Val);
+    });
   }
 }
 
@@ -124,14 +174,30 @@ abstract class _$$MentalHealthScreeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? stage,
-      DateTime screeningDate,
-      String? screeningStatus,
-      int? screeningScore,
-      DateTime counsellingLinked,
-      DateTime psychiatristLinked,
-      String? feelingBetter,
-      String? talkToHelpline});
+      {@JsonKey(name: 'stage') String? stage,
+      @JsonKey(
+          name: 'screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? screeningDate,
+      @JsonKey(name: 'case_status') String? screeningStatus,
+      @JsonKey(name: 'score') String? screeningScore,
+      @JsonKey(
+          name: 'counselling_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? counsellingLinked,
+      @JsonKey(
+          name: 'psychiatrist_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? psychiatristLinked,
+      @JsonKey(name: 'feeling_better_linkage') String? feelingBetter,
+      @JsonKey(name: 'talk_helpline_again') String? talkToHelpline,
+      WHOSrqModel? whoSrqModel});
+
+  @override
+  $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
 }
 
 /// @nodoc
@@ -148,23 +214,24 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? stage = freezed,
-    Object? screeningDate = null,
+    Object? screeningDate = freezed,
     Object? screeningStatus = freezed,
     Object? screeningScore = freezed,
-    Object? counsellingLinked = null,
-    Object? psychiatristLinked = null,
+    Object? counsellingLinked = freezed,
+    Object? psychiatristLinked = freezed,
     Object? feelingBetter = freezed,
     Object? talkToHelpline = freezed,
+    Object? whoSrqModel = freezed,
   }) {
     return _then(_$MentalHealthScreeningModelImpl(
       stage: freezed == stage
           ? _value.stage
           : stage // ignore: cast_nullable_to_non_nullable
               as String?,
-      screeningDate: null == screeningDate
+      screeningDate: freezed == screeningDate
           ? _value.screeningDate
           : screeningDate // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       screeningStatus: freezed == screeningStatus
           ? _value.screeningStatus
           : screeningStatus // ignore: cast_nullable_to_non_nullable
@@ -172,15 +239,15 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
       screeningScore: freezed == screeningScore
           ? _value.screeningScore
           : screeningScore // ignore: cast_nullable_to_non_nullable
-              as int?,
-      counsellingLinked: null == counsellingLinked
+              as String?,
+      counsellingLinked: freezed == counsellingLinked
           ? _value.counsellingLinked
           : counsellingLinked // ignore: cast_nullable_to_non_nullable
-              as DateTime,
-      psychiatristLinked: null == psychiatristLinked
+              as DateTime?,
+      psychiatristLinked: freezed == psychiatristLinked
           ? _value.psychiatristLinked
           : psychiatristLinked // ignore: cast_nullable_to_non_nullable
-              as DateTime,
+              as DateTime?,
       feelingBetter: freezed == feelingBetter
           ? _value.feelingBetter
           : feelingBetter // ignore: cast_nullable_to_non_nullable
@@ -189,6 +256,10 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
           ? _value.talkToHelpline
           : talkToHelpline // ignore: cast_nullable_to_non_nullable
               as String?,
+      whoSrqModel: freezed == whoSrqModel
+          ? _value.whoSrqModel
+          : whoSrqModel // ignore: cast_nullable_to_non_nullable
+              as WHOSrqModel?,
     ));
   }
 }
@@ -197,39 +268,71 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
   const _$MentalHealthScreeningModelImpl(
-      {required this.stage,
-      required this.screeningDate,
-      required this.screeningStatus,
-      required this.screeningScore,
-      required this.counsellingLinked,
-      required this.psychiatristLinked,
-      required this.feelingBetter,
-      required this.talkToHelpline});
+      {@JsonKey(name: 'stage') this.stage,
+      @JsonKey(
+          name: 'screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.screeningDate,
+      @JsonKey(name: 'case_status') this.screeningStatus,
+      @JsonKey(name: 'score') this.screeningScore,
+      @JsonKey(
+          name: 'counselling_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.counsellingLinked,
+      @JsonKey(
+          name: 'psychiatrist_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.psychiatristLinked,
+      @JsonKey(name: 'feeling_better_linkage') this.feelingBetter,
+      @JsonKey(name: 'talk_helpline_again') this.talkToHelpline,
+      this.whoSrqModel});
 
   factory _$MentalHealthScreeningModelImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$MentalHealthScreeningModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'stage')
   final String? stage;
   @override
-  final DateTime screeningDate;
+  @JsonKey(
+      name: 'screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  final DateTime? screeningDate;
   @override
+  @JsonKey(name: 'case_status')
   final String? screeningStatus;
   @override
-  final int? screeningScore;
+  @JsonKey(name: 'score')
+  final String? screeningScore;
   @override
-  final DateTime counsellingLinked;
+  @JsonKey(
+      name: 'counselling_linked',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  final DateTime? counsellingLinked;
   @override
-  final DateTime psychiatristLinked;
+  @JsonKey(
+      name: 'psychiatrist_linked',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  final DateTime? psychiatristLinked;
   @override
+  @JsonKey(name: 'feeling_better_linkage')
   final String? feelingBetter;
   @override
+  @JsonKey(name: 'talk_helpline_again')
   final String? talkToHelpline;
+  @override
+  final WHOSrqModel? whoSrqModel;
 
   @override
   String toString() {
-    return 'MentalHealthScreeningModel(stage: $stage, screeningDate: $screeningDate, screeningStatus: $screeningStatus, screeningScore: $screeningScore, counsellingLinked: $counsellingLinked, psychiatristLinked: $psychiatristLinked, feelingBetter: $feelingBetter, talkToHelpline: $talkToHelpline)';
+    return 'MentalHealthScreeningModel(stage: $stage, screeningDate: $screeningDate, screeningStatus: $screeningStatus, screeningScore: $screeningScore, counsellingLinked: $counsellingLinked, psychiatristLinked: $psychiatristLinked, feelingBetter: $feelingBetter, talkToHelpline: $talkToHelpline, whoSrqModel: $whoSrqModel)';
   }
 
   @override
@@ -251,7 +354,9 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
             (identical(other.feelingBetter, feelingBetter) ||
                 other.feelingBetter == feelingBetter) &&
             (identical(other.talkToHelpline, talkToHelpline) ||
-                other.talkToHelpline == talkToHelpline));
+                other.talkToHelpline == talkToHelpline) &&
+            (identical(other.whoSrqModel, whoSrqModel) ||
+                other.whoSrqModel == whoSrqModel));
   }
 
   @JsonKey(ignore: true)
@@ -265,7 +370,8 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
       counsellingLinked,
       psychiatristLinked,
       feelingBetter,
-      talkToHelpline);
+      talkToHelpline,
+      whoSrqModel);
 
   @JsonKey(ignore: true)
   @override
@@ -285,35 +391,66 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
 abstract class _MentalHealthScreeningModel
     implements MentalHealthScreeningModel {
   const factory _MentalHealthScreeningModel(
-          {required final String? stage,
-          required final DateTime screeningDate,
-          required final String? screeningStatus,
-          required final int? screeningScore,
-          required final DateTime counsellingLinked,
-          required final DateTime psychiatristLinked,
-          required final String? feelingBetter,
-          required final String? talkToHelpline}) =
-      _$MentalHealthScreeningModelImpl;
+      {@JsonKey(name: 'stage') final String? stage,
+      @JsonKey(
+          name: 'screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? screeningDate,
+      @JsonKey(name: 'case_status') final String? screeningStatus,
+      @JsonKey(name: 'score') final String? screeningScore,
+      @JsonKey(
+          name: 'counselling_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? counsellingLinked,
+      @JsonKey(
+          name: 'psychiatrist_linked',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? psychiatristLinked,
+      @JsonKey(name: 'feeling_better_linkage') final String? feelingBetter,
+      @JsonKey(name: 'talk_helpline_again') final String? talkToHelpline,
+      final WHOSrqModel? whoSrqModel}) = _$MentalHealthScreeningModelImpl;
 
   factory _MentalHealthScreeningModel.fromJson(Map<String, dynamic> json) =
       _$MentalHealthScreeningModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'stage')
   String? get stage;
   @override
-  DateTime get screeningDate;
+  @JsonKey(
+      name: 'screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get screeningDate;
   @override
+  @JsonKey(name: 'case_status')
   String? get screeningStatus;
   @override
-  int? get screeningScore;
+  @JsonKey(name: 'score')
+  String? get screeningScore;
   @override
-  DateTime get counsellingLinked;
+  @JsonKey(
+      name: 'counselling_linked',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get counsellingLinked;
   @override
-  DateTime get psychiatristLinked;
+  @JsonKey(
+      name: 'psychiatrist_linked',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get psychiatristLinked;
   @override
+  @JsonKey(name: 'feeling_better_linkage')
   String? get feelingBetter;
   @override
+  @JsonKey(name: 'talk_helpline_again')
   String? get talkToHelpline;
+  @override
+  WHOSrqModel? get whoSrqModel;
   @override
   @JsonKey(ignore: true)
   _$$MentalHealthScreeningModelImplCopyWith<_$MentalHealthScreeningModelImpl>

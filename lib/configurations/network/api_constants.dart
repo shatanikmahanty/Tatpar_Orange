@@ -1,7 +1,17 @@
 import 'package:flutter/foundation.dart';
 
-const baseUrl = kDebugMode ? 'http://13.200.79.16:8000' : 'http://13.200.79.16:8000';
+const baseUrl =
+    kDebugMode ? 'http://35.154.215.58:8000' : 'http://35.154.215.58:8000/';
 
+const districtsUrl = '$baseUrl/api/referral-data';
+const referralDetailsUrl = '$baseUrl/api/referral';
+const tbScreeningUrl = '$baseUrl/api/tb-screening';
+const whoSrqUrl = '$baseUrl/api/whosrq';
+const diagnosisDataUrl = '$baseUrl/api/diagnosis-data';
+const diagnosisUrl = '$baseUrl/api/diagnosis';
+const treatmentUrl = '$baseUrl/api/treatment';
+const contactTracingUrl = '$baseUrl/api/contact-tracing';
+const outcomeUrl = '$baseUrl/api/outcome';
 const loginUrl = '$baseUrl/healthworker/login/';
 const healthWorkerApiUrl = '$baseUrl/healthworker/';
 const patientsUrl = '$baseUrl/patient/patients/';

@@ -67,6 +67,10 @@ class AppRouter extends $AppRouter {
       path: '/outcome_page',
       page: OutcomeRoute.page,
     ),
+    AutoRoute(
+      path: '/contact_tracing_page',
+      page: ContactTracingRoute.page,
+    ),
   ];
 }
 

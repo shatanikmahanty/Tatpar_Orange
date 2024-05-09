@@ -9,7 +9,7 @@ part of 'health_worker_info_model.dart';
 _$HealthWorkerInfoModelImpl _$$HealthWorkerInfoModelImplFromJson(
         Map<String, dynamic> json) =>
     _$HealthWorkerInfoModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       fullName: json['full_name'] as String?,
       mobileNumber: json['mobile_number'] as String?,
     );

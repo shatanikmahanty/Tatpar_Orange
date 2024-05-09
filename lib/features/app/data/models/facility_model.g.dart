@@ -8,7 +8,7 @@ part of 'facility_model.dart';
 
 _$FacilityModelImpl _$$FacilityModelImplFromJson(Map<String, dynamic> json) =>
     _$FacilityModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       location: json['location'] == null
           ? null
           : Location.fromJson(json['location'] as Map<String, dynamic>),
@@ -17,10 +17,10 @@ _$FacilityModelImpl _$$FacilityModelImplFromJson(Map<String, dynamic> json) =>
       licenseId: json['license_id'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,
-      createdBy: json['created_by'] as int?,
-      updatedBy: json['updated_by'] as int?,
+      createdBy: (json['created_by'] as num?)?.toInt(),
+      updatedBy: (json['updated_by'] as num?)?.toInt(),
       healthworkersAssigned: (json['healthworkers_assigned'] as List<dynamic>?)
-          ?.map((e) => e as int)
+          ?.map((e) => (e as num).toInt())
           .toList(),
     );
 

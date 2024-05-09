@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_profile_card.dart';
+import 'package:timelines/timelines.dart';
 
 import '../../../../configurations/configurations.dart';
 import '../widgets/case_app_bar.dart';
+import '../widgets/workflow_connector.dart';
+import '../widgets/workflow_item_widget.dart';
 
 @RoutePage()
 class CaseProfilePage extends StatelessWidget {
@@ -11,8 +15,8 @@ class CaseProfilePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // final caseCubit = context.read<CaseCubit>();
-    // final workflows = caseCubit.workflows(caseCubit.state.caseWorkedUpon);
+    final caseCubit = context.read<CaseCubit>();
+    final workflows = caseCubit.workflows(caseCubit.state.caseWorkedUpon);
     return Scaffold(
       appBar: const CaseAppBar('Case Profile'),
       body: Padding(
@@ -24,96 +28,113 @@ class CaseProfilePage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: kPadding * 0.25, horizontal: kPadding),
-                        decoration: BoxDecoration(
-                            color: Theme.of(context).primaryColor,
-                            borderRadius:
-                                BorderRadius.circular(kPadding * 0.5)),
-                        child: Text(
-                          'Active',
-                          style: Theme.of(context)
-                              .textTheme
-                              .titleSmall
-                              ?.copyWith(
+                  Container(
+                    alignment: Alignment.centerRight,
+                    child: DropdownButton<String>(
+                      selectedItemBuilder: (context) => ['1', '2']
+                          .map<DropdownMenuItem<String>>(
+                            (String value) => DropdownMenuItem<String>(
+                              value: value,
+                              child: Text(
+                                'case-$value',
+                                style: Theme.of(context)
+                                    .textTheme
+                                    .headlineSmall
+                                    ?.copyWith(
+                                      color:
+                                          Theme.of(context).colorScheme.primary,
+                                      fontFamily: FontFamily.poppins,
+                                      fontSize: 12,
+                                    ),
+                              ),
+                            ),
+                          )
+                          .toList(),
+                      value: '1',
+                      hint: Text(
+                        'hint',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headlineSmall
+                            ?.copyWith(
                                 fontSize: 12,
-                                height: 2.4,
-                                fontFamily: FontFamily.poppins,
-                                color: Theme.of(context).colorScheme.onPrimary,
-                              ),
-                        ),
+                                color: Theme.of(context).colorScheme.primary,
+                                fontFamily: FontFamily.poppins),
                       ),
-                      const Spacer(),
-                      DropdownButton<String>(
-                        selectedItemBuilder: (context) => ['1', '2']
-                            .map<DropdownMenuItem<String>>(
+                      items: ['1', '2']
+                          .map<DropdownMenuItem<String>>(
                               (String value) => DropdownMenuItem<String>(
-                                value: value,
-                                child: Text(
-                                  'case-$value',
-                                  style: Theme.of(context)
-                                      .textTheme
-                                      .headlineSmall
-                                      ?.copyWith(
-                                        color: Theme.of(context)
-                                            .colorScheme
-                                            .primary,
-                                        fontFamily: FontFamily.poppins,
-                                        fontSize: 12,
-                                      ),
-                                ),
-                              ),
-                            )
-                            .toList(),
-                        value: '1',
-                        hint: Text(
-                          'hint',
-                          style: Theme.of(context)
-                              .textTheme
-                              .headlineSmall
-                              ?.copyWith(
-                                  fontSize: 12,
-                                  color: Theme.of(context).colorScheme.primary,
-                                  fontFamily: FontFamily.poppins),
-                        ),
-                        items: ['1', '2']
-                            .map<DropdownMenuItem<String>>(
-                                (String value) => DropdownMenuItem<String>(
-                                      value: value,
-                                      child: Text(
-                                        'case-$value',
-                                        style: Theme.of(context)
-                                            .textTheme
-                                            .headlineSmall
-                                            ?.copyWith(
-                                              color: Theme.of(context)
-                                                  .colorScheme
-                                                  .primary,
-                                              fontFamily: FontFamily.poppins,
-                                              fontSize: 12,
-                                            ),
-                                      ),
-                                    ))
-                            .toList(),
-                        onChanged: (Object? value) {},
-                      ),
-                    ],
+                                    value: value,
+                                    child: Text(
+                                      'case-$value',
+                                      style: Theme.of(context)
+                                          .textTheme
+                                          .headlineSmall
+                                          ?.copyWith(
+                                            color: Theme.of(context)
+                                                .colorScheme
+                                                .primary,
+                                            fontFamily: FontFamily.poppins,
+                                            fontSize: 12,
+                                          ),
+                                    ),
+                                  ))
+                          .toList(),
+                      onChanged: (Object? value) {},
+                    ),
                   ),
-                  // BlocBuilder<CaseCubit, CaseState>(
-                  //   builder: (context, state) {
-                  //     final caseWorkedUpon = state.caseWorkedUpon;
-                  //   return
-                  CaseProfileCard(
-                    patientName: 'Unknown',
-                    mobileNumber: '8143163280',
-                    caseWorker: ('Not Assigned').toString(),
-                    hub: 'Hub: Andheri(W)',
-                    //(caseWorkedUpon.hub ?? '').toString(), //TODO remove hardcode once data is available
-                    doctor: ('Doctor').toString(),
+                  BlocBuilder<CaseCubit, CaseState>(
+                    builder: (context, state) {
+                      final caseWorkedUpon = state.caseWorkedUpon;
+                      return Stack(
+                        children: [
+                          CaseProfileCard(
+                            patientName:
+                                caseWorkedUpon.patient?.name ?? 'Kalyani',
+                            mobileNumber:
+                                caseWorkedUpon.patient?.mobileNumber ??
+                                    '8143163280',
+                            caseWorker: (caseWorkedUpon.assignedTo?.fullName ??
+                                    'Kalyani Kilaparthi')
+                                .toString(),
+                            hub: 'Hub: Andheri(W)',
+                            //(caseWorkedUpon.hub ?? '').toString(), //TODO remove hardcode once data is available
+                            doctor:
+                                (caseWorkedUpon.sourceVisited ?? '').toString(),
+                          ),
+                          Positioned(
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: kPadding * 0.25,
+                                      horizontal: kPadding),
+                                  decoration: BoxDecoration(
+                                      color: Theme.of(context).primaryColor,
+                                      borderRadius: BorderRadius.circular(
+                                          kPadding * 0.5)),
+                                  child: Text(
+                                    'Active',
+                                    style: Theme.of(context)
+                                        .textTheme
+                                        .titleMedium
+                                        ?.copyWith(
+                                          fontSize: 13,
+                                          // height: 2.4,
+                                          fontFamily: FontFamily.poppins,
+                                          color: Theme.of(context)
+                                              .colorScheme
+                                              .onPrimary,
+                                        ),
+                                  ),
+                                )
+                              ],
+                            ),
+                          )
+                        ],
+                      );
+                    },
                   ),
                   const SizedBox(height: kPadding * 2),
                   Text(
@@ -124,53 +145,52 @@ class CaseProfilePage extends StatelessWidget {
                         letterSpacing: 0.5),
                   ),
                   const SizedBox(height: kPadding * 3),
-                  // BlocBuilder<CaseCubit, CaseState>(
-                  //   builder: (context, state) => Expanded(
-                  //     child:
-                  //  Timeline.tileBuilder(
-                  //       builder: TimelineTileBuilder.connected(
-                  //         contentsAlign: ContentsAlign.basic,
-                  //         contentsBuilder: (context, index) {
-                  //           final item = workflows[index];
-                  //           return WorkFlowItemWidget(
-                  //             workflow: item,
-                  //             completed: item.status,
-                  //             inProgress: item.inProgress,
-                  //           );
-                  //         },
-                  //         indicatorBuilder: (context, index) {
-                  //           final item = workflows[index];
-                  //           return WorkflowConnector(
-                  //             completed: item.status,
-                  //             inProgress: item.inProgress,
-                  //             isFinal: index == workflows.length - 1,
-                  //           );
-                  //         },
-                  //         connectorBuilder: (context, index, t) {
-                  //           final item = workflows[index];
-                  //           final nextItem = index < workflows.length - 1
-                  //               ? workflows[index + 1]
-                  //               : null;
-                  //           if (item.status && nextItem?.status == true) {
-                  //             return SolidLineConnector(
-                  //               color: Theme.of(context).primaryColor,
-                  //               thickness: 2,
-                  //             );
-                  //           }
-                  //           return DashedLineConnector(
-                  //             color: item.status
-                  //                 ? Theme.of(context).primaryColor
-                  //                 : Theme.of(context).colorScheme.onSurface,
-                  //             gap: kPadding,
-                  //           );
-                  //         },
-                  //         itemCount: workflows.length,
-                  //         nodePositionBuilder: (context, node) => 0,
-                  //         indicatorPositionBuilder: (context, node) => 0,
-                  //       ),
-                  //     ),
-                  //   ),
-                  // ),
+                  BlocBuilder<CaseCubit, CaseState>(
+                    builder: (context, state) => Expanded(
+                      child: Timeline.tileBuilder(
+                        builder: TimelineTileBuilder.connected(
+                          contentsAlign: ContentsAlign.basic,
+                          contentsBuilder: (context, index) {
+                            final item = workflows[index];
+                            return WorkFlowItemWidget(
+                              workflow: item,
+                              completed: item.status,
+                              inProgress: item.inProgress,
+                            );
+                          },
+                          indicatorBuilder: (context, index) {
+                            final item = workflows[index];
+                            return WorkflowConnector(
+                              completed: item.status,
+                              inProgress: item.inProgress,
+                              isFinal: index == workflows.length - 1,
+                            );
+                          },
+                          connectorBuilder: (context, index, t) {
+                            final item = workflows[index];
+                            final nextItem = index < workflows.length - 1
+                                ? workflows[index + 1]
+                                : null;
+                            if (item.status && nextItem?.status == true) {
+                              return SolidLineConnector(
+                                color: Theme.of(context).primaryColor,
+                                thickness: 2,
+                              );
+                            }
+                            return DashedLineConnector(
+                              color: item.status
+                                  ? Theme.of(context).primaryColor
+                                  : Theme.of(context).colorScheme.onSurface,
+                              gap: kPadding,
+                            );
+                          },
+                          itemCount: workflows.length,
+                          nodePositionBuilder: (context, node) => 0,
+                          indicatorPositionBuilder: (context, node) => 0,
+                        ),
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),

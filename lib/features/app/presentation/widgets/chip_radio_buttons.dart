@@ -12,6 +12,7 @@ class ChipRadioButtons extends StatefulWidget {
     this.onChanged,
     this.optionIcons,
     this.allowMultiSelect = false,
+    this.validationMessages,
   });
 
   final List<String> options;
@@ -21,6 +22,7 @@ class ChipRadioButtons extends StatefulWidget {
   final int crossAxisCount;
   final void Function(String)? onChanged;
   final bool allowMultiSelect;
+  final Map<String, String Function(Object)>? validationMessages;
 
   @override
   State<ChipRadioButtons> createState() => _ChipRadioButtonsState();
@@ -28,6 +30,7 @@ class ChipRadioButtons extends StatefulWidget {
 
 class _ChipRadioButtonsState extends State<ChipRadioButtons> {
   final List<String> _selected = [];
+  bool hasError = false;
 
   @override
   void initState() {
@@ -44,7 +47,7 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(widget.label,
-              style: Theme.of(context).textTheme.titleSmall?.copyWith(
+              style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   // color: Theme.of(context).primaryColorDark
                   )),
           const SizedBox(

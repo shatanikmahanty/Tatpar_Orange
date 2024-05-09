@@ -20,33 +20,34 @@ TBScreeningModel _$TBScreeningModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TBScreeningModel {
-  @JsonKey(name: 'Scr_date')
+  @JsonKey(
+      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get screeningDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Screened_by')
-  String? get screenedBy => throw _privateConstructorUsedError;
-  @JsonKey(name: 'trimester')
-  String? get trimester => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Cough_2wk')
+  @JsonKey(name: 'screened_by')
+  int? get screenedBy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'trimester_of_pw')
+  int? get trimester => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cough_2_weeks')
   String? get cough => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Sputum_2wk')
+  @JsonKey(name: 'sputum_2_weeks')
   String? get sputum => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Hemoptysis_6mo')
+  @JsonKey(name: 'hemoptysis')
   String? get hemoptysis => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Fever_2wk')
+  @JsonKey(name: 'fever_2_weeks')
   String? get fever => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Night_Sweats_2wk')
+  @JsonKey(name: 'night_sweats_2_weeks')
   String? get nightSweats => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Chest_pain_1mo')
+  @JsonKey(name: 'chest_pain_2_months')
   String? get chestPain => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Weight_loss_3mo')
+  @JsonKey(name: 'weight_loss_3_months')
   String? get weightLoss => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Swollen_gland_now')
+  @JsonKey(name: 'swollen_gland')
   String? get swollenGland => throw _privateConstructorUsedError;
-  @JsonKey(name: 'TB_medication_before_yes_no')
+  @JsonKey(name: 'tb_medicine_before')
   String? get tbMedicine => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Screening_outcome')
+  @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Comments')
+  @JsonKey(name: 'comments')
   String? get comments => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -62,20 +63,24 @@ abstract class $TBScreeningModelCopyWith<$Res> {
       _$TBScreeningModelCopyWithImpl<$Res, TBScreeningModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Scr_date') DateTime? screeningDate,
-      @JsonKey(name: 'Screened_by') String? screenedBy,
-      @JsonKey(name: 'trimester') String? trimester,
-      @JsonKey(name: 'Cough_2wk') String? cough,
-      @JsonKey(name: 'Sputum_2wk') String? sputum,
-      @JsonKey(name: 'Hemoptysis_6mo') String? hemoptysis,
-      @JsonKey(name: 'Fever_2wk') String? fever,
-      @JsonKey(name: 'Night_Sweats_2wk') String? nightSweats,
-      @JsonKey(name: 'Chest_pain_1mo') String? chestPain,
-      @JsonKey(name: 'Weight_loss_3mo') String? weightLoss,
-      @JsonKey(name: 'Swollen_gland_now') String? swollenGland,
-      @JsonKey(name: 'TB_medication_before_yes_no') String? tbMedicine,
-      @JsonKey(name: 'Screening_outcome') String? screeningOutcome,
-      @JsonKey(name: 'Comments') String? comments});
+      {@JsonKey(
+          name: 'Scr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? screeningDate,
+      @JsonKey(name: 'screened_by') int? screenedBy,
+      @JsonKey(name: 'trimester_of_pw') int? trimester,
+      @JsonKey(name: 'cough_2_weeks') String? cough,
+      @JsonKey(name: 'sputum_2_weeks') String? sputum,
+      @JsonKey(name: 'hemoptysis') String? hemoptysis,
+      @JsonKey(name: 'fever_2_weeks') String? fever,
+      @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
+      @JsonKey(name: 'chest_pain_2_months') String? chestPain,
+      @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
+      @JsonKey(name: 'swollen_gland') String? swollenGland,
+      @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
+      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
+      @JsonKey(name: 'comments') String? comments});
 }
 
 /// @nodoc
@@ -114,11 +119,11 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
       screenedBy: freezed == screenedBy
           ? _value.screenedBy
           : screenedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       trimester: freezed == trimester
           ? _value.trimester
           : trimester // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       cough: freezed == cough
           ? _value.cough
           : cough // ignore: cast_nullable_to_non_nullable
@@ -176,20 +181,24 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Scr_date') DateTime? screeningDate,
-      @JsonKey(name: 'Screened_by') String? screenedBy,
-      @JsonKey(name: 'trimester') String? trimester,
-      @JsonKey(name: 'Cough_2wk') String? cough,
-      @JsonKey(name: 'Sputum_2wk') String? sputum,
-      @JsonKey(name: 'Hemoptysis_6mo') String? hemoptysis,
-      @JsonKey(name: 'Fever_2wk') String? fever,
-      @JsonKey(name: 'Night_Sweats_2wk') String? nightSweats,
-      @JsonKey(name: 'Chest_pain_1mo') String? chestPain,
-      @JsonKey(name: 'Weight_loss_3mo') String? weightLoss,
-      @JsonKey(name: 'Swollen_gland_now') String? swollenGland,
-      @JsonKey(name: 'TB_medication_before_yes_no') String? tbMedicine,
-      @JsonKey(name: 'Screening_outcome') String? screeningOutcome,
-      @JsonKey(name: 'Comments') String? comments});
+      {@JsonKey(
+          name: 'Scr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? screeningDate,
+      @JsonKey(name: 'screened_by') int? screenedBy,
+      @JsonKey(name: 'trimester_of_pw') int? trimester,
+      @JsonKey(name: 'cough_2_weeks') String? cough,
+      @JsonKey(name: 'sputum_2_weeks') String? sputum,
+      @JsonKey(name: 'hemoptysis') String? hemoptysis,
+      @JsonKey(name: 'fever_2_weeks') String? fever,
+      @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
+      @JsonKey(name: 'chest_pain_2_months') String? chestPain,
+      @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
+      @JsonKey(name: 'swollen_gland') String? swollenGland,
+      @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
+      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
+      @JsonKey(name: 'comments') String? comments});
 }
 
 /// @nodoc
@@ -226,11 +235,11 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
       screenedBy: freezed == screenedBy
           ? _value.screenedBy
           : screenedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       trimester: freezed == trimester
           ? _value.trimester
           : trimester // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       cough: freezed == cough
           ? _value.cough
           : cough // ignore: cast_nullable_to_non_nullable
@@ -283,65 +292,70 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TBScreeningModelImpl implements _TBScreeningModel {
   const _$TBScreeningModelImpl(
-      {@JsonKey(name: 'Scr_date') required this.screeningDate,
-      @JsonKey(name: 'Screened_by') required this.screenedBy,
-      @JsonKey(name: 'trimester') required this.trimester,
-      @JsonKey(name: 'Cough_2wk') required this.cough,
-      @JsonKey(name: 'Sputum_2wk') required this.sputum,
-      @JsonKey(name: 'Hemoptysis_6mo') required this.hemoptysis,
-      @JsonKey(name: 'Fever_2wk') required this.fever,
-      @JsonKey(name: 'Night_Sweats_2wk') required this.nightSweats,
-      @JsonKey(name: 'Chest_pain_1mo') required this.chestPain,
-      @JsonKey(name: 'Weight_loss_3mo') required this.weightLoss,
-      @JsonKey(name: 'Swollen_gland_now') required this.swollenGland,
-      @JsonKey(name: 'TB_medication_before_yes_no') required this.tbMedicine,
-      @JsonKey(name: 'Screening_outcome') required this.screeningOutcome,
-      @JsonKey(name: 'Comments') required this.comments});
+      {@JsonKey(
+          name: 'Scr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.screeningDate,
+      @JsonKey(name: 'screened_by') this.screenedBy,
+      @JsonKey(name: 'trimester_of_pw') this.trimester,
+      @JsonKey(name: 'cough_2_weeks') this.cough,
+      @JsonKey(name: 'sputum_2_weeks') this.sputum,
+      @JsonKey(name: 'hemoptysis') this.hemoptysis,
+      @JsonKey(name: 'fever_2_weeks') this.fever,
+      @JsonKey(name: 'night_sweats_2_weeks') this.nightSweats,
+      @JsonKey(name: 'chest_pain_2_months') this.chestPain,
+      @JsonKey(name: 'weight_loss_3_months') this.weightLoss,
+      @JsonKey(name: 'swollen_gland') this.swollenGland,
+      @JsonKey(name: 'tb_medicine_before') this.tbMedicine,
+      @JsonKey(name: 'screening_outcome') this.screeningOutcome,
+      @JsonKey(name: 'comments') this.comments});
 
   factory _$TBScreeningModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TBScreeningModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'Scr_date')
+  @JsonKey(
+      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? screeningDate;
   @override
-  @JsonKey(name: 'Screened_by')
-  final String? screenedBy;
+  @JsonKey(name: 'screened_by')
+  final int? screenedBy;
   @override
-  @JsonKey(name: 'trimester')
-  final String? trimester;
+  @JsonKey(name: 'trimester_of_pw')
+  final int? trimester;
   @override
-  @JsonKey(name: 'Cough_2wk')
+  @JsonKey(name: 'cough_2_weeks')
   final String? cough;
   @override
-  @JsonKey(name: 'Sputum_2wk')
+  @JsonKey(name: 'sputum_2_weeks')
   final String? sputum;
   @override
-  @JsonKey(name: 'Hemoptysis_6mo')
+  @JsonKey(name: 'hemoptysis')
   final String? hemoptysis;
   @override
-  @JsonKey(name: 'Fever_2wk')
+  @JsonKey(name: 'fever_2_weeks')
   final String? fever;
   @override
-  @JsonKey(name: 'Night_Sweats_2wk')
+  @JsonKey(name: 'night_sweats_2_weeks')
   final String? nightSweats;
   @override
-  @JsonKey(name: 'Chest_pain_1mo')
+  @JsonKey(name: 'chest_pain_2_months')
   final String? chestPain;
   @override
-  @JsonKey(name: 'Weight_loss_3mo')
+  @JsonKey(name: 'weight_loss_3_months')
   final String? weightLoss;
   @override
-  @JsonKey(name: 'Swollen_gland_now')
+  @JsonKey(name: 'swollen_gland')
   final String? swollenGland;
   @override
-  @JsonKey(name: 'TB_medication_before_yes_no')
+  @JsonKey(name: 'tb_medicine_before')
   final String? tbMedicine;
   @override
-  @JsonKey(name: 'Screening_outcome')
+  @JsonKey(name: 'screening_outcome')
   final String? screeningOutcome;
   @override
-  @JsonKey(name: 'Comments')
+  @JsonKey(name: 'comments')
   final String? comments;
 
   @override
@@ -417,68 +431,71 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
 
 abstract class _TBScreeningModel implements TBScreeningModel {
   const factory _TBScreeningModel(
-      {@JsonKey(name: 'Scr_date') required final DateTime? screeningDate,
-      @JsonKey(name: 'Screened_by') required final String? screenedBy,
-      @JsonKey(name: 'trimester') required final String? trimester,
-      @JsonKey(name: 'Cough_2wk') required final String? cough,
-      @JsonKey(name: 'Sputum_2wk') required final String? sputum,
-      @JsonKey(name: 'Hemoptysis_6mo') required final String? hemoptysis,
-      @JsonKey(name: 'Fever_2wk') required final String? fever,
-      @JsonKey(name: 'Night_Sweats_2wk') required final String? nightSweats,
-      @JsonKey(name: 'Chest_pain_1mo') required final String? chestPain,
-      @JsonKey(name: 'Weight_loss_3mo') required final String? weightLoss,
-      @JsonKey(name: 'Swollen_gland_now') required final String? swollenGland,
-      @JsonKey(name: 'TB_medication_before_yes_no')
-      required final String? tbMedicine,
-      @JsonKey(name: 'Screening_outcome')
-      required final String? screeningOutcome,
-      @JsonKey(name: 'Comments')
-      required final String? comments}) = _$TBScreeningModelImpl;
+          {@JsonKey(
+              name: 'Scr_date',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
+          final DateTime? screeningDate,
+          @JsonKey(name: 'screened_by') final int? screenedBy,
+          @JsonKey(name: 'trimester_of_pw') final int? trimester,
+          @JsonKey(name: 'cough_2_weeks') final String? cough,
+          @JsonKey(name: 'sputum_2_weeks') final String? sputum,
+          @JsonKey(name: 'hemoptysis') final String? hemoptysis,
+          @JsonKey(name: 'fever_2_weeks') final String? fever,
+          @JsonKey(name: 'night_sweats_2_weeks') final String? nightSweats,
+          @JsonKey(name: 'chest_pain_2_months') final String? chestPain,
+          @JsonKey(name: 'weight_loss_3_months') final String? weightLoss,
+          @JsonKey(name: 'swollen_gland') final String? swollenGland,
+          @JsonKey(name: 'tb_medicine_before') final String? tbMedicine,
+          @JsonKey(name: 'screening_outcome') final String? screeningOutcome,
+          @JsonKey(name: 'comments') final String? comments}) =
+      _$TBScreeningModelImpl;
 
   factory _TBScreeningModel.fromJson(Map<String, dynamic> json) =
       _$TBScreeningModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'Scr_date')
+  @JsonKey(
+      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get screeningDate;
   @override
-  @JsonKey(name: 'Screened_by')
-  String? get screenedBy;
+  @JsonKey(name: 'screened_by')
+  int? get screenedBy;
   @override
-  @JsonKey(name: 'trimester')
-  String? get trimester;
+  @JsonKey(name: 'trimester_of_pw')
+  int? get trimester;
   @override
-  @JsonKey(name: 'Cough_2wk')
+  @JsonKey(name: 'cough_2_weeks')
   String? get cough;
   @override
-  @JsonKey(name: 'Sputum_2wk')
+  @JsonKey(name: 'sputum_2_weeks')
   String? get sputum;
   @override
-  @JsonKey(name: 'Hemoptysis_6mo')
+  @JsonKey(name: 'hemoptysis')
   String? get hemoptysis;
   @override
-  @JsonKey(name: 'Fever_2wk')
+  @JsonKey(name: 'fever_2_weeks')
   String? get fever;
   @override
-  @JsonKey(name: 'Night_Sweats_2wk')
+  @JsonKey(name: 'night_sweats_2_weeks')
   String? get nightSweats;
   @override
-  @JsonKey(name: 'Chest_pain_1mo')
+  @JsonKey(name: 'chest_pain_2_months')
   String? get chestPain;
   @override
-  @JsonKey(name: 'Weight_loss_3mo')
+  @JsonKey(name: 'weight_loss_3_months')
   String? get weightLoss;
   @override
-  @JsonKey(name: 'Swollen_gland_now')
+  @JsonKey(name: 'swollen_gland')
   String? get swollenGland;
   @override
-  @JsonKey(name: 'TB_medication_before_yes_no')
+  @JsonKey(name: 'tb_medicine_before')
   String? get tbMedicine;
   @override
-  @JsonKey(name: 'Screening_outcome')
+  @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome;
   @override
-  @JsonKey(name: 'Comments')
+  @JsonKey(name: 'comments')
   String? get comments;
   @override
   @JsonKey(ignore: true)

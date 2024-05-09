@@ -34,16 +34,21 @@ class Case with _$Case {
     @JsonKey(name: 'patient_details_status')
     @Default(false)
     bool patientDetailsStatus,
-    @JsonKey(name: 'disease_status') @Default(false) bool diseaseStatus,
-    @JsonKey(name: 'xray_status') @Default(false) bool xrayStatus,
-    @JsonKey(name: 'udst_status') @Default(false) bool udstStatus,
-    @JsonKey(name: 'nikshay_status') @Default(false) bool nikshayStatus,
-    @JsonKey(name: 'comorbidity_status') @Default(false) bool comorbidityStatus,
-    @JsonKey(name: 'dbt_status') @Default(false) bool dbtStatus,
-    @JsonKey(name: 'contract_casing_status')
-    @Default(false)
-    bool contractCasingStatus,
     @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
+    @JsonKey(name: 'referral_details_status')
+    @Default(false)
+    bool referralDetailsStatus,
+    @JsonKey(name: 'tb_screening_status')
+    @Default(false)
+    bool tbScreeningStatus,
+    @JsonKey(name: 'mental_health_screening_status')
+    @Default(false)
+    bool mentalHealthScreeningStatus,
+    @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
+    @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
+    @JsonKey(name: 'contact_tracing_status')
+    @Default(false)
+    bool contactTracingStatus,
     @JsonKey(
       name: 'created_at',
       fromJson: fromJsonToDateTime,
@@ -67,12 +72,12 @@ class Case with _$Case {
     HealthWorkerInfoModel? assignedTo,
     @JsonKey(name: 'filled_form') int? filledForm,
     @JsonKey(name: 'disease') int? disease,
-    @JsonKey(name: 'xray') int? xray,
-    @JsonKey(name: 'udst') int? udst,
-    @JsonKey(name: 'nikshay') int? nikshay,
-    @JsonKey(name: 'comorbidity') int? comorbidity,
-    @JsonKey(name: 'Dbt') int? dbt,
-    @JsonKey(name: 'contractcasing') int? contractCasing,
+    @JsonKey(name: 'xray') int? referralDetails,
+    @JsonKey(name: 'udst') int? tbScreening,
+    @JsonKey(name: 'nikshay') int? whoSrq,
+    @JsonKey(name: 'comorbidity') int? diagnosis,
+    @JsonKey(name: 'outcome_value') int? outcomeValue,
+    @JsonKey(name: 'contractcasing') int? contactTracing,
     @JsonKey(name: 'treatment') int? treatment,
     @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
     HealthWorkerInfoModel? createdBy,
@@ -87,27 +92,20 @@ enum FormStatus { notStarted, started, completed }
 
 extension Casex on Case {
   bool isCaseNeedToCompete(FilterShortCut stage) => switch (stage) {
-        FilterShortCut.notXRay => !xrayStatus,
-        FilterShortCut.notUDST => !udstStatus,
-        FilterShortCut.notNI => !nikshayStatus,
-
-        /// HIV & DM are comorbidities
-        FilterShortCut.notHIV => !comorbidityStatus,
-        FilterShortCut.notDM => !comorbidityStatus,
-        FilterShortCut.notDBT => !dbtStatus,
-
-        /// TT & TO both are treatmentStatus
-        FilterShortCut.notTT => !treatmentStatus,
-        FilterShortCut.notTO => !treatmentStatus,
-        // CL assigned to contract casing
-        FilterShortCut.notCL => !contractCasingStatus,
-        FilterShortCut.all => !xrayStatus &&
-            !udstStatus &&
-            !nikshayStatus &&
-            !comorbidityStatus &&
-            !dbtStatus &&
-            !treatmentStatus &&
-            !contractCasingStatus,
+        FilterShortCut.referralDetails => !referralDetailsStatus,
+        FilterShortCut.tbScreening => !tbScreeningStatus,
+        FilterShortCut.mentalHealthScreening => !mentalHealthScreeningStatus,
+        FilterShortCut.diagnosis => !diagnosisStatus,
+        FilterShortCut.treatment => !treatmentStatus,
+        FilterShortCut.outcome => !outcomeStatus,
+        FilterShortCut.contactTracing => !contactTracingStatus,
+        FilterShortCut.all => !referralDetailsStatus &&
+            !tbScreeningStatus &&
+            !mentalHealthScreeningStatus &&
+            !diagnosisStatus &&
+            !outcomeStatus &&
+            !contactTracingStatus &&
+            !treatmentStatus,
       };
 
   bool isCaseFormCompeted(FilterShortCut stage) => isCaseNeedToCompete(stage);

@@ -1,22 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:tatpar_acf/configurations/constants/assets.gen.dart';
-import 'package:tatpar_acf/features/referral/model/referraldetails_model.dart';
+import 'package:tatpar_acf/configurations/network/api_constants.dart';
+import 'package:tatpar_acf/configurations/network/application_error.dart';
+import 'package:tatpar_acf/configurations/network/network_manager.dart';
+import 'package:tatpar_acf/configurations/network/network_request.dart';
+import 'package:tatpar_acf/features/referral/model/data_model.dart';
 
 class ReferralDetailsRepository {
-  final String file;
-  final BuildContext context;
-  ReferralDetailsRepository({required this.context, required this.file});
-  ReferralDetailsModel referralDetailsModel = ReferralDetailsModel();
-  Future<ReferralDetailsModel> buildDistrictFields() async {
-    var resp = await Utility().readJsonFromFile(context, Assets.json.districts);
-    referralDetailsModel = referralDetailsFromJson(resp);
-    return referralDetailsModel;
-  }
-}
+  Future<DataModel> buildDataFields() async {
+    final response = await NetworkManager.instance.perform(NetworkRequest(
+      districtsUrl,
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    ));
+    if (response.success = true) {
+      final DataModel dataModel = DataModel.fromJson(response.data['data']);
 
-class Utility {
-  Future<dynamic> readJsonFromFile(BuildContext context, String path) async {
-    String data = await DefaultAssetBundle.of(context).loadString(path);
-    return data;
+      return dataModel;
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error fetching data',
+        type: UnExpected(),
+      );
+    }
   }
 }

@@ -5,27 +5,28 @@ part 'who_srq_model.g.dart';
 @freezed
 class WHOSrqModel with _$WHOSrqModel {
   const factory WHOSrqModel({
-    required String? headache,
-    required String? apetite,
-    required String? sleep,
-    required String? frightened,
-    required String? handsShake,
-    required String? nervous,
-    required String? digestionPoor,
-    required String? troubleThinking,
-    required String? unhappy,
-    required String? cryMore,
-    required String? dailyActivities,
-    required String? decisionMaking,
-    required String? dailyWorkSuffering,
-    required String? playAUsefulPart,
-    required String? lostInterest,
-    required String? worthlessPerson,
-    required String? endingLife,
-    required String? tiredAllTheTime,
-    required String? uncomfortableFeelings,
-    required String? easilyTired,
+    @JsonKey(name: 'have_headaches') String? headache,
+    @JsonKey(name: 'appetite_poor') String? apetite,
+    @JsonKey(name: 'sleep_badly') String? sleep,
+    @JsonKey(name: 'easily_frightened') String? frightened,
+    @JsonKey(name: 'hands_shake') String? handsShake,
+    @JsonKey(name: 'feel_nervous') String? nervous,
+    @JsonKey(name: 'digestion_poor') String? digestionPoor,
+    @JsonKey(name: 'trouble_thinking') String? troubleThinking,
+    @JsonKey(name: 'feel_unhappy') String? unhappy,
+    @JsonKey(name: 'cry') String? cryMore,
+    @JsonKey(name: 'daily_activities') String? dailyActivities,
+    @JsonKey(name: 'decisions') String? decisionMaking,
+    @JsonKey(name: 'daily_work') String? dailyWorkSuffering,
+    @JsonKey(name: 'useful_part_life') String? playAUsefulPart,
+    @JsonKey(name: 'lost_interest') String? lostInterest,
+    @JsonKey(name: 'worthless_person') String? worthlessPerson,
+    @JsonKey(name: 'end_life') String? endingLife,
+    @JsonKey(name: 'feel_tired') String? tiredAllTheTime,
+    @JsonKey(name: 'uncomfortable_stomach') String? uncomfortableFeelings,
+    @JsonKey(name: 'easily_tired') String? easilyTired,
   }) = _WHOSrqModel;
+
   factory WHOSrqModel.fromJson(Map<String, dynamic> json) =>
       _$WHOSrqModelFromJson(json);
 }

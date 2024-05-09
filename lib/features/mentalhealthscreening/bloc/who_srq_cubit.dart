@@ -46,7 +46,6 @@ class WHOSrqStateCubit extends Cubit<WHOSrqState> {
   }
 
   void updateMentalHealthScreeningModel(MentalHealthScreeningModel model) {
-    print('Builing Model');
     emit(state.copyWith(isLoading: false, mentalHealthScreeningModel: model));
   }
 }

@@ -1,0 +1,592 @@
+// coverage:ignore-file
+// GENERATED CODE - DO NOT MODIFY BY HAND
+// ignore_for_file: type=lint
+// ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
+
+part of 'case_cubit.dart';
+
+// **************************************************************************
+// FreezedGenerator
+// **************************************************************************
+
+T _$identity<T>(T value) => value;
+
+final _privateConstructorUsedError = UnsupportedError(
+    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+
+CaseState _$CaseStateFromJson(Map<String, dynamic> json) {
+  return _CaseState.fromJson(json);
+}
+
+/// @nodoc
+mixin _$CaseState {
+  bool? get isLoading => throw _privateConstructorUsedError;
+  Case get caseWorkedUpon => throw _privateConstructorUsedError;
+  DataModel? get dataModel => throw _privateConstructorUsedError;
+  ReferralDetailsModel? get referralDetailsModel =>
+      throw _privateConstructorUsedError;
+  TBScreeningModel? get tbScreeningModel => throw _privateConstructorUsedError;
+  WHOSrqModel? get whoSrqModel => throw _privateConstructorUsedError;
+  MentalHealthScreeningModel? get mentalHealthScreeningModel =>
+      throw _privateConstructorUsedError;
+  String? get screeningOutcome => throw _privateConstructorUsedError;
+  DiagnosisModel? get diagnsosisModel => throw _privateConstructorUsedError;
+  DiagnosisData? get diagnosisData => throw _privateConstructorUsedError;
+  TreatmentModel? get treatmentModel => throw _privateConstructorUsedError;
+  ContactTracingModel? get contactTracingModel =>
+      throw _privateConstructorUsedError;
+  OutcomeModel? get outcomeModel => throw _privateConstructorUsedError;
+
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+  @JsonKey(ignore: true)
+  $CaseStateCopyWith<CaseState> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $CaseStateCopyWith<$Res> {
+  factory $CaseStateCopyWith(CaseState value, $Res Function(CaseState) then) =
+      _$CaseStateCopyWithImpl<$Res, CaseState>;
+  @useResult
+  $Res call(
+      {bool? isLoading,
+      Case caseWorkedUpon,
+      DataModel? dataModel,
+      ReferralDetailsModel? referralDetailsModel,
+      TBScreeningModel? tbScreeningModel,
+      WHOSrqModel? whoSrqModel,
+      MentalHealthScreeningModel? mentalHealthScreeningModel,
+      String? screeningOutcome,
+      DiagnosisModel? diagnsosisModel,
+      DiagnosisData? diagnosisData,
+      TreatmentModel? treatmentModel,
+      ContactTracingModel? contactTracingModel,
+      OutcomeModel? outcomeModel});
+
+  $CaseCopyWith<$Res> get caseWorkedUpon;
+  $DataModelCopyWith<$Res>? get dataModel;
+  $ReferralDetailsModelCopyWith<$Res>? get referralDetailsModel;
+  $TBScreeningModelCopyWith<$Res>? get tbScreeningModel;
+  $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
+  $MentalHealthScreeningModelCopyWith<$Res>? get mentalHealthScreeningModel;
+  $DiagnosisModelCopyWith<$Res>? get diagnsosisModel;
+  $DiagnosisDataCopyWith<$Res>? get diagnosisData;
+  $TreatmentModelCopyWith<$Res>? get treatmentModel;
+  $ContactTracingModelCopyWith<$Res>? get contactTracingModel;
+  $OutcomeModelCopyWith<$Res>? get outcomeModel;
+}
+
+/// @nodoc
+class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
+    implements $CaseStateCopyWith<$Res> {
+  _$CaseStateCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = freezed,
+    Object? caseWorkedUpon = null,
+    Object? dataModel = freezed,
+    Object? referralDetailsModel = freezed,
+    Object? tbScreeningModel = freezed,
+    Object? whoSrqModel = freezed,
+    Object? mentalHealthScreeningModel = freezed,
+    Object? screeningOutcome = freezed,
+    Object? diagnsosisModel = freezed,
+    Object? diagnosisData = freezed,
+    Object? treatmentModel = freezed,
+    Object? contactTracingModel = freezed,
+    Object? outcomeModel = freezed,
+  }) {
+    return _then(_value.copyWith(
+      isLoading: freezed == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseWorkedUpon: null == caseWorkedUpon
+          ? _value.caseWorkedUpon
+          : caseWorkedUpon // ignore: cast_nullable_to_non_nullable
+              as Case,
+      dataModel: freezed == dataModel
+          ? _value.dataModel
+          : dataModel // ignore: cast_nullable_to_non_nullable
+              as DataModel?,
+      referralDetailsModel: freezed == referralDetailsModel
+          ? _value.referralDetailsModel
+          : referralDetailsModel // ignore: cast_nullable_to_non_nullable
+              as ReferralDetailsModel?,
+      tbScreeningModel: freezed == tbScreeningModel
+          ? _value.tbScreeningModel
+          : tbScreeningModel // ignore: cast_nullable_to_non_nullable
+              as TBScreeningModel?,
+      whoSrqModel: freezed == whoSrqModel
+          ? _value.whoSrqModel
+          : whoSrqModel // ignore: cast_nullable_to_non_nullable
+              as WHOSrqModel?,
+      mentalHealthScreeningModel: freezed == mentalHealthScreeningModel
+          ? _value.mentalHealthScreeningModel
+          : mentalHealthScreeningModel // ignore: cast_nullable_to_non_nullable
+              as MentalHealthScreeningModel?,
+      screeningOutcome: freezed == screeningOutcome
+          ? _value.screeningOutcome
+          : screeningOutcome // ignore: cast_nullable_to_non_nullable
+              as String?,
+      diagnsosisModel: freezed == diagnsosisModel
+          ? _value.diagnsosisModel
+          : diagnsosisModel // ignore: cast_nullable_to_non_nullable
+              as DiagnosisModel?,
+      diagnosisData: freezed == diagnosisData
+          ? _value.diagnosisData
+          : diagnosisData // ignore: cast_nullable_to_non_nullable
+              as DiagnosisData?,
+      treatmentModel: freezed == treatmentModel
+          ? _value.treatmentModel
+          : treatmentModel // ignore: cast_nullable_to_non_nullable
+              as TreatmentModel?,
+      contactTracingModel: freezed == contactTracingModel
+          ? _value.contactTracingModel
+          : contactTracingModel // ignore: cast_nullable_to_non_nullable
+              as ContactTracingModel?,
+      outcomeModel: freezed == outcomeModel
+          ? _value.outcomeModel
+          : outcomeModel // ignore: cast_nullable_to_non_nullable
+              as OutcomeModel?,
+    ) as $Val);
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $CaseCopyWith<$Res> get caseWorkedUpon {
+    return $CaseCopyWith<$Res>(_value.caseWorkedUpon, (value) {
+      return _then(_value.copyWith(caseWorkedUpon: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DataModelCopyWith<$Res>? get dataModel {
+    if (_value.dataModel == null) {
+      return null;
+    }
+
+    return $DataModelCopyWith<$Res>(_value.dataModel!, (value) {
+      return _then(_value.copyWith(dataModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ReferralDetailsModelCopyWith<$Res>? get referralDetailsModel {
+    if (_value.referralDetailsModel == null) {
+      return null;
+    }
+
+    return $ReferralDetailsModelCopyWith<$Res>(_value.referralDetailsModel!,
+        (value) {
+      return _then(_value.copyWith(referralDetailsModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TBScreeningModelCopyWith<$Res>? get tbScreeningModel {
+    if (_value.tbScreeningModel == null) {
+      return null;
+    }
+
+    return $TBScreeningModelCopyWith<$Res>(_value.tbScreeningModel!, (value) {
+      return _then(_value.copyWith(tbScreeningModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $WHOSrqModelCopyWith<$Res>? get whoSrqModel {
+    if (_value.whoSrqModel == null) {
+      return null;
+    }
+
+    return $WHOSrqModelCopyWith<$Res>(_value.whoSrqModel!, (value) {
+      return _then(_value.copyWith(whoSrqModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $MentalHealthScreeningModelCopyWith<$Res>? get mentalHealthScreeningModel {
+    if (_value.mentalHealthScreeningModel == null) {
+      return null;
+    }
+
+    return $MentalHealthScreeningModelCopyWith<$Res>(
+        _value.mentalHealthScreeningModel!, (value) {
+      return _then(_value.copyWith(mentalHealthScreeningModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DiagnosisModelCopyWith<$Res>? get diagnsosisModel {
+    if (_value.diagnsosisModel == null) {
+      return null;
+    }
+
+    return $DiagnosisModelCopyWith<$Res>(_value.diagnsosisModel!, (value) {
+      return _then(_value.copyWith(diagnsosisModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $DiagnosisDataCopyWith<$Res>? get diagnosisData {
+    if (_value.diagnosisData == null) {
+      return null;
+    }
+
+    return $DiagnosisDataCopyWith<$Res>(_value.diagnosisData!, (value) {
+      return _then(_value.copyWith(diagnosisData: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $TreatmentModelCopyWith<$Res>? get treatmentModel {
+    if (_value.treatmentModel == null) {
+      return null;
+    }
+
+    return $TreatmentModelCopyWith<$Res>(_value.treatmentModel!, (value) {
+      return _then(_value.copyWith(treatmentModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $ContactTracingModelCopyWith<$Res>? get contactTracingModel {
+    if (_value.contactTracingModel == null) {
+      return null;
+    }
+
+    return $ContactTracingModelCopyWith<$Res>(_value.contactTracingModel!,
+        (value) {
+      return _then(_value.copyWith(contactTracingModel: value) as $Val);
+    });
+  }
+
+  @override
+  @pragma('vm:prefer-inline')
+  $OutcomeModelCopyWith<$Res>? get outcomeModel {
+    if (_value.outcomeModel == null) {
+      return null;
+    }
+
+    return $OutcomeModelCopyWith<$Res>(_value.outcomeModel!, (value) {
+      return _then(_value.copyWith(outcomeModel: value) as $Val);
+    });
+  }
+}
+
+/// @nodoc
+abstract class _$$CaseStateImplCopyWith<$Res>
+    implements $CaseStateCopyWith<$Res> {
+  factory _$$CaseStateImplCopyWith(
+          _$CaseStateImpl value, $Res Function(_$CaseStateImpl) then) =
+      __$$CaseStateImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {bool? isLoading,
+      Case caseWorkedUpon,
+      DataModel? dataModel,
+      ReferralDetailsModel? referralDetailsModel,
+      TBScreeningModel? tbScreeningModel,
+      WHOSrqModel? whoSrqModel,
+      MentalHealthScreeningModel? mentalHealthScreeningModel,
+      String? screeningOutcome,
+      DiagnosisModel? diagnsosisModel,
+      DiagnosisData? diagnosisData,
+      TreatmentModel? treatmentModel,
+      ContactTracingModel? contactTracingModel,
+      OutcomeModel? outcomeModel});
+
+  @override
+  $CaseCopyWith<$Res> get caseWorkedUpon;
+  @override
+  $DataModelCopyWith<$Res>? get dataModel;
+  @override
+  $ReferralDetailsModelCopyWith<$Res>? get referralDetailsModel;
+  @override
+  $TBScreeningModelCopyWith<$Res>? get tbScreeningModel;
+  @override
+  $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
+  @override
+  $MentalHealthScreeningModelCopyWith<$Res>? get mentalHealthScreeningModel;
+  @override
+  $DiagnosisModelCopyWith<$Res>? get diagnsosisModel;
+  @override
+  $DiagnosisDataCopyWith<$Res>? get diagnosisData;
+  @override
+  $TreatmentModelCopyWith<$Res>? get treatmentModel;
+  @override
+  $ContactTracingModelCopyWith<$Res>? get contactTracingModel;
+  @override
+  $OutcomeModelCopyWith<$Res>? get outcomeModel;
+}
+
+/// @nodoc
+class __$$CaseStateImplCopyWithImpl<$Res>
+    extends _$CaseStateCopyWithImpl<$Res, _$CaseStateImpl>
+    implements _$$CaseStateImplCopyWith<$Res> {
+  __$$CaseStateImplCopyWithImpl(
+      _$CaseStateImpl _value, $Res Function(_$CaseStateImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? isLoading = freezed,
+    Object? caseWorkedUpon = null,
+    Object? dataModel = freezed,
+    Object? referralDetailsModel = freezed,
+    Object? tbScreeningModel = freezed,
+    Object? whoSrqModel = freezed,
+    Object? mentalHealthScreeningModel = freezed,
+    Object? screeningOutcome = freezed,
+    Object? diagnsosisModel = freezed,
+    Object? diagnosisData = freezed,
+    Object? treatmentModel = freezed,
+    Object? contactTracingModel = freezed,
+    Object? outcomeModel = freezed,
+  }) {
+    return _then(_$CaseStateImpl(
+      isLoading: freezed == isLoading
+          ? _value.isLoading
+          : isLoading // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseWorkedUpon: null == caseWorkedUpon
+          ? _value.caseWorkedUpon
+          : caseWorkedUpon // ignore: cast_nullable_to_non_nullable
+              as Case,
+      dataModel: freezed == dataModel
+          ? _value.dataModel
+          : dataModel // ignore: cast_nullable_to_non_nullable
+              as DataModel?,
+      referralDetailsModel: freezed == referralDetailsModel
+          ? _value.referralDetailsModel
+          : referralDetailsModel // ignore: cast_nullable_to_non_nullable
+              as ReferralDetailsModel?,
+      tbScreeningModel: freezed == tbScreeningModel
+          ? _value.tbScreeningModel
+          : tbScreeningModel // ignore: cast_nullable_to_non_nullable
+              as TBScreeningModel?,
+      whoSrqModel: freezed == whoSrqModel
+          ? _value.whoSrqModel
+          : whoSrqModel // ignore: cast_nullable_to_non_nullable
+              as WHOSrqModel?,
+      mentalHealthScreeningModel: freezed == mentalHealthScreeningModel
+          ? _value.mentalHealthScreeningModel
+          : mentalHealthScreeningModel // ignore: cast_nullable_to_non_nullable
+              as MentalHealthScreeningModel?,
+      screeningOutcome: freezed == screeningOutcome
+          ? _value.screeningOutcome
+          : screeningOutcome // ignore: cast_nullable_to_non_nullable
+              as String?,
+      diagnsosisModel: freezed == diagnsosisModel
+          ? _value.diagnsosisModel
+          : diagnsosisModel // ignore: cast_nullable_to_non_nullable
+              as DiagnosisModel?,
+      diagnosisData: freezed == diagnosisData
+          ? _value.diagnosisData
+          : diagnosisData // ignore: cast_nullable_to_non_nullable
+              as DiagnosisData?,
+      treatmentModel: freezed == treatmentModel
+          ? _value.treatmentModel
+          : treatmentModel // ignore: cast_nullable_to_non_nullable
+              as TreatmentModel?,
+      contactTracingModel: freezed == contactTracingModel
+          ? _value.contactTracingModel
+          : contactTracingModel // ignore: cast_nullable_to_non_nullable
+              as ContactTracingModel?,
+      outcomeModel: freezed == outcomeModel
+          ? _value.outcomeModel
+          : outcomeModel // ignore: cast_nullable_to_non_nullable
+              as OutcomeModel?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$CaseStateImpl implements _CaseState {
+  const _$CaseStateImpl(
+      {this.isLoading,
+      required this.caseWorkedUpon,
+      this.dataModel,
+      this.referralDetailsModel,
+      this.tbScreeningModel,
+      this.whoSrqModel,
+      this.mentalHealthScreeningModel,
+      this.screeningOutcome,
+      this.diagnsosisModel,
+      this.diagnosisData,
+      this.treatmentModel,
+      this.contactTracingModel,
+      this.outcomeModel});
+
+  factory _$CaseStateImpl.fromJson(Map<String, dynamic> json) =>
+      _$$CaseStateImplFromJson(json);
+
+  @override
+  final bool? isLoading;
+  @override
+  final Case caseWorkedUpon;
+  @override
+  final DataModel? dataModel;
+  @override
+  final ReferralDetailsModel? referralDetailsModel;
+  @override
+  final TBScreeningModel? tbScreeningModel;
+  @override
+  final WHOSrqModel? whoSrqModel;
+  @override
+  final MentalHealthScreeningModel? mentalHealthScreeningModel;
+  @override
+  final String? screeningOutcome;
+  @override
+  final DiagnosisModel? diagnsosisModel;
+  @override
+  final DiagnosisData? diagnosisData;
+  @override
+  final TreatmentModel? treatmentModel;
+  @override
+  final ContactTracingModel? contactTracingModel;
+  @override
+  final OutcomeModel? outcomeModel;
+
+  @override
+  String toString() {
+    return 'CaseState(isLoading: $isLoading, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$CaseStateImpl &&
+            (identical(other.isLoading, isLoading) ||
+                other.isLoading == isLoading) &&
+            (identical(other.caseWorkedUpon, caseWorkedUpon) ||
+                other.caseWorkedUpon == caseWorkedUpon) &&
+            (identical(other.dataModel, dataModel) ||
+                other.dataModel == dataModel) &&
+            (identical(other.referralDetailsModel, referralDetailsModel) ||
+                other.referralDetailsModel == referralDetailsModel) &&
+            (identical(other.tbScreeningModel, tbScreeningModel) ||
+                other.tbScreeningModel == tbScreeningModel) &&
+            (identical(other.whoSrqModel, whoSrqModel) ||
+                other.whoSrqModel == whoSrqModel) &&
+            (identical(other.mentalHealthScreeningModel,
+                    mentalHealthScreeningModel) ||
+                other.mentalHealthScreeningModel ==
+                    mentalHealthScreeningModel) &&
+            (identical(other.screeningOutcome, screeningOutcome) ||
+                other.screeningOutcome == screeningOutcome) &&
+            (identical(other.diagnsosisModel, diagnsosisModel) ||
+                other.diagnsosisModel == diagnsosisModel) &&
+            (identical(other.diagnosisData, diagnosisData) ||
+                other.diagnosisData == diagnosisData) &&
+            (identical(other.treatmentModel, treatmentModel) ||
+                other.treatmentModel == treatmentModel) &&
+            (identical(other.contactTracingModel, contactTracingModel) ||
+                other.contactTracingModel == contactTracingModel) &&
+            (identical(other.outcomeModel, outcomeModel) ||
+                other.outcomeModel == outcomeModel));
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      caseWorkedUpon,
+      dataModel,
+      referralDetailsModel,
+      tbScreeningModel,
+      whoSrqModel,
+      mentalHealthScreeningModel,
+      screeningOutcome,
+      diagnsosisModel,
+      diagnosisData,
+      treatmentModel,
+      contactTracingModel,
+      outcomeModel);
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$CaseStateImplCopyWith<_$CaseStateImpl> get copyWith =>
+      __$$CaseStateImplCopyWithImpl<_$CaseStateImpl>(this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$CaseStateImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _CaseState implements CaseState {
+  const factory _CaseState(
+      {final bool? isLoading,
+      required final Case caseWorkedUpon,
+      final DataModel? dataModel,
+      final ReferralDetailsModel? referralDetailsModel,
+      final TBScreeningModel? tbScreeningModel,
+      final WHOSrqModel? whoSrqModel,
+      final MentalHealthScreeningModel? mentalHealthScreeningModel,
+      final String? screeningOutcome,
+      final DiagnosisModel? diagnsosisModel,
+      final DiagnosisData? diagnosisData,
+      final TreatmentModel? treatmentModel,
+      final ContactTracingModel? contactTracingModel,
+      final OutcomeModel? outcomeModel}) = _$CaseStateImpl;
+
+  factory _CaseState.fromJson(Map<String, dynamic> json) =
+      _$CaseStateImpl.fromJson;
+
+  @override
+  bool? get isLoading;
+  @override
+  Case get caseWorkedUpon;
+  @override
+  DataModel? get dataModel;
+  @override
+  ReferralDetailsModel? get referralDetailsModel;
+  @override
+  TBScreeningModel? get tbScreeningModel;
+  @override
+  WHOSrqModel? get whoSrqModel;
+  @override
+  MentalHealthScreeningModel? get mentalHealthScreeningModel;
+  @override
+  String? get screeningOutcome;
+  @override
+  DiagnosisModel? get diagnsosisModel;
+  @override
+  DiagnosisData? get diagnosisData;
+  @override
+  TreatmentModel? get treatmentModel;
+  @override
+  ContactTracingModel? get contactTracingModel;
+  @override
+  OutcomeModel? get outcomeModel;
+  @override
+  @JsonKey(ignore: true)
+  _$$CaseStateImplCopyWith<_$CaseStateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}

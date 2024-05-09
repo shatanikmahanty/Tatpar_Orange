@@ -25,7 +25,7 @@ Map<String, dynamic> _$$ClinicalPersonTypeImplToJson(
     };
 
 _$SourceImpl _$$SourceImplFromJson(Map<String, dynamic> json) => _$SourceImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       clinicalPersonType: json['clinical_person_type'] == null
           ? null
           : ClinicalPersonType.fromJson(
@@ -40,10 +40,10 @@ _$SourceImpl _$$SourceImplFromJson(Map<String, dynamic> json) => _$SourceImpl(
       clinicalPersonLicenseId: json['clinial_person_license_id'] as String?,
       createdAt: _dateTimeFromJson(json['created_at'] as String),
       updatedAt: _dateTimeFromJson(json['updated_at'] as String),
-      createdBy: json['created_by'] as int?,
-      updatedBy: json['updated_by'] as int?,
+      createdBy: (json['created_by'] as num?)?.toInt(),
+      updatedBy: (json['updated_by'] as num?)?.toInt(),
       healthWorkersAssigned: (json['healthworkers_assigned'] as List<dynamic>?)
-              ?.map((e) => e as int)
+              ?.map((e) => (e as num).toInt())
               .toList() ??
           const [],
     );

@@ -80,7 +80,7 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
               alignment: Alignment.centerLeft,
               child: Text(
                 widget.label!,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.titleMedium,
               ),
             ),
           if (widget.label != null)
