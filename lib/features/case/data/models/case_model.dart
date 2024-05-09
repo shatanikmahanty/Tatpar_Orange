@@ -76,8 +76,8 @@ class Case with _$Case {
     @JsonKey(name: 'udst') int? tbScreening,
     @JsonKey(name: 'nikshay') int? whoSrq,
     @JsonKey(name: 'comorbidity') int? diagnosis,
-    @JsonKey(name: 'Dbt') int? dbt,
-    @JsonKey(name: 'contractcasing') int? contractCasing,
+    @JsonKey(name: 'outcome_value') int? outcomeValue,
+    @JsonKey(name: 'contractcasing') int? contactTracing,
     @JsonKey(name: 'treatment') int? treatment,
     @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
     HealthWorkerInfoModel? createdBy,

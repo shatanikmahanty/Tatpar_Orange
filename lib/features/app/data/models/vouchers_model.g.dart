@@ -9,7 +9,7 @@ part of 'vouchers_model.dart';
 _$VouchersModelImpl _$$VouchersModelImplFromJson(Map<String, dynamic> json) =>
     _$VouchersModelImpl(
       voucherNo: json['voucher_no'] as String?,
-      validity: json['validity'] as int?,
+      validity: (json['validity'] as num?)?.toInt(),
       createdAt: _dateTimeFromJson(json['created_at'] as String),
       updatedAt: _dateTimeFromJson(json['updated_at'] as String),
       createdBy: _dateTimeFromJson(json['created_by'] as String),

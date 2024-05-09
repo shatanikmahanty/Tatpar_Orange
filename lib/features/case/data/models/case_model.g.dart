@@ -7,8 +7,8 @@ part of 'case_model.dart';
 // **************************************************************************
 
 _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
-      id: json['id'] as int?,
-      healthworkerId: json['healthworker_id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
+      healthworkerId: (json['healthworker_id'] as num?)?.toInt(),
       patient: json['patient'] == null
           ? null
           : PatientModel.fromJson(json['patient'] as Map<String, dynamic>),
@@ -25,9 +25,9 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
       contactTracingStatus: json['contact_tracing_status'] as bool? ?? false,
       createdAt: fromJsonToDateTime(json['created_at'] as String?),
       updatedAt: fromJsonToDateTime(json['updated_at'] as String?),
-      sourceVisited: json['source_visited'] as int?,
-      hub: json['hub'] as int?,
-      drugsPurchased: json['drugs_purchased'] as int?,
+      sourceVisited: (json['source_visited'] as num?)?.toInt(),
+      hub: (json['hub'] as num?)?.toInt(),
+      drugsPurchased: (json['drugs_purchased'] as num?)?.toInt(),
       referredTo: json['referred_to'] == null
           ? null
           : HealthWorkerInfoModel.fromJson(
@@ -36,15 +36,15 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
           ? null
           : HealthWorkerInfoModel.fromJson(
               json['assigned_to'] as Map<String, dynamic>),
-      filledForm: json['filled_form'] as int?,
-      disease: json['disease'] as int?,
-      referralDetails: json['xray'] as int?,
-      tbScreening: json['udst'] as int?,
-      whoSrq: json['nikshay'] as int?,
-      diagnosis: json['comorbidity'] as int?,
-      dbt: json['Dbt'] as int?,
-      contractCasing: json['contractcasing'] as int?,
-      treatment: json['treatment'] as int?,
+      filledForm: (json['filled_form'] as num?)?.toInt(),
+      disease: (json['disease'] as num?)?.toInt(),
+      referralDetails: (json['xray'] as num?)?.toInt(),
+      tbScreening: (json['udst'] as num?)?.toInt(),
+      whoSrq: (json['nikshay'] as num?)?.toInt(),
+      diagnosis: (json['comorbidity'] as num?)?.toInt(),
+      outcomeValue: (json['outcome_value'] as num?)?.toInt(),
+      contactTracing: (json['contractcasing'] as num?)?.toInt(),
+      treatment: (json['treatment'] as num?)?.toInt(),
       createdBy: json['created_by'] == null
           ? null
           : HealthWorkerInfoModel.fromJson(
@@ -91,8 +91,8 @@ Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) {
   val['udst'] = instance.tbScreening;
   val['nikshay'] = instance.whoSrq;
   val['comorbidity'] = instance.diagnosis;
-  val['Dbt'] = instance.dbt;
-  val['contractcasing'] = instance.contractCasing;
+  val['outcome_value'] = instance.outcomeValue;
+  val['contractcasing'] = instance.contactTracing;
   val['treatment'] = instance.treatment;
   val['created_by'] = healthWorkerToJson(instance.createdBy);
   val['updated_by'] = healthWorkerToJson(instance.updatedBy);

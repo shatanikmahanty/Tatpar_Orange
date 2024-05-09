@@ -20,16 +20,40 @@ ContactTracingModel _$ContactTracingModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContactTracingModel {
+  @JsonKey(name: 'tb_contact_name')
   String? get tbContactName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'age')
   int? get age => throw _privateConstructorUsedError;
+  @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome => throw _privateConstructorUsedError;
+  @JsonKey(name: 'test_conducted')
   String? get testConducted => throw _privateConstructorUsedError;
+  DateTime? get cxrDate => throw _privateConstructorUsedError;
+  String? get cxrResult => throw _privateConstructorUsedError;
+  DateTime? get tbiDate => throw _privateConstructorUsedError;
+  String? get tbiResult => throw _privateConstructorUsedError;
+  String? get nikshayID => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tpt_eligible')
   String? get tptEligible => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tpt_regimen')
+  int? get selectedTptRegimen => throw _privateConstructorUsedError;
+  @JsonKey(includeIfNull: false)
   String? get tptRegimen => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'tpt_start_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get tptStartDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'weight')
   int? get weight => throw _privateConstructorUsedError;
+  @JsonKey(name: 'side_effects')
   String? get tptSideEffects => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'tpt_outcome_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get tptOutcomeDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tpt_outcome')
   String? get tptOutcome => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -45,17 +69,31 @@ abstract class $ContactTracingModelCopyWith<$Res> {
       _$ContactTracingModelCopyWithImpl<$Res, ContactTracingModel>;
   @useResult
   $Res call(
-      {String? tbContactName,
-      int? age,
-      String? screeningOutcome,
-      String? testConducted,
-      String? tptEligible,
-      String? tptRegimen,
+      {@JsonKey(name: 'tb_contact_name') String? tbContactName,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
+      @JsonKey(name: 'test_conducted') String? testConducted,
+      DateTime? cxrDate,
+      String? cxrResult,
+      DateTime? tbiDate,
+      String? tbiResult,
+      String? nikshayID,
+      @JsonKey(name: 'tpt_eligible') String? tptEligible,
+      @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
+      @JsonKey(includeIfNull: false) String? tptRegimen,
+      @JsonKey(
+          name: 'tpt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? tptStartDate,
-      int? weight,
-      String? tptSideEffects,
+      @JsonKey(name: 'weight') int? weight,
+      @JsonKey(name: 'side_effects') String? tptSideEffects,
+      @JsonKey(
+          name: 'tpt_outcome_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? tptOutcomeDate,
-      String? tptOutcome});
+      @JsonKey(name: 'tpt_outcome') String? tptOutcome});
 }
 
 /// @nodoc
@@ -75,7 +113,13 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
     Object? age = freezed,
     Object? screeningOutcome = freezed,
     Object? testConducted = freezed,
+    Object? cxrDate = freezed,
+    Object? cxrResult = freezed,
+    Object? tbiDate = freezed,
+    Object? tbiResult = freezed,
+    Object? nikshayID = freezed,
     Object? tptEligible = freezed,
+    Object? selectedTptRegimen = freezed,
     Object? tptRegimen = freezed,
     Object? tptStartDate = freezed,
     Object? weight = freezed,
@@ -100,10 +144,34 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
           ? _value.testConducted
           : testConducted // ignore: cast_nullable_to_non_nullable
               as String?,
+      cxrDate: freezed == cxrDate
+          ? _value.cxrDate
+          : cxrDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      cxrResult: freezed == cxrResult
+          ? _value.cxrResult
+          : cxrResult // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tbiDate: freezed == tbiDate
+          ? _value.tbiDate
+          : tbiDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      tbiResult: freezed == tbiResult
+          ? _value.tbiResult
+          : tbiResult // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nikshayID: freezed == nikshayID
+          ? _value.nikshayID
+          : nikshayID // ignore: cast_nullable_to_non_nullable
+              as String?,
       tptEligible: freezed == tptEligible
           ? _value.tptEligible
           : tptEligible // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedTptRegimen: freezed == selectedTptRegimen
+          ? _value.selectedTptRegimen
+          : selectedTptRegimen // ignore: cast_nullable_to_non_nullable
+              as int?,
       tptRegimen: freezed == tptRegimen
           ? _value.tptRegimen
           : tptRegimen // ignore: cast_nullable_to_non_nullable
@@ -141,17 +209,31 @@ abstract class _$$ContactTracingModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? tbContactName,
-      int? age,
-      String? screeningOutcome,
-      String? testConducted,
-      String? tptEligible,
-      String? tptRegimen,
+      {@JsonKey(name: 'tb_contact_name') String? tbContactName,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
+      @JsonKey(name: 'test_conducted') String? testConducted,
+      DateTime? cxrDate,
+      String? cxrResult,
+      DateTime? tbiDate,
+      String? tbiResult,
+      String? nikshayID,
+      @JsonKey(name: 'tpt_eligible') String? tptEligible,
+      @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
+      @JsonKey(includeIfNull: false) String? tptRegimen,
+      @JsonKey(
+          name: 'tpt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? tptStartDate,
-      int? weight,
-      String? tptSideEffects,
+      @JsonKey(name: 'weight') int? weight,
+      @JsonKey(name: 'side_effects') String? tptSideEffects,
+      @JsonKey(
+          name: 'tpt_outcome_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? tptOutcomeDate,
-      String? tptOutcome});
+      @JsonKey(name: 'tpt_outcome') String? tptOutcome});
 }
 
 /// @nodoc
@@ -169,7 +251,13 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
     Object? age = freezed,
     Object? screeningOutcome = freezed,
     Object? testConducted = freezed,
+    Object? cxrDate = freezed,
+    Object? cxrResult = freezed,
+    Object? tbiDate = freezed,
+    Object? tbiResult = freezed,
+    Object? nikshayID = freezed,
     Object? tptEligible = freezed,
+    Object? selectedTptRegimen = freezed,
     Object? tptRegimen = freezed,
     Object? tptStartDate = freezed,
     Object? weight = freezed,
@@ -194,10 +282,34 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
           ? _value.testConducted
           : testConducted // ignore: cast_nullable_to_non_nullable
               as String?,
+      cxrDate: freezed == cxrDate
+          ? _value.cxrDate
+          : cxrDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      cxrResult: freezed == cxrResult
+          ? _value.cxrResult
+          : cxrResult // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tbiDate: freezed == tbiDate
+          ? _value.tbiDate
+          : tbiDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      tbiResult: freezed == tbiResult
+          ? _value.tbiResult
+          : tbiResult // ignore: cast_nullable_to_non_nullable
+              as String?,
+      nikshayID: freezed == nikshayID
+          ? _value.nikshayID
+          : nikshayID // ignore: cast_nullable_to_non_nullable
+              as String?,
       tptEligible: freezed == tptEligible
           ? _value.tptEligible
           : tptEligible // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedTptRegimen: freezed == selectedTptRegimen
+          ? _value.selectedTptRegimen
+          : selectedTptRegimen // ignore: cast_nullable_to_non_nullable
+              as int?,
       tptRegimen: freezed == tptRegimen
           ? _value.tptRegimen
           : tptRegimen // ignore: cast_nullable_to_non_nullable
@@ -230,47 +342,91 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ContactTracingModelImpl implements _ContactTracingModel {
   const _$ContactTracingModelImpl(
-      {required this.tbContactName,
-      required this.age,
-      required this.screeningOutcome,
-      required this.testConducted,
-      required this.tptEligible,
-      required this.tptRegimen,
-      required this.tptStartDate,
-      required this.weight,
-      required this.tptSideEffects,
-      required this.tptOutcomeDate,
-      required this.tptOutcome});
+      {@JsonKey(name: 'tb_contact_name') this.tbContactName,
+      @JsonKey(name: 'age') this.age,
+      @JsonKey(name: 'screening_outcome') this.screeningOutcome,
+      @JsonKey(name: 'test_conducted') this.testConducted,
+      this.cxrDate,
+      this.cxrResult,
+      this.tbiDate,
+      this.tbiResult,
+      this.nikshayID,
+      @JsonKey(name: 'tpt_eligible') this.tptEligible,
+      @JsonKey(name: 'tpt_regimen') this.selectedTptRegimen,
+      @JsonKey(includeIfNull: false) this.tptRegimen,
+      @JsonKey(
+          name: 'tpt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.tptStartDate,
+      @JsonKey(name: 'weight') this.weight,
+      @JsonKey(name: 'side_effects') this.tptSideEffects,
+      @JsonKey(
+          name: 'tpt_outcome_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.tptOutcomeDate,
+      @JsonKey(name: 'tpt_outcome') this.tptOutcome});
 
   factory _$ContactTracingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContactTracingModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'tb_contact_name')
   final String? tbContactName;
   @override
+  @JsonKey(name: 'age')
   final int? age;
   @override
+  @JsonKey(name: 'screening_outcome')
   final String? screeningOutcome;
   @override
+  @JsonKey(name: 'test_conducted')
   final String? testConducted;
   @override
+  final DateTime? cxrDate;
+  @override
+  final String? cxrResult;
+  @override
+  final DateTime? tbiDate;
+  @override
+  final String? tbiResult;
+  @override
+  final String? nikshayID;
+  @override
+  @JsonKey(name: 'tpt_eligible')
   final String? tptEligible;
   @override
+  @JsonKey(name: 'tpt_regimen')
+  final int? selectedTptRegimen;
+  @override
+  @JsonKey(includeIfNull: false)
   final String? tptRegimen;
   @override
+  @JsonKey(
+      name: 'tpt_start_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? tptStartDate;
   @override
+  @JsonKey(name: 'weight')
   final int? weight;
   @override
+  @JsonKey(name: 'side_effects')
   final String? tptSideEffects;
   @override
+  @JsonKey(
+      name: 'tpt_outcome_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? tptOutcomeDate;
   @override
+  @JsonKey(name: 'tpt_outcome')
   final String? tptOutcome;
 
   @override
   String toString() {
-    return 'ContactTracingModel(tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, tptEligible: $tptEligible, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome)';
+    return 'ContactTracingModel(tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, cxrDate: $cxrDate, cxrResult: $cxrResult, tbiDate: $tbiDate, tbiResult: $tbiResult, nikshayID: $nikshayID, tptEligible: $tptEligible, selectedTptRegimen: $selectedTptRegimen, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome)';
   }
 
   @override
@@ -285,8 +441,18 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
                 other.screeningOutcome == screeningOutcome) &&
             (identical(other.testConducted, testConducted) ||
                 other.testConducted == testConducted) &&
+            (identical(other.cxrDate, cxrDate) || other.cxrDate == cxrDate) &&
+            (identical(other.cxrResult, cxrResult) ||
+                other.cxrResult == cxrResult) &&
+            (identical(other.tbiDate, tbiDate) || other.tbiDate == tbiDate) &&
+            (identical(other.tbiResult, tbiResult) ||
+                other.tbiResult == tbiResult) &&
+            (identical(other.nikshayID, nikshayID) ||
+                other.nikshayID == nikshayID) &&
             (identical(other.tptEligible, tptEligible) ||
                 other.tptEligible == tptEligible) &&
+            (identical(other.selectedTptRegimen, selectedTptRegimen) ||
+                other.selectedTptRegimen == selectedTptRegimen) &&
             (identical(other.tptRegimen, tptRegimen) ||
                 other.tptRegimen == tptRegimen) &&
             (identical(other.tptStartDate, tptStartDate) ||
@@ -308,7 +474,13 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
       age,
       screeningOutcome,
       testConducted,
+      cxrDate,
+      cxrResult,
+      tbiDate,
+      tbiResult,
+      nikshayID,
       tptEligible,
+      selectedTptRegimen,
       tptRegimen,
       tptStartDate,
       weight,
@@ -333,42 +505,87 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
 
 abstract class _ContactTracingModel implements ContactTracingModel {
   const factory _ContactTracingModel(
-      {required final String? tbContactName,
-      required final int? age,
-      required final String? screeningOutcome,
-      required final String? testConducted,
-      required final String? tptEligible,
-      required final String? tptRegimen,
-      required final DateTime? tptStartDate,
-      required final int? weight,
-      required final String? tptSideEffects,
-      required final DateTime? tptOutcomeDate,
-      required final String? tptOutcome}) = _$ContactTracingModelImpl;
+          {@JsonKey(name: 'tb_contact_name') final String? tbContactName,
+          @JsonKey(name: 'age') final int? age,
+          @JsonKey(name: 'screening_outcome') final String? screeningOutcome,
+          @JsonKey(name: 'test_conducted') final String? testConducted,
+          final DateTime? cxrDate,
+          final String? cxrResult,
+          final DateTime? tbiDate,
+          final String? tbiResult,
+          final String? nikshayID,
+          @JsonKey(name: 'tpt_eligible') final String? tptEligible,
+          @JsonKey(name: 'tpt_regimen') final int? selectedTptRegimen,
+          @JsonKey(includeIfNull: false) final String? tptRegimen,
+          @JsonKey(
+              name: 'tpt_start_date',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
+          final DateTime? tptStartDate,
+          @JsonKey(name: 'weight') final int? weight,
+          @JsonKey(name: 'side_effects') final String? tptSideEffects,
+          @JsonKey(
+              name: 'tpt_outcome_date',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
+          final DateTime? tptOutcomeDate,
+          @JsonKey(name: 'tpt_outcome') final String? tptOutcome}) =
+      _$ContactTracingModelImpl;
 
   factory _ContactTracingModel.fromJson(Map<String, dynamic> json) =
       _$ContactTracingModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'tb_contact_name')
   String? get tbContactName;
   @override
+  @JsonKey(name: 'age')
   int? get age;
   @override
+  @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome;
   @override
+  @JsonKey(name: 'test_conducted')
   String? get testConducted;
   @override
+  DateTime? get cxrDate;
+  @override
+  String? get cxrResult;
+  @override
+  DateTime? get tbiDate;
+  @override
+  String? get tbiResult;
+  @override
+  String? get nikshayID;
+  @override
+  @JsonKey(name: 'tpt_eligible')
   String? get tptEligible;
   @override
+  @JsonKey(name: 'tpt_regimen')
+  int? get selectedTptRegimen;
+  @override
+  @JsonKey(includeIfNull: false)
   String? get tptRegimen;
   @override
+  @JsonKey(
+      name: 'tpt_start_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get tptStartDate;
   @override
+  @JsonKey(name: 'weight')
   int? get weight;
   @override
+  @JsonKey(name: 'side_effects')
   String? get tptSideEffects;
   @override
+  @JsonKey(
+      name: 'tpt_outcome_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get tptOutcomeDate;
   @override
+  @JsonKey(name: 'tpt_outcome')
   String? get tptOutcome;
   @override
   @JsonKey(ignore: true)

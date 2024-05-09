@@ -21,10 +21,11 @@ class TBScreeningPage extends StatelessWidget {
     return fb.group({
       'screening_date': FormControl<DateTime>(
           value: tbScreeningModel?.screeningDate ?? DateTime(2002)),
-      'screened_by': FormControl<String?>(
+      'screened_by': FormControl<int>(
+        validators: [Validators.required],
         value: tbScreeningModel?.screenedBy,
       ),
-      'trimester': FormControl<String?>(
+      'trimester': FormControl<int?>(
         value: tbScreeningModel?.trimester,
       ),
       'cough': FormControl<String?>(
@@ -65,11 +66,11 @@ class TBScreeningPage extends StatelessWidget {
       print('IN Save Method');
       final formData = formGroup.value;
       final cubit = context.read<CaseCubit>();
-      final model = cubit.state.tbScreeningModel;
-      final tbScreeningModel = TBScreeningModel(
+      final model = cubit.state.tbScreeningModel ?? const TBScreeningModel();
+      final tbScreeningModel = model.copyWith(
           screeningDate: formData['screening_date'] as DateTime,
-          screenedBy: formData['screened_by'] as String?,
-          trimester: formData['trimester'] as String?,
+          screenedBy: formData['screened_by'] as int?,
+          trimester: formData['trimester'] as int?,
           cough: formData['cough'] as String?,
           sputum: formData['sputum'] as String?,
           hemoptysis: formData['hemoptysis'] as String?,
@@ -128,6 +129,7 @@ class TBScreeningPage extends StatelessWidget {
                                   const PrimaryTextField(
                                     formControlName: 'screened_by',
                                     label: 'Screened By',
+                                    keyboardType: TextInputType.number,
                                     prefixIcon: Icons.account_circle_outlined,
                                   ),
                                   const SizedBox(height: kPadding * 2),

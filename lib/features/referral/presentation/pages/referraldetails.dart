@@ -377,11 +377,58 @@ class ReferralDetailsPage extends StatelessWidget {
                                     );
                                   }),
                               const SizedBox(height: kPadding * 2),
-                              const PrimaryTextField(
-                                formControlName: 'referrer_panchayat_code',
-                                label: 'Referrer Panchayat Code',
-                                prefixIcon: Icons.location_city_outlined,
-                              ),
+                              BlocBuilder<CaseCubit, CaseState>(
+                                  buildWhen: ((previous, current) =>
+                                      (previous.isLoading !=
+                                          current.isLoading) ||
+                                      previous.dataModel != current.dataModel),
+                                  builder: (context, state) {
+                                    List<String> panchayats = state
+                                        .dataModel!.blocks!
+                                        .expand((e) => e.panchayat!
+                                            .map((e) => '${e.panchayat}'))
+                                        .toList();
+
+                                    if (state.isLoading ?? false) {
+                                      return const SizedBox(
+                                        height: 15,
+                                        width: 15,
+                                        child: Center(
+                                          child: CircularProgressIndicator(),
+                                        ),
+                                      );
+                                    }
+                                    return TextFieldWithList(
+                                      controlName: 'referrer_panchayat_code',
+                                      label: 'Referrer Panchayat Code',
+                                      padding: EdgeInsets.zero,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                      listData: panchayats,
+                                      allowMultiSelection: false,
+                                      onSelected: (value) {
+                                        formGroup
+                                            .control('referrer_panchayat_code')
+                                            .value = value[0];
+                                        for (var block
+                                            in state.dataModel!.blocks!) {
+                                          var panchayat = block.panchayat!
+                                              .firstWhere(
+                                                  (p) =>
+                                                      p.panchayat == value[0],
+                                                  orElse: () =>
+                                                      const Panchayat(id: 0));
+                                          if (panchayat.id != 0) {
+                                            context
+                                                    .read<CaseCubit>()
+                                                    .selectReferrerPanchayatCodeId =
+                                                panchayat.id;
+                                            break;
+                                          }
+                                        }
+                                      },
+                                      emptyString: '',
+                                    );
+                                  }),
                               const SizedBox(height: kPadding * 2),
                               const PrimaryTextField(
                                 formControlName: 'referred_ward',

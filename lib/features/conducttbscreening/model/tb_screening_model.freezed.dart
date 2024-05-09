@@ -20,12 +20,13 @@ TBScreeningModel _$TBScreeningModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TBScreeningModel {
-  @JsonKey(name: 'Scr_date')
+  @JsonKey(
+      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get screeningDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'screened_by')
-  String? get screenedBy => throw _privateConstructorUsedError;
+  int? get screenedBy => throw _privateConstructorUsedError;
   @JsonKey(name: 'trimester_of_pw')
-  String? get trimester => throw _privateConstructorUsedError;
+  int? get trimester => throw _privateConstructorUsedError;
   @JsonKey(name: 'cough_2_weeks')
   String? get cough => throw _privateConstructorUsedError;
   @JsonKey(name: 'sputum_2_weeks')
@@ -62,9 +63,13 @@ abstract class $TBScreeningModelCopyWith<$Res> {
       _$TBScreeningModelCopyWithImpl<$Res, TBScreeningModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'Scr_date') DateTime? screeningDate,
-      @JsonKey(name: 'screened_by') String? screenedBy,
-      @JsonKey(name: 'trimester_of_pw') String? trimester,
+      {@JsonKey(
+          name: 'Scr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? screeningDate,
+      @JsonKey(name: 'screened_by') int? screenedBy,
+      @JsonKey(name: 'trimester_of_pw') int? trimester,
       @JsonKey(name: 'cough_2_weeks') String? cough,
       @JsonKey(name: 'sputum_2_weeks') String? sputum,
       @JsonKey(name: 'hemoptysis') String? hemoptysis,
@@ -114,11 +119,11 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
       screenedBy: freezed == screenedBy
           ? _value.screenedBy
           : screenedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       trimester: freezed == trimester
           ? _value.trimester
           : trimester // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       cough: freezed == cough
           ? _value.cough
           : cough // ignore: cast_nullable_to_non_nullable
@@ -176,9 +181,13 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'Scr_date') DateTime? screeningDate,
-      @JsonKey(name: 'screened_by') String? screenedBy,
-      @JsonKey(name: 'trimester_of_pw') String? trimester,
+      {@JsonKey(
+          name: 'Scr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? screeningDate,
+      @JsonKey(name: 'screened_by') int? screenedBy,
+      @JsonKey(name: 'trimester_of_pw') int? trimester,
       @JsonKey(name: 'cough_2_weeks') String? cough,
       @JsonKey(name: 'sputum_2_weeks') String? sputum,
       @JsonKey(name: 'hemoptysis') String? hemoptysis,
@@ -226,11 +235,11 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
       screenedBy: freezed == screenedBy
           ? _value.screenedBy
           : screenedBy // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       trimester: freezed == trimester
           ? _value.trimester
           : trimester // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       cough: freezed == cough
           ? _value.cough
           : cough // ignore: cast_nullable_to_non_nullable
@@ -283,7 +292,11 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TBScreeningModelImpl implements _TBScreeningModel {
   const _$TBScreeningModelImpl(
-      {@JsonKey(name: 'Scr_date') this.screeningDate,
+      {@JsonKey(
+          name: 'Scr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.screeningDate,
       @JsonKey(name: 'screened_by') this.screenedBy,
       @JsonKey(name: 'trimester_of_pw') this.trimester,
       @JsonKey(name: 'cough_2_weeks') this.cough,
@@ -302,14 +315,15 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
       _$$TBScreeningModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'Scr_date')
+  @JsonKey(
+      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? screeningDate;
   @override
   @JsonKey(name: 'screened_by')
-  final String? screenedBy;
+  final int? screenedBy;
   @override
   @JsonKey(name: 'trimester_of_pw')
-  final String? trimester;
+  final int? trimester;
   @override
   @JsonKey(name: 'cough_2_weeks')
   final String? cough;
@@ -417,9 +431,13 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
 
 abstract class _TBScreeningModel implements TBScreeningModel {
   const factory _TBScreeningModel(
-          {@JsonKey(name: 'Scr_date') final DateTime? screeningDate,
-          @JsonKey(name: 'screened_by') final String? screenedBy,
-          @JsonKey(name: 'trimester_of_pw') final String? trimester,
+          {@JsonKey(
+              name: 'Scr_date',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
+          final DateTime? screeningDate,
+          @JsonKey(name: 'screened_by') final int? screenedBy,
+          @JsonKey(name: 'trimester_of_pw') final int? trimester,
           @JsonKey(name: 'cough_2_weeks') final String? cough,
           @JsonKey(name: 'sputum_2_weeks') final String? sputum,
           @JsonKey(name: 'hemoptysis') final String? hemoptysis,
@@ -437,14 +455,15 @@ abstract class _TBScreeningModel implements TBScreeningModel {
       _$TBScreeningModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'Scr_date')
+  @JsonKey(
+      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get screeningDate;
   @override
   @JsonKey(name: 'screened_by')
-  String? get screenedBy;
+  int? get screenedBy;
   @override
   @JsonKey(name: 'trimester_of_pw')
-  String? get trimester;
+  int? get trimester;
   @override
   @JsonKey(name: 'cough_2_weeks')
   String? get cough;

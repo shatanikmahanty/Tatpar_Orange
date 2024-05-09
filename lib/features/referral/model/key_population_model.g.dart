@@ -8,7 +8,7 @@ part of 'key_population_model.dart';
 
 _$KeyPopulationImpl _$$KeyPopulationImplFromJson(Map<String, dynamic> json) =>
     _$KeyPopulationImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       updatedOn: json['updated_on'] as String?,
       createdOn: json['created_on'] as String?,

@@ -4,12 +4,30 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 part 'tb_screening_model.freezed.dart';
 part 'tb_screening_model.g.dart';
 
+DateTime? fromJsonToDateTime(String? date) {
+  if (date == null) {
+    return null;
+  }
+  final dateCleaned = date.split('T')[0];
+  final dateParts = dateCleaned.split('-');
+  return DateTime(int.parse(dateParts[0]), int.parse(dateParts[1]),
+      int.parse(dateParts[2]));
+}
+
+String? _dateTimeToJson(DateTime? date) =>
+    date?.toIso8601String().substring(0, 10);
+
 @freezed
 class TBScreeningModel with _$TBScreeningModel {
   const factory TBScreeningModel({
-    @JsonKey(name: 'Scr_date') DateTime? screeningDate,
-    @JsonKey(name: 'screened_by') String? screenedBy,
-    @JsonKey(name: 'trimester_of_pw') String? trimester,
+    @JsonKey(
+      name: 'Scr_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson,
+    )
+    DateTime? screeningDate,
+    @JsonKey(name: 'screened_by') int? screenedBy,
+    @JsonKey(name: 'trimester_of_pw') int? trimester,
     @JsonKey(name: 'cough_2_weeks') String? cough,
     @JsonKey(name: 'sputum_2_weeks') String? sputum,
     @JsonKey(name: 'hemoptysis') String? hemoptysis,

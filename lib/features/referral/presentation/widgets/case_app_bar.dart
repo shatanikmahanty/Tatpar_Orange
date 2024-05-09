@@ -24,7 +24,7 @@ class CaseAppBar extends StatelessWidget implements PreferredSizeWidget {
         actions: [
           IconButton(
               onPressed: () {
-                context.router.maybePop();
+                context.router.pop();
               },
               icon: const Icon(Icons.close))
         ],

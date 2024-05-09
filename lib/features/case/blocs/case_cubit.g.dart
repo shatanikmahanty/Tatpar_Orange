@@ -22,7 +22,33 @@ _$CaseStateImpl _$$CaseStateImplFromJson(Map<String, dynamic> json) =>
           ? null
           : TBScreeningModel.fromJson(
               json['tbScreeningModel'] as Map<String, dynamic>),
+      whoSrqModel: json['whoSrqModel'] == null
+          ? null
+          : WHOSrqModel.fromJson(json['whoSrqModel'] as Map<String, dynamic>),
+      mentalHealthScreeningModel: json['mentalHealthScreeningModel'] == null
+          ? null
+          : MentalHealthScreeningModel.fromJson(
+              json['mentalHealthScreeningModel'] as Map<String, dynamic>),
       screeningOutcome: json['screeningOutcome'] as String?,
+      diagnsosisModel: json['diagnsosisModel'] == null
+          ? null
+          : DiagnosisModel.fromJson(
+              json['diagnsosisModel'] as Map<String, dynamic>),
+      diagnosisData: json['diagnosisData'] == null
+          ? null
+          : DiagnosisData.fromJson(
+              json['diagnosisData'] as Map<String, dynamic>),
+      treatmentModel: json['treatmentModel'] == null
+          ? null
+          : TreatmentModel.fromJson(
+              json['treatmentModel'] as Map<String, dynamic>),
+      contactTracingModel: json['contactTracingModel'] == null
+          ? null
+          : ContactTracingModel.fromJson(
+              json['contactTracingModel'] as Map<String, dynamic>),
+      outcomeModel: json['outcomeModel'] == null
+          ? null
+          : OutcomeModel.fromJson(json['outcomeModel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CaseStateImplToJson(_$CaseStateImpl instance) =>
@@ -32,5 +58,12 @@ Map<String, dynamic> _$$CaseStateImplToJson(_$CaseStateImpl instance) =>
       'dataModel': instance.dataModel,
       'referralDetailsModel': instance.referralDetailsModel,
       'tbScreeningModel': instance.tbScreeningModel,
+      'whoSrqModel': instance.whoSrqModel,
+      'mentalHealthScreeningModel': instance.mentalHealthScreeningModel,
       'screeningOutcome': instance.screeningOutcome,
+      'diagnsosisModel': instance.diagnsosisModel,
+      'diagnosisData': instance.diagnosisData,
+      'treatmentModel': instance.treatmentModel,
+      'contactTracingModel': instance.contactTracingModel,
+      'outcomeModel': instance.outcomeModel,
     };

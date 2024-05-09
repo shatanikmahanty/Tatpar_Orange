@@ -3,9 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
+import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_field.dart';
-import 'package:tatpar_acf/features/mentalhealthscreening/bloc/who_srq_cubit.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
+import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
 
 import '../../../app/presentation/widgets/date_text_input.dart';
@@ -23,8 +24,8 @@ class MentalHealthScreeningPage extends StatelessWidget {
           value: mentalHealthScreeningModel?.screeningDate),
       'screening_status': FormControl<String>(
           value: mentalHealthScreeningModel?.screeningStatus),
-      'screening_score':
-          FormControl<int>(value: mentalHealthScreeningModel?.screeningScore),
+      'screening_score': FormControl<String>(
+          value: mentalHealthScreeningModel?.screeningScore),
       'counselling_linked': FormControl<DateTime>(
           value: mentalHealthScreeningModel?.counsellingLinked),
       'psychiatrist_linked': FormControl<DateTime>(
@@ -36,28 +37,37 @@ class MentalHealthScreeningPage extends StatelessWidget {
     });
   }
 
-  Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
-    final whoSrqCubit = context.read<WHOSrqStateCubit>();
+  Future<void> _onSave(BuildContext context, FormGroup formGroup,
+      WHOSrqModel? whoSrqModel) async {
+    final formData = formGroup.value;
+    final caseCubit = context.read<CaseCubit>();
+    final model = caseCubit.state.mentalHealthScreeningModel ??
+        const MentalHealthScreeningModel();
+    final whoSrqJson = whoSrqModel?.toJson() ?? <String, dynamic>{};
 
-    final mentalHealthScreeningModel = MentalHealthScreeningModel(
-        stage: formGroup.control('stage').value,
-        screeningDate: formGroup.control('screening_date').value,
-        screeningStatus: formGroup.control('screening_status').value,
-        screeningScore: formGroup.control('screening_score').value,
-        counsellingLinked: formGroup.control('counselling_linked').value,
-        psychiatristLinked: formGroup.control('psychiatrist_linked').value,
-        feelingBetter: formGroup.control('feeling_better_after_linkage').value,
-        talkToHelpline:
-            formGroup.control('feeling_better_after_linkage').value);
-
-    whoSrqCubit.updateMentalHealthScreeningModel(mentalHealthScreeningModel);
+    final updatedModel = model.copyWith(
+      stage: formData['stage'] as String?,
+      screeningDate: formData['screening_date'] as DateTime?,
+      screeningStatus: formData['screening_status'] as String?,
+      screeningScore: formData['screening_score'] as String?,
+      counsellingLinked: formData['counselling_linked'] as DateTime?,
+      psychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
+      feelingBetter: formData['feeling_better_after_linkage'] as String?,
+      talkToHelpline: formData['talk_to_helpline'] as String?,
+      whoSrqModel: WHOSrqModel.fromJson(whoSrqJson),
+    );
+    caseCubit.updateWHOSRQData(updatedModel);
   }
 
   @override
   Widget build(BuildContext context) {
+    WHOSrqModel? whoSrqModel;
+    String yesCounter;
+    String screeningStatus;
+
     return Scaffold(
         appBar: const CaseAppBar('Mental Health Screening'),
-        body: BlocBuilder<WHOSrqStateCubit, WHOSrqState>(
+        body: BlocBuilder<CaseCubit, CaseState>(
             buildWhen: (previous, current) =>
                 (previous.isLoading != current.isLoading) ||
                 (previous.mentalHealthScreeningModel !=
@@ -125,12 +135,14 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                               value is Map<
                                                                   String,
                                                                   dynamic>) {
-                                                            int yesCounter =
-                                                                value['yesCounter']
-                                                                    as int;
+                                                            whoSrqModel = value[
+                                                                    'whoSrqModel']
+                                                                as WHOSrqModel;
+                                                            yesCounter = value[
+                                                                    'yesCounter']
+                                                                as String;
 
-                                                            String
-                                                                screeningStatus =
+                                                            screeningStatus =
                                                                 value['screeningStatus']
                                                                     as String;
                                                             formGroup
@@ -142,8 +154,6 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                         'screening_status')
                                                                     .value =
                                                                 screeningStatus;
-                                                            _onSave(context,
-                                                                formGroup);
                                                           }
                                                         });
                                                       },
@@ -172,10 +182,10 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                 child:
                                                                     SecondaryTextField(
                                                                   text: formGroup
-                                                                      .control(
-                                                                          'screening_score')
-                                                                      .value
-                                                                      .toString(),
+                                                                          .control(
+                                                                              'screening_score')
+                                                                          .value ??
+                                                                      '',
                                                                   label:
                                                                       'Screening Score',
                                                                 ),
@@ -188,10 +198,10 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                 child:
                                                                     SecondaryTextField(
                                                                   text: formGroup
-                                                                      .control(
-                                                                          'screening_status')
-                                                                      .value
-                                                                      .toString(),
+                                                                          .control(
+                                                                              'screening_status')
+                                                                          .value ??
+                                                                      '',
                                                                   label:
                                                                       'Screening Status',
                                                                 ),
@@ -286,7 +296,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                         ])))),
                         BottomButtonBar(
                           onSave: (_) async =>
-                              await _onSave(context, formGroup),
+                              await _onSave(context, formGroup, whoSrqModel),
                           nextPage: const DiagnosisRoute(),
                         ),
                         const SizedBox(height: kPadding * 2),

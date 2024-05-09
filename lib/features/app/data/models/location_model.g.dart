@@ -8,7 +8,7 @@ part of 'location_model.dart';
 
 _$LocationImpl _$$LocationImplFromJson(Map<String, dynamic> json) =>
     _$LocationImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       address: json['address'] as String,
       city: json['city'] as String,
       state: json['state'] as String,

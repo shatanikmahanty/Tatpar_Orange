@@ -6,8 +6,15 @@ import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
+import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
+import 'package:tatpar_acf/features/diagnosis/model/diagnosis_data.dart';
+import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
+import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
+import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
+import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
 import 'package:tatpar_acf/features/referral/model/data_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
+import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 
 import '../data/models/workflow_item.dart';
 
@@ -16,19 +23,20 @@ part 'case_cubit.g.dart';
 
 @freezed
 class CaseState with _$CaseState {
-  const factory CaseState({
-    bool? isLoading,
-    required Case caseWorkedUpon,
-    DataModel? dataModel,
-    ReferralDetailsModel? referralDetailsModel,
-    TBScreeningModel? tbScreeningModel,
-    String? screeningOutcome,
-    // UdModel? udstFormData,
-    // NikshayIdentityModel? nikshayFormData,
-    // ComorbidityModel? comorbidityFormData,
-    // ContactTracingModel? contractTracingFormData,
-    // DBTModel? dbtFormData,
-  }) = _CaseState;
+  const factory CaseState(
+      {bool? isLoading,
+      required Case caseWorkedUpon,
+      DataModel? dataModel,
+      ReferralDetailsModel? referralDetailsModel,
+      TBScreeningModel? tbScreeningModel,
+      WHOSrqModel? whoSrqModel,
+      MentalHealthScreeningModel? mentalHealthScreeningModel,
+      String? screeningOutcome,
+      DiagnosisModel? diagnsosisModel,
+      DiagnosisData? diagnosisData,
+      TreatmentModel? treatmentModel,
+      ContactTracingModel? contactTracingModel,
+      OutcomeModel? outcomeModel}) = _CaseState;
 
   factory CaseState.fromJson(Map<String, dynamic> json) =>
       _$CaseStateFromJson(json);
@@ -65,18 +73,61 @@ class CaseCubit extends Cubit<CaseState> {
     //   //   getTreatmentFormData(caseModel.treatment);
     //   // }
   }
+
+  ///ReferralDetailsPage
   int? _selectedDistrictId;
   int? _selectedBlockId;
   int? _selectedPanchayatCodeId;
+  int? _selectedReferrerPanchayatCodeId;
+
+  ///DiagnosisPage
+  int? _selectedAFB1Result;
+  int? _selectedAFB2Result;
+  int? _selectedNAATMachine;
+  int? _selectedMTBResult;
+
+  ///ContactTracingPage
+  int? _selectedTPTRegimen;
+
+  ///OutcomePage
+  int? _selectedTreatmentOutcome;
+
   set selectDistrictId(int? selectedDistrictId) =>
       _selectedDistrictId = selectedDistrictId;
   set selectBlockId(int? selectedBlockId) => _selectedBlockId = selectedBlockId;
   set selectPanchayatCodeId(int? selectedPanchayatCodeId) =>
       _selectedPanchayatCodeId = selectedPanchayatCodeId;
+  set selectReferrerPanchayatCodeId(int? selectedReferrerPanchayatCodeId) =>
+      _selectedReferrerPanchayatCodeId = selectedReferrerPanchayatCodeId;
+
+  set selectAFB1Result(int? selectedAFB1Result) =>
+      _selectedAFB1Result = selectedAFB1Result;
+  set selectAFB2Result(int? selectedAFB2Result) =>
+      _selectedAFB2Result = selectedAFB2Result;
+  set selectNAATMachine(int? selectedNAATMachine) =>
+      _selectedNAATMachine = selectedNAATMachine;
+  set selectMTBResult(int? selectedMTBResult) =>
+      _selectedMTBResult = selectedMTBResult;
+
+  set selectTPTRegimen(int? selectedTPTRegimen) =>
+      _selectedTPTRegimen = selectedTPTRegimen;
+
+  set selectTreatmentOutcome(int? selectedTreatmentOutcome) =>
+      _selectedTreatmentOutcome = selectedTreatmentOutcome;
 
   int? get selectedBlockId => _selectedBlockId;
   int? get selectedDistrictId => _selectedDistrictId;
   int? get selectedPanchayatCodeId => _selectedPanchayatCodeId;
+  int? get selectedReferrerPanchayatCodeId => _selectedReferrerPanchayatCodeId;
+
+  int? get selectedAFB1Result => _selectedAFB1Result;
+  int? get selectedAFB2Result => _selectedAFB2Result;
+  int? get selectedNAATMachine => _selectedNAATMachine;
+  int? get selectedMTBResult => _selectedMTBResult;
+
+  int? get selectedTPTRegimen => _selectedTPTRegimen;
+
+  int? get selectedTreatmentOutcome => _selectedTreatmentOutcome;
 
   Future<void> loadDistricts() async {
     emit(state.copyWith(isLoading: true));
@@ -138,6 +189,44 @@ class CaseCubit extends Cubit<CaseState> {
     } else {
       emit(state.copyWith(screeningOutcome: 'No Symptom'));
       return 'No Symptom';
+    }
+  }
+
+  Map<String, dynamic> calculateYesCounter(
+      FormGroup formGroup, WHOSrqModel whoSrqModel) {
+    int numberOfYes = 0;
+    String screeningStatus;
+    formGroup.controls.forEach((key, control) {
+      if (control.value?.toString() == 'Yes') {
+        numberOfYes++;
+      }
+    });
+    if (numberOfYes > 14 ||
+        (formGroup.control('ending_your_life').value == 'Yes' &&
+            numberOfYes < 15)) {
+      screeningStatus = 'Positive';
+    } else {
+      screeningStatus = 'Negative';
+    }
+    String yesCounter = '$numberOfYes/20'.toString();
+    return {
+      'yesCounter': yesCounter,
+      'screeningStatus': screeningStatus,
+      'whoSrqModel': whoSrqModel
+    };
+  }
+
+  Future<void> loadDiagnosisData() async {
+    emit(state.copyWith(isLoading: true));
+    try {
+      final model = await caseRepo.getDiagnosisData();
+      emit(state.copyWith(isLoading: false, diagnosisData: model));
+    } on Exception {
+      emit(
+        state.copyWith(
+          isLoading: true,
+        ),
+      );
     }
   }
   // common update these values from UI
@@ -236,6 +325,62 @@ class CaseCubit extends Cubit<CaseState> {
     );
   }
 
+  Future<void> updateWHOSRQData(
+      MentalHealthScreeningModel mentalHealthScreeningModel) async {
+    final response = await caseRepo.saveWHOSRQData(
+        mentalHealthScreeningModel: mentalHealthScreeningModel);
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(whoSrq: 1),
+        mentalHealthScreeningModel: response,
+      ),
+    );
+  }
+
+  Future<void> updateDiagnosisData(DiagnosisModel diagnosisModel) async {
+    final response =
+        await caseRepo.saveDiagnosisData(diagnosisModel: diagnosisModel);
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(diagnosis: 1),
+        diagnsosisModel: response,
+      ),
+    );
+  }
+
+  Future<void> updateTreatmentData(TreatmentModel treatmentModel) async {
+    final response =
+        await caseRepo.saveTreatmentData(treatmentModel: treatmentModel);
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(treatment: 1),
+        treatmentModel: response,
+      ),
+    );
+  }
+
+  Future<void> updateContactTracingData(
+      ContactTracingModel contactTracingModel) async {
+    final response = await caseRepo.saveContactTracingData(
+        contactTracingModel: contactTracingModel);
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(contactTracing: 1),
+        contactTracingModel: response,
+      ),
+    );
+  }
+
+  Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {
+    final response = await caseRepo.saveOutcomeData(outcomeModel: outcomeModel);
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(outcomeValue: 1),
+        outcomeModel: response,
+      ),
+    );
+  }
+
   List<WorkflowItem> workflows(Case workingCase) {
     final workflows = [
       WorkflowItem(
@@ -273,18 +418,18 @@ class CaseCubit extends Cubit<CaseState> {
         status: workingCase.treatmentStatus,
       ),
       WorkflowItem(
-        route: const OutcomeRoute(),
-        title: 'Outcome',
-        description: 'Steps of Outcome',
-        backendKey: 'dbt_status',
-        status: workingCase.outcomeStatus,
-      ),
-      WorkflowItem(
         route: const ContactTracingRoute(),
         title: 'Contact Tracing',
         description: 'Contact Tracing Status',
         backendKey: 'contract_casing_status',
         status: workingCase.contactTracingStatus,
+      ),
+      WorkflowItem(
+        route: const OutcomeRoute(),
+        title: 'Outcome',
+        description: 'Steps of Outcome',
+        backendKey: 'dbt_status',
+        status: workingCase.outcomeStatus,
       )
     ];
 

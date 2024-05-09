@@ -214,7 +214,7 @@ class _CasesFilterDialogPageState extends State<CasesFilterDialogPage> {
           )),
           TextButton(
               onPressed: () {
-                context.router.maybePop();
+                context.router.pop();
               },
               child: Text(
                 'Apply',

@@ -8,7 +8,7 @@ part of 'referral_districts_model.dart';
 
 _$DistrictImpl _$$DistrictImplFromJson(Map<String, dynamic> json) =>
     _$DistrictImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       state: json['state'] as String?,
       block: (json['block'] as List<dynamic>?)
           ?.map((e) => Block.fromJson(e as Map<String, dynamic>))
@@ -25,7 +25,7 @@ Map<String, dynamic> _$$DistrictImplToJson(_$DistrictImpl instance) =>
     };
 
 _$BlockImpl _$$BlockImplFromJson(Map<String, dynamic> json) => _$BlockImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       block: json['block'] as String?,
       panchayat: (json['panchayat'] as List<dynamic>?)
           ?.map((e) => Panchayat.fromJson(e as Map<String, dynamic>))
@@ -41,7 +41,7 @@ Map<String, dynamic> _$$BlockImplToJson(_$BlockImpl instance) =>
 
 _$PanchayatImpl _$$PanchayatImplFromJson(Map<String, dynamic> json) =>
     _$PanchayatImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       panchayat: json['panchayat'] as String?,
     );
 

@@ -45,7 +45,7 @@ class SuccessDialogPage extends StatelessWidget {
               const SizedBox(height: kPadding * 3.5),
               TextButton(
                 onPressed: () {
-                  context.router.maybePop();
+                  context.router.pop();
                 },
                 style: TextButton.styleFrom(
                   backgroundColor: Theme.of(context).colorScheme.primary,

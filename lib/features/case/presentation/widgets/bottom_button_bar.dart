@@ -50,7 +50,7 @@ class BottomButtonBar extends StatelessWidget {
                 action: onSave,
                 onSuccess: () => nextPage != null
                     ? context.router.navigate(nextPage!)
-                    : context.router.maybePop(),
+                    : context.router.pop(),
                 builder: (context, action, error) => FormActionButton(
                     onPressed: enableValidator &&
                             !(ReactiveForm.of(context)?.valid ?? false)

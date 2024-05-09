@@ -9,7 +9,7 @@ part of 'facility_type_model.dart';
 _$FacilityTypeModelImpl _$$FacilityTypeModelImplFromJson(
         Map<String, dynamic> json) =>
     _$FacilityTypeModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       typeText: json['type_text'] as String?,
       createdAt: json['created_at'] as String?,
       updatedAt: json['updated_at'] as String?,

@@ -20,39 +20,91 @@ TreatmentModel _$TreatmentModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TreatmentModel {
+  @JsonKey(name: 'case_definition')
   String? get caseDefinition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tb_treated')
   String? get previouslyTbTreated => throw _privateConstructorUsedError;
+  @JsonKey(name: 'rif_sensitivity')
   String? get rifSensitivity => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get ihvDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'treatment_regimen')
   String? get treatmentRegimen => throw _privateConstructorUsedError;
+  @JsonKey(name: 'patient_occupation')
   String? get patientOccupation => throw _privateConstructorUsedError;
+  @JsonKey(name: 'treatment_supporter_name')
   String? get treatmentSupporterName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'treatment_supporter_position')
   String? get treatmentSupporterPosition => throw _privateConstructorUsedError;
+  @JsonKey(name: 'treatment_supporter_phone')
   String? get treatmentSupporterPhone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'treatment_supporter_panchayat')
   String? get treatmentSupporterPanchayat => throw _privateConstructorUsedError;
-  String? get treatmentSupporterWard => throw _privateConstructorUsedError;
+  @JsonKey(name: 'treatment_supporter_ward')
+  int? get treatmentSupporterWard => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'home_visit_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get dateOfHomeVisit => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'ipt_start_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get iptStartDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hiv_done')
   String? get hivDone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hiv_result')
   String? get hivResult => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'hiv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get hivDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hb_done')
   String? get hbDone => throw _privateConstructorUsedError;
-  String? get hbResult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'hb_result')
+  int? get hbResult => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'hb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get hbDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'blood_sugar_done')
   String? get bloodSugarDone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'blood_sugar_result')
   String? get bloodSugarResult => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'blood_sugar_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get bloodSugarDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'alcohol')
   String? get alcohol => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tb_consumption')
   String? get tbConsumption => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nutrition_screening')
   String? get nutrition => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'nutrition_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get screeningDateNutrition => throw _privateConstructorUsedError;
-  DateTime? get nutritionLinkage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nutrition_linkage')
+  String? get nutritionLinkage => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_followup_nat_test')
   String? get ipNatTest => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'ip_afb_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get ipAfbDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_followup_afb_lab_number')
   String? get ipAfbLabNo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_followup_nat_result')
   String? get ipNatResult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_followup_lab_number')
   String? get ipLabNo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_chest_xray')
   String? get ipChestXray => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_nutrition_support')
   String? get ipNutritionSupport => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -68,40 +120,75 @@ abstract class $TreatmentModelCopyWith<$Res> {
       _$TreatmentModelCopyWithImpl<$Res, TreatmentModel>;
   @useResult
   $Res call(
-      {String? caseDefinition,
-      String? previouslyTbTreated,
-      String? rifSensitivity,
+      {@JsonKey(name: 'case_definition') String? caseDefinition,
+      @JsonKey(name: 'tb_treated') String? previouslyTbTreated,
+      @JsonKey(name: 'rif_sensitivity') String? rifSensitivity,
+      @JsonKey(
+          name: 'ihv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? ihvDate,
-      String? treatmentRegimen,
-      String? patientOccupation,
-      String? treatmentSupporterName,
+      @JsonKey(name: 'treatment_regimen') String? treatmentRegimen,
+      @JsonKey(name: 'patient_occupation') String? patientOccupation,
+      @JsonKey(name: 'treatment_supporter_name') String? treatmentSupporterName,
+      @JsonKey(name: 'treatment_supporter_position')
       String? treatmentSupporterPosition,
+      @JsonKey(name: 'treatment_supporter_phone')
       String? treatmentSupporterPhone,
+      @JsonKey(name: 'treatment_supporter_panchayat')
       String? treatmentSupporterPanchayat,
-      String? treatmentSupporterWard,
+      @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
+      @JsonKey(
+          name: 'home_visit_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? dateOfHomeVisit,
+      @JsonKey(
+          name: 'ipt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? iptStartDate,
-      String? hivDone,
-      String? hivResult,
+      @JsonKey(name: 'hiv_done') String? hivDone,
+      @JsonKey(name: 'hiv_result') String? hivResult,
+      @JsonKey(
+          name: 'hiv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? hivDate,
-      String? hbDone,
-      String? hbResult,
+      @JsonKey(name: 'hb_done') String? hbDone,
+      @JsonKey(name: 'hb_result') int? hbResult,
+      @JsonKey(
+          name: 'hb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? hbDate,
-      String? bloodSugarDone,
-      String? bloodSugarResult,
+      @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
+      @JsonKey(name: 'blood_sugar_result') String? bloodSugarResult,
+      @JsonKey(
+          name: 'blood_sugar_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? bloodSugarDate,
-      String? alcohol,
-      String? tbConsumption,
-      String? nutrition,
+      @JsonKey(name: 'alcohol') String? alcohol,
+      @JsonKey(name: 'tb_consumption') String? tbConsumption,
+      @JsonKey(name: 'nutrition_screening') String? nutrition,
+      @JsonKey(
+          name: 'nutrition_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? screeningDateNutrition,
-      DateTime? nutritionLinkage,
-      String? ipNatTest,
+      @JsonKey(name: 'nutrition_linkage') String? nutritionLinkage,
+      @JsonKey(name: 'ip_followup_nat_test') String? ipNatTest,
+      @JsonKey(
+          name: 'ip_afb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? ipAfbDate,
-      String? ipAfbLabNo,
-      String? ipNatResult,
-      String? ipLabNo,
-      String? ipChestXray,
-      String? ipNutritionSupport});
+      @JsonKey(name: 'ip_followup_afb_lab_number') String? ipAfbLabNo,
+      @JsonKey(name: 'ip_followup_nat_result') String? ipNatResult,
+      @JsonKey(name: 'ip_followup_lab_number') String? ipLabNo,
+      @JsonKey(name: 'ip_chest_xray') String? ipChestXray,
+      @JsonKey(name: 'ip_nutrition_support') String? ipNutritionSupport});
 }
 
 /// @nodoc
@@ -196,7 +283,7 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
       treatmentSupporterWard: freezed == treatmentSupporterWard
           ? _value.treatmentSupporterWard
           : treatmentSupporterWard // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       dateOfHomeVisit: freezed == dateOfHomeVisit
           ? _value.dateOfHomeVisit
           : dateOfHomeVisit // ignore: cast_nullable_to_non_nullable
@@ -224,7 +311,7 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
       hbResult: freezed == hbResult
           ? _value.hbResult
           : hbResult // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       hbDate: freezed == hbDate
           ? _value.hbDate
           : hbDate // ignore: cast_nullable_to_non_nullable
@@ -260,7 +347,7 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
       nutritionLinkage: freezed == nutritionLinkage
           ? _value.nutritionLinkage
           : nutritionLinkage // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       ipNatTest: freezed == ipNatTest
           ? _value.ipNatTest
           : ipNatTest // ignore: cast_nullable_to_non_nullable
@@ -302,40 +389,75 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {String? caseDefinition,
-      String? previouslyTbTreated,
-      String? rifSensitivity,
+      {@JsonKey(name: 'case_definition') String? caseDefinition,
+      @JsonKey(name: 'tb_treated') String? previouslyTbTreated,
+      @JsonKey(name: 'rif_sensitivity') String? rifSensitivity,
+      @JsonKey(
+          name: 'ihv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? ihvDate,
-      String? treatmentRegimen,
-      String? patientOccupation,
-      String? treatmentSupporterName,
+      @JsonKey(name: 'treatment_regimen') String? treatmentRegimen,
+      @JsonKey(name: 'patient_occupation') String? patientOccupation,
+      @JsonKey(name: 'treatment_supporter_name') String? treatmentSupporterName,
+      @JsonKey(name: 'treatment_supporter_position')
       String? treatmentSupporterPosition,
+      @JsonKey(name: 'treatment_supporter_phone')
       String? treatmentSupporterPhone,
+      @JsonKey(name: 'treatment_supporter_panchayat')
       String? treatmentSupporterPanchayat,
-      String? treatmentSupporterWard,
+      @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
+      @JsonKey(
+          name: 'home_visit_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? dateOfHomeVisit,
+      @JsonKey(
+          name: 'ipt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? iptStartDate,
-      String? hivDone,
-      String? hivResult,
+      @JsonKey(name: 'hiv_done') String? hivDone,
+      @JsonKey(name: 'hiv_result') String? hivResult,
+      @JsonKey(
+          name: 'hiv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? hivDate,
-      String? hbDone,
-      String? hbResult,
+      @JsonKey(name: 'hb_done') String? hbDone,
+      @JsonKey(name: 'hb_result') int? hbResult,
+      @JsonKey(
+          name: 'hb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? hbDate,
-      String? bloodSugarDone,
-      String? bloodSugarResult,
+      @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
+      @JsonKey(name: 'blood_sugar_result') String? bloodSugarResult,
+      @JsonKey(
+          name: 'blood_sugar_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? bloodSugarDate,
-      String? alcohol,
-      String? tbConsumption,
-      String? nutrition,
+      @JsonKey(name: 'alcohol') String? alcohol,
+      @JsonKey(name: 'tb_consumption') String? tbConsumption,
+      @JsonKey(name: 'nutrition_screening') String? nutrition,
+      @JsonKey(
+          name: 'nutrition_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? screeningDateNutrition,
-      DateTime? nutritionLinkage,
-      String? ipNatTest,
+      @JsonKey(name: 'nutrition_linkage') String? nutritionLinkage,
+      @JsonKey(name: 'ip_followup_nat_test') String? ipNatTest,
+      @JsonKey(
+          name: 'ip_afb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? ipAfbDate,
-      String? ipAfbLabNo,
-      String? ipNatResult,
-      String? ipLabNo,
-      String? ipChestXray,
-      String? ipNutritionSupport});
+      @JsonKey(name: 'ip_followup_afb_lab_number') String? ipAfbLabNo,
+      @JsonKey(name: 'ip_followup_nat_result') String? ipNatResult,
+      @JsonKey(name: 'ip_followup_lab_number') String? ipLabNo,
+      @JsonKey(name: 'ip_chest_xray') String? ipChestXray,
+      @JsonKey(name: 'ip_nutrition_support') String? ipNutritionSupport});
 }
 
 /// @nodoc
@@ -428,7 +550,7 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
       treatmentSupporterWard: freezed == treatmentSupporterWard
           ? _value.treatmentSupporterWard
           : treatmentSupporterWard // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       dateOfHomeVisit: freezed == dateOfHomeVisit
           ? _value.dateOfHomeVisit
           : dateOfHomeVisit // ignore: cast_nullable_to_non_nullable
@@ -456,7 +578,7 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
       hbResult: freezed == hbResult
           ? _value.hbResult
           : hbResult // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as int?,
       hbDate: freezed == hbDate
           ? _value.hbDate
           : hbDate // ignore: cast_nullable_to_non_nullable
@@ -492,7 +614,7 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
       nutritionLinkage: freezed == nutritionLinkage
           ? _value.nutritionLinkage
           : nutritionLinkage // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
+              as String?,
       ipNatTest: freezed == ipNatTest
           ? _value.ipNatTest
           : ipNatTest // ignore: cast_nullable_to_non_nullable
@@ -529,111 +651,197 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TreatmentModelImpl implements _TreatmentModel {
   const _$TreatmentModelImpl(
-      {required this.caseDefinition,
-      required this.previouslyTbTreated,
-      required this.rifSensitivity,
-      required this.ihvDate,
-      required this.treatmentRegimen,
-      required this.patientOccupation,
-      required this.treatmentSupporterName,
-      required this.treatmentSupporterPosition,
-      required this.treatmentSupporterPhone,
-      required this.treatmentSupporterPanchayat,
-      required this.treatmentSupporterWard,
-      required this.dateOfHomeVisit,
-      required this.iptStartDate,
-      required this.hivDone,
-      required this.hivResult,
-      required this.hivDate,
-      required this.hbDone,
-      required this.hbResult,
-      required this.hbDate,
-      required this.bloodSugarDone,
-      required this.bloodSugarResult,
-      required this.bloodSugarDate,
-      required this.alcohol,
-      required this.tbConsumption,
-      required this.nutrition,
-      required this.screeningDateNutrition,
-      required this.nutritionLinkage,
-      required this.ipNatTest,
-      required this.ipAfbDate,
-      required this.ipAfbLabNo,
-      required this.ipNatResult,
-      required this.ipLabNo,
-      required this.ipChestXray,
-      required this.ipNutritionSupport});
+      {@JsonKey(name: 'case_definition') this.caseDefinition,
+      @JsonKey(name: 'tb_treated') this.previouslyTbTreated,
+      @JsonKey(name: 'rif_sensitivity') this.rifSensitivity,
+      @JsonKey(
+          name: 'ihv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.ihvDate,
+      @JsonKey(name: 'treatment_regimen') this.treatmentRegimen,
+      @JsonKey(name: 'patient_occupation') this.patientOccupation,
+      @JsonKey(name: 'treatment_supporter_name') this.treatmentSupporterName,
+      @JsonKey(name: 'treatment_supporter_position')
+      this.treatmentSupporterPosition,
+      @JsonKey(name: 'treatment_supporter_phone') this.treatmentSupporterPhone,
+      @JsonKey(name: 'treatment_supporter_panchayat')
+      this.treatmentSupporterPanchayat,
+      @JsonKey(name: 'treatment_supporter_ward') this.treatmentSupporterWard,
+      @JsonKey(
+          name: 'home_visit_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.dateOfHomeVisit,
+      @JsonKey(
+          name: 'ipt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.iptStartDate,
+      @JsonKey(name: 'hiv_done') this.hivDone,
+      @JsonKey(name: 'hiv_result') this.hivResult,
+      @JsonKey(
+          name: 'hiv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.hivDate,
+      @JsonKey(name: 'hb_done') this.hbDone,
+      @JsonKey(name: 'hb_result') this.hbResult,
+      @JsonKey(
+          name: 'hb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.hbDate,
+      @JsonKey(name: 'blood_sugar_done') this.bloodSugarDone,
+      @JsonKey(name: 'blood_sugar_result') this.bloodSugarResult,
+      @JsonKey(
+          name: 'blood_sugar_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.bloodSugarDate,
+      @JsonKey(name: 'alcohol') this.alcohol,
+      @JsonKey(name: 'tb_consumption') this.tbConsumption,
+      @JsonKey(name: 'nutrition_screening') this.nutrition,
+      @JsonKey(
+          name: 'nutrition_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.screeningDateNutrition,
+      @JsonKey(name: 'nutrition_linkage') this.nutritionLinkage,
+      @JsonKey(name: 'ip_followup_nat_test') this.ipNatTest,
+      @JsonKey(
+          name: 'ip_afb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.ipAfbDate,
+      @JsonKey(name: 'ip_followup_afb_lab_number') this.ipAfbLabNo,
+      @JsonKey(name: 'ip_followup_nat_result') this.ipNatResult,
+      @JsonKey(name: 'ip_followup_lab_number') this.ipLabNo,
+      @JsonKey(name: 'ip_chest_xray') this.ipChestXray,
+      @JsonKey(name: 'ip_nutrition_support') this.ipNutritionSupport});
 
   factory _$TreatmentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TreatmentModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'case_definition')
   final String? caseDefinition;
   @override
+  @JsonKey(name: 'tb_treated')
   final String? previouslyTbTreated;
   @override
+  @JsonKey(name: 'rif_sensitivity')
   final String? rifSensitivity;
   @override
+  @JsonKey(
+      name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? ihvDate;
   @override
+  @JsonKey(name: 'treatment_regimen')
   final String? treatmentRegimen;
   @override
+  @JsonKey(name: 'patient_occupation')
   final String? patientOccupation;
   @override
+  @JsonKey(name: 'treatment_supporter_name')
   final String? treatmentSupporterName;
   @override
+  @JsonKey(name: 'treatment_supporter_position')
   final String? treatmentSupporterPosition;
   @override
+  @JsonKey(name: 'treatment_supporter_phone')
   final String? treatmentSupporterPhone;
   @override
+  @JsonKey(name: 'treatment_supporter_panchayat')
   final String? treatmentSupporterPanchayat;
   @override
-  final String? treatmentSupporterWard;
+  @JsonKey(name: 'treatment_supporter_ward')
+  final int? treatmentSupporterWard;
   @override
+  @JsonKey(
+      name: 'home_visit_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? dateOfHomeVisit;
   @override
+  @JsonKey(
+      name: 'ipt_start_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? iptStartDate;
   @override
+  @JsonKey(name: 'hiv_done')
   final String? hivDone;
   @override
+  @JsonKey(name: 'hiv_result')
   final String? hivResult;
   @override
+  @JsonKey(
+      name: 'hiv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? hivDate;
   @override
+  @JsonKey(name: 'hb_done')
   final String? hbDone;
   @override
-  final String? hbResult;
+  @JsonKey(name: 'hb_result')
+  final int? hbResult;
   @override
+  @JsonKey(
+      name: 'hb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? hbDate;
   @override
+  @JsonKey(name: 'blood_sugar_done')
   final String? bloodSugarDone;
   @override
+  @JsonKey(name: 'blood_sugar_result')
   final String? bloodSugarResult;
   @override
+  @JsonKey(
+      name: 'blood_sugar_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? bloodSugarDate;
   @override
+  @JsonKey(name: 'alcohol')
   final String? alcohol;
   @override
+  @JsonKey(name: 'tb_consumption')
   final String? tbConsumption;
   @override
+  @JsonKey(name: 'nutrition_screening')
   final String? nutrition;
   @override
+  @JsonKey(
+      name: 'nutrition_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? screeningDateNutrition;
   @override
-  final DateTime? nutritionLinkage;
+  @JsonKey(name: 'nutrition_linkage')
+  final String? nutritionLinkage;
   @override
+  @JsonKey(name: 'ip_followup_nat_test')
   final String? ipNatTest;
   @override
+  @JsonKey(
+      name: 'ip_afb_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? ipAfbDate;
   @override
+  @JsonKey(name: 'ip_followup_afb_lab_number')
   final String? ipAfbLabNo;
   @override
+  @JsonKey(name: 'ip_followup_nat_result')
   final String? ipNatResult;
   @override
+  @JsonKey(name: 'ip_followup_lab_number')
   final String? ipLabNo;
   @override
+  @JsonKey(name: 'ip_chest_xray')
   final String? ipChestXray;
   @override
+  @JsonKey(name: 'ip_nutrition_support')
   final String? ipNutritionSupport;
 
   @override
@@ -766,111 +974,201 @@ class _$TreatmentModelImpl implements _TreatmentModel {
 
 abstract class _TreatmentModel implements TreatmentModel {
   const factory _TreatmentModel(
-      {required final String? caseDefinition,
-      required final String? previouslyTbTreated,
-      required final String? rifSensitivity,
-      required final DateTime? ihvDate,
-      required final String? treatmentRegimen,
-      required final String? patientOccupation,
-      required final String? treatmentSupporterName,
-      required final String? treatmentSupporterPosition,
-      required final String? treatmentSupporterPhone,
-      required final String? treatmentSupporterPanchayat,
-      required final String? treatmentSupporterWard,
-      required final DateTime? dateOfHomeVisit,
-      required final DateTime? iptStartDate,
-      required final String? hivDone,
-      required final String? hivResult,
-      required final DateTime? hivDate,
-      required final String? hbDone,
-      required final String? hbResult,
-      required final DateTime? hbDate,
-      required final String? bloodSugarDone,
-      required final String? bloodSugarResult,
-      required final DateTime? bloodSugarDate,
-      required final String? alcohol,
-      required final String? tbConsumption,
-      required final String? nutrition,
-      required final DateTime? screeningDateNutrition,
-      required final DateTime? nutritionLinkage,
-      required final String? ipNatTest,
-      required final DateTime? ipAfbDate,
-      required final String? ipAfbLabNo,
-      required final String? ipNatResult,
-      required final String? ipLabNo,
-      required final String? ipChestXray,
-      required final String? ipNutritionSupport}) = _$TreatmentModelImpl;
+      {@JsonKey(name: 'case_definition') final String? caseDefinition,
+      @JsonKey(name: 'tb_treated') final String? previouslyTbTreated,
+      @JsonKey(name: 'rif_sensitivity') final String? rifSensitivity,
+      @JsonKey(
+          name: 'ihv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? ihvDate,
+      @JsonKey(name: 'treatment_regimen') final String? treatmentRegimen,
+      @JsonKey(name: 'patient_occupation') final String? patientOccupation,
+      @JsonKey(name: 'treatment_supporter_name')
+      final String? treatmentSupporterName,
+      @JsonKey(name: 'treatment_supporter_position')
+      final String? treatmentSupporterPosition,
+      @JsonKey(name: 'treatment_supporter_phone')
+      final String? treatmentSupporterPhone,
+      @JsonKey(name: 'treatment_supporter_panchayat')
+      final String? treatmentSupporterPanchayat,
+      @JsonKey(name: 'treatment_supporter_ward')
+      final int? treatmentSupporterWard,
+      @JsonKey(
+          name: 'home_visit_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? dateOfHomeVisit,
+      @JsonKey(
+          name: 'ipt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? iptStartDate,
+      @JsonKey(name: 'hiv_done') final String? hivDone,
+      @JsonKey(name: 'hiv_result') final String? hivResult,
+      @JsonKey(
+          name: 'hiv_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? hivDate,
+      @JsonKey(name: 'hb_done') final String? hbDone,
+      @JsonKey(name: 'hb_result') final int? hbResult,
+      @JsonKey(
+          name: 'hb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? hbDate,
+      @JsonKey(name: 'blood_sugar_done') final String? bloodSugarDone,
+      @JsonKey(name: 'blood_sugar_result') final String? bloodSugarResult,
+      @JsonKey(
+          name: 'blood_sugar_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? bloodSugarDate,
+      @JsonKey(name: 'alcohol') final String? alcohol,
+      @JsonKey(name: 'tb_consumption') final String? tbConsumption,
+      @JsonKey(name: 'nutrition_screening') final String? nutrition,
+      @JsonKey(
+          name: 'nutrition_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? screeningDateNutrition,
+      @JsonKey(name: 'nutrition_linkage') final String? nutritionLinkage,
+      @JsonKey(name: 'ip_followup_nat_test') final String? ipNatTest,
+      @JsonKey(
+          name: 'ip_afb_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? ipAfbDate,
+      @JsonKey(name: 'ip_followup_afb_lab_number') final String? ipAfbLabNo,
+      @JsonKey(name: 'ip_followup_nat_result') final String? ipNatResult,
+      @JsonKey(name: 'ip_followup_lab_number') final String? ipLabNo,
+      @JsonKey(name: 'ip_chest_xray') final String? ipChestXray,
+      @JsonKey(name: 'ip_nutrition_support')
+      final String? ipNutritionSupport}) = _$TreatmentModelImpl;
 
   factory _TreatmentModel.fromJson(Map<String, dynamic> json) =
       _$TreatmentModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'case_definition')
   String? get caseDefinition;
   @override
+  @JsonKey(name: 'tb_treated')
   String? get previouslyTbTreated;
   @override
+  @JsonKey(name: 'rif_sensitivity')
   String? get rifSensitivity;
   @override
+  @JsonKey(
+      name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get ihvDate;
   @override
+  @JsonKey(name: 'treatment_regimen')
   String? get treatmentRegimen;
   @override
+  @JsonKey(name: 'patient_occupation')
   String? get patientOccupation;
   @override
+  @JsonKey(name: 'treatment_supporter_name')
   String? get treatmentSupporterName;
   @override
+  @JsonKey(name: 'treatment_supporter_position')
   String? get treatmentSupporterPosition;
   @override
+  @JsonKey(name: 'treatment_supporter_phone')
   String? get treatmentSupporterPhone;
   @override
+  @JsonKey(name: 'treatment_supporter_panchayat')
   String? get treatmentSupporterPanchayat;
   @override
-  String? get treatmentSupporterWard;
+  @JsonKey(name: 'treatment_supporter_ward')
+  int? get treatmentSupporterWard;
   @override
+  @JsonKey(
+      name: 'home_visit_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get dateOfHomeVisit;
   @override
+  @JsonKey(
+      name: 'ipt_start_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get iptStartDate;
   @override
+  @JsonKey(name: 'hiv_done')
   String? get hivDone;
   @override
+  @JsonKey(name: 'hiv_result')
   String? get hivResult;
   @override
+  @JsonKey(
+      name: 'hiv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get hivDate;
   @override
+  @JsonKey(name: 'hb_done')
   String? get hbDone;
   @override
-  String? get hbResult;
+  @JsonKey(name: 'hb_result')
+  int? get hbResult;
   @override
+  @JsonKey(
+      name: 'hb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get hbDate;
   @override
+  @JsonKey(name: 'blood_sugar_done')
   String? get bloodSugarDone;
   @override
+  @JsonKey(name: 'blood_sugar_result')
   String? get bloodSugarResult;
   @override
+  @JsonKey(
+      name: 'blood_sugar_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get bloodSugarDate;
   @override
+  @JsonKey(name: 'alcohol')
   String? get alcohol;
   @override
+  @JsonKey(name: 'tb_consumption')
   String? get tbConsumption;
   @override
+  @JsonKey(name: 'nutrition_screening')
   String? get nutrition;
   @override
+  @JsonKey(
+      name: 'nutrition_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get screeningDateNutrition;
   @override
-  DateTime? get nutritionLinkage;
+  @JsonKey(name: 'nutrition_linkage')
+  String? get nutritionLinkage;
   @override
+  @JsonKey(name: 'ip_followup_nat_test')
   String? get ipNatTest;
   @override
+  @JsonKey(
+      name: 'ip_afb_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get ipAfbDate;
   @override
+  @JsonKey(name: 'ip_followup_afb_lab_number')
   String? get ipAfbLabNo;
   @override
+  @JsonKey(name: 'ip_followup_nat_result')
   String? get ipNatResult;
   @override
+  @JsonKey(name: 'ip_followup_lab_number')
   String? get ipLabNo;
   @override
+  @JsonKey(name: 'ip_chest_xray')
   String? get ipChestXray;
   @override
+  @JsonKey(name: 'ip_nutrition_support')
   String? get ipNutritionSupport;
   @override
   @JsonKey(ignore: true)

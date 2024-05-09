@@ -9,27 +9,27 @@ part of 'referral_details_model.dart';
 _$ReferralDetailsModelImpl _$$ReferralDetailsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ReferralDetailsModelImpl(
-      referralID: json['referral_id'] as int?,
+      referralID: (json['referral_id'] as num?)?.toInt(),
       referralDate: fromJsonToDateTime(json['referral_date'] as String?),
       referralName: json['referral_name'] as String?,
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
       gender: json['gender'] as String?,
-      selectedDistrict: json['referral_district'] as int?,
-      selectedBlock: json['referral_block'] as int?,
-      selectedPanchayatCode: json['referral_panchayat'] as int?,
+      selectedDistrict: (json['referral_district'] as num?)?.toInt(),
+      selectedBlock: (json['referral_block'] as num?)?.toInt(),
+      selectedPanchayatCode: (json['referral_panchayat'] as num?)?.toInt(),
       district: json['district'] as String?,
       block: json['block'] as String?,
       panchayatCode: json['panchayatCode'] as String?,
-      ward: json['referral_ward'] as int?,
+      ward: (json['referral_ward'] as num?)?.toInt(),
       guardianName: json['guardian_name'] as String?,
       guardianPhoneNumber: json['guardian_phone_number'] as String?,
-      casteCategory: json['caste_category'] as int?,
+      casteCategory: (json['caste_category'] as num?)?.toInt(),
       keyPopulation: (json['key_population'] as List<dynamic>?)
-          ?.map((e) => e as int)
+          ?.map((e) => (e as num).toInt())
           .toList(),
-      trimester: json['trimester_of_pw'] as int?,
+      trimester: (json['trimester_of_pw'] as num?)?.toInt(),
       referredBy: json['referred_by_name'] as String?,
-      referrerSource: json['referrer_source'] as int?,
+      referrerSource: (json['referrer_source'] as num?)?.toInt(),
       referredWard: json['referred_ward'] as String?,
       referrerPanchayatCode: json['referrer_panchayat_code'] as String?,
       source: json['source'] as String?,

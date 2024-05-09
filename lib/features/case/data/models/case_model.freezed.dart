@@ -79,10 +79,10 @@ mixin _$Case {
   int? get whoSrq => throw _privateConstructorUsedError;
   @JsonKey(name: 'comorbidity')
   int? get diagnosis => throw _privateConstructorUsedError;
-  @JsonKey(name: 'Dbt')
-  int? get dbt => throw _privateConstructorUsedError;
+  @JsonKey(name: 'outcome_value')
+  int? get outcomeValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'contractcasing')
-  int? get contractCasing => throw _privateConstructorUsedError;
+  int? get contactTracing => throw _privateConstructorUsedError;
   @JsonKey(name: 'treatment')
   int? get treatment => throw _privateConstructorUsedError;
   @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
@@ -140,8 +140,8 @@ abstract class $CaseCopyWith<$Res> {
       @JsonKey(name: 'udst') int? tbScreening,
       @JsonKey(name: 'nikshay') int? whoSrq,
       @JsonKey(name: 'comorbidity') int? diagnosis,
-      @JsonKey(name: 'Dbt') int? dbt,
-      @JsonKey(name: 'contractcasing') int? contractCasing,
+      @JsonKey(name: 'outcome_value') int? outcomeValue,
+      @JsonKey(name: 'contractcasing') int? contactTracing,
       @JsonKey(name: 'treatment') int? treatment,
       @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
       HealthWorkerInfoModel? createdBy,
@@ -194,8 +194,8 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
     Object? tbScreening = freezed,
     Object? whoSrq = freezed,
     Object? diagnosis = freezed,
-    Object? dbt = freezed,
-    Object? contractCasing = freezed,
+    Object? outcomeValue = freezed,
+    Object? contactTracing = freezed,
     Object? treatment = freezed,
     Object? createdBy = freezed,
     Object? updatedBy = freezed,
@@ -305,13 +305,13 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.diagnosis
           : diagnosis // ignore: cast_nullable_to_non_nullable
               as int?,
-      dbt: freezed == dbt
-          ? _value.dbt
-          : dbt // ignore: cast_nullable_to_non_nullable
+      outcomeValue: freezed == outcomeValue
+          ? _value.outcomeValue
+          : outcomeValue // ignore: cast_nullable_to_non_nullable
               as int?,
-      contractCasing: freezed == contractCasing
-          ? _value.contractCasing
-          : contractCasing // ignore: cast_nullable_to_non_nullable
+      contactTracing: freezed == contactTracing
+          ? _value.contactTracing
+          : contactTracing // ignore: cast_nullable_to_non_nullable
               as int?,
       treatment: freezed == treatment
           ? _value.treatment
@@ -436,8 +436,8 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
       @JsonKey(name: 'udst') int? tbScreening,
       @JsonKey(name: 'nikshay') int? whoSrq,
       @JsonKey(name: 'comorbidity') int? diagnosis,
-      @JsonKey(name: 'Dbt') int? dbt,
-      @JsonKey(name: 'contractcasing') int? contractCasing,
+      @JsonKey(name: 'outcome_value') int? outcomeValue,
+      @JsonKey(name: 'contractcasing') int? contactTracing,
       @JsonKey(name: 'treatment') int? treatment,
       @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
       HealthWorkerInfoModel? createdBy,
@@ -492,8 +492,8 @@ class __$$CaseImplCopyWithImpl<$Res>
     Object? tbScreening = freezed,
     Object? whoSrq = freezed,
     Object? diagnosis = freezed,
-    Object? dbt = freezed,
-    Object? contractCasing = freezed,
+    Object? outcomeValue = freezed,
+    Object? contactTracing = freezed,
     Object? treatment = freezed,
     Object? createdBy = freezed,
     Object? updatedBy = freezed,
@@ -603,13 +603,13 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.diagnosis
           : diagnosis // ignore: cast_nullable_to_non_nullable
               as int?,
-      dbt: freezed == dbt
-          ? _value.dbt
-          : dbt // ignore: cast_nullable_to_non_nullable
+      outcomeValue: freezed == outcomeValue
+          ? _value.outcomeValue
+          : outcomeValue // ignore: cast_nullable_to_non_nullable
               as int?,
-      contractCasing: freezed == contractCasing
-          ? _value.contractCasing
-          : contractCasing // ignore: cast_nullable_to_non_nullable
+      contactTracing: freezed == contactTracing
+          ? _value.contactTracing
+          : contactTracing // ignore: cast_nullable_to_non_nullable
               as int?,
       treatment: freezed == treatment
           ? _value.treatment
@@ -671,8 +671,8 @@ class _$CaseImpl implements _Case {
       @JsonKey(name: 'udst') this.tbScreening,
       @JsonKey(name: 'nikshay') this.whoSrq,
       @JsonKey(name: 'comorbidity') this.diagnosis,
-      @JsonKey(name: 'Dbt') this.dbt,
-      @JsonKey(name: 'contractcasing') this.contractCasing,
+      @JsonKey(name: 'outcome_value') this.outcomeValue,
+      @JsonKey(name: 'contractcasing') this.contactTracing,
       @JsonKey(name: 'treatment') this.treatment,
       @JsonKey(name: 'created_by', toJson: healthWorkerToJson) this.createdBy,
       @JsonKey(name: 'updated_by', toJson: healthWorkerToJson) this.updatedBy});
@@ -766,11 +766,11 @@ class _$CaseImpl implements _Case {
   @JsonKey(name: 'comorbidity')
   final int? diagnosis;
   @override
-  @JsonKey(name: 'Dbt')
-  final int? dbt;
+  @JsonKey(name: 'outcome_value')
+  final int? outcomeValue;
   @override
   @JsonKey(name: 'contractcasing')
-  final int? contractCasing;
+  final int? contactTracing;
   @override
   @JsonKey(name: 'treatment')
   final int? treatment;
@@ -783,7 +783,7 @@ class _$CaseImpl implements _Case {
 
   @override
   String toString() {
-    return 'Case(id: $id, healthworkerId: $healthworkerId, patient: $patient, xrayOutcome: $xrayOutcome, outcome: $outcome, patientDetailsStatus: $patientDetailsStatus, treatmentStatus: $treatmentStatus, referralDetailsStatus: $referralDetailsStatus, tbScreeningStatus: $tbScreeningStatus, mentalHealthScreeningStatus: $mentalHealthScreeningStatus, diagnosisStatus: $diagnosisStatus, outcomeStatus: $outcomeStatus, contactTracingStatus: $contactTracingStatus, createdAt: $createdAt, updatedAt: $updatedAt, sourceVisited: $sourceVisited, hub: $hub, drugsPurchased: $drugsPurchased, referredTo: $referredTo, assignedTo: $assignedTo, filledForm: $filledForm, disease: $disease, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, dbt: $dbt, contractCasing: $contractCasing, treatment: $treatment, createdBy: $createdBy, updatedBy: $updatedBy)';
+    return 'Case(id: $id, healthworkerId: $healthworkerId, patient: $patient, xrayOutcome: $xrayOutcome, outcome: $outcome, patientDetailsStatus: $patientDetailsStatus, treatmentStatus: $treatmentStatus, referralDetailsStatus: $referralDetailsStatus, tbScreeningStatus: $tbScreeningStatus, mentalHealthScreeningStatus: $mentalHealthScreeningStatus, diagnosisStatus: $diagnosisStatus, outcomeStatus: $outcomeStatus, contactTracingStatus: $contactTracingStatus, createdAt: $createdAt, updatedAt: $updatedAt, sourceVisited: $sourceVisited, hub: $hub, drugsPurchased: $drugsPurchased, referredTo: $referredTo, assignedTo: $assignedTo, filledForm: $filledForm, disease: $disease, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, outcomeValue: $outcomeValue, contactTracing: $contactTracing, treatment: $treatment, createdBy: $createdBy, updatedBy: $updatedBy)';
   }
 
   @override
@@ -839,9 +839,10 @@ class _$CaseImpl implements _Case {
             (identical(other.whoSrq, whoSrq) || other.whoSrq == whoSrq) &&
             (identical(other.diagnosis, diagnosis) ||
                 other.diagnosis == diagnosis) &&
-            (identical(other.dbt, dbt) || other.dbt == dbt) &&
-            (identical(other.contractCasing, contractCasing) ||
-                other.contractCasing == contractCasing) &&
+            (identical(other.outcomeValue, outcomeValue) ||
+                other.outcomeValue == outcomeValue) &&
+            (identical(other.contactTracing, contactTracing) ||
+                other.contactTracing == contactTracing) &&
             (identical(other.treatment, treatment) ||
                 other.treatment == treatment) &&
             (identical(other.createdBy, createdBy) ||
@@ -880,8 +881,8 @@ class _$CaseImpl implements _Case {
         tbScreening,
         whoSrq,
         diagnosis,
-        dbt,
-        contractCasing,
+        outcomeValue,
+        contactTracing,
         treatment,
         createdBy,
         updatedBy
@@ -944,8 +945,8 @@ abstract class _Case implements Case {
       @JsonKey(name: 'udst') final int? tbScreening,
       @JsonKey(name: 'nikshay') final int? whoSrq,
       @JsonKey(name: 'comorbidity') final int? diagnosis,
-      @JsonKey(name: 'Dbt') final int? dbt,
-      @JsonKey(name: 'contractcasing') final int? contractCasing,
+      @JsonKey(name: 'outcome_value') final int? outcomeValue,
+      @JsonKey(name: 'contractcasing') final int? contactTracing,
       @JsonKey(name: 'treatment') final int? treatment,
       @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
       final HealthWorkerInfoModel? createdBy,
@@ -1040,11 +1041,11 @@ abstract class _Case implements Case {
   @JsonKey(name: 'comorbidity')
   int? get diagnosis;
   @override
-  @JsonKey(name: 'Dbt')
-  int? get dbt;
+  @JsonKey(name: 'outcome_value')
+  int? get outcomeValue;
   @override
   @JsonKey(name: 'contractcasing')
-  int? get contractCasing;
+  int? get contactTracing;
   @override
   @JsonKey(name: 'treatment')
   int? get treatment;

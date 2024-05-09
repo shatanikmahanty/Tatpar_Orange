@@ -8,7 +8,7 @@ part of 'referrer_source_model.dart';
 
 _$ReferrerSourceImpl _$$ReferrerSourceImplFromJson(Map<String, dynamic> json) =>
     _$ReferrerSourceImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
       updatedOn: json['updated_on'] as String?,
       createdOn: json['created_on'] as String?,

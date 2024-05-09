@@ -12,7 +12,7 @@ _$CasesFilterModelImpl _$$CasesFilterModelImplFromJson(
       selectedShortCut: $enumDecodeNullable(
           _$FilterShortCutEnumMap, json['selectedShortCut']),
       assignedTo: (json['assignedTo'] as List<dynamic>?)
-              ?.map((e) => e as int)
+              ?.map((e) => (e as num).toInt())
               .toList() ??
           const [],
       assignedOn: fromJsonToDateTime(json['assignedOn'] as String?),

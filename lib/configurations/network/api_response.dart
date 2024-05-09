@@ -11,11 +11,13 @@ class ApiResponse<T> {
 
   ApiResponse.success(this.response) {
     success = true;
+    status = Status.ok;
     data = response?.data;
   }
 
   ApiResponse.failed(ApplicationError this.error) {
     success = false;
+    status = Status.failed;
   }
 
   handleResponse({Function? onSuccess, Function? onFailed}) async {

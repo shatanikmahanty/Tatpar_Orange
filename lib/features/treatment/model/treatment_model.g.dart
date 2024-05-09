@@ -8,97 +8,82 @@ part of 'treatment_model.dart';
 
 _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
     _$TreatmentModelImpl(
-      caseDefinition: json['caseDefinition'] as String?,
-      previouslyTbTreated: json['previouslyTbTreated'] as String?,
-      rifSensitivity: json['rifSensitivity'] as String?,
-      ihvDate: json['ihvDate'] == null
-          ? null
-          : DateTime.parse(json['ihvDate'] as String),
-      treatmentRegimen: json['treatmentRegimen'] as String?,
-      patientOccupation: json['patientOccupation'] as String?,
-      treatmentSupporterName: json['treatmentSupporterName'] as String?,
-      treatmentSupporterPosition: json['treatmentSupporterPosition'] as String?,
-      treatmentSupporterPhone: json['treatmentSupporterPhone'] as String?,
+      caseDefinition: json['case_definition'] as String?,
+      previouslyTbTreated: json['tb_treated'] as String?,
+      rifSensitivity: json['rif_sensitivity'] as String?,
+      ihvDate: fromJsonToDateTime(json['ihv_date'] as String?),
+      treatmentRegimen: json['treatment_regimen'] as String?,
+      patientOccupation: json['patient_occupation'] as String?,
+      treatmentSupporterName: json['treatment_supporter_name'] as String?,
+      treatmentSupporterPosition:
+          json['treatment_supporter_position'] as String?,
+      treatmentSupporterPhone: json['treatment_supporter_phone'] as String?,
       treatmentSupporterPanchayat:
-          json['treatmentSupporterPanchayat'] as String?,
-      treatmentSupporterWard: json['treatmentSupporterWard'] as String?,
-      dateOfHomeVisit: json['dateOfHomeVisit'] == null
-          ? null
-          : DateTime.parse(json['dateOfHomeVisit'] as String),
-      iptStartDate: json['iptStartDate'] == null
-          ? null
-          : DateTime.parse(json['iptStartDate'] as String),
-      hivDone: json['hivDone'] as String?,
-      hivResult: json['hivResult'] as String?,
-      hivDate: json['hivDate'] == null
-          ? null
-          : DateTime.parse(json['hivDate'] as String),
-      hbDone: json['hbDone'] as String?,
-      hbResult: json['hbResult'] as String?,
-      hbDate: json['hbDate'] == null
-          ? null
-          : DateTime.parse(json['hbDate'] as String),
-      bloodSugarDone: json['bloodSugarDone'] as String?,
-      bloodSugarResult: json['bloodSugarResult'] as String?,
-      bloodSugarDate: json['bloodSugarDate'] == null
-          ? null
-          : DateTime.parse(json['bloodSugarDate'] as String),
+          json['treatment_supporter_panchayat'] as String?,
+      treatmentSupporterWard:
+          (json['treatment_supporter_ward'] as num?)?.toInt(),
+      dateOfHomeVisit: fromJsonToDateTime(json['home_visit_date'] as String?),
+      iptStartDate: fromJsonToDateTime(json['ipt_start_date'] as String?),
+      hivDone: json['hiv_done'] as String?,
+      hivResult: json['hiv_result'] as String?,
+      hivDate: fromJsonToDateTime(json['hiv_date'] as String?),
+      hbDone: json['hb_done'] as String?,
+      hbResult: (json['hb_result'] as num?)?.toInt(),
+      hbDate: fromJsonToDateTime(json['hb_date'] as String?),
+      bloodSugarDone: json['blood_sugar_done'] as String?,
+      bloodSugarResult: json['blood_sugar_result'] as String?,
+      bloodSugarDate: fromJsonToDateTime(json['blood_sugar_date'] as String?),
       alcohol: json['alcohol'] as String?,
-      tbConsumption: json['tbConsumption'] as String?,
-      nutrition: json['nutrition'] as String?,
-      screeningDateNutrition: json['screeningDateNutrition'] == null
-          ? null
-          : DateTime.parse(json['screeningDateNutrition'] as String),
-      nutritionLinkage: json['nutritionLinkage'] == null
-          ? null
-          : DateTime.parse(json['nutritionLinkage'] as String),
-      ipNatTest: json['ipNatTest'] as String?,
-      ipAfbDate: json['ipAfbDate'] == null
-          ? null
-          : DateTime.parse(json['ipAfbDate'] as String),
-      ipAfbLabNo: json['ipAfbLabNo'] as String?,
-      ipNatResult: json['ipNatResult'] as String?,
-      ipLabNo: json['ipLabNo'] as String?,
-      ipChestXray: json['ipChestXray'] as String?,
-      ipNutritionSupport: json['ipNutritionSupport'] as String?,
+      tbConsumption: json['tb_consumption'] as String?,
+      nutrition: json['nutrition_screening'] as String?,
+      screeningDateNutrition:
+          fromJsonToDateTime(json['nutrition_screening_date'] as String?),
+      nutritionLinkage: json['nutrition_linkage'] as String?,
+      ipNatTest: json['ip_followup_nat_test'] as String?,
+      ipAfbDate: fromJsonToDateTime(json['ip_afb_date'] as String?),
+      ipAfbLabNo: json['ip_followup_afb_lab_number'] as String?,
+      ipNatResult: json['ip_followup_nat_result'] as String?,
+      ipLabNo: json['ip_followup_lab_number'] as String?,
+      ipChestXray: json['ip_chest_xray'] as String?,
+      ipNutritionSupport: json['ip_nutrition_support'] as String?,
     );
 
 Map<String, dynamic> _$$TreatmentModelImplToJson(
         _$TreatmentModelImpl instance) =>
     <String, dynamic>{
-      'caseDefinition': instance.caseDefinition,
-      'previouslyTbTreated': instance.previouslyTbTreated,
-      'rifSensitivity': instance.rifSensitivity,
-      'ihvDate': instance.ihvDate?.toIso8601String(),
-      'treatmentRegimen': instance.treatmentRegimen,
-      'patientOccupation': instance.patientOccupation,
-      'treatmentSupporterName': instance.treatmentSupporterName,
-      'treatmentSupporterPosition': instance.treatmentSupporterPosition,
-      'treatmentSupporterPhone': instance.treatmentSupporterPhone,
-      'treatmentSupporterPanchayat': instance.treatmentSupporterPanchayat,
-      'treatmentSupporterWard': instance.treatmentSupporterWard,
-      'dateOfHomeVisit': instance.dateOfHomeVisit?.toIso8601String(),
-      'iptStartDate': instance.iptStartDate?.toIso8601String(),
-      'hivDone': instance.hivDone,
-      'hivResult': instance.hivResult,
-      'hivDate': instance.hivDate?.toIso8601String(),
-      'hbDone': instance.hbDone,
-      'hbResult': instance.hbResult,
-      'hbDate': instance.hbDate?.toIso8601String(),
-      'bloodSugarDone': instance.bloodSugarDone,
-      'bloodSugarResult': instance.bloodSugarResult,
-      'bloodSugarDate': instance.bloodSugarDate?.toIso8601String(),
+      'case_definition': instance.caseDefinition,
+      'tb_treated': instance.previouslyTbTreated,
+      'rif_sensitivity': instance.rifSensitivity,
+      'ihv_date': _dateTimeToJson(instance.ihvDate),
+      'treatment_regimen': instance.treatmentRegimen,
+      'patient_occupation': instance.patientOccupation,
+      'treatment_supporter_name': instance.treatmentSupporterName,
+      'treatment_supporter_position': instance.treatmentSupporterPosition,
+      'treatment_supporter_phone': instance.treatmentSupporterPhone,
+      'treatment_supporter_panchayat': instance.treatmentSupporterPanchayat,
+      'treatment_supporter_ward': instance.treatmentSupporterWard,
+      'home_visit_date': _dateTimeToJson(instance.dateOfHomeVisit),
+      'ipt_start_date': _dateTimeToJson(instance.iptStartDate),
+      'hiv_done': instance.hivDone,
+      'hiv_result': instance.hivResult,
+      'hiv_date': _dateTimeToJson(instance.hivDate),
+      'hb_done': instance.hbDone,
+      'hb_result': instance.hbResult,
+      'hb_date': _dateTimeToJson(instance.hbDate),
+      'blood_sugar_done': instance.bloodSugarDone,
+      'blood_sugar_result': instance.bloodSugarResult,
+      'blood_sugar_date': _dateTimeToJson(instance.bloodSugarDate),
       'alcohol': instance.alcohol,
-      'tbConsumption': instance.tbConsumption,
-      'nutrition': instance.nutrition,
-      'screeningDateNutrition':
-          instance.screeningDateNutrition?.toIso8601String(),
-      'nutritionLinkage': instance.nutritionLinkage?.toIso8601String(),
-      'ipNatTest': instance.ipNatTest,
-      'ipAfbDate': instance.ipAfbDate?.toIso8601String(),
-      'ipAfbLabNo': instance.ipAfbLabNo,
-      'ipNatResult': instance.ipNatResult,
-      'ipLabNo': instance.ipLabNo,
-      'ipChestXray': instance.ipChestXray,
-      'ipNutritionSupport': instance.ipNutritionSupport,
+      'tb_consumption': instance.tbConsumption,
+      'nutrition_screening': instance.nutrition,
+      'nutrition_screening_date':
+          _dateTimeToJson(instance.screeningDateNutrition),
+      'nutrition_linkage': instance.nutritionLinkage,
+      'ip_followup_nat_test': instance.ipNatTest,
+      'ip_afb_date': _dateTimeToJson(instance.ipAfbDate),
+      'ip_followup_afb_lab_number': instance.ipAfbLabNo,
+      'ip_followup_nat_result': instance.ipNatResult,
+      'ip_followup_lab_number': instance.ipLabNo,
+      'ip_chest_xray': instance.ipChestXray,
+      'ip_nutrition_support': instance.ipNutritionSupport,
     };

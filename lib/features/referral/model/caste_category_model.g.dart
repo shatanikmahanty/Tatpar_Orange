@@ -8,7 +8,7 @@ part of 'caste_category_model.dart';
 
 _$CasteCategoryImpl _$$CasteCategoryImplFromJson(Map<String, dynamic> json) =>
     _$CasteCategoryImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       name: json['name'] as String?,
     );
 

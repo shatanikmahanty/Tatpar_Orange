@@ -8,21 +8,21 @@ part of 'app_user_model.dart';
 
 _$AppUserImpl _$$AppUserImplFromJson(Map<String, dynamic> json) =>
     _$AppUserImpl(
-      id: json['id'] as int,
+      id: (json['id'] as num).toInt(),
       firstName: json['first_name'] as String,
       lastName: json['last_name'] as String,
       mobileNumber: json['mobile_number'] as String,
       alternateNumber: json['alternate_number'] as String?,
       profilePhoto: json['profile_photo'] as String?,
       email: json['email'] as String?,
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
       education: json['education'] as String?,
       gender: json['gender'] as String,
       isSupervisor: json['is_supervisor'] as bool,
       isActive: json['is_active'] as bool,
       createdAt: json['created_at'] as String,
       updatedAt: json['updated_at'] as String?,
-      supervisor: json['supervisor'] as int?,
+      supervisor: (json['supervisor'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$AppUserImplToJson(_$AppUserImpl instance) =>

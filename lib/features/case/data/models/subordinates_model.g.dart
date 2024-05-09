@@ -9,7 +9,7 @@ part of 'subordinates_model.dart';
 _$SubordinatesModelImpl _$$SubordinatesModelImplFromJson(
         Map<String, dynamic> json) =>
     _$SubordinatesModelImpl(
-      id: json['id'] as int?,
+      id: (json['id'] as num?)?.toInt(),
       location: json['location'] == null
           ? null
           : Location.fromJson(json['location'] as Map<String, dynamic>),
@@ -23,7 +23,7 @@ _$SubordinatesModelImpl _$$SubordinatesModelImplFromJson(
       mobileNumber: json['mobile_number'] as String?,
       alternateNumber: json['alternate_number'],
       email: json['email'] as String?,
-      age: json['age'] as int?,
+      age: (json['age'] as num?)?.toInt(),
       competency: json['competency'] as String?,
       licenseId: json['license_id'],
       profilePhoto: json['profile_photo'],
