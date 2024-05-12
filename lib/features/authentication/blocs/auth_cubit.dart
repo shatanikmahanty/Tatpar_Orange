@@ -31,6 +31,9 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
   late final AuthRepo _authRepo;
 
   AuthCubit._internal() : super(const AuthState());
+  int? _caseId;
+  set caseId(int? caseId) => _caseId = caseId;
+  int? get workingCaseId => _caseId;
 
   void init(AuthRepo authRepo) {
     _authRepo = authRepo;
@@ -42,7 +45,7 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
 
   Future<void> logout() async {
     await _authRepo.logout();
-    emit(state.copyWith(user: null));
+    emit(state.copyWith(user: null, phoneNumber: null));
   }
 
   FormGroup formBuilder() => fb.group({
@@ -93,9 +96,9 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
   @override
   AuthState? fromJson(Map<String, dynamic> json) => AuthState.fromJson(json);
 
-  Future<void> register(RegisterUser user) async {
-    await _authRepo.register(user);
-  }
+  // Future<void> register(RegisterUser user) async {
+  //   await _authRepo.register(user);
+  // }
 
   Future<void> resendOtp() async {
     await _authRepo.sendOtp(

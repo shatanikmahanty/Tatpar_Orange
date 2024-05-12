@@ -82,29 +82,24 @@ class PhoneLoginPage extends StatelessWidget {
                         );
                       }
                       return AuthButton(
-                          text: 'Login',
-                          onClick: () {
-                            context.router.navigate(
-                              const PhoneVerifyRoute(),
-                            );
-                          }
-                          // (ReactiveForm.of(context)?.valid ?? false)
-                          //     ? () async {
-                          //         final phoneControl = form.control('phone');
-                          //         await authCubit
-                          //             .loginWithPhone(phoneControl.value);
-                          //       }
-                          //     : null,
-                          );
+                        text: 'Login',
+                        onClick: (ReactiveForm.of(context)?.valid ?? false)
+                            ? () async {
+                                final phoneControl = form.control('phone');
+                                await authCubit
+                                    .loginWithPhone(phoneControl.value);
+                              }
+                            : null,
+                      );
                     },
                   ),
                   const SizedBox(
                     height: kPadding * 2,
                   ),
                   const LoginRegisterToggle(),
-                  // const SizedBox(
-                  //   height: kPadding * 2,
-                  // ),
+                  const SizedBox(
+                    height: kPadding * 2,
+                  ),
                 ],
               ),
             ),

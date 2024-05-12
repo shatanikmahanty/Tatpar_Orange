@@ -66,8 +66,7 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                             color: AppColors.grey50),
                       ),
                       Text(
-                        //  context.watch<AuthCubit>().state.user?.firstName ??
-                        '',
+                        context.watch<AuthCubit>().state.user?.firstName ?? '',
                         style: AppTextStyle.titleLarge.copyWith(
                             fontSize: 20,
                             height: 1.2,

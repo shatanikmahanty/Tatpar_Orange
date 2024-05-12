@@ -22,73 +22,63 @@ Case _$CaseFromJson(Map<String, dynamic> json) {
 mixin _$Case {
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'healthworker_id')
-  int? get healthworkerId => throw _privateConstructorUsedError;
-  PatientModel? get patient => throw _privateConstructorUsedError;
-  @JsonKey(name: 'xray_outcome', includeIfNull: false)
-  String? get xrayOutcome => throw _privateConstructorUsedError;
-  @JsonKey(name: 'outcome', includeIfNull: false)
-  String? get outcome => throw _privateConstructorUsedError;
-  @JsonKey(name: 'patient_details_status')
-  bool get patientDetailsStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'treatment_status')
-  bool get treatmentStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'referral_details_status')
-  bool get referralDetailsStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'tb_screening_status')
-  bool get tbScreeningStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'mental_health_screening_status')
-  bool get mentalHealthScreeningStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'diagnosis_status')
-  bool get diagnosisStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'outcome_status')
-  bool get outcomeStatus => throw _privateConstructorUsedError;
-  @JsonKey(name: 'contact_tracing_status')
-  bool get contactTracingStatus => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_name')
+  String? get referralName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'gender')
+  String? get gender => throw _privateConstructorUsedError;
+  @JsonKey(name: 'age')
+  int? get age => throw _privateConstructorUsedError;
+  @JsonKey(name: 'panchayat')
+  String? get panchayat => throw _privateConstructorUsedError;
+  @JsonKey(name: 'screened_by')
+  String? get screenedBy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referred_by')
+  String? get referredBy => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_mobile_number')
+  String? get referralMobileNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'assigned_to')
+  String? get assignedTo => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tb_screening')
+  String? get tbScreeningOutcome => throw _privateConstructorUsedError;
+  @JsonKey(name: 'diagnosis')
+  String? get diagnosisName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  String? get status =>
+      throw _privateConstructorUsedError; // @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
+// @JsonKey(name: 'referral_details_status')
+// @Default(false)
+// bool referralDetailsStatus,
+// @JsonKey(name: 'tb_screening_status')
+// @Default(false)
+// bool tbScreeningStatus,
+// @JsonKey(name: 'mental_health_screening_status')
+// @Default(false)
+// bool mentalHealthScreeningStatus,
+// @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
+// @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
+// @JsonKey(name: 'contact_tracing_status')
+// @Default(false)
+// bool contactTracingStatus,
   @JsonKey(
-      name: 'created_at',
+      name: 'assigned_on',
       fromJson: fromJsonToDateTime,
-      toJson: _dateTimeToJson,
-      includeIfNull: false)
-  DateTime? get createdAt => throw _privateConstructorUsedError;
+      toJson: _dateTimeToJson)
+  DateTime? get assignedOn => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'updated_at',
-      fromJson: fromJsonToDateTime,
-      toJson: _dateTimeToJson,
-      includeIfNull: false)
-  DateTime? get updatedAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'source_visited')
-  int? get sourceVisited => throw _privateConstructorUsedError;
-  @JsonKey(name: 'hub')
-  int? get hub => throw _privateConstructorUsedError;
-  @JsonKey(name: 'drugs_purchased')
-  int? get drugsPurchased => throw _privateConstructorUsedError;
-  @JsonKey(name: 'referred_to', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get referredTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'assigned_to', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get assignedTo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'filled_form')
-  int? get filledForm => throw _privateConstructorUsedError;
-  @JsonKey(name: 'disease')
-  int? get disease => throw _privateConstructorUsedError;
-  @JsonKey(name: 'xray')
+      name: 'created_on', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+  DateTime? get createdOn => throw _privateConstructorUsedError;
+  @JsonKey(name: 'referral_id')
   int? get referralDetails => throw _privateConstructorUsedError;
-  @JsonKey(name: 'udst')
+  @JsonKey(name: 'tb_screening_id')
   int? get tbScreening => throw _privateConstructorUsedError;
-  @JsonKey(name: 'nikshay')
+  @JsonKey(name: 'whosrq_id')
   int? get whoSrq => throw _privateConstructorUsedError;
-  @JsonKey(name: 'comorbidity')
-  int? get diagnosis => throw _privateConstructorUsedError;
-  @JsonKey(name: 'outcome_value')
+  @JsonKey(name: 'outcome_id')
   int? get outcomeValue => throw _privateConstructorUsedError;
-  @JsonKey(name: 'contractcasing')
+  @JsonKey(name: 'contact_tracing_id')
   int? get contactTracing => throw _privateConstructorUsedError;
-  @JsonKey(name: 'treatment')
+  @JsonKey(name: 'treatment_id')
   int? get treatment => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get createdBy => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_by', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get updatedBy => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -102,57 +92,33 @@ abstract class $CaseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'healthworker_id') int? healthworkerId,
-      PatientModel? patient,
-      @JsonKey(name: 'xray_outcome', includeIfNull: false) String? xrayOutcome,
-      @JsonKey(name: 'outcome', includeIfNull: false) String? outcome,
-      @JsonKey(name: 'patient_details_status') bool patientDetailsStatus,
-      @JsonKey(name: 'treatment_status') bool treatmentStatus,
-      @JsonKey(name: 'referral_details_status') bool referralDetailsStatus,
-      @JsonKey(name: 'tb_screening_status') bool tbScreeningStatus,
-      @JsonKey(name: 'mental_health_screening_status')
-      bool mentalHealthScreeningStatus,
-      @JsonKey(name: 'diagnosis_status') bool diagnosisStatus,
-      @JsonKey(name: 'outcome_status') bool outcomeStatus,
-      @JsonKey(name: 'contact_tracing_status') bool contactTracingStatus,
+      @JsonKey(name: 'referral_name') String? referralName,
+      @JsonKey(name: 'gender') String? gender,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'panchayat') String? panchayat,
+      @JsonKey(name: 'screened_by') String? screenedBy,
+      @JsonKey(name: 'referred_by') String? referredBy,
+      @JsonKey(name: 'referral_mobile_number') String? referralMobileNumber,
+      @JsonKey(name: 'assigned_to') String? assignedTo,
+      @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
+      @JsonKey(name: 'diagnosis') String? diagnosisName,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(
-          name: 'created_at',
+          name: 'assigned_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      DateTime? createdAt,
+          toJson: _dateTimeToJson)
+      DateTime? assignedOn,
       @JsonKey(
-          name: 'updated_at',
+          name: 'created_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      DateTime? updatedAt,
-      @JsonKey(name: 'source_visited') int? sourceVisited,
-      @JsonKey(name: 'hub') int? hub,
-      @JsonKey(name: 'drugs_purchased') int? drugsPurchased,
-      @JsonKey(name: 'referred_to', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? referredTo,
-      @JsonKey(name: 'assigned_to', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? assignedTo,
-      @JsonKey(name: 'filled_form') int? filledForm,
-      @JsonKey(name: 'disease') int? disease,
-      @JsonKey(name: 'xray') int? referralDetails,
-      @JsonKey(name: 'udst') int? tbScreening,
-      @JsonKey(name: 'nikshay') int? whoSrq,
-      @JsonKey(name: 'comorbidity') int? diagnosis,
-      @JsonKey(name: 'outcome_value') int? outcomeValue,
-      @JsonKey(name: 'contractcasing') int? contactTracing,
-      @JsonKey(name: 'treatment') int? treatment,
-      @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? createdBy,
-      @JsonKey(name: 'updated_by', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? updatedBy});
-
-  $PatientModelCopyWith<$Res>? get patient;
-  $HealthWorkerInfoModelCopyWith<$Res>? get referredTo;
-  $HealthWorkerInfoModelCopyWith<$Res>? get assignedTo;
-  $HealthWorkerInfoModelCopyWith<$Res>? get createdBy;
-  $HealthWorkerInfoModelCopyWith<$Res>? get updatedBy;
+          toJson: _dateTimeToJson)
+      DateTime? createdOn,
+      @JsonKey(name: 'referral_id') int? referralDetails,
+      @JsonKey(name: 'tb_screening_id') int? tbScreening,
+      @JsonKey(name: 'whosrq_id') int? whoSrq,
+      @JsonKey(name: 'outcome_id') int? outcomeValue,
+      @JsonKey(name: 'contact_tracing_id') int? contactTracing,
+      @JsonKey(name: 'treatment_id') int? treatment});
 }
 
 /// @nodoc
@@ -169,126 +135,83 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
   @override
   $Res call({
     Object? id = freezed,
-    Object? healthworkerId = freezed,
-    Object? patient = freezed,
-    Object? xrayOutcome = freezed,
-    Object? outcome = freezed,
-    Object? patientDetailsStatus = null,
-    Object? treatmentStatus = null,
-    Object? referralDetailsStatus = null,
-    Object? tbScreeningStatus = null,
-    Object? mentalHealthScreeningStatus = null,
-    Object? diagnosisStatus = null,
-    Object? outcomeStatus = null,
-    Object? contactTracingStatus = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? sourceVisited = freezed,
-    Object? hub = freezed,
-    Object? drugsPurchased = freezed,
-    Object? referredTo = freezed,
+    Object? referralName = freezed,
+    Object? gender = freezed,
+    Object? age = freezed,
+    Object? panchayat = freezed,
+    Object? screenedBy = freezed,
+    Object? referredBy = freezed,
+    Object? referralMobileNumber = freezed,
     Object? assignedTo = freezed,
-    Object? filledForm = freezed,
-    Object? disease = freezed,
+    Object? tbScreeningOutcome = freezed,
+    Object? diagnosisName = freezed,
+    Object? status = freezed,
+    Object? assignedOn = freezed,
+    Object? createdOn = freezed,
     Object? referralDetails = freezed,
     Object? tbScreening = freezed,
     Object? whoSrq = freezed,
-    Object? diagnosis = freezed,
     Object? outcomeValue = freezed,
     Object? contactTracing = freezed,
     Object? treatment = freezed,
-    Object? createdBy = freezed,
-    Object? updatedBy = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      healthworkerId: freezed == healthworkerId
-          ? _value.healthworkerId
-          : healthworkerId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      patient: freezed == patient
-          ? _value.patient
-          : patient // ignore: cast_nullable_to_non_nullable
-              as PatientModel?,
-      xrayOutcome: freezed == xrayOutcome
-          ? _value.xrayOutcome
-          : xrayOutcome // ignore: cast_nullable_to_non_nullable
+      referralName: freezed == referralName
+          ? _value.referralName
+          : referralName // ignore: cast_nullable_to_non_nullable
               as String?,
-      outcome: freezed == outcome
-          ? _value.outcome
-          : outcome // ignore: cast_nullable_to_non_nullable
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
               as String?,
-      patientDetailsStatus: null == patientDetailsStatus
-          ? _value.patientDetailsStatus
-          : patientDetailsStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      treatmentStatus: null == treatmentStatus
-          ? _value.treatmentStatus
-          : treatmentStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      referralDetailsStatus: null == referralDetailsStatus
-          ? _value.referralDetailsStatus
-          : referralDetailsStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      tbScreeningStatus: null == tbScreeningStatus
-          ? _value.tbScreeningStatus
-          : tbScreeningStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      mentalHealthScreeningStatus: null == mentalHealthScreeningStatus
-          ? _value.mentalHealthScreeningStatus
-          : mentalHealthScreeningStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      diagnosisStatus: null == diagnosisStatus
-          ? _value.diagnosisStatus
-          : diagnosisStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      outcomeStatus: null == outcomeStatus
-          ? _value.outcomeStatus
-          : outcomeStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      contactTracingStatus: null == contactTracingStatus
-          ? _value.contactTracingStatus
-          : contactTracingStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      sourceVisited: freezed == sourceVisited
-          ? _value.sourceVisited
-          : sourceVisited // ignore: cast_nullable_to_non_nullable
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as int?,
-      hub: freezed == hub
-          ? _value.hub
-          : hub // ignore: cast_nullable_to_non_nullable
-              as int?,
-      drugsPurchased: freezed == drugsPurchased
-          ? _value.drugsPurchased
-          : drugsPurchased // ignore: cast_nullable_to_non_nullable
-              as int?,
-      referredTo: freezed == referredTo
-          ? _value.referredTo
-          : referredTo // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
+      panchayat: freezed == panchayat
+          ? _value.panchayat
+          : panchayat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      screenedBy: freezed == screenedBy
+          ? _value.screenedBy
+          : screenedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      referredBy: freezed == referredBy
+          ? _value.referredBy
+          : referredBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      referralMobileNumber: freezed == referralMobileNumber
+          ? _value.referralMobileNumber
+          : referralMobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
       assignedTo: freezed == assignedTo
           ? _value.assignedTo
           : assignedTo // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
-      filledForm: freezed == filledForm
-          ? _value.filledForm
-          : filledForm // ignore: cast_nullable_to_non_nullable
-              as int?,
-      disease: freezed == disease
-          ? _value.disease
-          : disease // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      tbScreeningOutcome: freezed == tbScreeningOutcome
+          ? _value.tbScreeningOutcome
+          : tbScreeningOutcome // ignore: cast_nullable_to_non_nullable
+              as String?,
+      diagnosisName: freezed == diagnosisName
+          ? _value.diagnosisName
+          : diagnosisName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      assignedOn: freezed == assignedOn
+          ? _value.assignedOn
+          : assignedOn // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdOn: freezed == createdOn
+          ? _value.createdOn
+          : createdOn // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       referralDetails: freezed == referralDetails
           ? _value.referralDetails
           : referralDetails // ignore: cast_nullable_to_non_nullable
@@ -300,10 +223,6 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
       whoSrq: freezed == whoSrq
           ? _value.whoSrq
           : whoSrq // ignore: cast_nullable_to_non_nullable
-              as int?,
-      diagnosis: freezed == diagnosis
-          ? _value.diagnosis
-          : diagnosis // ignore: cast_nullable_to_non_nullable
               as int?,
       outcomeValue: freezed == outcomeValue
           ? _value.outcomeValue
@@ -317,75 +236,7 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.treatment
           : treatment // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
-      updatedBy: freezed == updatedBy
-          ? _value.updatedBy
-          : updatedBy // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
     ) as $Val);
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $PatientModelCopyWith<$Res>? get patient {
-    if (_value.patient == null) {
-      return null;
-    }
-
-    return $PatientModelCopyWith<$Res>(_value.patient!, (value) {
-      return _then(_value.copyWith(patient: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HealthWorkerInfoModelCopyWith<$Res>? get referredTo {
-    if (_value.referredTo == null) {
-      return null;
-    }
-
-    return $HealthWorkerInfoModelCopyWith<$Res>(_value.referredTo!, (value) {
-      return _then(_value.copyWith(referredTo: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HealthWorkerInfoModelCopyWith<$Res>? get assignedTo {
-    if (_value.assignedTo == null) {
-      return null;
-    }
-
-    return $HealthWorkerInfoModelCopyWith<$Res>(_value.assignedTo!, (value) {
-      return _then(_value.copyWith(assignedTo: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HealthWorkerInfoModelCopyWith<$Res>? get createdBy {
-    if (_value.createdBy == null) {
-      return null;
-    }
-
-    return $HealthWorkerInfoModelCopyWith<$Res>(_value.createdBy!, (value) {
-      return _then(_value.copyWith(createdBy: value) as $Val);
-    });
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $HealthWorkerInfoModelCopyWith<$Res>? get updatedBy {
-    if (_value.updatedBy == null) {
-      return null;
-    }
-
-    return $HealthWorkerInfoModelCopyWith<$Res>(_value.updatedBy!, (value) {
-      return _then(_value.copyWith(updatedBy: value) as $Val);
-    });
   }
 }
 
@@ -398,62 +249,33 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
   @useResult
   $Res call(
       {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'healthworker_id') int? healthworkerId,
-      PatientModel? patient,
-      @JsonKey(name: 'xray_outcome', includeIfNull: false) String? xrayOutcome,
-      @JsonKey(name: 'outcome', includeIfNull: false) String? outcome,
-      @JsonKey(name: 'patient_details_status') bool patientDetailsStatus,
-      @JsonKey(name: 'treatment_status') bool treatmentStatus,
-      @JsonKey(name: 'referral_details_status') bool referralDetailsStatus,
-      @JsonKey(name: 'tb_screening_status') bool tbScreeningStatus,
-      @JsonKey(name: 'mental_health_screening_status')
-      bool mentalHealthScreeningStatus,
-      @JsonKey(name: 'diagnosis_status') bool diagnosisStatus,
-      @JsonKey(name: 'outcome_status') bool outcomeStatus,
-      @JsonKey(name: 'contact_tracing_status') bool contactTracingStatus,
+      @JsonKey(name: 'referral_name') String? referralName,
+      @JsonKey(name: 'gender') String? gender,
+      @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'panchayat') String? panchayat,
+      @JsonKey(name: 'screened_by') String? screenedBy,
+      @JsonKey(name: 'referred_by') String? referredBy,
+      @JsonKey(name: 'referral_mobile_number') String? referralMobileNumber,
+      @JsonKey(name: 'assigned_to') String? assignedTo,
+      @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
+      @JsonKey(name: 'diagnosis') String? diagnosisName,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(
-          name: 'created_at',
+          name: 'assigned_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      DateTime? createdAt,
+          toJson: _dateTimeToJson)
+      DateTime? assignedOn,
       @JsonKey(
-          name: 'updated_at',
+          name: 'created_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      DateTime? updatedAt,
-      @JsonKey(name: 'source_visited') int? sourceVisited,
-      @JsonKey(name: 'hub') int? hub,
-      @JsonKey(name: 'drugs_purchased') int? drugsPurchased,
-      @JsonKey(name: 'referred_to', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? referredTo,
-      @JsonKey(name: 'assigned_to', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? assignedTo,
-      @JsonKey(name: 'filled_form') int? filledForm,
-      @JsonKey(name: 'disease') int? disease,
-      @JsonKey(name: 'xray') int? referralDetails,
-      @JsonKey(name: 'udst') int? tbScreening,
-      @JsonKey(name: 'nikshay') int? whoSrq,
-      @JsonKey(name: 'comorbidity') int? diagnosis,
-      @JsonKey(name: 'outcome_value') int? outcomeValue,
-      @JsonKey(name: 'contractcasing') int? contactTracing,
-      @JsonKey(name: 'treatment') int? treatment,
-      @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? createdBy,
-      @JsonKey(name: 'updated_by', toJson: healthWorkerToJson)
-      HealthWorkerInfoModel? updatedBy});
-
-  @override
-  $PatientModelCopyWith<$Res>? get patient;
-  @override
-  $HealthWorkerInfoModelCopyWith<$Res>? get referredTo;
-  @override
-  $HealthWorkerInfoModelCopyWith<$Res>? get assignedTo;
-  @override
-  $HealthWorkerInfoModelCopyWith<$Res>? get createdBy;
-  @override
-  $HealthWorkerInfoModelCopyWith<$Res>? get updatedBy;
+          toJson: _dateTimeToJson)
+      DateTime? createdOn,
+      @JsonKey(name: 'referral_id') int? referralDetails,
+      @JsonKey(name: 'tb_screening_id') int? tbScreening,
+      @JsonKey(name: 'whosrq_id') int? whoSrq,
+      @JsonKey(name: 'outcome_id') int? outcomeValue,
+      @JsonKey(name: 'contact_tracing_id') int? contactTracing,
+      @JsonKey(name: 'treatment_id') int? treatment});
 }
 
 /// @nodoc
@@ -467,126 +289,83 @@ class __$$CaseImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? id = freezed,
-    Object? healthworkerId = freezed,
-    Object? patient = freezed,
-    Object? xrayOutcome = freezed,
-    Object? outcome = freezed,
-    Object? patientDetailsStatus = null,
-    Object? treatmentStatus = null,
-    Object? referralDetailsStatus = null,
-    Object? tbScreeningStatus = null,
-    Object? mentalHealthScreeningStatus = null,
-    Object? diagnosisStatus = null,
-    Object? outcomeStatus = null,
-    Object? contactTracingStatus = null,
-    Object? createdAt = freezed,
-    Object? updatedAt = freezed,
-    Object? sourceVisited = freezed,
-    Object? hub = freezed,
-    Object? drugsPurchased = freezed,
-    Object? referredTo = freezed,
+    Object? referralName = freezed,
+    Object? gender = freezed,
+    Object? age = freezed,
+    Object? panchayat = freezed,
+    Object? screenedBy = freezed,
+    Object? referredBy = freezed,
+    Object? referralMobileNumber = freezed,
     Object? assignedTo = freezed,
-    Object? filledForm = freezed,
-    Object? disease = freezed,
+    Object? tbScreeningOutcome = freezed,
+    Object? diagnosisName = freezed,
+    Object? status = freezed,
+    Object? assignedOn = freezed,
+    Object? createdOn = freezed,
     Object? referralDetails = freezed,
     Object? tbScreening = freezed,
     Object? whoSrq = freezed,
-    Object? diagnosis = freezed,
     Object? outcomeValue = freezed,
     Object? contactTracing = freezed,
     Object? treatment = freezed,
-    Object? createdBy = freezed,
-    Object? updatedBy = freezed,
   }) {
     return _then(_$CaseImpl(
       id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
               as int?,
-      healthworkerId: freezed == healthworkerId
-          ? _value.healthworkerId
-          : healthworkerId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      patient: freezed == patient
-          ? _value.patient
-          : patient // ignore: cast_nullable_to_non_nullable
-              as PatientModel?,
-      xrayOutcome: freezed == xrayOutcome
-          ? _value.xrayOutcome
-          : xrayOutcome // ignore: cast_nullable_to_non_nullable
+      referralName: freezed == referralName
+          ? _value.referralName
+          : referralName // ignore: cast_nullable_to_non_nullable
               as String?,
-      outcome: freezed == outcome
-          ? _value.outcome
-          : outcome // ignore: cast_nullable_to_non_nullable
+      gender: freezed == gender
+          ? _value.gender
+          : gender // ignore: cast_nullable_to_non_nullable
               as String?,
-      patientDetailsStatus: null == patientDetailsStatus
-          ? _value.patientDetailsStatus
-          : patientDetailsStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      treatmentStatus: null == treatmentStatus
-          ? _value.treatmentStatus
-          : treatmentStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      referralDetailsStatus: null == referralDetailsStatus
-          ? _value.referralDetailsStatus
-          : referralDetailsStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      tbScreeningStatus: null == tbScreeningStatus
-          ? _value.tbScreeningStatus
-          : tbScreeningStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      mentalHealthScreeningStatus: null == mentalHealthScreeningStatus
-          ? _value.mentalHealthScreeningStatus
-          : mentalHealthScreeningStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      diagnosisStatus: null == diagnosisStatus
-          ? _value.diagnosisStatus
-          : diagnosisStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      outcomeStatus: null == outcomeStatus
-          ? _value.outcomeStatus
-          : outcomeStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      contactTracingStatus: null == contactTracingStatus
-          ? _value.contactTracingStatus
-          : contactTracingStatus // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: freezed == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      sourceVisited: freezed == sourceVisited
-          ? _value.sourceVisited
-          : sourceVisited // ignore: cast_nullable_to_non_nullable
+      age: freezed == age
+          ? _value.age
+          : age // ignore: cast_nullable_to_non_nullable
               as int?,
-      hub: freezed == hub
-          ? _value.hub
-          : hub // ignore: cast_nullable_to_non_nullable
-              as int?,
-      drugsPurchased: freezed == drugsPurchased
-          ? _value.drugsPurchased
-          : drugsPurchased // ignore: cast_nullable_to_non_nullable
-              as int?,
-      referredTo: freezed == referredTo
-          ? _value.referredTo
-          : referredTo // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
+      panchayat: freezed == panchayat
+          ? _value.panchayat
+          : panchayat // ignore: cast_nullable_to_non_nullable
+              as String?,
+      screenedBy: freezed == screenedBy
+          ? _value.screenedBy
+          : screenedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      referredBy: freezed == referredBy
+          ? _value.referredBy
+          : referredBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      referralMobileNumber: freezed == referralMobileNumber
+          ? _value.referralMobileNumber
+          : referralMobileNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
       assignedTo: freezed == assignedTo
           ? _value.assignedTo
           : assignedTo // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
-      filledForm: freezed == filledForm
-          ? _value.filledForm
-          : filledForm // ignore: cast_nullable_to_non_nullable
-              as int?,
-      disease: freezed == disease
-          ? _value.disease
-          : disease // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
+      tbScreeningOutcome: freezed == tbScreeningOutcome
+          ? _value.tbScreeningOutcome
+          : tbScreeningOutcome // ignore: cast_nullable_to_non_nullable
+              as String?,
+      diagnosisName: freezed == diagnosisName
+          ? _value.diagnosisName
+          : diagnosisName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
+      assignedOn: freezed == assignedOn
+          ? _value.assignedOn
+          : assignedOn // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      createdOn: freezed == createdOn
+          ? _value.createdOn
+          : createdOn // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
       referralDetails: freezed == referralDetails
           ? _value.referralDetails
           : referralDetails // ignore: cast_nullable_to_non_nullable
@@ -598,10 +377,6 @@ class __$$CaseImplCopyWithImpl<$Res>
       whoSrq: freezed == whoSrq
           ? _value.whoSrq
           : whoSrq // ignore: cast_nullable_to_non_nullable
-              as int?,
-      diagnosis: freezed == diagnosis
-          ? _value.diagnosis
-          : diagnosis // ignore: cast_nullable_to_non_nullable
               as int?,
       outcomeValue: freezed == outcomeValue
           ? _value.outcomeValue
@@ -615,14 +390,6 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.treatment
           : treatment // ignore: cast_nullable_to_non_nullable
               as int?,
-      createdBy: freezed == createdBy
-          ? _value.createdBy
-          : createdBy // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
-      updatedBy: freezed == updatedBy
-          ? _value.updatedBy
-          : updatedBy // ignore: cast_nullable_to_non_nullable
-              as HealthWorkerInfoModel?,
     ));
   }
 }
@@ -632,50 +399,33 @@ class __$$CaseImplCopyWithImpl<$Res>
 class _$CaseImpl implements _Case {
   const _$CaseImpl(
       {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'healthworker_id') this.healthworkerId,
-      this.patient,
-      @JsonKey(name: 'xray_outcome', includeIfNull: false) this.xrayOutcome,
-      @JsonKey(name: 'outcome', includeIfNull: false) this.outcome,
-      @JsonKey(name: 'patient_details_status')
-      this.patientDetailsStatus = false,
-      @JsonKey(name: 'treatment_status') this.treatmentStatus = false,
-      @JsonKey(name: 'referral_details_status')
-      this.referralDetailsStatus = false,
-      @JsonKey(name: 'tb_screening_status') this.tbScreeningStatus = false,
-      @JsonKey(name: 'mental_health_screening_status')
-      this.mentalHealthScreeningStatus = false,
-      @JsonKey(name: 'diagnosis_status') this.diagnosisStatus = false,
-      @JsonKey(name: 'outcome_status') this.outcomeStatus = false,
-      @JsonKey(name: 'contact_tracing_status')
-      this.contactTracingStatus = false,
+      @JsonKey(name: 'referral_name') this.referralName,
+      @JsonKey(name: 'gender') this.gender,
+      @JsonKey(name: 'age') this.age,
+      @JsonKey(name: 'panchayat') this.panchayat,
+      @JsonKey(name: 'screened_by') this.screenedBy,
+      @JsonKey(name: 'referred_by') this.referredBy,
+      @JsonKey(name: 'referral_mobile_number') this.referralMobileNumber,
+      @JsonKey(name: 'assigned_to') this.assignedTo,
+      @JsonKey(name: 'tb_screening') this.tbScreeningOutcome,
+      @JsonKey(name: 'diagnosis') this.diagnosisName,
+      @JsonKey(name: 'status') this.status,
       @JsonKey(
-          name: 'created_at',
+          name: 'assigned_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      this.createdAt,
+          toJson: _dateTimeToJson)
+      this.assignedOn,
       @JsonKey(
-          name: 'updated_at',
+          name: 'created_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      this.updatedAt,
-      @JsonKey(name: 'source_visited') this.sourceVisited,
-      @JsonKey(name: 'hub') this.hub,
-      @JsonKey(name: 'drugs_purchased') this.drugsPurchased,
-      @JsonKey(name: 'referred_to', toJson: healthWorkerToJson) this.referredTo,
-      @JsonKey(name: 'assigned_to', toJson: healthWorkerToJson) this.assignedTo,
-      @JsonKey(name: 'filled_form') this.filledForm,
-      @JsonKey(name: 'disease') this.disease,
-      @JsonKey(name: 'xray') this.referralDetails,
-      @JsonKey(name: 'udst') this.tbScreening,
-      @JsonKey(name: 'nikshay') this.whoSrq,
-      @JsonKey(name: 'comorbidity') this.diagnosis,
-      @JsonKey(name: 'outcome_value') this.outcomeValue,
-      @JsonKey(name: 'contractcasing') this.contactTracing,
-      @JsonKey(name: 'treatment') this.treatment,
-      @JsonKey(name: 'created_by', toJson: healthWorkerToJson) this.createdBy,
-      @JsonKey(name: 'updated_by', toJson: healthWorkerToJson) this.updatedBy});
+          toJson: _dateTimeToJson)
+      this.createdOn,
+      @JsonKey(name: 'referral_id') this.referralDetails,
+      @JsonKey(name: 'tb_screening_id') this.tbScreening,
+      @JsonKey(name: 'whosrq_id') this.whoSrq,
+      @JsonKey(name: 'outcome_id') this.outcomeValue,
+      @JsonKey(name: 'contact_tracing_id') this.contactTracing,
+      @JsonKey(name: 'treatment_id') this.treatment});
 
   factory _$CaseImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaseImplFromJson(json);
@@ -684,106 +434,85 @@ class _$CaseImpl implements _Case {
   @JsonKey(name: 'id')
   final int? id;
   @override
-  @JsonKey(name: 'healthworker_id')
-  final int? healthworkerId;
+  @JsonKey(name: 'referral_name')
+  final String? referralName;
   @override
-  final PatientModel? patient;
+  @JsonKey(name: 'gender')
+  final String? gender;
   @override
-  @JsonKey(name: 'xray_outcome', includeIfNull: false)
-  final String? xrayOutcome;
+  @JsonKey(name: 'age')
+  final int? age;
   @override
-  @JsonKey(name: 'outcome', includeIfNull: false)
-  final String? outcome;
+  @JsonKey(name: 'panchayat')
+  final String? panchayat;
   @override
-  @JsonKey(name: 'patient_details_status')
-  final bool patientDetailsStatus;
+  @JsonKey(name: 'screened_by')
+  final String? screenedBy;
   @override
-  @JsonKey(name: 'treatment_status')
-  final bool treatmentStatus;
+  @JsonKey(name: 'referred_by')
+  final String? referredBy;
   @override
-  @JsonKey(name: 'referral_details_status')
-  final bool referralDetailsStatus;
+  @JsonKey(name: 'referral_mobile_number')
+  final String? referralMobileNumber;
   @override
-  @JsonKey(name: 'tb_screening_status')
-  final bool tbScreeningStatus;
+  @JsonKey(name: 'assigned_to')
+  final String? assignedTo;
   @override
-  @JsonKey(name: 'mental_health_screening_status')
-  final bool mentalHealthScreeningStatus;
+  @JsonKey(name: 'tb_screening')
+  final String? tbScreeningOutcome;
   @override
-  @JsonKey(name: 'diagnosis_status')
-  final bool diagnosisStatus;
+  @JsonKey(name: 'diagnosis')
+  final String? diagnosisName;
   @override
-  @JsonKey(name: 'outcome_status')
-  final bool outcomeStatus;
-  @override
-  @JsonKey(name: 'contact_tracing_status')
-  final bool contactTracingStatus;
+  @JsonKey(name: 'status')
+  final String? status;
+// @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
+// @JsonKey(name: 'referral_details_status')
+// @Default(false)
+// bool referralDetailsStatus,
+// @JsonKey(name: 'tb_screening_status')
+// @Default(false)
+// bool tbScreeningStatus,
+// @JsonKey(name: 'mental_health_screening_status')
+// @Default(false)
+// bool mentalHealthScreeningStatus,
+// @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
+// @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
+// @JsonKey(name: 'contact_tracing_status')
+// @Default(false)
+// bool contactTracingStatus,
   @override
   @JsonKey(
-      name: 'created_at',
+      name: 'assigned_on',
       fromJson: fromJsonToDateTime,
-      toJson: _dateTimeToJson,
-      includeIfNull: false)
-  final DateTime? createdAt;
+      toJson: _dateTimeToJson)
+  final DateTime? assignedOn;
   @override
   @JsonKey(
-      name: 'updated_at',
-      fromJson: fromJsonToDateTime,
-      toJson: _dateTimeToJson,
-      includeIfNull: false)
-  final DateTime? updatedAt;
+      name: 'created_on', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+  final DateTime? createdOn;
   @override
-  @JsonKey(name: 'source_visited')
-  final int? sourceVisited;
-  @override
-  @JsonKey(name: 'hub')
-  final int? hub;
-  @override
-  @JsonKey(name: 'drugs_purchased')
-  final int? drugsPurchased;
-  @override
-  @JsonKey(name: 'referred_to', toJson: healthWorkerToJson)
-  final HealthWorkerInfoModel? referredTo;
-  @override
-  @JsonKey(name: 'assigned_to', toJson: healthWorkerToJson)
-  final HealthWorkerInfoModel? assignedTo;
-  @override
-  @JsonKey(name: 'filled_form')
-  final int? filledForm;
-  @override
-  @JsonKey(name: 'disease')
-  final int? disease;
-  @override
-  @JsonKey(name: 'xray')
+  @JsonKey(name: 'referral_id')
   final int? referralDetails;
   @override
-  @JsonKey(name: 'udst')
+  @JsonKey(name: 'tb_screening_id')
   final int? tbScreening;
   @override
-  @JsonKey(name: 'nikshay')
+  @JsonKey(name: 'whosrq_id')
   final int? whoSrq;
   @override
-  @JsonKey(name: 'comorbidity')
-  final int? diagnosis;
-  @override
-  @JsonKey(name: 'outcome_value')
+  @JsonKey(name: 'outcome_id')
   final int? outcomeValue;
   @override
-  @JsonKey(name: 'contractcasing')
+  @JsonKey(name: 'contact_tracing_id')
   final int? contactTracing;
   @override
-  @JsonKey(name: 'treatment')
+  @JsonKey(name: 'treatment_id')
   final int? treatment;
-  @override
-  @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
-  final HealthWorkerInfoModel? createdBy;
-  @override
-  @JsonKey(name: 'updated_by', toJson: healthWorkerToJson)
-  final HealthWorkerInfoModel? updatedBy;
 
   @override
   String toString() {
-    return 'Case(id: $id, healthworkerId: $healthworkerId, patient: $patient, xrayOutcome: $xrayOutcome, outcome: $outcome, patientDetailsStatus: $patientDetailsStatus, treatmentStatus: $treatmentStatus, referralDetailsStatus: $referralDetailsStatus, tbScreeningStatus: $tbScreeningStatus, mentalHealthScreeningStatus: $mentalHealthScreeningStatus, diagnosisStatus: $diagnosisStatus, outcomeStatus: $outcomeStatus, contactTracingStatus: $contactTracingStatus, createdAt: $createdAt, updatedAt: $updatedAt, sourceVisited: $sourceVisited, hub: $hub, drugsPurchased: $drugsPurchased, referredTo: $referredTo, assignedTo: $assignedTo, filledForm: $filledForm, disease: $disease, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, outcomeValue: $outcomeValue, contactTracing: $contactTracing, treatment: $treatment, createdBy: $createdBy, updatedBy: $updatedBy)';
+    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, outcomeValue: $outcomeValue, contactTracing: $contactTracing, treatment: $treatment)';
   }
 
   @override
@@ -792,63 +521,40 @@ class _$CaseImpl implements _Case {
         (other.runtimeType == runtimeType &&
             other is _$CaseImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.healthworkerId, healthworkerId) ||
-                other.healthworkerId == healthworkerId) &&
-            (identical(other.patient, patient) || other.patient == patient) &&
-            (identical(other.xrayOutcome, xrayOutcome) ||
-                other.xrayOutcome == xrayOutcome) &&
-            (identical(other.outcome, outcome) || other.outcome == outcome) &&
-            (identical(other.patientDetailsStatus, patientDetailsStatus) ||
-                other.patientDetailsStatus == patientDetailsStatus) &&
-            (identical(other.treatmentStatus, treatmentStatus) ||
-                other.treatmentStatus == treatmentStatus) &&
-            (identical(other.referralDetailsStatus, referralDetailsStatus) ||
-                other.referralDetailsStatus == referralDetailsStatus) &&
-            (identical(other.tbScreeningStatus, tbScreeningStatus) ||
-                other.tbScreeningStatus == tbScreeningStatus) &&
-            (identical(other.mentalHealthScreeningStatus,
-                    mentalHealthScreeningStatus) ||
-                other.mentalHealthScreeningStatus ==
-                    mentalHealthScreeningStatus) &&
-            (identical(other.diagnosisStatus, diagnosisStatus) ||
-                other.diagnosisStatus == diagnosisStatus) &&
-            (identical(other.outcomeStatus, outcomeStatus) ||
-                other.outcomeStatus == outcomeStatus) &&
-            (identical(other.contactTracingStatus, contactTracingStatus) ||
-                other.contactTracingStatus == contactTracingStatus) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.sourceVisited, sourceVisited) ||
-                other.sourceVisited == sourceVisited) &&
-            (identical(other.hub, hub) || other.hub == hub) &&
-            (identical(other.drugsPurchased, drugsPurchased) ||
-                other.drugsPurchased == drugsPurchased) &&
-            (identical(other.referredTo, referredTo) ||
-                other.referredTo == referredTo) &&
+            (identical(other.referralName, referralName) ||
+                other.referralName == referralName) &&
+            (identical(other.gender, gender) || other.gender == gender) &&
+            (identical(other.age, age) || other.age == age) &&
+            (identical(other.panchayat, panchayat) ||
+                other.panchayat == panchayat) &&
+            (identical(other.screenedBy, screenedBy) ||
+                other.screenedBy == screenedBy) &&
+            (identical(other.referredBy, referredBy) ||
+                other.referredBy == referredBy) &&
+            (identical(other.referralMobileNumber, referralMobileNumber) ||
+                other.referralMobileNumber == referralMobileNumber) &&
             (identical(other.assignedTo, assignedTo) ||
                 other.assignedTo == assignedTo) &&
-            (identical(other.filledForm, filledForm) ||
-                other.filledForm == filledForm) &&
-            (identical(other.disease, disease) || other.disease == disease) &&
+            (identical(other.tbScreeningOutcome, tbScreeningOutcome) ||
+                other.tbScreeningOutcome == tbScreeningOutcome) &&
+            (identical(other.diagnosisName, diagnosisName) ||
+                other.diagnosisName == diagnosisName) &&
+            (identical(other.status, status) || other.status == status) &&
+            (identical(other.assignedOn, assignedOn) ||
+                other.assignedOn == assignedOn) &&
+            (identical(other.createdOn, createdOn) ||
+                other.createdOn == createdOn) &&
             (identical(other.referralDetails, referralDetails) ||
                 other.referralDetails == referralDetails) &&
             (identical(other.tbScreening, tbScreening) ||
                 other.tbScreening == tbScreening) &&
             (identical(other.whoSrq, whoSrq) || other.whoSrq == whoSrq) &&
-            (identical(other.diagnosis, diagnosis) ||
-                other.diagnosis == diagnosis) &&
             (identical(other.outcomeValue, outcomeValue) ||
                 other.outcomeValue == outcomeValue) &&
             (identical(other.contactTracing, contactTracing) ||
                 other.contactTracing == contactTracing) &&
             (identical(other.treatment, treatment) ||
-                other.treatment == treatment) &&
-            (identical(other.createdBy, createdBy) ||
-                other.createdBy == createdBy) &&
-            (identical(other.updatedBy, updatedBy) ||
-                other.updatedBy == updatedBy));
+                other.treatment == treatment));
   }
 
   @JsonKey(ignore: true)
@@ -856,36 +562,25 @@ class _$CaseImpl implements _Case {
   int get hashCode => Object.hashAll([
         runtimeType,
         id,
-        healthworkerId,
-        patient,
-        xrayOutcome,
-        outcome,
-        patientDetailsStatus,
-        treatmentStatus,
-        referralDetailsStatus,
-        tbScreeningStatus,
-        mentalHealthScreeningStatus,
-        diagnosisStatus,
-        outcomeStatus,
-        contactTracingStatus,
-        createdAt,
-        updatedAt,
-        sourceVisited,
-        hub,
-        drugsPurchased,
-        referredTo,
+        referralName,
+        gender,
+        age,
+        panchayat,
+        screenedBy,
+        referredBy,
+        referralMobileNumber,
         assignedTo,
-        filledForm,
-        disease,
+        tbScreeningOutcome,
+        diagnosisName,
+        status,
+        assignedOn,
+        createdOn,
         referralDetails,
         tbScreening,
         whoSrq,
-        diagnosis,
         outcomeValue,
         contactTracing,
-        treatment,
-        createdBy,
-        updatedBy
+        treatment
       ]);
 
   @JsonKey(ignore: true)
@@ -905,53 +600,34 @@ class _$CaseImpl implements _Case {
 abstract class _Case implements Case {
   const factory _Case(
       {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'healthworker_id') final int? healthworkerId,
-      final PatientModel? patient,
-      @JsonKey(name: 'xray_outcome', includeIfNull: false)
-      final String? xrayOutcome,
-      @JsonKey(name: 'outcome', includeIfNull: false) final String? outcome,
-      @JsonKey(name: 'patient_details_status') final bool patientDetailsStatus,
-      @JsonKey(name: 'treatment_status') final bool treatmentStatus,
-      @JsonKey(name: 'referral_details_status')
-      final bool referralDetailsStatus,
-      @JsonKey(name: 'tb_screening_status') final bool tbScreeningStatus,
-      @JsonKey(name: 'mental_health_screening_status')
-      final bool mentalHealthScreeningStatus,
-      @JsonKey(name: 'diagnosis_status') final bool diagnosisStatus,
-      @JsonKey(name: 'outcome_status') final bool outcomeStatus,
-      @JsonKey(name: 'contact_tracing_status') final bool contactTracingStatus,
+      @JsonKey(name: 'referral_name') final String? referralName,
+      @JsonKey(name: 'gender') final String? gender,
+      @JsonKey(name: 'age') final int? age,
+      @JsonKey(name: 'panchayat') final String? panchayat,
+      @JsonKey(name: 'screened_by') final String? screenedBy,
+      @JsonKey(name: 'referred_by') final String? referredBy,
+      @JsonKey(name: 'referral_mobile_number')
+      final String? referralMobileNumber,
+      @JsonKey(name: 'assigned_to') final String? assignedTo,
+      @JsonKey(name: 'tb_screening') final String? tbScreeningOutcome,
+      @JsonKey(name: 'diagnosis') final String? diagnosisName,
+      @JsonKey(name: 'status') final String? status,
       @JsonKey(
-          name: 'created_at',
+          name: 'assigned_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      final DateTime? createdAt,
+          toJson: _dateTimeToJson)
+      final DateTime? assignedOn,
       @JsonKey(
-          name: 'updated_at',
+          name: 'created_on',
           fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson,
-          includeIfNull: false)
-      final DateTime? updatedAt,
-      @JsonKey(name: 'source_visited') final int? sourceVisited,
-      @JsonKey(name: 'hub') final int? hub,
-      @JsonKey(name: 'drugs_purchased') final int? drugsPurchased,
-      @JsonKey(name: 'referred_to', toJson: healthWorkerToJson)
-      final HealthWorkerInfoModel? referredTo,
-      @JsonKey(name: 'assigned_to', toJson: healthWorkerToJson)
-      final HealthWorkerInfoModel? assignedTo,
-      @JsonKey(name: 'filled_form') final int? filledForm,
-      @JsonKey(name: 'disease') final int? disease,
-      @JsonKey(name: 'xray') final int? referralDetails,
-      @JsonKey(name: 'udst') final int? tbScreening,
-      @JsonKey(name: 'nikshay') final int? whoSrq,
-      @JsonKey(name: 'comorbidity') final int? diagnosis,
-      @JsonKey(name: 'outcome_value') final int? outcomeValue,
-      @JsonKey(name: 'contractcasing') final int? contactTracing,
-      @JsonKey(name: 'treatment') final int? treatment,
-      @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
-      final HealthWorkerInfoModel? createdBy,
-      @JsonKey(name: 'updated_by', toJson: healthWorkerToJson)
-      final HealthWorkerInfoModel? updatedBy}) = _$CaseImpl;
+          toJson: _dateTimeToJson)
+      final DateTime? createdOn,
+      @JsonKey(name: 'referral_id') final int? referralDetails,
+      @JsonKey(name: 'tb_screening_id') final int? tbScreening,
+      @JsonKey(name: 'whosrq_id') final int? whoSrq,
+      @JsonKey(name: 'outcome_id') final int? outcomeValue,
+      @JsonKey(name: 'contact_tracing_id') final int? contactTracing,
+      @JsonKey(name: 'treatment_id') final int? treatment}) = _$CaseImpl;
 
   factory _Case.fromJson(Map<String, dynamic> json) = _$CaseImpl.fromJson;
 
@@ -959,102 +635,80 @@ abstract class _Case implements Case {
   @JsonKey(name: 'id')
   int? get id;
   @override
-  @JsonKey(name: 'healthworker_id')
-  int? get healthworkerId;
+  @JsonKey(name: 'referral_name')
+  String? get referralName;
   @override
-  PatientModel? get patient;
+  @JsonKey(name: 'gender')
+  String? get gender;
   @override
-  @JsonKey(name: 'xray_outcome', includeIfNull: false)
-  String? get xrayOutcome;
+  @JsonKey(name: 'age')
+  int? get age;
   @override
-  @JsonKey(name: 'outcome', includeIfNull: false)
-  String? get outcome;
+  @JsonKey(name: 'panchayat')
+  String? get panchayat;
   @override
-  @JsonKey(name: 'patient_details_status')
-  bool get patientDetailsStatus;
+  @JsonKey(name: 'screened_by')
+  String? get screenedBy;
   @override
-  @JsonKey(name: 'treatment_status')
-  bool get treatmentStatus;
+  @JsonKey(name: 'referred_by')
+  String? get referredBy;
   @override
-  @JsonKey(name: 'referral_details_status')
-  bool get referralDetailsStatus;
+  @JsonKey(name: 'referral_mobile_number')
+  String? get referralMobileNumber;
   @override
-  @JsonKey(name: 'tb_screening_status')
-  bool get tbScreeningStatus;
+  @JsonKey(name: 'assigned_to')
+  String? get assignedTo;
   @override
-  @JsonKey(name: 'mental_health_screening_status')
-  bool get mentalHealthScreeningStatus;
+  @JsonKey(name: 'tb_screening')
+  String? get tbScreeningOutcome;
   @override
-  @JsonKey(name: 'diagnosis_status')
-  bool get diagnosisStatus;
+  @JsonKey(name: 'diagnosis')
+  String? get diagnosisName;
   @override
-  @JsonKey(name: 'outcome_status')
-  bool get outcomeStatus;
-  @override
-  @JsonKey(name: 'contact_tracing_status')
-  bool get contactTracingStatus;
+  @JsonKey(name: 'status')
+  String? get status;
+  @override // @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
+// @JsonKey(name: 'referral_details_status')
+// @Default(false)
+// bool referralDetailsStatus,
+// @JsonKey(name: 'tb_screening_status')
+// @Default(false)
+// bool tbScreeningStatus,
+// @JsonKey(name: 'mental_health_screening_status')
+// @Default(false)
+// bool mentalHealthScreeningStatus,
+// @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
+// @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
+// @JsonKey(name: 'contact_tracing_status')
+// @Default(false)
+// bool contactTracingStatus,
+  @JsonKey(
+      name: 'assigned_on',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get assignedOn;
   @override
   @JsonKey(
-      name: 'created_at',
-      fromJson: fromJsonToDateTime,
-      toJson: _dateTimeToJson,
-      includeIfNull: false)
-  DateTime? get createdAt;
+      name: 'created_on', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+  DateTime? get createdOn;
   @override
-  @JsonKey(
-      name: 'updated_at',
-      fromJson: fromJsonToDateTime,
-      toJson: _dateTimeToJson,
-      includeIfNull: false)
-  DateTime? get updatedAt;
-  @override
-  @JsonKey(name: 'source_visited')
-  int? get sourceVisited;
-  @override
-  @JsonKey(name: 'hub')
-  int? get hub;
-  @override
-  @JsonKey(name: 'drugs_purchased')
-  int? get drugsPurchased;
-  @override
-  @JsonKey(name: 'referred_to', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get referredTo;
-  @override
-  @JsonKey(name: 'assigned_to', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get assignedTo;
-  @override
-  @JsonKey(name: 'filled_form')
-  int? get filledForm;
-  @override
-  @JsonKey(name: 'disease')
-  int? get disease;
-  @override
-  @JsonKey(name: 'xray')
+  @JsonKey(name: 'referral_id')
   int? get referralDetails;
   @override
-  @JsonKey(name: 'udst')
+  @JsonKey(name: 'tb_screening_id')
   int? get tbScreening;
   @override
-  @JsonKey(name: 'nikshay')
+  @JsonKey(name: 'whosrq_id')
   int? get whoSrq;
   @override
-  @JsonKey(name: 'comorbidity')
-  int? get diagnosis;
-  @override
-  @JsonKey(name: 'outcome_value')
+  @JsonKey(name: 'outcome_id')
   int? get outcomeValue;
   @override
-  @JsonKey(name: 'contractcasing')
+  @JsonKey(name: 'contact_tracing_id')
   int? get contactTracing;
   @override
-  @JsonKey(name: 'treatment')
+  @JsonKey(name: 'treatment_id')
   int? get treatment;
-  @override
-  @JsonKey(name: 'created_by', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get createdBy;
-  @override
-  @JsonKey(name: 'updated_by', toJson: healthWorkerToJson)
-  HealthWorkerInfoModel? get updatedBy;
   @override
   @JsonKey(ignore: true)
   _$$CaseImplCopyWith<_$CaseImpl> get copyWith =>

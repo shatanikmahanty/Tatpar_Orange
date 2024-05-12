@@ -152,14 +152,11 @@ class PhoneVerifyPage extends StatelessWidget {
                           .verifyOtp(otpControl.value);
                     },
                     builder: (context, action, error) => AuthButton(
-                        text: 'Login',
-                        onClick: () {
-                          context.router.replace(const AppHomeRoute());
-                        }
-                        // (ReactiveForm.of(context)?.valid ?? false)
-                        //     ? action
-                        //     : null,
-                        ),
+                      text: 'Login',
+                      onClick: (ReactiveForm.of(context)?.valid ?? false)
+                          ? action
+                          : null,
+                    ),
                   ),
                 ),
               ],

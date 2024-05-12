@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "762173822440",
-    "project_id": "tatpar-acf",
-    "storage_bucket": "tatpar-acf.appspot.com"
+    "project_number": "555188132765",
+    "project_id": "tatpar-acf-flutter",
+    "storage_bucket": "tatpar-acf-flutter.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:762173822440:android:bde5b3247b9c87f980805d",
+        "mobilesdk_app_id": "1:555188132765:android:8d5b0dd8aff934b3712d74",
         "android_client_info": {
           "package_name": "com.example.tatpar_acf"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyB8BalbnWbYbYqOe3tylnWLJLtu4s4Fs08"
+          "current_key": "AIzaSyBtrN9Ndltn3s4mb8EC0MymPJbJEoDKcxw"
         }
       ],
       "services": {
