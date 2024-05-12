@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
+import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
@@ -48,7 +51,7 @@ class CaseCubit extends Cubit<CaseState> {
   CaseCubit({required this.caseRepo, required Case caseModel})
       : super(CaseState(caseWorkedUpon: caseModel)) {
     // if (caseModel.referralDetailsStatus != null) {
-    //   getXRayFormData(caseModel.xray);
+    //   getReferralDetailsData(caseModel.xray);
     // }
     //   if (caseModel.udst != null) {
     //     getUDSTFormData(caseModel.udst);
@@ -78,7 +81,14 @@ class CaseCubit extends Cubit<CaseState> {
   int? _selectedDistrictId;
   int? _selectedBlockId;
   int? _selectedPanchayatCodeId;
+  int? _selectedCasteCategory;
+  List<int>? _selectedKeyPopulation;
+  int? _selectedTrimester;
+  int? _selectedReferrerSource;
   int? _selectedReferrerPanchayatCodeId;
+
+  ///TB Screening
+  int? _selectedTBTrimester;
 
   ///DiagnosisPage
   int? _selectedAFB1Result;
@@ -99,6 +109,17 @@ class CaseCubit extends Cubit<CaseState> {
       _selectedPanchayatCodeId = selectedPanchayatCodeId;
   set selectReferrerPanchayatCodeId(int? selectedReferrerPanchayatCodeId) =>
       _selectedReferrerPanchayatCodeId = selectedReferrerPanchayatCodeId;
+  set selectCasteCategory(int? selectedCasteCategory) =>
+      _selectedCasteCategory = selectedCasteCategory;
+  set selectKeyPopulation(List<int>? selectedKeyPopulation) =>
+      _selectedKeyPopulation = selectedKeyPopulation;
+  set selectTrimester(int? selectedTrimester) =>
+      _selectedTrimester = selectedTrimester;
+  set selectReferrerSource(int? selectedReferrerSource) =>
+      _selectedReferrerSource = selectedReferrerSource;
+
+  set selectTBTrimester(int? selectedTBTrimester) =>
+      _selectedTBTrimester = selectedTBTrimester;
 
   set selectAFB1Result(int? selectedAFB1Result) =>
       _selectedAFB1Result = selectedAFB1Result;
@@ -119,6 +140,12 @@ class CaseCubit extends Cubit<CaseState> {
   int? get selectedDistrictId => _selectedDistrictId;
   int? get selectedPanchayatCodeId => _selectedPanchayatCodeId;
   int? get selectedReferrerPanchayatCodeId => _selectedReferrerPanchayatCodeId;
+  int? get selectedCasteCategory => _selectedCasteCategory;
+  List<int>? get selectedKeyPopulation => _selectedKeyPopulation;
+  int? get selectedTrimester => _selectedTrimester;
+  int? get selectedReferrerSource => _selectedReferrerSource;
+
+  int? get selectedTBTrimester => _selectedTBTrimester;
 
   int? get selectedAFB1Result => _selectedAFB1Result;
   int? get selectedAFB2Result => _selectedAFB2Result;
@@ -229,25 +256,10 @@ class CaseCubit extends Cubit<CaseState> {
       );
     }
   }
-  // common update these values from UI
-  // int? _selectedLabId;
-  // int? _selectedDoctorId;
-  // int? _collectionAgentId;
-  // int? sourceID;
 
-  // int? get selectedLabId => _selectedLabId;
-  // int? get selectedDoctorId => _selectedDoctorId;
-  // int? get collectionAgentId => _collectionAgentId;
-
-  // set selectLabId(int? selectedLabId) => _selectedLabId = selectedLabId;
-  // set selectDoctorId(int? selectedDoctorId) =>
-  //     _selectedDoctorId = selectedDoctorId;
-  // set setCollectionAgentId(int? collectionAgentId) =>
-  //     _collectionAgentId = collectionAgentId;
-
-  // Future<void> getXRayFormData(int? formId) async {
+  // Future<void> getReferralDetailsData(int? formId) async {
   //   if (formId == null) return;
-  //   caseRepo.getXRayFormData(xRayFormId: formId).then((value) {
+  //   caseRepo.getReferralDetailsData(xRayFormId: formId).then((value) {
   //     emit(
   //       state.copyWith(xRayFormData: value),
   //     );
@@ -307,8 +319,8 @@ class CaseCubit extends Cubit<CaseState> {
         referralDetailsModel: referralDetailsModel);
     emit(
       state.copyWith(
-        caseWorkedUpon:
-            state.caseWorkedUpon.copyWith(referralDetails: response.referralID),
+        caseWorkedUpon: state.caseWorkedUpon
+            .copyWith(referralDetails: AuthCubit.instance.workingCaseId),
         referralDetailsModel: response,
       ),
     );
@@ -319,7 +331,8 @@ class CaseCubit extends Cubit<CaseState> {
         await caseRepo.saveTbScreeningData(tbScreeningModel: tbScreeningModel);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(tbScreening: 1),
+        caseWorkedUpon: state.caseWorkedUpon
+            .copyWith(tbScreening: AuthCubit.instance.workingCaseId),
         tbScreeningModel: response,
       ),
     );
@@ -331,7 +344,8 @@ class CaseCubit extends Cubit<CaseState> {
         mentalHealthScreeningModel: mentalHealthScreeningModel);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(whoSrq: 1),
+        caseWorkedUpon: state.caseWorkedUpon
+            .copyWith(whoSrq: AuthCubit.instance.workingCaseId),
         mentalHealthScreeningModel: response,
       ),
     );
@@ -342,7 +356,8 @@ class CaseCubit extends Cubit<CaseState> {
         await caseRepo.saveDiagnosisData(diagnosisModel: diagnosisModel);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(diagnosis: 1),
+        caseWorkedUpon: state.caseWorkedUpon
+            .copyWith(treatment: AuthCubit.instance.workingCaseId),
         diagnsosisModel: response,
       ),
     );
@@ -353,7 +368,8 @@ class CaseCubit extends Cubit<CaseState> {
         await caseRepo.saveTreatmentData(treatmentModel: treatmentModel);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(treatment: 1),
+        caseWorkedUpon: state.caseWorkedUpon
+            .copyWith(treatment: AuthCubit.instance.workingCaseId),
         treatmentModel: response,
       ),
     );
@@ -365,7 +381,8 @@ class CaseCubit extends Cubit<CaseState> {
         contactTracingModel: contactTracingModel);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(contactTracing: 1),
+        caseWorkedUpon: state.caseWorkedUpon
+            .copyWith(contactTracing: AuthCubit.instance.workingCaseId),
         contactTracingModel: response,
       ),
     );
@@ -375,7 +392,8 @@ class CaseCubit extends Cubit<CaseState> {
     final response = await caseRepo.saveOutcomeData(outcomeModel: outcomeModel);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(outcomeValue: 1),
+        caseWorkedUpon: state.caseWorkedUpon
+            .copyWith(outcomeValue: AuthCubit.instance.workingCaseId),
         outcomeModel: response,
       ),
     );
@@ -388,48 +406,48 @@ class CaseCubit extends Cubit<CaseState> {
         title: 'Referral Details',
         description: 'Add a new case',
         backendKey: 'patient_details_status',
-        status: true,
+        status: false,
       ),
       WorkflowItem(
           route: const TBScreeningRoute(),
           title: 'TB Screening',
           description: 'Steps of TB Screening',
           backendKey: 'xray_status',
-          status: true),
+          status: false),
       WorkflowItem(
         route: const MentalHealthRouterRoute(),
         title: 'Mental Health Screening',
         description: 'WHO Questionairre',
         backendKey: 'udst_status',
-        status: workingCase.mentalHealthScreeningStatus,
+        status: false,
       ),
       WorkflowItem(
         route: const DiagnosisRoute(),
         title: 'Diagnosis',
         description: 'Steps of diagnosis',
         backendKey: 'nikshay_status',
-        status: workingCase.diagnosisStatus,
+        status: false,
       ),
       WorkflowItem(
         route: const TreatmentRoute(),
         title: 'Treatment',
         description: 'Steps of treatment',
         backendKey: 'comorbidity_status',
-        status: workingCase.treatmentStatus,
+        status: false,
       ),
       WorkflowItem(
         route: const ContactTracingRoute(),
         title: 'Contact Tracing',
         description: 'Contact Tracing Status',
         backendKey: 'contract_casing_status',
-        status: workingCase.contactTracingStatus,
+        status: false,
       ),
       WorkflowItem(
         route: const OutcomeRoute(),
         title: 'Outcome',
         description: 'Steps of Outcome',
         backendKey: 'dbt_status',
-        status: workingCase.outcomeStatus,
+        status: false,
       )
     ];
 
@@ -443,13 +461,13 @@ class CaseCubit extends Cubit<CaseState> {
     );
 
     if (response.status == Status.ok) {
-      emit(
-        state.copyWith(
-          caseWorkedUpon: state.caseWorkedUpon.copyWith(
-            outcome: value,
-          ),
-        ),
-      );
+      // emit(
+      //   state.copyWith(
+      //     caseWorkedUpon: state.caseWorkedUpon.copyWith(
+      //       outcome: value,
+      //     ),
+      //   ),
+      // );
     }
   }
 

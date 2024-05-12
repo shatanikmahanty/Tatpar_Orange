@@ -1,3 +1,4 @@
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -21,11 +22,11 @@ class TBScreeningPage extends StatelessWidget {
     return fb.group({
       'screening_date': FormControl<DateTime>(
           value: tbScreeningModel?.screeningDate ?? DateTime(2002)),
-      'screened_by': FormControl<int>(
+      'screened_by': FormControl<String>(
         validators: [Validators.required],
         value: tbScreeningModel?.screenedBy,
       ),
-      'trimester': FormControl<int?>(
+      'trimester': FormControl<String>(
         value: tbScreeningModel?.trimester,
       ),
       'cough': FormControl<String?>(
@@ -69,8 +70,8 @@ class TBScreeningPage extends StatelessWidget {
       final model = cubit.state.tbScreeningModel ?? const TBScreeningModel();
       final tbScreeningModel = model.copyWith(
           screeningDate: formData['screening_date'] as DateTime,
-          screenedBy: formData['screened_by'] as int?,
-          trimester: formData['trimester'] as int?,
+          screenedBy: formData['screened_by'] as String?,
+          selectedTrimester: cubit.selectedTBTrimester,
           cough: formData['cough'] as String?,
           sputum: formData['sputum'] as String?,
           hemoptysis: formData['hemoptysis'] as String?,
@@ -84,16 +85,15 @@ class TBScreeningPage extends StatelessWidget {
           comments: formData['comments'] as String?);
       await cubit.updateTbScreeningData(tbScreeningModel);
     } else {
-      //  final fields = [];
-      // formGroup.controls.forEach((key, value) {
-      //   if (value.invalid) {
-      //     fields.add(key.replaceFirst('patient_', ''));
-      //   }
-      // });
-      // DjangoflowAppSnackbar.showError(
-      //     'please enter the fields: ${fields.join(', ')}');
-
       formGroup.markAllAsTouched();
+      final fields = [];
+      formGroup.controls.forEach((key, value) {
+        if (value.invalid) {
+          fields.add(key.replaceFirst('patient_', ''));
+        }
+      });
+      DjangoflowAppSnackbar.showError(
+          'please enter the fields: ${fields.join(', ')}');
     }
   }
 
@@ -129,7 +129,6 @@ class TBScreeningPage extends StatelessWidget {
                                   const PrimaryTextField(
                                     formControlName: 'screened_by',
                                     label: 'Screened By',
-                                    keyboardType: TextInputType.number,
                                     prefixIcon: Icons.account_circle_outlined,
                                   ),
                                   const SizedBox(height: kPadding * 2),
@@ -275,8 +274,13 @@ class TBScreeningPage extends StatelessWidget {
                                                 final selectedId = int.tryParse(
                                                     value.split(':')[0]);
                                                 formGroup
-                                                    .control('trimester')
-                                                    .value = selectedId;
+                                                        .control('trimester')
+                                                        .value =
+                                                    value.split(':')[1];
+                                                context
+                                                        .read<CaseCubit>()
+                                                        .selectTBTrimester =
+                                                    selectedId;
                                               },
                                             ),
                                             const SizedBox(
@@ -285,23 +289,6 @@ class TBScreeningPage extends StatelessWidget {
                                         );
                                       }),
                                   const SizedBox(height: kPadding * 2),
-                                  // ChipRadioButtons(
-                                  //     label: 'Screening Outcome ?',
-                                  //     options: const [
-                                  //       'DRTB',
-                                  //       'DSTB',
-                                  //       'EPTB',
-                                  //       'No Symptom'
-                                  //     ],
-                                  //     crossAxisCount: 2,
-                                  //     onChanged: (value) {
-                                  //       formGroup
-                                  //           .control('screening_outcome')
-                                  //           .value = state.screeningOutcome;
-                                  //       extractFormData(
-                                  //           formGroup, context);
-                                  //     },
-                                  //     selected: state.screeningOutcome),
                                   BlocBuilder<CaseCubit, CaseState>(
                                       buildWhen: ((previous, current) =>
                                           (previous.screeningOutcome !=
@@ -309,7 +296,6 @@ class TBScreeningPage extends StatelessWidget {
                                           previous.tbScreeningModel !=
                                               current.tbScreeningModel),
                                       builder: (context, state) {
-                                        print(state.screeningOutcome);
                                         formGroup
                                             .control('screening_outcome')
                                             .value = state.screeningOutcome;

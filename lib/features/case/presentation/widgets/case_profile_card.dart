@@ -9,20 +9,20 @@ class CaseProfileCard extends StatelessWidget {
     super.key,
     required this.patientName,
     required this.mobileNumber,
-    required this.caseWorker,
-    required this.hub,
-    required this.doctor,
+    required this.panchayat,
+    required this.district,
+    required this.screeningStatus,
   });
 
-  final String patientName, mobileNumber, caseWorker, hub, doctor;
+  final String patientName, mobileNumber, panchayat, district, screeningStatus;
 
   @override
   Widget build(BuildContext context) {
-    String? doctorName;
-    if (doctor.isNotEmpty) {
-      doctorName = 'Doctor Name';
-      // getDoctorFromSources(context, int.parse(doctor));
-    }
+    // String? doctorName;
+    // if (doctor.isNotEmpty) {
+    //   doctorName = 'Doctor Name';
+    //   // getDoctorFromSources(context, int.parse(doctor));
+    // }
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
@@ -35,9 +35,9 @@ class CaseProfileCard extends StatelessWidget {
         children: [
           InfoTile('Patient name', fieldValue: patientName),
           InfoTile('Mobile Number', fieldValue: mobileNumber),
-          InfoTile('Case Worker', fieldValue: caseWorker),
-          InfoTile('Hub', fieldValue: hub), //TODO: get hub name from sources
-          InfoTile('Doctor', fieldValue: doctorName ?? 'Not assigned'),
+          InfoTile('Panchayat', fieldValue: panchayat),
+          InfoTile('District', fieldValue: district),
+          InfoTile('Screening Status', fieldValue: screeningStatus),
         ],
       ),
     );

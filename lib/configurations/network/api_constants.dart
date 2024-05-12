@@ -12,6 +12,8 @@ const diagnosisUrl = '$baseUrl/api/diagnosis';
 const treatmentUrl = '$baseUrl/api/treatment';
 const contactTracingUrl = '$baseUrl/api/contact-tracing';
 const outcomeUrl = '$baseUrl/api/outcome';
+const casesForHealthWorkerUrl = '$baseUrl/api/case';
+
 const loginUrl = '$baseUrl/healthworker/login/';
 const healthWorkerApiUrl = '$baseUrl/healthworker/';
 const patientsUrl = '$baseUrl/patient/patients/';
@@ -31,7 +33,6 @@ const contractCasingsUrl = '$tuberculosisUrl/contract_casings/';
 const casesUrl = '$tuberculosisUrl/cases/';
 const episodeIdUrl = '${casesUrl}episode-id/';
 
-const casesForHealthWorkerUrl = '${casesUrl}get_cases_healthworker/';
 const sourcesForHealthWorkerUrl = '${sourcesUrl}get_sources_assigned/';
 
 const subordinatesUrl = '${healthWorkerApiUrl}get_subordinates/';

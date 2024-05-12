@@ -3,8 +3,11 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:djangoflow_app/djangoflow_app.dart';
+import 'package:djangoflow_app_links/djangoflow_app_links.dart';
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/firebase_options.dart';
@@ -26,6 +29,8 @@ Future<void> main() async {
       log(exception.toString(), stackTrace: stackTrace);
     }
   }, rootWidgetBuilder: (appBuilder) async {
+    String? initialDeepLink;
+    final appLinksRepository = AppLinksRepository();
     AppCubit.initialState = const AppState(
       themeMode: ThemeMode.light,
     );
@@ -33,9 +38,14 @@ Future<void> main() async {
       options: DefaultFirebaseOptions.currentPlatform,
     );
     final router = AppRouter();
+    if (!kIsWeb) {
+      initialDeepLink = (await appLinksRepository.getInitialLink())?.path;
+    }
 
     return TatparAcfAppBuilder(
       appRouter: router,
+      initialDeepLink: initialDeepLink,
+      appLinksRepository: appLinksRepository,
     );
   });
 }

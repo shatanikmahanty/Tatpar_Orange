@@ -1,3 +1,4 @@
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -22,7 +23,10 @@ class ReferralDetailsPage extends StatelessWidget {
   FormGroup _basicDetailsFormBuilder(
       {required ReferralDetailsModel? referralDetailsModel}) {
     return fb.group({
-      'referral_id': FormControl<int>(value: referralDetailsModel?.referralID),
+      'referral_id': FormControl<int>(
+        value: referralDetailsModel?.referralID,
+        validators: [Validators.required],
+      ),
       'referral_date':
           FormControl<DateTime>(value: referralDetailsModel?.referralDate),
       'referral_name':
@@ -50,18 +54,22 @@ class ReferralDetailsPage extends StatelessWidget {
           validators: [Validators.required],
           value: referralDetailsModel?.guardianPhoneNumber),
       'caste_category':
-          FormControl<int?>(value: referralDetailsModel?.casteCategory),
+          FormControl<String?>(value: referralDetailsModel?.casteCategory),
       'key_population':
-          FormControl<List<int>>(value: referralDetailsModel?.keyPopulation),
-      'trimester': FormControl<int?>(value: referralDetailsModel?.trimester),
+          FormControl<List<String>>(value: referralDetailsModel?.keyPopulation),
+      'trimester': FormControl<String?>(value: referralDetailsModel?.trimester),
       'referred_by':
           FormControl<String?>(value: referralDetailsModel?.referredBy),
-      'referrer_source': FormControl<int?>(
+      'referrer_source': FormControl<String?>(
           validators: [Validators.required],
           value: referralDetailsModel?.referrerSource),
-      'referred_ward':
-          FormControl<String?>(value: referralDetailsModel?.referredWard),
-      'referrer_panchayat_code': FormControl<String?>(
+      'referred_ward': FormControl<int>(validators: [
+        Validators.required,
+        Validators.min(1),
+        Validators.max(40),
+      ], value: referralDetailsModel?.referredWard),
+      'referrer_panchayat_code': FormControl<String>(
+          validators: [Validators.required],
           value: referralDetailsModel?.referrerPanchayatCode),
       'source': FormControl<String?>(value: referralDetailsModel?.source),
     });
@@ -87,25 +95,33 @@ class ReferralDetailsPage extends StatelessWidget {
         ward: formData['ward'] as int?,
         guardianName: formData['guardian_name'] as String?,
         guardianPhoneNumber: formData['guardian_phone_number'] as String?,
-        casteCategory: formData['caste_category'] as int?,
-        keyPopulation: formData['key_population'] as List<int>?,
-        trimester: formData['trimester'] as int?,
+        selectedCasteCategory: caseCubit.selectedCasteCategory,
+        selectedKeyPopulation: caseCubit.selectedKeyPopulation,
+        selectedTrimester: caseCubit.selectedTrimester,
         referredBy: formData['referred_by'] as String?,
-        referrerSource: formData['referrer_source'] as int?,
-        referredWard: formData['referred_ward'] as String?,
-        referrerPanchayatCode: formData['referrer_panchayat_code'] as String?,
+        selectedrReferrerSource: caseCubit.selectedReferrerSource,
+        referredWard: formData['referred_ward'] as int?,
+        selectedReferrerPanchayatCode:
+            caseCubit.selectedReferrerPanchayatCodeId,
         source: formData['source'] as String?,
       );
-
       await caseCubit.updateReferralDetailsData(referralDetailsData);
     } else {
       formGroup.markAllAsTouched();
+      // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
+      final fields = [];
+      formGroup.controls.forEach((key, value) {
+        if (value.invalid) {
+          fields.add(key.replaceFirst('patient_', ''));
+        }
+      });
+      DjangoflowAppSnackbar.showError(
+          'please enter the fields: ${fields.join(', ')}');
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    context.read<CaseCubit>().loadDistricts();
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
             appBar: const CaseAppBar('Referral Details'),
@@ -223,9 +239,12 @@ class ReferralDetailsPage extends StatelessWidget {
                                       onChanged: (value) {
                                         final selectedId =
                                             int.tryParse(value.split(':')[0]);
+                                        context
+                                            .read<CaseCubit>()
+                                            .selectCasteCategory = selectedId;
                                         formGroup
                                             .control('caste_category')
-                                            .value = selectedId;
+                                            .value = value.split(':')[1];
                                       },
                                     );
                                   }),
@@ -256,9 +275,6 @@ class ReferralDetailsPage extends StatelessWidget {
                                       crossAxisCount: 2,
                                       label: 'Key Population',
                                       options: list,
-                                      selected: formGroup
-                                          .control('key_population')
-                                          .value,
                                       onChanged: (value) {
                                         if (value.isEmpty) {
                                           formGroup
@@ -271,9 +287,17 @@ class ReferralDetailsPage extends StatelessWidget {
                                           final parts = e.split(':');
                                           return int.parse(parts[0]);
                                         }).toList();
+                                        final List<String> values =
+                                            value.split(',').map((e) {
+                                          final parts = e.split(':');
+                                          return (parts[1]);
+                                        }).toList();
+                                        context
+                                            .read<CaseCubit>()
+                                            .selectKeyPopulation = listOfIds;
                                         formGroup
                                             .control('key_population')
-                                            .value = listOfIds;
+                                            .value = values;
                                       },
                                     );
                                   }),
@@ -300,7 +324,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                       );
                                     }
                                     return ReactiveValueListenableBuilder<
-                                            List<int>>(
+                                            List<String>>(
                                         formControlName: 'key_population',
                                         builder: (context, control, child) =>
                                             Visibility(
@@ -308,7 +332,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                                       .control('key_population')
                                                       .value)
                                                   .toString()
-                                                  .contains('1'),
+                                                  .contains('PW'),
                                               child: Column(
                                                 children: [
                                                   ChipRadioButtons(
@@ -322,9 +346,14 @@ class ReferralDetailsPage extends StatelessWidget {
                                                       final selectedId =
                                                           int.tryParse(value
                                                               .split(':')[0]);
+                                                      context
+                                                              .read<CaseCubit>()
+                                                              .selectTrimester =
+                                                          selectedId;
                                                       formGroup
-                                                          .control('trimester')
-                                                          .value = selectedId;
+                                                              .control('trimester')
+                                                              .value =
+                                                          value.split(':')[1];
                                                     },
                                                   ),
                                                   const SizedBox(
@@ -370,9 +399,12 @@ class ReferralDetailsPage extends StatelessWidget {
                                       onChanged: (value) {
                                         final selectedId =
                                             int.tryParse(value.split(':')[0]);
+                                        context
+                                            .read<CaseCubit>()
+                                            .selectReferrerSource = selectedId;
                                         formGroup
                                             .control('referrer_source')
-                                            .value = selectedId;
+                                            .value = value.split(':')[1];
                                       },
                                     );
                                   }),
@@ -383,11 +415,13 @@ class ReferralDetailsPage extends StatelessWidget {
                                           current.isLoading) ||
                                       previous.dataModel != current.dataModel),
                                   builder: (context, state) {
-                                    List<String> panchayats = state
-                                        .dataModel!.blocks!
-                                        .expand((e) => e.panchayat!
-                                            .map((e) => '${e.panchayat}'))
-                                        .toList();
+                                    List<String> panchayats =
+                                        (state.dataModel != null)
+                                            ? state.dataModel!.blocks!
+                                                .expand((e) => e.panchayat!.map(
+                                                    (e) => '${e.panchayat}'))
+                                                .toList()
+                                            : [];
 
                                     if (state.isLoading ?? false) {
                                       return const SizedBox(
@@ -426,14 +460,19 @@ class ReferralDetailsPage extends StatelessWidget {
                                           }
                                         }
                                       },
-                                      emptyString: '',
+                                      emptyString: 'No Panchayats available',
                                     );
                                   }),
                               const SizedBox(height: kPadding * 2),
-                              const PrimaryTextField(
+                              PrimaryTextField<int?>(
                                 formControlName: 'referred_ward',
                                 label: 'Referred Ward',
-                                prefixIcon: Icons.location_city_outlined,
+                                prefixIcon: Icons.account_circle_outlined,
+                                keyboardType: TextInputType.number,
+                                inputFormatter: [
+                                  FilteringTextInputFormatter.digitsOnly,
+                                  LengthLimitingTextInputFormatter(2),
+                                ],
                               ),
                               const SizedBox(height: kPadding * 2),
                               const PrimaryTextField(
@@ -450,6 +489,7 @@ class ReferralDetailsPage extends StatelessWidget {
                     BottomButtonBar(
                       onSave: (_) async => await _onSave(context, formGroup),
                       nextPage: const TBScreeningRoute(),
+                      enableValidator: false,
                     ),
                     const SizedBox(height: kPadding * 2),
                   ],
@@ -504,7 +544,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
                     .expand((e) => e.block!.map((e) => '${e.block}'))
                     .toList());
               },
-              emptyString: 'District',
+              emptyString: 'No Districts available',
             ),
             const SizedBox(height: kPadding * 2),
             TextFieldWithList(
@@ -529,7 +569,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
                     .expand((e) => e.panchayat!.map((e) => '${e.panchayat}'))
                     .toList());
               },
-              emptyString: '',
+              emptyString: 'No Blocks available',
             ),
             const SizedBox(height: kPadding * 2),
             TextFieldWithList(
@@ -552,7 +592,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
                   }
                 }
               },
-              emptyString: '',
+              emptyString: 'No Panchayats available',
             ),
             const SizedBox(height: kPadding * 2),
           ],

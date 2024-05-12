@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tatpar_acf/configurations/router/auth_guard.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/presentation/pages/mental_health_routes.dart';
 
 import '../../features/app/presentation/pages/app_home_routes.dart';
@@ -34,43 +35,50 @@ class AppRouter extends $AppRouter {
       page: UnknownRoute.page,
     ),
     AutoRoute(
-      path: '/app_home',
-      page: AppHomeRoute.page,
-      children: appHomeRoutes,
-    ),
+        path: '/app_home',
+        page: AppHomeRoute.page,
+        children: appHomeRoutes,
+        guards: [
+          AuthGuard(),
+        ]),
     AutoRoute(
-      path: '/case',
-      page: CaseRouter.page,
-      children: caseRoutes,
-    ),
+        path: '/case',
+        page: CaseRouter.page,
+        children: caseRoutes,
+        guards: [
+          AuthGuard(),
+        ]),
     AutoRoute(
-      path: '/referral_details',
-      page: ReferralDetailsRoute.page,
-    ),
-    AutoRoute(
-      path: '/tb_screening_page',
-      page: TBScreeningRoute.page,
-    ),
+        path: '/referral_details',
+        page: ReferralDetailsRoute.page,
+        guards: [
+          AuthGuard(),
+        ]),
+    AutoRoute(path: '/tb_screening_page', page: TBScreeningRoute.page, guards: [
+      AuthGuard(),
+    ]),
     AutoRoute(
         path: '/mental_health_screening_page',
         page: MentalHealthRouterRoute.page,
-        children: mentalHealthRoutes),
+        children: mentalHealthRoutes,
+        guards: [
+          AuthGuard(),
+        ]),
+    AutoRoute(path: '/diagnosis_page', page: DiagnosisRoute.page, guards: [
+      AuthGuard(),
+    ]),
+    AutoRoute(path: '/treatment_page', page: TreatmentRoute.page, guards: [
+      AuthGuard(),
+    ]),
+    AutoRoute(path: '/outcome_page', page: OutcomeRoute.page, guards: [
+      AuthGuard(),
+    ]),
     AutoRoute(
-      path: '/diagnosis_page',
-      page: DiagnosisRoute.page,
-    ),
-    AutoRoute(
-      path: '/treatment_page',
-      page: TreatmentRoute.page,
-    ),
-    AutoRoute(
-      path: '/outcome_page',
-      page: OutcomeRoute.page,
-    ),
-    AutoRoute(
-      path: '/contact_tracing_page',
-      page: ContactTracingRoute.page,
-    ),
+        path: '/contact_tracing_page',
+        page: ContactTracingRoute.page,
+        guards: [
+          AuthGuard(),
+        ]),
   ];
 }
 

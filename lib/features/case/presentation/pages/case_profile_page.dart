@@ -90,17 +90,15 @@ class CaseProfilePage extends StatelessWidget {
                         children: [
                           CaseProfileCard(
                             patientName:
-                                caseWorkedUpon.patient?.name ?? 'Kalyani',
+                                caseWorkedUpon.referralName ?? 'Unknown',
                             mobileNumber:
-                                caseWorkedUpon.patient?.mobileNumber ??
-                                    '8143163280',
-                            caseWorker: (caseWorkedUpon.assignedTo?.fullName ??
-                                    'Kalyani Kilaparthi')
-                                .toString(),
-                            hub: 'Hub: Andheri(W)',
-                            //(caseWorkedUpon.hub ?? '').toString(), //TODO remove hardcode once data is available
-                            doctor:
-                                (caseWorkedUpon.sourceVisited ?? '').toString(),
+                                caseWorkedUpon.referralMobileNumber ?? '',
+                            panchayat:
+                                (caseWorkedUpon.panchayat ?? '').toString(),
+                            district: '',
+                            //   (caseWorkedUpon.panchayat ?? '').toString(),
+                            screeningStatus:
+                                (caseWorkedUpon.status ?? '').toString(),
                           ),
                           Positioned(
                             child: Row(
