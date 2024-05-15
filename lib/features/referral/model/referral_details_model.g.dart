@@ -81,6 +81,5 @@ Map<String, dynamic> _$$ReferralDetailsModelImplToJson(
   val['referred_ward'] = instance.referredWard;
   val['referrer_panchayat_code'] = instance.selectedReferrerPanchayatCode;
   writeNotNull('referrerPanchayatCode', instance.referrerPanchayatCode);
-  val['source'] = instance.source;
   return val;
 }

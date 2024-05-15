@@ -53,7 +53,7 @@ class ReferralDetailsModel with _$ReferralDetailsModel {
     @JsonKey(name: 'referrer_panchayat_code')
     int? selectedReferrerPanchayatCode,
     @JsonKey(includeIfNull: false) String? referrerPanchayatCode,
-    @JsonKey(name: 'source') String? source,
+    @JsonKey(includeToJson: false) String? source,
   }) = _ReferralDetailsModel;
   factory ReferralDetailsModel.fromJson(Map<String, dynamic> json) =>
       _$ReferralDetailsModelFromJson(json);

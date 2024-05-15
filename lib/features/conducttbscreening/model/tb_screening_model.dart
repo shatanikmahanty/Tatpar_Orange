@@ -20,9 +20,9 @@ String? _dateTimeToJson(DateTime? date) =>
 @freezed
 class TBScreeningModel with _$TBScreeningModel {
   const factory TBScreeningModel({
-    @JsonKey(name: 'case_id', includeToJson: false) int? id,
+    @JsonKey(name: 'id', includeToJson: false) int? id,
     @JsonKey(
-      name: 'Scr_date',
+      name: 'screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson,
     )

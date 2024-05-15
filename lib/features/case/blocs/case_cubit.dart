@@ -271,6 +271,7 @@ class CaseCubit extends Cubit<CaseState> {
   Future<void> getTBScreeningData(int? formId) async {
     if (state.caseWorkedUpon.tbScreening == null) return;
     final response = await caseRepo.getTBScreening(id: formId);
+    print('Printing the updated form');
     emit(
       state.copyWith(
         tbScreeningModel: response,
@@ -318,8 +319,13 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateReferralDetailsData(
       ReferralDetailsModel referralDetailsModel) async {
+    print(state.caseWorkedUpon.id);
     final response = await caseRepo.saveReferralDetails(
-        referralDetailsModel: referralDetailsModel);
+        referralDetailsModel: referralDetailsModel,
+        id: state.caseWorkedUpon.referralDetails);
+    print('Emitting new State');
+    print(response);
+    print(response.id);
     emit(
       state.copyWith(
         caseWorkedUpon:
@@ -327,12 +333,19 @@ class CaseCubit extends Cubit<CaseState> {
         referralDetailsModel: response,
       ),
     );
+    print(state.caseWorkedUpon.referralDetails);
     getReferralDetailsData(state.caseWorkedUpon.referralDetails);
   }
 
   Future<void> updateTbScreeningData(TBScreeningModel tbScreeningModel) async {
+    print(state.caseWorkedUpon.id);
     final response = await caseRepo.saveTbScreeningData(
-        tbScreeningModel: tbScreeningModel, id: state.caseWorkedUpon.id);
+        tbScreeningModel: tbScreeningModel,
+        id: state.caseWorkedUpon.tbScreening);
+
+    print('Emitting new State');
+    print(response);
+    print(response.id);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon.copyWith(tbScreening: response.id),

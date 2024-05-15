@@ -59,12 +59,12 @@ class CaseRepo {
     }
   }
 
-  Future<ReferralDetailsModel> saveReferralDetails({
-    required ReferralDetailsModel referralDetailsModel,
-  }) async {
+  Future<ReferralDetailsModel> saveReferralDetails(
+      {required ReferralDetailsModel referralDetailsModel,
+      required int? id}) async {
     final request = NetworkRequest(
-      referralDetailsUrl,
-      RequestMethod.post,
+      '$referralDetailsUrl${id == null ? '' : '/$id'}',
+      id == null ? RequestMethod.post : RequestMethod.patch,
       isAuthorized: true,
       data: {
         ...referralDetailsModel.toJson(),
@@ -88,10 +88,10 @@ class CaseRepo {
 
   Future<TBScreeningModel> saveTbScreeningData(
       {required TBScreeningModel tbScreeningModel, required int? id}) async {
-    print(AuthCubit.instance.workingCaseId);
+    print(tbScreeningModel);
     final request = NetworkRequest(
-      tbScreeningUrl,
-      RequestMethod.post,
+      '$tbScreeningUrl${id == null ? '' : '/$id'}',
+      id == null ? RequestMethod.post : RequestMethod.patch,
       isAuthorized: true,
       data: {
         ...tbScreeningModel.toJson(),
