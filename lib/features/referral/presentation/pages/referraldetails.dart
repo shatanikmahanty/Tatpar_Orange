@@ -82,8 +82,9 @@ class ReferralDetailsPage extends StatelessWidget {
         value: referralDetailsModel?.referralID,
         validators: [Validators.required],
       ),
-      'referral_date':
-          FormControl<DateTime>(value: referralDetailsModel?.referralDate),
+      'referral_date': FormControl<DateTime>(
+          validators: [Validators.required],
+          value: referralDetailsModel?.referralDate),
       'referral_name':
           FormControl<String>(value: referralDetailsModel?.referralName),
       'age': FormControl<int>(
@@ -157,6 +158,74 @@ class ReferralDetailsPage extends StatelessWidget {
     if (formGroup.valid) {
       final formData = formGroup.value;
       final caseCubit = context.read<CaseCubit>();
+      context.read<CaseCubit>().selectCasteCategory =
+          formGroup.control('caste_category').value != null
+              ? int.tryParse(
+                  formGroup.control('caste_category').value.split(':')[0])
+              : null;
+
+      // context.read<CaseCubit>().selectKeyPopulation =
+      //     formGroup.control('key_population').isNotNull
+      //         ? formGroup.control('key_population').value.split(',').map((e) {
+      //             final parts = e.split(':');
+      //             return int.parse(parts[0]);
+      //           }).toList()
+      //         : null;
+      context.read<CaseCubit>().selectTrimester =
+          (formGroup.control('trimester').value) != null
+              ? int.tryParse(formGroup.control('trimester').value.split(':')[0])
+              : null;
+      context.read<CaseCubit>().selectReferrerSource =
+          formGroup.control('referrer_source').value != null
+              ? int.tryParse(
+                  formGroup.control('referrer_source').value.split(':')[0])
+              : null;
+      for (var block in caseCubit.state.dataModel!.blocks!) {
+        var panchayat = block.panchayat!.firstWhere(
+            (p) =>
+                p.panchayat ==
+                formGroup.control('referrer_panchayat_code').value,
+            orElse: () => const Panchayat(id: 0));
+        if (panchayat.id != 0) {
+          context.read<CaseCubit>().selectReferrerPanchayatCodeId =
+              panchayat.id;
+          break;
+        }
+      }
+      context.read<CaseCubit>().selectDistrictId = caseCubit
+          .state.dataModel!.districts!
+          .firstWhere(
+              (element) =>
+                  element.district == formGroup.control('district').value,
+              orElse: () => const District(id: 0))
+          .id;
+      context.read<CaseCubit>().selectBlockId = caseCubit
+          .state.dataModel!.blocks!
+          .firstWhere(
+              (element) =>
+                  element.block == formGroup.control('referral_block').value,
+              orElse: () => const Block(id: 0))
+          .id;
+      for (var block in caseCubit.state.dataModel!.blocks!) {
+        var panchayat = block.panchayat!.firstWhere(
+            (p) => p.panchayat == formGroup.control('panchayat_code').value,
+            orElse: () => const Panchayat(id: 0));
+        if (panchayat.id != 0) {
+          context.read<CaseCubit>().selectPanchayatCodeId = panchayat.id;
+          break;
+        }
+      }
+      final List<String> value = formGroup.control('key_population').value;
+
+      context.read<CaseCubit>().selectKeyPopulation = value
+          .join(',')
+          .split(',')
+          .map((e) => RegExp(r'\d+').firstMatch(e))
+          .where((match) => match != null)
+          .map((match) => int.parse(match!.group(0)!))
+          .toList();
+      print(
+          'selected KEY POPULATION${context.read<CaseCubit>().selectedKeyPopulation}');
 
       final model =
           caseCubit.state.referralDetailsModel ?? const ReferralDetailsModel();
@@ -318,14 +387,9 @@ class ReferralDetailsPage extends StatelessWidget {
                                           .control('caste_category')
                                           .value,
                                       onChanged: (value) {
-                                        final selectedId =
-                                            int.tryParse(value.split(':')[0]);
-                                        context
-                                            .read<CaseCubit>()
-                                            .selectCasteCategory = selectedId;
                                         formGroup
                                             .control('caste_category')
-                                            .value = value.split(':')[1];
+                                            .value = value;
                                       },
                                     );
                                   }),
@@ -360,6 +424,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                           .value,
                                       options: list,
                                       onChanged: (value) {
+                                        print(value);
                                         if (value.isEmpty) {
                                           formGroup
                                               .control('key_population')
@@ -367,22 +432,27 @@ class ReferralDetailsPage extends StatelessWidget {
                                           return;
                                         }
 
-                                        final List<int> listOfIds =
-                                            value.split(',').map((e) {
-                                          final parts = e.split(':');
-                                          return int.parse(parts[0]);
-                                        }).toList();
-                                        final List<String> values =
-                                            value.split(',').map((e) {
-                                          final parts = e.split(':');
-                                          return (parts[1]);
-                                        }).toList();
-                                        context
-                                            .read<CaseCubit>()
-                                            .selectKeyPopulation = listOfIds;
+                                        // final List<int> listOfIds =
+                                        //     value.split(',').map((e) {
+                                        //   final parts = e.split(':');
+                                        //   return int.parse(parts[0]);
+                                        // }).toList();
+                                        // final List<String> values =
+                                        //     value.split(',').map((e) {
+                                        //   final parts = e.split(':');
+                                        //   return (parts[1]);
+                                        // }).toList();
+                                        // context
+                                        //     .read<CaseCubit>()
+                                        //     .selectKeyPopulation = listOfIds;
+                                        final listOfValues = value.split(',');
+
                                         formGroup
                                             .control('key_population')
-                                            .value = values;
+                                            .value = listOfValues;
+                                        print(formGroup
+                                            .control('key_population')
+                                            .value);
                                       },
                                     );
                                   }),
@@ -414,11 +484,10 @@ class ReferralDetailsPage extends StatelessWidget {
                                         builder: (context, control, child) =>
                                             Visibility(
                                               visible: (formGroup
-                                                          .control(
-                                                              'key_population')
-                                                          .value)
-                                                      .toString() ==
-                                                  'PW',
+                                                      .control('key_population')
+                                                      .value)
+                                                  .toString()
+                                                  .contains('PW'),
                                               child: Column(
                                                 children: [
                                                   ChipRadioButtons(
@@ -429,17 +498,9 @@ class ReferralDetailsPage extends StatelessWidget {
                                                         .control('trimester')
                                                         .value,
                                                     onChanged: (value) {
-                                                      final selectedId =
-                                                          int.tryParse(value
-                                                              .split(':')[0]);
-                                                      context
-                                                              .read<CaseCubit>()
-                                                              .selectTrimester =
-                                                          selectedId;
                                                       formGroup
-                                                              .control('trimester')
-                                                              .value =
-                                                          value.split(':')[1];
+                                                          .control('trimester')
+                                                          .value = value;
                                                     },
                                                   ),
                                                   const SizedBox(
@@ -483,14 +544,9 @@ class ReferralDetailsPage extends StatelessWidget {
                                           .control('referrer_source')
                                           .value,
                                       onChanged: (value) {
-                                        final selectedId =
-                                            int.tryParse(value.split(':')[0]);
-                                        context
-                                            .read<CaseCubit>()
-                                            .selectReferrerSource = selectedId;
                                         formGroup
                                             .control('referrer_source')
-                                            .value = value.split(':')[1];
+                                            .value = value;
                                       },
                                     );
                                   }),
@@ -529,22 +585,6 @@ class ReferralDetailsPage extends StatelessWidget {
                                         formGroup
                                             .control('referrer_panchayat_code')
                                             .value = value[0];
-                                        for (var block
-                                            in state.dataModel!.blocks!) {
-                                          var panchayat = block.panchayat!
-                                              .firstWhere(
-                                                  (p) =>
-                                                      p.panchayat == value[0],
-                                                  orElse: () =>
-                                                      const Panchayat(id: 0));
-                                          if (panchayat.id != 0) {
-                                            context
-                                                    .read<CaseCubit>()
-                                                    .selectReferrerPanchayatCodeId =
-                                                panchayat.id;
-                                            break;
-                                          }
-                                        }
                                       },
                                       emptyString: 'No Panchayats available',
                                     );
@@ -618,11 +658,6 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
               allowMultiSelection: false,
               onSelected: (value) {
                 formGroup.control('district').value = value[0];
-                context.read<CaseCubit>().selectDistrictId = state
-                    .dataModel!.districts!
-                    .firstWhere((element) => element.district == value[0],
-                        orElse: () => const District(id: 0))
-                    .id;
 
                 blocks.clear();
 
@@ -643,11 +678,6 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
               allowMultiSelection: false,
               onSelected: (value) {
                 formGroup.control('referral_block').value = value[0];
-                context.read<CaseCubit>().selectBlockId = state
-                    .dataModel!.blocks!
-                    .firstWhere((element) => element.block == value[0],
-                        orElse: () => const Block(id: 0))
-                    .id;
 
                 panchayats.clear();
 
@@ -668,16 +698,6 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
               allowMultiSelection: false,
               onSelected: (value) {
                 formGroup.control('panchayat_code').value = value[0];
-                for (var block in state.dataModel!.blocks!) {
-                  var panchayat = block.panchayat!.firstWhere(
-                      (p) => p.panchayat == value[0],
-                      orElse: () => const Panchayat(id: 0));
-                  if (panchayat.id != 0) {
-                    context.read<CaseCubit>().selectPanchayatCodeId =
-                        panchayat.id;
-                    break;
-                  }
-                }
               },
               emptyString: 'No Panchayats available',
             ),

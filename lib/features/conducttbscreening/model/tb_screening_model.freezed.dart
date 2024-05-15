@@ -20,10 +20,12 @@ TBScreeningModel _$TBScreeningModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TBScreeningModel {
-  @JsonKey(name: 'case_id', includeToJson: false)
+  @JsonKey(name: 'id', includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      name: 'screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get screeningDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'screened_by')
   String? get screenedBy => throw _privateConstructorUsedError;
@@ -67,9 +69,9 @@ abstract class $TBScreeningModelCopyWith<$Res> {
       _$TBScreeningModelCopyWithImpl<$Res, TBScreeningModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'case_id', includeToJson: false) int? id,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
       @JsonKey(
-          name: 'Scr_date',
+          name: 'screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? screeningDate,
@@ -197,9 +199,9 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'case_id', includeToJson: false) int? id,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
       @JsonKey(
-          name: 'Scr_date',
+          name: 'screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? screeningDate,
@@ -320,9 +322,9 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TBScreeningModelImpl implements _TBScreeningModel {
   const _$TBScreeningModelImpl(
-      {@JsonKey(name: 'case_id', includeToJson: false) this.id,
+      {@JsonKey(name: 'id', includeToJson: false) this.id,
       @JsonKey(
-          name: 'Scr_date',
+          name: 'screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.screeningDate,
@@ -345,11 +347,13 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
       _$$TBScreeningModelImplFromJson(json);
 
   @override
-  @JsonKey(name: 'case_id', includeToJson: false)
+  @JsonKey(name: 'id', includeToJson: false)
   final int? id;
   @override
   @JsonKey(
-      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      name: 'screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? screeningDate;
   @override
   @JsonKey(name: 'screened_by')
@@ -472,9 +476,9 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
 
 abstract class _TBScreeningModel implements TBScreeningModel {
   const factory _TBScreeningModel(
-          {@JsonKey(name: 'case_id', includeToJson: false) final int? id,
+          {@JsonKey(name: 'id', includeToJson: false) final int? id,
           @JsonKey(
-              name: 'Scr_date',
+              name: 'screening_date',
               fromJson: fromJsonToDateTime,
               toJson: _dateTimeToJson)
           final DateTime? screeningDate,
@@ -498,11 +502,13 @@ abstract class _TBScreeningModel implements TBScreeningModel {
       _$TBScreeningModelImpl.fromJson;
 
   @override
-  @JsonKey(name: 'case_id', includeToJson: false)
+  @JsonKey(name: 'id', includeToJson: false)
   int? get id;
   @override
   @JsonKey(
-      name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      name: 'screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get screeningDate;
   @override
   @JsonKey(name: 'screened_by')

@@ -73,10 +73,16 @@ class TBScreeningPage extends StatelessWidget {
   }
 
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
+    final cubit = context.read<CaseCubit>();
     if (formGroup.valid) {
+      final selectedId =
+          int.tryParse(formGroup.control('trimester').value.split(':')[0]);
+
+      context.read<CaseCubit>().selectTBTrimester = selectedId;
+
       print('IN Save Method');
       final formData = formGroup.value;
-      final cubit = context.read<CaseCubit>();
+
       final model = cubit.state.tbScreeningModel ?? const TBScreeningModel();
       final tbScreeningModel = model.copyWith(
           screeningDate: formData['screening_date'] as DateTime,
@@ -256,6 +262,8 @@ class TBScreeningPage extends StatelessWidget {
                                       ),
                                     );
                                   }
+                                  print(
+                                      'TRIMESTER SELECTED VALUE${formGroup.control('trimester').value}');
                                   return Column(
                                     children: [
                                       ChipRadioButtons(

@@ -77,7 +77,7 @@ mixin _$ReferralDetailsModel {
   int? get selectedReferrerPanchayatCode => throw _privateConstructorUsedError;
   @JsonKey(includeIfNull: false)
   String? get referrerPanchayatCode => throw _privateConstructorUsedError;
-  @JsonKey(name: 'source')
+  @JsonKey(includeToJson: false)
   String? get source => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -125,7 +125,7 @@ abstract class $ReferralDetailsModelCopyWith<$Res> {
       @JsonKey(name: 'referrer_panchayat_code')
       int? selectedReferrerPanchayatCode,
       @JsonKey(includeIfNull: false) String? referrerPanchayatCode,
-      @JsonKey(name: 'source') String? source});
+      @JsonKey(includeToJson: false) String? source});
 }
 
 /// @nodoc
@@ -329,7 +329,7 @@ abstract class _$$ReferralDetailsModelImplCopyWith<$Res>
       @JsonKey(name: 'referrer_panchayat_code')
       int? selectedReferrerPanchayatCode,
       @JsonKey(includeIfNull: false) String? referrerPanchayatCode,
-      @JsonKey(name: 'source') String? source});
+      @JsonKey(includeToJson: false) String? source});
 }
 
 /// @nodoc
@@ -525,7 +525,7 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
       @JsonKey(name: 'referrer_panchayat_code')
       this.selectedReferrerPanchayatCode,
       @JsonKey(includeIfNull: false) this.referrerPanchayatCode,
-      @JsonKey(name: 'source') this.source})
+      @JsonKey(includeToJson: false) this.source})
       : _selectedKeyPopulation = selectedKeyPopulation,
         _keyPopulation = keyPopulation;
 
@@ -634,7 +634,7 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
   @JsonKey(includeIfNull: false)
   final String? referrerPanchayatCode;
   @override
-  @JsonKey(name: 'source')
+  @JsonKey(includeToJson: false)
   final String? source;
 
   @override
@@ -786,7 +786,7 @@ abstract class _ReferralDetailsModel implements ReferralDetailsModel {
       @JsonKey(name: 'referrer_panchayat_code')
       final int? selectedReferrerPanchayatCode,
       @JsonKey(includeIfNull: false) final String? referrerPanchayatCode,
-      @JsonKey(name: 'source')
+      @JsonKey(includeToJson: false)
       final String? source}) = _$ReferralDetailsModelImpl;
 
   factory _ReferralDetailsModel.fromJson(Map<String, dynamic> json) =
@@ -877,7 +877,7 @@ abstract class _ReferralDetailsModel implements ReferralDetailsModel {
   @JsonKey(includeIfNull: false)
   String? get referrerPanchayatCode;
   @override
-  @JsonKey(name: 'source')
+  @JsonKey(includeToJson: false)
   String? get source;
   @override
   @JsonKey(ignore: true)

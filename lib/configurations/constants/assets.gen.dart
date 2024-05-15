@@ -54,6 +54,10 @@ class $AssetsImagesGen {
   AssetGenImage get checkmark =>
       const AssetGenImage('assets/images/checkmark.png');
 
+  /// File path: assets/images/iih_bg_logo.png
+  AssetGenImage get iihBgLogo =>
+      const AssetGenImage('assets/images/iih_bg_logo.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -70,8 +74,16 @@ class $AssetsImagesGen {
       const AssetGenImage('assets/images/tatparLogo.png');
 
   /// List of all assets
-  List<AssetGenImage> get values =>
-      [iIHLogo, appIcon, checkmark, logo, logoHor, pallinos, tatparLogo];
+  List<AssetGenImage> get values => [
+        iIHLogo,
+        appIcon,
+        checkmark,
+        iihBgLogo,
+        logo,
+        logoHor,
+        pallinos,
+        tatparLogo
+      ];
 }
 
 class $AssetsJsonGen {
