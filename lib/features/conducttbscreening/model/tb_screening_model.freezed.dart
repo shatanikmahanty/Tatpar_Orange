@@ -20,6 +20,8 @@ TBScreeningModel _$TBScreeningModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TBScreeningModel {
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get screeningDate => throw _privateConstructorUsedError;
@@ -65,7 +67,8 @@ abstract class $TBScreeningModelCopyWith<$Res> {
       _$TBScreeningModelCopyWithImpl<$Res, TBScreeningModel>;
   @useResult
   $Res call(
-      {@JsonKey(
+      {@JsonKey(name: 'case_id', includeToJson: false) int? id,
+      @JsonKey(
           name: 'Scr_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
@@ -99,6 +102,7 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? screeningDate = freezed,
     Object? screenedBy = freezed,
     Object? selectedTrimester = freezed,
@@ -116,6 +120,10 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
     Object? comments = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       screeningDate: freezed == screeningDate
           ? _value.screeningDate
           : screeningDate // ignore: cast_nullable_to_non_nullable
@@ -189,7 +197,8 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(
+      {@JsonKey(name: 'case_id', includeToJson: false) int? id,
+      @JsonKey(
           name: 'Scr_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
@@ -221,6 +230,7 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? screeningDate = freezed,
     Object? screenedBy = freezed,
     Object? selectedTrimester = freezed,
@@ -238,6 +248,10 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
     Object? comments = freezed,
   }) {
     return _then(_$TBScreeningModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       screeningDate: freezed == screeningDate
           ? _value.screeningDate
           : screeningDate // ignore: cast_nullable_to_non_nullable
@@ -306,7 +320,8 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TBScreeningModelImpl implements _TBScreeningModel {
   const _$TBScreeningModelImpl(
-      {@JsonKey(
+      {@JsonKey(name: 'case_id', includeToJson: false) this.id,
+      @JsonKey(
           name: 'Scr_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
@@ -329,6 +344,9 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
   factory _$TBScreeningModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TBScreeningModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'case_id', includeToJson: false)
+  final int? id;
   @override
   @JsonKey(
       name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
@@ -378,7 +396,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
 
   @override
   String toString() {
-    return 'TBScreeningModel(screeningDate: $screeningDate, screenedBy: $screenedBy, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments)';
+    return 'TBScreeningModel(id: $id, screeningDate: $screeningDate, screenedBy: $screenedBy, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments)';
   }
 
   @override
@@ -386,6 +404,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TBScreeningModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.screeningDate, screeningDate) ||
                 other.screeningDate == screeningDate) &&
             (identical(other.screenedBy, screenedBy) ||
@@ -419,6 +438,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       screeningDate,
       screenedBy,
       selectedTrimester,
@@ -452,7 +472,8 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
 
 abstract class _TBScreeningModel implements TBScreeningModel {
   const factory _TBScreeningModel(
-          {@JsonKey(
+          {@JsonKey(name: 'case_id', includeToJson: false) final int? id,
+          @JsonKey(
               name: 'Scr_date',
               fromJson: fromJsonToDateTime,
               toJson: _dateTimeToJson)
@@ -476,6 +497,9 @@ abstract class _TBScreeningModel implements TBScreeningModel {
   factory _TBScreeningModel.fromJson(Map<String, dynamic> json) =
       _$TBScreeningModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get id;
   @override
   @JsonKey(
       name: 'Scr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)

@@ -9,8 +9,12 @@ import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dar
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
+import 'package:tatpar_acf/features/referral/model/key_population_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_districts_model.dart';
+import 'package:tatpar_acf/features/referral/model/referrer_source_model.dart';
+import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
 
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
@@ -21,9 +25,60 @@ import '../../../../configurations/theme/size_constants.dart';
 class ReferralDetailsPage extends StatelessWidget {
   const ReferralDetailsPage({super.key});
   FormGroup _basicDetailsFormBuilder(
-      {required ReferralDetailsModel? referralDetailsModel}) {
+      {required ReferralDetailsModel? referralDetailsModel,
+      required CaseCubit cubit}) {
+    final district = referralDetailsModel?.selectedDistrict;
+    final block = referralDetailsModel?.selectedBlock;
+    final panchayat = referralDetailsModel?.selectedPanchayatCode;
+    final trimester = referralDetailsModel?.selectedTrimester;
+
+    final casteCategory = referralDetailsModel?.selectedCasteCategory;
+    final referrerSource = referralDetailsModel?.selectedrReferrerSource;
+    final referrerPanchayatCode =
+        referralDetailsModel?.selectedReferrerPanchayatCode;
+    final districtData = cubit.state.dataModel!.districts?.firstWhere(
+      (element) => element.id == district,
+      orElse: () => const District(district: null),
+    );
+    final String? districtName = districtData?.district;
+
+    final blockData = cubit.state.dataModel!.blocks?.firstWhere(
+      (element) => element.id == block,
+      orElse: () => const Block(block: null),
+    );
+    final String? blockName = blockData?.block;
+    String? panchayatName =
+        _getPanchayatName(cubit.state.dataModel!.blocks!, panchayat);
+
+    final trimesterData = cubit.state.dataModel!.trimester?.firstWhere(
+      (element) => element.id == trimester,
+      orElse: () => const Trimester(name: null),
+    );
+    final String? trimesterName = trimesterData?.name;
+
+    final casteCategoryData = cubit.state.dataModel!.casteCategory?.firstWhere(
+      (element) => element.id == casteCategory,
+      orElse: () => const CasteCategory(name: null),
+    );
+    final String? casteCategoryName = casteCategoryData?.name;
+    final keyPopulationNames =
+        (referralDetailsModel?.selectedKeyPopulation ?? []).map((id) {
+      final keyPopulationData = cubit.state.dataModel!.keyPopulation
+          ?.firstWhere((element) => element.id == id,
+              orElse: () => const KeyPopulation(id: 0, name: ''));
+      return '${keyPopulationData!.id}:\t${keyPopulationData.name}';
+    }).toList();
+
+    final referrerSourceData =
+        cubit.state.dataModel!.referrerSource?.firstWhere(
+      (element) => element.id == referrerSource,
+      orElse: () => const ReferrerSource(name: null),
+    );
+    final String? referrerSourceName = referrerSourceData?.name;
+    String? referrerPanchayatName = _getPanchayatName(
+        cubit.state.dataModel!.blocks!, referrerPanchayatCode);
     return fb.group({
-      'referral_id': FormControl<int>(
+      'referral_id': FormControl<String>(
         value: referralDetailsModel?.referralID,
         validators: [Validators.required],
       ),
@@ -36,13 +91,13 @@ class ReferralDetailsPage extends StatelessWidget {
       'gender': FormControl<String>(value: referralDetailsModel?.gender),
       'district': FormControl<String>(
           validators: [Validators.required],
-          value: referralDetailsModel?.district),
+          value: districtName ?? referralDetailsModel?.district),
       'referral_block': FormControl<String>(
           validators: [Validators.required],
-          value: referralDetailsModel?.block),
+          value: blockName ?? referralDetailsModel?.block),
       'panchayat_code': FormControl<String>(
           validators: [Validators.required],
-          value: referralDetailsModel?.panchayatCode),
+          value: panchayatName ?? referralDetailsModel?.panchayatCode),
       'ward': FormControl<int>(validators: [
         Validators.required,
         Validators.min(1),
@@ -53,16 +108,25 @@ class ReferralDetailsPage extends StatelessWidget {
       'guardian_phone_number': FormControl<String?>(
           validators: [Validators.required],
           value: referralDetailsModel?.guardianPhoneNumber),
-      'caste_category':
-          FormControl<String?>(value: referralDetailsModel?.casteCategory),
-      'key_population':
-          FormControl<List<String>>(value: referralDetailsModel?.keyPopulation),
-      'trimester': FormControl<String?>(value: referralDetailsModel?.trimester),
+      'caste_category': FormControl<String?>(
+          value: casteCategoryName != null
+              ? '$casteCategory:\t$casteCategoryName'
+              : referralDetailsModel?.casteCategory),
+      'key_population': FormControl<List<String>>(
+          value: keyPopulationNames.isNotEmpty
+              ? keyPopulationNames
+              : referralDetailsModel?.keyPopulation),
+      'trimester': FormControl<String?>(
+          value: trimesterName != null
+              ? '$trimester:\t$trimesterName'
+              : referralDetailsModel?.trimester),
       'referred_by':
           FormControl<String?>(value: referralDetailsModel?.referredBy),
       'referrer_source': FormControl<String?>(
           validators: [Validators.required],
-          value: referralDetailsModel?.referrerSource),
+          value: referrerSourceName != null
+              ? '$referrerSource:\t$referrerSourceName'
+              : referralDetailsModel?.referrerSource),
       'referred_ward': FormControl<int>(validators: [
         Validators.required,
         Validators.min(1),
@@ -70,9 +134,23 @@ class ReferralDetailsPage extends StatelessWidget {
       ], value: referralDetailsModel?.referredWard),
       'referrer_panchayat_code': FormControl<String>(
           validators: [Validators.required],
-          value: referralDetailsModel?.referrerPanchayatCode),
+          value: referrerPanchayatName ??
+              referralDetailsModel?.referrerPanchayatCode),
       'source': FormControl<String?>(value: referralDetailsModel?.source),
     });
+  }
+
+  String? _getPanchayatName(List<Block> blocks, int? panchayat) {
+    String? panchayatName;
+    for (var block in blocks) {
+      var panchayatData = block.panchayat?.firstWhere((p) => p.id == panchayat,
+          orElse: () => const Panchayat(panchayat: null));
+      if (panchayatData != null) {
+        panchayatName = panchayatData.panchayat;
+        break;
+      }
+    }
+    return panchayatName;
   }
 
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
@@ -84,7 +162,7 @@ class ReferralDetailsPage extends StatelessWidget {
           caseCubit.state.referralDetailsModel ?? const ReferralDetailsModel();
 
       final referralDetailsData = model.copyWith(
-        referralID: formData['referral_id'] as int?,
+        referralID: formData['referral_id'] as String?,
         referralDate: formData['referral_date'] as DateTime,
         referralName: formData['referral_name'] as String?,
         age: formData['age'] as int?,
@@ -126,8 +204,11 @@ class ReferralDetailsPage extends StatelessWidget {
         builder: (context, state) => Scaffold(
             appBar: const CaseAppBar('Referral Details'),
             body: ReactiveFormBuilder(
-              form: () => _basicDetailsFormBuilder(
-                  referralDetailsModel: state.referralDetailsModel),
+              form: () {
+                return _basicDetailsFormBuilder(
+                    referralDetailsModel: state.referralDetailsModel,
+                    cubit: context.read<CaseCubit>());
+              },
               builder:
                   (BuildContext context, FormGroup formGroup, Widget? child) =>
                       AutofillGroup(
@@ -274,6 +355,9 @@ class ReferralDetailsPage extends StatelessWidget {
                                       allowMultiSelect: true,
                                       crossAxisCount: 2,
                                       label: 'Key Population',
+                                      selectedList: formGroup
+                                          .control('key_population')
+                                          .value,
                                       options: list,
                                       onChanged: (value) {
                                         if (value.isEmpty) {
@@ -282,6 +366,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                               .value = null;
                                           return;
                                         }
+
                                         final List<int> listOfIds =
                                             value.split(',').map((e) {
                                           final parts = e.split(':');
@@ -329,10 +414,11 @@ class ReferralDetailsPage extends StatelessWidget {
                                         builder: (context, control, child) =>
                                             Visibility(
                                               visible: (formGroup
-                                                      .control('key_population')
-                                                      .value)
-                                                  .toString()
-                                                  .contains('PW'),
+                                                          .control(
+                                                              'key_population')
+                                                          .value)
+                                                      .toString() ==
+                                                  'PW',
                                               child: Column(
                                                 children: [
                                                   ChipRadioButtons(
@@ -508,6 +594,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
         List<String> districts = (state.dataModel != null)
             ? state.dataModel!.districts!.map((e) => '${e.district}').toList()
             : [];
+        print(districts);
         List<String> blocks = [];
         List<String> panchayats = [];
         if (state.isLoading ?? false) {

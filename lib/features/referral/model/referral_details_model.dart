@@ -20,7 +20,8 @@ String? _dateTimeToJson(DateTime? date) =>
 @freezed
 class ReferralDetailsModel with _$ReferralDetailsModel {
   const factory ReferralDetailsModel({
-    @JsonKey(name: 'referral_id') int? referralID,
+    @JsonKey(name: 'id', includeToJson: false) int? id,
+    @JsonKey(name: 'referral_id') String? referralID,
     @JsonKey(
       name: 'referral_date',
       fromJson: fromJsonToDateTime,

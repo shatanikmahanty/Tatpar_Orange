@@ -13,10 +13,11 @@ class ChipRadioButtons extends StatefulWidget {
     this.optionIcons,
     this.allowMultiSelect = false,
     this.validationMessages,
+    this.selectedList,
   });
-
   final List<String> options;
   final List<IconData>? optionIcons;
+  final List<String>? selectedList;
   final String? selected;
   final String label;
   final int crossAxisCount;
@@ -30,6 +31,7 @@ class ChipRadioButtons extends StatefulWidget {
 
 class _ChipRadioButtonsState extends State<ChipRadioButtons> {
   final List<String> _selected = [];
+
   bool hasError = false;
 
   @override
@@ -37,6 +39,9 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
     final selected = widget.selected;
     if (selected != null) {
       _selected.add(selected);
+    }
+    if (widget.selectedList != null) {
+      _selected.addAll(widget.selectedList as Iterable<String>);
     }
     setState(() {});
     super.initState();
@@ -76,6 +81,7 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
                       } else {
                         _selected.add(widget.options[index]);
                       }
+
                       widget.onChanged?.call(_selected.join(','));
                     });
                   } else {

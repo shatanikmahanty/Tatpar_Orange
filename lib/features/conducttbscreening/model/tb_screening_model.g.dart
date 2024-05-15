@@ -9,6 +9,7 @@ part of 'tb_screening_model.dart';
 _$TBScreeningModelImpl _$$TBScreeningModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TBScreeningModelImpl(
+      id: (json['case_id'] as num?)?.toInt(),
       screeningDate: fromJsonToDateTime(json['Scr_date'] as String?),
       screenedBy: json['screened_by'] as String?,
       selectedTrimester: (json['trimester_of_pw'] as num?)?.toInt(),

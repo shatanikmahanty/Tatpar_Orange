@@ -15,7 +15,6 @@ import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
-import 'package:tatpar_acf/features/mentalhealthscreening/bloc/who_srq_cubit.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 
 import 'configurations/configurations.dart';
@@ -58,9 +57,6 @@ class TatparAcfAppBuilder extends AppBuilder {
               lazy: false,
             ),
 
-            BlocProvider<WHOSrqStateCubit>(
-              create: (context) => WHOSrqStateCubit(),
-            ),
             // BlocProvider<TBScreeningStateCubit>(
             //   create: (context) => TBScreeningStateCubit(),
             // ),
@@ -91,7 +87,6 @@ class TatparAcfAppBuilder extends AppBuilder {
               create: (context) => CaseCubit(
                   caseRepo: context.read<CaseRepo>(), caseModel: const Case()),
             )
-            // BlocProvider<LogVisitCubit>(create: (context) => LogVisitCubit()),
           ],
           builder: (context) => LoginListenerWrapper(
             initialUser: context.read<AuthCubit>().state.user,
