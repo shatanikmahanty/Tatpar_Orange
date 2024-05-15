@@ -67,7 +67,7 @@ class CaseCard extends StatelessWidget {
                     offset: const Offset(30, 30), // Kebab icon
                     onSelected: (String value) {
                       if (value == 'reassign') {
-                        context.router.navigate(const AppHomeRoute());
+                        context.router.navigate(const ReferralDetailsRoute());
                       }
                     },
                     itemBuilder: (BuildContext context) =>

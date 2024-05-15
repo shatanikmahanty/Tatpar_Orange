@@ -50,12 +50,12 @@ class CaseCubit extends Cubit<CaseState> {
 
   CaseCubit({required this.caseRepo, required Case caseModel})
       : super(CaseState(caseWorkedUpon: caseModel)) {
-    // if (caseModel.referralDetailsStatus != null) {
-    //   getReferralDetailsData(caseModel.xray);
-    // }
-    //   if (caseModel.udst != null) {
-    //     getUDSTFormData(caseModel.udst);
-    //   }
+    if (caseModel.referralDetails != null) {
+      getReferralDetailsData(caseModel.referralDetails);
+    }
+    if (caseModel.tbScreening != null) {
+      getTBScreeningData(caseModel.tbScreening);
+    }
     //   if (caseModel.nikshay != null) {
     //     getNikshayFormData(caseModel.nikshay);
     //   }
@@ -257,23 +257,26 @@ class CaseCubit extends Cubit<CaseState> {
     }
   }
 
-  // Future<void> getReferralDetailsData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getReferralDetailsData(xRayFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(xRayFormData: value),
-  //     );
-  //   });
-  // }
+  Future<void> getReferralDetailsData(int? formId) async {
+    if (state.caseWorkedUpon.referralDetails == null) return;
+    final response = await caseRepo.getReferralDetails(id: formId);
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(referralDetails: formId),
+        referralDetailsModel: response,
+      ),
+    );
+  }
 
-  // Future<void> getDBTFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getDBTFormData(dbtFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(dbtFormData: value),
-  //     );
-  //   });
-  // }
+  Future<void> getTBScreeningData(int? formId) async {
+    if (state.caseWorkedUpon.tbScreening == null) return;
+    final response = await caseRepo.getTBScreening(id: formId);
+    emit(
+      state.copyWith(
+        tbScreeningModel: response,
+      ),
+    );
+  }
 
   // Future<void> getUDSTFormData(int? formId) async {
   //   if (formId == null) return;
@@ -319,23 +322,24 @@ class CaseCubit extends Cubit<CaseState> {
         referralDetailsModel: referralDetailsModel);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon
-            .copyWith(referralDetails: AuthCubit.instance.workingCaseId),
+        caseWorkedUpon:
+            state.caseWorkedUpon.copyWith(referralDetails: response.id),
         referralDetailsModel: response,
       ),
     );
+    getReferralDetailsData(state.caseWorkedUpon.referralDetails);
   }
 
   Future<void> updateTbScreeningData(TBScreeningModel tbScreeningModel) async {
-    final response =
-        await caseRepo.saveTbScreeningData(tbScreeningModel: tbScreeningModel);
+    final response = await caseRepo.saveTbScreeningData(
+        tbScreeningModel: tbScreeningModel, id: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon
-            .copyWith(tbScreening: AuthCubit.instance.workingCaseId),
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(tbScreening: response.id),
         tbScreeningModel: response,
       ),
     );
+    getTBScreeningData(state.caseWorkedUpon.tbScreening);
   }
 
   Future<void> updateWHOSRQData(

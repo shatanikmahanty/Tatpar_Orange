@@ -20,8 +20,10 @@ ReferralDetailsModel _$ReferralDetailsModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ReferralDetailsModel {
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'referral_id')
-  int? get referralID => throw _privateConstructorUsedError;
+  String? get referralID => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'referral_date',
       fromJson: fromJsonToDateTime,
@@ -91,7 +93,8 @@ abstract class $ReferralDetailsModelCopyWith<$Res> {
       _$ReferralDetailsModelCopyWithImpl<$Res, ReferralDetailsModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'referral_id') int? referralID,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'referral_id') String? referralID,
       @JsonKey(
           name: 'referral_date',
           fromJson: fromJsonToDateTime,
@@ -139,6 +142,7 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? referralID = freezed,
     Object? referralDate = freezed,
     Object? referralName = freezed,
@@ -168,10 +172,14 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
     Object? source = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       referralID: freezed == referralID
           ? _value.referralID
           : referralID // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       referralDate: freezed == referralDate
           ? _value.referralDate
           : referralDate // ignore: cast_nullable_to_non_nullable
@@ -289,7 +297,8 @@ abstract class _$$ReferralDetailsModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'referral_id') int? referralID,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'referral_id') String? referralID,
       @JsonKey(
           name: 'referral_date',
           fromJson: fromJsonToDateTime,
@@ -334,6 +343,7 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? referralID = freezed,
     Object? referralDate = freezed,
     Object? referralName = freezed,
@@ -363,10 +373,14 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
     Object? source = freezed,
   }) {
     return _then(_$ReferralDetailsModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       referralID: freezed == referralID
           ? _value.referralID
           : referralID // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as String?,
       referralDate: freezed == referralDate
           ? _value.referralDate
           : referralDate // ignore: cast_nullable_to_non_nullable
@@ -479,7 +493,8 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
   const _$ReferralDetailsModelImpl(
-      {@JsonKey(name: 'referral_id') this.referralID,
+      {@JsonKey(name: 'id', includeToJson: false) this.id,
+      @JsonKey(name: 'referral_id') this.referralID,
       @JsonKey(
           name: 'referral_date',
           fromJson: fromJsonToDateTime,
@@ -518,8 +533,11 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
       _$$ReferralDetailsModelImplFromJson(json);
 
   @override
+  @JsonKey(name: 'id', includeToJson: false)
+  final int? id;
+  @override
   @JsonKey(name: 'referral_id')
-  final int? referralID;
+  final String? referralID;
   @override
   @JsonKey(
       name: 'referral_date',
@@ -621,7 +639,7 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
 
   @override
   String toString() {
-    return 'ReferralDetailsModel(referralID: $referralID, referralDate: $referralDate, referralName: $referralName, age: $age, gender: $gender, selectedDistrict: $selectedDistrict, selectedBlock: $selectedBlock, selectedPanchayatCode: $selectedPanchayatCode, district: $district, block: $block, panchayatCode: $panchayatCode, ward: $ward, guardianName: $guardianName, guardianPhoneNumber: $guardianPhoneNumber, selectedCasteCategory: $selectedCasteCategory, casteCategory: $casteCategory, selectedKeyPopulation: $selectedKeyPopulation, keyPopulation: $keyPopulation, selectedTrimester: $selectedTrimester, trimester: $trimester, referredBy: $referredBy, selectedrReferrerSource: $selectedrReferrerSource, referrerSource: $referrerSource, referredWard: $referredWard, selectedReferrerPanchayatCode: $selectedReferrerPanchayatCode, referrerPanchayatCode: $referrerPanchayatCode, source: $source)';
+    return 'ReferralDetailsModel(id: $id, referralID: $referralID, referralDate: $referralDate, referralName: $referralName, age: $age, gender: $gender, selectedDistrict: $selectedDistrict, selectedBlock: $selectedBlock, selectedPanchayatCode: $selectedPanchayatCode, district: $district, block: $block, panchayatCode: $panchayatCode, ward: $ward, guardianName: $guardianName, guardianPhoneNumber: $guardianPhoneNumber, selectedCasteCategory: $selectedCasteCategory, casteCategory: $casteCategory, selectedKeyPopulation: $selectedKeyPopulation, keyPopulation: $keyPopulation, selectedTrimester: $selectedTrimester, trimester: $trimester, referredBy: $referredBy, selectedrReferrerSource: $selectedrReferrerSource, referrerSource: $referrerSource, referredWard: $referredWard, selectedReferrerPanchayatCode: $selectedReferrerPanchayatCode, referrerPanchayatCode: $referrerPanchayatCode, source: $source)';
   }
 
   @override
@@ -629,6 +647,7 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ReferralDetailsModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.referralID, referralID) ||
                 other.referralID == referralID) &&
             (identical(other.referralDate, referralDate) ||
@@ -687,6 +706,7 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        id,
         referralID,
         referralDate,
         referralName,
@@ -734,7 +754,8 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
 
 abstract class _ReferralDetailsModel implements ReferralDetailsModel {
   const factory _ReferralDetailsModel(
-      {@JsonKey(name: 'referral_id') final int? referralID,
+      {@JsonKey(name: 'id', includeToJson: false) final int? id,
+      @JsonKey(name: 'referral_id') final String? referralID,
       @JsonKey(
           name: 'referral_date',
           fromJson: fromJsonToDateTime,
@@ -772,8 +793,11 @@ abstract class _ReferralDetailsModel implements ReferralDetailsModel {
       _$ReferralDetailsModelImpl.fromJson;
 
   @override
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id;
+  @override
   @JsonKey(name: 'referral_id')
-  int? get referralID;
+  String? get referralID;
   @override
   @JsonKey(
       name: 'referral_date',

@@ -140,11 +140,11 @@ class CaseListCubit extends Cubit<CaseListState> {
   void updateSingleCase(Case updatedCase) {
     final cases = state.cases;
     final index = cases.indexWhere((element) => element.id == updatedCase.id);
-    print('=============$index');
+
     if (index == -1) return;
     List<Case> copyCases = List.from(cases);
     copyCases[index] = updatedCase;
-    log(copyCases.toString() as num);
+
     emit(
       state.copyWith(cases: copyCases),
     );

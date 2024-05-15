@@ -86,21 +86,21 @@ class CaseRepo {
     }
   }
 
-  Future<TBScreeningModel> saveTbScreeningData({
-    required TBScreeningModel tbScreeningModel,
-  }) async {
+  Future<TBScreeningModel> saveTbScreeningData(
+      {required TBScreeningModel tbScreeningModel, required int? id}) async {
+    print(AuthCubit.instance.workingCaseId);
     final request = NetworkRequest(
       tbScreeningUrl,
       RequestMethod.post,
       isAuthorized: true,
       data: {
         ...tbScreeningModel.toJson(),
-        'case_id': AuthCubit.instance.workingCaseId
+        'case_id': id,
       },
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return TBScreeningModel.fromJson(result.data);
+      return TBScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
         errorMsg: 'Error submitting data',
@@ -212,6 +212,46 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       return OutcomeModel.fromJson(result.data);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error submitting data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<ReferralDetailsModel> getReferralDetails({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$referralDetailsUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return ReferralDetailsModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error submitting data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<TBScreeningModel> getTBScreening({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$tbScreeningUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return TBScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
         errorMsg: 'Error submitting data',
