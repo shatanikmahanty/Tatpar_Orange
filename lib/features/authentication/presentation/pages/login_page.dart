@@ -1,4 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 
@@ -18,18 +21,23 @@ class LoginPage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Align(
+                    Container(
+                      margin: const EdgeInsets.only(top: 150),
                       alignment: Alignment.topCenter,
+                      height: MediaQuery.of(context).size.height * 0.08,
                       child: Assets.images.pallinos.image(
                         height: MediaQuery.of(context).size.height * 0.2,
                         width: MediaQuery.of(context).size.width * 0.2,
                       ),
                     ),
-                    Align(
-                        alignment: Alignment.center,
-                        child: Assets.images.tatparLogo.image()),
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      child: Align(
+                          alignment: Alignment.topCenter,
+                          child: Assets.images.tatparLogo.image()),
+                    ),
                     Container(
-                      height: MediaQuery.of(context).size.height * 0.3,
+                      height: MediaQuery.of(context).size.height * 0.2,
                       alignment: Alignment.bottomCenter,
                       child: Assets.images.iIHLogo.image(
                         height: MediaQuery.of(context).size.height * 0.8,
