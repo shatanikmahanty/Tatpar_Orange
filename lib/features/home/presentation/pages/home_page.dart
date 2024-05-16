@@ -22,7 +22,7 @@ class HomePage extends StatelessWidget {
                 title: 'Add Referral',
                 subText: 'Add a new case',
                 action: () {
-                  context.router.navigate(const ReferralDetailsRoute());
+                  context.router.navigate(const BasicDetails());
                   // showModalBottomSheet(context: context, builder: (BuildContext context) => const AddNotificationBottomSheet());
                 },
               ),

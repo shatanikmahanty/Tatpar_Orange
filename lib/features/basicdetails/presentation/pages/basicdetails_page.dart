@@ -10,72 +10,69 @@ import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
-import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
-import 'package:tatpar_acf/features/referral/model/key_population_model.dart';
+
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_districts_model.dart';
-import 'package:tatpar_acf/features/referral/model/referrer_source_model.dart';
-import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
 
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 
 @RoutePage()
-class ReferralDetailsPage extends StatelessWidget {
-  const ReferralDetailsPage({super.key});
+class BasicDetails extends StatelessWidget {
+  const BasicDetails({super.key});
   FormGroup _basicDetailsFormBuilder(
       {required ReferralDetailsModel? referralDetailsModel,
       required CaseCubit cubit}) {
-    final district = referralDetailsModel?.selectedDistrict;
-    final block = referralDetailsModel?.selectedBlock;
-    final panchayat = referralDetailsModel?.selectedPanchayatCode;
-    final trimester = referralDetailsModel?.selectedTrimester;
+    // final district = referralDetailsModel?.selectedDistrict;
+    // final block = referralDetailsModel?.selectedBlock;
+    // final panchayat = referralDetailsModel?.selectedPanchayatCode;
+    // final trimester = referralDetailsModel?.selectedTrimester;
 
-    final casteCategory = referralDetailsModel?.selectedCasteCategory;
-    final referrerSource = referralDetailsModel?.selectedrReferrerSource;
-    final referrerPanchayatCode =
-        referralDetailsModel?.selectedReferrerPanchayatCode;
-    final districtData = cubit.state.dataModel?.districts?.firstWhere(
-      (element) => element.id == district,
-      orElse: () => const District(district: null),
-    );
-    final String? districtName = districtData?.district;
+    // final casteCategory = referralDetailsModel?.selectedCasteCategory;
+    // final referrerSource = referralDetailsModel?.selectedrReferrerSource;
+    // final referrerPanchayatCode =
+    //     referralDetailsModel?.selectedReferrerPanchayatCode;
+    // final districtData = cubit.state.dataModel?.districts?.firstWhere(
+    //   (element) => element.id == district,
+    //   orElse: () => const District(district: null),
+    // );
+    // final String? districtName = districtData?.district;
 
-    final blockData = cubit.state.dataModel?.blocks?.firstWhere(
-      (element) => element.id == block,
-      orElse: () => const Block(block: null),
-    );
-    final String? blockName = blockData?.block;
-    String? panchayatName =
-        _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
+    // final blockData = cubit.state.dataModel?.blocks?.firstWhere(
+    //   (element) => element.id == block,
+    //   orElse: () => const Block(block: null),
+    // );
+    // final String? blockName = blockData?.block;
+    // String? panchayatName =
+    //     _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
 
-    final trimesterData = cubit.state.dataModel!.trimester?.firstWhere(
-      (element) => element.id == trimester,
-      orElse: () => const Trimester(name: null),
-    );
-    final String? trimesterName = trimesterData?.name;
+    // final trimesterData = cubit.state.dataModel!.trimester?.firstWhere(
+    //   (element) => element.id == trimester,
+    //   orElse: () => const Trimester(name: null),
+    // );
+    // final String? trimesterName = trimesterData?.name;
 
-    final casteCategoryData = cubit.state.dataModel!.casteCategory?.firstWhere(
-      (element) => element.id == casteCategory,
-      orElse: () => const CasteCategory(name: null),
-    );
-    final String? casteCategoryName = casteCategoryData?.name;
-    final keyPopulationNames =
-        (referralDetailsModel?.selectedKeyPopulation ?? []).map((id) {
-      final keyPopulationData = cubit.state.dataModel!.keyPopulation
-          ?.firstWhere((element) => element.id == id,
-              orElse: () => const KeyPopulation(id: 0, name: ''));
-      return '${keyPopulationData!.id}:\t${keyPopulationData.name}';
-    }).toList();
+    // final casteCategoryData = cubit.state.dataModel!.casteCategory?.firstWhere(
+    //   (element) => element.id == casteCategory,
+    //   orElse: () => const CasteCategory(name: null),
+    // );
+    // final String? casteCategoryName = casteCategoryData?.name;
+    // final keyPopulationNames =
+    //     (referralDetailsModel?.selectedKeyPopulation ?? []).map((id) {
+    //   final keyPopulationData = cubit.state.dataModel!.keyPopulation
+    //       ?.firstWhere((element) => element.id == id,
+    //           orElse: () => const KeyPopulation(id: 0, name: ''));
+    //   return '${keyPopulationData!.id}:\t${keyPopulationData.name}';
+    // }).toList();
 
-    final referrerSourceData =
-        cubit.state.dataModel!.referrerSource?.firstWhere(
-      (element) => element.id == referrerSource,
-      orElse: () => const ReferrerSource(name: null),
-    );
-    final String? referrerSourceName = referrerSourceData?.name;
-    String? referrerPanchayatName = _getPanchayatName(
-        cubit.state.dataModel!.blocks!, referrerPanchayatCode);
+    // final referrerSourceData =
+    //     cubit.state.dataModel!.referrerSource?.firstWhere(
+    //   (element) => element.id == referrerSource,
+    //   orElse: () => const ReferrerSource(name: null),
+    // );
+    // final String? referrerSourceName = referrerSourceData?.name;
+    // String? referrerPanchayatName = _getPanchayatName(
+    //     cubit.state.dataModel!.blocks!, referrerPanchayatCode);
     return fb.group({
       'referral_id': FormControl<String>(
         value: referralDetailsModel?.referralID,
@@ -93,13 +90,13 @@ class ReferralDetailsPage extends StatelessWidget {
       'gender': FormControl<String>(value: referralDetailsModel?.gender),
       'district': FormControl<String>(
           // validators: [Validators.required],
-          value: districtName ?? referralDetailsModel?.district),
+          value: referralDetailsModel?.district),
       'referral_block': FormControl<String>(
           // validators: [Validators.required],
-          value: blockName ?? referralDetailsModel?.block),
+          value: referralDetailsModel?.block),
       'panchayat_code': FormControl<String>(
           //  validators: [Validators.required],
-          value: panchayatName ?? referralDetailsModel?.panchayatCode),
+          value: referralDetailsModel?.panchayatCode),
       'ward': FormControl<int>(validators: [
         //  Validators.required,
         Validators.min(1),
@@ -110,25 +107,16 @@ class ReferralDetailsPage extends StatelessWidget {
       'guardian_phone_number': FormControl<String?>(
           validators: [Validators.required],
           value: referralDetailsModel?.guardianPhoneNumber),
-      'caste_category': FormControl<String?>(
-          value: casteCategoryName != null
-              ? '$casteCategory:\t$casteCategoryName'
-              : referralDetailsModel?.casteCategory),
-      'key_population': FormControl<List<String>>(
-          value: keyPopulationNames.isNotEmpty
-              ? keyPopulationNames
-              : referralDetailsModel?.keyPopulation),
-      'trimester': FormControl<String?>(
-          value: trimesterName != null
-              ? '$trimester:\t$trimesterName'
-              : referralDetailsModel?.trimester),
+      'caste_category':
+          FormControl<String?>(value: referralDetailsModel?.casteCategory),
+      'key_population':
+          FormControl<List<String>>(value: referralDetailsModel?.keyPopulation),
+      'trimester': FormControl<String?>(value: referralDetailsModel?.trimester),
       'referred_by':
           FormControl<String?>(value: referralDetailsModel?.referredBy),
       'referrer_source': FormControl<String?>(
           //validators: [Validators.required],
-          value: referrerSourceName != null
-              ? '$referrerSource:\t$referrerSourceName'
-              : referralDetailsModel?.referrerSource),
+          value: referralDetailsModel?.referrerSource),
       'referred_ward': FormControl<int>(validators: [
         // Validators.required,
         Validators.min(1),
@@ -136,29 +124,28 @@ class ReferralDetailsPage extends StatelessWidget {
       ], value: referralDetailsModel?.referredWard),
       'referrer_panchayat_code': FormControl<String>(
           // validators: [Validators.required],
-          value: referrerPanchayatName ??
-              referralDetailsModel?.referrerPanchayatCode),
+          value: referralDetailsModel?.referrerPanchayatCode),
       'source': FormControl<String?>(value: referralDetailsModel?.source),
     });
   }
 
-  String? _getPanchayatName(List<Block>? blocks, int? panchayat) {
-    String? panchayatName;
-    if (blocks != null) {
-      for (var block in blocks) {
-        var panchayatData = block.panchayat?.firstWhere(
-            (p) => p.id == panchayat,
-            orElse: () => const Panchayat(panchayat: null));
-        if (panchayatData != null) {
-          panchayatName = panchayatData.panchayat;
-          break;
-        }
-      }
-      return panchayatName;
-    } else {
-      return null;
-    }
-  }
+  // String? _getPanchayatName(List<Block>? blocks, int? panchayat) {
+  //   String? panchayatName;
+  //   if (blocks != null) {
+  //     for (var block in blocks) {
+  //       var panchayatData = block.panchayat?.firstWhere(
+  //           (p) => p.id == panchayat,
+  //           orElse: () => const Panchayat(panchayat: null));
+  //       if (panchayatData != null) {
+  //         panchayatName = panchayatData.panchayat;
+  //         break;
+  //       }
+  //     }
+  //     return panchayatName;
+  //   } else {
+  //     return null;
+  //   }
+  // }
 
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     if (formGroup.valid) {
@@ -619,11 +606,10 @@ class ReferralDetailsPage extends StatelessWidget {
                       onSave: (_) async {
                         await _onSave(context, formGroup);
                       },
-                      nextPage: TBScreeningRoute(),
-                      // nextPage: CaseRouter(
-                      //     caseModel: context.read<CaseCubit>().selectedCase ??
-                      //         const Case(),
-                      //     tbScreeningPageRoute: true),
+                      nextPage: CaseRouter(
+                          caseModel:
+                              context.read<CaseCubit>().selectedCase ?? Case(),
+                          tbScreeningPageRoute: true),
                       enableValidator: false,
                     ),
                     const SizedBox(height: kPadding * 2),
