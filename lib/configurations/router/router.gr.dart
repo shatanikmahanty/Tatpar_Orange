@@ -125,7 +125,6 @@ abstract class $AppRouter extends _i28.RootStackRouter {
           () => _i6.CaseRouterPage(
             key: args.key,
             caseModel: args.caseModel,
-            tbScreeningPageRoute: args.tbScreeningPageRoute,
           ),
         ),
       );
@@ -405,14 +404,12 @@ class CaseRouter extends _i28.PageRouteInfo<CaseRouterArgs> {
   CaseRouter({
     _i29.Key? key,
     required _i30.Case caseModel,
-    required bool tbScreeningPageRoute,
     List<_i28.PageRouteInfo>? children,
   }) : super(
           CaseRouter.name,
           args: CaseRouterArgs(
             key: key,
             caseModel: caseModel,
-            tbScreeningPageRoute: tbScreeningPageRoute,
           ),
           initialChildren: children,
         );
@@ -427,18 +424,15 @@ class CaseRouterArgs {
   const CaseRouterArgs({
     this.key,
     required this.caseModel,
-    required this.tbScreeningPageRoute,
   });
 
   final _i29.Key? key;
 
   final _i30.Case caseModel;
 
-  final bool tbScreeningPageRoute;
-
   @override
   String toString() {
-    return 'CaseRouterArgs{key: $key, caseModel: $caseModel, tbScreeningPageRoute: $tbScreeningPageRoute}';
+    return 'CaseRouterArgs{key: $key, caseModel: $caseModel}';
   }
 }
 

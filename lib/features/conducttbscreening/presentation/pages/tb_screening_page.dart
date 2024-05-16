@@ -22,7 +22,7 @@ class TBScreeningPage extends StatelessWidget {
       {required TBScreeningModel? tbScreeningModel, required CaseCubit cubit}) {
     final trimester = tbScreeningModel?.selectedTrimester;
 
-    final trimesterData = cubit.state.dataModel!.trimester?.firstWhere(
+    final trimesterData = cubit.state.dataModel?.trimester?.firstWhere(
       (element) => element.id == trimester,
       orElse: () => const Trimester(name: null),
     );

@@ -607,9 +607,9 @@ class BasicDetails extends StatelessWidget {
                         await _onSave(context, formGroup);
                       },
                       nextPage: CaseRouter(
-                          caseModel:
-                              context.read<CaseCubit>().selectedCase ?? Case(),
-                          tbScreeningPageRoute: true),
+                        caseModel: context.read<CaseCubit>().selectedCase?? const Case()
+                        ,children: const [TBScreeningRoute()]
+                      ),
                       enableValidator: false,
                     ),
                     const SizedBox(height: kPadding * 2),
