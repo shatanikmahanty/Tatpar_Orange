@@ -3,10 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
-import 'package:tatpar_acf/features/case/data/enums/filter_shortcuts.dart';
-import 'package:tatpar_acf/features/case/data/models/case_model.dart';
-
-import 'package:tatpar_acf/features/home/presentation/widgets/app_filter_chip.dart';
 
 import '../widgets/case_card.dart';
 

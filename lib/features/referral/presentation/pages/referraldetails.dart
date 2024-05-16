@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
-import 'package:tatpar_acf/configurations/router/router.dart';
+import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
@@ -18,8 +18,6 @@ import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
 
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
-
-import '../../../../configurations/theme/size_constants.dart';
 
 @RoutePage()
 class ReferralDetailsPage extends StatelessWidget {
@@ -84,23 +82,25 @@ class ReferralDetailsPage extends StatelessWidget {
       ),
       'referral_date': FormControl<DateTime>(
           validators: [Validators.required],
-          value: referralDetailsModel?.referralDate),
-      'referral_name':
-          FormControl<String>(value: referralDetailsModel?.referralName),
+          value: referralDetailsModel?.referralDate ?? DateTime.now()),
+      'referral_name': FormControl<String>(
+          validators: [Validators.required],
+          value: referralDetailsModel?.referralName),
       'age': FormControl<int>(
-          validators: [Validators.required], value: referralDetailsModel?.age),
+          //  validators: [Validators.required],
+          value: referralDetailsModel?.age),
       'gender': FormControl<String>(value: referralDetailsModel?.gender),
       'district': FormControl<String>(
-          validators: [Validators.required],
+          // validators: [Validators.required],
           value: districtName ?? referralDetailsModel?.district),
       'referral_block': FormControl<String>(
-          validators: [Validators.required],
+          // validators: [Validators.required],
           value: blockName ?? referralDetailsModel?.block),
       'panchayat_code': FormControl<String>(
-          validators: [Validators.required],
+          //  validators: [Validators.required],
           value: panchayatName ?? referralDetailsModel?.panchayatCode),
       'ward': FormControl<int>(validators: [
-        Validators.required,
+        //  Validators.required,
         Validators.min(1),
         Validators.max(40),
       ], value: referralDetailsModel?.ward),
@@ -124,17 +124,17 @@ class ReferralDetailsPage extends StatelessWidget {
       'referred_by':
           FormControl<String?>(value: referralDetailsModel?.referredBy),
       'referrer_source': FormControl<String?>(
-          validators: [Validators.required],
+          //validators: [Validators.required],
           value: referrerSourceName != null
               ? '$referrerSource:\t$referrerSourceName'
               : referralDetailsModel?.referrerSource),
       'referred_ward': FormControl<int>(validators: [
-        Validators.required,
+        // Validators.required,
         Validators.min(1),
         Validators.max(40),
       ], value: referralDetailsModel?.referredWard),
       'referrer_panchayat_code': FormControl<String>(
-          validators: [Validators.required],
+          // validators: [Validators.required],
           value: referrerPanchayatName ??
               referralDetailsModel?.referrerPanchayatCode),
       'source': FormControl<String?>(value: referralDetailsModel?.source),
@@ -197,35 +197,35 @@ class ReferralDetailsPage extends StatelessWidget {
           .firstWhere(
               (element) =>
                   element.district == formGroup.control('district').value,
-              orElse: () => const District(id: 0))
+              orElse: () => const District(id: null))
           .id;
       context.read<CaseCubit>().selectBlockId = caseCubit
           .state.dataModel!.blocks!
           .firstWhere(
               (element) =>
                   element.block == formGroup.control('referral_block').value,
-              orElse: () => const Block(id: 0))
+              orElse: () => const Block(id: null))
           .id;
       for (var block in caseCubit.state.dataModel!.blocks!) {
         var panchayat = block.panchayat!.firstWhere(
             (p) => p.panchayat == formGroup.control('panchayat_code').value,
-            orElse: () => const Panchayat(id: 0));
+            orElse: () => const Panchayat(id: null));
         if (panchayat.id != 0) {
           context.read<CaseCubit>().selectPanchayatCodeId = panchayat.id;
           break;
         }
       }
-      final List<String> value = formGroup.control('key_population').value;
+      final List<String>? value = formGroup.control('key_population').value;
 
-      context.read<CaseCubit>().selectKeyPopulation = value
-          .join(',')
-          .split(',')
-          .map((e) => RegExp(r'\d+').firstMatch(e))
-          .where((match) => match != null)
-          .map((match) => int.parse(match!.group(0)!))
-          .toList();
-      print(
-          'selected KEY POPULATION${context.read<CaseCubit>().selectedKeyPopulation}');
+      context.read<CaseCubit>().selectKeyPopulation = (value) != null
+          ? value
+              .join(',')
+              .split(',')
+              .map((e) => RegExp(r'\d+').firstMatch(e))
+              .where((match) => match != null)
+              .map((match) => int.parse(match!.group(0)!))
+              .toList()
+          : [];
 
       final model =
           caseCubit.state.referralDetailsModel ?? const ReferralDetailsModel();
@@ -252,7 +252,10 @@ class ReferralDetailsPage extends StatelessWidget {
             caseCubit.selectedReferrerPanchayatCodeId,
         source: formData['source'] as String?,
       );
-      await caseCubit.updateReferralDetailsData(referralDetailsData);
+      int? caseId =
+          await caseCubit.updateReferralDetailsData(referralDetailsData);
+
+      ///
     } else {
       formGroup.markAllAsTouched();
       // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
@@ -424,7 +427,6 @@ class ReferralDetailsPage extends StatelessWidget {
                                           .value,
                                       options: list,
                                       onChanged: (value) {
-                                        print(value);
                                         if (value.isEmpty) {
                                           formGroup
                                               .control('key_population')
@@ -450,9 +452,6 @@ class ReferralDetailsPage extends StatelessWidget {
                                         formGroup
                                             .control('key_population')
                                             .value = listOfValues;
-                                        print(formGroup
-                                            .control('key_population')
-                                            .value);
                                       },
                                     );
                                   }),
@@ -634,7 +633,6 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
         List<String> districts = (state.dataModel != null)
             ? state.dataModel!.districts!.map((e) => '${e.district}').toList()
             : [];
-        print(districts);
         List<String> blocks = [];
         List<String> panchayats = [];
         if (state.isLoading ?? false) {

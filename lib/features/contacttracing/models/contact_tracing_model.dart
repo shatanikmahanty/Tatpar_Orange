@@ -1,3 +1,5 @@
+// ignore_for_file: invalid_annotation_target
+
 import 'package:freezed_annotation/freezed_annotation.dart';
 part 'contact_tracing_model.freezed.dart';
 part 'contact_tracing_model.g.dart';

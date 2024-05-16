@@ -41,7 +41,6 @@ class OutcomePage extends StatelessWidget {
 
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     if (formGroup.valid) {
-      print('IN Save Method');
       final formData = formGroup.value;
       final cubit = context.read<CaseCubit>();
       final model = cubit.state.outcomeModel ?? const OutcomeModel();
@@ -161,9 +160,6 @@ class OutcomePage extends StatelessWidget {
                                                                   const TreatmentOutcome(
                                                                       id: 0))
                                                           .id;
-                                                  print(context
-                                                      .read<CaseCubit>()
-                                                      .selectedTreatmentOutcome);
                                                 },
                                                 selected: formGroup
                                                     .control(

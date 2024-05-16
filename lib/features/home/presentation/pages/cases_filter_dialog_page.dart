@@ -38,7 +38,7 @@ class _CasesFilterDialogPageState extends State<CasesFilterDialogPage> {
     CaseFilterType(title: 'Assignment date', filters: [
       CaseFilterItem(title: 'Today'),
       CaseFilterItem(title: 'Yesterday'),
-      // TODO: Add date picker
+      // TODOT: Add date picker
       CaseFilterItem(
           title: 'Custom', subTitle: 'TODO:after discussing with Shatanik'),
     ]),

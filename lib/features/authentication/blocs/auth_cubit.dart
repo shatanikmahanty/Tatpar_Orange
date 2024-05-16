@@ -5,7 +5,6 @@ import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/utils/mixins/cubit_maybe_emit_mixin.dart';
 
 import '../authentication.dart';
-import '../data/api_models/register_user.dart';
 import '../data/repo/auth_repo.dart';
 
 part 'auth_cubit.freezed.dart';

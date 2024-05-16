@@ -88,14 +88,13 @@ class CaseRepo {
 
   Future<TBScreeningModel> saveTbScreeningData(
       {required TBScreeningModel tbScreeningModel, required int? id}) async {
-    print(tbScreeningModel);
     final request = NetworkRequest(
       '$tbScreeningUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
       isAuthorized: true,
       data: {
         ...tbScreeningModel.toJson(),
-        'case_id': id,
+        'case_id': AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
@@ -273,8 +272,6 @@ class CaseRepo {
   }
 
   Future<List<Case>> getCasesForHealthWorker() async {
-    print(
-        'MOBILE NUMBER+++++++++++++++++++++++${AuthCubit.instance.state.user!.mobileNumber}');
     final request = NetworkRequest(
       casesForHealthWorkerUrl,
       RequestMethod.get,

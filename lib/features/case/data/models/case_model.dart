@@ -1,8 +1,4 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tatpar_acf/features/app/data/models/health_worker_info_model.dart';
-import 'package:tatpar_acf/features/case/data/models/patient_model.dart';
-
-import '../enums/filter_shortcuts.dart';
 
 part 'case_model.freezed.dart';
 part 'case_model.g.dart';

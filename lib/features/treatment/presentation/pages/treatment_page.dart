@@ -129,7 +129,6 @@ class TreatmentPage extends StatelessWidget {
 
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     if (formGroup.valid) {
-      print('IN Save Method');
       final formData = formGroup.value;
       final cubit = context.read<CaseCubit>();
       final model = cubit.state.treatmentModel ?? const TreatmentModel();

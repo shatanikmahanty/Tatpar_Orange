@@ -80,7 +80,6 @@ class TBScreeningPage extends StatelessWidget {
 
       context.read<CaseCubit>().selectTBTrimester = selectedId;
 
-      print('IN Save Method');
       final formData = formGroup.value;
 
       final model = cubit.state.tbScreeningModel ?? const TBScreeningModel();
@@ -262,8 +261,7 @@ class TBScreeningPage extends StatelessWidget {
                                       ),
                                     );
                                   }
-                                  print(
-                                      'TRIMESTER SELECTED VALUE${formGroup.control('trimester').value}');
+
                                   return Column(
                                     children: [
                                       ChipRadioButtons(
