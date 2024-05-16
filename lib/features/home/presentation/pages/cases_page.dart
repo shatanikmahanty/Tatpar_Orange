@@ -3,10 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
-import 'package:tatpar_acf/features/case/data/enums/filter_shortcuts.dart';
-import 'package:tatpar_acf/features/case/data/models/case_model.dart';
-
-import 'package:tatpar_acf/features/home/presentation/widgets/app_filter_chip.dart';
 
 import '../widgets/case_card.dart';
 
@@ -69,81 +65,80 @@ class CasesPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    SizedBox(
-                      height: 70,
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: kPadding * 1.5, horizontal: kPadding * 2),
-                        child: ListView.separated(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: FilterShortCut.values.length,
-                          itemBuilder: (_, index) => AppFilterChip(
-                              label: FilterShortCut.values[index].label,
-                              isSelected: (state.casesFilter.selectedShortCut ==
-                                  FilterShortCut.values[index]),
-                              onCLicked: () => cubit.applyPendingStageFilter(
-                                  FilterShortCut.values[index])),
-                          separatorBuilder: (BuildContext context, int index) =>
-                              const SizedBox(
-                            width: kPadding,
-                          ),
-                        ),
-                      ),
-                    ),
-                    // if (state.cases.isEmpty ||
-                    //     (state.filteredCases != null &&
-                    //         state.filteredCases!.isEmpty))
-                    //   Padding(
+                    // SizedBox(
+                    //   height: 70,
+                    //   child: Padding(
                     //     padding: const EdgeInsets.symmetric(
-                    //       vertical: kPadding * 10,
-                    //     ),
-                    //     child: Column(
-                    //       children: [
-                    //         Icon(
-                    //           Icons.search_off,
-                    //           size: kPadding * 8,
-                    //           color: theme.primaryColor,
-                    //         ),
-                    //         const SizedBox(
-                    //           height: kPadding,
-                    //         ),
-                    //         Text(
-                    //           'No Cases found',
-                    //           style: theme.textTheme.bodyLarge,
-                    //         ),
-                    //       ],
+                    //         vertical: kPadding * 1.5, horizontal: kPadding * 2),
+                    //     child: ListView.separated(
+                    //       scrollDirection: Axis.horizontal,
+                    //       itemCount: FilterShortCut.values.length,
+                    //       itemBuilder: (_, index) => AppFilterChip(
+                    //           label: FilterShortCut.values[index].label,
+                    //           isSelected: (state.casesFilter.selectedShortCut ==
+                    //               FilterShortCut.values[index]),
+                    //           onCLicked: () => cubit.applyPendingStageFilter(
+                    //               FilterShortCut.values[index])),
+                    //       separatorBuilder: (BuildContext context, int index) =>
+                    //           const SizedBox(
+                    //         width: kPadding,
+                    //       ),
                     //     ),
                     //   ),
-                    Expanded(
-                        child: //state.filteredCases == null
-                            //  ?
-                            ListView.builder(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: kPadding * 2),
-                      itemBuilder: (context, index) => const Padding(
-                        padding: EdgeInsets.only(
-                          bottom: kPadding * 2,
+                    // ),
+                    if (state.cases.isEmpty ||
+                        (state.filteredCases != null &&
+                            state.filteredCases!.isEmpty))
+                      Padding(
+                        padding: const EdgeInsets.symmetric(
+                          vertical: kPadding * 10,
                         ),
-                        child: CaseCard(
-                          caseModel: Case(),
+                        child: Column(
+                          children: [
+                            Icon(
+                              Icons.search_off,
+                              size: kPadding * 8,
+                              color: theme.primaryColor,
+                            ),
+                            const SizedBox(
+                              height: kPadding,
+                            ),
+                            Text(
+                              'No Cases found',
+                              style: theme.textTheme.bodyLarge,
+                            ),
+                          ],
                         ),
                       ),
-                      itemCount: 5,
-                    )
-                        // : ListView.builder(
-                        //     padding: const EdgeInsets.symmetric(
-                        //         horizontal: kPadding * 2),
-                        //     itemBuilder: (context, index) => Padding(
-                        //       padding: const EdgeInsets.only(
-                        //         bottom: kPadding * 2,
-                        //       ),
-                        //       child: CaseCard(
-                        //         caseModel: state.filteredCases![index],
-                        //       ),
-                        //     ),
-                        //     itemCount: state.filteredCases!.length,
-                        //   ),
-                        ),
+                    Expanded(
+                      child: state.filteredCases == null
+                          ? ListView.builder(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: kPadding * 2),
+                              itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.only(
+                                  bottom: kPadding * 2,
+                                ),
+                                child: CaseCard(
+                                  caseModel: state.cases[index],
+                                ),
+                              ),
+                              itemCount: state.cases.length,
+                            )
+                          : ListView.builder(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: kPadding * 2),
+                              itemBuilder: (context, index) => Padding(
+                                padding: const EdgeInsets.only(
+                                  bottom: kPadding * 2,
+                                ),
+                                child: CaseCard(
+                                  caseModel: state.filteredCases![index],
+                                ),
+                              ),
+                              itemCount: state.filteredCases!.length,
+                            ),
+                    ),
                     if (context.read<AuthCubit>().state.user?.isSupervisor ??
                         false)
                       Container(

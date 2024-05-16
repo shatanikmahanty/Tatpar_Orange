@@ -1,15 +1,9 @@
 import 'dart:ui';
 
-import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tatpar_acf/configurations/network/api_response.dart';
-import 'package:tatpar_acf/configurations/network/network_manager.dart';
+
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/models/app_user_model.dart';
-
-import '../../../../configurations/network/api_constants.dart';
-import '../../../../configurations/network/network_request.dart';
-import '../api_models/register_user.dart';
 
 class AuthRepo {
   final FirebaseAuth _auth;
@@ -28,12 +22,9 @@ class AuthRepo {
       phoneNumber: '+91${phoneNo.trim()}',
       timeout: const Duration(seconds: 30),
       verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
-        // final userCredentials =
-        //     await _auth.signInWithCredential(phoneAuthCredential);
-
-        // Get the authentication token
-        String? token = await _auth.currentUser!.getIdToken();
-        // handlePostLogin(userCredentials, register);
+        final userCredentials =
+            await _auth.signInWithCredential(phoneAuthCredential);
+        handlePostLogin(userCredentials, register);
       },
       verificationFailed: (FirebaseAuthException error) {
         onError();
@@ -57,11 +48,10 @@ class AuthRepo {
     String otp,
     void Function(String) register,
   ) async {
-    //final credential = PhoneAuthProvider.credential(
-    // verificationId: _verificationId ?? '', smsCode: otp);
-    // final userCredential = await _auth.signInWithCredential(credential);
-    String? token = await _auth.currentUser!.getIdToken();
-    //handlePostLogin(userCredential, register);
+    final credential = PhoneAuthProvider.credential(
+        verificationId: _verificationId ?? '', smsCode: otp);
+    final userCredential = await _auth.signInWithCredential(credential);
+    handlePostLogin(userCredential, register);
   }
 
   Future<void> handlePostLogin(
@@ -69,58 +59,68 @@ class AuthRepo {
     void Function(String) register,
   ) async {
     if (userCredential.user != null) {
-      if (userCredential.additionalUserInfo!.isNewUser) {
-        register(userCredential.user!.uid);
-      } else {
-        final user =
-            await _getUserDetails(await _auth.currentUser!.getIdToken());
-        final token = _auth.currentUser!.getIdToken();
-        print(token);
-        if (user == null) {
-          return;
-        }
-        AuthCubit.instance.login(user);
+      //  String? token = await _auth.currentUser!.getIdToken();
+      // if (userCredential.additionalUserInfo!.isNewUser) {
+      //   register(userCredential.user!.uid);
+      // } else {
+      final user = await _getUserDetails(await _auth.currentUser!.getIdToken());
+      if (user == null) {
+        return;
       }
+      AuthCubit.instance.login(user);
+      //  }
     }
   }
 
   Future<void> logout() => _auth.signOut();
 
   Future<AppUser?> _getUserDetails(String? token) async {
-    final apiResponse = await NetworkManager.instance.perform(
-      NetworkRequest(
-        loginUrl,
-        RequestMethod.post,
-        data: {
-          'mobile_number':
-              (_auth.currentUser?.phoneNumber ?? '').replaceAll('+91', ''),
-        },
-        isAuthorized: true,
-      ),
+    // final apiResponse = await NetworkManager.instance.perform(
+    //   NetworkRequest(
+    //     loginUrl,
+    //     RequestMethod.post,
+    //     data: {
+    //       'mobile_number':
+    //           (_auth.currentUser?.phoneNumber ?? '').replaceAll('+91', ''),
+    //     },
+    //     isAuthorized: true,
+    //   ),
+    // );
+    // if (apiResponse.status == Status.failed) {
+    //   return null;
+    // }
+    // if (apiResponse.response!.statusCode == 200) {
+    //   return AppUser.fromJson(apiResponse.data['Success']);
+    // }
+    // return null;
+    AppUser user = AppUser(
+      id: 1,
+      firstName: 'John',
+      lastName: 'Doe',
+      mobileNumber:
+          (_auth.currentUser?.phoneNumber ?? '').replaceAll('+91', ''),
+      gender: 'Male',
+      isSupervisor: false,
+      isActive: true,
+      createdAt: '2022-05-12T12:00:00Z',
     );
-    if (apiResponse.status == Status.failed) {
-      return null;
-    }
-    if (apiResponse.response!.statusCode == 200) {
-      return AppUser.fromJson(apiResponse.data['Success']);
-    }
-    return null;
+    return user;
   }
 
-  Future<AppUser> register(RegisterUser user) async {
-    final apiResponse = await NetworkManager.instance.perform(
-      NetworkRequest(
-        healthWorkerApiUrl,
-        RequestMethod.post,
-        data: user.toJson(),
-      ),
-    );
-    if (apiResponse.response?.statusCode == 200) {
-      return AppUser.fromJson(apiResponse.data);
-    }
-    throw DioException(
-      error: 'Something went wrong',
-      requestOptions: RequestOptions(path: healthWorkerApiUrl),
-    );
-  }
+  // Future<AppUser> register(RegisterUser user) async {
+  //   final apiResponse = await NetworkManager.instance.perform(
+  //     NetworkRequest(
+  //       healthWorkerApiUrl,
+  //       RequestMethod.post,
+  //       data: user.toJson(),
+  //     ),
+  //   );
+  //   if (apiResponse.response?.statusCode == 200) {
+  //     return AppUser.fromJson(apiResponse.data);
+  //   }
+  //   throw DioException(
+  //     error: 'Something went wrong',
+  //     requestOptions: RequestOptions(path: healthWorkerApiUrl),
+  //   );
+  // }
 }

@@ -59,20 +59,25 @@ class CaseRepo {
     }
   }
 
-  Future<ReferralDetailsModel> saveReferralDetails({
-    required ReferralDetailsModel referralDetailsModel,
-  }) async {
+  Future<ReferralDetailsModel> saveReferralDetails(
+      {required ReferralDetailsModel referralDetailsModel,
+      required int? id}) async {
     final request = NetworkRequest(
-      referralDetailsUrl,
-      RequestMethod.post,
+      '$referralDetailsUrl${id == null ? '' : '/$id'}',
+      id == null ? RequestMethod.post : RequestMethod.patch,
       isAuthorized: true,
       data: {
         ...referralDetailsModel.toJson(),
+        'logged_in_user': AuthCubit.instance.state.user!.mobileNumber,
       },
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return ReferralDetailsModel.fromJson(result.data);
+      AuthCubit.instance.caseId = result.data['data']['case_id'];
+      // updateCase(AuthCubit.instance.workingCaseId ?? 0, {
+      //   'referral': result.data['case_id'],
+      // });
+      return ReferralDetailsModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
         errorMsg: 'Error submitting data',
@@ -81,20 +86,20 @@ class CaseRepo {
     }
   }
 
-  Future<TBScreeningModel> saveTbScreeningData({
-    required TBScreeningModel tbScreeningModel,
-  }) async {
+  Future<TBScreeningModel> saveTbScreeningData(
+      {required TBScreeningModel tbScreeningModel, required int? id}) async {
     final request = NetworkRequest(
-      tbScreeningUrl,
-      RequestMethod.post,
+      '$tbScreeningUrl${id == null ? '' : '/$id'}',
+      id == null ? RequestMethod.post : RequestMethod.patch,
       isAuthorized: true,
       data: {
         ...tbScreeningModel.toJson(),
+        'case_id': AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return TBScreeningModel.fromJson(result.data);
+      return TBScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
         errorMsg: 'Error submitting data',
@@ -115,8 +120,6 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      print('==============================================${result.data}');
-
       return MentalHealthScreeningModel.fromJson(result.data);
     } else {
       throw ApplicationError(
@@ -139,6 +142,8 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
+      //  await updateCase(caseId, {'dbt': result.data['id'], 'dbt_status': dbtDetails.isFormCompleated});
+
       return DiagnosisModel.fromJson(result.data);
     } else {
       throw ApplicationError(
@@ -214,6 +219,46 @@ class CaseRepo {
     }
   }
 
+  Future<ReferralDetailsModel> getReferralDetails({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$referralDetailsUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return ReferralDetailsModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error submitting data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<TBScreeningModel> getTBScreening({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$tbScreeningUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return TBScreeningModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error submitting data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
   Future<ApiResponse<dynamic>> saveCase(
       int caseId, Map<String, dynamic> caseDetails) async {
     final request = NetworkRequest('$casesUrl$caseId/', RequestMethod.patch,
@@ -226,20 +271,28 @@ class CaseRepo {
     return result;
   }
 
-  Future<List<Case>> getCasesForHealthWorker(
-      {required int healthWorkerId}) async {
+  Future<List<Case>> getCasesForHealthWorker() async {
     final request = NetworkRequest(
       casesForHealthWorkerUrl,
       RequestMethod.get,
       isAuthorized: true,
       data: {
-        'healthworker_id': healthWorkerId,
+        'logged_in_user': AuthCubit.instance.state.user!.mobileNumber,
       },
     );
     final result = await NetworkManager.instance.perform(request);
-    final List<Case> cases =
-        result.data.map<Case>((e) => Case.fromJson(e)).toList();
-    return cases;
+    log(result.data['data']['cases'].toString());
+    if (result.status == Status.ok) {
+      final List<dynamic> caseDataList = result.data['data']['cases'];
+      final List<Case> cases =
+          caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
+      return cases;
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error submitting data',
+        type: Unauthorized(),
+      );
+    }
   }
 
   Future<ContactTracingModel> getContactCasingFormData(

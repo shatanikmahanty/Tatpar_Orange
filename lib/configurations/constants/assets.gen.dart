@@ -42,6 +42,10 @@ class $AssetsIconsGen {
 class $AssetsImagesGen {
   const $AssetsImagesGen();
 
+  /// File path: assets/images/IIH_logo.png
+  AssetGenImage get iIHLogo =>
+      const AssetGenImage('assets/images/IIH_logo.png');
+
   /// File path: assets/images/app_icon.png
   AssetGenImage get appIcon =>
       const AssetGenImage('assets/images/app_icon.png');
@@ -50,6 +54,10 @@ class $AssetsImagesGen {
   AssetGenImage get checkmark =>
       const AssetGenImage('assets/images/checkmark.png');
 
+  /// File path: assets/images/iih_bg_logo.png
+  AssetGenImage get iihBgLogo =>
+      const AssetGenImage('assets/images/iih_bg_logo.png');
+
   /// File path: assets/images/logo.png
   AssetGenImage get logo => const AssetGenImage('assets/images/logo.png');
 
@@ -57,8 +65,25 @@ class $AssetsImagesGen {
   AssetGenImage get logoHor =>
       const AssetGenImage('assets/images/logo_hor.png');
 
+  /// File path: assets/images/pallinos.png
+  AssetGenImage get pallinos =>
+      const AssetGenImage('assets/images/pallinos.png');
+
+  /// File path: assets/images/tatparLogo.png
+  AssetGenImage get tatparLogo =>
+      const AssetGenImage('assets/images/tatparLogo.png');
+
   /// List of all assets
-  List<AssetGenImage> get values => [appIcon, checkmark, logo, logoHor];
+  List<AssetGenImage> get values => [
+        iIHLogo,
+        appIcon,
+        checkmark,
+        iihBgLogo,
+        logo,
+        logoHor,
+        pallinos,
+        tatparLogo
+      ];
 }
 
 class $AssetsJsonGen {

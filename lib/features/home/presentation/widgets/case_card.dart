@@ -5,6 +5,7 @@ import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:intl/intl.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/disease_chips.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class CaseCard extends StatelessWidget {
   const CaseCard({super.key, required this.caseModel});
@@ -49,7 +50,7 @@ class CaseCard extends StatelessWidget {
                   const DiseaseChip('Referral', color: AppColors.blueLight),
                   const Spacer(),
                   Text(
-                    'Created on 21/12/2002 ${getFormattedDate(caseModel.createdAt)}',
+                    'Created on ${getFormattedDate(caseModel.createdOn)}',
                     style: textTheme.labelMedium?.copyWith(
                       // fontSize: 9,
                       // height: 1.7,
@@ -65,7 +66,9 @@ class CaseCard extends StatelessWidget {
                     icon: const Icon(Icons.more_vert),
                     offset: const Offset(30, 30), // Kebab icon
                     onSelected: (String value) {
-                      // Handle item selection here
+                      if (value == 'reassign') {
+                        context.router.navigate(const ReferralDetailsRoute());
+                      }
                     },
                     itemBuilder: (BuildContext context) =>
                         <PopupMenuEntry<String>>[
@@ -118,8 +121,8 @@ class CaseCard extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          // '${caseModel.patient?.name}\t•\t ${caseModel.patient?.gender},${caseModel.patient?.age}' ??
-                          'Vineeth Singh\t•\tM,\t35',
+                          '${caseModel.referralName}\t•\t ${caseModel.gender},\t${caseModel.age}',
+                          // 'Vineeth Singh\t•\tM,\t35',
                           style: textTheme.labelLarge?.copyWith(
                             fontWeight: FontWeight.w600,
                             height: 1.14,
@@ -127,11 +130,10 @@ class CaseCard extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        // if (caseModel.assignedTo != null)
-                        ...[
+                        if (caseModel.assignedTo != null) ...[
                           const SizedBox(height: kPadding * 0.75),
                           Text(
-                            'Panchayat • Block',
+                            '${caseModel.panchayat}',
                             style: textTheme.bodyMedium?.copyWith(
                               height: 1.33,
                               letterSpacing: 0.2,
@@ -142,7 +144,7 @@ class CaseCard extends StatelessWidget {
                           height: kPadding * 0.75,
                         ),
                         Text(
-                          'Scr: Amit Kumar • Ref: Amit Kumar', //${caseModel.hub.toString()}',
+                          'Scr: ${caseModel.screenedBy} • Ref: ${caseModel.referredBy}', //${caseModel.hub.toString()}',
                           style: textTheme.bodyMedium?.copyWith(
                             height: 1.33,
                             letterSpacing: 0.2,
@@ -151,7 +153,17 @@ class CaseCard extends StatelessWidget {
                       ],
                     ),
                   )),
-                  const Icon(Icons.phone, color: AppColors.blueMedium)
+                  IconButton(
+                      onPressed: () async {
+                        String url = '${caseModel.referralMobileNumber}';
+                        final Uri launchUri = Uri(
+                          scheme: 'tel',
+                          path: url,
+                        );
+                        await launchUrl(launchUri);
+                      },
+                      icon:
+                          const Icon(Icons.phone, color: AppColors.blueMedium))
                 ],
               ),
             ),
@@ -239,25 +251,25 @@ class CaseCard extends StatelessWidget {
     return DateFormat('dd MMM yyyy').format(date);
   }
 
-  bool getFormCompletedStatus(String key) {
-    switch (key) {
-      case 'Referral':
-        return caseModel.referralDetailsStatus;
-      case 'TB Screening':
-        return caseModel.tbScreeningStatus;
-      case 'Mental Health Screening':
-        return caseModel.mentalHealthScreeningStatus;
-      case 'Diagnosis':
-        return caseModel.diagnosisStatus;
-      case 'Treatment':
-        return caseModel.treatmentStatus;
-      case 'Outcome':
-        return caseModel.outcomeStatus;
-      case 'Contact Tracing':
-        return caseModel.contactTracingStatus;
+  // bool getFormCompletedStatus(String key) {
+  //   switch (key) {
+  //     case 'Referral':
+  //       return caseModel.referralDetailsStatus;
+  //     case 'TB Screening':
+  //       return caseModel.tbScreeningStatus;
+  //     case 'Mental Health Screening':
+  //       return caseModel.mentalHealthScreeningStatus;
+  //     case 'Diagnosis':
+  //       return caseModel.diagnosisStatus;
+  //     case 'Treatment':
+  //       return caseModel.treatmentStatus;
+  //     case 'Outcome':
+  //       return caseModel.outcomeStatus;
+  //     case 'Contact Tracing':
+  //       return caseModel.contactTracingStatus;
 
-      default:
-        return false;
-    }
-  }
+  //     default:
+  //       return false;
+  //   }
+  // }
 }

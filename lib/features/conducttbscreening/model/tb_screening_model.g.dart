@@ -9,9 +9,11 @@ part of 'tb_screening_model.dart';
 _$TBScreeningModelImpl _$$TBScreeningModelImplFromJson(
         Map<String, dynamic> json) =>
     _$TBScreeningModelImpl(
-      screeningDate: fromJsonToDateTime(json['Scr_date'] as String?),
-      screenedBy: (json['screened_by'] as num?)?.toInt(),
-      trimester: (json['trimester_of_pw'] as num?)?.toInt(),
+      id: (json['id'] as num?)?.toInt(),
+      screeningDate: fromJsonToDateTime(json['screening_date'] as String?),
+      screenedBy: json['screened_by'] as String?,
+      selectedTrimester: (json['trimester_of_pw'] as num?)?.toInt(),
+      trimester: json['trimester'] as String?,
       cough: json['cough_2_weeks'] as String?,
       sputum: json['sputum_2_weeks'] as String?,
       hemoptysis: json['hemoptysis'] as String?,
@@ -26,20 +28,30 @@ _$TBScreeningModelImpl _$$TBScreeningModelImplFromJson(
     );
 
 Map<String, dynamic> _$$TBScreeningModelImplToJson(
-        _$TBScreeningModelImpl instance) =>
-    <String, dynamic>{
-      'Scr_date': _dateTimeToJson(instance.screeningDate),
-      'screened_by': instance.screenedBy,
-      'trimester_of_pw': instance.trimester,
-      'cough_2_weeks': instance.cough,
-      'sputum_2_weeks': instance.sputum,
-      'hemoptysis': instance.hemoptysis,
-      'fever_2_weeks': instance.fever,
-      'night_sweats_2_weeks': instance.nightSweats,
-      'chest_pain_2_months': instance.chestPain,
-      'weight_loss_3_months': instance.weightLoss,
-      'swollen_gland': instance.swollenGland,
-      'tb_medicine_before': instance.tbMedicine,
-      'screening_outcome': instance.screeningOutcome,
-      'comments': instance.comments,
-    };
+    _$TBScreeningModelImpl instance) {
+  final val = <String, dynamic>{
+    'screening_date': _dateTimeToJson(instance.screeningDate),
+    'screened_by': instance.screenedBy,
+    'trimester_of_pw': instance.selectedTrimester,
+  };
+
+  void writeNotNull(String key, dynamic value) {
+    if (value != null) {
+      val[key] = value;
+    }
+  }
+
+  writeNotNull('trimester', instance.trimester);
+  val['cough_2_weeks'] = instance.cough;
+  val['sputum_2_weeks'] = instance.sputum;
+  val['hemoptysis'] = instance.hemoptysis;
+  val['fever_2_weeks'] = instance.fever;
+  val['night_sweats_2_weeks'] = instance.nightSweats;
+  val['chest_pain_2_months'] = instance.chestPain;
+  val['weight_loss_3_months'] = instance.weightLoss;
+  val['swollen_gland'] = instance.swollenGland;
+  val['tb_medicine_before'] = instance.tbMedicine;
+  val['screening_outcome'] = instance.screeningOutcome;
+  val['comments'] = instance.comments;
+  return val;
+}

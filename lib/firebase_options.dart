@@ -44,29 +44,29 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB1lWYdNS2OaYr2SSL92K5cjR8tXZg7b2g',
-    appId: '1:762173822440:web:a6f4f4e52a87b62d80805d',
-    messagingSenderId: '762173822440',
-    projectId: 'tatpar-acf',
-    authDomain: 'tatpar-acf.firebaseapp.com',
-    storageBucket: 'tatpar-acf.appspot.com',
-    measurementId: 'G-WR1DX5WMQ6',
+    apiKey: 'AIzaSyAZFRmdzCbpqvHF9SG9tKbdNtnTnx6JeC8',
+    appId: '1:555188132765:web:524a6e50dd6906cd712d74',
+    messagingSenderId: '555188132765',
+    projectId: 'tatpar-acf-flutter',
+    authDomain: 'tatpar-acf-flutter.firebaseapp.com',
+    storageBucket: 'tatpar-acf-flutter.appspot.com',
+    measurementId: 'G-WBGWK8FYTL',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB8BalbnWbYbYqOe3tylnWLJLtu4s4Fs08',
-    appId: '1:762173822440:android:bde5b3247b9c87f980805d',
-    messagingSenderId: '762173822440',
-    projectId: 'tatpar-acf',
-    storageBucket: 'tatpar-acf.appspot.com',
+    apiKey: 'AIzaSyBtrN9Ndltn3s4mb8EC0MymPJbJEoDKcxw',
+    appId: '1:555188132765:android:8d5b0dd8aff934b3712d74',
+    messagingSenderId: '555188132765',
+    projectId: 'tatpar-acf-flutter',
+    storageBucket: 'tatpar-acf-flutter.appspot.com',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyAhaXTbuzjYfQHxCpSwJGAggywncVGaOAI',
-    appId: '1:762173822440:ios:e4c59ad91d9f360d80805d',
-    messagingSenderId: '762173822440',
-    projectId: 'tatpar-acf',
-    storageBucket: 'tatpar-acf.appspot.com',
+    apiKey: 'AIzaSyBdHGUcLViZ8s8bhphsabFwiikmVZVZ3WY',
+    appId: '1:555188132765:ios:1f493d77529dee4f712d74',
+    messagingSenderId: '555188132765',
+    projectId: 'tatpar-acf-flutter',
+    storageBucket: 'tatpar-acf-flutter.appspot.com',
     iosBundleId: 'com.example.tatparAcf',
   );
 

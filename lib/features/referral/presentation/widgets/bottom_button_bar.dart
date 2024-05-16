@@ -28,7 +28,11 @@ class BottomButtonBar extends StatelessWidget {
             child: Center(
               child: CircularProgressBuilder(
                 onError: (e) => throw (e),
-                onSuccess: () => DjangoflowAppSnackbar.showInfo(onSaveMessage),
+                onSuccess: () {
+                  if (ReactiveForm.of(context)?.valid ?? false) {
+                    DjangoflowAppSnackbar.showInfo(onSaveMessage);
+                  }
+                },
                 action: onSave,
                 builder: (context, action, error) => FormActionButton(
                   text: 'Save',
@@ -48,9 +52,15 @@ class BottomButtonBar extends StatelessWidget {
               child: CircularProgressBuilder(
                 onError: (e) => throw (e),
                 action: onSave,
-                onSuccess: () => nextPage != null
-                    ? context.router.navigate(nextPage!)
-                    : context.router.pop(),
+                onSuccess: () {
+                  if (ReactiveForm.of(context)?.valid ?? false) {
+                    if (nextPage != null) {
+                      context.router.navigate(nextPage!);
+                    } else {
+                      context.router.pop();
+                    }
+                  }
+                },
                 builder: (context, action, error) => FormActionButton(
                     onPressed: enableValidator &&
                             !(ReactiveForm.of(context)?.valid ?? false)

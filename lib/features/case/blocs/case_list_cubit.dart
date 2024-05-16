@@ -1,13 +1,10 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tatpar_acf/configurations/network/api_response.dart';
-import 'package:tatpar_acf/features/app/data/models/health_worker_info_model.dart';
+
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
-import 'package:tatpar_acf/features/case/data/models/subordinates_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 
-import '../data/enums/filter_shortcuts.dart';
 import '../data/models/cases_filter_model.dart';
 
 part 'case_list_cubit.freezed.dart';
@@ -50,44 +47,43 @@ class CaseListCubit extends Cubit<CaseListState> {
     if (filters.searchWord != null) {
       filteredCases = filteredCases.where((element) {
         final queryLower = filters.searchWord!.toLowerCase();
-        final patient = element.patient!;
-        return patient.name.toLowerCase().contains(queryLower) ||
-            patient.mobileNumber.contains(queryLower);
+        final patientName = element.referralName;
+        final patientNumber = element.referralMobileNumber;
+        return patientName!.toLowerCase().contains(queryLower) ||
+            patientNumber!.contains(queryLower);
       }).toList();
     }
-    if (filters.assignedTo.isNotEmpty) {
-      filteredCases = filteredCases
-          .where((element) => filters.assignedTo
-              .any((assigned) => assigned == element.assignedTo?.id))
-          .toList();
-    }
-    if (filters.selectedShortCut != null) {
-      // TODO: this is for completed cases
-      // filteredCases = filteredCases.where((element) => element.isCaseFormCompeted(filters.pendingStage!)).toList();
-      // TODO: this is for pending cases
-      filteredCases = filteredCases
-          .where((element) =>
-              element.isCaseNeedToCompete(filters.selectedShortCut!))
-          .toList();
-    }
+    // if (filters.assignedTo.isNotEmpty) {
+    //   filteredCases = filteredCases
+    //       .where((element) => filters.assignedTo
+    //           .any((assigned) => assigned == element.assignedTo?.id))
+    //       .toList();
+    // }
+    // if (filters.selectedShortCut != null) {
+    //   //  this is for completed cases
+    //   // TODOTfilteredCases = filteredCases.where((element) => element.isCaseFormCompeted(filters.pendingStage!)).toList();
+    //   // TODOT this is for pending cases
+    //   filteredCases = filteredCases
+    //       .where((element) =>
+    //           element.isCaseNeedToCompete(filters.selectedShortCut!))
+    //       .toList();
+    // }
     emit(state.copyWith(filteredCases: filteredCases, casesFilter: filters));
   }
 
-  void applyPendingStageFilter(FilterShortCut? pendingStage) {
-    if (state.casesFilter.selectedShortCut == pendingStage) {
-      return applyFilters(
-          caseFilter: state.casesFilter.copyWith(selectedShortCut: null));
-    }
-    return applyFilters(
-        caseFilter: state.casesFilter.copyWith(selectedShortCut: pendingStage));
-  }
+  // void applyPendingStageFilter(FilterShortCut? pendingStage) {
+  //   if (state.casesFilter.selectedShortCut == pendingStage) {
+  //     return applyFilters(
+  //         caseFilter: state.casesFilter.copyWith(selectedShortCut: null));
+  //   }
+  //   return applyFilters(
+  //       caseFilter: state.casesFilter.copyWith(selectedShortCut: pendingStage));
+  // }
 
   Future<void> getCasesForHealthWorker() async {
     emit(state.copyWith(isLoading: true));
-    final cases = await caseRepo.getCasesForHealthWorker(
-      healthWorkerId: AuthCubit.instance.state.user!.id,
-    );
-    cases.sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+    final cases = await caseRepo.getCasesForHealthWorker();
+    cases.sort((a, b) => b.createdOn!.compareTo(a.createdOn!));
     emit(
       state.copyWith(
         isLoading: false,
@@ -96,30 +92,30 @@ class CaseListCubit extends Cubit<CaseListState> {
     );
   }
 
-  Future<void> assignCase(
-      int caseId, SubordinatesModel subordinatesModel) async {
-    final response = await caseRepo.assignSubordinate(caseId,
-        subordinatesModel: subordinatesModel);
-    if (response.status == Status.failed) {
-      return;
-    }
-    final cases = state.cases;
-    final index = cases.indexWhere((element) => element.id == caseId);
-    if (index == -1) return;
-    List<Case> copyCases = List.from(cases);
-    copyCases[index] = copyCases[index].copyWith(
-      assignedTo: HealthWorkerInfoModel(
-        id: subordinatesModel.id,
-        fullName:
-            '${subordinatesModel.firstName ?? ''} ${subordinatesModel.lastName ?? ''}',
-      ),
-    );
-    emit(
-      state.copyWith(
-        cases: copyCases,
-      ),
-    );
-  }
+  // Future<void> assignCase(
+  //     int caseId, SubordinatesModel subordinatesModel) async {
+  //   final response = await caseRepo.assignSubordinate(caseId,
+  //       subordinatesModel: subordinatesModel);
+  //   if (response.status == Status.failed) {
+  //     return;
+  //   }
+  //   final cases = state.cases;
+  //   final index = cases.indexWhere((element) => element.id == caseId);
+  //   if (index == -1) return;
+  //   List<Case> copyCases = List.from(cases);
+  //   copyCases[index] = copyCases[index].copyWith(
+  //     assignedTo: HealthWorkerInfoModel(
+  //       id: subordinatesModel.id,
+  //       fullName:
+  //           '${subordinatesModel.firstName ?? ''} ${subordinatesModel.lastName ?? ''}',
+  //     ),
+  //   );
+  //   emit(
+  //     state.copyWith(
+  //       cases: copyCases,
+  //     ),
+  //   );
+  // }
 
   void toggleShowAssignedToMeOnly() {
     final showAssignedToMeOnly = !state.showAssignedToMeOnly;
@@ -139,9 +135,11 @@ class CaseListCubit extends Cubit<CaseListState> {
   void updateSingleCase(Case updatedCase) {
     final cases = state.cases;
     final index = cases.indexWhere((element) => element.id == updatedCase.id);
+
     if (index == -1) return;
     List<Case> copyCases = List.from(cases);
     copyCases[index] = updatedCase;
+
     emit(
       state.copyWith(cases: copyCases),
     );
