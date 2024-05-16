@@ -1,14 +1,9 @@
-import 'dart:math';
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:tatpar_acf/configurations/network/api_response.dart';
-import 'package:tatpar_acf/configurations/network/network_manager.dart';
+
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/models/app_user_model.dart';
-
-import '../../../../configurations/network/api_constants.dart';
-import '../../../../configurations/network/network_request.dart';
 
 class AuthRepo {
   final FirebaseAuth _auth;
@@ -64,14 +59,12 @@ class AuthRepo {
     void Function(String) register,
   ) async {
     if (userCredential.user != null) {
-      String? token = await _auth.currentUser!.getIdToken();
-      print('=====================================================+$token ');
+      //  String? token = await _auth.currentUser!.getIdToken();
       // if (userCredential.additionalUserInfo!.isNewUser) {
       //   register(userCredential.user!.uid);
       // } else {
       final user = await _getUserDetails(await _auth.currentUser!.getIdToken());
       if (user == null) {
-        print('User is null');
         return;
       }
       AuthCubit.instance.login(user);

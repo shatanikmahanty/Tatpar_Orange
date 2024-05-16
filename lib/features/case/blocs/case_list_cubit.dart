@@ -1,15 +1,10 @@
-import 'dart:math';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-import 'package:tatpar_acf/configurations/network/api_response.dart';
-import 'package:tatpar_acf/features/app/data/models/health_worker_info_model.dart';
+
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
-import 'package:tatpar_acf/features/case/data/models/subordinates_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 
-import '../data/enums/filter_shortcuts.dart';
 import '../data/models/cases_filter_model.dart';
 
 part 'case_list_cubit.freezed.dart';
@@ -65,9 +60,9 @@ class CaseListCubit extends Cubit<CaseListState> {
     //       .toList();
     // }
     // if (filters.selectedShortCut != null) {
-    //   // TODO: this is for completed cases
-    //   // filteredCases = filteredCases.where((element) => element.isCaseFormCompeted(filters.pendingStage!)).toList();
-    //   // TODO: this is for pending cases
+    //   //  this is for completed cases
+    //   // TODOTfilteredCases = filteredCases.where((element) => element.isCaseFormCompeted(filters.pendingStage!)).toList();
+    //   // TODOT this is for pending cases
     //   filteredCases = filteredCases
     //       .where((element) =>
     //           element.isCaseNeedToCompete(filters.selectedShortCut!))
