@@ -21,7 +21,7 @@ class CaseCard extends StatelessWidget {
     return InkWell(
       onTap: () {
         context.router.navigate(
-          CaseRouter(caseModel: caseModel, tbScreeningPageRoute: false),
+          CaseRouter(caseModel: caseModel),
         );
       },
       child: Container(
