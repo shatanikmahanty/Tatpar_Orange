@@ -27,7 +27,7 @@ class CaseRouterPage extends StatelessWidget {
       create: (context) => CaseCubit(
         caseRepo: context.read<CaseRepo>(),
         caseModel: caseModel,
-      ),
+      )..loadDistricts(),
       child: BlocListener<CaseCubit, CaseState>(
         listener: (context, state) {
           context.read<CaseListCubit>().updateSingleCase(state.caseWorkedUpon);

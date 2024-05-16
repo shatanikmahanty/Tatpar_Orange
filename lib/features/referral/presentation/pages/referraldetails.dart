@@ -49,33 +49,33 @@ class ReferralDetailsPage extends StatelessWidget {
     String? panchayatName =
         _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
 
-    final trimesterData = cubit.state.dataModel!.trimester?.firstWhere(
+    final trimesterData = cubit.state.dataModel?.trimester?.firstWhere(
       (element) => element.id == trimester,
       orElse: () => const Trimester(name: null),
     );
     final String? trimesterName = trimesterData?.name;
 
-    final casteCategoryData = cubit.state.dataModel!.casteCategory?.firstWhere(
+    final casteCategoryData = cubit.state.dataModel?.casteCategory?.firstWhere(
       (element) => element.id == casteCategory,
       orElse: () => const CasteCategory(name: null),
     );
     final String? casteCategoryName = casteCategoryData?.name;
     final keyPopulationNames =
         (referralDetailsModel?.selectedKeyPopulation ?? []).map((id) {
-      final keyPopulationData = cubit.state.dataModel!.keyPopulation
+      final keyPopulationData = cubit.state.dataModel?.keyPopulation
           ?.firstWhere((element) => element.id == id,
               orElse: () => const KeyPopulation(id: 0, name: ''));
       return '${keyPopulationData!.id}:\t${keyPopulationData.name}';
     }).toList();
 
     final referrerSourceData =
-        cubit.state.dataModel!.referrerSource?.firstWhere(
+        cubit.state.dataModel?.referrerSource?.firstWhere(
       (element) => element.id == referrerSource,
       orElse: () => const ReferrerSource(name: null),
     );
     final String? referrerSourceName = referrerSourceData?.name;
     String? referrerPanchayatName = _getPanchayatName(
-        cubit.state.dataModel!.blocks!, referrerPanchayatCode);
+        cubit.state.dataModel?.blocks!, referrerPanchayatCode);
     return fb.group({
       'referral_id': FormControl<String>(
         value: referralDetailsModel?.referralID,
