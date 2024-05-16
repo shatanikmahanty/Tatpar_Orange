@@ -75,8 +75,9 @@ class TBScreeningPage extends StatelessWidget {
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     final cubit = context.read<CaseCubit>();
     if (formGroup.valid) {
-      final selectedId =
-          int.tryParse(formGroup.control('trimester').value.split(':')[0]);
+      final selectedId = (formGroup.control('trimester').value) != null
+          ? int.tryParse(formGroup.control('trimester').value.split(':')[0])
+          : null;
 
       context.read<CaseCubit>().selectTBTrimester = selectedId;
 
@@ -272,13 +273,13 @@ class TBScreeningPage extends StatelessWidget {
                                             .control('trimester')
                                             .value,
                                         onChanged: (value) {
-                                          final selectedId =
-                                              int.tryParse(value.split(':')[0]);
+                                          // final selectedId =
+                                          //     int.tryParse(value.split(':')[0]);
                                           formGroup.control('trimester').value =
-                                              value.split(':')[1];
-                                          context
-                                              .read<CaseCubit>()
-                                              .selectTBTrimester = selectedId;
+                                              value;
+                                          // context
+                                          //     .read<CaseCubit>()
+                                          //     .selectTBTrimester = selectedId;
                                         },
                                       ),
                                       const SizedBox(height: kPadding * 2),

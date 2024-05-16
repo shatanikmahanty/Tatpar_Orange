@@ -9,6 +9,7 @@ part of 'referral_details_model.dart';
 _$ReferralDetailsModelImpl _$$ReferralDetailsModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ReferralDetailsModelImpl(
+      caseId: (json['case_id'] as num?)?.toInt(),
       id: (json['id'] as num?)?.toInt(),
       referralID: json['referral_id'] as String?,
       referralDate: fromJsonToDateTime(json['referral_date'] as String?),

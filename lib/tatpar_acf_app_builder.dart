@@ -10,7 +10,6 @@ import 'package:tatpar_acf/features/app/presentation/builders/app_responsive_lay
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/repo/auth_repo.dart';
 import 'package:tatpar_acf/features/authentication/presentation/listeners/login_listener_wrapper.dart';
-import 'package:tatpar_acf/features/case/blocs/assign_case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
@@ -72,8 +71,8 @@ class TatparAcfAppBuilder extends AppBuilder {
             //     context.read<SourceRepo>(),
             //   ),
             // ),
-            BlocProvider<SubordinatesCaseCubit>(
-                create: (context) => SubordinatesCaseCubit()),
+            // BlocProvider<SubordinatesCaseCubit>(
+            //     create: (context) => SubordinatesCaseCubit()),
             // BlocProvider(
             //   create: (_) => SplashBloc(),
             // ),
@@ -98,9 +97,9 @@ class TatparAcfAppBuilder extends AppBuilder {
               // context.read<SourceCubit>().getFacilities();
               // context.read<SourceCubit>().getDrugs();
               // context.read<SourceCubit>().getVouchers();
-              if (user.isSupervisor) {
-                context.read<SubordinatesCaseCubit>().getSubordinates();
-              }
+              // if (user.isSupervisor) {
+              //   context.read<SubordinatesCaseCubit>().getSubordinates();
+              // }
             },
             onLogout: (context) {},
             child: AppCubitConsumer(
