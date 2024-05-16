@@ -59,7 +59,7 @@ class AuthRepo {
     void Function(String) register,
   ) async {
     if (userCredential.user != null) {
-      //  String? token = await _auth.currentUser!.getIdToken();
+      String? token = await _auth.currentUser!.getIdToken();
       // if (userCredential.additionalUserInfo!.isNewUser) {
       //   register(userCredential.user!.uid);
       // } else {
