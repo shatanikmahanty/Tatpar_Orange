@@ -12,6 +12,6 @@ const diagnosisUrl = '$baseUrl/api/diagnosis';
 const treatmentUrl = '$baseUrl/api/treatment';
 const contactTracingUrl = '$baseUrl/api/contact-tracing';
 const outcomeUrl = '$baseUrl/api/outcome';
-const casesForHealthWorkerUrl = '$baseUrl/api/case';
+const casesForHealthWorkerUrl = '$baseUrl/api/case?logged_in_user=';
 
 const getSingleCaseUrl = '$baseUrl/api/case/get-delete';

@@ -291,8 +291,9 @@ class CaseRepo {
   // }
 
   Future<List<Case>> getCasesForHealthWorker() async {
+    print(AuthCubit.instance.state.user!.mobileNumber);
     final request = NetworkRequest(
-      casesForHealthWorkerUrl,
+      '$casesForHealthWorkerUrl${AuthCubit.instance.state.user!.mobileNumber}',
       RequestMethod.get,
       isAuthorized: true,
       data: {
