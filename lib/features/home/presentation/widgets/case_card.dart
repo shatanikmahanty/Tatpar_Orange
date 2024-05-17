@@ -1,8 +1,13 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:intl/intl.dart';
+import 'package:tatpar_acf/configurations/router/router.dart';
+import 'package:tatpar_acf/configurations/router/router.gr.dart';
+import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/disease_chips.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -14,6 +19,7 @@ class CaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(caseModel);
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     //final primaryColor = theme.primaryColor;
@@ -45,7 +51,11 @@ class CaseCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  const DiseaseChip('Referral', color: AppColors.blueLight),
+                  DiseaseChip(
+                      caseModel.tbScreeningOutcome != null
+                          ? 'Likely Positive'
+                          : 'Processing',
+                      color: AppColors.blueLight),
                   const Spacer(),
                   Text(
                     'Created on ${getFormattedDate(caseModel.createdOn)}',
@@ -63,9 +73,14 @@ class CaseCard extends StatelessWidget {
                     ),
                     icon: const Icon(Icons.more_vert),
                     offset: const Offset(30, 30), // Kebab icon
-                    onSelected: (String value) {
+                    onSelected: (String value) async {
                       if (value == 'reassign') {
-                        context.router.navigate(const ReferralDetailsRoute());
+                        print(caseModel);
+                        context.router.navigate(
+                          CaseRouter(
+                              caseModel: caseModel,
+                              children: const [TBScreeningRoute()]),
+                        );
                       }
                     },
                     itemBuilder: (BuildContext context) =>

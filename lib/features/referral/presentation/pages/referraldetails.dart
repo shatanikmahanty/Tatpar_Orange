@@ -9,7 +9,6 @@ import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dar
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
-import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
 import 'package:tatpar_acf/features/referral/model/key_population_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
@@ -619,7 +618,7 @@ class ReferralDetailsPage extends StatelessWidget {
                       onSave: (_) async {
                         await _onSave(context, formGroup);
                       },
-                      nextPage: TBScreeningRoute(),
+                      nextPage: const TBScreeningRoute(),
                       // nextPage: CaseRouter(
                       //     caseModel: context.read<CaseCubit>().selectedCase ??
                       //         const Case(),

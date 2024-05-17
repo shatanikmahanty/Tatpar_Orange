@@ -95,8 +95,8 @@ class AuthRepo {
     // return null;
     AppUser user = AppUser(
       id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
+      firstName: '',
+      lastName: '',
       mobileNumber:
           (_auth.currentUser?.phoneNumber ?? '').replaceAll('+91', ''),
       gender: 'Male',
