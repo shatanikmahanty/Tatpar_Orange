@@ -9,6 +9,7 @@ import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dar
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
@@ -20,74 +21,22 @@ import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.d
 @RoutePage()
 class BasicDetails extends StatelessWidget {
   const BasicDetails({super.key});
-  FormGroup _basicDetailsFormBuilder(
-      {required ReferralDetailsModel? referralDetailsModel,
-      required CaseCubit cubit}) {
-    // final district = referralDetailsModel?.selectedDistrict;
-    // final block = referralDetailsModel?.selectedBlock;
-    // final panchayat = referralDetailsModel?.selectedPanchayatCode;
-    // final trimester = referralDetailsModel?.selectedTrimester;
-
-    // final casteCategory = referralDetailsModel?.selectedCasteCategory;
-    // final referrerSource = referralDetailsModel?.selectedrReferrerSource;
-    // final referrerPanchayatCode =
-    //     referralDetailsModel?.selectedReferrerPanchayatCode;
-    // final districtData = cubit.state.dataModel?.districts?.firstWhere(
-    //   (element) => element.id == district,
-    //   orElse: () => const District(district: null),
-    // );
-    // final String? districtName = districtData?.district;
-
-    // final blockData = cubit.state.dataModel?.blocks?.firstWhere(
-    //   (element) => element.id == block,
-    //   orElse: () => const Block(block: null),
-    // );
-    // final String? blockName = blockData?.block;
-    // String? panchayatName =
-    //     _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
-
-    // final trimesterData = cubit.state.dataModel!.trimester?.firstWhere(
-    //   (element) => element.id == trimester,
-    //   orElse: () => const Trimester(name: null),
-    // );
-    // final String? trimesterName = trimesterData?.name;
-
-    // final casteCategoryData = cubit.state.dataModel!.casteCategory?.firstWhere(
-    //   (element) => element.id == casteCategory,
-    //   orElse: () => const CasteCategory(name: null),
-    // );
-    // final String? casteCategoryName = casteCategoryData?.name;
-    // final keyPopulationNames =
-    //     (referralDetailsModel?.selectedKeyPopulation ?? []).map((id) {
-    //   final keyPopulationData = cubit.state.dataModel!.keyPopulation
-    //       ?.firstWhere((element) => element.id == id,
-    //           orElse: () => const KeyPopulation(id: 0, name: ''));
-    //   return '${keyPopulationData!.id}:\t${keyPopulationData.name}';
-    // }).toList();
-
-    // final referrerSourceData =
-    //     cubit.state.dataModel!.referrerSource?.firstWhere(
-    //   (element) => element.id == referrerSource,
-    //   orElse: () => const ReferrerSource(name: null),
-    // );
-    // final String? referrerSourceName = referrerSourceData?.name;
-    // String? referrerPanchayatName = _getPanchayatName(
-    //     cubit.state.dataModel!.blocks!, referrerPanchayatCode);
+  FormGroup _basicDetailsFormBuilder({
+    required ReferralDetailsModel? referralDetailsModel,
+  }) {
     return fb.group({
       'referral_id': FormControl<String>(
-        value: referralDetailsModel?.referralID,
         validators: [Validators.required],
       ),
       'referral_date': FormControl<DateTime>(
-          validators: [Validators.required],
-          value: referralDetailsModel?.referralDate ?? DateTime.now()),
+          validators: [Validators.required], value: DateTime.now()),
       'referral_name': FormControl<String>(
-          validators: [Validators.required],
-          value: referralDetailsModel?.referralName),
+        validators: [Validators.required],
+      ),
       'age': FormControl<int>(
           //  validators: [Validators.required],
           value: referralDetailsModel?.age),
-      'gender': FormControl<String>(value: referralDetailsModel?.gender),
+      'gender': FormControl<String>(),
       'district': FormControl<String>(
           // validators: [Validators.required],
           value: referralDetailsModel?.district),
@@ -97,35 +46,33 @@ class BasicDetails extends StatelessWidget {
       'panchayat_code': FormControl<String>(
           //  validators: [Validators.required],
           value: referralDetailsModel?.panchayatCode),
-      'ward': FormControl<int>(validators: [
-        //  Validators.required,
-        Validators.min(1),
-        Validators.max(40),
-      ], value: referralDetailsModel?.ward),
-      'guardian_name':
-          FormControl<String>(value: referralDetailsModel?.guardianName),
+      'ward': FormControl<int>(
+        validators: [
+          //  Validators.required,
+          Validators.min(1),
+          Validators.max(40),
+        ],
+      ),
+      'guardian_name': FormControl<String>(),
       'guardian_phone_number': FormControl<String?>(
-          validators: [Validators.required],
-          value: referralDetailsModel?.guardianPhoneNumber),
-      'caste_category':
-          FormControl<String?>(value: referralDetailsModel?.casteCategory),
-      'key_population':
-          FormControl<List<String>>(value: referralDetailsModel?.keyPopulation),
-      'trimester': FormControl<String?>(value: referralDetailsModel?.trimester),
-      'referred_by':
-          FormControl<String?>(value: referralDetailsModel?.referredBy),
+        validators: [Validators.required],
+      ),
+      'caste_category': FormControl<String?>(),
+      'key_population': FormControl<List<String>>(),
+      'trimester': FormControl<String?>(),
+      'referred_by': FormControl<String?>(),
       'referrer_source': FormControl<String?>(
           //validators: [Validators.required],
           value: referralDetailsModel?.referrerSource),
-      'referred_ward': FormControl<int>(validators: [
-        // Validators.required,
-        Validators.min(1),
-        Validators.max(40),
-      ], value: referralDetailsModel?.referredWard),
-      'referrer_panchayat_code': FormControl<String>(
-          // validators: [Validators.required],
-          value: referralDetailsModel?.referrerPanchayatCode),
-      'source': FormControl<String?>(value: referralDetailsModel?.source),
+      'referred_ward': FormControl<int>(
+        validators: [
+          // Validators.required,
+          Validators.min(1),
+          Validators.max(40),
+        ],
+      ),
+      'referrer_panchayat_code': FormControl<String>(),
+      'source': FormControl<String?>(),
     });
   }
 
@@ -151,6 +98,7 @@ class BasicDetails extends StatelessWidget {
     if (formGroup.valid) {
       final formData = formGroup.value;
       final caseCubit = context.read<CaseCubit>();
+      final sourceCubit = context.read<SourceCubit>();
       context.read<CaseCubit>().selectCasteCategory =
           formGroup.control('caste_category').value != null
               ? int.tryParse(
@@ -173,7 +121,7 @@ class BasicDetails extends StatelessWidget {
               ? int.tryParse(
                   formGroup.control('referrer_source').value.split(':')[0])
               : null;
-      for (var block in caseCubit.state.dataModel!.blocks!) {
+      for (var block in sourceCubit.state.dataModel!.blocks!) {
         var panchayat = block.panchayat!.firstWhere(
             (p) =>
                 p.panchayat ==
@@ -185,21 +133,21 @@ class BasicDetails extends StatelessWidget {
           break;
         }
       }
-      context.read<CaseCubit>().selectDistrictId = caseCubit
+      context.read<CaseCubit>().selectDistrictId = sourceCubit
           .state.dataModel!.districts!
           .firstWhere(
               (element) =>
                   element.district == formGroup.control('district').value,
               orElse: () => const District(id: null))
           .id;
-      context.read<CaseCubit>().selectBlockId = caseCubit
+      context.read<CaseCubit>().selectBlockId = sourceCubit
           .state.dataModel!.blocks!
           .firstWhere(
               (element) =>
                   element.block == formGroup.control('referral_block').value,
               orElse: () => const Block(id: null))
           .id;
-      for (var block in caseCubit.state.dataModel!.blocks!) {
+      for (var block in sourceCubit.state.dataModel!.blocks!) {
         var panchayat = block.panchayat!.firstWhere(
             (p) => p.panchayat == formGroup.control('panchayat_code').value,
             orElse: () => const Panchayat(id: null));
@@ -269,8 +217,8 @@ class BasicDetails extends StatelessWidget {
             body: ReactiveFormBuilder(
               form: () {
                 return _basicDetailsFormBuilder(
-                    referralDetailsModel: state.referralDetailsModel,
-                    cubit: context.read<CaseCubit>());
+                  referralDetailsModel: state.referralDetailsModel,
+                );
               },
               builder:
                   (BuildContext context, FormGroup formGroup, Widget? child) =>
@@ -352,7 +300,7 @@ class BasicDetails extends StatelessWidget {
                                   LengthLimitingTextInputFormatter(10)
                                 ],
                               ),
-                              BlocBuilder<CaseCubit, CaseState>(
+                              BlocBuilder<SourceCubit, SourceState>(
                                   buildWhen: ((previous, current) =>
                                       (previous.isLoading !=
                                           current.isLoading) ||
@@ -388,7 +336,7 @@ class BasicDetails extends StatelessWidget {
                                     );
                                   }),
                               const SizedBox(height: kPadding * 2),
-                              BlocBuilder<CaseCubit, CaseState>(
+                              BlocBuilder<SourceCubit, SourceState>(
                                   buildWhen: ((previous, current) =>
                                       (previous.isLoading !=
                                           current.isLoading) ||
@@ -436,7 +384,7 @@ class BasicDetails extends StatelessWidget {
                                         //   return (parts[1]);
                                         // }).toList();
                                         // context
-                                        //     .read<CaseCubit>()
+                                        //     .read<SourceCubit>()
                                         //     .selectKeyPopulation = listOfIds;
                                         final listOfValues = value.split(',');
 
@@ -447,7 +395,7 @@ class BasicDetails extends StatelessWidget {
                                     );
                                   }),
                               const SizedBox(height: kPadding * 2),
-                              BlocBuilder<CaseCubit, CaseState>(
+                              BlocBuilder<SourceCubit, SourceState>(
                                   buildWhen: ((previous, current) =>
                                       (previous.isLoading !=
                                           current.isLoading) ||
@@ -505,7 +453,7 @@ class BasicDetails extends StatelessWidget {
                                 prefixIcon: Icons.location_city_outlined,
                               ),
                               const SizedBox(height: kPadding * 2),
-                              BlocBuilder<CaseCubit, CaseState>(
+                              BlocBuilder<SourceCubit, SourceState>(
                                   buildWhen: ((previous, current) =>
                                       (previous.isLoading !=
                                           current.isLoading) ||
@@ -541,7 +489,7 @@ class BasicDetails extends StatelessWidget {
                                     );
                                   }),
                               const SizedBox(height: kPadding * 2),
-                              BlocBuilder<CaseCubit, CaseState>(
+                              BlocBuilder<SourceCubit, SourceState>(
                                   buildWhen: ((previous, current) =>
                                       (previous.isLoading !=
                                           current.isLoading) ||
@@ -607,9 +555,9 @@ class BasicDetails extends StatelessWidget {
                         await _onSave(context, formGroup);
                       },
                       nextPage: CaseRouter(
-                        caseModel: context.read<CaseCubit>().selectedCase?? const Case()
-                        ,children: const [TBScreeningRoute()]
-                      ),
+                          caseModel: context.read<CaseCubit>().selectedCase ??
+                              const Case(),
+                          children: const [TBScreeningRoute()]),
                       enableValidator: false,
                     ),
                     const SizedBox(height: kPadding * 2),
@@ -621,7 +569,7 @@ class BasicDetails extends StatelessWidget {
 }
 
 _loadDistricts(FormGroup formGroup, BuildContext context) {
-  return BlocBuilder<CaseCubit, CaseState>(
+  return BlocBuilder<SourceCubit, SourceState>(
       buildWhen: ((previous, current) =>
           (previous.isLoading != current.isLoading) ||
           previous.dataModel != current.dataModel),

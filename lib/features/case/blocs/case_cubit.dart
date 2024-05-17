@@ -137,20 +137,6 @@ class CaseCubit extends Cubit<CaseState> {
 
   int? get selectedTreatmentOutcome => _selectedTreatmentOutcome;
 
-  Future<void> loadDistricts() async {
-    emit(state.copyWith(isLoading: true));
-    try {
-      final model = await caseRepo.buildDataFields();
-      emit(state.copyWith(isLoading: false, dataModel: model));
-    } on Exception {
-      emit(
-        state.copyWith(
-          isLoading: true,
-        ),
-      );
-    }
-  }
-
   String? updateScreeningOutcome(FormGroup formGroup) {
     final cough = formGroup.control('cough').value;
     final sputum = formGroup.control('sputum').value;
@@ -172,7 +158,7 @@ class CaseCubit extends Cubit<CaseState> {
       emit(state.copyWith(screeningOutcome: 'No Symptom'));
       return 'No Symptom';
     } else if (swollenGland == 'Yes') {
-      emit(state.copyWith(screeningOutcome: 'EPTB'));
+      emit(state.copyWith(screeningOutcome: 'Presumptive EPTB'));
       return 'EPTB';
     } else if ((cough == 'Yes' ||
             sputum == 'Yes' ||
@@ -182,7 +168,7 @@ class CaseCubit extends Cubit<CaseState> {
             weightLoss == 'Yes' ||
             swollenGland == 'Yes') &&
         tbMedicine == 'Yes') {
-      emit(state.copyWith(screeningOutcome: 'DRTB'));
+      emit(state.copyWith(screeningOutcome: 'Presumptive DRTB'));
       return 'DRTB';
     } else if ((cough == 'Yes' ||
             sputum == 'Yes' ||
@@ -192,7 +178,7 @@ class CaseCubit extends Cubit<CaseState> {
             weightLoss == 'Yes') &&
         swollenGland == 'No' &&
         tbMedicine == 'No') {
-      emit(state.copyWith(screeningOutcome: 'DSTB'));
+      emit(state.copyWith(screeningOutcome: 'Presumptive DSTB'));
       return 'DSTB';
     } else {
       emit(state.copyWith(screeningOutcome: 'No Symptom'));
@@ -222,20 +208,6 @@ class CaseCubit extends Cubit<CaseState> {
       'screeningStatus': screeningStatus,
       'whoSrqModel': whoSrqModel
     };
-  }
-
-  Future<void> loadDiagnosisData() async {
-    emit(state.copyWith(isLoading: true));
-    try {
-      final model = await caseRepo.getDiagnosisData();
-      emit(state.copyWith(isLoading: false, diagnosisData: model));
-    } on Exception {
-      emit(
-        state.copyWith(
-          isLoading: true,
-        ),
-      );
-    }
   }
 
   Future<Case> getCaseModel(int? caseId) async {

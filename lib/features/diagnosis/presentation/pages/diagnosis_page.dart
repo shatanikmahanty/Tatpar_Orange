@@ -6,6 +6,7 @@ import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dar
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
@@ -217,7 +218,7 @@ class DiagnosisPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<CaseCubit>().loadDiagnosisData();
+    context.read<SourceCubit>().loadDiagnosisData();
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
             appBar: const CaseAppBar('Diagnosis'),

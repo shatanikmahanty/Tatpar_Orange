@@ -19,7 +19,6 @@ class CaseCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print(caseModel);
     final theme = Theme.of(context);
     final textTheme = theme.textTheme;
     //final primaryColor = theme.primaryColor;
@@ -52,13 +51,13 @@ class CaseCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   DiseaseChip(
-                      caseModel.tbScreeningOutcome != null
-                          ? 'Likely Positive'
-                          : 'Processing',
+                      caseModel.tbScreeningOutcome == "No Symptom"
+                          ? 'Scr Neg'
+                          : 'Scr Pos',
                       color: AppColors.blueLight),
                   const Spacer(),
                   Text(
-                    'Created on ${getFormattedDate(caseModel.createdOn)}',
+                    getFormattedDate(caseModel.createdOn),
                     style: textTheme.labelMedium?.copyWith(
                       // fontSize: 9,
                       // height: 1.7,
@@ -75,11 +74,10 @@ class CaseCard extends StatelessWidget {
                     offset: const Offset(30, 30), // Kebab icon
                     onSelected: (String value) async {
                       if (value == 'reassign') {
-                        print(caseModel);
                         context.router.navigate(
                           CaseRouter(
                               caseModel: caseModel,
-                              children: const [TBScreeningRoute()]),
+                              children: const [ReferralDetailsRoute()]),
                         );
                       }
                     },
@@ -157,7 +155,7 @@ class CaseCard extends StatelessWidget {
                           height: kPadding * 0.75,
                         ),
                         Text(
-                          'Scr: ${caseModel.screenedBy} • Ref: ${caseModel.referredBy}', //${caseModel.hub.toString()}',
+                          'Scr by: ${caseModel.screenedBy} • Ref by: ${caseModel.referredBy}', //${caseModel.hub.toString()}',
                           style: textTheme.bodyMedium?.copyWith(
                             height: 1.33,
                             letterSpacing: 0.2,
@@ -261,7 +259,7 @@ class CaseCard extends StatelessWidget {
 
   String getFormattedDate(DateTime? date) {
     if (date == null) return '';
-    return DateFormat('dd MMM yyyy').format(date);
+    return DateFormat('dd MMM yy').format(date);
   }
 
   // bool getFormCompletedStatus(String key) {

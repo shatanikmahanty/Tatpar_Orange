@@ -6,6 +6,7 @@ import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_field.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
@@ -19,7 +20,8 @@ class TBScreeningPage extends StatelessWidget {
   const TBScreeningPage({super.key});
 
   FormGroup _tbScreeningDetailsFormBuilder(
-      {required TBScreeningModel? tbScreeningModel, required CaseCubit cubit}) {
+      {required TBScreeningModel? tbScreeningModel,
+      required SourceCubit cubit}) {
     final trimester = tbScreeningModel?.selectedTrimester;
 
     final trimesterData = cubit.state.dataModel?.trimester?.firstWhere(
@@ -121,7 +123,7 @@ class TBScreeningPage extends StatelessWidget {
           body: ReactiveFormBuilder(form: () {
             return _tbScreeningDetailsFormBuilder(
                 tbScreeningModel: state.tbScreeningModel,
-                cubit: context.read<CaseCubit>());
+                cubit: context.read<SourceCubit>());
           }, builder:
               (BuildContext context, FormGroup formGroup, Widget? child) {
             formGroup.valueChanges.listen((_) {
@@ -243,7 +245,7 @@ class TBScreeningPage extends StatelessWidget {
                               selected: formGroup.control('tb_medicine').value,
                             ),
                             const SizedBox(height: kPadding * 2),
-                            BlocBuilder<CaseCubit, CaseState>(
+                            BlocBuilder<SourceCubit, SourceState>(
                                 buildWhen: ((previous, current) =>
                                     (previous.isLoading != current.isLoading) ||
                                     previous.dataModel != current.dataModel),

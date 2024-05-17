@@ -10,54 +10,13 @@ import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
-import 'package:tatpar_acf/features/diagnosis/model/diagnosis_data.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
-import 'package:tatpar_acf/features/referral/model/data_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 
 class CaseRepo {
-  Future<DataModel> buildDataFields() async {
-    final response = await NetworkManager.instance.perform(NetworkRequest(
-      districtsUrl,
-      RequestMethod.get,
-      isAuthorized: true,
-      data: {},
-    ));
-    if (response.success = true) {
-      final DataModel dataModel = DataModel.fromJson(response.data['data']);
-
-      return dataModel;
-    } else {
-      throw ApplicationError(
-        errorMsg: 'Error fetching data',
-        type: UnExpected(),
-      );
-    }
-  }
-
-  Future<DiagnosisData> getDiagnosisData() async {
-    final response = await NetworkManager.instance.perform(NetworkRequest(
-      diagnosisDataUrl,
-      RequestMethod.get,
-      isAuthorized: true,
-      data: {},
-    ));
-    if (response.success = true) {
-      final DiagnosisData diagnosisData =
-          DiagnosisData.fromJson(response.data['data']);
-
-      return diagnosisData;
-    } else {
-      throw ApplicationError(
-        errorMsg: 'Error fetching data',
-        type: UnExpected(),
-      );
-    }
-  }
-
   Future<ReferralDetailsModel> saveReferralDetails(
       {required ReferralDetailsModel referralDetailsModel,
       required int? id}) async {
