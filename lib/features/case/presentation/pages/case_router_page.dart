@@ -12,22 +12,17 @@ class CaseRouterPage extends StatelessWidget {
   const CaseRouterPage({
     super.key,
     required this.caseModel,
-    // required this.tbScreeningPageRoute, // Update constructor
   });
 
   final Case caseModel;
-  // final bool tbScreeningPageRoute;
 
   @override
   Widget build(BuildContext context) {
-    // if (tbScreeningPageRoute) {
-    //   context.router.navigate(const TBScreeningRoute());
-    // }
     return BlocProvider(
       create: (context) => CaseCubit(
         caseRepo: context.read<CaseRepo>(),
         caseModel: caseModel,
-      )..loadDistricts(),
+      ),
       child: BlocListener<CaseCubit, CaseState>(
         listener: (context, state) {
           context.read<CaseListCubit>().updateSingleCase(state.caseWorkedUpon);

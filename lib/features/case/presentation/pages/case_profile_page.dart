@@ -56,7 +56,6 @@ class CaseProfilePage extends StatelessWidget {
                                 (caseWorkedUpon.panchayat ?? '').toString(),
                             district:
                                 (caseWorkedUpon.district ?? '').toString(),
-                            //   (caseWorkedUpon.panchayat ?? '').toString(),
                             screeningStatus:
                                 (caseWorkedUpon.tbScreeningOutcome ?? '')
                                     .toString(),
