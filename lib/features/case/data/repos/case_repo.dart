@@ -7,58 +7,16 @@ import 'package:tatpar_acf/configurations/network/network_manager.dart';
 import 'package:tatpar_acf/configurations/network/network_request.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
-import 'package:tatpar_acf/features/case/data/models/patient_model.dart';
-import 'package:tatpar_acf/features/case/data/models/subordinates_model.dart';
+
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
-import 'package:tatpar_acf/features/diagnosis/model/diagnosis_data.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
-import 'package:tatpar_acf/features/referral/model/data_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 
 class CaseRepo {
-  Future<DataModel> buildDataFields() async {
-    final response = await NetworkManager.instance.perform(NetworkRequest(
-      districtsUrl,
-      RequestMethod.get,
-      isAuthorized: true,
-      data: {},
-    ));
-    if (response.success = true) {
-      final DataModel dataModel = DataModel.fromJson(response.data['data']);
-
-      return dataModel;
-    } else {
-      throw ApplicationError(
-        errorMsg: 'Error fetching data',
-        type: UnExpected(),
-      );
-    }
-  }
-
-  Future<DiagnosisData> getDiagnosisData() async {
-    final response = await NetworkManager.instance.perform(NetworkRequest(
-      diagnosisDataUrl,
-      RequestMethod.get,
-      isAuthorized: true,
-      data: {},
-    ));
-    if (response.success = true) {
-      final DiagnosisData diagnosisData =
-          DiagnosisData.fromJson(response.data['data']);
-
-      return diagnosisData;
-    } else {
-      throw ApplicationError(
-        errorMsg: 'Error fetching data',
-        type: UnExpected(),
-      );
-    }
-  }
-
   Future<ReferralDetailsModel> saveReferralDetails(
       {required ReferralDetailsModel referralDetailsModel,
       required int? id}) async {
@@ -219,6 +177,26 @@ class CaseRepo {
     }
   }
 
+  Future<Case> getCaseModel({
+    required int? caseId,
+  }) async {
+    final request = NetworkRequest(
+      '$getSingleCaseUrl/$caseId',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return Case.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error Retrieving data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
   Future<ReferralDetailsModel> getReferralDetails({
     required int? id,
   }) async {
@@ -233,7 +211,7 @@ class CaseRepo {
       return ReferralDetailsModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error Retrieving data',
         type: Unauthorized(),
       );
     }
@@ -253,27 +231,28 @@ class CaseRepo {
       return TBScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error Retrieving data',
         type: Unauthorized(),
       );
     }
   }
 
-  Future<ApiResponse<dynamic>> saveCase(
-      int caseId, Map<String, dynamic> caseDetails) async {
-    final request = NetworkRequest('$casesUrl$caseId/', RequestMethod.patch,
-        isAuthorized: true,
-        data: {
-          ...caseDetails,
-          'healthworker_id': AuthCubit.instance.state.user!.id,
-        });
-    final result = await NetworkManager.instance.perform(request);
-    return result;
-  }
+  // Future<ApiResponse<dynamic>> saveCase(
+  //     int caseId, Map<String, dynamic> caseDetails) async {
+  //   final request = NetworkRequest('$casesUrl$caseId/', RequestMethod.patch,
+  //       isAuthorized: true,
+  //       data: {
+  //         ...caseDetails,
+  //         'healthworker_id': AuthCubit.instance.state.user!.id,
+  //       });
+  //   final result = await NetworkManager.instance.perform(request);
+  //   return result;
+  // }
 
   Future<List<Case>> getCasesForHealthWorker() async {
+    print(AuthCubit.instance.state.user!.mobileNumber);
     final request = NetworkRequest(
-      casesForHealthWorkerUrl,
+      '$casesForHealthWorkerUrl${AuthCubit.instance.state.user!.mobileNumber}',
       RequestMethod.get,
       isAuthorized: true,
       data: {
@@ -295,85 +274,85 @@ class CaseRepo {
     }
   }
 
-  Future<ContactTracingModel> getContactCasingFormData(
-      {required int contactCasingFormId}) async {
-    final request = NetworkRequest(
-      '$contractCasingsUrl$contactCasingFormId/',
-      RequestMethod.get,
-      isAuthorized: true,
-      data: {
-        'healthworker_id': AuthCubit.instance.state.user!.id,
-      },
-    );
-    final result = await NetworkManager.instance.perform(request);
-    final ContactTracingModel contactTracing =
-        ContactTracingModel.fromJson(result.data);
-    return contactTracing;
-  }
+  // Future<ContactTracingModel> getContactCasingFormData(
+  //     {required int contactCasingFormId}) async {
+  //   final request = NetworkRequest(
+  //     '$contractCasingsUrl$contactCasingFormId/',
+  //     RequestMethod.get,
+  //     isAuthorized: true,
+  //     data: {
+  //       'healthworker_id': AuthCubit.instance.state.user!.id,
+  //     },
+  //   );
+  //   final result = await NetworkManager.instance.perform(request);
+  //   final ContactTracingModel contactTracing =
+  //       ContactTracingModel.fromJson(result.data);
+  //   return contactTracing;
+  // }
 
-  Future<PatientModel> getPatientDetailsFormData(
-      {required int patientId}) async {
-    final request = NetworkRequest(
-      nikshayIdentitiesUrl,
-      RequestMethod.get,
-      isAuthorized: true,
-      data: {
-        'id': patientId,
-      },
-    );
-    final result = await NetworkManager.instance.perform(request);
-    final PatientModel patientModel = PatientModel.fromJson(result.data);
-    return patientModel;
-  }
+  // // Future<PatientModel> getPatientDetailsFormData(
+  // //     {required int patientId}) async {
+  // //   final request = NetworkRequest(
+  // //     nikshayIdentitiesUrl,
+  // //     RequestMethod.get,
+  // //     isAuthorized: true,
+  // //     data: {
+  // //       'id': patientId,
+  // //     },
+  // //   );
+  // //   final result = await NetworkManager.instance.perform(request);
+  // //   final PatientModel patientModel = PatientModel.fromJson(result.data);
+  // //   return patientModel;
+  // // }
 
-  Future<ApiResponse> assignSubordinate(int caseId,
-      {required SubordinatesModel subordinatesModel}) async {
-    final response = await NetworkManager.instance.perform(
-      NetworkRequest(
-        '$casesUrl$caseId/',
-        RequestMethod.put,
-        data: {
-          'assigned_to': subordinatesModel.id,
-          'healthworker_id': AuthCubit.instance.state.user!.id,
-        },
-        isAuthorized: true,
-      ),
-    );
-    return response;
-  }
+  // Future<ApiResponse> assignSubordinate(int caseId,
+  //     {required SubordinatesModel subordinatesModel}) async {
+  //   final response = await NetworkManager.instance.perform(
+  //     NetworkRequest(
+  //       '$casesUrl$caseId/',
+  //       RequestMethod.put,
+  //       data: {
+  //         'assigned_to': subordinatesModel.id,
+  //         'healthworker_id': AuthCubit.instance.state.user!.id,
+  //       },
+  //       isAuthorized: true,
+  //     ),
+  //   );
+  //   return response;
+  // }
 
-  Future<ApiResponse> closeCase(
-          {required int caseId, required String outcome}) async =>
-      await NetworkManager.instance.perform(
-        NetworkRequest(
-          '$casesUrl$caseId/',
-          RequestMethod.patch,
-          data: {
-            'outcome': outcome,
-            'healthworker_id': AuthCubit.instance.state.user!.id,
-          },
-          isAuthorized: true,
-        ),
-      );
+  // Future<ApiResponse> closeCase(
+  //         {required int caseId, required String outcome}) async =>
+  //     await NetworkManager.instance.perform(
+  //       NetworkRequest(
+  //         '$casesUrl$caseId/',
+  //         RequestMethod.patch,
+  //         data: {
+  //           'outcome': outcome,
+  //           'healthworker_id': AuthCubit.instance.state.user!.id,
+  //         },
+  //         isAuthorized: true,
+  //       ),
+  //     );
 
-  Future<Case> updateCase(int caseId, Map<String, dynamic> caseDetails) async {
-    final request = NetworkRequest(
-      '$casesUrl$caseId/',
-      RequestMethod.patch,
-      isAuthorized: true,
-      data: {
-        ...caseDetails,
-        'healthworker_id': AuthCubit.instance.state.user!.id,
-      },
-    );
-    final caseUpdateResult = await NetworkManager.instance.perform(request);
-    if (caseUpdateResult.status == Status.ok) {
-      return Case.fromJson(caseUpdateResult.data);
-    } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting data',
-        type: Unauthorized(),
-      );
-    }
-  }
+  // Future<Case> updateCase(int caseId, Map<String, dynamic> caseDetails) async {
+  //   final request = NetworkRequest(
+  //     '$casesUrl$caseId/',
+  //     RequestMethod.patch,
+  //     isAuthorized: true,
+  //     data: {
+  //       ...caseDetails,
+  //       'healthworker_id': AuthCubit.instance.state.user!.id,
+  //     },
+  //   );
+  //   final caseUpdateResult = await NetworkManager.instance.perform(request);
+  //   if (caseUpdateResult.status == Status.ok) {
+  //     return Case.fromJson(caseUpdateResult.data);
+  //   } else {
+  //     throw ApplicationError(
+  //       errorMsg: 'Error submitting data',
+  //       type: Unauthorized(),
+  //     );
+  //   }
+  // }
 }

@@ -12,31 +12,6 @@ const diagnosisUrl = '$baseUrl/api/diagnosis';
 const treatmentUrl = '$baseUrl/api/treatment';
 const contactTracingUrl = '$baseUrl/api/contact-tracing';
 const outcomeUrl = '$baseUrl/api/outcome';
-const casesForHealthWorkerUrl = '$baseUrl/api/case';
+const casesForHealthWorkerUrl = '$baseUrl/api/case?logged_in_user=';
 
-const loginUrl = '$baseUrl/healthworker/login/';
-const healthWorkerApiUrl = '$baseUrl/healthworker/';
-const patientsUrl = '$baseUrl/patient/patients/';
-const healthWorkerUrl = '$baseUrl/healthworker/';
-
-const tuberculosisUrl = '$baseUrl/tuberculosis';
-const sourcesUrl = '$tuberculosisUrl/sources/';
-const diseaseUrl = '$tuberculosisUrl/disease/';
-const visitUrl = '$tuberculosisUrl/visits/';
-const xraysUrl = '$tuberculosisUrl/xrays/';
-const udstsUrl = '$tuberculosisUrl/udsts/';
-const bankDetailsUrl = '$tuberculosisUrl/patient_bank_details/';
-const nikshayIdentitiesUrl = '$tuberculosisUrl/nikshay_identities/';
-const comorbiditiesUrl = '$tuberculosisUrl/comorbidities/';
-const diagnosisBasisTypeUrl = '$tuberculosisUrl/diagnosis_basis_type/';
-const contractCasingsUrl = '$tuberculosisUrl/contract_casings/';
-const casesUrl = '$tuberculosisUrl/cases/';
-const episodeIdUrl = '${casesUrl}episode-id/';
-
-const sourcesForHealthWorkerUrl = '${sourcesUrl}get_sources_assigned/';
-
-const subordinatesUrl = '${healthWorkerApiUrl}get_subordinates/';
-const facilitiesUrl = '${healthWorkerUrl}facilities/';
-
-const drugsUrl = '$tuberculosisUrl/drugs/';
-const vouchersUrl = '$tuberculosisUrl/vouchers/';
+const getSingleCaseUrl = '$baseUrl/api/case/get-delete';

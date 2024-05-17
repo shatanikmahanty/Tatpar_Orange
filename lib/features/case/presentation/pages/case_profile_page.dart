@@ -29,58 +29,17 @@ class CaseProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
+                    padding: EdgeInsets.only(top: kPadding),
                     alignment: Alignment.centerRight,
-                    child: DropdownButton<String>(
-                      selectedItemBuilder: (context) => ['1', '2']
-                          .map<DropdownMenuItem<String>>(
-                            (String value) => DropdownMenuItem<String>(
-                              value: value,
-                              child: Text(
-                                'case-$value',
-                                style: Theme.of(context)
-                                    .textTheme
-                                    .headlineSmall
-                                    ?.copyWith(
-                                      color:
-                                          Theme.of(context).colorScheme.primary,
-                                      fontFamily: FontFamily.poppins,
-                                      fontSize: 12,
-                                    ),
-                              ),
-                            ),
-                          )
-                          .toList(),
-                      value: '1',
-                      hint: Text(
-                        'hint',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headlineSmall
-                            ?.copyWith(
-                                fontSize: 12,
-                                color: Theme.of(context).colorScheme.primary,
-                                fontFamily: FontFamily.poppins),
-                      ),
-                      items: ['1', '2']
-                          .map<DropdownMenuItem<String>>(
-                              (String value) => DropdownMenuItem<String>(
-                                    value: value,
-                                    child: Text(
-                                      'case-$value',
-                                      style: Theme.of(context)
-                                          .textTheme
-                                          .headlineSmall
-                                          ?.copyWith(
-                                            color: Theme.of(context)
-                                                .colorScheme
-                                                .primary,
-                                            fontFamily: FontFamily.poppins,
-                                            fontSize: 12,
-                                          ),
-                                    ),
-                                  ))
-                          .toList(),
-                      onChanged: (Object? value) {},
+                    child: Text(
+                      'Referral ID:\t${caseCubit.state.caseWorkedUpon.referralDetails}',
+                      style: Theme.of(context)
+                          .textTheme
+                          .headlineSmall
+                          ?.copyWith(
+                              fontSize: 12,
+                              color: Theme.of(context).colorScheme.primary,
+                              fontFamily: FontFamily.poppins),
                     ),
                   ),
                   BlocBuilder<CaseCubit, CaseState>(
@@ -95,10 +54,11 @@ class CaseProfilePage extends StatelessWidget {
                                 caseWorkedUpon.referralMobileNumber ?? '',
                             panchayat:
                                 (caseWorkedUpon.panchayat ?? '').toString(),
-                            district: '',
-                            //   (caseWorkedUpon.panchayat ?? '').toString(),
+                            district:
+                                (caseWorkedUpon.district ?? '').toString(),
                             screeningStatus:
-                                (caseWorkedUpon.status ?? '').toString(),
+                                (caseWorkedUpon.tbScreeningOutcome ?? '')
+                                    .toString(),
                           ),
                           Positioned(
                             child: Row(

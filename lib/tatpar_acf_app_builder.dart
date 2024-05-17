@@ -10,11 +10,12 @@ import 'package:tatpar_acf/features/app/presentation/builders/app_responsive_lay
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/repo/auth_repo.dart';
 import 'package:tatpar_acf/features/authentication/presentation/listeners/login_listener_wrapper.dart';
-import 'package:tatpar_acf/features/case/blocs/assign_case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
+import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 
 import 'configurations/configurations.dart';
@@ -35,9 +36,9 @@ class TatparAcfAppBuilder extends AppBuilder {
             RepositoryProvider<CaseRepo>(
               create: (context) => CaseRepo(),
             ),
-            // RepositoryProvider<SourceRepo>(
-            //   create: (context) => SourceRepo(),
-            // ),
+            RepositoryProvider<SourceRepo>(
+              create: (context) => SourceRepo(),
+            ),
             RepositoryProvider<AuthRepo>(
               create: (context) => AuthRepo(FirebaseAuth.instance),
             ),
@@ -67,13 +68,13 @@ class TatparAcfAppBuilder extends AppBuilder {
               ),
               lazy: false,
             ),
-            // BlocProvider<SourceCubit>(
-            //   create: (context) => SourceCubit(
-            //     context.read<SourceRepo>(),
-            //   ),
-            // ),
-            BlocProvider<SubordinatesCaseCubit>(
-                create: (context) => SubordinatesCaseCubit()),
+            BlocProvider<SourceCubit>(
+              create: (context) => SourceCubit(
+                context.read<SourceRepo>(),
+              ),
+            ),
+            // BlocProvider<SubordinatesCaseCubit>(
+            //     create: (context) => SubordinatesCaseCubit()),
             // BlocProvider(
             //   create: (_) => SplashBloc(),
             // ),
@@ -92,15 +93,17 @@ class TatparAcfAppBuilder extends AppBuilder {
             initialUser: context.read<AuthCubit>().state.user,
             onLogin: (context, user) {
               ///For performing tasks after login
-              context.read<CaseCubit>().loadDistricts();
+              context.read<SourceCubit>().loadDistricts();
+              context.read<SourceCubit>().loadDiagnosisData();
+
               context.read<CaseListCubit>().getCasesForHealthWorker();
 
               // context.read<SourceCubit>().getFacilities();
               // context.read<SourceCubit>().getDrugs();
               // context.read<SourceCubit>().getVouchers();
-              if (user.isSupervisor) {
-                context.read<SubordinatesCaseCubit>().getSubordinates();
-              }
+              // if (user.isSupervisor) {
+              //   context.read<SubordinatesCaseCubit>().getSubordinates();
+              // }
             },
             onLogout: (context) {},
             child: AppCubitConsumer(

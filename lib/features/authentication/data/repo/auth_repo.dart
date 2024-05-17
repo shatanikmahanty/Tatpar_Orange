@@ -59,7 +59,7 @@ class AuthRepo {
     void Function(String) register,
   ) async {
     if (userCredential.user != null) {
-      //  String? token = await _auth.currentUser!.getIdToken();
+      String? token = await _auth.currentUser!.getIdToken();
       // if (userCredential.additionalUserInfo!.isNewUser) {
       //   register(userCredential.user!.uid);
       // } else {
@@ -95,8 +95,8 @@ class AuthRepo {
     // return null;
     AppUser user = AppUser(
       id: 1,
-      firstName: 'John',
-      lastName: 'Doe',
+      firstName: '',
+      lastName: '',
       mobileNumber:
           (_auth.currentUser?.phoneNumber ?? '').replaceAll('+91', ''),
       gender: 'Male',

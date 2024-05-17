@@ -6,6 +6,7 @@ import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_field.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
@@ -19,10 +20,11 @@ class TBScreeningPage extends StatelessWidget {
   const TBScreeningPage({super.key});
 
   FormGroup _tbScreeningDetailsFormBuilder(
-      {required TBScreeningModel? tbScreeningModel, required CaseCubit cubit}) {
+      {required TBScreeningModel? tbScreeningModel,
+      required SourceCubit cubit}) {
     final trimester = tbScreeningModel?.selectedTrimester;
 
-    final trimesterData = cubit.state.dataModel!.trimester?.firstWhere(
+    final trimesterData = cubit.state.dataModel?.trimester?.firstWhere(
       (element) => element.id == trimester,
       orElse: () => const Trimester(name: null),
     );
@@ -75,8 +77,9 @@ class TBScreeningPage extends StatelessWidget {
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     final cubit = context.read<CaseCubit>();
     if (formGroup.valid) {
-      final selectedId =
-          int.tryParse(formGroup.control('trimester').value.split(':')[0]);
+      final selectedId = (formGroup.control('trimester').value) != null
+          ? int.tryParse(formGroup.control('trimester').value.split(':')[0])
+          : null;
 
       context.read<CaseCubit>().selectTBTrimester = selectedId;
 
@@ -120,7 +123,7 @@ class TBScreeningPage extends StatelessWidget {
           body: ReactiveFormBuilder(form: () {
             return _tbScreeningDetailsFormBuilder(
                 tbScreeningModel: state.tbScreeningModel,
-                cubit: context.read<CaseCubit>());
+                cubit: context.read<SourceCubit>());
           }, builder:
               (BuildContext context, FormGroup formGroup, Widget? child) {
             formGroup.valueChanges.listen((_) {
@@ -242,7 +245,7 @@ class TBScreeningPage extends StatelessWidget {
                               selected: formGroup.control('tb_medicine').value,
                             ),
                             const SizedBox(height: kPadding * 2),
-                            BlocBuilder<CaseCubit, CaseState>(
+                            BlocBuilder<SourceCubit, SourceState>(
                                 buildWhen: ((previous, current) =>
                                     (previous.isLoading != current.isLoading) ||
                                     previous.dataModel != current.dataModel),
@@ -272,13 +275,13 @@ class TBScreeningPage extends StatelessWidget {
                                             .control('trimester')
                                             .value,
                                         onChanged: (value) {
-                                          final selectedId =
-                                              int.tryParse(value.split(':')[0]);
+                                          // final selectedId =
+                                          //     int.tryParse(value.split(':')[0]);
                                           formGroup.control('trimester').value =
-                                              value.split(':')[1];
-                                          context
-                                              .read<CaseCubit>()
-                                              .selectTBTrimester = selectedId;
+                                              value;
+                                          // context
+                                          //     .read<CaseCubit>()
+                                          //     .selectTBTrimester = selectedId;
                                         },
                                       ),
                                       const SizedBox(height: kPadding * 2),

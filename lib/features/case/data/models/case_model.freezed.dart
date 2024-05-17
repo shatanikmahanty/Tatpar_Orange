@@ -28,6 +28,8 @@ mixin _$Case {
   String? get gender => throw _privateConstructorUsedError;
   @JsonKey(name: 'age')
   int? get age => throw _privateConstructorUsedError;
+  @JsonKey(name: 'district')
+  String? get district => throw _privateConstructorUsedError;
   @JsonKey(name: 'panchayat')
   String? get panchayat => throw _privateConstructorUsedError;
   @JsonKey(name: 'screened_by')
@@ -95,6 +97,7 @@ abstract class $CaseCopyWith<$Res> {
       @JsonKey(name: 'referral_name') String? referralName,
       @JsonKey(name: 'gender') String? gender,
       @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'district') String? district,
       @JsonKey(name: 'panchayat') String? panchayat,
       @JsonKey(name: 'screened_by') String? screenedBy,
       @JsonKey(name: 'referred_by') String? referredBy,
@@ -138,6 +141,7 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
     Object? referralName = freezed,
     Object? gender = freezed,
     Object? age = freezed,
+    Object? district = freezed,
     Object? panchayat = freezed,
     Object? screenedBy = freezed,
     Object? referredBy = freezed,
@@ -172,6 +176,10 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int?,
+      district: freezed == district
+          ? _value.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as String?,
       panchayat: freezed == panchayat
           ? _value.panchayat
           : panchayat // ignore: cast_nullable_to_non_nullable
@@ -252,6 +260,7 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
       @JsonKey(name: 'referral_name') String? referralName,
       @JsonKey(name: 'gender') String? gender,
       @JsonKey(name: 'age') int? age,
+      @JsonKey(name: 'district') String? district,
       @JsonKey(name: 'panchayat') String? panchayat,
       @JsonKey(name: 'screened_by') String? screenedBy,
       @JsonKey(name: 'referred_by') String? referredBy,
@@ -292,6 +301,7 @@ class __$$CaseImplCopyWithImpl<$Res>
     Object? referralName = freezed,
     Object? gender = freezed,
     Object? age = freezed,
+    Object? district = freezed,
     Object? panchayat = freezed,
     Object? screenedBy = freezed,
     Object? referredBy = freezed,
@@ -326,6 +336,10 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.age
           : age // ignore: cast_nullable_to_non_nullable
               as int?,
+      district: freezed == district
+          ? _value.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as String?,
       panchayat: freezed == panchayat
           ? _value.panchayat
           : panchayat // ignore: cast_nullable_to_non_nullable
@@ -402,6 +416,7 @@ class _$CaseImpl implements _Case {
       @JsonKey(name: 'referral_name') this.referralName,
       @JsonKey(name: 'gender') this.gender,
       @JsonKey(name: 'age') this.age,
+      @JsonKey(name: 'district') this.district,
       @JsonKey(name: 'panchayat') this.panchayat,
       @JsonKey(name: 'screened_by') this.screenedBy,
       @JsonKey(name: 'referred_by') this.referredBy,
@@ -442,6 +457,9 @@ class _$CaseImpl implements _Case {
   @override
   @JsonKey(name: 'age')
   final int? age;
+  @override
+  @JsonKey(name: 'district')
+  final String? district;
   @override
   @JsonKey(name: 'panchayat')
   final String? panchayat;
@@ -512,7 +530,7 @@ class _$CaseImpl implements _Case {
 
   @override
   String toString() {
-    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, outcomeValue: $outcomeValue, contactTracing: $contactTracing, treatment: $treatment)';
+    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, district: $district, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, outcomeValue: $outcomeValue, contactTracing: $contactTracing, treatment: $treatment)';
   }
 
   @override
@@ -525,6 +543,8 @@ class _$CaseImpl implements _Case {
                 other.referralName == referralName) &&
             (identical(other.gender, gender) || other.gender == gender) &&
             (identical(other.age, age) || other.age == age) &&
+            (identical(other.district, district) ||
+                other.district == district) &&
             (identical(other.panchayat, panchayat) ||
                 other.panchayat == panchayat) &&
             (identical(other.screenedBy, screenedBy) ||
@@ -565,6 +585,7 @@ class _$CaseImpl implements _Case {
         referralName,
         gender,
         age,
+        district,
         panchayat,
         screenedBy,
         referredBy,
@@ -603,6 +624,7 @@ abstract class _Case implements Case {
       @JsonKey(name: 'referral_name') final String? referralName,
       @JsonKey(name: 'gender') final String? gender,
       @JsonKey(name: 'age') final int? age,
+      @JsonKey(name: 'district') final String? district,
       @JsonKey(name: 'panchayat') final String? panchayat,
       @JsonKey(name: 'screened_by') final String? screenedBy,
       @JsonKey(name: 'referred_by') final String? referredBy,
@@ -643,6 +665,9 @@ abstract class _Case implements Case {
   @override
   @JsonKey(name: 'age')
   int? get age;
+  @override
+  @JsonKey(name: 'district')
+  String? get district;
   @override
   @JsonKey(name: 'panchayat')
   String? get panchayat;

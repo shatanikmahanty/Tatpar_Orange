@@ -23,6 +23,7 @@ class Case with _$Case {
     @JsonKey(name: 'referral_name') String? referralName,
     @JsonKey(name: 'gender') String? gender,
     @JsonKey(name: 'age') int? age,
+    @JsonKey(name: 'district') String? district,
     @JsonKey(name: 'panchayat') String? panchayat,
     @JsonKey(name: 'screened_by') String? screenedBy,
     @JsonKey(name: 'referred_by') String? referredBy,

@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
-import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
@@ -54,26 +53,10 @@ class CaseCubit extends Cubit<CaseState> {
     if (caseModel.tbScreening != null) {
       getTBScreeningData(caseModel.tbScreening);
     }
-    //   if (caseModel.nikshay != null) {
-    //     getNikshayFormData(caseModel.nikshay);
-    //   }
-    //   //This is for HIV & DM
-    //   if (caseModel.comorbidity != null) {
-    //     getComorbidityFormData(caseModel.comorbidity);
-    //   }
-    //   // if (caseModel.disease != null) {
-    //   //   getDiseaseFormData(caseModel.disease);
-    //   // }
-    //   if (caseModel.dbt != null) {
-    //     getDBTFormData(caseModel.dbt);
-    //   }
-    //   if (caseModel.contractCasing != null) {
-    //     getContactCasingData(caseModel.contractCasing);
-    //   }
-    //   // if (caseModel.treatmentStatus) {
-    //   //   getTreatmentFormData(caseModel.treatment);
-    //   // }
   }
+  Case? selectedCase;
+
+  set selectCase(Case? selectedCase) => selectedCase = selectedCase;
 
   ///ReferralDetailsPage
   int? _selectedDistrictId;
@@ -154,20 +137,6 @@ class CaseCubit extends Cubit<CaseState> {
 
   int? get selectedTreatmentOutcome => _selectedTreatmentOutcome;
 
-  Future<void> loadDistricts() async {
-    emit(state.copyWith(isLoading: true));
-    try {
-      final model = await caseRepo.buildDataFields();
-      emit(state.copyWith(isLoading: false, dataModel: model));
-    } on Exception {
-      emit(
-        state.copyWith(
-          isLoading: true,
-        ),
-      );
-    }
-  }
-
   String? updateScreeningOutcome(FormGroup formGroup) {
     final cough = formGroup.control('cough').value;
     final sputum = formGroup.control('sputum').value;
@@ -189,7 +158,7 @@ class CaseCubit extends Cubit<CaseState> {
       emit(state.copyWith(screeningOutcome: 'No Symptom'));
       return 'No Symptom';
     } else if (swollenGland == 'Yes') {
-      emit(state.copyWith(screeningOutcome: 'EPTB'));
+      emit(state.copyWith(screeningOutcome: 'Presumptive EPTB'));
       return 'EPTB';
     } else if ((cough == 'Yes' ||
             sputum == 'Yes' ||
@@ -199,7 +168,7 @@ class CaseCubit extends Cubit<CaseState> {
             weightLoss == 'Yes' ||
             swollenGland == 'Yes') &&
         tbMedicine == 'Yes') {
-      emit(state.copyWith(screeningOutcome: 'DRTB'));
+      emit(state.copyWith(screeningOutcome: 'Presumptive DRTB'));
       return 'DRTB';
     } else if ((cough == 'Yes' ||
             sputum == 'Yes' ||
@@ -209,7 +178,7 @@ class CaseCubit extends Cubit<CaseState> {
             weightLoss == 'Yes') &&
         swollenGland == 'No' &&
         tbMedicine == 'No') {
-      emit(state.copyWith(screeningOutcome: 'DSTB'));
+      emit(state.copyWith(screeningOutcome: 'Presumptive DSTB'));
       return 'DSTB';
     } else {
       emit(state.copyWith(screeningOutcome: 'No Symptom'));
@@ -241,18 +210,9 @@ class CaseCubit extends Cubit<CaseState> {
     };
   }
 
-  Future<void> loadDiagnosisData() async {
-    emit(state.copyWith(isLoading: true));
-    try {
-      final model = await caseRepo.getDiagnosisData();
-      emit(state.copyWith(isLoading: false, diagnosisData: model));
-    } on Exception {
-      emit(
-        state.copyWith(
-          isLoading: true,
-        ),
-      );
-    }
+  Future<Case> getCaseModel(int? caseId) async {
+    final response = await caseRepo.getCaseModel(caseId: caseId);
+    return response;
   }
 
   Future<void> getReferralDetailsData(int? formId) async {
@@ -326,8 +286,10 @@ class CaseCubit extends Cubit<CaseState> {
         referralDetailsModel: response,
       ),
     );
+    selectCase = await getCaseModel(response.caseId);
+
     getReferralDetailsData(state.caseWorkedUpon.referralDetails);
-    return response.id;
+    return response.caseId;
   }
 
   Future<void> updateTbScreeningData(TBScreeningModel tbScreeningModel) async {
@@ -341,7 +303,7 @@ class CaseCubit extends Cubit<CaseState> {
         tbScreeningModel: response,
       ),
     );
-    getTBScreeningData(state.caseWorkedUpon.tbScreening);
+    // getTBScreeningData(state.caseWorkedUpon.tbScreening);
   }
 
   Future<void> updateWHOSRQData(
@@ -460,22 +422,22 @@ class CaseCubit extends Cubit<CaseState> {
     return workflows;
   }
 
-  Future<void> closeCase(String value) async {
-    final response = await caseRepo.closeCase(
-      caseId: state.caseWorkedUpon.id!,
-      outcome: value,
-    );
+  // Future<void> closeCase(String value) async {
+  //   final response = await caseRepo.closeCase(
+  //     caseId: state.caseWorkedUpon.id!,
+  //     outcome: value,
+  //   );
 
-    if (response.status == Status.ok) {
-      // emit(
-      //   state.copyWith(
-      //     caseWorkedUpon: state.caseWorkedUpon.copyWith(
-      //       outcome: value,
-      //     ),
-      //   ),
-      // );
-    }
-  }
+  //   if (response.status == Status.ok) {
+  //     // emit(
+  //     //   state.copyWith(
+  //     //     caseWorkedUpon: state.caseWorkedUpon.copyWith(
+  //     //       outcome: value,
+  //     //     ),
+  //     //   ),
+  //     // );
+  //   }
+  // }
 
   // Future<void> updateComorbidity(ComorbidityModel model) async {
   //   final newComorbidity = await caseRepo.saveComorbidity(
