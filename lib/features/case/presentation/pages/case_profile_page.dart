@@ -29,7 +29,7 @@ class CaseProfilePage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(top: kPadding),
+                    padding: const EdgeInsets.only(top: kPadding),
                     alignment: Alignment.centerRight,
                     child: Text(
                       'Referral ID:\t${caseCubit.state.caseWorkedUpon.referralDetails}',

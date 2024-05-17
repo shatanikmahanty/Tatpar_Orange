@@ -208,8 +208,8 @@ class ReferralDetailsPage extends StatelessWidget {
               orElse: () => const Block(id: null))
           .id;
       for (var block in sourceCubit.state.dataModel!.blocks!) {
-        print(
-            'PANCHAYAT============ ${formGroup.control('panchayat_code').value}');
+
+
         var panchayat = block.panchayat!.firstWhere(
             (p) => p.panchayat == formGroup.control('panchayat_code').value,
             orElse: () => const Panchayat(id: null));
@@ -218,8 +218,7 @@ class ReferralDetailsPage extends StatelessWidget {
           break;
         }
       }
-      print(
-          'PANCHAYAT CODE============ ${context.read<CaseCubit>().selectedPanchayatCodeId}');
+
       final List<String>? value = formGroup.control('key_population').value;
 
       context.read<CaseCubit>().selectKeyPopulation = (value) != null
