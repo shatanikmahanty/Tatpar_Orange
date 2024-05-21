@@ -8,13 +8,13 @@ part of 'diagnosis_data.dart';
 
 _$DiagnosisDataImpl _$$DiagnosisDataImplFromJson(Map<String, dynamic> json) =>
     _$DiagnosisDataImpl(
-      casteCategory: (json['afb_result'] as List<dynamic>?)
+      afbResult: (json['afb_result'] as List<dynamic>?)
           ?.map((e) => AFBResult.fromJson(e as Map<String, dynamic>))
           .toList(),
-      keyPopulation: (json['naat_machine'] as List<dynamic>?)
+      naatMachine: (json['naat_machine'] as List<dynamic>?)
           ?.map((e) => NaatMachine.fromJson(e as Map<String, dynamic>))
           .toList(),
-      referrerSource: (json['mtb_result'] as List<dynamic>?)
+      mtbResult: (json['mtb_result'] as List<dynamic>?)
           ?.map((e) => MTBResult.fromJson(e as Map<String, dynamic>))
           .toList(),
       tptRegimen: (json['tpt_regimen'] as List<dynamic>?)
@@ -27,9 +27,9 @@ _$DiagnosisDataImpl _$$DiagnosisDataImplFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$$DiagnosisDataImplToJson(_$DiagnosisDataImpl instance) =>
     <String, dynamic>{
-      'afb_result': instance.casteCategory,
-      'naat_machine': instance.keyPopulation,
-      'mtb_result': instance.referrerSource,
+      'afb_result': instance.afbResult,
+      'naat_machine': instance.naatMachine,
+      'mtb_result': instance.mtbResult,
       'tpt_regimen': instance.tptRegimen,
       'treatment_outcome': instance.treatmentOutcome,
     };

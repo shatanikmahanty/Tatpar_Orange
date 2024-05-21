@@ -6,6 +6,7 @@ import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.
 import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/diagnosis/model/treatment_outcome.dart';
@@ -110,7 +111,7 @@ class OutcomePage extends StatelessWidget {
                                               Icons.account_circle_outlined,
                                         ),
                                         const SizedBox(height: kPadding * 2),
-                                        BlocBuilder<CaseCubit, CaseState>(
+                                        BlocBuilder<SourceCubit, SourceState>(
                                             buildWhen: ((previous, current) =>
                                                 (previous.isLoading !=
                                                     current.isLoading) ||

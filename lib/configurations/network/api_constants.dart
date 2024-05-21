@@ -1,7 +1,8 @@
 import 'package:flutter/foundation.dart';
 
-const baseUrl =
-    kDebugMode ? 'https://35.154.215.58:8000' : 'https://35.154.215.58:8000/';
+const baseUrl = kDebugMode
+    ? 'https://tatparacf.pallinos.in:8000'
+    : 'https://tatparacf.pallinos.in:8000';
 
 const districtsUrl = '$baseUrl/api/referral-data';
 const referralDetailsUrl = '$baseUrl/api/referral';

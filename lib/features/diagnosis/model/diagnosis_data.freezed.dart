@@ -21,11 +21,11 @@ DiagnosisData _$DiagnosisDataFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$DiagnosisData {
   @JsonKey(name: 'afb_result')
-  List<AFBResult>? get casteCategory => throw _privateConstructorUsedError;
+  List<AFBResult>? get afbResult => throw _privateConstructorUsedError;
   @JsonKey(name: 'naat_machine')
-  List<NaatMachine>? get keyPopulation => throw _privateConstructorUsedError;
+  List<NaatMachine>? get naatMachine => throw _privateConstructorUsedError;
   @JsonKey(name: 'mtb_result')
-  List<MTBResult>? get referrerSource => throw _privateConstructorUsedError;
+  List<MTBResult>? get mtbResult => throw _privateConstructorUsedError;
   @JsonKey(name: 'tpt_regimen')
   List<TPTRegimen>? get tptRegimen => throw _privateConstructorUsedError;
   @JsonKey(name: 'treatment_outcome')
@@ -45,9 +45,9 @@ abstract class $DiagnosisDataCopyWith<$Res> {
       _$DiagnosisDataCopyWithImpl<$Res, DiagnosisData>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'afb_result') List<AFBResult>? casteCategory,
-      @JsonKey(name: 'naat_machine') List<NaatMachine>? keyPopulation,
-      @JsonKey(name: 'mtb_result') List<MTBResult>? referrerSource,
+      {@JsonKey(name: 'afb_result') List<AFBResult>? afbResult,
+      @JsonKey(name: 'naat_machine') List<NaatMachine>? naatMachine,
+      @JsonKey(name: 'mtb_result') List<MTBResult>? mtbResult,
       @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
       @JsonKey(name: 'treatment_outcome')
       List<TreatmentOutcome>? treatmentOutcome});
@@ -66,24 +66,24 @@ class _$DiagnosisDataCopyWithImpl<$Res, $Val extends DiagnosisData>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? casteCategory = freezed,
-    Object? keyPopulation = freezed,
-    Object? referrerSource = freezed,
+    Object? afbResult = freezed,
+    Object? naatMachine = freezed,
+    Object? mtbResult = freezed,
     Object? tptRegimen = freezed,
     Object? treatmentOutcome = freezed,
   }) {
     return _then(_value.copyWith(
-      casteCategory: freezed == casteCategory
-          ? _value.casteCategory
-          : casteCategory // ignore: cast_nullable_to_non_nullable
+      afbResult: freezed == afbResult
+          ? _value.afbResult
+          : afbResult // ignore: cast_nullable_to_non_nullable
               as List<AFBResult>?,
-      keyPopulation: freezed == keyPopulation
-          ? _value.keyPopulation
-          : keyPopulation // ignore: cast_nullable_to_non_nullable
+      naatMachine: freezed == naatMachine
+          ? _value.naatMachine
+          : naatMachine // ignore: cast_nullable_to_non_nullable
               as List<NaatMachine>?,
-      referrerSource: freezed == referrerSource
-          ? _value.referrerSource
-          : referrerSource // ignore: cast_nullable_to_non_nullable
+      mtbResult: freezed == mtbResult
+          ? _value.mtbResult
+          : mtbResult // ignore: cast_nullable_to_non_nullable
               as List<MTBResult>?,
       tptRegimen: freezed == tptRegimen
           ? _value.tptRegimen
@@ -106,9 +106,9 @@ abstract class _$$DiagnosisDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'afb_result') List<AFBResult>? casteCategory,
-      @JsonKey(name: 'naat_machine') List<NaatMachine>? keyPopulation,
-      @JsonKey(name: 'mtb_result') List<MTBResult>? referrerSource,
+      {@JsonKey(name: 'afb_result') List<AFBResult>? afbResult,
+      @JsonKey(name: 'naat_machine') List<NaatMachine>? naatMachine,
+      @JsonKey(name: 'mtb_result') List<MTBResult>? mtbResult,
       @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
       @JsonKey(name: 'treatment_outcome')
       List<TreatmentOutcome>? treatmentOutcome});
@@ -125,24 +125,24 @@ class __$$DiagnosisDataImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? casteCategory = freezed,
-    Object? keyPopulation = freezed,
-    Object? referrerSource = freezed,
+    Object? afbResult = freezed,
+    Object? naatMachine = freezed,
+    Object? mtbResult = freezed,
     Object? tptRegimen = freezed,
     Object? treatmentOutcome = freezed,
   }) {
     return _then(_$DiagnosisDataImpl(
-      casteCategory: freezed == casteCategory
-          ? _value._casteCategory
-          : casteCategory // ignore: cast_nullable_to_non_nullable
+      afbResult: freezed == afbResult
+          ? _value._afbResult
+          : afbResult // ignore: cast_nullable_to_non_nullable
               as List<AFBResult>?,
-      keyPopulation: freezed == keyPopulation
-          ? _value._keyPopulation
-          : keyPopulation // ignore: cast_nullable_to_non_nullable
+      naatMachine: freezed == naatMachine
+          ? _value._naatMachine
+          : naatMachine // ignore: cast_nullable_to_non_nullable
               as List<NaatMachine>?,
-      referrerSource: freezed == referrerSource
-          ? _value._referrerSource
-          : referrerSource // ignore: cast_nullable_to_non_nullable
+      mtbResult: freezed == mtbResult
+          ? _value._mtbResult
+          : mtbResult // ignore: cast_nullable_to_non_nullable
               as List<MTBResult>?,
       tptRegimen: freezed == tptRegimen
           ? _value._tptRegimen
@@ -160,50 +160,50 @@ class __$$DiagnosisDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DiagnosisDataImpl implements _DiagnosisData {
   const _$DiagnosisDataImpl(
-      {@JsonKey(name: 'afb_result') final List<AFBResult>? casteCategory,
-      @JsonKey(name: 'naat_machine') final List<NaatMachine>? keyPopulation,
-      @JsonKey(name: 'mtb_result') final List<MTBResult>? referrerSource,
+      {@JsonKey(name: 'afb_result') final List<AFBResult>? afbResult,
+      @JsonKey(name: 'naat_machine') final List<NaatMachine>? naatMachine,
+      @JsonKey(name: 'mtb_result') final List<MTBResult>? mtbResult,
       @JsonKey(name: 'tpt_regimen') final List<TPTRegimen>? tptRegimen,
       @JsonKey(name: 'treatment_outcome')
       final List<TreatmentOutcome>? treatmentOutcome})
-      : _casteCategory = casteCategory,
-        _keyPopulation = keyPopulation,
-        _referrerSource = referrerSource,
+      : _afbResult = afbResult,
+        _naatMachine = naatMachine,
+        _mtbResult = mtbResult,
         _tptRegimen = tptRegimen,
         _treatmentOutcome = treatmentOutcome;
 
   factory _$DiagnosisDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$DiagnosisDataImplFromJson(json);
 
-  final List<AFBResult>? _casteCategory;
+  final List<AFBResult>? _afbResult;
   @override
   @JsonKey(name: 'afb_result')
-  List<AFBResult>? get casteCategory {
-    final value = _casteCategory;
+  List<AFBResult>? get afbResult {
+    final value = _afbResult;
     if (value == null) return null;
-    if (_casteCategory is EqualUnmodifiableListView) return _casteCategory;
+    if (_afbResult is EqualUnmodifiableListView) return _afbResult;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<NaatMachine>? _keyPopulation;
+  final List<NaatMachine>? _naatMachine;
   @override
   @JsonKey(name: 'naat_machine')
-  List<NaatMachine>? get keyPopulation {
-    final value = _keyPopulation;
+  List<NaatMachine>? get naatMachine {
+    final value = _naatMachine;
     if (value == null) return null;
-    if (_keyPopulation is EqualUnmodifiableListView) return _keyPopulation;
+    if (_naatMachine is EqualUnmodifiableListView) return _naatMachine;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
 
-  final List<MTBResult>? _referrerSource;
+  final List<MTBResult>? _mtbResult;
   @override
   @JsonKey(name: 'mtb_result')
-  List<MTBResult>? get referrerSource {
-    final value = _referrerSource;
+  List<MTBResult>? get mtbResult {
+    final value = _mtbResult;
     if (value == null) return null;
-    if (_referrerSource is EqualUnmodifiableListView) return _referrerSource;
+    if (_mtbResult is EqualUnmodifiableListView) return _mtbResult;
     // ignore: implicit_dynamic_type
     return EqualUnmodifiableListView(value);
   }
@@ -233,7 +233,7 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
   @override
   String toString() {
-    return 'DiagnosisData(casteCategory: $casteCategory, keyPopulation: $keyPopulation, referrerSource: $referrerSource, tptRegimen: $tptRegimen, treatmentOutcome: $treatmentOutcome)';
+    return 'DiagnosisData(afbResult: $afbResult, naatMachine: $naatMachine, mtbResult: $mtbResult, tptRegimen: $tptRegimen, treatmentOutcome: $treatmentOutcome)';
   }
 
   @override
@@ -242,11 +242,11 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
         (other.runtimeType == runtimeType &&
             other is _$DiagnosisDataImpl &&
             const DeepCollectionEquality()
-                .equals(other._casteCategory, _casteCategory) &&
+                .equals(other._afbResult, _afbResult) &&
             const DeepCollectionEquality()
-                .equals(other._keyPopulation, _keyPopulation) &&
+                .equals(other._naatMachine, _naatMachine) &&
             const DeepCollectionEquality()
-                .equals(other._referrerSource, _referrerSource) &&
+                .equals(other._mtbResult, _mtbResult) &&
             const DeepCollectionEquality()
                 .equals(other._tptRegimen, _tptRegimen) &&
             const DeepCollectionEquality()
@@ -257,9 +257,9 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
   @override
   int get hashCode => Object.hash(
       runtimeType,
-      const DeepCollectionEquality().hash(_casteCategory),
-      const DeepCollectionEquality().hash(_keyPopulation),
-      const DeepCollectionEquality().hash(_referrerSource),
+      const DeepCollectionEquality().hash(_afbResult),
+      const DeepCollectionEquality().hash(_naatMachine),
+      const DeepCollectionEquality().hash(_mtbResult),
       const DeepCollectionEquality().hash(_tptRegimen),
       const DeepCollectionEquality().hash(_treatmentOutcome));
 
@@ -279,9 +279,9 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
 abstract class _DiagnosisData implements DiagnosisData {
   const factory _DiagnosisData(
-      {@JsonKey(name: 'afb_result') final List<AFBResult>? casteCategory,
-      @JsonKey(name: 'naat_machine') final List<NaatMachine>? keyPopulation,
-      @JsonKey(name: 'mtb_result') final List<MTBResult>? referrerSource,
+      {@JsonKey(name: 'afb_result') final List<AFBResult>? afbResult,
+      @JsonKey(name: 'naat_machine') final List<NaatMachine>? naatMachine,
+      @JsonKey(name: 'mtb_result') final List<MTBResult>? mtbResult,
       @JsonKey(name: 'tpt_regimen') final List<TPTRegimen>? tptRegimen,
       @JsonKey(name: 'treatment_outcome')
       final List<TreatmentOutcome>? treatmentOutcome}) = _$DiagnosisDataImpl;
@@ -291,13 +291,13 @@ abstract class _DiagnosisData implements DiagnosisData {
 
   @override
   @JsonKey(name: 'afb_result')
-  List<AFBResult>? get casteCategory;
+  List<AFBResult>? get afbResult;
   @override
   @JsonKey(name: 'naat_machine')
-  List<NaatMachine>? get keyPopulation;
+  List<NaatMachine>? get naatMachine;
   @override
   @JsonKey(name: 'mtb_result')
-  List<MTBResult>? get referrerSource;
+  List<MTBResult>? get mtbResult;
   @override
   @JsonKey(name: 'tpt_regimen')
   List<TPTRegimen>? get tptRegimen;

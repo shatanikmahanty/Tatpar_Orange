@@ -8,6 +8,7 @@ import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dar
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_acf/features/diagnosis/model/treatment_outcome.dart';
@@ -17,7 +18,14 @@ import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_
 class ContactTracingPage extends StatelessWidget {
   const ContactTracingPage({super.key});
   FormGroup _contactTracingFormBuilder(
-      {required ContactTracingModel? contactTracingModel}) {
+      {required ContactTracingModel? contactTracingModel,
+      required SourceCubit cubit}) {
+    final tptRegimen = contactTracingModel?.selectedTptRegimen;
+    final tptRegimenData = cubit.state.diagnosisData?.tptRegimen?.firstWhere(
+      (element) => element.id == tptRegimen,
+      orElse: () => const TPTRegimen(name: null),
+    );
+    final String? tptRegimenName = tptRegimenData?.name;
     return fb.group({
       'tb_contact_name': FormControl<String?>(
         value: contactTracingModel?.tbContactName,
@@ -42,8 +50,11 @@ class ContactTracingPage extends StatelessWidget {
       'tpt_eligible': FormControl<String?>(
         value: contactTracingModel?.tptEligible,
       ),
-      'tpt_regimen':
-          FormControl<String?>(value: contactTracingModel?.tptRegimen),
+      'tpt_regimen': FormControl<String?>(
+        value: tptRegimenName != null
+            ? '$tptRegimen:\t$tptRegimenName'
+            : contactTracingModel?.tptRegimen,
+      ),
       'tpt_start_date': FormControl<DateTime>(
         value: contactTracingModel?.tptStartDate,
       ),
@@ -63,6 +74,14 @@ class ContactTracingPage extends StatelessWidget {
     if (formGroup.valid) {
       final formData = formGroup.value;
       final cubit = context.read<CaseCubit>();
+      final sourceCubit = context.read<SourceCubit>();
+      context.read<CaseCubit>().selectTPTRegimen = sourceCubit
+          .state.diagnosisData?.tptRegimen!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('tpt_regimen').value,
+              orElse: () => const TPTRegimen(id: 0))
+          .id;
       final model =
           cubit.state.contactTracingModel ?? const ContactTracingModel();
       final contactTracingModel = model.copyWith(
@@ -91,7 +110,9 @@ class ContactTracingPage extends StatelessWidget {
             appBar: const CaseAppBar('Contact Tracing'),
             body: ReactiveFormBuilder(
                 form: () => _contactTracingFormBuilder(
-                    contactTracingModel: state.contactTracingModel),
+                      contactTracingModel: state.contactTracingModel,
+                      cubit: context.read<SourceCubit>(),
+                    ),
                 builder: (BuildContext context, FormGroup formGroup,
                         Widget? child) =>
                     AutofillGroup(
@@ -249,7 +270,7 @@ class ContactTracingPage extends StatelessWidget {
                                               .value,
                                         ),
                                         const SizedBox(height: kPadding * 2),
-                                        BlocBuilder<CaseCubit, CaseState>(
+                                        BlocBuilder<SourceCubit, SourceState>(
                                             buildWhen: ((previous, current) =>
                                                 (previous.isLoading !=
                                                     current.isLoading) ||
@@ -284,20 +305,6 @@ class ContactTracingPage extends StatelessWidget {
                                                   formGroup
                                                       .control('tpt_regimen')
                                                       .value = value;
-                                                  context
-                                                          .read<CaseCubit>()
-                                                          .selectTPTRegimen =
-                                                      state.diagnosisData!
-                                                          .tptRegimen!
-                                                          .firstWhere(
-                                                              (element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  value,
-                                                              orElse: () =>
-                                                                  const TPTRegimen(
-                                                                      id: 0))
-                                                          .id;
                                                 },
                                                 selected: formGroup
                                                     .control('tpt_regimen')
