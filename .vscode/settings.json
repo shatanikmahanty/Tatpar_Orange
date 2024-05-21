@@ -1,4 +1,5 @@
 {
-    "cmake.configureOnOpen": true,
-    "cmake.sourceDirectory": "C:/Users/gande/OneDrive/Documents/tatpar_acf/linux"
+  "cmake.configureOnOpen": true,
+  "cmake.sourceDirectory": "C:/Users/gande/OneDrive/Documents/tatpar_acf/linux",
+  "java.configuration.updateBuildConfiguration": "interactive"
 }
