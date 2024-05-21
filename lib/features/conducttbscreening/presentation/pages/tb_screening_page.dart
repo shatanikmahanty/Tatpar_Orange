@@ -31,7 +31,7 @@ class TBScreeningPage extends StatelessWidget {
     final String? trimesterName = trimesterData?.name;
     return fb.group({
       'screening_date': FormControl<DateTime>(
-          value: tbScreeningModel?.screeningDate ?? DateTime(2002)),
+          value: tbScreeningModel?.screeningDate ?? DateTime.now()),
       'screened_by': FormControl<String>(
         validators: [Validators.required],
         value: tbScreeningModel?.screenedBy,
@@ -68,6 +68,7 @@ class TBScreeningPage extends StatelessWidget {
       'tb_medicine': FormControl<String?>(
         value: tbScreeningModel?.tbMedicine,
       ),
+      'pregnant': FormControl<String>(),
       'screening_outcome':
           FormControl<String>(value: tbScreeningModel?.screeningOutcome),
       'comments': FormControl<String?>(value: tbScreeningModel?.comments),
@@ -245,6 +246,15 @@ class TBScreeningPage extends StatelessWidget {
                               selected: formGroup.control('tb_medicine').value,
                             ),
                             const SizedBox(height: kPadding * 2),
+                            ChipRadioButtons(
+                              label: '3. Are you Pregnant?',
+                              options: const ['Yes', 'No'],
+                              crossAxisCount: 2,
+                              onChanged: (value) {
+                                formGroup.control('pregnant').value = value;
+                              },
+                              selected: formGroup.control('pregnant').value,
+                            ),
                             BlocBuilder<SourceCubit, SourceState>(
                                 buildWhen: ((previous, current) =>
                                     (previous.isLoading != current.isLoading) ||
@@ -265,27 +275,38 @@ class TBScreeningPage extends StatelessWidget {
                                     );
                                   }
 
-                                  return Column(
-                                    children: [
-                                      ChipRadioButtons(
-                                        crossAxisCount: 2,
-                                        label: 'Trimester Of PW',
-                                        options: list,
-                                        selected: formGroup
-                                            .control('trimester')
-                                            .value,
-                                        onChanged: (value) {
-                                          // final selectedId =
-                                          //     int.tryParse(value.split(':')[0]);
-                                          formGroup.control('trimester').value =
-                                              value;
-                                          // context
-                                          //     .read<CaseCubit>()
-                                          //     .selectTBTrimester = selectedId;
-                                        },
+                                  return ReactiveValueListenableBuilder<String>(
+                                    formControlName: 'pregnant',
+                                    builder: (context, control, child) =>
+                                        Visibility(
+                                      visible: (formGroup
+                                              .control('pregnant')
+                                              .value) ==
+                                          'Yes',
+                                      child: Column(
+                                        children: [
+                                          const SizedBox(height: kPadding * 2),
+                                          ChipRadioButtons(
+                                            crossAxisCount: 2,
+                                            label: 'Trimester Of PW',
+                                            options: list,
+                                            selected: formGroup
+                                                .control('trimester')
+                                                .value,
+                                            onChanged: (value) {
+                                              // final selectedId =
+                                              //     int.tryParse(value.split(':')[0]);
+                                              formGroup
+                                                  .control('trimester')
+                                                  .value = value;
+                                              // context
+                                              //     .read<CaseCubit>()
+                                              //     .selectTBTrimester = selectedId;
+                                            },
+                                          ),
+                                        ],
                                       ),
-                                      const SizedBox(height: kPadding * 2),
-                                    ],
+                                    ),
                                   );
                                 }),
                             const SizedBox(height: kPadding * 2),

@@ -150,7 +150,7 @@ class BasicDetails extends StatelessWidget {
       for (var block in sourceCubit.state.dataModel!.blocks!) {
         var panchayat = block.panchayat!.firstWhere(
             (p) => p.panchayat == formGroup.control('panchayat_code').value,
-            orElse: () => const Panchayat(id: null));
+            orElse: () => const Panchayat(id: 0));
         if (panchayat.id != 0) {
           context.read<CaseCubit>().selectPanchayatCodeId = panchayat.id;
           break;

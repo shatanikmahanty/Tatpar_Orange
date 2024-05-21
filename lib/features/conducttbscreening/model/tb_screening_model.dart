@@ -28,6 +28,7 @@ class TBScreeningModel with _$TBScreeningModel {
     )
     DateTime? screeningDate,
     @JsonKey(name: 'screened_by') String? screenedBy,
+    @JsonKey(includeToJson: false) String? pregnant,
     @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
     @JsonKey(includeIfNull: false) String? trimester,
     @JsonKey(name: 'cough_2_weeks') String? cough,

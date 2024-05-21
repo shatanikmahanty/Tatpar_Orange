@@ -29,6 +29,8 @@ mixin _$TBScreeningModel {
   DateTime? get screeningDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'screened_by')
   String? get screenedBy => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
+  String? get pregnant => throw _privateConstructorUsedError;
   @JsonKey(name: 'trimester_of_pw')
   int? get selectedTrimester => throw _privateConstructorUsedError;
   @JsonKey(includeIfNull: false)
@@ -76,6 +78,7 @@ abstract class $TBScreeningModelCopyWith<$Res> {
           toJson: _dateTimeToJson)
       DateTime? screeningDate,
       @JsonKey(name: 'screened_by') String? screenedBy,
+      @JsonKey(includeToJson: false) String? pregnant,
       @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
       @JsonKey(includeIfNull: false) String? trimester,
       @JsonKey(name: 'cough_2_weeks') String? cough,
@@ -107,6 +110,7 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
     Object? id = freezed,
     Object? screeningDate = freezed,
     Object? screenedBy = freezed,
+    Object? pregnant = freezed,
     Object? selectedTrimester = freezed,
     Object? trimester = freezed,
     Object? cough = freezed,
@@ -133,6 +137,10 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
       screenedBy: freezed == screenedBy
           ? _value.screenedBy
           : screenedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pregnant: freezed == pregnant
+          ? _value.pregnant
+          : pregnant // ignore: cast_nullable_to_non_nullable
               as String?,
       selectedTrimester: freezed == selectedTrimester
           ? _value.selectedTrimester
@@ -206,6 +214,7 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
           toJson: _dateTimeToJson)
       DateTime? screeningDate,
       @JsonKey(name: 'screened_by') String? screenedBy,
+      @JsonKey(includeToJson: false) String? pregnant,
       @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
       @JsonKey(includeIfNull: false) String? trimester,
       @JsonKey(name: 'cough_2_weeks') String? cough,
@@ -235,6 +244,7 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? screeningDate = freezed,
     Object? screenedBy = freezed,
+    Object? pregnant = freezed,
     Object? selectedTrimester = freezed,
     Object? trimester = freezed,
     Object? cough = freezed,
@@ -261,6 +271,10 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
       screenedBy: freezed == screenedBy
           ? _value.screenedBy
           : screenedBy // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pregnant: freezed == pregnant
+          ? _value.pregnant
+          : pregnant // ignore: cast_nullable_to_non_nullable
               as String?,
       selectedTrimester: freezed == selectedTrimester
           ? _value.selectedTrimester
@@ -329,6 +343,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
           toJson: _dateTimeToJson)
       this.screeningDate,
       @JsonKey(name: 'screened_by') this.screenedBy,
+      @JsonKey(includeToJson: false) this.pregnant,
       @JsonKey(name: 'trimester_of_pw') this.selectedTrimester,
       @JsonKey(includeIfNull: false) this.trimester,
       @JsonKey(name: 'cough_2_weeks') this.cough,
@@ -358,6 +373,9 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
   @override
   @JsonKey(name: 'screened_by')
   final String? screenedBy;
+  @override
+  @JsonKey(includeToJson: false)
+  final String? pregnant;
   @override
   @JsonKey(name: 'trimester_of_pw')
   final int? selectedTrimester;
@@ -400,7 +418,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
 
   @override
   String toString() {
-    return 'TBScreeningModel(id: $id, screeningDate: $screeningDate, screenedBy: $screenedBy, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments)';
+    return 'TBScreeningModel(id: $id, screeningDate: $screeningDate, screenedBy: $screenedBy, pregnant: $pregnant, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments)';
   }
 
   @override
@@ -413,6 +431,8 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
                 other.screeningDate == screeningDate) &&
             (identical(other.screenedBy, screenedBy) ||
                 other.screenedBy == screenedBy) &&
+            (identical(other.pregnant, pregnant) ||
+                other.pregnant == pregnant) &&
             (identical(other.selectedTrimester, selectedTrimester) ||
                 other.selectedTrimester == selectedTrimester) &&
             (identical(other.trimester, trimester) ||
@@ -445,6 +465,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
       id,
       screeningDate,
       screenedBy,
+      pregnant,
       selectedTrimester,
       trimester,
       cough,
@@ -483,6 +504,7 @@ abstract class _TBScreeningModel implements TBScreeningModel {
               toJson: _dateTimeToJson)
           final DateTime? screeningDate,
           @JsonKey(name: 'screened_by') final String? screenedBy,
+          @JsonKey(includeToJson: false) final String? pregnant,
           @JsonKey(name: 'trimester_of_pw') final int? selectedTrimester,
           @JsonKey(includeIfNull: false) final String? trimester,
           @JsonKey(name: 'cough_2_weeks') final String? cough,
@@ -513,6 +535,9 @@ abstract class _TBScreeningModel implements TBScreeningModel {
   @override
   @JsonKey(name: 'screened_by')
   String? get screenedBy;
+  @override
+  @JsonKey(includeToJson: false)
+  String? get pregnant;
   @override
   @JsonKey(name: 'trimester_of_pw')
   int? get selectedTrimester;

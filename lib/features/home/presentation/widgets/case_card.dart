@@ -46,10 +46,7 @@ class CaseCard extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
-                  DiseaseChip(
-                      caseModel.tbScreeningOutcome == "No Symptom"
-                          ? 'Scr Neg'
-                          : 'Scr Pos',
+                  DiseaseChip(calculateScreeningStatus(),
                       color: AppColors.blueLight),
                   const Spacer(),
                   Text(
@@ -251,6 +248,16 @@ class CaseCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  String calculateScreeningStatus() {
+    if (caseModel.tbScreeningOutcome == "No Symptom") {
+      return 'Scr Neg';
+    } else if (caseModel.tbScreeningOutcome == "") {
+      return 'Scr Not Screened';
+    } else {
+      return 'Scr Pos';
+    }
   }
 
   String getFormattedDate(DateTime? date) {

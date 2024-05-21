@@ -12,6 +12,7 @@ _$TBScreeningModelImpl _$$TBScreeningModelImplFromJson(
       id: (json['id'] as num?)?.toInt(),
       screeningDate: fromJsonToDateTime(json['screening_date'] as String?),
       screenedBy: json['screened_by'] as String?,
+      pregnant: json['pregnant'] as String?,
       selectedTrimester: (json['trimester_of_pw'] as num?)?.toInt(),
       trimester: json['trimester'] as String?,
       cough: json['cough_2_weeks'] as String?,

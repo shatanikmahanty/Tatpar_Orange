@@ -295,7 +295,8 @@ class CaseCubit extends Cubit<CaseState> {
   Future<void> updateTbScreeningData(TBScreeningModel tbScreeningModel) async {
     final response = await caseRepo.saveTbScreeningData(
         tbScreeningModel: tbScreeningModel,
-        id: state.caseWorkedUpon.tbScreening);
+        id: state.caseWorkedUpon.tbScreening,
+        caseId: state.caseWorkedUpon.id);
 
     emit(
       state.copyWith(
@@ -303,13 +304,14 @@ class CaseCubit extends Cubit<CaseState> {
         tbScreeningModel: response,
       ),
     );
-    // getTBScreeningData(state.caseWorkedUpon.tbScreening);
+    getTBScreeningData(state.caseWorkedUpon.tbScreening);
   }
 
   Future<void> updateWHOSRQData(
       MentalHealthScreeningModel mentalHealthScreeningModel) async {
     final response = await caseRepo.saveWHOSRQData(
-        mentalHealthScreeningModel: mentalHealthScreeningModel);
+        mentalHealthScreeningModel: mentalHealthScreeningModel,
+        id: state.caseWorkedUpon.referralDetails);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon
@@ -320,8 +322,9 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> updateDiagnosisData(DiagnosisModel diagnosisModel) async {
-    final response =
-        await caseRepo.saveDiagnosisData(diagnosisModel: diagnosisModel);
+    final response = await caseRepo.saveDiagnosisData(
+        diagnosisModel: diagnosisModel,
+        id: state.caseWorkedUpon.referralDetails);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon
@@ -332,8 +335,8 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> updateTreatmentData(TreatmentModel treatmentModel) async {
-    final response =
-        await caseRepo.saveTreatmentData(treatmentModel: treatmentModel);
+    final response = await caseRepo.saveTreatmentData(
+        treatmentModel: treatmentModel, id: state.caseWorkedUpon.treatment);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon
@@ -346,7 +349,8 @@ class CaseCubit extends Cubit<CaseState> {
   Future<void> updateContactTracingData(
       ContactTracingModel contactTracingModel) async {
     final response = await caseRepo.saveContactTracingData(
-        contactTracingModel: contactTracingModel);
+        contactTracingModel: contactTracingModel,
+        id: state.caseWorkedUpon.contactTracing);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon
@@ -357,7 +361,8 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {
-    final response = await caseRepo.saveOutcomeData(outcomeModel: outcomeModel);
+    final response = await caseRepo.saveOutcomeData(
+        outcomeModel: outcomeModel, id: state.caseWorkedUpon.outcomeValue);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon
