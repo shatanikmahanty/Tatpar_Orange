@@ -46,7 +46,8 @@ class ReferralDetailsPage extends StatelessWidget {
       orElse: () => const Block(block: null),
     );
     final String? blockName = blockData?.block;
-
+    print(panchayat);
+    print(cubit.state.dataModel?.blocks!);
     String? panchayatName =
         _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
 
@@ -150,8 +151,10 @@ class ReferralDetailsPage extends StatelessWidget {
         var panchayatData = block.panchayat?.firstWhere(
             (p) => p.id == panchayat,
             orElse: () => const Panchayat(id: 0));
+        print(panchayatData);
         if (panchayatData?.id != 0) {
           panchayatName = panchayatData?.panchayat;
+          print(panchayatName);
           break;
         }
       }
@@ -208,8 +211,6 @@ class ReferralDetailsPage extends StatelessWidget {
               orElse: () => const Block(id: null))
           .id;
       for (var block in sourceCubit.state.dataModel!.blocks!) {
-
-
         var panchayat = block.panchayat!.firstWhere(
             (p) => p.panchayat == formGroup.control('panchayat_code').value,
             orElse: () => const Panchayat(id: null));
@@ -602,12 +603,12 @@ class ReferralDetailsPage extends StatelessWidget {
                                 ],
                               ),
                               const SizedBox(height: kPadding * 2),
-                              const PrimaryTextField(
-                                formControlName: 'source',
-                                label: 'Source',
-                                prefixIcon: Icons.location_city_outlined,
-                              ),
-                              const SizedBox(height: kPadding * 2)
+                              // const PrimaryTextField(
+                              //   formControlName: 'source',
+                              //   label: 'Source',
+                              //   prefixIcon: Icons.location_city_outlined,
+                              // ),
+                              // const SizedBox(height: kPadding * 2)
                             ],
                           ),
                         ),
