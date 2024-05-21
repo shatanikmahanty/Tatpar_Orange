@@ -55,7 +55,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyBtrN9Ndltn3s4mb8EC0MymPJbJEoDKcxw',
-    appId: '1:555188132765:android:8d5b0dd8aff934b3712d74',
+    appId: '1:555188132765:android:106dd6fb1d71e741712d74',
     messagingSenderId: '555188132765',
     projectId: 'tatpar-acf-flutter',
     storageBucket: 'tatpar-acf-flutter.appspot.com',
@@ -63,11 +63,11 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyBdHGUcLViZ8s8bhphsabFwiikmVZVZ3WY',
-    appId: '1:555188132765:ios:1f493d77529dee4f712d74',
+    appId: '1:555188132765:ios:c375390fbb00e665712d74',
     messagingSenderId: '555188132765',
     projectId: 'tatpar-acf-flutter',
     storageBucket: 'tatpar-acf-flutter.appspot.com',
-    iosBundleId: 'com.example.tatparAcf',
+    iosBundleId: 'com.mylabs.tatparAcf',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(

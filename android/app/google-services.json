@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:555188132765:android:8d5b0dd8aff934b3712d74",
+        "mobilesdk_app_id": "1:555188132765:android:106dd6fb1d71e741712d74",
         "android_client_info": {
-          "package_name": "com.example.tatpar_acf"
+          "package_name": "com.mylabs.tatpar_acf"
         }
       },
       "oauth_client": [],
