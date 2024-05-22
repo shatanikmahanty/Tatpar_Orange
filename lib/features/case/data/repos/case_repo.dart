@@ -55,7 +55,7 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...tbScreeningModel.toJson(),
-        'case_id': caseId,
+        'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
