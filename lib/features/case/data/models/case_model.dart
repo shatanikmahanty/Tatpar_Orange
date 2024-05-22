@@ -32,22 +32,6 @@ class Case with _$Case {
     @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
     @JsonKey(name: 'diagnosis') String? diagnosisName,
     @JsonKey(name: 'status') String? status,
-
-    // @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
-    // @JsonKey(name: 'referral_details_status')
-    // @Default(false)
-    // bool referralDetailsStatus,
-    // @JsonKey(name: 'tb_screening_status')
-    // @Default(false)
-    // bool tbScreeningStatus,
-    // @JsonKey(name: 'mental_health_screening_status')
-    // @Default(false)
-    // bool mentalHealthScreeningStatus,
-    // @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
-    // @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
-    // @JsonKey(name: 'contact_tracing_status')
-    // @Default(false)
-    // bool contactTracingStatus,
     @JsonKey(
       name: 'assigned_on',
       fromJson: fromJsonToDateTime,
@@ -63,6 +47,7 @@ class Case with _$Case {
     @JsonKey(name: 'referral_id') int? referralDetails,
     @JsonKey(name: 'tb_screening_id') int? tbScreening,
     @JsonKey(name: 'whosrq_id') int? whoSrq,
+    @JsonKey(name: 'diagnosis_id') int? diagnosis,
     @JsonKey(name: 'outcome_id') int? outcomeValue,
     @JsonKey(name: 'contact_tracing_id') int? contactTracing,
     @JsonKey(name: 'treatment_id') int? treatment,

@@ -9,7 +9,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
+import 'package:tatpar_acf/features/referral/model/data_model.dart';
+import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
 import 'package:tatpar_acf/utils/extensions/app_dio_exception.dart';
@@ -17,6 +20,7 @@ import 'package:tatpar_acf/utils/extensions/extensions.dart';
 
 import 'configurations/configurations.dart';
 
+late Box box;
 Future<void> main() async {
   DjangoflowAppRunner.run(onException: (exception, stackTrace) {
     if (exception is FirebaseAuthException) {
@@ -34,6 +38,10 @@ Future<void> main() async {
     AppCubit.initialState = const AppState(
       themeMode: ThemeMode.light,
     );
+    await Hive.initFlutter();
+    Hive.openBox<DataModel>('dataModel');
+    Hive.registerAdapter(DataModelAdapter());
+
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );

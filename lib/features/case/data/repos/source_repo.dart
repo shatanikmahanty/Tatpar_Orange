@@ -1,3 +1,4 @@
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_data.dart';
@@ -15,7 +16,11 @@ class SourceRepo {
       data: {},
     ));
     if (response.success = true) {
+      Box<DataModel> dataBox = Hive.box<DataModel>('dataModel');
+
       final DataModel dataModel = DataModel.fromJson(response.data['data']);
+      dataBox.put('ReferralDetailsData', dataModel);
+      dataBox.get('ReferralDetailsData');
 
       return dataModel;
     } else {

@@ -45,22 +45,7 @@ mixin _$Case {
   @JsonKey(name: 'diagnosis')
   String? get diagnosisName => throw _privateConstructorUsedError;
   @JsonKey(name: 'status')
-  String? get status =>
-      throw _privateConstructorUsedError; // @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
-// @JsonKey(name: 'referral_details_status')
-// @Default(false)
-// bool referralDetailsStatus,
-// @JsonKey(name: 'tb_screening_status')
-// @Default(false)
-// bool tbScreeningStatus,
-// @JsonKey(name: 'mental_health_screening_status')
-// @Default(false)
-// bool mentalHealthScreeningStatus,
-// @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
-// @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
-// @JsonKey(name: 'contact_tracing_status')
-// @Default(false)
-// bool contactTracingStatus,
+  String? get status => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'assigned_on',
       fromJson: fromJsonToDateTime,
@@ -75,6 +60,8 @@ mixin _$Case {
   int? get tbScreening => throw _privateConstructorUsedError;
   @JsonKey(name: 'whosrq_id')
   int? get whoSrq => throw _privateConstructorUsedError;
+  @JsonKey(name: 'diagnosis_id')
+  int? get diagnosis => throw _privateConstructorUsedError;
   @JsonKey(name: 'outcome_id')
   int? get outcomeValue => throw _privateConstructorUsedError;
   @JsonKey(name: 'contact_tracing_id')
@@ -119,6 +106,7 @@ abstract class $CaseCopyWith<$Res> {
       @JsonKey(name: 'referral_id') int? referralDetails,
       @JsonKey(name: 'tb_screening_id') int? tbScreening,
       @JsonKey(name: 'whosrq_id') int? whoSrq,
+      @JsonKey(name: 'diagnosis_id') int? diagnosis,
       @JsonKey(name: 'outcome_id') int? outcomeValue,
       @JsonKey(name: 'contact_tracing_id') int? contactTracing,
       @JsonKey(name: 'treatment_id') int? treatment});
@@ -155,6 +143,7 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
     Object? referralDetails = freezed,
     Object? tbScreening = freezed,
     Object? whoSrq = freezed,
+    Object? diagnosis = freezed,
     Object? outcomeValue = freezed,
     Object? contactTracing = freezed,
     Object? treatment = freezed,
@@ -232,6 +221,10 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.whoSrq
           : whoSrq // ignore: cast_nullable_to_non_nullable
               as int?,
+      diagnosis: freezed == diagnosis
+          ? _value.diagnosis
+          : diagnosis // ignore: cast_nullable_to_non_nullable
+              as int?,
       outcomeValue: freezed == outcomeValue
           ? _value.outcomeValue
           : outcomeValue // ignore: cast_nullable_to_non_nullable
@@ -282,6 +275,7 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
       @JsonKey(name: 'referral_id') int? referralDetails,
       @JsonKey(name: 'tb_screening_id') int? tbScreening,
       @JsonKey(name: 'whosrq_id') int? whoSrq,
+      @JsonKey(name: 'diagnosis_id') int? diagnosis,
       @JsonKey(name: 'outcome_id') int? outcomeValue,
       @JsonKey(name: 'contact_tracing_id') int? contactTracing,
       @JsonKey(name: 'treatment_id') int? treatment});
@@ -315,6 +309,7 @@ class __$$CaseImplCopyWithImpl<$Res>
     Object? referralDetails = freezed,
     Object? tbScreening = freezed,
     Object? whoSrq = freezed,
+    Object? diagnosis = freezed,
     Object? outcomeValue = freezed,
     Object? contactTracing = freezed,
     Object? treatment = freezed,
@@ -392,6 +387,10 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.whoSrq
           : whoSrq // ignore: cast_nullable_to_non_nullable
               as int?,
+      diagnosis: freezed == diagnosis
+          ? _value.diagnosis
+          : diagnosis // ignore: cast_nullable_to_non_nullable
+              as int?,
       outcomeValue: freezed == outcomeValue
           ? _value.outcomeValue
           : outcomeValue // ignore: cast_nullable_to_non_nullable
@@ -438,6 +437,7 @@ class _$CaseImpl implements _Case {
       @JsonKey(name: 'referral_id') this.referralDetails,
       @JsonKey(name: 'tb_screening_id') this.tbScreening,
       @JsonKey(name: 'whosrq_id') this.whoSrq,
+      @JsonKey(name: 'diagnosis_id') this.diagnosis,
       @JsonKey(name: 'outcome_id') this.outcomeValue,
       @JsonKey(name: 'contact_tracing_id') this.contactTracing,
       @JsonKey(name: 'treatment_id') this.treatment});
@@ -484,21 +484,6 @@ class _$CaseImpl implements _Case {
   @override
   @JsonKey(name: 'status')
   final String? status;
-// @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
-// @JsonKey(name: 'referral_details_status')
-// @Default(false)
-// bool referralDetailsStatus,
-// @JsonKey(name: 'tb_screening_status')
-// @Default(false)
-// bool tbScreeningStatus,
-// @JsonKey(name: 'mental_health_screening_status')
-// @Default(false)
-// bool mentalHealthScreeningStatus,
-// @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
-// @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
-// @JsonKey(name: 'contact_tracing_status')
-// @Default(false)
-// bool contactTracingStatus,
   @override
   @JsonKey(
       name: 'assigned_on',
@@ -519,6 +504,9 @@ class _$CaseImpl implements _Case {
   @JsonKey(name: 'whosrq_id')
   final int? whoSrq;
   @override
+  @JsonKey(name: 'diagnosis_id')
+  final int? diagnosis;
+  @override
   @JsonKey(name: 'outcome_id')
   final int? outcomeValue;
   @override
@@ -530,7 +518,7 @@ class _$CaseImpl implements _Case {
 
   @override
   String toString() {
-    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, district: $district, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, outcomeValue: $outcomeValue, contactTracing: $contactTracing, treatment: $treatment)';
+    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, district: $district, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, outcomeValue: $outcomeValue, contactTracing: $contactTracing, treatment: $treatment)';
   }
 
   @override
@@ -569,6 +557,8 @@ class _$CaseImpl implements _Case {
             (identical(other.tbScreening, tbScreening) ||
                 other.tbScreening == tbScreening) &&
             (identical(other.whoSrq, whoSrq) || other.whoSrq == whoSrq) &&
+            (identical(other.diagnosis, diagnosis) ||
+                other.diagnosis == diagnosis) &&
             (identical(other.outcomeValue, outcomeValue) ||
                 other.outcomeValue == outcomeValue) &&
             (identical(other.contactTracing, contactTracing) ||
@@ -599,6 +589,7 @@ class _$CaseImpl implements _Case {
         referralDetails,
         tbScreening,
         whoSrq,
+        diagnosis,
         outcomeValue,
         contactTracing,
         treatment
@@ -647,6 +638,7 @@ abstract class _Case implements Case {
       @JsonKey(name: 'referral_id') final int? referralDetails,
       @JsonKey(name: 'tb_screening_id') final int? tbScreening,
       @JsonKey(name: 'whosrq_id') final int? whoSrq,
+      @JsonKey(name: 'diagnosis_id') final int? diagnosis,
       @JsonKey(name: 'outcome_id') final int? outcomeValue,
       @JsonKey(name: 'contact_tracing_id') final int? contactTracing,
       @JsonKey(name: 'treatment_id') final int? treatment}) = _$CaseImpl;
@@ -692,21 +684,7 @@ abstract class _Case implements Case {
   @override
   @JsonKey(name: 'status')
   String? get status;
-  @override // @JsonKey(name: 'treatment_status') @Default(false) bool treatmentStatus,
-// @JsonKey(name: 'referral_details_status')
-// @Default(false)
-// bool referralDetailsStatus,
-// @JsonKey(name: 'tb_screening_status')
-// @Default(false)
-// bool tbScreeningStatus,
-// @JsonKey(name: 'mental_health_screening_status')
-// @Default(false)
-// bool mentalHealthScreeningStatus,
-// @JsonKey(name: 'diagnosis_status') @Default(false) bool diagnosisStatus,
-// @JsonKey(name: 'outcome_status') @Default(false) bool outcomeStatus,
-// @JsonKey(name: 'contact_tracing_status')
-// @Default(false)
-// bool contactTracingStatus,
+  @override
   @JsonKey(
       name: 'assigned_on',
       fromJson: fromJsonToDateTime,
@@ -725,6 +703,9 @@ abstract class _Case implements Case {
   @override
   @JsonKey(name: 'whosrq_id')
   int? get whoSrq;
+  @override
+  @JsonKey(name: 'diagnosis_id')
+  int? get diagnosis;
   @override
   @JsonKey(name: 'outcome_id')
   int? get outcomeValue;

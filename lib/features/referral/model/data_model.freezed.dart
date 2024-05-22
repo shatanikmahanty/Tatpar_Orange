@@ -20,17 +20,23 @@ DataModel _$DataModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DataModel {
+  @HiveField(0)
   @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'key_population')
   List<KeyPopulation>? get keyPopulation => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'referrer_source')
   List<ReferrerSource>? get referrerSource =>
       throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'trimester_of_pw')
   List<Trimester>? get trimester => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'districts')
   List<District>? get districts => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(name: 'blocks')
   List<Block>? get blocks => throw _privateConstructorUsedError;
 
@@ -46,12 +52,20 @@ abstract class $DataModelCopyWith<$Res> {
       _$DataModelCopyWithImpl<$Res, DataModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'caste_category') List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'key_population') List<KeyPopulation>? keyPopulation,
-      @JsonKey(name: 'referrer_source') List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'trimester_of_pw') List<Trimester>? trimester,
-      @JsonKey(name: 'districts') List<District>? districts,
-      @JsonKey(name: 'blocks') List<Block>? blocks});
+      {@HiveField(0)
+      @JsonKey(name: 'caste_category')
+      List<CasteCategory>? casteCategory,
+      @HiveField(1)
+      @JsonKey(name: 'key_population')
+      List<KeyPopulation>? keyPopulation,
+      @HiveField(2)
+      @JsonKey(name: 'referrer_source')
+      List<ReferrerSource>? referrerSource,
+      @HiveField(3)
+      @JsonKey(name: 'trimester_of_pw')
+      List<Trimester>? trimester,
+      @HiveField(4) @JsonKey(name: 'districts') List<District>? districts,
+      @HiveField(5) @JsonKey(name: 'blocks') List<Block>? blocks});
 }
 
 /// @nodoc
@@ -112,12 +126,20 @@ abstract class _$$DataModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'caste_category') List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'key_population') List<KeyPopulation>? keyPopulation,
-      @JsonKey(name: 'referrer_source') List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'trimester_of_pw') List<Trimester>? trimester,
-      @JsonKey(name: 'districts') List<District>? districts,
-      @JsonKey(name: 'blocks') List<Block>? blocks});
+      {@HiveField(0)
+      @JsonKey(name: 'caste_category')
+      List<CasteCategory>? casteCategory,
+      @HiveField(1)
+      @JsonKey(name: 'key_population')
+      List<KeyPopulation>? keyPopulation,
+      @HiveField(2)
+      @JsonKey(name: 'referrer_source')
+      List<ReferrerSource>? referrerSource,
+      @HiveField(3)
+      @JsonKey(name: 'trimester_of_pw')
+      List<Trimester>? trimester,
+      @HiveField(4) @JsonKey(name: 'districts') List<District>? districts,
+      @HiveField(5) @JsonKey(name: 'blocks') List<Block>? blocks});
 }
 
 /// @nodoc
@@ -171,14 +193,20 @@ class __$$DataModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DataModelImpl implements _DataModel {
   const _$DataModelImpl(
-      {@JsonKey(name: 'caste_category')
+      {@HiveField(0)
+      @JsonKey(name: 'caste_category')
       final List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'key_population') final List<KeyPopulation>? keyPopulation,
+      @HiveField(1)
+      @JsonKey(name: 'key_population')
+      final List<KeyPopulation>? keyPopulation,
+      @HiveField(2)
       @JsonKey(name: 'referrer_source')
       final List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'trimester_of_pw') final List<Trimester>? trimester,
-      @JsonKey(name: 'districts') final List<District>? districts,
-      @JsonKey(name: 'blocks') final List<Block>? blocks})
+      @HiveField(3)
+      @JsonKey(name: 'trimester_of_pw')
+      final List<Trimester>? trimester,
+      @HiveField(4) @JsonKey(name: 'districts') final List<District>? districts,
+      @HiveField(5) @JsonKey(name: 'blocks') final List<Block>? blocks})
       : _casteCategory = casteCategory,
         _keyPopulation = keyPopulation,
         _referrerSource = referrerSource,
@@ -191,6 +219,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<CasteCategory>? _casteCategory;
   @override
+  @HiveField(0)
   @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory {
     final value = _casteCategory;
@@ -202,6 +231,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<KeyPopulation>? _keyPopulation;
   @override
+  @HiveField(1)
   @JsonKey(name: 'key_population')
   List<KeyPopulation>? get keyPopulation {
     final value = _keyPopulation;
@@ -213,6 +243,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<ReferrerSource>? _referrerSource;
   @override
+  @HiveField(2)
   @JsonKey(name: 'referrer_source')
   List<ReferrerSource>? get referrerSource {
     final value = _referrerSource;
@@ -224,6 +255,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<Trimester>? _trimester;
   @override
+  @HiveField(3)
   @JsonKey(name: 'trimester_of_pw')
   List<Trimester>? get trimester {
     final value = _trimester;
@@ -235,6 +267,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<District>? _districts;
   @override
+  @HiveField(4)
   @JsonKey(name: 'districts')
   List<District>? get districts {
     final value = _districts;
@@ -246,6 +279,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<Block>? _blocks;
   @override
+  @HiveField(5)
   @JsonKey(name: 'blocks')
   List<Block>? get blocks {
     final value = _blocks;
@@ -305,34 +339,48 @@ class _$DataModelImpl implements _DataModel {
 
 abstract class _DataModel implements DataModel {
   const factory _DataModel(
-      {@JsonKey(name: 'caste_category')
+      {@HiveField(0)
+      @JsonKey(name: 'caste_category')
       final List<CasteCategory>? casteCategory,
-      @JsonKey(name: 'key_population') final List<KeyPopulation>? keyPopulation,
+      @HiveField(1)
+      @JsonKey(name: 'key_population')
+      final List<KeyPopulation>? keyPopulation,
+      @HiveField(2)
       @JsonKey(name: 'referrer_source')
       final List<ReferrerSource>? referrerSource,
-      @JsonKey(name: 'trimester_of_pw') final List<Trimester>? trimester,
-      @JsonKey(name: 'districts') final List<District>? districts,
-      @JsonKey(name: 'blocks') final List<Block>? blocks}) = _$DataModelImpl;
+      @HiveField(3)
+      @JsonKey(name: 'trimester_of_pw')
+      final List<Trimester>? trimester,
+      @HiveField(4) @JsonKey(name: 'districts') final List<District>? districts,
+      @HiveField(5)
+      @JsonKey(name: 'blocks')
+      final List<Block>? blocks}) = _$DataModelImpl;
 
   factory _DataModel.fromJson(Map<String, dynamic> json) =
       _$DataModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory;
   @override
+  @HiveField(1)
   @JsonKey(name: 'key_population')
   List<KeyPopulation>? get keyPopulation;
   @override
+  @HiveField(2)
   @JsonKey(name: 'referrer_source')
   List<ReferrerSource>? get referrerSource;
   @override
+  @HiveField(3)
   @JsonKey(name: 'trimester_of_pw')
   List<Trimester>? get trimester;
   @override
+  @HiveField(4)
   @JsonKey(name: 'districts')
   List<District>? get districts;
   @override
+  @HiveField(5)
   @JsonKey(name: 'blocks')
   List<Block>? get blocks;
   @override

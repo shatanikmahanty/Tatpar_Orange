@@ -71,7 +71,8 @@ class CaseRepo {
 
   Future<MentalHealthScreeningModel> saveWHOSRQData(
       {required MentalHealthScreeningModel mentalHealthScreeningModel,
-      required int? id}) async {
+      required int? id,
+      required int? caseId}) async {
     log(mentalHealthScreeningModel.toJson().toString());
     final request = NetworkRequest(
       '$whoSrqUrl${id == null ? '' : '/$id'}',
@@ -94,7 +95,9 @@ class CaseRepo {
   }
 
   Future<DiagnosisModel> saveDiagnosisData(
-      {required DiagnosisModel diagnosisModel, required int? id}) async {
+      {required DiagnosisModel diagnosisModel,
+      required int? id,
+      required int? caseId}) async {
     final request = NetworkRequest(
       '$diagnosisUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -118,7 +121,9 @@ class CaseRepo {
   }
 
   Future<TreatmentModel> saveTreatmentData(
-      {required TreatmentModel treatmentModel, required int? id}) async {
+      {required TreatmentModel treatmentModel,
+      required int? id,
+      required int? caseId}) async {
     final request = NetworkRequest(
       '$treatmentUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -141,7 +146,8 @@ class CaseRepo {
 
   Future<ContactTracingModel> saveContactTracingData(
       {required ContactTracingModel contactTracingModel,
-      required int? id}) async {
+      required int? id,
+      required int? caseId}) async {
     final request = NetworkRequest(
       '$contactTracingModel${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -163,7 +169,9 @@ class CaseRepo {
   }
 
   Future<OutcomeModel> saveOutcomeData(
-      {required OutcomeModel outcomeModel, required int? id}) async {
+      {required OutcomeModel outcomeModel,
+      required int? id,
+      required int? caseId}) async {
     final request = NetworkRequest(
       '$outcomeUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
