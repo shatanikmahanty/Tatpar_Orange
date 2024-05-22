@@ -20,6 +20,8 @@ ContactTracingModel _$ContactTracingModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContactTracingModel {
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'tb_contact_name')
   String? get tbContactName => throw _privateConstructorUsedError;
   @JsonKey(name: 'age')
@@ -69,7 +71,8 @@ abstract class $ContactTracingModelCopyWith<$Res> {
       _$ContactTracingModelCopyWithImpl<$Res, ContactTracingModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'tb_contact_name') String? tbContactName,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'tb_contact_name') String? tbContactName,
       @JsonKey(name: 'age') int? age,
       @JsonKey(name: 'screening_outcome') String? screeningOutcome,
       @JsonKey(name: 'test_conducted') String? testConducted,
@@ -109,6 +112,7 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? tbContactName = freezed,
     Object? age = freezed,
     Object? screeningOutcome = freezed,
@@ -128,6 +132,10 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
     Object? tptOutcome = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       tbContactName: freezed == tbContactName
           ? _value.tbContactName
           : tbContactName // ignore: cast_nullable_to_non_nullable
@@ -209,7 +217,8 @@ abstract class _$$ContactTracingModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'tb_contact_name') String? tbContactName,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'tb_contact_name') String? tbContactName,
       @JsonKey(name: 'age') int? age,
       @JsonKey(name: 'screening_outcome') String? screeningOutcome,
       @JsonKey(name: 'test_conducted') String? testConducted,
@@ -247,6 +256,7 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? tbContactName = freezed,
     Object? age = freezed,
     Object? screeningOutcome = freezed,
@@ -266,6 +276,10 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
     Object? tptOutcome = freezed,
   }) {
     return _then(_$ContactTracingModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       tbContactName: freezed == tbContactName
           ? _value.tbContactName
           : tbContactName // ignore: cast_nullable_to_non_nullable
@@ -342,7 +356,8 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ContactTracingModelImpl implements _ContactTracingModel {
   const _$ContactTracingModelImpl(
-      {@JsonKey(name: 'tb_contact_name') this.tbContactName,
+      {@JsonKey(name: 'id', includeToJson: false) this.id,
+      @JsonKey(name: 'tb_contact_name') this.tbContactName,
       @JsonKey(name: 'age') this.age,
       @JsonKey(name: 'screening_outcome') this.screeningOutcome,
       @JsonKey(name: 'test_conducted') this.testConducted,
@@ -371,6 +386,9 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
   factory _$ContactTracingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContactTracingModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  final int? id;
   @override
   @JsonKey(name: 'tb_contact_name')
   final String? tbContactName;
@@ -426,7 +444,7 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
 
   @override
   String toString() {
-    return 'ContactTracingModel(tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, cxrDate: $cxrDate, cxrResult: $cxrResult, tbiDate: $tbiDate, tbiResult: $tbiResult, nikshayID: $nikshayID, tptEligible: $tptEligible, selectedTptRegimen: $selectedTptRegimen, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome)';
+    return 'ContactTracingModel(id: $id, tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, cxrDate: $cxrDate, cxrResult: $cxrResult, tbiDate: $tbiDate, tbiResult: $tbiResult, nikshayID: $nikshayID, tptEligible: $tptEligible, selectedTptRegimen: $selectedTptRegimen, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome)';
   }
 
   @override
@@ -434,6 +452,7 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$ContactTracingModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.tbContactName, tbContactName) ||
                 other.tbContactName == tbContactName) &&
             (identical(other.age, age) || other.age == age) &&
@@ -470,6 +489,7 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       tbContactName,
       age,
       screeningOutcome,
@@ -505,7 +525,8 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
 
 abstract class _ContactTracingModel implements ContactTracingModel {
   const factory _ContactTracingModel(
-          {@JsonKey(name: 'tb_contact_name') final String? tbContactName,
+          {@JsonKey(name: 'id', includeToJson: false) final int? id,
+          @JsonKey(name: 'tb_contact_name') final String? tbContactName,
           @JsonKey(name: 'age') final int? age,
           @JsonKey(name: 'screening_outcome') final String? screeningOutcome,
           @JsonKey(name: 'test_conducted') final String? testConducted,
@@ -535,6 +556,9 @@ abstract class _ContactTracingModel implements ContactTracingModel {
   factory _ContactTracingModel.fromJson(Map<String, dynamic> json) =
       _$ContactTracingModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id;
   @override
   @JsonKey(name: 'tb_contact_name')
   String? get tbContactName;

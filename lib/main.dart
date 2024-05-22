@@ -12,7 +12,6 @@ import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/features/referral/model/data_model.dart';
-import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
 import 'package:tatpar_acf/utils/extensions/app_dio_exception.dart';

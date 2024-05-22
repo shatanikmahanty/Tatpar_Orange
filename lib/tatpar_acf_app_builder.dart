@@ -16,7 +16,6 @@ import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
-import 'package:tatpar_acf/features/referral/model/data_model.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 
 import 'configurations/configurations.dart';

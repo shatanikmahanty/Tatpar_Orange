@@ -21,6 +21,7 @@ String? _dateTimeToJson(DateTime? date) =>
 @freezed
 class OutcomeModel with _$OutcomeModel {
   const factory OutcomeModel({
+    @JsonKey(name: 'id', includeToJson: false) int? id,
     @JsonKey(
       name: 'treatment_completion_date',
       fromJson: fromJsonToDateTime,

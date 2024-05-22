@@ -8,6 +8,7 @@ part of 'treatment_model.dart';
 
 _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
     _$TreatmentModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       caseDefinition: json['case_definition'] as String?,
       previouslyTbTreated: json['tb_treated'] as String?,
       rifSensitivity: json['rif_sensitivity'] as String?,

@@ -21,7 +21,8 @@ String? _dateTimeToJson(DateTime? date) =>
 @freezed
 class MentalHealthScreeningModel with _$MentalHealthScreeningModel {
   const factory MentalHealthScreeningModel(
-      {@JsonKey(name: 'stage') String? stage,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'stage') String? stage,
       @JsonKey(
         name: 'screening_date',
         fromJson: fromJsonToDateTime,

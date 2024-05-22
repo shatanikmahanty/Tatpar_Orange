@@ -20,6 +20,8 @@ OutcomeModel _$OutcomeModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OutcomeModel {
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'treatment_completion_date',
       fromJson: fromJsonToDateTime,
@@ -50,7 +52,8 @@ abstract class $OutcomeModelCopyWith<$Res> {
       _$OutcomeModelCopyWithImpl<$Res, OutcomeModel>;
   @useResult
   $Res call(
-      {@JsonKey(
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
@@ -76,6 +79,7 @@ class _$OutcomeModelCopyWithImpl<$Res, $Val extends OutcomeModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? treatmentCompletionDate = freezed,
     Object? nikshayId = freezed,
     Object? fcName = freezed,
@@ -85,6 +89,10 @@ class _$OutcomeModelCopyWithImpl<$Res, $Val extends OutcomeModel>
     Object? treatmentComments = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       treatmentCompletionDate: freezed == treatmentCompletionDate
           ? _value.treatmentCompletionDate
           : treatmentCompletionDate // ignore: cast_nullable_to_non_nullable
@@ -126,7 +134,8 @@ abstract class _$$OutcomeModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
@@ -150,6 +159,7 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? treatmentCompletionDate = freezed,
     Object? nikshayId = freezed,
     Object? fcName = freezed,
@@ -159,6 +169,10 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
     Object? treatmentComments = freezed,
   }) {
     return _then(_$OutcomeModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       treatmentCompletionDate: freezed == treatmentCompletionDate
           ? _value.treatmentCompletionDate
           : treatmentCompletionDate // ignore: cast_nullable_to_non_nullable
@@ -195,7 +209,8 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OutcomeModelImpl implements _OutcomeModel {
   const _$OutcomeModelImpl(
-      {@JsonKey(
+      {@JsonKey(name: 'id', includeToJson: false) this.id,
+      @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
@@ -210,6 +225,9 @@ class _$OutcomeModelImpl implements _OutcomeModel {
   factory _$OutcomeModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$OutcomeModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  final int? id;
   @override
   @JsonKey(
       name: 'treatment_completion_date',
@@ -236,7 +254,7 @@ class _$OutcomeModelImpl implements _OutcomeModel {
 
   @override
   String toString() {
-    return 'OutcomeModel(treatmentCompletionDate: $treatmentCompletionDate, nikshayId: $nikshayId, fcName: $fcName, nutritionProvided: $nutritionProvided, selectedtreatmentOutcome: $selectedtreatmentOutcome, treatmentOutcome: $treatmentOutcome, treatmentComments: $treatmentComments)';
+    return 'OutcomeModel(id: $id, treatmentCompletionDate: $treatmentCompletionDate, nikshayId: $nikshayId, fcName: $fcName, nutritionProvided: $nutritionProvided, selectedtreatmentOutcome: $selectedtreatmentOutcome, treatmentOutcome: $treatmentOutcome, treatmentComments: $treatmentComments)';
   }
 
   @override
@@ -244,6 +262,7 @@ class _$OutcomeModelImpl implements _OutcomeModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$OutcomeModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(
                     other.treatmentCompletionDate, treatmentCompletionDate) ||
                 other.treatmentCompletionDate == treatmentCompletionDate) &&
@@ -265,6 +284,7 @@ class _$OutcomeModelImpl implements _OutcomeModel {
   @override
   int get hashCode => Object.hash(
       runtimeType,
+      id,
       treatmentCompletionDate,
       nikshayId,
       fcName,
@@ -289,7 +309,8 @@ class _$OutcomeModelImpl implements _OutcomeModel {
 
 abstract class _OutcomeModel implements OutcomeModel {
   const factory _OutcomeModel(
-      {@JsonKey(
+      {@JsonKey(name: 'id', includeToJson: false) final int? id,
+      @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
@@ -305,6 +326,9 @@ abstract class _OutcomeModel implements OutcomeModel {
   factory _OutcomeModel.fromJson(Map<String, dynamic> json) =
       _$OutcomeModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id;
   @override
   @JsonKey(
       name: 'treatment_completion_date',

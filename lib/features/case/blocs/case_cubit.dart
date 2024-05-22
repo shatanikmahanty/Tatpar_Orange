@@ -2,7 +2,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
-import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/data/models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
@@ -311,11 +310,11 @@ class CaseCubit extends Cubit<CaseState> {
       MentalHealthScreeningModel mentalHealthScreeningModel) async {
     final response = await caseRepo.saveWHOSRQData(
         mentalHealthScreeningModel: mentalHealthScreeningModel,
-        id: state.caseWorkedUpon.referralDetails);
+        id: state.caseWorkedUpon.whoSrq,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon
-            .copyWith(whoSrq: AuthCubit.instance.workingCaseId),
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(whoSrq: response.id),
         mentalHealthScreeningModel: response,
       ),
     );
@@ -324,11 +323,11 @@ class CaseCubit extends Cubit<CaseState> {
   Future<void> updateDiagnosisData(DiagnosisModel diagnosisModel) async {
     final response = await caseRepo.saveDiagnosisData(
         diagnosisModel: diagnosisModel,
-        id: state.caseWorkedUpon.referralDetails);
+        id: state.caseWorkedUpon.referralDetails,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon
-            .copyWith(treatment: AuthCubit.instance.workingCaseId),
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(treatment: response.id),
         diagnsosisModel: response,
       ),
     );
@@ -336,11 +335,12 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateTreatmentData(TreatmentModel treatmentModel) async {
     final response = await caseRepo.saveTreatmentData(
-        treatmentModel: treatmentModel, id: state.caseWorkedUpon.treatment);
+        treatmentModel: treatmentModel,
+        id: state.caseWorkedUpon.treatment,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon
-            .copyWith(treatment: AuthCubit.instance.workingCaseId),
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(treatment: response.id),
         treatmentModel: response,
       ),
     );
@@ -350,11 +350,12 @@ class CaseCubit extends Cubit<CaseState> {
       ContactTracingModel contactTracingModel) async {
     final response = await caseRepo.saveContactTracingData(
         contactTracingModel: contactTracingModel,
-        id: state.caseWorkedUpon.contactTracing);
+        id: state.caseWorkedUpon.contactTracing,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon
-            .copyWith(contactTracing: AuthCubit.instance.workingCaseId),
+        caseWorkedUpon:
+            state.caseWorkedUpon.copyWith(contactTracing: response.id),
         contactTracingModel: response,
       ),
     );
@@ -362,11 +363,13 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {
     final response = await caseRepo.saveOutcomeData(
-        outcomeModel: outcomeModel, id: state.caseWorkedUpon.outcomeValue);
+        outcomeModel: outcomeModel,
+        id: state.caseWorkedUpon.outcomeValue,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon
-            .copyWith(outcomeValue: AuthCubit.instance.workingCaseId),
+        caseWorkedUpon:
+            state.caseWorkedUpon.copyWith(outcomeValue: response.id),
         outcomeModel: response,
       ),
     );

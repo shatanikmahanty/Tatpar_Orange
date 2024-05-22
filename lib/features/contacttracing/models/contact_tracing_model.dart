@@ -20,6 +20,7 @@ String? _dateTimeToJson(DateTime? date) =>
 @freezed
 class ContactTracingModel with _$ContactTracingModel {
   const factory ContactTracingModel({
+    @JsonKey(name: 'id', includeToJson: false) int? id,
     @JsonKey(name: 'tb_contact_name') String? tbContactName,
     @JsonKey(name: 'age') int? age,
     @JsonKey(name: 'screening_outcome') String? screeningOutcome,

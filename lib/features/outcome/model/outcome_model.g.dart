@@ -8,6 +8,7 @@ part of 'outcome_model.dart';
 
 _$OutcomeModelImpl _$$OutcomeModelImplFromJson(Map<String, dynamic> json) =>
     _$OutcomeModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       treatmentCompletionDate:
           fromJsonToDateTime(json['treatment_completion_date'] as String?),
       nikshayId: json['nikshay_id'] as String?,

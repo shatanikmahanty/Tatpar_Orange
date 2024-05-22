@@ -8,6 +8,7 @@ part of 'diagnosis_model.dart';
 
 _$DiagnosisModelImpl _$$DiagnosisModelImplFromJson(Map<String, dynamic> json) =>
     _$DiagnosisModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       diagnosisInitiated: json['diagnosis_initiated'] as String?,
       firstConsultation: json['first_consultation'] as String?,
       firstConsultationDate:

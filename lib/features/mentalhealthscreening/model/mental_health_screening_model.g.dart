@@ -9,6 +9,7 @@ part of 'mental_health_screening_model.dart';
 _$MentalHealthScreeningModelImpl _$$MentalHealthScreeningModelImplFromJson(
         Map<String, dynamic> json) =>
     _$MentalHealthScreeningModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       stage: json['stage'] as String?,
       screeningDate: fromJsonToDateTime(json['screening_date'] as String?),
       screeningStatus: json['case_status'] as String?,

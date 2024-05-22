@@ -20,6 +20,7 @@ String? _dateTimeToJson(DateTime? date) =>
 @freezed
 class DiagnosisModel with _$DiagnosisModel {
   const factory DiagnosisModel({
+    @JsonKey(name: 'id', includeToJson: false) int? id,
     @JsonKey(name: 'diagnosis_initiated') String? diagnosisInitiated,
     @JsonKey(name: 'first_consultation') String? firstConsultation,
     @JsonKey(

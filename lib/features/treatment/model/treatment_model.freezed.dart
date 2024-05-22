@@ -20,6 +20,8 @@ TreatmentModel _$TreatmentModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TreatmentModel {
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'case_definition')
   String? get caseDefinition => throw _privateConstructorUsedError;
   @JsonKey(name: 'tb_treated')
@@ -120,7 +122,8 @@ abstract class $TreatmentModelCopyWith<$Res> {
       _$TreatmentModelCopyWithImpl<$Res, TreatmentModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'case_definition') String? caseDefinition,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'case_definition') String? caseDefinition,
       @JsonKey(name: 'tb_treated') String? previouslyTbTreated,
       @JsonKey(name: 'rif_sensitivity') String? rifSensitivity,
       @JsonKey(
@@ -204,6 +207,7 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? caseDefinition = freezed,
     Object? previouslyTbTreated = freezed,
     Object? rifSensitivity = freezed,
@@ -240,6 +244,10 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? ipNutritionSupport = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       caseDefinition: freezed == caseDefinition
           ? _value.caseDefinition
           : caseDefinition // ignore: cast_nullable_to_non_nullable
@@ -389,7 +397,8 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'case_definition') String? caseDefinition,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'case_definition') String? caseDefinition,
       @JsonKey(name: 'tb_treated') String? previouslyTbTreated,
       @JsonKey(name: 'rif_sensitivity') String? rifSensitivity,
       @JsonKey(
@@ -471,6 +480,7 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? caseDefinition = freezed,
     Object? previouslyTbTreated = freezed,
     Object? rifSensitivity = freezed,
@@ -507,6 +517,10 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? ipNutritionSupport = freezed,
   }) {
     return _then(_$TreatmentModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       caseDefinition: freezed == caseDefinition
           ? _value.caseDefinition
           : caseDefinition // ignore: cast_nullable_to_non_nullable
@@ -651,7 +665,8 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TreatmentModelImpl implements _TreatmentModel {
   const _$TreatmentModelImpl(
-      {@JsonKey(name: 'case_definition') this.caseDefinition,
+      {@JsonKey(name: 'id', includeToJson: false) this.id,
+      @JsonKey(name: 'case_definition') this.caseDefinition,
       @JsonKey(name: 'tb_treated') this.previouslyTbTreated,
       @JsonKey(name: 'rif_sensitivity') this.rifSensitivity,
       @JsonKey(
@@ -723,6 +738,9 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   factory _$TreatmentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TreatmentModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  final int? id;
   @override
   @JsonKey(name: 'case_definition')
   final String? caseDefinition;
@@ -846,7 +864,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
 
   @override
   String toString() {
-    return 'TreatmentModel(caseDefinition: $caseDefinition, previouslyTbTreated: $previouslyTbTreated, rifSensitivity: $rifSensitivity, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, dateOfHomeVisit: $dateOfHomeVisit, iptStartDate: $iptStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tbConsumption: $tbConsumption, nutrition: $nutrition, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, ipNatTest: $ipNatTest, ipAfbDate: $ipAfbDate, ipAfbLabNo: $ipAfbLabNo, ipNatResult: $ipNatResult, ipLabNo: $ipLabNo, ipChestXray: $ipChestXray, ipNutritionSupport: $ipNutritionSupport)';
+    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, previouslyTbTreated: $previouslyTbTreated, rifSensitivity: $rifSensitivity, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, dateOfHomeVisit: $dateOfHomeVisit, iptStartDate: $iptStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tbConsumption: $tbConsumption, nutrition: $nutrition, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, ipNatTest: $ipNatTest, ipAfbDate: $ipAfbDate, ipAfbLabNo: $ipAfbLabNo, ipNatResult: $ipNatResult, ipLabNo: $ipLabNo, ipChestXray: $ipChestXray, ipNutritionSupport: $ipNutritionSupport)';
   }
 
   @override
@@ -854,6 +872,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$TreatmentModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.caseDefinition, caseDefinition) ||
                 other.caseDefinition == caseDefinition) &&
             (identical(other.previouslyTbTreated, previouslyTbTreated) ||
@@ -921,6 +940,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        id,
         caseDefinition,
         previouslyTbTreated,
         rifSensitivity,
@@ -974,7 +994,8 @@ class _$TreatmentModelImpl implements _TreatmentModel {
 
 abstract class _TreatmentModel implements TreatmentModel {
   const factory _TreatmentModel(
-      {@JsonKey(name: 'case_definition') final String? caseDefinition,
+      {@JsonKey(name: 'id', includeToJson: false) final int? id,
+      @JsonKey(name: 'case_definition') final String? caseDefinition,
       @JsonKey(name: 'tb_treated') final String? previouslyTbTreated,
       @JsonKey(name: 'rif_sensitivity') final String? rifSensitivity,
       @JsonKey(
@@ -1050,6 +1071,9 @@ abstract class _TreatmentModel implements TreatmentModel {
   factory _TreatmentModel.fromJson(Map<String, dynamic> json) =
       _$TreatmentModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id;
   @override
   @JsonKey(name: 'case_definition')
   String? get caseDefinition;

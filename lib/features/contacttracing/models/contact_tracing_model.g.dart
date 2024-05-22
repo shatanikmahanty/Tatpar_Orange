@@ -9,6 +9,7 @@ part of 'contact_tracing_model.dart';
 _$ContactTracingModelImpl _$$ContactTracingModelImplFromJson(
         Map<String, dynamic> json) =>
     _$ContactTracingModelImpl(
+      id: (json['id'] as num?)?.toInt(),
       tbContactName: json['tb_contact_name'] as String?,
       age: (json['age'] as num?)?.toInt(),
       screeningOutcome: json['screening_outcome'] as String?,

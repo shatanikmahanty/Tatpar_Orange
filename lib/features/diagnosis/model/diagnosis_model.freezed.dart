@@ -20,6 +20,8 @@ DiagnosisModel _$DiagnosisModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DiagnosisModel {
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id => throw _privateConstructorUsedError;
   @JsonKey(name: 'diagnosis_initiated')
   String? get diagnosisInitiated => throw _privateConstructorUsedError;
   @JsonKey(name: 'first_consultation')
@@ -159,7 +161,8 @@ abstract class $DiagnosisModelCopyWith<$Res> {
       _$DiagnosisModelCopyWithImpl<$Res, DiagnosisModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'diagnosis_initiated') String? diagnosisInitiated,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'diagnosis_initiated') String? diagnosisInitiated,
       @JsonKey(name: 'first_consultation') String? firstConsultation,
       @JsonKey(
           name: 'first_consultation_date',
@@ -264,6 +267,7 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? diagnosisInitiated = freezed,
     Object? firstConsultation = freezed,
     Object? firstConsultationDate = freezed,
@@ -316,6 +320,10 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
     Object? diagnosisDate = freezed,
   }) {
     return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       diagnosisInitiated: freezed == diagnosisInitiated
           ? _value.diagnosisInitiated
           : diagnosisInitiated // ignore: cast_nullable_to_non_nullable
@@ -529,7 +537,8 @@ abstract class _$$DiagnosisModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'diagnosis_initiated') String? diagnosisInitiated,
+      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      @JsonKey(name: 'diagnosis_initiated') String? diagnosisInitiated,
       @JsonKey(name: 'first_consultation') String? firstConsultation,
       @JsonKey(
           name: 'first_consultation_date',
@@ -632,6 +641,7 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? id = freezed,
     Object? diagnosisInitiated = freezed,
     Object? firstConsultation = freezed,
     Object? firstConsultationDate = freezed,
@@ -684,6 +694,10 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
     Object? diagnosisDate = freezed,
   }) {
     return _then(_$DiagnosisModelImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
       diagnosisInitiated: freezed == diagnosisInitiated
           ? _value.diagnosisInitiated
           : diagnosisInitiated // ignore: cast_nullable_to_non_nullable
@@ -892,7 +906,8 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DiagnosisModelImpl implements _DiagnosisModel {
   const _$DiagnosisModelImpl(
-      {@JsonKey(name: 'diagnosis_initiated') this.diagnosisInitiated,
+      {@JsonKey(name: 'id', includeToJson: false) this.id,
+      @JsonKey(name: 'diagnosis_initiated') this.diagnosisInitiated,
       @JsonKey(name: 'first_consultation') this.firstConsultation,
       @JsonKey(
           name: 'first_consultation_date',
@@ -986,6 +1001,9 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
   factory _$DiagnosisModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DiagnosisModelImplFromJson(json);
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  final int? id;
   @override
   @JsonKey(name: 'diagnosis_initiated')
   final String? diagnosisInitiated;
@@ -1164,7 +1182,7 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
 
   @override
   String toString() {
-    return 'DiagnosisModel(diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, drugResistance: $drugResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate)';
+    return 'DiagnosisModel(id: $id, diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, drugResistance: $drugResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate)';
   }
 
   @override
@@ -1172,6 +1190,7 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$DiagnosisModelImpl &&
+            (identical(other.id, id) || other.id == id) &&
             (identical(other.diagnosisInitiated, diagnosisInitiated) ||
                 other.diagnosisInitiated == diagnosisInitiated) &&
             (identical(other.firstConsultation, firstConsultation) ||
@@ -1271,6 +1290,7 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
+        id,
         diagnosisInitiated,
         firstConsultation,
         firstConsultationDate,
@@ -1340,7 +1360,8 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
 
 abstract class _DiagnosisModel implements DiagnosisModel {
   const factory _DiagnosisModel(
-      {@JsonKey(name: 'diagnosis_initiated') final String? diagnosisInitiated,
+      {@JsonKey(name: 'id', includeToJson: false) final int? id,
+      @JsonKey(name: 'diagnosis_initiated') final String? diagnosisInitiated,
       @JsonKey(name: 'first_consultation') final String? firstConsultation,
       @JsonKey(
           name: 'first_consultation_date',
@@ -1434,6 +1455,9 @@ abstract class _DiagnosisModel implements DiagnosisModel {
   factory _DiagnosisModel.fromJson(Map<String, dynamic> json) =
       _$DiagnosisModelImpl.fromJson;
 
+  @override
+  @JsonKey(name: 'id', includeToJson: false)
+  int? get id;
   @override
   @JsonKey(name: 'diagnosis_initiated')
   String? get diagnosisInitiated;

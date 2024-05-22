@@ -80,7 +80,7 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...mentalHealthScreeningModel.toJson(),
-        'case_id': AuthCubit.instance.workingCaseId,
+        'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
@@ -104,7 +104,7 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...diagnosisModel.toJson(),
-        'case_id': AuthCubit.instance.workingCaseId,
+        'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
@@ -130,7 +130,7 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...treatmentModel.toJson(),
-        'case_id': AuthCubit.instance.workingCaseId,
+        'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
@@ -154,7 +154,7 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...contactTracingModel.toJson(),
-        'case_id': AuthCubit.instance.workingCaseId,
+        'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
@@ -178,7 +178,7 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...outcomeModel.toJson(),
-        'case_id': AuthCubit.instance.workingCaseId,
+        'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
     final result = await NetworkManager.instance.perform(request);
