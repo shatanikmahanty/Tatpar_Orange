@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
+import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
 import 'package:tatpar_acf/features/referral/model/data_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
@@ -38,8 +39,8 @@ Future<void> main() async {
       themeMode: ThemeMode.light,
     );
     await Hive.initFlutter();
-    Hive.openBox<DataModel>('dataModel');
-    Hive.registerAdapter(DataModelAdapter());
+    Hive.openBox<CasteCategory>('casteCategory');
+    Hive.registerAdapter(CasteCategoryAdapter());
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

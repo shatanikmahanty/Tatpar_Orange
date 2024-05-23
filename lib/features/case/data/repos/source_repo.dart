@@ -1,7 +1,10 @@
+import 'dart:developer';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_data.dart';
+import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
 import 'package:tatpar_acf/features/referral/model/data_model.dart';
 
 import '../../../../configurations/network/api_constants.dart';
@@ -16,11 +19,14 @@ class SourceRepo {
       data: {},
     ));
     if (response.success = true) {
-      Box<DataModel> dataBox = Hive.box<DataModel>('dataModel');
+      Box<CasteCategory> dataBox = Hive.box<CasteCategory>('casteCategory');
 
       final DataModel dataModel = DataModel.fromJson(response.data['data']);
-      dataBox.put('ReferralDetailsData', dataModel);
-      dataBox.get('ReferralDetailsData');
+      final List<CasteCategory> casteCategory =
+          dataModel.casteCategory as List<CasteCategory>;
+      await dataBox.addAll(casteCategory);
+      dataBox.get('casteCategory');
+      print(casteCategory);
 
       return dataModel;
     } else {

@@ -20,8 +20,10 @@ CasteCategory _$CasteCategoryFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CasteCategory {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
@@ -38,7 +40,8 @@ abstract class $CasteCategoryCopyWith<$Res> {
       _$CasteCategoryCopyWithImpl<$Res, CasteCategory>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -79,7 +82,8 @@ abstract class _$$CasteCategoryImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -113,15 +117,18 @@ class __$$CasteCategoryImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CasteCategoryImpl implements _CasteCategory {
   const _$CasteCategoryImpl(
-      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
 
   factory _$CasteCategoryImpl.fromJson(Map<String, dynamic> json) =>
       _$$CasteCategoryImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   final String? name;
 
@@ -159,16 +166,19 @@ class _$CasteCategoryImpl implements _CasteCategory {
 
 abstract class _CasteCategory implements CasteCategory {
   const factory _CasteCategory(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'name') final String? name}) = _$CasteCategoryImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
+      _$CasteCategoryImpl;
 
   factory _CasteCategory.fromJson(Map<String, dynamic> json) =
       _$CasteCategoryImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
   @override
