@@ -5,7 +5,7 @@ import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 
 import '../../blocs/case_list_cubit.dart';
-import '../../data/models/case_model.dart';
+import '../../data/case_models/case_model.dart';
 
 @RoutePage(name: 'CaseRouter')
 class CaseRouterPage extends StatelessWidget {

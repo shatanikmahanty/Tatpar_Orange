@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 
-import '../../data/models/workflow_item.dart';
+import '../../data/case_models/workflow_item.dart';
 
 class WorkFlowItemWidget extends StatelessWidget {
   const WorkFlowItemWidget({

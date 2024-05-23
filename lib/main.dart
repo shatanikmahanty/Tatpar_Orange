@@ -11,13 +11,15 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
-import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
-import 'package:tatpar_acf/features/referral/model/data_model.dart';
-import 'package:tatpar_acf/features/referral/model/key_population_model.dart';
-import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
-import 'package:tatpar_acf/features/referral/model/referral_districts_model.dart';
-import 'package:tatpar_acf/features/referral/model/referrer_source_model.dart';
-import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
+import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data.dart';
+import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
+import 'package:tatpar_acf/features/case/data/source_models/caste_category_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/data_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/key_population_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/referrer_source_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
 import 'package:tatpar_acf/utils/extensions/app_dio_exception.dart';
@@ -44,6 +46,8 @@ Future<void> main() async {
       themeMode: ThemeMode.light,
     );
     await Hive.initFlutter();
+
+    ///ReferralDetailsGetApi
     Hive.registerAdapter(CasteCategoryAdapter());
     Hive.registerAdapter(KeyPopulationAdapter());
     Hive.registerAdapter(ReferrerSourceAdapter());
@@ -51,10 +55,21 @@ Future<void> main() async {
     Hive.registerAdapter(DistrictAdapter());
     Hive.registerAdapter(BlockAdapter());
     Hive.registerAdapter(PanchayatAdapter());
-
     Hive.registerAdapter(DataModelAdapter());
-
     await Hive.openBox<DataModel>('dataModel');
+
+    ///diagnosisGetAPI
+    Hive.registerAdapter(AFBResultAdapter());
+    Hive.registerAdapter(NaatMachineAdapter());
+    Hive.registerAdapter(MTBResultAdapter());
+    Hive.registerAdapter(TPTRegimenAdapter());
+    Hive.registerAdapter(TreatmentOutcomeAdapter());
+    Hive.registerAdapter(DiagnosisDataAdapter());
+    await Hive.openBox<DiagnosisData>('diagnosisData');
+
+    ///caseListGetAPI
+    Hive.registerAdapter(CaseAdapter());
+    await Hive.openBox<Case>('caseList');
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

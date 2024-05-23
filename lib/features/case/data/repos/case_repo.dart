@@ -1,12 +1,14 @@
 import 'dart:developer';
 
+import 'package:hive/hive.dart';
+import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
 import 'package:tatpar_acf/configurations/network/network_request.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
-import 'package:tatpar_acf/features/case/data/models/case_model.dart';
+import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
@@ -272,18 +274,6 @@ class CaseRepo {
     }
   }
 
-  // Future<ApiResponse<dynamic>> saveCase(
-  //     int caseId, Map<String, dynamic> caseDetails) async {
-  //   final request = NetworkRequest('$casesUrl$caseId/', RequestMethod.patch,
-  //       isAuthorized: true,
-  //       data: {
-  //         ...caseDetails,
-  //         'healthworker_id': AuthCubit.instance.state.user!.id,
-  //       });
-  //   final result = await NetworkManager.instance.perform(request);
-  //   return result;
-  // }
-
   Future<List<Case>> getCasesForHealthWorker() async {
     final request = NetworkRequest(
       '$casesForHealthWorkerUrl${AuthCubit.instance.state.user!.mobileNumber}',
@@ -294,17 +284,29 @@ class CaseRepo {
       },
     );
     final result = await NetworkManager.instance.perform(request);
-    log(result.data['data']['cases'].toString());
     if (result.status == Status.ok) {
+      Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<dynamic> caseDataList = result.data['data']['cases'];
       final List<Case> cases =
           caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
+      await dataBox.addAll(cases);
+      final List<Case> storedData = dataBox.values.toList();
+      log(storedData.toString());
+
       return cases;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting data',
-        type: Unauthorized(),
-      );
+      Box<Case> dataBox = Hive.box<Case>('caseList');
+      final List<Case> storedData = dataBox.values.toList();
+      if (result.error != null && result.error?.type is NetworkError) {
+        log('No NETWORK');
+        print('Using stored data Of cases from Hive: $storedData');
+        return storedData;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 

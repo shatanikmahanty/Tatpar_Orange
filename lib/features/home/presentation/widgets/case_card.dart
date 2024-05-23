@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:intl/intl.dart';
-import 'package:tatpar_acf/features/case/data/models/case_model.dart';
+import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/disease_chips.dart';
 import 'package:url_launcher/url_launcher.dart';
 

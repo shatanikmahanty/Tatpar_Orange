@@ -9,7 +9,7 @@ import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_field.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
-import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 
 import '../../../app/presentation/widgets/date_text_input.dart';

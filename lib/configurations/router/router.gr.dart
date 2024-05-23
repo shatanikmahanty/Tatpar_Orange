@@ -28,7 +28,8 @@ import 'package:tatpar_acf/features/authentication/presentation/pages/register_p
     deferred as _i20;
 import 'package:tatpar_acf/features/basicdetails/presentation/pages/basicdetails_page.dart'
     deferred as _i3;
-import 'package:tatpar_acf/features/case/data/models/case_model.dart' as _i30;
+import 'package:tatpar_acf/features/case/data/case_models/case_model.dart'
+    as _i30;
 import 'package:tatpar_acf/features/case/presentation/pages/case_profile_page.dart'
     deferred as _i5;
 import 'package:tatpar_acf/features/case/presentation/pages/case_router_page.dart'

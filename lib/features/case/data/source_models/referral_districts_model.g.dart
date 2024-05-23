@@ -62,7 +62,7 @@ class BlockAdapter extends TypeAdapter<Block> {
     return Block(
       id: fields[0] as int?,
       block: fields[1] as String?,
-      panchayat: (fields[8] as List?)?.cast<Panchayat>(),
+      panchayat: (fields[7] as List?)?.cast<Panchayat>(),
     );
   }
 
@@ -74,7 +74,7 @@ class BlockAdapter extends TypeAdapter<Block> {
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.block)
-      ..writeByte(8)
+      ..writeByte(7)
       ..write(obj.panchayat);
   }
 
@@ -91,7 +91,7 @@ class BlockAdapter extends TypeAdapter<Block> {
 
 class PanchayatAdapter extends TypeAdapter<Panchayat> {
   @override
-  final int typeId = 8;
+  final int typeId = 7;
 
   @override
   Panchayat read(BinaryReader reader) {

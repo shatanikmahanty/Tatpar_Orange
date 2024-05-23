@@ -261,7 +261,7 @@ mixin _$Block {
   @HiveField(1)
   @JsonKey(name: 'block')
   String? get block => throw _privateConstructorUsedError;
-  @HiveField(8)
+  @HiveField(7)
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat => throw _privateConstructorUsedError;
 
@@ -278,7 +278,7 @@ abstract class $BlockCopyWith<$Res> {
   $Res call(
       {@HiveField(0) @JsonKey(name: 'id') int? id,
       @HiveField(1) @JsonKey(name: 'block') String? block,
-      @HiveField(8) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
+      @HiveField(7) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
 }
 
 /// @nodoc
@@ -325,7 +325,7 @@ abstract class _$$BlockImplCopyWith<$Res> implements $BlockCopyWith<$Res> {
   $Res call(
       {@HiveField(0) @JsonKey(name: 'id') int? id,
       @HiveField(1) @JsonKey(name: 'block') String? block,
-      @HiveField(8) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
+      @HiveField(7) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
 }
 
 /// @nodoc
@@ -366,7 +366,7 @@ class _$BlockImpl implements _Block {
   const _$BlockImpl(
       {@HiveField(0) @JsonKey(name: 'id') this.id,
       @HiveField(1) @JsonKey(name: 'block') this.block,
-      @HiveField(8)
+      @HiveField(7)
       @JsonKey(name: 'panchayat')
       final List<Panchayat>? panchayat})
       : _panchayat = panchayat;
@@ -384,7 +384,7 @@ class _$BlockImpl implements _Block {
   final String? block;
   final List<Panchayat>? _panchayat;
   @override
-  @HiveField(8)
+  @HiveField(7)
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat {
     final value = _panchayat;
@@ -433,7 +433,7 @@ abstract class _Block implements Block {
   const factory _Block(
       {@HiveField(0) @JsonKey(name: 'id') final int? id,
       @HiveField(1) @JsonKey(name: 'block') final String? block,
-      @HiveField(8)
+      @HiveField(7)
       @JsonKey(name: 'panchayat')
       final List<Panchayat>? panchayat}) = _$BlockImpl;
 
@@ -448,7 +448,7 @@ abstract class _Block implements Block {
   @JsonKey(name: 'block')
   String? get block;
   @override
-  @HiveField(8)
+  @HiveField(7)
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat;
   @override

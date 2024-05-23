@@ -2,20 +2,20 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
-import 'package:tatpar_acf/features/case/data/models/case_model.dart';
+import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
-import 'package:tatpar_acf/features/diagnosis/model/diagnosis_data.dart';
+import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
-import 'package:tatpar_acf/features/referral/model/data_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/data_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 
-import '../data/models/workflow_item.dart';
+import '../data/case_models/workflow_item.dart';
 
 part 'case_cubit.freezed.dart';
 part 'case_cubit.g.dart';

@@ -10,12 +10,12 @@ import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
-import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
-import 'package:tatpar_acf/features/referral/model/key_population_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/caste_category_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/key_population_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
-import 'package:tatpar_acf/features/referral/model/referral_districts_model.dart';
-import 'package:tatpar_acf/features/referral/model/referrer_source_model.dart';
-import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/referrer_source_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart';
 
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';

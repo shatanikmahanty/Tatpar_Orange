@@ -20,14 +20,19 @@ DiagnosisData _$DiagnosisDataFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DiagnosisData {
+  @HiveField(9)
   @JsonKey(name: 'afb_result')
   List<AFBResult>? get afbResult => throw _privateConstructorUsedError;
+  @HiveField(10)
   @JsonKey(name: 'naat_machine')
   List<NaatMachine>? get naatMachine => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(name: 'mtb_result')
   List<MTBResult>? get mtbResult => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(name: 'tpt_regimen')
   List<TPTRegimen>? get tptRegimen => throw _privateConstructorUsedError;
+  @HiveField(13)
   @JsonKey(name: 'treatment_outcome')
   List<TreatmentOutcome>? get treatmentOutcome =>
       throw _privateConstructorUsedError;
@@ -45,10 +50,13 @@ abstract class $DiagnosisDataCopyWith<$Res> {
       _$DiagnosisDataCopyWithImpl<$Res, DiagnosisData>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'afb_result') List<AFBResult>? afbResult,
-      @JsonKey(name: 'naat_machine') List<NaatMachine>? naatMachine,
-      @JsonKey(name: 'mtb_result') List<MTBResult>? mtbResult,
-      @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
+      {@HiveField(9) @JsonKey(name: 'afb_result') List<AFBResult>? afbResult,
+      @HiveField(10)
+      @JsonKey(name: 'naat_machine')
+      List<NaatMachine>? naatMachine,
+      @HiveField(11) @JsonKey(name: 'mtb_result') List<MTBResult>? mtbResult,
+      @HiveField(12) @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
+      @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
       List<TreatmentOutcome>? treatmentOutcome});
 }
@@ -106,10 +114,13 @@ abstract class _$$DiagnosisDataImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'afb_result') List<AFBResult>? afbResult,
-      @JsonKey(name: 'naat_machine') List<NaatMachine>? naatMachine,
-      @JsonKey(name: 'mtb_result') List<MTBResult>? mtbResult,
-      @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
+      {@HiveField(9) @JsonKey(name: 'afb_result') List<AFBResult>? afbResult,
+      @HiveField(10)
+      @JsonKey(name: 'naat_machine')
+      List<NaatMachine>? naatMachine,
+      @HiveField(11) @JsonKey(name: 'mtb_result') List<MTBResult>? mtbResult,
+      @HiveField(12) @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
+      @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
       List<TreatmentOutcome>? treatmentOutcome});
 }
@@ -160,10 +171,19 @@ class __$$DiagnosisDataImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DiagnosisDataImpl implements _DiagnosisData {
   const _$DiagnosisDataImpl(
-      {@JsonKey(name: 'afb_result') final List<AFBResult>? afbResult,
-      @JsonKey(name: 'naat_machine') final List<NaatMachine>? naatMachine,
-      @JsonKey(name: 'mtb_result') final List<MTBResult>? mtbResult,
-      @JsonKey(name: 'tpt_regimen') final List<TPTRegimen>? tptRegimen,
+      {@HiveField(9)
+      @JsonKey(name: 'afb_result')
+      final List<AFBResult>? afbResult,
+      @HiveField(10)
+      @JsonKey(name: 'naat_machine')
+      final List<NaatMachine>? naatMachine,
+      @HiveField(11)
+      @JsonKey(name: 'mtb_result')
+      final List<MTBResult>? mtbResult,
+      @HiveField(12)
+      @JsonKey(name: 'tpt_regimen')
+      final List<TPTRegimen>? tptRegimen,
+      @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
       final List<TreatmentOutcome>? treatmentOutcome})
       : _afbResult = afbResult,
@@ -177,6 +197,7 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
   final List<AFBResult>? _afbResult;
   @override
+  @HiveField(9)
   @JsonKey(name: 'afb_result')
   List<AFBResult>? get afbResult {
     final value = _afbResult;
@@ -188,6 +209,7 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
   final List<NaatMachine>? _naatMachine;
   @override
+  @HiveField(10)
   @JsonKey(name: 'naat_machine')
   List<NaatMachine>? get naatMachine {
     final value = _naatMachine;
@@ -199,6 +221,7 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
   final List<MTBResult>? _mtbResult;
   @override
+  @HiveField(11)
   @JsonKey(name: 'mtb_result')
   List<MTBResult>? get mtbResult {
     final value = _mtbResult;
@@ -210,6 +233,7 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
   final List<TPTRegimen>? _tptRegimen;
   @override
+  @HiveField(12)
   @JsonKey(name: 'tpt_regimen')
   List<TPTRegimen>? get tptRegimen {
     final value = _tptRegimen;
@@ -221,6 +245,7 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
   final List<TreatmentOutcome>? _treatmentOutcome;
   @override
+  @HiveField(13)
   @JsonKey(name: 'treatment_outcome')
   List<TreatmentOutcome>? get treatmentOutcome {
     final value = _treatmentOutcome;
@@ -279,10 +304,19 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
 
 abstract class _DiagnosisData implements DiagnosisData {
   const factory _DiagnosisData(
-      {@JsonKey(name: 'afb_result') final List<AFBResult>? afbResult,
-      @JsonKey(name: 'naat_machine') final List<NaatMachine>? naatMachine,
-      @JsonKey(name: 'mtb_result') final List<MTBResult>? mtbResult,
-      @JsonKey(name: 'tpt_regimen') final List<TPTRegimen>? tptRegimen,
+      {@HiveField(9)
+      @JsonKey(name: 'afb_result')
+      final List<AFBResult>? afbResult,
+      @HiveField(10)
+      @JsonKey(name: 'naat_machine')
+      final List<NaatMachine>? naatMachine,
+      @HiveField(11)
+      @JsonKey(name: 'mtb_result')
+      final List<MTBResult>? mtbResult,
+      @HiveField(12)
+      @JsonKey(name: 'tpt_regimen')
+      final List<TPTRegimen>? tptRegimen,
+      @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
       final List<TreatmentOutcome>? treatmentOutcome}) = _$DiagnosisDataImpl;
 
@@ -290,18 +324,23 @@ abstract class _DiagnosisData implements DiagnosisData {
       _$DiagnosisDataImpl.fromJson;
 
   @override
+  @HiveField(9)
   @JsonKey(name: 'afb_result')
   List<AFBResult>? get afbResult;
   @override
+  @HiveField(10)
   @JsonKey(name: 'naat_machine')
   List<NaatMachine>? get naatMachine;
   @override
+  @HiveField(11)
   @JsonKey(name: 'mtb_result')
   List<MTBResult>? get mtbResult;
   @override
+  @HiveField(12)
   @JsonKey(name: 'tpt_regimen')
   List<TPTRegimen>? get tptRegimen;
   @override
+  @HiveField(13)
   @JsonKey(name: 'treatment_outcome')
   List<TreatmentOutcome>? get treatmentOutcome;
   @override

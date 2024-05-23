@@ -3,7 +3,7 @@
 // ignore_for_file: type=lint
 // ignore_for_file: unused_element, deprecated_member_use, deprecated_member_use_from_same_package, use_function_type_syntax_for_parameters, unnecessary_const, avoid_init_to_null, invalid_override_different_default_values_named, prefer_expression_function_bodies, annotate_overrides, invalid_annotation_target, unnecessary_question_mark
 
-part of 'treatment_outcome.dart';
+part of 'diagnosis_data_fields.dart';
 
 // **************************************************************************
 // FreezedGenerator
@@ -20,8 +20,10 @@ TreatmentOutcome _$TreatmentOutcomeFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TreatmentOutcome {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
@@ -38,7 +40,8 @@ abstract class $TreatmentOutcomeCopyWith<$Res> {
       _$TreatmentOutcomeCopyWithImpl<$Res, TreatmentOutcome>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -79,7 +82,8 @@ abstract class _$$TreatmentOutcomeImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -113,15 +117,18 @@ class __$$TreatmentOutcomeImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TreatmentOutcomeImpl implements _TreatmentOutcome {
   const _$TreatmentOutcomeImpl(
-      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
 
   factory _$TreatmentOutcomeImpl.fromJson(Map<String, dynamic> json) =>
       _$$TreatmentOutcomeImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   final String? name;
 
@@ -160,16 +167,19 @@ class _$TreatmentOutcomeImpl implements _TreatmentOutcome {
 
 abstract class _TreatmentOutcome implements TreatmentOutcome {
   const factory _TreatmentOutcome(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'name') final String? name}) = _$TreatmentOutcomeImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
+      _$TreatmentOutcomeImpl;
 
   factory _TreatmentOutcome.fromJson(Map<String, dynamic> json) =
       _$TreatmentOutcomeImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
   @override
@@ -184,8 +194,10 @@ TPTRegimen _$TPTRegimenFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TPTRegimen {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
@@ -202,7 +214,8 @@ abstract class $TPTRegimenCopyWith<$Res> {
       _$TPTRegimenCopyWithImpl<$Res, TPTRegimen>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -243,7 +256,8 @@ abstract class _$$TPTRegimenImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -277,15 +291,18 @@ class __$$TPTRegimenImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TPTRegimenImpl implements _TPTRegimen {
   const _$TPTRegimenImpl(
-      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
 
   factory _$TPTRegimenImpl.fromJson(Map<String, dynamic> json) =>
       _$$TPTRegimenImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   final String? name;
 
@@ -323,16 +340,19 @@ class _$TPTRegimenImpl implements _TPTRegimen {
 
 abstract class _TPTRegimen implements TPTRegimen {
   const factory _TPTRegimen(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'name') final String? name}) = _$TPTRegimenImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
+      _$TPTRegimenImpl;
 
   factory _TPTRegimen.fromJson(Map<String, dynamic> json) =
       _$TPTRegimenImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
   @override
@@ -347,8 +367,10 @@ MTBResult _$MTBResultFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$MTBResult {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
@@ -364,7 +386,8 @@ abstract class $MTBResultCopyWith<$Res> {
       _$MTBResultCopyWithImpl<$Res, MTBResult>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -405,7 +428,8 @@ abstract class _$$MTBResultImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -439,15 +463,18 @@ class __$$MTBResultImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MTBResultImpl implements _MTBResult {
   const _$MTBResultImpl(
-      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
 
   factory _$MTBResultImpl.fromJson(Map<String, dynamic> json) =>
       _$$MTBResultImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   final String? name;
 
@@ -485,16 +512,19 @@ class _$MTBResultImpl implements _MTBResult {
 
 abstract class _MTBResult implements MTBResult {
   const factory _MTBResult(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'name') final String? name}) = _$MTBResultImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
+      _$MTBResultImpl;
 
   factory _MTBResult.fromJson(Map<String, dynamic> json) =
       _$MTBResultImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
   @override
@@ -509,8 +539,10 @@ NaatMachine _$NaatMachineFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$NaatMachine {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
@@ -527,7 +559,8 @@ abstract class $NaatMachineCopyWith<$Res> {
       _$NaatMachineCopyWithImpl<$Res, NaatMachine>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -568,7 +601,8 @@ abstract class _$$NaatMachineImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -602,15 +636,18 @@ class __$$NaatMachineImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$NaatMachineImpl implements _NaatMachine {
   const _$NaatMachineImpl(
-      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
 
   factory _$NaatMachineImpl.fromJson(Map<String, dynamic> json) =>
       _$$NaatMachineImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   final String? name;
 
@@ -648,16 +685,19 @@ class _$NaatMachineImpl implements _NaatMachine {
 
 abstract class _NaatMachine implements NaatMachine {
   const factory _NaatMachine(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'name') final String? name}) = _$NaatMachineImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
+      _$NaatMachineImpl;
 
   factory _NaatMachine.fromJson(Map<String, dynamic> json) =
       _$NaatMachineImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
   @override
@@ -672,8 +712,10 @@ AFBResult _$AFBResultFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AFBResult {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
@@ -689,7 +731,8 @@ abstract class $AFBResultCopyWith<$Res> {
       _$AFBResultCopyWithImpl<$Res, AFBResult>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -730,7 +773,8 @@ abstract class _$$AFBResultImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id, @JsonKey(name: 'name') String? name});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -764,15 +808,18 @@ class __$$AFBResultImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AFBResultImpl implements _AFBResult {
   const _$AFBResultImpl(
-      {@JsonKey(name: 'id') this.id, @JsonKey(name: 'name') this.name});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
 
   factory _$AFBResultImpl.fromJson(Map<String, dynamic> json) =>
       _$$AFBResultImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   final String? name;
 
@@ -810,16 +857,19 @@ class _$AFBResultImpl implements _AFBResult {
 
 abstract class _AFBResult implements AFBResult {
   const factory _AFBResult(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'name') final String? name}) = _$AFBResultImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
+      _$AFBResultImpl;
 
   factory _AFBResult.fromJson(Map<String, dynamic> json) =
       _$AFBResultImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
   @override

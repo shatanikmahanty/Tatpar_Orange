@@ -2,10 +2,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
-import 'package:tatpar_acf/features/case/data/models/case_model.dart';
+import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 
-import '../data/models/cases_filter_model.dart';
+import '../data/case_models/cases_filter_model.dart';
 
 part 'case_list_cubit.freezed.dart';
 

@@ -1,14 +1,16 @@
 // ignore_for_file: invalid_annotation_target
 
 import 'package:freezed_annotation/freezed_annotation.dart';
-part 'treatment_outcome.freezed.dart';
-part 'treatment_outcome.g.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+part 'diagnosis_data_fields.freezed.dart';
+part 'diagnosis_data_fields.g.dart';
 
 @freezed
+@HiveType(typeId: 13)
 class TreatmentOutcome with _$TreatmentOutcome {
   const factory TreatmentOutcome({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'name') String? name,
+    @HiveField(0) @JsonKey(name: 'id') int? id,
+    @HiveField(1) @JsonKey(name: 'name') String? name,
   }) = _TreatmentOutcome;
 
   factory TreatmentOutcome.fromJson(Map<String, dynamic> json) =>
@@ -16,10 +18,11 @@ class TreatmentOutcome with _$TreatmentOutcome {
 }
 
 @freezed
+@HiveType(typeId: 12)
 class TPTRegimen with _$TPTRegimen {
   const factory TPTRegimen({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'name') String? name,
+    @HiveField(0) @JsonKey(name: 'id') int? id,
+    @HiveField(1) @JsonKey(name: 'name') String? name,
   }) = _TPTRegimen;
 
   factory TPTRegimen.fromJson(Map<String, dynamic> json) =>
@@ -27,10 +30,11 @@ class TPTRegimen with _$TPTRegimen {
 }
 
 @freezed
+@HiveType(typeId: 11)
 class MTBResult with _$MTBResult {
   const factory MTBResult({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'name') String? name,
+    @HiveField(0) @JsonKey(name: 'id') int? id,
+    @HiveField(1) @JsonKey(name: 'name') String? name,
   }) = _MTBResult;
 
   factory MTBResult.fromJson(Map<String, dynamic> json) =>
@@ -38,10 +42,11 @@ class MTBResult with _$MTBResult {
 }
 
 @freezed
+@HiveType(typeId: 10)
 class NaatMachine with _$NaatMachine {
   const factory NaatMachine({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'name') String? name,
+    @HiveField(0) @JsonKey(name: 'id') int? id,
+    @HiveField(1) @JsonKey(name: 'name') String? name,
   }) = _NaatMachine;
 
   factory NaatMachine.fromJson(Map<String, dynamic> json) =>
@@ -49,10 +54,11 @@ class NaatMachine with _$NaatMachine {
 }
 
 @freezed
+@HiveType(typeId: 9)
 class AFBResult with _$AFBResult {
   const factory AFBResult({
-    @JsonKey(name: 'id') int? id,
-    @JsonKey(name: 'name') String? name,
+    @HiveField(0) @JsonKey(name: 'id') int? id,
+    @HiveField(1) @JsonKey(name: 'name') String? name,
   }) = _AFBResult;
 
   factory AFBResult.fromJson(Map<String, dynamic> json) =>

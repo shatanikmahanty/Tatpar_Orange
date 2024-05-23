@@ -25,14 +25,14 @@ class Block with _$Block {
   const factory Block({
     @HiveField(0) @JsonKey(name: 'id') int? id,
     @HiveField(1) @JsonKey(name: 'block') String? block,
-    @HiveField(8) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat,
+    @HiveField(7) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat,
   }) = _Block;
 
   factory Block.fromJson(Map<String, dynamic> json) => _$BlockFromJson(json);
 }
 
 @freezed
-@HiveType(typeId: 8)
+@HiveType(typeId: 7)
 class Panchayat with _$Panchayat {
   const factory Panchayat({
     @HiveField(0) @JsonKey(name: 'id') int? id,

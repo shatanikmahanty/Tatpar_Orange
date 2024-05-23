@@ -20,52 +20,74 @@ Case _$CaseFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Case {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'referral_name')
   String? get referralName => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'gender')
   String? get gender => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'age')
   int? get age => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'district')
   String? get district => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(name: 'panchayat')
   String? get panchayat => throw _privateConstructorUsedError;
+  @HiveField(6)
   @JsonKey(name: 'screened_by')
   String? get screenedBy => throw _privateConstructorUsedError;
+  @HiveField(7)
   @JsonKey(name: 'referred_by')
   String? get referredBy => throw _privateConstructorUsedError;
+  @HiveField(8)
   @JsonKey(name: 'referral_mobile_number')
   String? get referralMobileNumber => throw _privateConstructorUsedError;
+  @HiveField(9)
   @JsonKey(name: 'assigned_to')
   String? get assignedTo => throw _privateConstructorUsedError;
+  @HiveField(10)
   @JsonKey(name: 'tb_screening')
   String? get tbScreeningOutcome => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(name: 'diagnosis')
   String? get diagnosisName => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(name: 'status')
   String? get status => throw _privateConstructorUsedError;
+  @HiveField(13)
   @JsonKey(
       name: 'assigned_on',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get assignedOn => throw _privateConstructorUsedError;
+  @HiveField(14)
   @JsonKey(
       name: 'created_on', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get createdOn => throw _privateConstructorUsedError;
+  @HiveField(15)
   @JsonKey(name: 'referral_id')
   int? get referralDetails => throw _privateConstructorUsedError;
+  @HiveField(16)
   @JsonKey(name: 'tb_screening_id')
   int? get tbScreening => throw _privateConstructorUsedError;
+  @HiveField(17)
   @JsonKey(name: 'whosrq_id')
   int? get whoSrq => throw _privateConstructorUsedError;
+  @HiveField(18)
   @JsonKey(name: 'diagnosis_id')
   int? get diagnosis => throw _privateConstructorUsedError;
+  @HiveField(19)
   @JsonKey(name: 'outcome_id')
   int? get outcomeValue => throw _privateConstructorUsedError;
+  @HiveField(20)
   @JsonKey(name: 'contact_tracing_id')
   int? get contactTracing => throw _privateConstructorUsedError;
+  @HiveField(21)
   @JsonKey(name: 'treatment_id')
   int? get treatment => throw _privateConstructorUsedError;
 
@@ -80,36 +102,40 @@ abstract class $CaseCopyWith<$Res> {
       _$CaseCopyWithImpl<$Res, Case>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'referral_name') String? referralName,
-      @JsonKey(name: 'gender') String? gender,
-      @JsonKey(name: 'age') int? age,
-      @JsonKey(name: 'district') String? district,
-      @JsonKey(name: 'panchayat') String? panchayat,
-      @JsonKey(name: 'screened_by') String? screenedBy,
-      @JsonKey(name: 'referred_by') String? referredBy,
-      @JsonKey(name: 'referral_mobile_number') String? referralMobileNumber,
-      @JsonKey(name: 'assigned_to') String? assignedTo,
-      @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
-      @JsonKey(name: 'diagnosis') String? diagnosisName,
-      @JsonKey(name: 'status') String? status,
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'referral_name') String? referralName,
+      @HiveField(2) @JsonKey(name: 'gender') String? gender,
+      @HiveField(3) @JsonKey(name: 'age') int? age,
+      @HiveField(4) @JsonKey(name: 'district') String? district,
+      @HiveField(5) @JsonKey(name: 'panchayat') String? panchayat,
+      @HiveField(6) @JsonKey(name: 'screened_by') String? screenedBy,
+      @HiveField(7) @JsonKey(name: 'referred_by') String? referredBy,
+      @HiveField(8)
+      @JsonKey(name: 'referral_mobile_number')
+      String? referralMobileNumber,
+      @HiveField(9) @JsonKey(name: 'assigned_to') String? assignedTo,
+      @HiveField(10) @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
+      @HiveField(11) @JsonKey(name: 'diagnosis') String? diagnosisName,
+      @HiveField(12) @JsonKey(name: 'status') String? status,
+      @HiveField(13)
       @JsonKey(
           name: 'assigned_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? assignedOn,
+      @HiveField(14)
       @JsonKey(
           name: 'created_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? createdOn,
-      @JsonKey(name: 'referral_id') int? referralDetails,
-      @JsonKey(name: 'tb_screening_id') int? tbScreening,
-      @JsonKey(name: 'whosrq_id') int? whoSrq,
-      @JsonKey(name: 'diagnosis_id') int? diagnosis,
-      @JsonKey(name: 'outcome_id') int? outcomeValue,
-      @JsonKey(name: 'contact_tracing_id') int? contactTracing,
-      @JsonKey(name: 'treatment_id') int? treatment});
+      @HiveField(15) @JsonKey(name: 'referral_id') int? referralDetails,
+      @HiveField(16) @JsonKey(name: 'tb_screening_id') int? tbScreening,
+      @HiveField(17) @JsonKey(name: 'whosrq_id') int? whoSrq,
+      @HiveField(18) @JsonKey(name: 'diagnosis_id') int? diagnosis,
+      @HiveField(19) @JsonKey(name: 'outcome_id') int? outcomeValue,
+      @HiveField(20) @JsonKey(name: 'contact_tracing_id') int? contactTracing,
+      @HiveField(21) @JsonKey(name: 'treatment_id') int? treatment});
 }
 
 /// @nodoc
@@ -249,36 +275,40 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'referral_name') String? referralName,
-      @JsonKey(name: 'gender') String? gender,
-      @JsonKey(name: 'age') int? age,
-      @JsonKey(name: 'district') String? district,
-      @JsonKey(name: 'panchayat') String? panchayat,
-      @JsonKey(name: 'screened_by') String? screenedBy,
-      @JsonKey(name: 'referred_by') String? referredBy,
-      @JsonKey(name: 'referral_mobile_number') String? referralMobileNumber,
-      @JsonKey(name: 'assigned_to') String? assignedTo,
-      @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
-      @JsonKey(name: 'diagnosis') String? diagnosisName,
-      @JsonKey(name: 'status') String? status,
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'referral_name') String? referralName,
+      @HiveField(2) @JsonKey(name: 'gender') String? gender,
+      @HiveField(3) @JsonKey(name: 'age') int? age,
+      @HiveField(4) @JsonKey(name: 'district') String? district,
+      @HiveField(5) @JsonKey(name: 'panchayat') String? panchayat,
+      @HiveField(6) @JsonKey(name: 'screened_by') String? screenedBy,
+      @HiveField(7) @JsonKey(name: 'referred_by') String? referredBy,
+      @HiveField(8)
+      @JsonKey(name: 'referral_mobile_number')
+      String? referralMobileNumber,
+      @HiveField(9) @JsonKey(name: 'assigned_to') String? assignedTo,
+      @HiveField(10) @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
+      @HiveField(11) @JsonKey(name: 'diagnosis') String? diagnosisName,
+      @HiveField(12) @JsonKey(name: 'status') String? status,
+      @HiveField(13)
       @JsonKey(
           name: 'assigned_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? assignedOn,
+      @HiveField(14)
       @JsonKey(
           name: 'created_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? createdOn,
-      @JsonKey(name: 'referral_id') int? referralDetails,
-      @JsonKey(name: 'tb_screening_id') int? tbScreening,
-      @JsonKey(name: 'whosrq_id') int? whoSrq,
-      @JsonKey(name: 'diagnosis_id') int? diagnosis,
-      @JsonKey(name: 'outcome_id') int? outcomeValue,
-      @JsonKey(name: 'contact_tracing_id') int? contactTracing,
-      @JsonKey(name: 'treatment_id') int? treatment});
+      @HiveField(15) @JsonKey(name: 'referral_id') int? referralDetails,
+      @HiveField(16) @JsonKey(name: 'tb_screening_id') int? tbScreening,
+      @HiveField(17) @JsonKey(name: 'whosrq_id') int? whoSrq,
+      @HiveField(18) @JsonKey(name: 'diagnosis_id') int? diagnosis,
+      @HiveField(19) @JsonKey(name: 'outcome_id') int? outcomeValue,
+      @HiveField(20) @JsonKey(name: 'contact_tracing_id') int? contactTracing,
+      @HiveField(21) @JsonKey(name: 'treatment_id') int? treatment});
 }
 
 /// @nodoc
@@ -411,108 +441,134 @@ class __$$CaseImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CaseImpl implements _Case {
   const _$CaseImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'referral_name') this.referralName,
-      @JsonKey(name: 'gender') this.gender,
-      @JsonKey(name: 'age') this.age,
-      @JsonKey(name: 'district') this.district,
-      @JsonKey(name: 'panchayat') this.panchayat,
-      @JsonKey(name: 'screened_by') this.screenedBy,
-      @JsonKey(name: 'referred_by') this.referredBy,
-      @JsonKey(name: 'referral_mobile_number') this.referralMobileNumber,
-      @JsonKey(name: 'assigned_to') this.assignedTo,
-      @JsonKey(name: 'tb_screening') this.tbScreeningOutcome,
-      @JsonKey(name: 'diagnosis') this.diagnosisName,
-      @JsonKey(name: 'status') this.status,
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'referral_name') this.referralName,
+      @HiveField(2) @JsonKey(name: 'gender') this.gender,
+      @HiveField(3) @JsonKey(name: 'age') this.age,
+      @HiveField(4) @JsonKey(name: 'district') this.district,
+      @HiveField(5) @JsonKey(name: 'panchayat') this.panchayat,
+      @HiveField(6) @JsonKey(name: 'screened_by') this.screenedBy,
+      @HiveField(7) @JsonKey(name: 'referred_by') this.referredBy,
+      @HiveField(8)
+      @JsonKey(name: 'referral_mobile_number')
+      this.referralMobileNumber,
+      @HiveField(9) @JsonKey(name: 'assigned_to') this.assignedTo,
+      @HiveField(10) @JsonKey(name: 'tb_screening') this.tbScreeningOutcome,
+      @HiveField(11) @JsonKey(name: 'diagnosis') this.diagnosisName,
+      @HiveField(12) @JsonKey(name: 'status') this.status,
+      @HiveField(13)
       @JsonKey(
           name: 'assigned_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.assignedOn,
+      @HiveField(14)
       @JsonKey(
           name: 'created_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.createdOn,
-      @JsonKey(name: 'referral_id') this.referralDetails,
-      @JsonKey(name: 'tb_screening_id') this.tbScreening,
-      @JsonKey(name: 'whosrq_id') this.whoSrq,
-      @JsonKey(name: 'diagnosis_id') this.diagnosis,
-      @JsonKey(name: 'outcome_id') this.outcomeValue,
-      @JsonKey(name: 'contact_tracing_id') this.contactTracing,
-      @JsonKey(name: 'treatment_id') this.treatment});
+      @HiveField(15) @JsonKey(name: 'referral_id') this.referralDetails,
+      @HiveField(16) @JsonKey(name: 'tb_screening_id') this.tbScreening,
+      @HiveField(17) @JsonKey(name: 'whosrq_id') this.whoSrq,
+      @HiveField(18) @JsonKey(name: 'diagnosis_id') this.diagnosis,
+      @HiveField(19) @JsonKey(name: 'outcome_id') this.outcomeValue,
+      @HiveField(20) @JsonKey(name: 'contact_tracing_id') this.contactTracing,
+      @HiveField(21) @JsonKey(name: 'treatment_id') this.treatment});
 
   factory _$CaseImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaseImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'referral_name')
   final String? referralName;
   @override
+  @HiveField(2)
   @JsonKey(name: 'gender')
   final String? gender;
   @override
+  @HiveField(3)
   @JsonKey(name: 'age')
   final int? age;
   @override
+  @HiveField(4)
   @JsonKey(name: 'district')
   final String? district;
   @override
+  @HiveField(5)
   @JsonKey(name: 'panchayat')
   final String? panchayat;
   @override
+  @HiveField(6)
   @JsonKey(name: 'screened_by')
   final String? screenedBy;
   @override
+  @HiveField(7)
   @JsonKey(name: 'referred_by')
   final String? referredBy;
   @override
+  @HiveField(8)
   @JsonKey(name: 'referral_mobile_number')
   final String? referralMobileNumber;
   @override
+  @HiveField(9)
   @JsonKey(name: 'assigned_to')
   final String? assignedTo;
   @override
+  @HiveField(10)
   @JsonKey(name: 'tb_screening')
   final String? tbScreeningOutcome;
   @override
+  @HiveField(11)
   @JsonKey(name: 'diagnosis')
   final String? diagnosisName;
   @override
+  @HiveField(12)
   @JsonKey(name: 'status')
   final String? status;
   @override
+  @HiveField(13)
   @JsonKey(
       name: 'assigned_on',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? assignedOn;
   @override
+  @HiveField(14)
   @JsonKey(
       name: 'created_on', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? createdOn;
   @override
+  @HiveField(15)
   @JsonKey(name: 'referral_id')
   final int? referralDetails;
   @override
+  @HiveField(16)
   @JsonKey(name: 'tb_screening_id')
   final int? tbScreening;
   @override
+  @HiveField(17)
   @JsonKey(name: 'whosrq_id')
   final int? whoSrq;
   @override
+  @HiveField(18)
   @JsonKey(name: 'diagnosis_id')
   final int? diagnosis;
   @override
+  @HiveField(19)
   @JsonKey(name: 'outcome_id')
   final int? outcomeValue;
   @override
+  @HiveField(20)
   @JsonKey(name: 'contact_tracing_id')
   final int? contactTracing;
   @override
+  @HiveField(21)
   @JsonKey(name: 'treatment_id')
   final int? treatment;
 
@@ -611,108 +667,139 @@ class _$CaseImpl implements _Case {
 
 abstract class _Case implements Case {
   const factory _Case(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'referral_name') final String? referralName,
-      @JsonKey(name: 'gender') final String? gender,
-      @JsonKey(name: 'age') final int? age,
-      @JsonKey(name: 'district') final String? district,
-      @JsonKey(name: 'panchayat') final String? panchayat,
-      @JsonKey(name: 'screened_by') final String? screenedBy,
-      @JsonKey(name: 'referred_by') final String? referredBy,
+      {@HiveField(0) @JsonKey(name: 'id') final int? id,
+      @HiveField(1) @JsonKey(name: 'referral_name') final String? referralName,
+      @HiveField(2) @JsonKey(name: 'gender') final String? gender,
+      @HiveField(3) @JsonKey(name: 'age') final int? age,
+      @HiveField(4) @JsonKey(name: 'district') final String? district,
+      @HiveField(5) @JsonKey(name: 'panchayat') final String? panchayat,
+      @HiveField(6) @JsonKey(name: 'screened_by') final String? screenedBy,
+      @HiveField(7) @JsonKey(name: 'referred_by') final String? referredBy,
+      @HiveField(8)
       @JsonKey(name: 'referral_mobile_number')
       final String? referralMobileNumber,
-      @JsonKey(name: 'assigned_to') final String? assignedTo,
-      @JsonKey(name: 'tb_screening') final String? tbScreeningOutcome,
-      @JsonKey(name: 'diagnosis') final String? diagnosisName,
-      @JsonKey(name: 'status') final String? status,
+      @HiveField(9) @JsonKey(name: 'assigned_to') final String? assignedTo,
+      @HiveField(10)
+      @JsonKey(name: 'tb_screening')
+      final String? tbScreeningOutcome,
+      @HiveField(11) @JsonKey(name: 'diagnosis') final String? diagnosisName,
+      @HiveField(12) @JsonKey(name: 'status') final String? status,
+      @HiveField(13)
       @JsonKey(
           name: 'assigned_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? assignedOn,
+      @HiveField(14)
       @JsonKey(
           name: 'created_on',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? createdOn,
-      @JsonKey(name: 'referral_id') final int? referralDetails,
-      @JsonKey(name: 'tb_screening_id') final int? tbScreening,
-      @JsonKey(name: 'whosrq_id') final int? whoSrq,
-      @JsonKey(name: 'diagnosis_id') final int? diagnosis,
-      @JsonKey(name: 'outcome_id') final int? outcomeValue,
-      @JsonKey(name: 'contact_tracing_id') final int? contactTracing,
-      @JsonKey(name: 'treatment_id') final int? treatment}) = _$CaseImpl;
+      @HiveField(15) @JsonKey(name: 'referral_id') final int? referralDetails,
+      @HiveField(16) @JsonKey(name: 'tb_screening_id') final int? tbScreening,
+      @HiveField(17) @JsonKey(name: 'whosrq_id') final int? whoSrq,
+      @HiveField(18) @JsonKey(name: 'diagnosis_id') final int? diagnosis,
+      @HiveField(19) @JsonKey(name: 'outcome_id') final int? outcomeValue,
+      @HiveField(20)
+      @JsonKey(name: 'contact_tracing_id')
+      final int? contactTracing,
+      @HiveField(21)
+      @JsonKey(name: 'treatment_id')
+      final int? treatment}) = _$CaseImpl;
 
   factory _Case.fromJson(Map<String, dynamic> json) = _$CaseImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'referral_name')
   String? get referralName;
   @override
+  @HiveField(2)
   @JsonKey(name: 'gender')
   String? get gender;
   @override
+  @HiveField(3)
   @JsonKey(name: 'age')
   int? get age;
   @override
+  @HiveField(4)
   @JsonKey(name: 'district')
   String? get district;
   @override
+  @HiveField(5)
   @JsonKey(name: 'panchayat')
   String? get panchayat;
   @override
+  @HiveField(6)
   @JsonKey(name: 'screened_by')
   String? get screenedBy;
   @override
+  @HiveField(7)
   @JsonKey(name: 'referred_by')
   String? get referredBy;
   @override
+  @HiveField(8)
   @JsonKey(name: 'referral_mobile_number')
   String? get referralMobileNumber;
   @override
+  @HiveField(9)
   @JsonKey(name: 'assigned_to')
   String? get assignedTo;
   @override
+  @HiveField(10)
   @JsonKey(name: 'tb_screening')
   String? get tbScreeningOutcome;
   @override
+  @HiveField(11)
   @JsonKey(name: 'diagnosis')
   String? get diagnosisName;
   @override
+  @HiveField(12)
   @JsonKey(name: 'status')
   String? get status;
   @override
+  @HiveField(13)
   @JsonKey(
       name: 'assigned_on',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get assignedOn;
   @override
+  @HiveField(14)
   @JsonKey(
       name: 'created_on', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get createdOn;
   @override
+  @HiveField(15)
   @JsonKey(name: 'referral_id')
   int? get referralDetails;
   @override
+  @HiveField(16)
   @JsonKey(name: 'tb_screening_id')
   int? get tbScreening;
   @override
+  @HiveField(17)
   @JsonKey(name: 'whosrq_id')
   int? get whoSrq;
   @override
+  @HiveField(18)
   @JsonKey(name: 'diagnosis_id')
   int? get diagnosis;
   @override
+  @HiveField(19)
   @JsonKey(name: 'outcome_id')
   int? get outcomeValue;
   @override
+  @HiveField(20)
   @JsonKey(name: 'contact_tracing_id')
   int? get contactTracing;
   @override
+  @HiveField(21)
   @JsonKey(name: 'treatment_id')
   int? get treatment;
   @override
