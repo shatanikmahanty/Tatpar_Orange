@@ -12,10 +12,10 @@ part 'data_model.freezed.dart';
 part 'data_model.g.dart';
 
 @freezed
-@HiveType(typeId: 0)
 class DataModel with _$DataModel {
+  @HiveType(typeId: 0, adapterName: 'DataModelAdapter')
   const factory DataModel({
-    @HiveField(0)
+    @HiveField(6)
     @JsonKey(name: 'caste_category')
     List<CasteCategory>? casteCategory,
     @HiveField(1)

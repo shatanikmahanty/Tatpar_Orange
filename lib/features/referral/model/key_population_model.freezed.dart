@@ -20,14 +20,12 @@ KeyPopulation _$KeyPopulationFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$KeyPopulation {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_on')
-  String? get updatedOn => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_on')
-  String? get createdOn => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -42,10 +40,8 @@ abstract class $KeyPopulationCopyWith<$Res> {
       _$KeyPopulationCopyWithImpl<$Res, KeyPopulation>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'updated_on') String? updatedOn,
-      @JsonKey(name: 'created_on') String? createdOn});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -63,8 +59,6 @@ class _$KeyPopulationCopyWithImpl<$Res, $Val extends KeyPopulation>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? updatedOn = freezed,
-    Object? createdOn = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -74,14 +68,6 @@ class _$KeyPopulationCopyWithImpl<$Res, $Val extends KeyPopulation>
       name: freezed == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
-              as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
               as String?,
     ) as $Val);
   }
@@ -96,10 +82,8 @@ abstract class _$$KeyPopulationImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'name') String? name,
-      @JsonKey(name: 'updated_on') String? updatedOn,
-      @JsonKey(name: 'created_on') String? createdOn});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
 }
 
 /// @nodoc
@@ -115,8 +99,6 @@ class __$$KeyPopulationImplCopyWithImpl<$Res>
   $Res call({
     Object? id = freezed,
     Object? name = freezed,
-    Object? updatedOn = freezed,
-    Object? createdOn = freezed,
   }) {
     return _then(_$KeyPopulationImpl(
       id: freezed == id
@@ -127,14 +109,6 @@ class __$$KeyPopulationImplCopyWithImpl<$Res>
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
               as String?,
-      updatedOn: freezed == updatedOn
-          ? _value.updatedOn
-          : updatedOn // ignore: cast_nullable_to_non_nullable
-              as String?,
-      createdOn: freezed == createdOn
-          ? _value.createdOn
-          : createdOn // ignore: cast_nullable_to_non_nullable
-              as String?,
     ));
   }
 }
@@ -143,30 +117,24 @@ class __$$KeyPopulationImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$KeyPopulationImpl implements _KeyPopulation {
   const _$KeyPopulationImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'name') this.name,
-      @JsonKey(name: 'updated_on') this.updatedOn,
-      @JsonKey(name: 'created_on') this.createdOn});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
 
   factory _$KeyPopulationImpl.fromJson(Map<String, dynamic> json) =>
       _$$KeyPopulationImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   final String? name;
-  @override
-  @JsonKey(name: 'updated_on')
-  final String? updatedOn;
-  @override
-  @JsonKey(name: 'created_on')
-  final String? createdOn;
 
   @override
   String toString() {
-    return 'KeyPopulation(id: $id, name: $name, updatedOn: $updatedOn, createdOn: $createdOn)';
+    return 'KeyPopulation(id: $id, name: $name)';
   }
 
   @override
@@ -175,16 +143,12 @@ class _$KeyPopulationImpl implements _KeyPopulation {
         (other.runtimeType == runtimeType &&
             other is _$KeyPopulationImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.name, name) || other.name == name) &&
-            (identical(other.updatedOn, updatedOn) ||
-                other.updatedOn == updatedOn) &&
-            (identical(other.createdOn, createdOn) ||
-                other.createdOn == createdOn));
+            (identical(other.name, name) || other.name == name));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, updatedOn, createdOn);
+  int get hashCode => Object.hash(runtimeType, id, name);
 
   @JsonKey(ignore: true)
   @override
@@ -202,27 +166,21 @@ class _$KeyPopulationImpl implements _KeyPopulation {
 
 abstract class _KeyPopulation implements KeyPopulation {
   const factory _KeyPopulation(
-          {@JsonKey(name: 'id') final int? id,
-          @JsonKey(name: 'name') final String? name,
-          @JsonKey(name: 'updated_on') final String? updatedOn,
-          @JsonKey(name: 'created_on') final String? createdOn}) =
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
       _$KeyPopulationImpl;
 
   factory _KeyPopulation.fromJson(Map<String, dynamic> json) =
       _$KeyPopulationImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
-  @override
-  @JsonKey(name: 'updated_on')
-  String? get updatedOn;
-  @override
-  @JsonKey(name: 'created_on')
-  String? get createdOn;
   @override
   @JsonKey(ignore: true)
   _$$KeyPopulationImplCopyWith<_$KeyPopulationImpl> get copyWith =>

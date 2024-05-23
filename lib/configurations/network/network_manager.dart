@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
+import 'package:connectivity/connectivity.dart';
 
 import 'api_constants.dart';
 import 'api_response.dart';
@@ -49,8 +50,19 @@ class NetworkManager {
         compact: false));
   }
 
+  Future<bool> isInternetAvailable() async {
+    var connectivityResult = await Connectivity().checkConnectivity();
+    return connectivityResult != ConnectivityResult.none;
+  }
+
   Future<ApiResponse<T>> perform<T>(NetworkRequest request) async {
     try {
+      if (!(await isInternetAvailable())) {
+        return ApiResponse.failed(ApplicationError(
+          type: NetworkError(-1),
+          errorMsg: 'No internet connection available',
+        ));
+      }
       final Response<dynamic> response = await _dio.request<dynamic>(
         request.url,
         data: request.data,

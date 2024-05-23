@@ -6,18 +6,18 @@ part of 'data_model.dart';
 // TypeAdapterGenerator
 // **************************************************************************
 
-class DataModelAdapter extends TypeAdapter<DataModel> {
+class DataModelAdapter extends TypeAdapter<_$DataModelImpl> {
   @override
   final int typeId = 0;
 
   @override
-  DataModel read(BinaryReader reader) {
+  _$DataModelImpl read(BinaryReader reader) {
     final numOfFields = reader.readByte();
     final fields = <int, dynamic>{
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
-    return DataModel(
-      casteCategory: (fields[0] as List?)?.cast<CasteCategory>(),
+    return _$DataModelImpl(
+      casteCategory: (fields[6] as List?)?.cast<CasteCategory>(),
       keyPopulation: (fields[1] as List?)?.cast<KeyPopulation>(),
       referrerSource: (fields[2] as List?)?.cast<ReferrerSource>(),
       trimester: (fields[3] as List?)?.cast<Trimester>(),
@@ -27,10 +27,10 @@ class DataModelAdapter extends TypeAdapter<DataModel> {
   }
 
   @override
-  void write(BinaryWriter writer, DataModel obj) {
+  void write(BinaryWriter writer, _$DataModelImpl obj) {
     writer
       ..writeByte(6)
-      ..writeByte(0)
+      ..writeByte(6)
       ..write(obj.casteCategory)
       ..writeByte(1)
       ..write(obj.keyPopulation)

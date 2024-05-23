@@ -13,6 +13,11 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
 import 'package:tatpar_acf/features/referral/model/data_model.dart';
+import 'package:tatpar_acf/features/referral/model/key_population_model.dart';
+import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
+import 'package:tatpar_acf/features/referral/model/referral_districts_model.dart';
+import 'package:tatpar_acf/features/referral/model/referrer_source_model.dart';
+import 'package:tatpar_acf/features/referral/model/trimester_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
 import 'package:tatpar_acf/utils/extensions/app_dio_exception.dart';
@@ -39,8 +44,17 @@ Future<void> main() async {
       themeMode: ThemeMode.light,
     );
     await Hive.initFlutter();
-    Hive.openBox<CasteCategory>('casteCategory');
     Hive.registerAdapter(CasteCategoryAdapter());
+    Hive.registerAdapter(KeyPopulationAdapter());
+    Hive.registerAdapter(ReferrerSourceAdapter());
+    Hive.registerAdapter(TrimesterAdapter());
+    Hive.registerAdapter(DistrictAdapter());
+    Hive.registerAdapter(BlockAdapter());
+    Hive.registerAdapter(PanchayatAdapter());
+
+    Hive.registerAdapter(DataModelAdapter());
+
+    await Hive.openBox<DataModel>('dataModel');
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

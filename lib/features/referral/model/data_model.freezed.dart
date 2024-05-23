@@ -20,7 +20,7 @@ DataModel _$DataModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DataModel {
-  @HiveField(0)
+  @HiveField(6)
   @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory => throw _privateConstructorUsedError;
   @HiveField(1)
@@ -52,7 +52,7 @@ abstract class $DataModelCopyWith<$Res> {
       _$DataModelCopyWithImpl<$Res, DataModel>;
   @useResult
   $Res call(
-      {@HiveField(0)
+      {@HiveField(6)
       @JsonKey(name: 'caste_category')
       List<CasteCategory>? casteCategory,
       @HiveField(1)
@@ -126,7 +126,7 @@ abstract class _$$DataModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@HiveField(0)
+      {@HiveField(6)
       @JsonKey(name: 'caste_category')
       List<CasteCategory>? casteCategory,
       @HiveField(1)
@@ -191,9 +191,10 @@ class __$$DataModelImplCopyWithImpl<$Res>
 
 /// @nodoc
 @JsonSerializable()
+@HiveType(typeId: 0, adapterName: 'DataModelAdapter')
 class _$DataModelImpl implements _DataModel {
   const _$DataModelImpl(
-      {@HiveField(0)
+      {@HiveField(6)
       @JsonKey(name: 'caste_category')
       final List<CasteCategory>? casteCategory,
       @HiveField(1)
@@ -219,7 +220,7 @@ class _$DataModelImpl implements _DataModel {
 
   final List<CasteCategory>? _casteCategory;
   @override
-  @HiveField(0)
+  @HiveField(6)
   @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory {
     final value = _casteCategory;
@@ -339,7 +340,7 @@ class _$DataModelImpl implements _DataModel {
 
 abstract class _DataModel implements DataModel {
   const factory _DataModel(
-      {@HiveField(0)
+      {@HiveField(6)
       @JsonKey(name: 'caste_category')
       final List<CasteCategory>? casteCategory,
       @HiveField(1)
@@ -360,7 +361,7 @@ abstract class _DataModel implements DataModel {
       _$DataModelImpl.fromJson;
 
   @override
-  @HiveField(0)
+  @HiveField(6)
   @JsonKey(name: 'caste_category')
   List<CasteCategory>? get casteCategory;
   @override

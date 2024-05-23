@@ -4,36 +4,45 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_data.dart';
-import 'package:tatpar_acf/features/referral/model/caste_category_model.dart';
 import 'package:tatpar_acf/features/referral/model/data_model.dart';
 
 import '../../../../configurations/network/api_constants.dart';
 import '../../../../configurations/network/network_request.dart';
 
 class SourceRepo {
-  Future<DataModel> buildDataFields() async {
+  Future<DataModel?> buildDataFields() async {
+    log('IN rEFERRAL DETAILS GET API');
     final response = await NetworkManager.instance.perform(NetworkRequest(
       districtsUrl,
       RequestMethod.get,
       isAuthorized: true,
       data: {},
     ));
-    if (response.success = true) {
-      Box<CasteCategory> dataBox = Hive.box<CasteCategory>('casteCategory');
-
+    print(response.success.toString());
+    if (response.success == true) {
+      Box<DataModel> dataBox = Hive.box<DataModel>('dataModel');
       final DataModel dataModel = DataModel.fromJson(response.data['data']);
-      final List<CasteCategory> casteCategory =
-          dataModel.casteCategory as List<CasteCategory>;
-      await dataBox.addAll(casteCategory);
-      dataBox.get('casteCategory');
-      print(casteCategory);
+      await dataBox.put('latestData', dataModel);
+
+      final storedData = dataBox.get(dataBox.keyAt(dataBox.length - 1));
+      print('STORED DATA=====================$storedData');
 
       return dataModel;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error fetching data',
-        type: UnExpected(),
-      );
+      Box<DataModel> dataBox = Hive.box<DataModel>('dataModel');
+      final DataModel? storedData =
+          dataBox.get(dataBox.keyAt(dataBox.length - 1));
+      print('Using stored data from Hive: $storedData');
+
+      if (response.error != null && response.error?.type is NetworkError) {
+        print('Using stored data from Hive: $storedData');
+        return storedData;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -44,7 +53,7 @@ class SourceRepo {
       isAuthorized: true,
       data: {},
     ));
-    if (response.success = true) {
+    if (response.success == true) {
       final DiagnosisData diagnosisData =
           DiagnosisData.fromJson(response.data['data']);
 

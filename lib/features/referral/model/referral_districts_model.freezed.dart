@@ -20,12 +20,16 @@ District _$DistrictFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$District {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'state')
   String? get state => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'block')
   List<Block>? get block => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'district')
   String? get district => throw _privateConstructorUsedError;
 
@@ -41,10 +45,10 @@ abstract class $DistrictCopyWith<$Res> {
       _$DistrictCopyWithImpl<$Res, District>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'state') String? state,
-      @JsonKey(name: 'block') List<Block>? block,
-      @JsonKey(name: 'district') String? district});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'state') String? state,
+      @HiveField(2) @JsonKey(name: 'block') List<Block>? block,
+      @HiveField(3) @JsonKey(name: 'district') String? district});
 }
 
 /// @nodoc
@@ -95,10 +99,10 @@ abstract class _$$DistrictImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'state') String? state,
-      @JsonKey(name: 'block') List<Block>? block,
-      @JsonKey(name: 'district') String? district});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'state') String? state,
+      @HiveField(2) @JsonKey(name: 'block') List<Block>? block,
+      @HiveField(3) @JsonKey(name: 'district') String? district});
 }
 
 /// @nodoc
@@ -142,23 +146,26 @@ class __$$DistrictImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DistrictImpl implements _District {
   const _$DistrictImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'state') this.state,
-      @JsonKey(name: 'block') final List<Block>? block,
-      @JsonKey(name: 'district') this.district})
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'state') this.state,
+      @HiveField(2) @JsonKey(name: 'block') final List<Block>? block,
+      @HiveField(3) @JsonKey(name: 'district') this.district})
       : _block = block;
 
   factory _$DistrictImpl.fromJson(Map<String, dynamic> json) =>
       _$$DistrictImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'state')
   final String? state;
   final List<Block>? _block;
   @override
+  @HiveField(2)
   @JsonKey(name: 'block')
   List<Block>? get block {
     final value = _block;
@@ -169,6 +176,7 @@ class _$DistrictImpl implements _District {
   }
 
   @override
+  @HiveField(3)
   @JsonKey(name: 'district')
   final String? district;
 
@@ -210,24 +218,29 @@ class _$DistrictImpl implements _District {
 
 abstract class _District implements District {
   const factory _District(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'state') final String? state,
-      @JsonKey(name: 'block') final List<Block>? block,
-      @JsonKey(name: 'district') final String? district}) = _$DistrictImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'state') final String? state,
+          @HiveField(2) @JsonKey(name: 'block') final List<Block>? block,
+          @HiveField(3) @JsonKey(name: 'district') final String? district}) =
+      _$DistrictImpl;
 
   factory _District.fromJson(Map<String, dynamic> json) =
       _$DistrictImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'state')
   String? get state;
   @override
+  @HiveField(2)
   @JsonKey(name: 'block')
   List<Block>? get block;
   @override
+  @HiveField(3)
   @JsonKey(name: 'district')
   String? get district;
   @override
@@ -242,10 +255,13 @@ Block _$BlockFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Block {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'block')
   String? get block => throw _privateConstructorUsedError;
+  @HiveField(8)
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat => throw _privateConstructorUsedError;
 
@@ -260,9 +276,9 @@ abstract class $BlockCopyWith<$Res> {
       _$BlockCopyWithImpl<$Res, Block>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'block') String? block,
-      @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'block') String? block,
+      @HiveField(8) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
 }
 
 /// @nodoc
@@ -307,9 +323,9 @@ abstract class _$$BlockImplCopyWith<$Res> implements $BlockCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'block') String? block,
-      @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'block') String? block,
+      @HiveField(8) @JsonKey(name: 'panchayat') List<Panchayat>? panchayat});
 }
 
 /// @nodoc
@@ -348,22 +364,27 @@ class __$$BlockImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$BlockImpl implements _Block {
   const _$BlockImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'block') this.block,
-      @JsonKey(name: 'panchayat') final List<Panchayat>? panchayat})
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'block') this.block,
+      @HiveField(8)
+      @JsonKey(name: 'panchayat')
+      final List<Panchayat>? panchayat})
       : _panchayat = panchayat;
 
   factory _$BlockImpl.fromJson(Map<String, dynamic> json) =>
       _$$BlockImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'block')
   final String? block;
   final List<Panchayat>? _panchayat;
   @override
+  @HiveField(8)
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat {
     final value = _panchayat;
@@ -410,20 +431,24 @@ class _$BlockImpl implements _Block {
 
 abstract class _Block implements Block {
   const factory _Block(
-          {@JsonKey(name: 'id') final int? id,
-          @JsonKey(name: 'block') final String? block,
-          @JsonKey(name: 'panchayat') final List<Panchayat>? panchayat}) =
-      _$BlockImpl;
+      {@HiveField(0) @JsonKey(name: 'id') final int? id,
+      @HiveField(1) @JsonKey(name: 'block') final String? block,
+      @HiveField(8)
+      @JsonKey(name: 'panchayat')
+      final List<Panchayat>? panchayat}) = _$BlockImpl;
 
   factory _Block.fromJson(Map<String, dynamic> json) = _$BlockImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'block')
   String? get block;
   @override
+  @HiveField(8)
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat;
   @override
@@ -438,8 +463,10 @@ Panchayat _$PanchayatFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$Panchayat {
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'panchayat')
   String? get panchayat => throw _privateConstructorUsedError;
 
@@ -455,8 +482,8 @@ abstract class $PanchayatCopyWith<$Res> {
       _$PanchayatCopyWithImpl<$Res, Panchayat>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'panchayat') String? panchayat});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'panchayat') String? panchayat});
 }
 
 /// @nodoc
@@ -497,8 +524,8 @@ abstract class _$$PanchayatImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id') int? id,
-      @JsonKey(name: 'panchayat') String? panchayat});
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'panchayat') String? panchayat});
 }
 
 /// @nodoc
@@ -532,16 +559,18 @@ class __$$PanchayatImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$PanchayatImpl implements _Panchayat {
   const _$PanchayatImpl(
-      {@JsonKey(name: 'id') this.id,
-      @JsonKey(name: 'panchayat') this.panchayat});
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'panchayat') this.panchayat});
 
   factory _$PanchayatImpl.fromJson(Map<String, dynamic> json) =>
       _$$PanchayatImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'panchayat')
   final String? panchayat;
 
@@ -580,16 +609,19 @@ class _$PanchayatImpl implements _Panchayat {
 
 abstract class _Panchayat implements Panchayat {
   const factory _Panchayat(
-      {@JsonKey(name: 'id') final int? id,
-      @JsonKey(name: 'panchayat') final String? panchayat}) = _$PanchayatImpl;
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'panchayat') final String? panchayat}) =
+      _$PanchayatImpl;
 
   factory _Panchayat.fromJson(Map<String, dynamic> json) =
       _$PanchayatImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id')
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'panchayat')
   String? get panchayat;
   @override

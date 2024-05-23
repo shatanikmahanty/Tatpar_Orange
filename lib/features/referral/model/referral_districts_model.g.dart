@@ -3,6 +3,130 @@
 part of 'referral_districts_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class DistrictAdapter extends TypeAdapter<District> {
+  @override
+  final int typeId = 4;
+
+  @override
+  District read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return District(
+      id: fields[0] as int?,
+      state: fields[1] as String?,
+      block: (fields[2] as List?)?.cast<Block>(),
+      district: fields[3] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, District obj) {
+    writer
+      ..writeByte(4)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.state)
+      ..writeByte(2)
+      ..write(obj.block)
+      ..writeByte(3)
+      ..write(obj.district);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DistrictAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class BlockAdapter extends TypeAdapter<Block> {
+  @override
+  final int typeId = 5;
+
+  @override
+  Block read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Block(
+      id: fields[0] as int?,
+      block: fields[1] as String?,
+      panchayat: (fields[8] as List?)?.cast<Panchayat>(),
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Block obj) {
+    writer
+      ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.block)
+      ..writeByte(8)
+      ..write(obj.panchayat);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is BlockAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+class PanchayatAdapter extends TypeAdapter<Panchayat> {
+  @override
+  final int typeId = 8;
+
+  @override
+  Panchayat read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return Panchayat(
+      id: fields[0] as int?,
+      panchayat: fields[1] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, Panchayat obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.panchayat);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is PanchayatAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

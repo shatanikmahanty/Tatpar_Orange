@@ -7,7 +7,7 @@ part 'caste_category_model.freezed.dart';
 part 'caste_category_model.g.dart';
 
 @freezed
-@HiveType(typeId: 0)
+@HiveType(typeId: 6)
 class CasteCategory with _$CasteCategory {
   const factory CasteCategory({
     @HiveField(0) @JsonKey(name: 'id') int? id,
