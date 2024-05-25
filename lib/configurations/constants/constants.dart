@@ -7,7 +7,7 @@ import 'package:tatpar_acf/configurations/constants/fonts.gen.dart';
 export 'assets.gen.dart'; //Uncomment if assets are needed
 export 'fonts.gen.dart';
 
-const appName = 'DFY FieldApp';
+const appName = 'Tatpar ACF';
 const kFontFamily = FontFamily.montserrat;
 
 const nikshaySetuLink =
