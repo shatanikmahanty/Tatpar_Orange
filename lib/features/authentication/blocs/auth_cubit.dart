@@ -56,31 +56,32 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
         ),
       });
 
+  Future<void> dummyCall(String phone) async {
+    emit(state.copyWith(phoneNumber: phone));
+    await _authRepo.sentOtpForWeb(phone);
+  }
+
   Future<void> loginWithPhone(String phone) async {
+    emit(state.copyWith(phoneNumber: phone));
     emit(state.copyWith(isOtpRequested: true));
     await _authRepo.sendOtp(
-      phone,
-      (resendToken) => emit(
-        state.copyWith(
-            phoneNumber: phone,
-            isOtpRequested: false,
-            resendToken: resendToken),
-      ),
-      () => emit(
-        state.copyWith(
-          isOtpRequested: false,
-        ),
-      ),
-      (uid) {},
-    );
+        phone,
+        (resendToken) => emit(
+              state.copyWith(
+                  phoneNumber: phone,
+                  isOtpRequested: false,
+                  resendToken: resendToken),
+            ),
+        () => emit(
+              state.copyWith(
+                isOtpRequested: false,
+              ),
+            ));
   }
 
   verifyOtp(String otp) async {
     debugPrint(otp);
-    await _authRepo.verifyOtp(
-      otp,
-      (uid) {},
-    );
+    await _authRepo.verifyOtp(otp);
   }
 
   @override
@@ -113,7 +114,6 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
           isOtpRequested: false,
         ),
       ),
-      (uid) {},
     );
   }
 }

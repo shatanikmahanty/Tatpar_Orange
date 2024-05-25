@@ -1,4 +1,5 @@
 import 'package:djangoflow_app/djangoflow_app.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -86,8 +87,8 @@ class PhoneLoginPage extends StatelessWidget {
                         onClick: (ReactiveForm.of(context)?.valid ?? false)
                             ? () async {
                                 final phoneControl = form.control('phone');
-                                await authCubit
-                                    .loginWithPhone(phoneControl.value);
+                                kIsWeb ? await authCubit
+                                    .dummyCall(phoneControl.value) : await authCubit.loginWithPhone(phoneControl.value);
                               }
                             : null,
                       );

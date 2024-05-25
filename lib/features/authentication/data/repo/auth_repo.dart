@@ -1,6 +1,8 @@
+import 'dart:developer';
 import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/foundation.dart';
 
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/models/app_user_model.dart';
@@ -10,13 +12,21 @@ class AuthRepo {
   int? _resendToken;
   String? _verificationId;
 
+  ConfirmationResult? _confirmationResult;
+
   AuthRepo(this._auth);
+
+  Future<void> sentOtpForWeb(String phoneNo) async {
+    _confirmationResult = await _auth.signInWithPhoneNumber(
+      '+91${phoneNo.trim()}',
+    );
+    log(_confirmationResult.toString());
+  }
 
   Future<void> sendOtp(
     String phoneNo,
     Function(int resendToken) isCodeSent,
     VoidCallback onError,
-    void Function(String) register,
   ) async {
     await _auth.verifyPhoneNumber(
       phoneNumber: '+91${phoneNo.trim()}',
@@ -24,7 +34,7 @@ class AuthRepo {
       verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
         final userCredentials =
             await _auth.signInWithCredential(phoneAuthCredential);
-        handlePostLogin(userCredentials, register);
+        handlePostLogin(userCredentials);
       },
       verificationFailed: (FirebaseAuthException error) {
         onError();
@@ -46,17 +56,38 @@ class AuthRepo {
 
   Future<void> verifyOtp(
     String otp,
-    void Function(String) register,
   ) async {
+
+    if (kIsWeb){
+      final userCredential = await _confirmationResult!.confirm(otp);
+      handlePostLogin(userCredential);
+      return;
+    }
     final credential = PhoneAuthProvider.credential(
         verificationId: _verificationId ?? '', smsCode: otp);
     final userCredential = await _auth.signInWithCredential(credential);
-    handlePostLogin(userCredential, register);
+    handlePostLogin(userCredential);
+  }
+
+  Future<void> handlePostVerificationWeb(
+    UserCredential userCredential,
+  ) async {
+    if (userCredential.user != null) {
+      String? token = await _auth.currentUser!.getIdToken();
+      // if (userCredential.additionalUserInfo!.isNewUser) {
+      //   register(userCredential.user!.uid);
+      // } else {
+      final user = await _getUserDetails(await _auth.currentUser!.getIdToken());
+      if (user == null) {
+        return;
+      }
+      AuthCubit.instance.login(user);
+      //  }
+    }
   }
 
   Future<void> handlePostLogin(
     UserCredential userCredential,
-    void Function(String) register,
   ) async {
     if (userCredential.user != null) {
       String? token = await _auth.currentUser!.getIdToken();
