@@ -56,9 +56,9 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
         ),
       });
 
-  Future<void> dummyCall(String phone) async {
-    emit(state.copyWith(phoneNumber: phone));
+  Future<void> loginWithPhoneOnWeb(String phone) async {
     await _authRepo.sentOtpForWeb(phone);
+    emit(state.copyWith(phoneNumber: phone));
   }
 
   Future<void> loginWithPhone(String phone) async {

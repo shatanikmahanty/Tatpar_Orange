@@ -88,7 +88,7 @@ class PhoneLoginPage extends StatelessWidget {
                             ? () async {
                                 final phoneControl = form.control('phone');
                                 kIsWeb ? await authCubit
-                                    .dummyCall(phoneControl.value) : await authCubit.loginWithPhone(phoneControl.value);
+                                    .loginWithPhoneOnWeb(phoneControl.value) : await authCubit.loginWithPhone(phoneControl.value);
                               }
                             : null,
                       );
