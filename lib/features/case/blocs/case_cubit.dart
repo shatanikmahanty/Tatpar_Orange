@@ -76,6 +76,9 @@ class CaseCubit extends Cubit<CaseState> {
   int? _selectedNAATMachine;
   int? _selectedMTBResult;
 
+  ///TreatmentPage
+  int? _selectedTreatmentPanchayatCodeId;
+
   ///ContactTracingPage
   int? _selectedTPTRegimen;
 
@@ -110,6 +113,9 @@ class CaseCubit extends Cubit<CaseState> {
   set selectMTBResult(int? selectedMTBResult) =>
       _selectedMTBResult = selectedMTBResult;
 
+  set selectTreatmentPanchayatCodeId(int? selectedTreatmentPanchayatCodeId) =>
+      _selectedTreatmentPanchayatCodeId = selectedTreatmentPanchayatCodeId;
+
   set selectTPTRegimen(int? selectedTPTRegimen) =>
       _selectedTPTRegimen = selectedTPTRegimen;
 
@@ -131,6 +137,9 @@ class CaseCubit extends Cubit<CaseState> {
   int? get selectedAFB2Result => _selectedAFB2Result;
   int? get selectedNAATMachine => _selectedNAATMachine;
   int? get selectedMTBResult => _selectedMTBResult;
+
+  int? get selectedTreatmentPanchayatCodeId =>
+      _selectedTreatmentPanchayatCodeId;
 
   int? get selectedTPTRegimen => _selectedTPTRegimen;
 
@@ -235,43 +244,55 @@ class CaseCubit extends Cubit<CaseState> {
     );
   }
 
-  // Future<void> getUDSTFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getUDFormData(udFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(udstFormData: value),
-  //     );
-  //   });
-  // }
+  Future<void> getMentalHealthScreeningData(int? formId) async {
+    if (state.caseWorkedUpon.whoSrq == null) return;
+    final response = await caseRepo.getWhoSrq(id: formId);
+    emit(
+      state.copyWith(
+        mentalHealthScreeningModel: response,
+      ),
+    );
+  }
 
-  // Future<void> getNikshayFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getNikshayIdentityFormData(nikshayFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(nikshayFormData: value),
-  //     );
-  //   });
-  // }
+  Future<void> getDiagnosisData(int? formId) async {
+    if (state.caseWorkedUpon.diagnosis == null) return;
+    final response = await caseRepo.getDiagnosis(id: formId);
+    emit(
+      state.copyWith(
+        diagnsosisModel: response,
+      ),
+    );
+  }
 
-  // Future<void> getContactCasingData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo
-  //       .getContactCasingFormData(contactCasingFormId: formId)
-  //       .then((value) {
-  //     emit(
-  //       state.copyWith(contractTracingFormData: value),
-  //     );
-  //   });
-  // }
+  Future<void> getTreatmentData(int? formId) async {
+    if (state.caseWorkedUpon.treatment == null) return;
+    final response = await caseRepo.getTreatment(id: formId);
+    emit(
+      state.copyWith(
+        treatmentModel: response,
+      ),
+    );
+  }
 
-  // Future<void> getComorbidityFormData(int? formId) async {
-  //   if (formId == null) return;
-  //   caseRepo.getComorbidityFormData(comorbidityFormId: formId).then((value) {
-  //     emit(
-  //       state.copyWith(comorbidityFormData: value),
-  //     );
-  //   });
-  // }
+  Future<void> getOutcomeData(int? formId) async {
+    if (state.caseWorkedUpon.outcomeValue == null) return;
+    final response = await caseRepo.getOutcome(id: formId);
+    emit(
+      state.copyWith(
+        outcomeModel: response,
+      ),
+    );
+  }
+
+  Future<void> getContactTracingData(int? formId) async {
+    if (state.caseWorkedUpon.contactTracing == null) return;
+    final response = await caseRepo.getContactTracing(id: formId);
+    emit(
+      state.copyWith(
+        contactTracingModel: response,
+      ),
+    );
+  }
 
   Future<int?> updateReferralDetailsData(
       ReferralDetailsModel referralDetailsModel) async {
@@ -318,12 +339,13 @@ class CaseCubit extends Cubit<CaseState> {
         mentalHealthScreeningModel: response,
       ),
     );
+    getMentalHealthScreeningData(state.caseWorkedUpon.whoSrq);
   }
 
   Future<void> updateDiagnosisData(DiagnosisModel diagnosisModel) async {
     final response = await caseRepo.saveDiagnosisData(
         diagnosisModel: diagnosisModel,
-        id: state.caseWorkedUpon.referralDetails,
+        id: state.caseWorkedUpon.diagnosis,
         caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
@@ -331,9 +353,11 @@ class CaseCubit extends Cubit<CaseState> {
         diagnsosisModel: response,
       ),
     );
+    getDiagnosisData(state.caseWorkedUpon.diagnosis);
   }
 
   Future<void> updateTreatmentData(TreatmentModel treatmentModel) async {
+    print('Calling UPdate Treatment');
     final response = await caseRepo.saveTreatmentData(
         treatmentModel: treatmentModel,
         id: state.caseWorkedUpon.treatment,
@@ -344,6 +368,7 @@ class CaseCubit extends Cubit<CaseState> {
         treatmentModel: response,
       ),
     );
+    getTreatmentData(state.caseWorkedUpon.treatment);
   }
 
   Future<void> updateContactTracingData(
@@ -359,6 +384,7 @@ class CaseCubit extends Cubit<CaseState> {
         contactTracingModel: response,
       ),
     );
+    getContactTracingData(state.caseWorkedUpon.contactTracing);
   }
 
   Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {
@@ -373,6 +399,7 @@ class CaseCubit extends Cubit<CaseState> {
         outcomeModel: response,
       ),
     );
+    getOutcomeData(state.caseWorkedUpon.outcomeValue);
   }
 
   List<WorkflowItem> workflows(Case workingCase) {

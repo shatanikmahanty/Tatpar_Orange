@@ -1,3 +1,4 @@
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -5,6 +6,7 @@ import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_field.dart';
+import 'package:tatpar_acf/features/mentalhealthscreening/bloc/who_srq_cubit.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
@@ -39,24 +41,37 @@ class MentalHealthScreeningPage extends StatelessWidget {
 
   Future<void> _onSave(BuildContext context, FormGroup formGroup,
       WHOSrqModel? whoSrqModel) async {
-    final formData = formGroup.value;
-    final caseCubit = context.read<CaseCubit>();
-    final model = caseCubit.state.mentalHealthScreeningModel ??
-        const MentalHealthScreeningModel();
-    final whoSrqJson = whoSrqModel?.toJson() ?? <String, dynamic>{};
+    if (formGroup.valid) {
+      final formData = formGroup.value;
+      final caseCubit = context.read<CaseCubit>();
+      final model = caseCubit.state.mentalHealthScreeningModel ??
+          const MentalHealthScreeningModel();
+      final whoSrqJson = whoSrqModel?.toJson() ?? <String, dynamic>{};
 
-    final updatedModel = model.copyWith(
-      stage: formData['stage'] as String?,
-      screeningDate: formData['screening_date'] as DateTime?,
-      screeningStatus: formData['screening_status'] as String?,
-      screeningScore: formData['screening_score'] as String?,
-      counsellingLinked: formData['counselling_linked'] as DateTime?,
-      psychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
-      feelingBetter: formData['feeling_better_after_linkage'] as String?,
-      talkToHelpline: formData['talk_to_helpline'] as String?,
-      whoSrqModel: WHOSrqModel.fromJson(whoSrqJson),
-    );
-    caseCubit.updateWHOSRQData(updatedModel);
+      final updatedModel = model.copyWith(
+        stage: formData['stage'] as String?,
+        screeningDate: formData['screening_date'] as DateTime?,
+        screeningStatus: formData['screening_status'] as String?,
+        screeningScore: formData['screening_score'] as String?,
+        counsellingLinked: formData['counselling_linked'] as DateTime?,
+        psychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
+        feelingBetter: formData['feeling_better_after_linkage'] as String?,
+        talkToHelpline: formData['talk_to_helpline'] as String?,
+        whoSrqModel: WHOSrqModel.fromJson(whoSrqJson),
+      );
+      caseCubit.updateWHOSRQData(updatedModel);
+    } else {
+      formGroup.markAllAsTouched();
+      // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
+      final fields = [];
+      formGroup.controls.forEach((key, value) {
+        if (value.invalid) {
+          fields.add(key.replaceFirst('patient_', ''));
+        }
+      });
+      DjangoflowAppSnackbar.showError(
+          'please enter the fields: ${fields.join(', ')}');
+    }
   }
 
   @override

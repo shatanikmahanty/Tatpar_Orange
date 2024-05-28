@@ -41,8 +41,11 @@ mixin _$TreatmentModel {
   String? get treatmentSupporterPosition => throw _privateConstructorUsedError;
   @JsonKey(name: 'treatment_supporter_phone')
   String? get treatmentSupporterPhone => throw _privateConstructorUsedError;
-  @JsonKey(name: 'treatment_supporter_panchayat')
+  @JsonKey(includeToJson: false)
   String? get treatmentSupporterPanchayat => throw _privateConstructorUsedError;
+  @JsonKey(name: 'treatment_supporter_panchayat')
+  int? get selectedTreatmentSupporterPanchayat =>
+      throw _privateConstructorUsedError;
   @JsonKey(name: 'treatment_supporter_ward')
   int? get treatmentSupporterWard => throw _privateConstructorUsedError;
   @JsonKey(
@@ -138,8 +141,9 @@ abstract class $TreatmentModelCopyWith<$Res> {
       String? treatmentSupporterPosition,
       @JsonKey(name: 'treatment_supporter_phone')
       String? treatmentSupporterPhone,
+      @JsonKey(includeToJson: false) String? treatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_panchayat')
-      String? treatmentSupporterPanchayat,
+      int? selectedTreatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
       @JsonKey(
           name: 'home_visit_date',
@@ -218,6 +222,7 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? treatmentSupporterPosition = freezed,
     Object? treatmentSupporterPhone = freezed,
     Object? treatmentSupporterPanchayat = freezed,
+    Object? selectedTreatmentSupporterPanchayat = freezed,
     Object? treatmentSupporterWard = freezed,
     Object? dateOfHomeVisit = freezed,
     Object? iptStartDate = freezed,
@@ -288,6 +293,11 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.treatmentSupporterPanchayat
           : treatmentSupporterPanchayat // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedTreatmentSupporterPanchayat: freezed ==
+              selectedTreatmentSupporterPanchayat
+          ? _value.selectedTreatmentSupporterPanchayat
+          : selectedTreatmentSupporterPanchayat // ignore: cast_nullable_to_non_nullable
+              as int?,
       treatmentSupporterWard: freezed == treatmentSupporterWard
           ? _value.treatmentSupporterWard
           : treatmentSupporterWard // ignore: cast_nullable_to_non_nullable
@@ -413,8 +423,9 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       String? treatmentSupporterPosition,
       @JsonKey(name: 'treatment_supporter_phone')
       String? treatmentSupporterPhone,
+      @JsonKey(includeToJson: false) String? treatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_panchayat')
-      String? treatmentSupporterPanchayat,
+      int? selectedTreatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
       @JsonKey(
           name: 'home_visit_date',
@@ -491,6 +502,7 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? treatmentSupporterPosition = freezed,
     Object? treatmentSupporterPhone = freezed,
     Object? treatmentSupporterPanchayat = freezed,
+    Object? selectedTreatmentSupporterPanchayat = freezed,
     Object? treatmentSupporterWard = freezed,
     Object? dateOfHomeVisit = freezed,
     Object? iptStartDate = freezed,
@@ -561,6 +573,11 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.treatmentSupporterPanchayat
           : treatmentSupporterPanchayat // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedTreatmentSupporterPanchayat: freezed ==
+              selectedTreatmentSupporterPanchayat
+          ? _value.selectedTreatmentSupporterPanchayat
+          : selectedTreatmentSupporterPanchayat // ignore: cast_nullable_to_non_nullable
+              as int?,
       treatmentSupporterWard: freezed == treatmentSupporterWard
           ? _value.treatmentSupporterWard
           : treatmentSupporterWard // ignore: cast_nullable_to_non_nullable
@@ -680,8 +697,9 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       @JsonKey(name: 'treatment_supporter_position')
       this.treatmentSupporterPosition,
       @JsonKey(name: 'treatment_supporter_phone') this.treatmentSupporterPhone,
+      @JsonKey(includeToJson: false) this.treatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_panchayat')
-      this.treatmentSupporterPanchayat,
+      this.selectedTreatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_ward') this.treatmentSupporterWard,
       @JsonKey(
           name: 'home_visit_date',
@@ -770,8 +788,11 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @JsonKey(name: 'treatment_supporter_phone')
   final String? treatmentSupporterPhone;
   @override
-  @JsonKey(name: 'treatment_supporter_panchayat')
+  @JsonKey(includeToJson: false)
   final String? treatmentSupporterPanchayat;
+  @override
+  @JsonKey(name: 'treatment_supporter_panchayat')
+  final int? selectedTreatmentSupporterPanchayat;
   @override
   @JsonKey(name: 'treatment_supporter_ward')
   final int? treatmentSupporterWard;
@@ -864,7 +885,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
 
   @override
   String toString() {
-    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, previouslyTbTreated: $previouslyTbTreated, rifSensitivity: $rifSensitivity, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, dateOfHomeVisit: $dateOfHomeVisit, iptStartDate: $iptStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tbConsumption: $tbConsumption, nutrition: $nutrition, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, ipNatTest: $ipNatTest, ipAfbDate: $ipAfbDate, ipAfbLabNo: $ipAfbLabNo, ipNatResult: $ipNatResult, ipLabNo: $ipLabNo, ipChestXray: $ipChestXray, ipNutritionSupport: $ipNutritionSupport)';
+    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, previouslyTbTreated: $previouslyTbTreated, rifSensitivity: $rifSensitivity, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat: $selectedTreatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, dateOfHomeVisit: $dateOfHomeVisit, iptStartDate: $iptStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tbConsumption: $tbConsumption, nutrition: $nutrition, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, ipNatTest: $ipNatTest, ipAfbDate: $ipAfbDate, ipAfbLabNo: $ipAfbLabNo, ipNatResult: $ipNatResult, ipLabNo: $ipLabNo, ipChestXray: $ipChestXray, ipNutritionSupport: $ipNutritionSupport)';
   }
 
   @override
@@ -894,6 +915,9 @@ class _$TreatmentModelImpl implements _TreatmentModel {
             (identical(other.treatmentSupporterPanchayat, treatmentSupporterPanchayat) ||
                 other.treatmentSupporterPanchayat ==
                     treatmentSupporterPanchayat) &&
+            (identical(other.selectedTreatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat) ||
+                other.selectedTreatmentSupporterPanchayat ==
+                    selectedTreatmentSupporterPanchayat) &&
             (identical(other.treatmentSupporterWard, treatmentSupporterWard) ||
                 other.treatmentSupporterWard == treatmentSupporterWard) &&
             (identical(other.dateOfHomeVisit, dateOfHomeVisit) ||
@@ -925,12 +949,9 @@ class _$TreatmentModelImpl implements _TreatmentModel {
                 other.nutritionLinkage == nutritionLinkage) &&
             (identical(other.ipNatTest, ipNatTest) ||
                 other.ipNatTest == ipNatTest) &&
-            (identical(other.ipAfbDate, ipAfbDate) ||
-                other.ipAfbDate == ipAfbDate) &&
-            (identical(other.ipAfbLabNo, ipAfbLabNo) ||
-                other.ipAfbLabNo == ipAfbLabNo) &&
-            (identical(other.ipNatResult, ipNatResult) ||
-                other.ipNatResult == ipNatResult) &&
+            (identical(other.ipAfbDate, ipAfbDate) || other.ipAfbDate == ipAfbDate) &&
+            (identical(other.ipAfbLabNo, ipAfbLabNo) || other.ipAfbLabNo == ipAfbLabNo) &&
+            (identical(other.ipNatResult, ipNatResult) || other.ipNatResult == ipNatResult) &&
             (identical(other.ipLabNo, ipLabNo) || other.ipLabNo == ipLabNo) &&
             (identical(other.ipChestXray, ipChestXray) || other.ipChestXray == ipChestXray) &&
             (identical(other.ipNutritionSupport, ipNutritionSupport) || other.ipNutritionSupport == ipNutritionSupport));
@@ -951,6 +972,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
         treatmentSupporterPosition,
         treatmentSupporterPhone,
         treatmentSupporterPanchayat,
+        selectedTreatmentSupporterPanchayat,
         treatmentSupporterWard,
         dateOfHomeVisit,
         iptStartDate,
@@ -1011,8 +1033,9 @@ abstract class _TreatmentModel implements TreatmentModel {
       final String? treatmentSupporterPosition,
       @JsonKey(name: 'treatment_supporter_phone')
       final String? treatmentSupporterPhone,
+      @JsonKey(includeToJson: false) final String? treatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_panchayat')
-      final String? treatmentSupporterPanchayat,
+      final int? selectedTreatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_ward')
       final int? treatmentSupporterWard,
       @JsonKey(
@@ -1103,8 +1126,11 @@ abstract class _TreatmentModel implements TreatmentModel {
   @JsonKey(name: 'treatment_supporter_phone')
   String? get treatmentSupporterPhone;
   @override
-  @JsonKey(name: 'treatment_supporter_panchayat')
+  @JsonKey(includeToJson: false)
   String? get treatmentSupporterPanchayat;
+  @override
+  @JsonKey(name: 'treatment_supporter_panchayat')
+  int? get selectedTreatmentSupporterPanchayat;
   @override
   @JsonKey(name: 'treatment_supporter_ward')
   int? get treatmentSupporterWard;

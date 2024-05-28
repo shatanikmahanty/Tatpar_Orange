@@ -51,28 +51,6 @@ class AppRouter extends $AppRouter {
     AutoRoute(path: '/basic', page: BasicDetails.page, guards: [
       AuthGuard(),
     ]),
-    AutoRoute(
-        path: '/mental_health_screening_page',
-        page: MentalHealthRouterRoute.page,
-        children: mentalHealthRoutes,
-        guards: [
-          AuthGuard(),
-        ]),
-    AutoRoute(path: '/diagnosis_page', page: DiagnosisRoute.page, guards: [
-      AuthGuard(),
-    ]),
-    AutoRoute(path: '/treatment_page', page: TreatmentRoute.page, guards: [
-      AuthGuard(),
-    ]),
-    AutoRoute(path: '/outcome_page', page: OutcomeRoute.page, guards: [
-      AuthGuard(),
-    ]),
-    AutoRoute(
-        path: '/contact_tracing_page',
-        page: ContactTracingRoute.page,
-        guards: [
-          AuthGuard(),
-        ]),
   ];
 }
 

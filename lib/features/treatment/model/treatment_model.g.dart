@@ -20,7 +20,9 @@ _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
           json['treatment_supporter_position'] as String?,
       treatmentSupporterPhone: json['treatment_supporter_phone'] as String?,
       treatmentSupporterPanchayat:
-          json['treatment_supporter_panchayat'] as String?,
+          json['treatmentSupporterPanchayat'] as String?,
+      selectedTreatmentSupporterPanchayat:
+          (json['treatment_supporter_panchayat'] as num?)?.toInt(),
       treatmentSupporterWard:
           (json['treatment_supporter_ward'] as num?)?.toInt(),
       dateOfHomeVisit: fromJsonToDateTime(json['home_visit_date'] as String?),
@@ -61,7 +63,8 @@ Map<String, dynamic> _$$TreatmentModelImplToJson(
       'treatment_supporter_name': instance.treatmentSupporterName,
       'treatment_supporter_position': instance.treatmentSupporterPosition,
       'treatment_supporter_phone': instance.treatmentSupporterPhone,
-      'treatment_supporter_panchayat': instance.treatmentSupporterPanchayat,
+      'treatment_supporter_panchayat':
+          instance.selectedTreatmentSupporterPanchayat,
       'treatment_supporter_ward': instance.treatmentSupporterWard,
       'home_visit_date': _dateTimeToJson(instance.dateOfHomeVisit),
       'ipt_start_date': _dateTimeToJson(instance.iptStartDate),

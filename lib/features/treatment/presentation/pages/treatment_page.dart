@@ -1,3 +1,4 @@
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -8,6 +9,8 @@ import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dar
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
+import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
@@ -15,7 +18,12 @@ import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 @RoutePage()
 class TreatmentPage extends StatelessWidget {
   const TreatmentPage({super.key});
-  FormGroup _treatmentFormBuilder({required TreatmentModel? treatmentModel}) {
+  FormGroup _treatmentFormBuilder(
+      {required TreatmentModel? treatmentModel, required SourceCubit cubit}) {
+    final panchayat = treatmentModel?.selectedTreatmentSupporterPanchayat;
+    String? panchayatName =
+        _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
+
     return fb.group({
       'case_definition': FormControl<String>(
         value: treatmentModel?.caseDefinition,
@@ -45,7 +53,7 @@ class TreatmentPage extends StatelessWidget {
         value: treatmentModel?.treatmentSupporterPhone,
       ),
       'treatment_supporter_panchayat': FormControl<String>(
-        value: treatmentModel?.treatmentSupporterPanchayat,
+        value: panchayatName ?? treatmentModel?.treatmentSupporterPanchayat,
       ),
       'treatment_supporter_ward': FormControl<int>(
         value: treatmentModel?.treatmentSupporterWard,
@@ -71,7 +79,6 @@ class TreatmentPage extends StatelessWidget {
       'hb_result': FormControl<int>(
         value: treatmentModel?.hbResult,
         validators: [
-          Validators.required,
           Validators.min(1),
           Validators.max(40),
         ],
@@ -127,10 +134,44 @@ class TreatmentPage extends StatelessWidget {
     });
   }
 
+  String? _getPanchayatName(List<Block>? blocks, int? panchayat) {
+    String? panchayatName;
+    if (blocks != null) {
+      for (var block in blocks) {
+        var panchayatData = block.panchayat?.firstWhere(
+            (p) => p.id == panchayat,
+            orElse: () => const Panchayat(id: 0));
+        print('Treatment PAnchayat Dats=======$panchayatData');
+        if (panchayatData?.id != 0) {
+          panchayatName = panchayatData?.panchayat;
+          print(panchayatName);
+          break;
+        }
+      }
+      return panchayatName;
+    } else {
+      return null;
+    }
+  }
+
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     if (formGroup.valid) {
       final formData = formGroup.value;
       final cubit = context.read<CaseCubit>();
+      final sourceCubit = context.read<SourceCubit>();
+
+      for (var block in sourceCubit.state.dataModel!.blocks!) {
+        var panchayat = block.panchayat!.firstWhere(
+            (p) =>
+                p.panchayat ==
+                formGroup.control('treatment_supporter_panchayat').value,
+            orElse: () => const Panchayat(id: 0));
+        if (panchayat.id != 0) {
+          context.read<CaseCubit>().selectTreatmentPanchayatCodeId =
+              panchayat.id;
+          break;
+        }
+      }
       final model = cubit.state.treatmentModel ?? const TreatmentModel();
       final treatmentModel = model.copyWith(
         caseDefinition: formData['case_definition'] as String?,
@@ -144,8 +185,8 @@ class TreatmentPage extends StatelessWidget {
             formData['treatment_supporter_position'] as String?,
         treatmentSupporterPhone:
             formData['treatment_supporter_phone'] as String?,
-        treatmentSupporterPanchayat:
-            formData['treatment_supporter_panchayat'] as String?,
+        selectedTreatmentSupporterPanchayat:
+            cubit.selectedTreatmentPanchayatCodeId,
         treatmentSupporterWard: formData['treatment_supporter_ward'] as int?,
         dateOfHomeVisit: formData['date_of_home_visit'] as DateTime?,
         iptStartDate: formData['ipt_start_date'] as DateTime?,
@@ -173,8 +214,18 @@ class TreatmentPage extends StatelessWidget {
         ipNutritionSupport: formData['ip_nutrition_support'] as String?,
       );
       await cubit.updateTreatmentData(treatmentModel);
+      print(treatmentModel);
     } else {
       formGroup.markAllAsTouched();
+      // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
+      final fields = [];
+      formGroup.controls.forEach((key, value) {
+        if (value.invalid) {
+          fields.add(key.replaceFirst('patient_', ''));
+        }
+      });
+      DjangoflowAppSnackbar.showError(
+          'please enter the fields: ${fields.join(', ')}');
     }
   }
 
@@ -184,8 +235,9 @@ class TreatmentPage extends StatelessWidget {
         builder: (context, state) => Scaffold(
             appBar: const CaseAppBar('Treatment'),
             body: ReactiveFormBuilder(
-                form: () =>
-                    _treatmentFormBuilder(treatmentModel: state.treatmentModel),
+                form: () => _treatmentFormBuilder(
+                    treatmentModel: state.treatmentModel,
+                    cubit: context.read<SourceCubit>()),
                 builder: (BuildContext context, FormGroup formGroup,
                         Widget? child) =>
                     AutofillGroup(
@@ -243,9 +295,8 @@ class TreatmentPage extends StatelessWidget {
                                             prefixIcon:
                                                 Icons.account_circle_outlined,
                                             listData: const [
-                                              'Item 1',
-                                              'Item 2',
-                                              'Item 3'
+                                              'Sensitive',
+                                              'Resistant'
                                             ],
                                             allowMultiSelection: false,
                                             onSelected: (value) {
@@ -292,28 +343,36 @@ class TreatmentPage extends StatelessWidget {
                                                 Icons.account_circle_outlined,
                                           ),
                                           const SizedBox(height: kPadding * 2),
-                                          TextFieldWithList(
-                                            controlName:
+                                          const PrimaryTextField(
+                                            formControlName:
                                                 'treatment_supporter_position',
                                             label:
                                                 'Treatment Supporter Position',
-                                            padding: EdgeInsets.zero,
                                             prefixIcon:
                                                 Icons.account_circle_outlined,
-                                            listData: const [
-                                              'Item 1',
-                                              'Item 2',
-                                              'Item 3'
-                                            ],
-                                            allowMultiSelection: false,
-                                            onSelected: (value) {
-                                              formGroup
-                                                  .control(
-                                                      'treatment_supporter_position')
-                                                  .value = value[0];
-                                            },
-                                            emptyString: '',
                                           ),
+                                          // TextFieldWithList(
+                                          //   controlName:
+                                          //       'treatment_supporter_position',
+                                          //   label:
+                                          //       'Treatment Supporter Position',
+                                          //   padding: EdgeInsets.zero,
+                                          //   prefixIcon:
+                                          //       Icons.account_circle_outlined,
+                                          //   listData: const [
+                                          //     'Item 1',
+                                          //     'Item 2',
+                                          //     'Item 3'
+                                          //   ],
+                                          //   allowMultiSelection: false,
+                                          //   onSelected: (value) {
+                                          //     formGroup
+                                          //         .control(
+                                          //             'treatment_supporter_position')
+                                          //         .value = value[0];
+                                          //   },
+                                          //   emptyString: '',
+                                          // ),
                                           const SizedBox(height: kPadding * 2),
                                           PrimaryTextField(
                                             formControlName:
@@ -330,28 +389,54 @@ class TreatmentPage extends StatelessWidget {
                                             ],
                                           ),
                                           const SizedBox(height: kPadding * 2),
-                                          TextFieldWithList(
-                                            controlName:
-                                                'treatment_supporter_panchayat',
-                                            label:
-                                                'Treatment Supporter Panchayat',
-                                            padding: EdgeInsets.zero,
-                                            prefixIcon:
-                                                Icons.account_circle_outlined,
-                                            listData: const [
-                                              'Item 1',
-                                              'Item 2',
-                                              'Item 3'
-                                            ],
-                                            allowMultiSelection: false,
-                                            onSelected: (value) {
-                                              formGroup
-                                                  .control(
-                                                      'treatment_supporter_panchayat')
-                                                  .value = value[0];
-                                            },
-                                            emptyString: '',
-                                          ),
+                                          BlocBuilder<SourceCubit, SourceState>(
+                                              buildWhen: ((previous, current) =>
+                                                  (previous.isLoading !=
+                                                      current.isLoading) ||
+                                                  previous.dataModel !=
+                                                      current.dataModel),
+                                              builder: (context, state) {
+                                                List<String> panchayats = (state
+                                                            .dataModel !=
+                                                        null)
+                                                    ? state.dataModel!.blocks!
+                                                        .expand((e) => e
+                                                            .panchayat!
+                                                            .map((e) =>
+                                                                '${e.panchayat}'))
+                                                        .toList()
+                                                    : [];
+
+                                                if (state.isLoading ?? false) {
+                                                  return const SizedBox(
+                                                    height: 15,
+                                                    width: 15,
+                                                    child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    ),
+                                                  );
+                                                }
+                                                return TextFieldWithList(
+                                                  controlName:
+                                                      'treatment_supporter_panchayat',
+                                                  label:
+                                                      'Treatment Supporter Panchayat',
+                                                  padding: EdgeInsets.zero,
+                                                  prefixIcon: Icons
+                                                      .account_circle_outlined,
+                                                  listData: panchayats,
+                                                  allowMultiSelection: false,
+                                                  onSelected: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'treatment_supporter_panchayat')
+                                                        .value = value[0];
+                                                  },
+                                                  emptyString:
+                                                      'No Panchayats available',
+                                                );
+                                              }),
                                           const SizedBox(height: kPadding * 2),
                                           const PrimaryTextField<int>(
                                             formControlName:

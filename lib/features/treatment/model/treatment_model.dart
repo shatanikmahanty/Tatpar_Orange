@@ -36,8 +36,9 @@ class TreatmentModel with _$TreatmentModel {
     @JsonKey(name: 'treatment_supporter_position')
     String? treatmentSupporterPosition,
     @JsonKey(name: 'treatment_supporter_phone') String? treatmentSupporterPhone,
+    @JsonKey(includeToJson: false) String? treatmentSupporterPanchayat,
     @JsonKey(name: 'treatment_supporter_panchayat')
-    String? treatmentSupporterPanchayat,
+    int? selectedTreatmentSupporterPanchayat,
     @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
     @JsonKey(
       name: 'home_visit_date',

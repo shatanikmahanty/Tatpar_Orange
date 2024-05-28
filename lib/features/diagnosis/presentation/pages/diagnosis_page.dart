@@ -7,6 +7,7 @@ import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
+import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
@@ -16,7 +17,23 @@ import '../../../app/presentation/widgets/chip_radio_buttons.dart';
 @RoutePage()
 class DiagnosisPage extends StatelessWidget {
   const DiagnosisPage({super.key});
-  FormGroup _diagnosisFormBuilder({required DiagnosisModel? diagnosisModel}) {
+  FormGroup _diagnosisFormBuilder(
+      {required DiagnosisModel? diagnosisModel, required SourceCubit cubit}) {
+    final afb1Result = diagnosisModel?.selectedAfb1Result;
+    final afb2Result = diagnosisModel?.selectedAfb2Result;
+    final naatResult = diagnosisModel?.selectedNaatMachine;
+    final mtbResult = diagnosisModel?.selectedMtbResult;
+    final afb1ResultName = _getAFBResultName(cubit, afb1Result);
+    final afb2ResultName = _getAFBResultName(cubit, afb2Result);
+    final naatResultData = cubit.state.diagnosisData?.naatMachine?.firstWhere(
+        (element) => element.id == naatResult,
+        orElse: () => const NaatMachine(name: null));
+    final naatResultName = naatResultData?.name;
+    final mtbResultData = cubit.state.diagnosisData?.mtbResult?.firstWhere(
+        (element) => element.id == mtbResult,
+        orElse: () => const MTBResult(name: null));
+    final mtbResultName = mtbResultData?.name;
+
     return fb.group({
       'diagnosis_initiated': FormControl<String>(
         value: diagnosisModel?.diagnosisInitiated,
@@ -43,13 +60,13 @@ class DiagnosisPage extends StatelessWidget {
         value: diagnosisModel?.afbLabNumber,
       ),
       'afb1_result': FormControl<String>(
-        value: diagnosisModel?.afb1Result,
+        value: afb1ResultName ?? diagnosisModel?.afb1Result,
       ),
       'afb1_result_date': FormControl<DateTime>(
         value: diagnosisModel?.afb1ResultDate,
       ),
       'afb2_result': FormControl<String>(
-        value: diagnosisModel?.afb2Result,
+        value: afb2ResultName ?? diagnosisModel?.afb2Result,
       ),
       'afb2_result_date': FormControl<DateTime>(
         value: diagnosisModel?.afb2ResultDate ?? DateTime.now(),
@@ -58,7 +75,7 @@ class DiagnosisPage extends StatelessWidget {
         value: diagnosisModel?.naatTest,
       ),
       'naat_machine': FormControl<String>(
-        value: diagnosisModel?.naatMachine,
+        value: naatResultName ?? diagnosisModel?.naatMachine,
       ),
       'naat_site': FormControl<String>(
         value: diagnosisModel?.naatSite,
@@ -73,7 +90,7 @@ class DiagnosisPage extends StatelessWidget {
         value: diagnosisModel?.naatResultDate ?? DateTime.now(),
       ),
       'mtb_result': FormControl<String>(
-        value: diagnosisModel?.mtbResult,
+        value: mtbResultName ?? diagnosisModel?.mtbResult,
       ),
       'rif_resistance': FormControl<String>(
         value: diagnosisModel?.rifResistance,
@@ -157,10 +174,49 @@ class DiagnosisPage extends StatelessWidget {
     });
   }
 
+  String? _getAFBResultName(SourceCubit cubit, int? afb) {
+    final afbResultData = cubit.state.diagnosisData?.afbResult?.firstWhere(
+        (element) => element.id == afb,
+        orElse: () => const AFBResult(name: null));
+    return afbResultData?.name;
+  }
+
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     if (formGroup.valid) {
       final formData = formGroup.value;
       final cubit = context.read<CaseCubit>();
+      final sourceCubit = context.read<SourceCubit>();
+
+      context.read<CaseCubit>().selectAFB1Result = sourceCubit
+          .state.diagnosisData!.afbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('afb1_result').value,
+              orElse: () => const AFBResult(id: null))
+          .id;
+      context.read<CaseCubit>().selectAFB2Result = sourceCubit
+          .state.diagnosisData!.afbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('afb2_result').value,
+              orElse: () => const AFBResult(id: null))
+          .id;
+      context.read<CaseCubit>().selectNAATMachine = sourceCubit
+          .state.diagnosisData!.naatMachine!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('naat_machine').value,
+              orElse: () => const NaatMachine(id: null))
+          .id;
+
+      context.read<CaseCubit>().selectMTBResult = sourceCubit
+          .state.diagnosisData!.mtbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('mtb_result').value,
+              orElse: () => const MTBResult(id: null))
+          .id;
+
       final model = cubit.state.diagnsosisModel ?? const DiagnosisModel();
       final diagnosisModel = model.copyWith(
         diagnosisInitiated: formData['diagnosis_initiated'] as String?,
@@ -218,13 +274,13 @@ class DiagnosisPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    context.read<SourceCubit>().loadDiagnosisData();
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
             appBar: const CaseAppBar('Diagnosis'),
             body: ReactiveFormBuilder(
                 form: () => _diagnosisFormBuilder(
-                    diagnosisModel: state.diagnsosisModel),
+                    diagnosisModel: state.diagnsosisModel,
+                    cubit: context.read<SourceCubit>()),
                 builder: (BuildContext context, FormGroup formGroup,
                         Widget? child) =>
                     AutofillGroup(
@@ -384,36 +440,65 @@ class DiagnosisPage extends StatelessWidget {
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'afb1_result',
-                                                          label: 'AFB1 Result',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'Negative',
-                                                            'Scanty',
-                                                            '1+',
-                                                            '2+',
-                                                            '3+'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'afb1_result')
-                                                                .value = value[0];
-
-                                                            context
-                                                                .read<
-                                                                    CaseCubit>()
-                                                                .selectAFB1Result = 1;
-                                                          },
-                                                          emptyString: '',
-                                                        ),
+                                                        BlocBuilder<SourceCubit,
+                                                                SourceState>(
+                                                            buildWhen: ((previous,
+                                                                    current) =>
+                                                                (previous
+                                                                        .isLoading !=
+                                                                    current
+                                                                        .isLoading) ||
+                                                                previous.diagnosisData !=
+                                                                    current
+                                                                        .diagnosisData),
+                                                            builder: (context,
+                                                                state) {
+                                                              List<
+                                                                  String> list = (state
+                                                                          .diagnosisData !=
+                                                                      null)
+                                                                  ? state
+                                                                      .diagnosisData!
+                                                                      .afbResult!
+                                                                      .map((e) =>
+                                                                          '${e.name}')
+                                                                      .toList()
+                                                                  : [];
+                                                              if (state
+                                                                      .isLoading ??
+                                                                  false) {
+                                                                return const SizedBox(
+                                                                  height: 15,
+                                                                  width: 15,
+                                                                  child: Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              return TextFieldWithList(
+                                                                controlName:
+                                                                    'afb1_result',
+                                                                label:
+                                                                    'AFB-1 Result',
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                prefixIcon: Icons
+                                                                    .account_circle_outlined,
+                                                                listData: list,
+                                                                allowMultiSelection:
+                                                                    false,
+                                                                onSelected:
+                                                                    (value) {
+                                                                  formGroup
+                                                                      .control(
+                                                                          'afb1_result')
+                                                                      .value = value[0];
+                                                                },
+                                                                emptyString: '',
+                                                              );
+                                                            }),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
@@ -423,41 +508,70 @@ class DiagnosisPage extends StatelessWidget {
                                                           controlName:
                                                               'afb1_result_date',
                                                           label:
-                                                              'AFB1 Result Date',
+                                                              'AFB-1 Result Date',
                                                         ),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'afb2_result',
-                                                          label: 'AFB2 Result',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'Negative',
-                                                            'Scanty',
-                                                            '1+',
-                                                            '2+',
-                                                            '3+'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'afb2_result')
-                                                                .value = value[0];
-
-                                                            context
-                                                                .read<
-                                                                    CaseCubit>()
-                                                                .selectAFB2Result = 1;
-                                                          },
-                                                          emptyString: '',
-                                                        ),
+                                                        BlocBuilder<SourceCubit,
+                                                                SourceState>(
+                                                            buildWhen: ((previous,
+                                                                    current) =>
+                                                                (previous
+                                                                        .isLoading !=
+                                                                    current
+                                                                        .isLoading) ||
+                                                                previous.diagnosisData !=
+                                                                    current
+                                                                        .diagnosisData),
+                                                            builder: (context,
+                                                                state) {
+                                                              List<
+                                                                  String> list = (state
+                                                                          .diagnosisData !=
+                                                                      null)
+                                                                  ? state
+                                                                      .diagnosisData!
+                                                                      .afbResult!
+                                                                      .map((e) =>
+                                                                          '${e.name}')
+                                                                      .toList()
+                                                                  : [];
+                                                              if (state
+                                                                      .isLoading ??
+                                                                  false) {
+                                                                return const SizedBox(
+                                                                  height: 15,
+                                                                  width: 15,
+                                                                  child: Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              return TextFieldWithList(
+                                                                controlName:
+                                                                    'afb2_result',
+                                                                label:
+                                                                    'AFB-2 Result',
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                prefixIcon: Icons
+                                                                    .account_circle_outlined,
+                                                                listData: list,
+                                                                allowMultiSelection:
+                                                                    false,
+                                                                onSelected:
+                                                                    (value) {
+                                                                  formGroup
+                                                                      .control(
+                                                                          'afb2_result')
+                                                                      .value = value[0];
+                                                                },
+                                                                emptyString: '',
+                                                              );
+                                                            }),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
@@ -467,7 +581,7 @@ class DiagnosisPage extends StatelessWidget {
                                                           controlName:
                                                               'afb2_result_date',
                                                           label:
-                                                              'AFB2 Result Date',
+                                                              'AFB-2 Result Date',
                                                         ),
                                                         const SizedBox(
                                                             height:
@@ -496,38 +610,65 @@ class DiagnosisPage extends StatelessWidget {
                                                       visible: (control.value ==
                                                           'Yes'),
                                                       child: Column(children: [
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'naat_machine',
-                                                          label: 'NAAT Machine',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'GeneXpert',
-                                                            'TruNAT',
-                                                            'MyLab PathoDetect'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'afb2_result')
-                                                                .value = value[0];
-                                                            formGroup
-                                                                .control(
-                                                                    'naat_machine')
-                                                                .value = value[0];
-
-                                                            context
-                                                                .read<
-                                                                    CaseCubit>()
-                                                                .selectNAATMachine = 1;
-                                                          },
-                                                          emptyString: '',
-                                                        ),
+                                                        BlocBuilder<SourceCubit,
+                                                                SourceState>(
+                                                            buildWhen: ((previous,
+                                                                    current) =>
+                                                                (previous
+                                                                        .isLoading !=
+                                                                    current
+                                                                        .isLoading) ||
+                                                                previous.diagnosisData !=
+                                                                    current
+                                                                        .diagnosisData),
+                                                            builder: (context,
+                                                                state) {
+                                                              List<
+                                                                  String> list = (state
+                                                                          .diagnosisData !=
+                                                                      null)
+                                                                  ? state
+                                                                      .diagnosisData!
+                                                                      .naatMachine!
+                                                                      .map((e) =>
+                                                                          '${e.name}')
+                                                                      .toList()
+                                                                  : [];
+                                                              if (state
+                                                                      .isLoading ??
+                                                                  false) {
+                                                                return const SizedBox(
+                                                                  height: 15,
+                                                                  width: 15,
+                                                                  child: Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              return TextFieldWithList(
+                                                                controlName:
+                                                                    'naat_machine',
+                                                                label:
+                                                                    'NAAT Machine',
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                prefixIcon: Icons
+                                                                    .account_circle_outlined,
+                                                                listData: list,
+                                                                allowMultiSelection:
+                                                                    false,
+                                                                onSelected:
+                                                                    (value) {
+                                                                  formGroup
+                                                                      .control(
+                                                                          'naat_machine')
+                                                                      .value = value[0];
+                                                                },
+                                                                emptyString: '',
+                                                              );
+                                                            }),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
@@ -589,36 +730,65 @@ class DiagnosisPage extends StatelessWidget {
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'mtb_result',
-                                                          label: 'MTB Result',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'MTB Detected ',
-                                                            'MTB Trace Detected ',
-                                                            'MTB not Detected ',
-                                                            'Error',
-                                                            'Invalid',
-                                                            'No Result'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'mtb_result')
-                                                                .value = value[0];
-                                                            context
-                                                                .read<
-                                                                    CaseCubit>()
-                                                                .selectMTBResult = 1;
-                                                          },
-                                                          emptyString: '',
-                                                        ),
+                                                        BlocBuilder<SourceCubit,
+                                                                SourceState>(
+                                                            buildWhen: ((previous,
+                                                                    current) =>
+                                                                (previous
+                                                                        .isLoading !=
+                                                                    current
+                                                                        .isLoading) ||
+                                                                previous.diagnosisData !=
+                                                                    current
+                                                                        .diagnosisData),
+                                                            builder: (context,
+                                                                state) {
+                                                              List<
+                                                                  String> list = (state
+                                                                          .diagnosisData !=
+                                                                      null)
+                                                                  ? state
+                                                                      .diagnosisData!
+                                                                      .mtbResult!
+                                                                      .map((e) =>
+                                                                          '${e.name}')
+                                                                      .toList()
+                                                                  : [];
+                                                              if (state
+                                                                      .isLoading ??
+                                                                  false) {
+                                                                return const SizedBox(
+                                                                  height: 15,
+                                                                  width: 15,
+                                                                  child: Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              return TextFieldWithList(
+                                                                controlName:
+                                                                    'mtb_result',
+                                                                label:
+                                                                    'MTB Result',
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                prefixIcon: Icons
+                                                                    .account_circle_outlined,
+                                                                listData: list,
+                                                                allowMultiSelection:
+                                                                    false,
+                                                                onSelected:
+                                                                    (value) {
+                                                                  formGroup
+                                                                      .control(
+                                                                          'mtb_result')
+                                                                      .value = value[0];
+                                                                },
+                                                                emptyString: '',
+                                                              );
+                                                            }),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
@@ -702,32 +872,6 @@ class DiagnosisPage extends StatelessWidget {
                                                       visible: (control.value ==
                                                           'Yes'),
                                                       child: Column(children: [
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'xdr_result',
-                                                          label: 'XDR Result',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'TB',
-                                                            'No TB',
-                                                            'Case Closed TB'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'xdr_result')
-                                                                .value = value[0];
-                                                          },
-                                                          emptyString: '',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
                                                         DateTextInput(
                                                           firstDate:
                                                               DateTime(2002),
@@ -753,7 +897,7 @@ class DiagnosisPage extends StatelessWidget {
                                                         ChipRadioButtons(
                                                           label: 'XDR Site',
                                                           options: const [
-                                                            'Ahaan',
+                                                            'Internal',
                                                             'GOV'
                                                           ],
                                                           crossAxisCount: 2,
@@ -899,6 +1043,32 @@ class DiagnosisPage extends StatelessWidget {
                                                               .control(
                                                                   'eth_resistance')
                                                               .value,
+                                                        ),
+                                                        const SizedBox(
+                                                            height:
+                                                                kPadding * 2),
+                                                        TextFieldWithList(
+                                                          controlName:
+                                                              'xdr_result',
+                                                          label: 'XDR Result',
+                                                          padding:
+                                                              EdgeInsets.zero,
+                                                          prefixIcon: Icons
+                                                              .account_circle_outlined,
+                                                          listData: const [
+                                                            'TB',
+                                                            'No TB',
+                                                            'Case Closed TB'
+                                                          ],
+                                                          allowMultiSelection:
+                                                              false,
+                                                          onSelected: (value) {
+                                                            formGroup
+                                                                .control(
+                                                                    'xdr_result')
+                                                                .value = value[0];
+                                                          },
+                                                          emptyString: '',
                                                         ),
                                                         const SizedBox(
                                                             height:

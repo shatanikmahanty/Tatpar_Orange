@@ -1,3 +1,5 @@
+import 'package:tatpar_acf/features/mentalhealthscreening/presentation/pages/mental_health_routes.dart';
+
 import '../../../../configurations/configurations.dart';
 
 final caseRoutes = [
@@ -13,5 +15,26 @@ final caseRoutes = [
   AutoRoute(
     path: 'tb_screening_page',
     page: TBScreeningRoute.page,
+  ),
+  AutoRoute(
+    path: 'mental_health_screening_page',
+    page: MentalHealthRouterRoute.page,
+    children: mentalHealthRoutes,
+  ),
+  AutoRoute(
+    path: 'diagnosis_page',
+    page: DiagnosisRoute.page,
+  ),
+  AutoRoute(
+    path: 'treatment_page',
+    page: TreatmentRoute.page,
+  ),
+  AutoRoute(
+    path: 'outcome_page',
+    page: OutcomeRoute.page,
+  ),
+  AutoRoute(
+    path: 'contact_tracing_page',
+    page: ContactTracingRoute.page,
   ),
 ];

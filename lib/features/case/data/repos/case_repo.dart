@@ -137,6 +137,7 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
+      print(result.status);
       return TreatmentModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
@@ -254,7 +255,7 @@ class CaseRepo {
     }
   }
 
-  Future<WHOSrqModel> getWhoSrq({
+  Future<MentalHealthScreeningModel> getWhoSrq({
     required int? id,
   }) async {
     final request = NetworkRequest(
@@ -265,7 +266,87 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return WHOSrqModel.fromJson(result.data['data']);
+      return MentalHealthScreeningModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error Retrieving data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<DiagnosisModel> getDiagnosis({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$diagnosisUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return DiagnosisModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error Retrieving data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<TreatmentModel> getTreatment({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$treatmentUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return TreatmentModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error Retrieving data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<OutcomeModel> getOutcome({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$outcomeUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return OutcomeModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error Retrieving data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<ContactTracingModel> getContactTracing({
+    required int? id,
+  }) async {
+    final request = NetworkRequest(
+      '$contactTracingUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return ContactTracingModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
         errorMsg: 'Error Retrieving data',
@@ -285,6 +366,7 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
+      print(result.status);
       Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<dynamic> caseDataList = result.data['data']['cases'];
       final List<Case> cases =
