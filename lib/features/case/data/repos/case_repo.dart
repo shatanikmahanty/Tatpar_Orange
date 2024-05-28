@@ -73,6 +73,7 @@ class CaseRepo {
 
   Future<MentalHealthScreeningModel> saveWHOSRQData(
       {required MentalHealthScreeningModel mentalHealthScreeningModel,
+      required WHOSrqModel? whoSrqModel,
       required int? id,
       required int? caseId}) async {
     log(mentalHealthScreeningModel.toJson().toString());
@@ -82,6 +83,7 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...mentalHealthScreeningModel.toJson(),
+        ...whoSrqModel!.toJson(),
         'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
@@ -266,6 +268,7 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
+      log(MentalHealthScreeningModel.fromJson(result.data['data']).toString());
       return MentalHealthScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(

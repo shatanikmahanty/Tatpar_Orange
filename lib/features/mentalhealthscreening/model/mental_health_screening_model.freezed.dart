@@ -48,6 +48,7 @@ mixin _$MentalHealthScreeningModel {
   String? get feelingBetter => throw _privateConstructorUsedError;
   @JsonKey(name: 'talk_helpline_again')
   String? get talkToHelpline => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
   WHOSrqModel? get whoSrqModel => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -85,7 +86,7 @@ abstract class $MentalHealthScreeningModelCopyWith<$Res> {
       DateTime? psychiatristLinked,
       @JsonKey(name: 'feeling_better_linkage') String? feelingBetter,
       @JsonKey(name: 'talk_helpline_again') String? talkToHelpline,
-      WHOSrqModel? whoSrqModel});
+      @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
 
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
 }
@@ -203,7 +204,7 @@ abstract class _$$MentalHealthScreeningModelImplCopyWith<$Res>
       DateTime? psychiatristLinked,
       @JsonKey(name: 'feeling_better_linkage') String? feelingBetter,
       @JsonKey(name: 'talk_helpline_again') String? talkToHelpline,
-      WHOSrqModel? whoSrqModel});
+      @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
 
   @override
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
@@ -303,7 +304,7 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
       this.psychiatristLinked,
       @JsonKey(name: 'feeling_better_linkage') this.feelingBetter,
       @JsonKey(name: 'talk_helpline_again') this.talkToHelpline,
-      this.whoSrqModel});
+      @JsonKey(includeToJson: false) this.whoSrqModel});
 
   factory _$MentalHealthScreeningModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -346,6 +347,7 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
   @JsonKey(name: 'talk_helpline_again')
   final String? talkToHelpline;
   @override
+  @JsonKey(includeToJson: false)
   final WHOSrqModel? whoSrqModel;
 
   @override
@@ -411,28 +413,29 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
 abstract class _MentalHealthScreeningModel
     implements MentalHealthScreeningModel {
   const factory _MentalHealthScreeningModel(
-      {@JsonKey(name: 'id', includeToJson: false) final int? id,
-      @JsonKey(name: 'stage') final String? stage,
-      @JsonKey(
-          name: 'screening_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
-      final DateTime? screeningDate,
-      @JsonKey(name: 'case_status') final String? screeningStatus,
-      @JsonKey(name: 'score') final String? screeningScore,
-      @JsonKey(
-          name: 'counselling_linked',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
-      final DateTime? counsellingLinked,
-      @JsonKey(
-          name: 'psychiatrist_linked',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
-      final DateTime? psychiatristLinked,
-      @JsonKey(name: 'feeling_better_linkage') final String? feelingBetter,
-      @JsonKey(name: 'talk_helpline_again') final String? talkToHelpline,
-      final WHOSrqModel? whoSrqModel}) = _$MentalHealthScreeningModelImpl;
+          {@JsonKey(name: 'id', includeToJson: false) final int? id,
+          @JsonKey(name: 'stage') final String? stage,
+          @JsonKey(
+              name: 'screening_date',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
+          final DateTime? screeningDate,
+          @JsonKey(name: 'case_status') final String? screeningStatus,
+          @JsonKey(name: 'score') final String? screeningScore,
+          @JsonKey(
+              name: 'counselling_linked',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
+          final DateTime? counsellingLinked,
+          @JsonKey(
+              name: 'psychiatrist_linked',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
+          final DateTime? psychiatristLinked,
+          @JsonKey(name: 'feeling_better_linkage') final String? feelingBetter,
+          @JsonKey(name: 'talk_helpline_again') final String? talkToHelpline,
+          @JsonKey(includeToJson: false) final WHOSrqModel? whoSrqModel}) =
+      _$MentalHealthScreeningModelImpl;
 
   factory _MentalHealthScreeningModel.fromJson(Map<String, dynamic> json) =
       _$MentalHealthScreeningModelImpl.fromJson;
@@ -474,6 +477,7 @@ abstract class _MentalHealthScreeningModel
   @JsonKey(name: 'talk_helpline_again')
   String? get talkToHelpline;
   @override
+  @JsonKey(includeToJson: false)
   WHOSrqModel? get whoSrqModel;
   @override
   @JsonKey(ignore: true)

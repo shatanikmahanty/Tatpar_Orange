@@ -57,9 +57,8 @@ class MentalHealthScreeningPage extends StatelessWidget {
         psychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
         feelingBetter: formData['feeling_better_after_linkage'] as String?,
         talkToHelpline: formData['talk_to_helpline'] as String?,
-        whoSrqModel: WHOSrqModel.fromJson(whoSrqJson),
       );
-      caseCubit.updateWHOSRQData(updatedModel);
+      caseCubit.updateWHOSRQData(updatedModel, whoSrqModel);
     } else {
       formGroup.markAllAsTouched();
       // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');

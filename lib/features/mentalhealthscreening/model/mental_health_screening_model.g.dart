@@ -36,5 +36,4 @@ Map<String, dynamic> _$$MentalHealthScreeningModelImplToJson(
       'psychiatrist_linked': _dateTimeToJson(instance.psychiatristLinked),
       'feeling_better_linkage': instance.feelingBetter,
       'talk_helpline_again': instance.talkToHelpline,
-      'whoSrqModel': instance.whoSrqModel,
     };

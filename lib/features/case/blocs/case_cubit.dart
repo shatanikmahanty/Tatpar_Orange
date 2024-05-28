@@ -52,6 +52,22 @@ class CaseCubit extends Cubit<CaseState> {
     if (caseModel.tbScreening != null) {
       getTBScreeningData(caseModel.tbScreening);
     }
+    if (caseModel.whoSrq != null) {
+      getMentalHealthScreeningData(caseModel.whoSrq);
+    }
+    if (caseModel.diagnosis != null) {
+      getDiagnosisData(caseModel.diagnosis);
+    }
+    if (caseModel.treatment != null) {
+      getTreatmentData(caseModel.treatment);
+    }
+
+    if (caseModel.outcomeValue != null) {
+      getOutcomeData(caseModel.outcomeValue);
+    }
+    if (caseModel.contactTracing != null) {
+      getContactTracingData(caseModel.contactTracing);
+    }
   }
   Case? selectedCase;
 
@@ -328,9 +344,11 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> updateWHOSRQData(
-      MentalHealthScreeningModel mentalHealthScreeningModel) async {
+      MentalHealthScreeningModel mentalHealthScreeningModel,
+      WHOSrqModel? whoSrqModel) async {
     final response = await caseRepo.saveWHOSRQData(
         mentalHealthScreeningModel: mentalHealthScreeningModel,
+        whoSrqModel: whoSrqModel,
         id: state.caseWorkedUpon.whoSrq,
         caseId: state.caseWorkedUpon.id);
     emit(

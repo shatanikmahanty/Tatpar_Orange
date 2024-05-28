@@ -21,31 +21,32 @@ String? _dateTimeToJson(DateTime? date) =>
 @freezed
 class MentalHealthScreeningModel with _$MentalHealthScreeningModel {
   const factory MentalHealthScreeningModel(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
-      @JsonKey(name: 'stage') String? stage,
-      @JsonKey(
-        name: 'screening_date',
-        fromJson: fromJsonToDateTime,
-        toJson: _dateTimeToJson,
-      )
-      DateTime? screeningDate,
-      @JsonKey(name: 'case_status') String? screeningStatus,
-      @JsonKey(name: 'score') String? screeningScore,
-      @JsonKey(
-        name: 'counselling_linked',
-        fromJson: fromJsonToDateTime,
-        toJson: _dateTimeToJson,
-      )
-      DateTime? counsellingLinked,
-      @JsonKey(
-        name: 'psychiatrist_linked',
-        fromJson: fromJsonToDateTime,
-        toJson: _dateTimeToJson,
-      )
-      DateTime? psychiatristLinked,
-      @JsonKey(name: 'feeling_better_linkage') String? feelingBetter,
-      @JsonKey(name: 'talk_helpline_again') String? talkToHelpline,
-      WHOSrqModel? whoSrqModel}) = _MentalHealthScreeningModel;
+          {@JsonKey(name: 'id', includeToJson: false) int? id,
+          @JsonKey(name: 'stage') String? stage,
+          @JsonKey(
+            name: 'screening_date',
+            fromJson: fromJsonToDateTime,
+            toJson: _dateTimeToJson,
+          )
+          DateTime? screeningDate,
+          @JsonKey(name: 'case_status') String? screeningStatus,
+          @JsonKey(name: 'score') String? screeningScore,
+          @JsonKey(
+            name: 'counselling_linked',
+            fromJson: fromJsonToDateTime,
+            toJson: _dateTimeToJson,
+          )
+          DateTime? counsellingLinked,
+          @JsonKey(
+            name: 'psychiatrist_linked',
+            fromJson: fromJsonToDateTime,
+            toJson: _dateTimeToJson,
+          )
+          DateTime? psychiatristLinked,
+          @JsonKey(name: 'feeling_better_linkage') String? feelingBetter,
+          @JsonKey(name: 'talk_helpline_again') String? talkToHelpline,
+          @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel}) =
+      _MentalHealthScreeningModel;
 
   factory MentalHealthScreeningModel.fromJson(Map<String, dynamic> json) =>
       _$MentalHealthScreeningModelFromJson(json);
