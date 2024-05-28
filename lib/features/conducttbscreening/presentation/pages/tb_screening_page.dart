@@ -42,29 +42,26 @@ class TBScreeningPage extends StatelessWidget {
             : tbScreeningModel?.trimester,
       ),
       'cough': FormControl<String?>(
-        value: tbScreeningModel?.cough,
-      ),
+          value: tbScreeningModel?.cough, validators: [Validators.required]),
       'sputum': FormControl<String?>(
-        value: tbScreeningModel?.sputum,
-      ),
+          value: tbScreeningModel?.sputum, validators: [Validators.required]),
       'hemoptysis': FormControl<String?>(
-        value: tbScreeningModel?.hemoptysis,
-      ),
+          value: tbScreeningModel?.hemoptysis,
+          validators: [Validators.required]),
       'fever': FormControl<String?>(
-        value: tbScreeningModel?.fever,
-      ),
+          value: tbScreeningModel?.fever, validators: [Validators.required]),
       'night_sweats': FormControl<String?>(
-        value: tbScreeningModel?.nightSweats,
-      ),
+          value: tbScreeningModel?.nightSweats,
+          validators: [Validators.required]),
       'chest_pain': FormControl<String?>(
-        value: tbScreeningModel?.chestPain,
-      ),
+          value: tbScreeningModel?.chestPain,
+          validators: [Validators.required]),
       'weight_loss': FormControl<String?>(
-        value: tbScreeningModel?.weightLoss,
-      ),
+          value: tbScreeningModel?.weightLoss,
+          validators: [Validators.required]),
       'swollen_gland': FormControl<String?>(
-        value: tbScreeningModel?.swollenGland,
-      ),
+          value: tbScreeningModel?.swollenGland,
+          validators: [Validators.required]),
       'tb_medicine': FormControl<String?>(
         value: tbScreeningModel?.tbMedicine,
       ),
