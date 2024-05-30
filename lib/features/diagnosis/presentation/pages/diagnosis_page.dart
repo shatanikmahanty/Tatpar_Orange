@@ -156,6 +156,9 @@ class DiagnosisPage extends StatelessWidget {
       'other_test': FormControl<String>(
         value: diagnosisModel?.otherTest,
       ),
+      'other_test_date': FormControl<DateTime>(
+        value: diagnosisModel?.otherTestDate,
+      ),
       'test_name': FormControl<String>(
         value: diagnosisModel?.testName,
       ),
@@ -216,6 +219,13 @@ class DiagnosisPage extends StatelessWidget {
                   element.name == formGroup.control('mtb_result').value,
               orElse: () => const MTBResult(id: null))
           .id;
+      context.read<CaseCubit>().selectXDRResult = sourceCubit
+          .state.diagnosisData!.mtbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('xdr_result').value,
+              orElse: () => const MTBResult(id: null))
+          .id;
 
       final model = cubit.state.diagnsosisModel ?? const DiagnosisModel();
       final diagnosisModel = model.copyWith(
@@ -241,7 +251,7 @@ class DiagnosisPage extends StatelessWidget {
         rifResistance: formData['rif_resistance'] as String?,
         drugResistance: formData['drug_resistance'] as String?,
         xdrDone: formData['xdr_done'] as String?,
-        xdrResult: formData['xdr_result'] as String?,
+        selectedXdrResult: cubit.selectedXDRResult,
         xdrResultDate: formData['xdr_result_date'] as DateTime?,
         xdrLabNumber: formData['xdr_lab_number'] as String?,
         xdrSite: formData['xdr_site'] as String?,
@@ -260,6 +270,7 @@ class DiagnosisPage extends StatelessWidget {
         usgResult: formData['usg_result'] as String?,
         usgComments: formData['usg_comments'] as String?,
         otherTest: formData['other_test'] as String?,
+        otherTestDate: formData['other_test_date'] as DateTime?,
         testName: formData['test_name'] as String?,
         otherTestResult: formData['other_test_result'] as String?,
         diagnosis: formData['diagnosis'] as String?,
@@ -819,28 +830,28 @@ class DiagnosisPage extends StatelessWidget {
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'Drug Resistance',
-                                                          options: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'drug_resistance')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'drug_resistance')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
+                                                        // ChipRadioButtons(
+                                                        //   label:
+                                                        //       'Drug Resistance',
+                                                        //   options: const [
+                                                        //     'Sensitive',
+                                                        //     'Resistant'
+                                                        //   ],
+                                                        //   crossAxisCount: 2,
+                                                        //   onChanged: (value) {
+                                                        //     formGroup
+                                                        //         .control(
+                                                        //             'drug_resistance')
+                                                        //         .value = value;
+                                                        //   },
+                                                        //   selected: formGroup
+                                                        //       .control(
+                                                        //           'drug_resistance')
+                                                        //       .value,
+                                                        // ),
+                                                        // const SizedBox(
+                                                        //     height:
+                                                        //         kPadding * 2),
                                                         ChipRadioButtons(
                                                           label: 'XDR Done',
                                                           options: const [
@@ -1047,29 +1058,65 @@ class DiagnosisPage extends StatelessWidget {
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'xdr_result',
-                                                          label: 'XDR Result',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'TB',
-                                                            'No TB',
-                                                            'Case Closed TB'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'xdr_result')
-                                                                .value = value[0];
-                                                          },
-                                                          emptyString: '',
-                                                        ),
+                                                        BlocBuilder<SourceCubit,
+                                                                SourceState>(
+                                                            buildWhen: ((previous,
+                                                                    current) =>
+                                                                (previous
+                                                                        .isLoading !=
+                                                                    current
+                                                                        .isLoading) ||
+                                                                previous.diagnosisData !=
+                                                                    current
+                                                                        .diagnosisData),
+                                                            builder: (context,
+                                                                state) {
+                                                              List<
+                                                                  String> list = (state
+                                                                          .diagnosisData !=
+                                                                      null)
+                                                                  ? state
+                                                                      .diagnosisData!
+                                                                      .mtbResult!
+                                                                      .map((e) =>
+                                                                          '${e.name}')
+                                                                      .toList()
+                                                                  : [];
+                                                              if (state
+                                                                      .isLoading ??
+                                                                  false) {
+                                                                return const SizedBox(
+                                                                  height: 15,
+                                                                  width: 15,
+                                                                  child: Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(),
+                                                                  ),
+                                                                );
+                                                              }
+                                                              return TextFieldWithList(
+                                                                controlName:
+                                                                    'xdr_result',
+                                                                label:
+                                                                    'XDR Result',
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                prefixIcon: Icons
+                                                                    .account_circle_outlined,
+                                                                listData: list,
+                                                                allowMultiSelection:
+                                                                    false,
+                                                                onSelected:
+                                                                    (value) {
+                                                                  formGroup
+                                                                      .control(
+                                                                          'xdr_result')
+                                                                      .value = value[0];
+                                                                },
+                                                                emptyString: '',
+                                                              );
+                                                            }),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
@@ -1105,8 +1152,8 @@ class DiagnosisPage extends StatelessWidget {
                                                   ChipRadioButtons(
                                                     label: 'FNAC Result',
                                                     options: const [
-                                                      'Postive',
-                                                      'Negative'
+                                                      'Normal',
+                                                      'Abnormal'
                                                     ],
                                                     crossAxisCount: 2,
                                                     onChanged: (value) {
@@ -1165,8 +1212,8 @@ class DiagnosisPage extends StatelessWidget {
                                                   ChipRadioButtons(
                                                     label: 'USG Result',
                                                     options: const [
-                                                      'Postive',
-                                                      'Negative'
+                                                      'Normal',
+                                                      'Abnormal'
                                                     ],
                                                     crossAxisCount: 2,
                                                     onChanged: (value) {
@@ -1216,6 +1263,17 @@ class DiagnosisPage extends StatelessWidget {
                                                       visible: (control.value ==
                                                           'Yes'),
                                                       child: Column(children: [
+                                                        DateTextInput(
+                                                          firstDate:
+                                                              DateTime(2002),
+                                                          controlName:
+                                                              'other_test_date',
+                                                          label:
+                                                              'Other Test Date',
+                                                        ),
+                                                        const SizedBox(
+                                                            height:
+                                                                kPadding * 2),
                                                         const PrimaryTextField(
                                                           formControlName:
                                                               'test_name',
@@ -1230,8 +1288,8 @@ class DiagnosisPage extends StatelessWidget {
                                                           label:
                                                               'Other Test Result',
                                                           options: const [
-                                                            'Positive',
-                                                            'Negative'
+                                                            'Normal',
+                                                            'Abnormal'
                                                           ],
                                                           crossAxisCount: 2,
                                                           onChanged: (value) {
@@ -1249,11 +1307,24 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                       ]))),
-                                          const PrimaryTextField(
-                                            formControlName: 'diagnosis',
+                                          TextFieldWithList(
+                                            controlName: 'diagnosis',
                                             label: 'Diagnosis',
+                                            padding: EdgeInsets.zero,
                                             prefixIcon:
                                                 Icons.account_circle_outlined,
+                                            listData: const [
+                                              'TB',
+                                              'No TB',
+                                              'Case Closed TB'
+                                            ],
+                                            allowMultiSelection: false,
+                                            onSelected: (value) {
+                                              formGroup
+                                                  .control('diagnosis')
+                                                  .value = value[0];
+                                            },
+                                            emptyString: '',
                                           ),
                                           const SizedBox(height: kPadding * 2),
                                           DateTextInput(
@@ -1276,7 +1347,10 @@ class DiagnosisPage extends StatelessWidget {
                       ))),
                       BottomButtonBar(
                         onSave: (_) async => await _onSave(context, formGroup),
-                        nextPage: const TreatmentRoute(),
+                        nextPage: formGroup.control('diagnosis').value ==
+                                'Case Closed TB'
+                            ? const AppHomeRoute()
+                            : const TreatmentRoute(),
                       ),
                       const SizedBox(height: kPadding * 2),
                     ])))));

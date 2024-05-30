@@ -37,7 +37,8 @@ _$DiagnosisModelImpl _$$DiagnosisModelImplFromJson(Map<String, dynamic> json) =>
       rifResistance: json['rif_resistance'] as String?,
       drugResistance: json['drugResistance'] as String?,
       xdrDone: json['xdr_done'] as String?,
-      xdrResult: json['xdr_result'] as String?,
+      xdrResult: json['xdrResult'] as String?,
+      selectedXdrResult: (json['xdr_result'] as num?)?.toInt(),
       xdrResultDate: fromJsonToDateTime(json['xdr_result_date'] as String?),
       xdrLabNumber: json['xdr_lab_number'] as String?,
       xdrSite: json['xdr_site'] as String?,
@@ -56,6 +57,7 @@ _$DiagnosisModelImpl _$$DiagnosisModelImplFromJson(Map<String, dynamic> json) =>
       usgResult: json['usg_result'] as String?,
       usgComments: json['usg_comments'] as String?,
       otherTest: json['other_test'] as String?,
+      otherTestDate: fromJsonToDateTime(json['other_test_date'] as String?),
       testName: json['test_name'] as String?,
       otherTestResult: json['other_test_result'] as String?,
       diagnosis: json['diagnosis'] as String?,
@@ -101,7 +103,7 @@ Map<String, dynamic> _$$DiagnosisModelImplToJson(
   val['rif_resistance'] = instance.rifResistance;
   val['drugResistance'] = instance.drugResistance;
   val['xdr_done'] = instance.xdrDone;
-  val['xdr_result'] = instance.xdrResult;
+  val['xdr_result'] = instance.selectedXdrResult;
   val['xdr_result_date'] = _dateTimeToJson(instance.xdrResultDate);
   val['xdr_lab_number'] = instance.xdrLabNumber;
   val['xdr_site'] = instance.xdrSite;
@@ -120,6 +122,7 @@ Map<String, dynamic> _$$DiagnosisModelImplToJson(
   val['usg_result'] = instance.usgResult;
   val['usg_comments'] = instance.usgComments;
   val['other_test'] = instance.otherTest;
+  val['other_test_date'] = _dateTimeToJson(instance.otherTestDate);
   val['test_name'] = instance.testName;
   val['other_test_result'] = instance.otherTestResult;
   val['diagnosis'] = instance.diagnosis;

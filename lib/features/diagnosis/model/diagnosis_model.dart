@@ -77,7 +77,8 @@ class DiagnosisModel with _$DiagnosisModel {
     @JsonKey(name: 'rif_resistance') String? rifResistance,
     String? drugResistance,
     @JsonKey(name: 'xdr_done') String? xdrDone,
-    @JsonKey(name: 'xdr_result') String? xdrResult,
+    @JsonKey(includeToJson: false) String? xdrResult,
+    @JsonKey(name: 'xdr_result') int? selectedXdrResult,
     @JsonKey(
       name: 'xdr_result_date',
       fromJson: fromJsonToDateTime,
@@ -111,6 +112,12 @@ class DiagnosisModel with _$DiagnosisModel {
     @JsonKey(name: 'usg_result') String? usgResult,
     @JsonKey(name: 'usg_comments') String? usgComments,
     @JsonKey(name: 'other_test') String? otherTest,
+    @JsonKey(
+      name: 'other_test_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson,
+    )
+    DateTime? otherTestDate,
     @JsonKey(name: 'test_name') String? testName,
     @JsonKey(name: 'other_test_result') String? otherTestResult,
     @JsonKey(name: 'diagnosis') String? diagnosis,

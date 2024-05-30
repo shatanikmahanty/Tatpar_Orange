@@ -91,6 +91,7 @@ class CaseCubit extends Cubit<CaseState> {
   int? _selectedAFB2Result;
   int? _selectedNAATMachine;
   int? _selectedMTBResult;
+  int? _selectedXDRResult;
 
   ///TreatmentPage
   int? _selectedTreatmentPanchayatCodeId;
@@ -128,6 +129,8 @@ class CaseCubit extends Cubit<CaseState> {
       _selectedNAATMachine = selectedNAATMachine;
   set selectMTBResult(int? selectedMTBResult) =>
       _selectedMTBResult = selectedMTBResult;
+  set selectXDRResult(int? selectedXDRResult) =>
+      _selectedXDRResult = selectedXDRResult;
 
   set selectTreatmentPanchayatCodeId(int? selectedTreatmentPanchayatCodeId) =>
       _selectedTreatmentPanchayatCodeId = selectedTreatmentPanchayatCodeId;
@@ -153,6 +156,7 @@ class CaseCubit extends Cubit<CaseState> {
   int? get selectedAFB2Result => _selectedAFB2Result;
   int? get selectedNAATMachine => _selectedNAATMachine;
   int? get selectedMTBResult => _selectedMTBResult;
+  int? get selectedXDRResult => _selectedXDRResult;
 
   int? get selectedTreatmentPanchayatCodeId =>
       _selectedTreatmentPanchayatCodeId;
