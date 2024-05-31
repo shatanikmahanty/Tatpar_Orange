@@ -17,7 +17,7 @@ import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
-
+import 'package:provider/provider.dart';
 import 'configurations/configurations.dart';
 
 class TatparAcfAppBuilder extends AppBuilder {
@@ -100,68 +100,81 @@ class TatparAcfAppBuilder extends AppBuilder {
             },
             onLogout: (context) {},
             child: AppCubitConsumer(
-              listenWhen: (previous, current) =>
-                  previous.environment != current.environment,
-              listener: (context, state) async {},
-              builder: (context, appState) => MaterialApp.router(
-                debugShowCheckedModeBanner: false,
-                scaffoldMessengerKey:
-                    DjangoflowAppSnackbar.scaffoldMessengerKey,
-                title: appName,
-                routeInformationParser: appRouter.defaultRouteParser(),
-                theme: AppTheme.light,
-                darkTheme: AppTheme.dark,
-                themeMode: appState.themeMode,
-                locale: Locale(appState.locale, ''),
-                supportedLocales: const [
-                  Locale('en', ''),
-                ],
-                localizationsDelegates: const [
-                  GlobalMaterialLocalizations.delegate,
-                  GlobalWidgetsLocalizations.delegate,
-                  GlobalCupertinoLocalizations.delegate,
-                ],
-                routerDelegate: appRouter.delegate(
-                  deepLinkBuilder: (_) => initialDeepLink != null
-                      ? DeepLink.path(initialDeepLink)
-                      : const DeepLink(
-                          [
-                            AppHomeRoute(),
-                          ],
-                        ),
-                  // List of global navigation obsersers here
-                  // SentryNavigationObserver
-                  // navigatorObservers: () => {RouteObserver()},
-                ),
-                builder: (context, child) => AppResponsiveLayoutBuilder(
-                  child: SandboxBanner(
-                    isSandbox: appState.environment == AppEnvironment.sandbox,
-                    child: child != null
-                        ? kIsWeb
-                            ? child
-                            : AppLinksCubitListener(
-                                listenWhen: (previous, current) =>
-                                    current != null,
-                                listener: (context, appLink) {
-                                  final path = appLink?.path;
-                                  if (path != null) {
-                                    appRouter.navigateNamed(
-                                      path,
-                                      onFailure: (failure) {
-                                        appRouter.navigate(
-                                          const AppHomeRoute(),
+                listenWhen: (previous, current) =>
+                    previous.environment != current.environment,
+                listener: (context, state) async {},
+                builder: (context, appState) {
+                  // ChangeNotifierProvider(create: (_) {
+                  //   return LanguageProvider();
+                  // });
+                  //               getCurrentAppLangauge();
+
+                  return MaterialApp.router(
+                    debugShowCheckedModeBanner: false,
+                    scaffoldMessengerKey:
+                        DjangoflowAppSnackbar.scaffoldMessengerKey,
+                    title: appName,
+                    routeInformationParser: appRouter.defaultRouteParser(),
+                    theme: AppTheme.light,
+                    darkTheme: AppTheme.dark,
+                    themeMode: appState.themeMode,
+                    locale: Locale(appState.locale, ''),
+                    // locale: Locale.fromSubtags(
+                    //     languageCode: LanguageProvider().currentLanguage),
+                    supportedLocales: const [
+                      Locale('en', ''),
+                    ],
+                    localizationsDelegates: const [
+                      GlobalMaterialLocalizations.delegate,
+                      GlobalWidgetsLocalizations.delegate,
+                      GlobalCupertinoLocalizations.delegate,
+                    ],
+                    routerDelegate: appRouter.delegate(
+                      deepLinkBuilder: (_) => initialDeepLink != null
+                          ? DeepLink.path(initialDeepLink)
+                          : const DeepLink(
+                              [
+                                AppHomeRoute(),
+                              ],
+                            ),
+                      // List of global navigation obsersers here
+                      // SentryNavigationObserver
+                      // navigatorObservers: () => {RouteObserver()},
+                    ),
+                    builder: (context, child) => AppResponsiveLayoutBuilder(
+                      child: SandboxBanner(
+                        isSandbox:
+                            appState.environment == AppEnvironment.sandbox,
+                        child: child != null
+                            ? kIsWeb
+                                ? child
+                                : AppLinksCubitListener(
+                                    listenWhen: (previous, current) =>
+                                        current != null,
+                                    listener: (context, appLink) {
+                                      final path = appLink?.path;
+                                      if (path != null) {
+                                        appRouter.navigateNamed(
+                                          path,
+                                          onFailure: (failure) {
+                                            appRouter.navigate(
+                                              const AppHomeRoute(),
+                                            );
+                                          },
                                         );
-                                      },
-                                    );
-                                  }
-                                },
-                                child: child,
-                              )
-                        : const Offstage(),
-                  ),
-                ),
-              ),
-            ),
+                                      }
+                                    },
+                                    child: child,
+                                  )
+                            : const Offstage(),
+                      ),
+                    ),
+                  );
+                }),
           ),
         );
+  void getCurrentAppLangauge() async {
+//final lang = await Preferences.getValuefor(PreferencesString.localeKey);
+    // LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
+  }
 }

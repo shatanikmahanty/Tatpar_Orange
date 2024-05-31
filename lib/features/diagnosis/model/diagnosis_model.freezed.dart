@@ -38,11 +38,11 @@ mixin _$DiagnosisModel {
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get chestXrayDate => throw _privateConstructorUsedError;
-  @JsonKey(name: 'chest_xray_result')
+  @JsonKey(name: 'chest_xray_result', includeToJson: false)
   String? get chestXrayResult => throw _privateConstructorUsedError;
   @JsonKey(name: 'afb_done')
   String? get afbDone => throw _privateConstructorUsedError;
-  @JsonKey(name: 'afb_lab_number')
+  @JsonKey(name: 'afb_lab_number', includeToJson: false)
   String? get afbLabNumber => throw _privateConstructorUsedError;
   @JsonKey(includeIfNull: false)
   String? get afb1Result => throw _privateConstructorUsedError;
@@ -88,7 +88,6 @@ mixin _$DiagnosisModel {
   int? get selectedMtbResult => throw _privateConstructorUsedError;
   @JsonKey(name: 'rif_resistance')
   String? get rifResistance => throw _privateConstructorUsedError;
-  String? get drugResistance => throw _privateConstructorUsedError;
   @JsonKey(name: 'xdr_done')
   String? get xdrDone => throw _privateConstructorUsedError;
   @JsonKey(includeToJson: false)
@@ -177,14 +176,13 @@ abstract class $DiagnosisModelCopyWith<$Res> {
           toJson: _dateTimeToJson)
       DateTime? firstConsultationDate,
       @JsonKey(name: 'chest_xray') String? chestXray,
-      @JsonKey(
-          name: 'chest_xray_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'chest_xray_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? chestXrayDate,
-      @JsonKey(name: 'chest_xray_result') String? chestXrayResult,
+      @JsonKey(name: 'chest_xray_result', includeToJson: false)
+      String? chestXrayResult,
       @JsonKey(name: 'afb_done') String? afbDone,
-      @JsonKey(name: 'afb_lab_number') String? afbLabNumber,
+      @JsonKey(name: 'afb_lab_number', includeToJson: false)
+      String? afbLabNumber,
       @JsonKey(includeIfNull: false) String? afb1Result,
       @JsonKey(name: 'afb_1_result') int? selectedAfb1Result,
       @JsonKey(
@@ -217,14 +215,10 @@ abstract class $DiagnosisModelCopyWith<$Res> {
       @JsonKey(includeIfNull: false) String? mtbResult,
       @JsonKey(name: 'mtb_result') int? selectedMtbResult,
       @JsonKey(name: 'rif_resistance') String? rifResistance,
-      String? drugResistance,
       @JsonKey(name: 'xdr_done') String? xdrDone,
       @JsonKey(includeToJson: false) String? xdrResult,
       @JsonKey(name: 'xdr_result') int? selectedXdrResult,
-      @JsonKey(
-          name: 'xdr_result_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'xdr_result_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? xdrResultDate,
       @JsonKey(name: 'xdr_lab_number') String? xdrLabNumber,
       @JsonKey(name: 'xdr_site') String? xdrSite,
@@ -235,18 +229,12 @@ abstract class $DiagnosisModelCopyWith<$Res> {
       @JsonKey(name: 'cap_resistance') String? capResistance,
       @JsonKey(name: 'eth_resistance') String? ethResistance,
       @JsonKey(name: 'fnac') String? fnac,
-      @JsonKey(
-          name: 'fnac_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'fnac_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? fnacDate,
       @JsonKey(name: 'fnac_result') String? fnacResult,
       @JsonKey(name: 'fnac_comments') String? fnacComments,
       @JsonKey(name: 'usg') String? usg,
-      @JsonKey(
-          name: 'usg_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'usg_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? usgDate,
       @JsonKey(name: 'usg_result') String? usgResult,
       @JsonKey(name: 'usg_comments') String? usgComments,
@@ -260,10 +248,7 @@ abstract class $DiagnosisModelCopyWith<$Res> {
       @JsonKey(name: 'other_test_result') String? otherTestResult,
       @JsonKey(name: 'diagnosis') String? diagnosis,
       @JsonKey(name: 'diagnosis_comments') String? diagnosisComments,
-      @JsonKey(
-          name: 'diagnosis_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'diagnosis_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? diagnosisDate});
 }
 
@@ -305,7 +290,6 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
     Object? mtbResult = freezed,
     Object? selectedMtbResult = freezed,
     Object? rifResistance = freezed,
-    Object? drugResistance = freezed,
     Object? xdrDone = freezed,
     Object? xdrResult = freezed,
     Object? selectedXdrResult = freezed,
@@ -434,10 +418,6 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
       rifResistance: freezed == rifResistance
           ? _value.rifResistance
           : rifResistance // ignore: cast_nullable_to_non_nullable
-              as String?,
-      drugResistance: freezed == drugResistance
-          ? _value.drugResistance
-          : drugResistance // ignore: cast_nullable_to_non_nullable
               as String?,
       xdrDone: freezed == xdrDone
           ? _value.xdrDone
@@ -569,14 +549,13 @@ abstract class _$$DiagnosisModelImplCopyWith<$Res>
           toJson: _dateTimeToJson)
       DateTime? firstConsultationDate,
       @JsonKey(name: 'chest_xray') String? chestXray,
-      @JsonKey(
-          name: 'chest_xray_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'chest_xray_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? chestXrayDate,
-      @JsonKey(name: 'chest_xray_result') String? chestXrayResult,
+      @JsonKey(name: 'chest_xray_result', includeToJson: false)
+      String? chestXrayResult,
       @JsonKey(name: 'afb_done') String? afbDone,
-      @JsonKey(name: 'afb_lab_number') String? afbLabNumber,
+      @JsonKey(name: 'afb_lab_number', includeToJson: false)
+      String? afbLabNumber,
       @JsonKey(includeIfNull: false) String? afb1Result,
       @JsonKey(name: 'afb_1_result') int? selectedAfb1Result,
       @JsonKey(
@@ -609,14 +588,10 @@ abstract class _$$DiagnosisModelImplCopyWith<$Res>
       @JsonKey(includeIfNull: false) String? mtbResult,
       @JsonKey(name: 'mtb_result') int? selectedMtbResult,
       @JsonKey(name: 'rif_resistance') String? rifResistance,
-      String? drugResistance,
       @JsonKey(name: 'xdr_done') String? xdrDone,
       @JsonKey(includeToJson: false) String? xdrResult,
       @JsonKey(name: 'xdr_result') int? selectedXdrResult,
-      @JsonKey(
-          name: 'xdr_result_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'xdr_result_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? xdrResultDate,
       @JsonKey(name: 'xdr_lab_number') String? xdrLabNumber,
       @JsonKey(name: 'xdr_site') String? xdrSite,
@@ -627,18 +602,12 @@ abstract class _$$DiagnosisModelImplCopyWith<$Res>
       @JsonKey(name: 'cap_resistance') String? capResistance,
       @JsonKey(name: 'eth_resistance') String? ethResistance,
       @JsonKey(name: 'fnac') String? fnac,
-      @JsonKey(
-          name: 'fnac_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'fnac_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? fnacDate,
       @JsonKey(name: 'fnac_result') String? fnacResult,
       @JsonKey(name: 'fnac_comments') String? fnacComments,
       @JsonKey(name: 'usg') String? usg,
-      @JsonKey(
-          name: 'usg_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'usg_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? usgDate,
       @JsonKey(name: 'usg_result') String? usgResult,
       @JsonKey(name: 'usg_comments') String? usgComments,
@@ -652,10 +621,7 @@ abstract class _$$DiagnosisModelImplCopyWith<$Res>
       @JsonKey(name: 'other_test_result') String? otherTestResult,
       @JsonKey(name: 'diagnosis') String? diagnosis,
       @JsonKey(name: 'diagnosis_comments') String? diagnosisComments,
-      @JsonKey(
-          name: 'diagnosis_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'diagnosis_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? diagnosisDate});
 }
 
@@ -695,7 +661,6 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
     Object? mtbResult = freezed,
     Object? selectedMtbResult = freezed,
     Object? rifResistance = freezed,
-    Object? drugResistance = freezed,
     Object? xdrDone = freezed,
     Object? xdrResult = freezed,
     Object? selectedXdrResult = freezed,
@@ -824,10 +789,6 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
       rifResistance: freezed == rifResistance
           ? _value.rifResistance
           : rifResistance // ignore: cast_nullable_to_non_nullable
-              as String?,
-      drugResistance: freezed == drugResistance
-          ? _value.drugResistance
-          : drugResistance // ignore: cast_nullable_to_non_nullable
               as String?,
       xdrDone: freezed == xdrDone
           ? _value.xdrDone
@@ -959,9 +920,10 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.chestXrayDate,
-      @JsonKey(name: 'chest_xray_result') this.chestXrayResult,
+      @JsonKey(name: 'chest_xray_result', includeToJson: false)
+      this.chestXrayResult,
       @JsonKey(name: 'afb_done') this.afbDone,
-      @JsonKey(name: 'afb_lab_number') this.afbLabNumber,
+      @JsonKey(name: 'afb_lab_number', includeToJson: false) this.afbLabNumber,
       @JsonKey(includeIfNull: false) this.afb1Result,
       @JsonKey(name: 'afb_1_result') this.selectedAfb1Result,
       @JsonKey(
@@ -994,7 +956,6 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
       @JsonKey(includeIfNull: false) this.mtbResult,
       @JsonKey(name: 'mtb_result') this.selectedMtbResult,
       @JsonKey(name: 'rif_resistance') this.rifResistance,
-      this.drugResistance,
       @JsonKey(name: 'xdr_done') this.xdrDone,
       @JsonKey(includeToJson: false) this.xdrResult,
       @JsonKey(name: 'xdr_result') this.selectedXdrResult,
@@ -1071,13 +1032,13 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
       toJson: _dateTimeToJson)
   final DateTime? chestXrayDate;
   @override
-  @JsonKey(name: 'chest_xray_result')
+  @JsonKey(name: 'chest_xray_result', includeToJson: false)
   final String? chestXrayResult;
   @override
   @JsonKey(name: 'afb_done')
   final String? afbDone;
   @override
-  @JsonKey(name: 'afb_lab_number')
+  @JsonKey(name: 'afb_lab_number', includeToJson: false)
   final String? afbLabNumber;
   @override
   @JsonKey(includeIfNull: false)
@@ -1139,8 +1100,6 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
   @override
   @JsonKey(name: 'rif_resistance')
   final String? rifResistance;
-  @override
-  final String? drugResistance;
   @override
   @JsonKey(name: 'xdr_done')
   final String? xdrDone;
@@ -1236,7 +1195,7 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
 
   @override
   String toString() {
-    return 'DiagnosisModel(id: $id, diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, drugResistance: $drugResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, selectedXdrResult: $selectedXdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, otherTestDate: $otherTestDate, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate)';
+    return 'DiagnosisModel(id: $id, diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, selectedXdrResult: $selectedXdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, otherTestDate: $otherTestDate, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate)';
   }
 
   @override
@@ -1292,8 +1251,6 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
                 other.selectedMtbResult == selectedMtbResult) &&
             (identical(other.rifResistance, rifResistance) ||
                 other.rifResistance == rifResistance) &&
-            (identical(other.drugResistance, drugResistance) ||
-                other.drugResistance == drugResistance) &&
             (identical(other.xdrDone, xdrDone) || other.xdrDone == xdrDone) &&
             (identical(other.xdrResult, xdrResult) ||
                 other.xdrResult == xdrResult) &&
@@ -1337,7 +1294,8 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
                 other.testName == testName) &&
             (identical(other.otherTestResult, otherTestResult) ||
                 other.otherTestResult == otherTestResult) &&
-            (identical(other.diagnosis, diagnosis) || other.diagnosis == diagnosis) &&
+            (identical(other.diagnosis, diagnosis) ||
+                other.diagnosis == diagnosis) &&
             (identical(other.diagnosisComments, diagnosisComments) || other.diagnosisComments == diagnosisComments) &&
             (identical(other.diagnosisDate, diagnosisDate) || other.diagnosisDate == diagnosisDate));
   }
@@ -1371,7 +1329,6 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
         mtbResult,
         selectedMtbResult,
         rifResistance,
-        drugResistance,
         xdrDone,
         xdrResult,
         selectedXdrResult,
@@ -1432,9 +1389,11 @@ abstract class _DiagnosisModel implements DiagnosisModel {
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? chestXrayDate,
-      @JsonKey(name: 'chest_xray_result') final String? chestXrayResult,
+      @JsonKey(name: 'chest_xray_result', includeToJson: false)
+      final String? chestXrayResult,
       @JsonKey(name: 'afb_done') final String? afbDone,
-      @JsonKey(name: 'afb_lab_number') final String? afbLabNumber,
+      @JsonKey(name: 'afb_lab_number', includeToJson: false)
+      final String? afbLabNumber,
       @JsonKey(includeIfNull: false) final String? afb1Result,
       @JsonKey(name: 'afb_1_result') final int? selectedAfb1Result,
       @JsonKey(
@@ -1467,7 +1426,6 @@ abstract class _DiagnosisModel implements DiagnosisModel {
       @JsonKey(includeIfNull: false) final String? mtbResult,
       @JsonKey(name: 'mtb_result') final int? selectedMtbResult,
       @JsonKey(name: 'rif_resistance') final String? rifResistance,
-      final String? drugResistance,
       @JsonKey(name: 'xdr_done') final String? xdrDone,
       @JsonKey(includeToJson: false) final String? xdrResult,
       @JsonKey(name: 'xdr_result') final int? selectedXdrResult,
@@ -1544,13 +1502,13 @@ abstract class _DiagnosisModel implements DiagnosisModel {
       toJson: _dateTimeToJson)
   DateTime? get chestXrayDate;
   @override
-  @JsonKey(name: 'chest_xray_result')
+  @JsonKey(name: 'chest_xray_result', includeToJson: false)
   String? get chestXrayResult;
   @override
   @JsonKey(name: 'afb_done')
   String? get afbDone;
   @override
-  @JsonKey(name: 'afb_lab_number')
+  @JsonKey(name: 'afb_lab_number', includeToJson: false)
   String? get afbLabNumber;
   @override
   @JsonKey(includeIfNull: false)
@@ -1612,8 +1570,6 @@ abstract class _DiagnosisModel implements DiagnosisModel {
   @override
   @JsonKey(name: 'rif_resistance')
   String? get rifResistance;
-  @override
-  String? get drugResistance;
   @override
   @JsonKey(name: 'xdr_done')
   String? get xdrDone;

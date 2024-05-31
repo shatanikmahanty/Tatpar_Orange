@@ -35,17 +35,17 @@ class BasicDetails extends StatelessWidget {
       ),
       'age': FormControl<int>(
           //  validators: [Validators.required],
-          value: referralDetailsModel?.age),
+          ),
       'gender': FormControl<String>(),
       'district': FormControl<String>(
           // validators: [Validators.required],
-          value: referralDetailsModel?.district),
+          ),
       'referral_block': FormControl<String>(
           // validators: [Validators.required],
-          value: referralDetailsModel?.block),
+          ),
       'panchayat_code': FormControl<String>(
           //  validators: [Validators.required],
-          value: referralDetailsModel?.panchayatCode),
+          ),
       'ward': FormControl<int>(
         validators: [
           //  Validators.required,
@@ -63,7 +63,7 @@ class BasicDetails extends StatelessWidget {
       'referred_by': FormControl<String?>(),
       'referrer_source': FormControl<String?>(
           //validators: [Validators.required],
-          value: referralDetailsModel?.referrerSource),
+          ),
       'referred_ward': FormControl<int>(
         validators: [
           // Validators.required,

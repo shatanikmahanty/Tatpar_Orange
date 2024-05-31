@@ -597,7 +597,7 @@ class TreatmentPage extends StatelessWidget {
                                                           controlName:
                                                               'ipt_start_date',
                                                           label:
-                                                              'IPT Start Date',
+                                                              'IP Start Date',
                                                         ),
                                                         const SizedBox(
                                                             height:

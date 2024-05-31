@@ -36,9 +36,10 @@ class DiagnosisModel with _$DiagnosisModel {
       toJson: _dateTimeToJson,
     )
     DateTime? chestXrayDate,
-    @JsonKey(name: 'chest_xray_result') String? chestXrayResult,
+    @JsonKey(name: 'chest_xray_result', includeToJson: false)
+    String? chestXrayResult,
     @JsonKey(name: 'afb_done') String? afbDone,
-    @JsonKey(name: 'afb_lab_number') String? afbLabNumber,
+    @JsonKey(name: 'afb_lab_number', includeToJson: false) String? afbLabNumber,
     @JsonKey(includeIfNull: false) String? afb1Result,
     @JsonKey(name: 'afb_1_result') int? selectedAfb1Result,
     @JsonKey(
@@ -75,7 +76,6 @@ class DiagnosisModel with _$DiagnosisModel {
     @JsonKey(includeIfNull: false) String? mtbResult,
     @JsonKey(name: 'mtb_result') int? selectedMtbResult,
     @JsonKey(name: 'rif_resistance') String? rifResistance,
-    String? drugResistance,
     @JsonKey(name: 'xdr_done') String? xdrDone,
     @JsonKey(includeToJson: false) String? xdrResult,
     @JsonKey(name: 'xdr_result') int? selectedXdrResult,

@@ -35,7 +35,6 @@ _$DiagnosisModelImpl _$$DiagnosisModelImplFromJson(Map<String, dynamic> json) =>
       mtbResult: json['mtbResult'] as String?,
       selectedMtbResult: (json['mtb_result'] as num?)?.toInt(),
       rifResistance: json['rif_resistance'] as String?,
-      drugResistance: json['drugResistance'] as String?,
       xdrDone: json['xdr_done'] as String?,
       xdrResult: json['xdrResult'] as String?,
       selectedXdrResult: (json['xdr_result'] as num?)?.toInt(),
@@ -73,9 +72,7 @@ Map<String, dynamic> _$$DiagnosisModelImplToJson(
     'first_consultation_date': _dateTimeToJson(instance.firstConsultationDate),
     'chest_xray': instance.chestXray,
     'chest_xray_date': _dateTimeToJson(instance.chestXrayDate),
-    'chest_xray_result': instance.chestXrayResult,
     'afb_done': instance.afbDone,
-    'afb_lab_number': instance.afbLabNumber,
   };
 
   void writeNotNull(String key, dynamic value) {
@@ -101,7 +98,6 @@ Map<String, dynamic> _$$DiagnosisModelImplToJson(
   writeNotNull('mtbResult', instance.mtbResult);
   val['mtb_result'] = instance.selectedMtbResult;
   val['rif_resistance'] = instance.rifResistance;
-  val['drugResistance'] = instance.drugResistance;
   val['xdr_done'] = instance.xdrDone;
   val['xdr_result'] = instance.selectedXdrResult;
   val['xdr_result_date'] = _dateTimeToJson(instance.xdrResultDate);

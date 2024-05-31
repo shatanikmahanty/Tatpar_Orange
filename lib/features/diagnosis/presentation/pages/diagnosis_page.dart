@@ -95,7 +95,6 @@ class DiagnosisPage extends StatelessWidget {
       'rif_resistance': FormControl<String>(
         value: diagnosisModel?.rifResistance,
       ),
-      'drug_resistance': FormControl<String>(),
       'xdr_done': FormControl<String>(
         value: diagnosisModel?.xdrDone,
       ),
@@ -249,7 +248,6 @@ class DiagnosisPage extends StatelessWidget {
         naatResultDate: formData['naat_result_date'] as DateTime?,
         selectedMtbResult: cubit.selectedMTBResult,
         rifResistance: formData['rif_resistance'] as String?,
-        drugResistance: formData['drug_resistance'] as String?,
         xdrDone: formData['xdr_done'] as String?,
         selectedXdrResult: cubit.selectedXDRResult,
         xdrResultDate: formData['xdr_result_date'] as DateTime?,
@@ -683,28 +681,46 @@ class DiagnosisPage extends StatelessWidget {
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'naat_site',
-                                                          label: ' NAAT Site',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'Government',
+                                                        ChipRadioButtons(
+                                                          label: 'NAAT Site',
+                                                          options: const [
                                                             'Internal',
+                                                            'GOV'
                                                           ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
+                                                          crossAxisCount: 2,
+                                                          onChanged: (value) {
                                                             formGroup
                                                                 .control(
                                                                     'naat_site')
-                                                                .value = value[0];
+                                                                .value = value;
                                                           },
-                                                          emptyString: '',
+                                                          selected: formGroup
+                                                              .control(
+                                                                  'naat_site')
+                                                              .value,
                                                         ),
+                                                        // TextFieldWithList(
+                                                        //   controlName:
+                                                        //       'naat_site',
+                                                        //   label: ' NAAT Site',
+                                                        //   padding:
+                                                        //       EdgeInsets.zero,
+                                                        //   prefixIcon: Icons
+                                                        //       .account_circle_outlined,
+                                                        //   listData: const [
+                                                        //     'Government',
+                                                        //     'Internal',
+                                                        //   ],
+                                                        //   allowMultiSelection:
+                                                        //       false,
+                                                        //   onSelected: (value) {
+                                                        //     formGroup
+                                                        //         .control(
+                                                        //             'naat_site')
+                                                        //         .value = value[0];
+                                                        //   },
+                                                        //   emptyString: '',
+                                                        // ),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
@@ -1094,6 +1110,7 @@ class DiagnosisPage extends StatelessWidget {
                                                                   ),
                                                                 );
                                                               }
+                                                              print(list);
                                                               return TextFieldWithList(
                                                                 controlName:
                                                                     'xdr_result',
