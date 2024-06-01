@@ -10,6 +10,7 @@ import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
+import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
@@ -70,10 +71,7 @@ class TreatmentPage extends StatelessWidget {
       'treatment_supporter_ward': FormControl<int>(
         value: treatmentModel?.treatmentSupporterWard,
       ),
-      'date_of_home_visit': FormControl<DateTime>(
-        value: treatmentModel?.dateOfHomeVisit,
-      ),
-      'ipt_start_date': FormControl<DateTime>(
+      'ip_start_date': FormControl<DateTime>(
         value: treatmentModel?.iptStartDate,
       ),
       'hiv_done': FormControl<String>(
@@ -100,48 +98,78 @@ class TreatmentPage extends StatelessWidget {
       'blood_sugar_done': FormControl<String>(
         value: treatmentModel?.bloodSugarDone,
       ),
-      'blood_sugar_result': FormControl<String>(
-        value: treatmentModel?.bloodSugarResult,
-      ),
+      'blood_sugar_result': FormControl<int>(),
       'blood_sugar_date': FormControl<DateTime>(
         value: treatmentModel?.bloodSugarDate,
       ),
       'alcohol': FormControl<String>(
         value: treatmentModel?.alcohol,
       ),
-      'tb_consumption': FormControl<String>(
+      'tobacco_consumption': FormControl<String>(
         value: treatmentModel?.tbConsumption,
       ),
       'nutrition': FormControl<String>(
         value: treatmentModel?.nutrition,
       ),
+      'nutrition_eligibility': FormControl<String>(),
       'screening_date_nutrition': FormControl<DateTime>(
         value: treatmentModel?.screeningDateNutrition,
       ),
       'nutrition_linkage': FormControl<String>(
         value: treatmentModel?.nutritionLinkage,
       ),
-      'ip_nat_test': FormControl<String>(
-        value: treatmentModel?.ipNatTest,
-      ),
-      'ip_afb_date': FormControl<DateTime>(
+      'nutrition_linkage_date': FormControl<DateTime>(
         value: treatmentModel?.ipAfbDate,
       ),
-      'ip_date': FormControl<DateTime>(),
-      'ip_afb_lab_no': FormControl<String>(
+      'height': FormControl<int>(),
+      'weight': FormControl<int>(),
+      'stage': FormControl<String>(),
+      'ipfu_date': FormControl<DateTime>(),
+      'ipfu_afb_done': FormControl<String>(),
+      'ipfu_afb_lab_no': FormControl<String>(
         value: treatmentModel?.ipAfbLabNo,
       ),
-      'ip_afb_result': FormControl<String>(),
-      'ip_nat_result': FormControl<String>(
+      'ipfu_afb_date': FormControl<DateTime>(
+        value: treatmentModel?.ipAfbDate,
+      ),
+      'ipfu_afb_result': FormControl<String>(),
+      'ipfu_naat_test': FormControl<String>(
+        value: treatmentModel?.ipNatTest,
+      ),
+      'ipfu_naat_result': FormControl<String>(
         value: treatmentModel?.ipNatResult,
       ),
-      'ip_lab_no': FormControl<String>(
+      'ipfu_lab_no': FormControl<String>(
         value: treatmentModel?.ipLabNo,
       ),
-      'ip_chest_xray': FormControl<String>(
+      'ipfu_chest_xray': FormControl<String>(
         value: treatmentModel?.ipChestXray,
       ),
-      'ip_nutrition_support': FormControl<String>(
+      'ipfu_nutrition_support': FormControl<String>(
+        value: treatmentModel?.ipNutritionSupport,
+      ),
+      'cp_date': FormControl<DateTime>(),
+      'cp_afb_done': FormControl<String>(),
+      'cp_afb_lab_no': FormControl<String>(
+        value: treatmentModel?.ipAfbLabNo,
+      ),
+      'cp_afb_date': FormControl<DateTime>(
+        value: treatmentModel?.ipAfbDate,
+      ),
+      'cp_afb_result': FormControl<String>(),
+      'cp_naat_test': FormControl<String>(
+        value: treatmentModel?.ipNatTest,
+      ),
+      'cp_naat_result': FormControl<String>(
+        value: treatmentModel?.ipNatResult,
+      ),
+      'cp_lab_no': FormControl<String>(
+        value: treatmentModel?.ipLabNo,
+      ),
+      'cp_chest_xray': FormControl<String>(
+        value: treatmentModel?.ipChestXray,
+      ),
+      'cp_nutrition_support': FormControl<String>(
         value: treatmentModel?.ipNutritionSupport,
       ),
     });
@@ -185,6 +213,20 @@ class TreatmentPage extends StatelessWidget {
           break;
         }
       }
+      context.read<CaseCubit>().selectIPFUAFBResult = sourceCubit
+          .state.diagnosisData!.afbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('ipfu_afb_result').value,
+              orElse: () => const AFBResult(id: null))
+          .id;
+      context.read<CaseCubit>().selectCPAFBResult = sourceCubit
+          .state.diagnosisData!.afbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('cp_afb_result').value,
+              orElse: () => const AFBResult(id: null))
+          .id;
       final model = cubit.state.treatmentModel ?? const TreatmentModel();
       final treatmentModel = model.copyWith(
         caseDefinition: formData['case_definition'] as String?,
@@ -201,8 +243,7 @@ class TreatmentPage extends StatelessWidget {
         selectedTreatmentSupporterPanchayat:
             cubit.selectedTreatmentPanchayatCodeId,
         treatmentSupporterWard: formData['treatment_supporter_ward'] as int?,
-        dateOfHomeVisit: formData['date_of_home_visit'] as DateTime?,
-        iptStartDate: formData['ipt_start_date'] as DateTime?,
+        iptStartDate: formData['ip_start_date'] as DateTime?,
         hivDone: formData['hiv_done'] as String?,
         hivResult: formData['hiv_result'] as String?,
         hivDate: formData['hiv_date'] as DateTime?,
@@ -213,18 +254,18 @@ class TreatmentPage extends StatelessWidget {
         bloodSugarResult: formData['blood_sugar_result'] as String?,
         bloodSugarDate: formData['blood_sugar_date'] as DateTime?,
         alcohol: formData['alcohol'] as String?,
-        tbConsumption: formData['tb_consumption'] as String?,
+        tbConsumption: formData['tobacco_consumption'] as String?,
         nutrition: formData['nutrition'] as String?,
         screeningDateNutrition:
             formData['screening_date_nutrition'] as DateTime?,
         nutritionLinkage: formData['nutrition_linkage'] as String?,
-        ipNatTest: formData['ip_nat_test'] as String?,
-        ipAfbDate: formData['ip_afb_date'] as DateTime?,
-        ipAfbLabNo: formData['ip_afb_lab_no'] as String?,
-        ipNatResult: formData['ip_nat_result'] as String?,
-        ipLabNo: formData['ip_lab_no'] as String?,
-        ipChestXray: formData['ip_chest_xray'] as String?,
-        ipNutritionSupport: formData['ip_nutrition_support'] as String?,
+        ipNatTest: formData['ipfu_naat_test'] as String?,
+        ipAfbDate: formData['ipfu_afb_date'] as DateTime?,
+        ipAfbLabNo: formData['ipfu_afb_lab_no'] as String?,
+        ipNatResult: formData['ipfu_naat_result'] as String?,
+        ipLabNo: formData['ipfu_lab_no'] as String?,
+        ipChestXray: formData['ipfu_chest_xray'] as String?,
+        ipNutritionSupport: formData['ipfu_nutrition_support'] as String?,
       );
       await cubit.updateTreatmentData(treatmentModel);
       print(treatmentModel);
@@ -251,397 +292,193 @@ class TreatmentPage extends StatelessWidget {
                 form: () => _treatmentFormBuilder(
                     treatmentModel: state.treatmentModel,
                     cubit: context.read<SourceCubit>()),
-                builder: (BuildContext context, FormGroup formGroup,
-                        Widget? child) =>
-                    AutofillGroup(
-                      child: Column(children: [
-                        const SizedBox(height: kPadding * 2),
-                        Expanded(
-                            child: SingleChildScrollView(
-                                child: Padding(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: kPadding * 2),
-                                    child: Column(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.start,
-                                        children: [
-                                          ChipRadioButtons(
-                                            label: 'Case Definition',
-                                            options: const ['MCB', 'CD'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('case_definition')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('case_definition')
-                                                .value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ChipRadioButtons(
-                                            label: 'TB Site',
-                                            options: const ['PTB', 'EPTB'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('tb_site')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('tb_site')
-                                                .value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          const PrimaryTextField(
-                                            formControlName: 'case_history',
-                                            label: 'Case History',
-                                            prefixIcon:
-                                                Icons.account_circle_outlined,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ChipRadioButtons(
-                                            label: 'Drug Sensitivy',
-                                            options: const [
-                                              'Sesnsitive',
-                                              'Resistant'
-                                            ],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('drug_sensitive')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('drug_sensitive')
-                                                .value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ChipRadioButtons(
-                                            label: 'Status Of Diagnosis',
-                                            options: const [
-                                              'PTLFU',
-                                              'On Treatment'
-                                            ],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('diagnosis_status')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('diagnosis_status')
-                                                .value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ReactiveValueListenableBuilder<
-                                                  String>(
-                                              formControlName:
-                                                  'diagnosis_status',
-                                              builder: (context, control,
-                                                      child) =>
-                                                  Visibility(
-                                                      visible: (formGroup
-                                                              .control(
-                                                                  'diagnosis_status')
-                                                              .value) ==
-                                                          'On Treatment',
-                                                      child: Column(children: [
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'previously_tb_treated',
-                                                          label:
-                                                              'Previously TB treated',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'Item 1',
-                                                            'Item 2',
-                                                            'Item 3'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'previously_tb_treated')
-                                                                .value = value[0];
-                                                          },
-                                                          emptyString: '',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'rif_sensitivity',
-                                                          label:
-                                                              'RIF Sensitivity',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'rif_sensitivity')
-                                                                .value = value[0];
-                                                          },
-                                                          emptyString: '',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'ihv_date',
-                                                          label: 'IHV Date',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'Treatment Regimen',
-                                                          options: const [
-                                                            'New',
-                                                            'Previous'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'treatment_regimen')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'treatment_regimen')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        const PrimaryTextField(
-                                                          formControlName:
-                                                              'patient_occupation',
-                                                          label:
-                                                              'Patient Occupation',
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        const PrimaryTextField(
-                                                          formControlName:
-                                                              'treatment_supporter_name',
-                                                          label:
-                                                              'Treatment Supporter Name',
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'treatment_supporter_position',
-                                                          label:
-                                                              'Treatment Supporter Position',
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'ASHA',
-                                                            'Family DOTS',
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'treatment_supporter_position')
-                                                                .value = value[0];
-                                                          },
-                                                          emptyString: '',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        PrimaryTextField(
-                                                          formControlName:
-                                                              'treatment_supporter_phone',
-                                                          label:
-                                                              'Treatment Supporter Phone',
-                                                          keyboardType:
-                                                              TextInputType
-                                                                  .number,
-                                                          maxLength: 10,
-                                                          prefixIcon: Icons
-                                                              .phone_outlined,
-                                                          inputFormatter: [
-                                                            FilteringTextInputFormatter
-                                                                .digitsOnly,
-                                                            LengthLimitingTextInputFormatter(
-                                                                10)
-                                                          ],
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        BlocBuilder<SourceCubit,
-                                                                SourceState>(
-                                                            buildWhen: ((previous,
-                                                                    current) =>
-                                                                (previous
-                                                                        .isLoading !=
-                                                                    current
-                                                                        .isLoading) ||
-                                                                previous.dataModel !=
-                                                                    current
-                                                                        .dataModel),
-                                                            builder: (context,
-                                                                state) {
-                                                              List<
-                                                                  String> panchayats = (state
-                                                                          .dataModel !=
-                                                                      null)
-                                                                  ? state
-                                                                      .dataModel!
-                                                                      .blocks!
-                                                                      .expand((e) => e
-                                                                          .panchayat!
-                                                                          .map((e) =>
-                                                                              '${e.panchayat}'))
-                                                                      .toList()
-                                                                  : [];
-
-                                                              if (state
-                                                                      .isLoading ??
-                                                                  false) {
-                                                                return const SizedBox(
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  child: Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              return TextFieldWithList(
-                                                                controlName:
-                                                                    'treatment_supporter_panchayat',
-                                                                label:
-                                                                    'Treatment Supporter Panchayat',
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                prefixIcon: Icons
-                                                                    .account_circle_outlined,
-                                                                listData:
-                                                                    panchayats,
-                                                                allowMultiSelection:
-                                                                    false,
-                                                                onSelected:
-                                                                    (value) {
-                                                                  formGroup
-                                                                      .control(
-                                                                          'treatment_supporter_panchayat')
-                                                                      .value = value[0];
-                                                                },
-                                                                emptyString:
-                                                                    'No Panchayats available',
-                                                              );
-                                                            }),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        const PrimaryTextField<
-                                                            int>(
-                                                          formControlName:
-                                                              'treatment_supporter_ward',
-                                                          label:
-                                                              'Treatment Supporter Ward',
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        // DateTextInput(
-                                                        //   firstDate:
-                                                        //       DateTime(2002),
-                                                        //   controlName:
-                                                        //       'date_of_home_visit',
-                                                        //   label:
-                                                        //       'Date Of Home Visit',
-                                                        // ),
-                                                        // const SizedBox(
-                                                        //     height:
-                                                        //         kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'ipt_start_date',
-                                                          label:
-                                                              'IP Start Date',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: 'HIV Done?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'hiv_done')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'hiv_done')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ReactiveValueListenableBuilder<
-                                                            String>(
-                                                          formControlName:
-                                                              'hiv_done',
-                                                          builder: (context,
-                                                                  control,
-                                                                  child) =>
-                                                              Visibility(
-                                                            visible: (control
-                                                                    .value ==
-                                                                'Yes'),
-                                                            child: Column(
+                builder:
+                    (BuildContext context, FormGroup formGroup,
+                            Widget? child) =>
+                        AutofillGroup(
+                          child: Column(children: [
+                            const SizedBox(height: kPadding * 2),
+                            Expanded(
+                                child: SingleChildScrollView(
+                                    child: Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: kPadding * 2),
+                                        child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              ChipRadioButtons(
+                                                label: 'Case Definition',
+                                                options: const ['MCB', 'CD'],
+                                                crossAxisCount: 2,
+                                                onChanged: (value) {
+                                                  formGroup
+                                                      .control(
+                                                          'case_definition')
+                                                      .value = value;
+                                                },
+                                                selected: formGroup
+                                                    .control('case_definition')
+                                                    .value,
+                                              ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
+                                              ChipRadioButtons(
+                                                label: 'TB Site',
+                                                options: const ['PTB', 'EPTB'],
+                                                crossAxisCount: 2,
+                                                onChanged: (value) {
+                                                  formGroup
+                                                      .control('tb_site')
+                                                      .value = value;
+                                                },
+                                                selected: formGroup
+                                                    .control('tb_site')
+                                                    .value,
+                                              ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
+                                              ChipRadioButtons(
+                                                label: 'Case History',
+                                                options: const [
+                                                  'New',
+                                                  'Recurrent'
+                                                ],
+                                                crossAxisCount: 2,
+                                                onChanged: (value) {
+                                                  formGroup
+                                                      .control('case_history')
+                                                      .value = value;
+                                                },
+                                                selected: formGroup
+                                                    .control('case_history')
+                                                    .value,
+                                              ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
+                                              ChipRadioButtons(
+                                                label: 'Drug Sensitivy',
+                                                options: const [
+                                                  'Sesnsitive',
+                                                  'Resistant'
+                                                ],
+                                                crossAxisCount: 2,
+                                                onChanged: (value) {
+                                                  formGroup
+                                                      .control('drug_sensitive')
+                                                      .value = value;
+                                                },
+                                                selected: formGroup
+                                                    .control('drug_sensitive')
+                                                    .value,
+                                              ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
+                                              ChipRadioButtons(
+                                                label: 'Status after Diagnosis',
+                                                options: const [
+                                                  'PTLFU',
+                                                  'On Treatment'
+                                                ],
+                                                crossAxisCount: 2,
+                                                onChanged: (value) {
+                                                  formGroup
+                                                      .control(
+                                                          'diagnosis_status')
+                                                      .value = value;
+                                                },
+                                                selected: formGroup
+                                                    .control('diagnosis_status')
+                                                    .value,
+                                              ),
+                                              const SizedBox(
+                                                  height: kPadding * 2),
+                                              ReactiveValueListenableBuilder<
+                                                      String>(
+                                                  formControlName:
+                                                      'diagnosis_status',
+                                                  builder: (context, control,
+                                                          child) =>
+                                                      Visibility(
+                                                          visible: (formGroup
+                                                                  .control(
+                                                                      'diagnosis_status')
+                                                                  .value) ==
+                                                              'On Treatment',
+                                                          child: Column(
                                                               children: [
+                                                                // TextFieldWithList(
+                                                                //   controlName:
+                                                                //       'previously_tb_treated',
+                                                                //   label:
+                                                                //       'Previously TB treated',
+                                                                //   padding:
+                                                                //       EdgeInsets.zero,
+                                                                //   prefixIcon: Icons
+                                                                //       .account_circle_outlined,
+                                                                //   listData: const [
+                                                                //     'Item 1',
+                                                                //     'Item 2',
+                                                                //     'Item 3'
+                                                                //   ],
+                                                                //   allowMultiSelection:
+                                                                //       false,
+                                                                //   onSelected: (value) {
+                                                                //     formGroup
+                                                                //         .control(
+                                                                //             'previously_tb_treated')
+                                                                //         .value = value[0];
+                                                                //   },
+                                                                //   emptyString: '',
+                                                                // ),
+                                                                // const SizedBox(
+                                                                //     height:
+                                                                //         kPadding * 2),
+                                                                // TextFieldWithList(
+                                                                //   controlName:
+                                                                //       'rif_sensitivity',
+                                                                //   label:
+                                                                //       'RIF Sensitivity',
+                                                                //   padding:
+                                                                //       EdgeInsets.zero,
+                                                                //   prefixIcon: Icons
+                                                                //       .account_circle_outlined,
+                                                                //   listData: const [
+                                                                //     'Sensitive',
+                                                                //     'Resistant'
+                                                                //   ],
+                                                                //   allowMultiSelection:
+                                                                //       false,
+                                                                //   onSelected: (value) {
+                                                                //     formGroup
+                                                                //         .control(
+                                                                //             'rif_sensitivity')
+                                                                //         .value = value[0];
+                                                                //   },
+                                                                //   emptyString: '',
+                                                                // ),
+                                                                // const SizedBox(
+                                                                //     height:
+                                                                //         kPadding * 2),
+                                                                DateTextInput(
+                                                                  firstDate:
+                                                                      DateTime(
+                                                                          2002),
+                                                                  controlName:
+                                                                      'ihv_date',
+                                                                  label:
+                                                                      'IHV Date',
+                                                                ),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        kPadding *
+                                                                            2),
                                                                 ChipRadioButtons(
                                                                   label:
-                                                                      'HIV Result?',
+                                                                      'Treatment Regimen',
                                                                   options: const [
-                                                                    'Reactive',
-                                                                    'Non Reactive'
+                                                                    'New',
+                                                                    'Previous'
                                                                   ],
                                                                   crossAxisCount:
                                                                       2,
@@ -649,506 +486,780 @@ class TreatmentPage extends StatelessWidget {
                                                                       (value) {
                                                                     formGroup
                                                                         .control(
-                                                                            'hiv_result')
+                                                                            'treatment_regimen')
                                                                         .value = value;
                                                                   },
                                                                   selected: formGroup
                                                                       .control(
-                                                                          'hiv_result')
+                                                                          'treatment_regimen')
                                                                       .value,
                                                                 ),
                                                                 const SizedBox(
                                                                     height:
                                                                         kPadding *
                                                                             2),
-                                                                DateTextInput(
-                                                                  firstDate:
-                                                                      DateTime(
-                                                                          2002),
-                                                                  controlName:
-                                                                      'hiv_date',
-                                                                  label:
-                                                                      'HIV Date',
-                                                                ),
-                                                                const SizedBox(
-                                                                    height:
-                                                                        kPadding *
-                                                                            2),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        ChipRadioButtons(
-                                                          label: 'Hb Done?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'hb_done')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'hb_done')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ReactiveValueListenableBuilder<
-                                                            String>(
-                                                          formControlName:
-                                                              'hb_done',
-                                                          builder: (context,
-                                                                  control,
-                                                                  child) =>
-                                                              Visibility(
-                                                            visible: (control
-                                                                    .value ==
-                                                                'Yes'),
-                                                            child: Column(
-                                                              children: [
-                                                                PrimaryTextField<
-                                                                    double>(
+                                                                const PrimaryTextField(
                                                                   formControlName:
-                                                                      'hb_result',
+                                                                      'patient_occupation',
                                                                   label:
-                                                                      'Hb Result?',
+                                                                      'Patient Occupation',
                                                                   prefixIcon: Icons
                                                                       .account_circle_outlined,
-                                                                  keyboardType: const TextInputType
-                                                                      .numberWithOptions(
-                                                                      decimal:
-                                                                          true),
+                                                                ),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        kPadding *
+                                                                            2),
+                                                                const PrimaryTextField(
+                                                                  formControlName:
+                                                                      'treatment_supporter_name',
+                                                                  label:
+                                                                      'Treatment Supporter Name',
+                                                                  prefixIcon: Icons
+                                                                      .account_circle_outlined,
+                                                                ),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        kPadding *
+                                                                            2),
+                                                                TextFieldWithList(
+                                                                  controlName:
+                                                                      'treatment_supporter_position',
+                                                                  label:
+                                                                      'Treatment Supporter Position',
+                                                                  padding:
+                                                                      EdgeInsets
+                                                                          .zero,
+                                                                  prefixIcon: Icons
+                                                                      .account_circle_outlined,
+                                                                  listData: const [
+                                                                    'ASHA',
+                                                                    'Family DOTS',
+                                                                  ],
+                                                                  allowMultiSelection:
+                                                                      false,
+                                                                  onSelected:
+                                                                      (value) {
+                                                                    formGroup
+                                                                        .control(
+                                                                            'treatment_supporter_position')
+                                                                        .value = value[0];
+                                                                  },
+                                                                  emptyString:
+                                                                      '',
+                                                                ),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        kPadding *
+                                                                            2),
+                                                                PrimaryTextField(
+                                                                  formControlName:
+                                                                      'treatment_supporter_phone',
+                                                                  label:
+                                                                      'Treatment Supporter Phone',
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  maxLength: 10,
+                                                                  prefixIcon: Icons
+                                                                      .phone_outlined,
                                                                   inputFormatter: [
-                                                                    DecimalTextInputFormatter(),
+                                                                    FilteringTextInputFormatter
+                                                                        .digitsOnly,
                                                                     LengthLimitingTextInputFormatter(
-                                                                        4), // Adjust length as needed
+                                                                        10)
                                                                   ],
                                                                 ),
                                                                 const SizedBox(
                                                                     height:
                                                                         kPadding *
                                                                             2),
-                                                                DateTextInput(
-                                                                  firstDate:
-                                                                      DateTime(
-                                                                          2002),
-                                                                  controlName:
-                                                                      'hb_date',
+                                                                BlocBuilder<
+                                                                        SourceCubit,
+                                                                        SourceState>(
+                                                                    buildWhen: ((previous,
+                                                                            current) =>
+                                                                        (previous.isLoading !=
+                                                                            current
+                                                                                .isLoading) ||
+                                                                        previous.dataModel !=
+                                                                            current
+                                                                                .dataModel),
+                                                                    builder:
+                                                                        (context,
+                                                                            state) {
+                                                                      List<
+                                                                          String> panchayats = (state.dataModel !=
+                                                                              null)
+                                                                          ? state
+                                                                              .dataModel!
+                                                                              .blocks!
+                                                                              .expand((e) => e.panchayat!.map((e) => '${e.panchayat}'))
+                                                                              .toList()
+                                                                          : [];
+
+                                                                      if (state
+                                                                              .isLoading ??
+                                                                          false) {
+                                                                        return const SizedBox(
+                                                                          height:
+                                                                              15,
+                                                                          width:
+                                                                              15,
+                                                                          child:
+                                                                              Center(
+                                                                            child:
+                                                                                CircularProgressIndicator(),
+                                                                          ),
+                                                                        );
+                                                                      }
+                                                                      return TextFieldWithList(
+                                                                        controlName:
+                                                                            'treatment_supporter_panchayat',
+                                                                        label:
+                                                                            'Treatment Supporter Panchayat',
+                                                                        padding:
+                                                                            EdgeInsets.zero,
+                                                                        prefixIcon:
+                                                                            Icons.account_circle_outlined,
+                                                                        listData:
+                                                                            panchayats,
+                                                                        allowMultiSelection:
+                                                                            false,
+                                                                        onSelected:
+                                                                            (value) {
+                                                                          formGroup
+                                                                              .control('treatment_supporter_panchayat')
+                                                                              .value = value[0];
+                                                                        },
+                                                                        emptyString:
+                                                                            'No Panchayats available',
+                                                                      );
+                                                                    }),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        kPadding *
+                                                                            2),
+                                                                const PrimaryTextField<
+                                                                    int>(
+                                                                  formControlName:
+                                                                      'treatment_supporter_ward',
                                                                   label:
-                                                                      'Hb Date',
+                                                                      'Treatment Supporter Ward',
+                                                                  prefixIcon: Icons
+                                                                      .account_circle_outlined,
                                                                 ),
                                                                 const SizedBox(
                                                                     height:
                                                                         kPadding *
                                                                             2),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'Blood Sugar Done?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'blood_sugar_done')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'blood_sugar_done')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ReactiveValueListenableBuilder<
-                                                            String>(
-                                                          formControlName:
-                                                              'blood_sugar_done',
-                                                          builder: (context,
-                                                                  control,
-                                                                  child) =>
-                                                              Visibility(
-                                                            visible: (control
-                                                                    .value ==
-                                                                'Yes'),
-                                                            child: Column(
-                                                              children: [
+                                                                PrimaryTextField(
+                                                                  formControlName:
+                                                                      'height',
+                                                                  label:
+                                                                      'Height(.cms)',
+                                                                  prefixIcon: Icons
+                                                                      .account_circle_outlined,
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  inputFormatter: [
+                                                                    FilteringTextInputFormatter
+                                                                        .digitsOnly,
+                                                                    LengthLimitingTextInputFormatter(
+                                                                        3)
+                                                                  ],
+                                                                ),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        kPadding *
+                                                                            2),
+                                                                PrimaryTextField(
+                                                                  formControlName:
+                                                                      'weight',
+                                                                  label:
+                                                                      'Weight(.kgs)',
+                                                                  prefixIcon: Icons
+                                                                      .account_circle_outlined,
+                                                                  keyboardType:
+                                                                      TextInputType
+                                                                          .number,
+                                                                  inputFormatter: [
+                                                                    FilteringTextInputFormatter
+                                                                        .digitsOnly,
+                                                                    LengthLimitingTextInputFormatter(
+                                                                        3)
+                                                                  ],
+                                                                ),
+                                                                const SizedBox(
+                                                                    height:
+                                                                        kPadding *
+                                                                            2),
+
                                                                 ChipRadioButtons(
                                                                   label:
-                                                                      'Blood Sugar Result',
+                                                                      'Stage',
                                                                   options: const [
-                                                                    'Positive',
-                                                                    'Negative'
+                                                                    'IP',
+                                                                    'IPFU',
+                                                                    'CP'
                                                                   ],
                                                                   crossAxisCount:
-                                                                      2,
+                                                                      3,
                                                                   onChanged:
                                                                       (value) {
                                                                     formGroup
                                                                         .control(
-                                                                            'blood_sugar_result')
+                                                                            'stage')
                                                                         .value = value;
                                                                   },
                                                                   selected: formGroup
                                                                       .control(
-                                                                          'blood_sugar_result')
+                                                                          'stage')
                                                                       .value,
                                                                 ),
                                                                 const SizedBox(
                                                                     height:
                                                                         kPadding *
                                                                             2),
-                                                                DateTextInput(
-                                                                  firstDate:
-                                                                      DateTime(
-                                                                          2002),
-                                                                  controlName:
-                                                                      'blood_sugar_date',
-                                                                  label:
-                                                                      'Blood Sugar Date?',
-                                                                ),
-                                                                const SizedBox(
-                                                                    height:
-                                                                        kPadding *
-                                                                            2),
-                                                              ],
-                                                            ),
-                                                          ),
-                                                        ),
-                                                        ChipRadioButtons(
-                                                          label: 'Alcohol',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'alcohol')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'alcohol')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'Tobacco Consumption',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'tb_consumption')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'tb_consumption')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'Screening for Nutrition?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'nutrition')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'nutrition')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ReactiveValueListenableBuilder<
-                                                                String>(
-                                                            formControlName:
-                                                                'nutrition',
-                                                            builder: (context,
-                                                                    control,
-                                                                    child) =>
-                                                                Visibility(
-                                                                    visible: (control
-                                                                            .value ==
-                                                                        'Yes'),
-                                                                    child: Column(
-                                                                        children: [
-                                                                          DateTextInput(
-                                                                            firstDate:
-                                                                                DateTime(2002),
-                                                                            controlName:
-                                                                                'screening_date_nutrition',
-                                                                            label:
-                                                                                'Date Of Screening for Nutrition',
-                                                                          ),
-                                                                          const SizedBox(
-                                                                              height: kPadding * 2),
-                                                                        ]))),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'Nutrition Linkage Done?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'nutrition_linkage')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'nutrition_linkage')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'ip_date',
-                                                          label:
-                                                              'IP Follow-up Date',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'ip_afb_date',
-                                                          label:
-                                                              'IP Follow-up AFB date',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        const PrimaryTextField(
-                                                          formControlName:
-                                                              'ip_afb_lab_no',
-                                                          label:
-                                                              'IP Follow-up AFB Lab No.',
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        const PrimaryTextField(
-                                                          formControlName:
-                                                              'ip_afb_result',
-                                                          label:
-                                                              'IP Follow-up Result.',
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'IP Follow-up NAAT Test Done?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'ip_nat_test')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'ip_nat_test')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        // ChipRadioButtons(
-                                                        //   label:
-                                                        //       'IP Follow-up NAAT Result?',
-                                                        //   options: const [
-                                                        //     'Positive',
-                                                        //     'Negative'
-                                                        //   ],
-                                                        //   crossAxisCount: 2,
-                                                        //   onChanged: (value) {
-                                                        //     formGroup
-                                                        //         .control(
-                                                        //             'ip_nat_result')
-                                                        //         .value = value;
-                                                        //   },
-                                                        //   selected: formGroup
-                                                        //       .control(
-                                                        //           'ip_nat_result')
-                                                        //       .value,
-                                                        // ),
-                                                        BlocBuilder<SourceCubit,
-                                                                SourceState>(
-                                                            buildWhen: ((previous,
-                                                                    current) =>
-                                                                (previous
-                                                                        .isLoading !=
-                                                                    current
-                                                                        .isLoading) ||
-                                                                previous.diagnosisData !=
-                                                                    current
-                                                                        .diagnosisData),
-                                                            builder: (context,
-                                                                state) {
-                                                              List<
-                                                                  String> list = (state
-                                                                          .diagnosisData !=
-                                                                      null)
-                                                                  ? state
-                                                                      .diagnosisData!
-                                                                      .mtbResult!
-                                                                      .map((e) =>
-                                                                          '${e.name}')
-                                                                      .toList()
-                                                                  : [];
-                                                              if (state
-                                                                      .isLoading ??
-                                                                  false) {
-                                                                return const SizedBox(
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  child: Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              return TextFieldWithList(
-                                                                controlName:
-                                                                    'ip_nat_result',
-                                                                label:
-                                                                    'IP Follow-up NAAT Result?',
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                prefixIcon: Icons
-                                                                    .account_circle_outlined,
-                                                                listData: list,
-                                                                allowMultiSelection:
-                                                                    false,
-                                                                onSelected:
-                                                                    (value) {
-                                                                  formGroup
-                                                                      .control(
-                                                                          'ip_nat_result')
-                                                                      .value = value[0];
-                                                                },
-                                                                emptyString: '',
-                                                              );
-                                                            }),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
 
-                                                        const PrimaryTextField(
-                                                          formControlName:
-                                                              'ip_lab_no',
-                                                          label:
-                                                              'IP Follow-up Lab No.',
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'IP Follow-up Chest-Xray?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'ip_chest_xray')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'ip_chest_xray')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label:
-                                                              'IP Follow-up Nutrition Support?',
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'ip_nutrition_support')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'ip_nutrition_support')
-                                                              .value,
-                                                        ),
-                                                      ]))),
-                                        ])))),
-                        BottomButtonBar(
-                          onSave: (_) async =>
-                              await _onSave(context, formGroup),
-                          nextPage: const ContactTracingRoute(),
-                        ),
-                        const SizedBox(height: kPadding * 2),
-                      ]),
-                    ))));
+                                                                ReactiveValueListenableBuilder<
+                                                                        String>(
+                                                                    formControlName:
+                                                                        'stage',
+                                                                    builder: (context,
+                                                                            control,
+                                                                            child) =>
+                                                                        Visibility(
+                                                                            visible: (control.value ==
+                                                                                'IP'),
+                                                                            child:
+                                                                                Column(children: [
+                                                                              DateTextInput(
+                                                                                firstDate: DateTime(2002),
+                                                                                controlName: 'ip_start_date',
+                                                                                label: 'IP Start Date',
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'HIV Done?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('hiv_done').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('hiv_done').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ReactiveValueListenableBuilder<String>(
+                                                                                formControlName: 'hiv_done',
+                                                                                builder: (context, control, child) => Visibility(
+                                                                                  visible: (control.value == 'Yes'),
+                                                                                  child: Column(
+                                                                                    children: [
+                                                                                      ChipRadioButtons(
+                                                                                        label: 'HIV Result?',
+                                                                                        options: const [
+                                                                                          'Reactive',
+                                                                                          'Non Reactive'
+                                                                                        ],
+                                                                                        crossAxisCount: 2,
+                                                                                        onChanged: (value) {
+                                                                                          formGroup.control('hiv_result').value = value;
+                                                                                        },
+                                                                                        selected: formGroup.control('hiv_result').value,
+                                                                                      ),
+                                                                                      const SizedBox(height: kPadding * 2),
+                                                                                      DateTextInput(
+                                                                                        firstDate: DateTime(2002),
+                                                                                        controlName: 'hiv_date',
+                                                                                        label: 'HIV Date',
+                                                                                      ),
+                                                                                      const SizedBox(height: kPadding * 2),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              ChipRadioButtons(
+                                                                                label: 'Hb Done?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('hb_done').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('hb_done').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ReactiveValueListenableBuilder<String>(
+                                                                                formControlName: 'hb_done',
+                                                                                builder: (context, control, child) => Visibility(
+                                                                                  visible: (control.value == 'Yes'),
+                                                                                  child: Column(
+                                                                                    children: [
+                                                                                      PrimaryTextField<double>(
+                                                                                        formControlName: 'hb_result',
+                                                                                        label: 'Hb Result?',
+                                                                                        prefixIcon: Icons.account_circle_outlined,
+                                                                                        keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                                                                                        inputFormatter: [
+                                                                                          DecimalTextInputFormatter(),
+                                                                                          LengthLimitingTextInputFormatter(4), // Adjust length as needed
+                                                                                        ],
+                                                                                      ),
+                                                                                      const SizedBox(height: kPadding * 2),
+                                                                                      DateTextInput(
+                                                                                        firstDate: DateTime(2002),
+                                                                                        controlName: 'hb_date',
+                                                                                        label: 'Hb Date',
+                                                                                      ),
+                                                                                      const SizedBox(height: kPadding * 2),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              ChipRadioButtons(
+                                                                                label: 'Blood Sugar Done?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('blood_sugar_done').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('blood_sugar_done').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ReactiveValueListenableBuilder<String>(
+                                                                                formControlName: 'blood_sugar_done',
+                                                                                builder: (context, control, child) => Visibility(
+                                                                                  visible: (control.value == 'Yes'),
+                                                                                  child: Column(
+                                                                                    children: [
+                                                                                      PrimaryTextField<double>(
+                                                                                        formControlName: 'blood_sugar_result',
+                                                                                        label: 'Blood Sugar Result?',
+                                                                                        prefixIcon: Icons.account_circle_outlined,
+                                                                                        keyboardType: TextInputType.number,
+                                                                                        inputFormatter: [
+                                                                                          FilteringTextInputFormatter.digitsOnly,
+                                                                                          LengthLimitingTextInputFormatter(3)
+                                                                                        ],
+                                                                                      ),
+                                                                                      const SizedBox(height: kPadding * 2),
+                                                                                      DateTextInput(
+                                                                                        firstDate: DateTime(2002),
+                                                                                        controlName: 'blood_sugar_date',
+                                                                                        label: 'Blood Sugar Date?',
+                                                                                      ),
+                                                                                      const SizedBox(height: kPadding * 2),
+                                                                                    ],
+                                                                                  ),
+                                                                                ),
+                                                                              ),
+                                                                              ChipRadioButtons(
+                                                                                label: 'Alcohol',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('alcohol').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('alcohol').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'Tobacco Consumption',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('tobacco_consumption').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('tobacco_consumption').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'Screening for Nutrition?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('nutrition').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('nutrition').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ReactiveValueListenableBuilder<String>(
+                                                                                  formControlName: 'nutrition',
+                                                                                  builder: (context, control, child) => Visibility(
+                                                                                      visible: (control.value == 'Yes'),
+                                                                                      child: Column(children: [
+                                                                                        DateTextInput(
+                                                                                          firstDate: DateTime(2002),
+                                                                                          controlName: 'screening_date_nutrition',
+                                                                                          label: 'Date Of Screening for Nutrition',
+                                                                                        ),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                        ChipRadioButtons(
+                                                                                          label: 'Eligible for Nutrition?',
+                                                                                          options: const [
+                                                                                            'Yes',
+                                                                                            'No'
+                                                                                          ],
+                                                                                          crossAxisCount: 2,
+                                                                                          onChanged: (value) {
+                                                                                            formGroup.control('nutrition_eligibility').value = value;
+                                                                                          },
+                                                                                          selected: formGroup.control('nutrition_eligibility').value,
+                                                                                        ),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                      ]))),
+                                                                              ChipRadioButtons(
+                                                                                label: 'Nutrition Linkage Done?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('nutrition_linkage').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('nutrition_linkage').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ReactiveValueListenableBuilder<String>(
+                                                                                  formControlName: 'nutrition_linkage',
+                                                                                  builder: (context, control, child) => Visibility(
+                                                                                      visible: (control.value == 'Yes'),
+                                                                                      child: Column(children: [
+                                                                                        DateTextInput(
+                                                                                          firstDate: DateTime(2002),
+                                                                                          controlName: 'nutrition_linkage_date',
+                                                                                          label: 'Nutrition Linkage Date',
+                                                                                        ),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                      ]))),
+                                                                            ]))),
+
+                                                                ReactiveValueListenableBuilder<
+                                                                        String>(
+                                                                    formControlName:
+                                                                        'stage',
+                                                                    builder: (context,
+                                                                            control,
+                                                                            child) =>
+                                                                        Visibility(
+                                                                            visible: (control.value ==
+                                                                                'IPFU'),
+                                                                            child:
+                                                                                Column(children: [
+                                                                              DateTextInput(
+                                                                                firstDate: DateTime(2002),
+                                                                                controlName: 'ipfu_date',
+                                                                                label: 'IPFU Date',
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'IPFU AFB Done',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('ipfu_afb_done').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('ipfu_afb_done').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ReactiveValueListenableBuilder<String>(
+                                                                                  formControlName: 'ipfu_afb_done',
+                                                                                  builder: (context, control, child) => Visibility(
+                                                                                      visible: (formGroup.control('ipfu_afb_done').value) == 'Yes',
+                                                                                      child: Column(children: [
+                                                                                        DateTextInput(
+                                                                                          firstDate: DateTime(2002),
+                                                                                          controlName: 'ipfu_afb_date',
+                                                                                          label: 'IPFU AFB date',
+                                                                                        ),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                        const PrimaryTextField(
+                                                                                          formControlName: 'ipfu_afb_lab_no',
+                                                                                          label: 'IPFU AFB Lab No.',
+                                                                                          prefixIcon: Icons.account_circle_outlined,
+                                                                                        ),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                        BlocBuilder<SourceCubit, SourceState>(
+                                                                                            buildWhen: ((previous, current) => (previous.isLoading != current.isLoading) || previous.diagnosisData != current.diagnosisData),
+                                                                                            builder: (context, state) {
+                                                                                              List<String> list = (state.diagnosisData != null) ? state.diagnosisData!.afbResult!.map((e) => '${e.name}').toList() : [];
+                                                                                              if (state.isLoading ?? false) {
+                                                                                                return const SizedBox(
+                                                                                                  height: 15,
+                                                                                                  width: 15,
+                                                                                                  child: Center(
+                                                                                                    child: CircularProgressIndicator(),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
+                                                                                              return TextFieldWithList(
+                                                                                                controlName: 'ipfu_afb_result',
+                                                                                                label: 'IPFU AFB Result',
+                                                                                                padding: EdgeInsets.zero,
+                                                                                                prefixIcon: Icons.account_circle_outlined,
+                                                                                                listData: list,
+                                                                                                allowMultiSelection: false,
+                                                                                                onSelected: (value) {
+                                                                                                  formGroup.control('ipfu_afb_result').value = value[0];
+                                                                                                },
+                                                                                                emptyString: '',
+                                                                                              );
+                                                                                            }),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                      ]))),
+                                                                              ChipRadioButtons(
+                                                                                label: 'IPFU NAAT Test Done?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('ipfu_naat_test').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('ipfu_naat_test').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              BlocBuilder<SourceCubit, SourceState>(
+                                                                                  buildWhen: ((previous, current) => (previous.isLoading != current.isLoading) || previous.diagnosisData != current.diagnosisData),
+                                                                                  builder: (context, state) {
+                                                                                    List<String> list = (state.diagnosisData != null) ? state.diagnosisData!.mtbResult!.map((e) => '${e.name}').toList() : [];
+                                                                                    if (state.isLoading ?? false) {
+                                                                                      return const SizedBox(
+                                                                                        height: 15,
+                                                                                        width: 15,
+                                                                                        child: Center(
+                                                                                          child: CircularProgressIndicator(),
+                                                                                        ),
+                                                                                      );
+                                                                                    }
+                                                                                    return TextFieldWithList(
+                                                                                      controlName: 'ipfu_naat_result',
+                                                                                      label: 'IPFU NAAT Result?',
+                                                                                      padding: EdgeInsets.zero,
+                                                                                      prefixIcon: Icons.account_circle_outlined,
+                                                                                      listData: list,
+                                                                                      allowMultiSelection: false,
+                                                                                      onSelected: (value) {
+                                                                                        formGroup.control('ipfu_naat_result').value = value[0];
+                                                                                      },
+                                                                                      emptyString: '',
+                                                                                    );
+                                                                                  }),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              const PrimaryTextField(
+                                                                                formControlName: 'ipfu_lab_no',
+                                                                                label: 'IPFU Lab No.',
+                                                                                prefixIcon: Icons.account_circle_outlined,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'IPFU Chest-Xray?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('ipfu_chest_xray').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('ipfu_chest_xray').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'IPFU Nutrition Support?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('ipfu_nutrition_support').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('ipfu_nutrition_support').value,
+                                                                              ),
+                                                                            ]))),
+                                                                ReactiveValueListenableBuilder<
+                                                                        String>(
+                                                                    formControlName:
+                                                                        'stage',
+                                                                    builder: (context,
+                                                                            control,
+                                                                            child) =>
+                                                                        Visibility(
+                                                                            visible: (control.value ==
+                                                                                'CP'),
+                                                                            child:
+                                                                                Column(children: [
+                                                                              DateTextInput(
+                                                                                firstDate: DateTime(2002),
+                                                                                controlName: 'cp_date',
+                                                                                label: 'CP Date',
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'CP AFB Done',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('cp_afb_done').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('cp_afb_done').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ReactiveValueListenableBuilder<String>(
+                                                                                  formControlName: 'cp_afb_done',
+                                                                                  builder: (context, control, child) => Visibility(
+                                                                                      visible: (formGroup.control('cp_afb_done').value) == 'Yes',
+                                                                                      child: Column(children: [
+                                                                                        DateTextInput(
+                                                                                          firstDate: DateTime(2002),
+                                                                                          controlName: 'cp_afb_date',
+                                                                                          label: 'CP AFB date',
+                                                                                        ),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                        const PrimaryTextField(
+                                                                                          formControlName: 'cp_afb_lab_no',
+                                                                                          label: 'CP AFB Lab No.',
+                                                                                          prefixIcon: Icons.account_circle_outlined,
+                                                                                        ),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                        BlocBuilder<SourceCubit, SourceState>(
+                                                                                            buildWhen: ((previous, current) => (previous.isLoading != current.isLoading) || previous.diagnosisData != current.diagnosisData),
+                                                                                            builder: (context, state) {
+                                                                                              List<String> list = (state.diagnosisData != null) ? state.diagnosisData!.afbResult!.map((e) => '${e.name}').toList() : [];
+                                                                                              if (state.isLoading ?? false) {
+                                                                                                return const SizedBox(
+                                                                                                  height: 15,
+                                                                                                  width: 15,
+                                                                                                  child: Center(
+                                                                                                    child: CircularProgressIndicator(),
+                                                                                                  ),
+                                                                                                );
+                                                                                              }
+                                                                                              return TextFieldWithList(
+                                                                                                controlName: 'cp_afb_result',
+                                                                                                label: 'CP AFB Result',
+                                                                                                padding: EdgeInsets.zero,
+                                                                                                prefixIcon: Icons.account_circle_outlined,
+                                                                                                listData: list,
+                                                                                                allowMultiSelection: false,
+                                                                                                onSelected: (value) {
+                                                                                                  formGroup.control('cp_afb_result').value = value[0];
+                                                                                                },
+                                                                                                emptyString: '',
+                                                                                              );
+                                                                                            }),
+                                                                                        const SizedBox(height: kPadding * 2),
+                                                                                      ]))),
+                                                                              ChipRadioButtons(
+                                                                                label: 'CP NAAT Test Done?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('cp_naat_test').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('cp_naat_test').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              BlocBuilder<SourceCubit, SourceState>(
+                                                                                  buildWhen: ((previous, current) => (previous.isLoading != current.isLoading) || previous.diagnosisData != current.diagnosisData),
+                                                                                  builder: (context, state) {
+                                                                                    List<String> list = (state.diagnosisData != null) ? state.diagnosisData!.mtbResult!.map((e) => '${e.name}').toList() : [];
+                                                                                    if (state.isLoading ?? false) {
+                                                                                      return const SizedBox(
+                                                                                        height: 15,
+                                                                                        width: 15,
+                                                                                        child: Center(
+                                                                                          child: CircularProgressIndicator(),
+                                                                                        ),
+                                                                                      );
+                                                                                    }
+                                                                                    return TextFieldWithList(
+                                                                                      controlName: 'cp_naat_result',
+                                                                                      label: 'CP NAAT Result?',
+                                                                                      padding: EdgeInsets.zero,
+                                                                                      prefixIcon: Icons.account_circle_outlined,
+                                                                                      listData: list,
+                                                                                      allowMultiSelection: false,
+                                                                                      onSelected: (value) {
+                                                                                        formGroup.control('cp_naat_result').value = value[0];
+                                                                                      },
+                                                                                      emptyString: '',
+                                                                                    );
+                                                                                  }),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              const PrimaryTextField(
+                                                                                formControlName: 'cp_lab_no',
+                                                                                label: 'CP Lab No.',
+                                                                                prefixIcon: Icons.account_circle_outlined,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'CP Chest-Xray?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('cp_chest_xray').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('cp_chest_xray').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'CP Nutrition Support?',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('cp_nutrition_support').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('cp_nutrition_support').value,
+                                                                              ),
+                                                                            ]))),
+                                                              ]))),
+                                            ])))),
+                            BottomButtonBar(
+                              onSave: (_) async =>
+                                  await _onSave(context, formGroup),
+                              nextPage: const ContactTracingRoute(),
+                            ),
+                            const SizedBox(height: kPadding * 2),
+                          ]),
+                        ))));
   }
 }
 

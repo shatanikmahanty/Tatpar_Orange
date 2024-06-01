@@ -41,12 +41,6 @@ class TreatmentModel with _$TreatmentModel {
     int? selectedTreatmentSupporterPanchayat,
     @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
     @JsonKey(
-      name: 'home_visit_date',
-      fromJson: fromJsonToDateTime,
-      toJson: _dateTimeToJson,
-    )
-    DateTime? dateOfHomeVisit,
-    @JsonKey(
       name: 'ipt_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson,
