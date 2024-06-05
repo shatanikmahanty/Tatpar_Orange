@@ -21,9 +21,12 @@ import 'package:tatpar_acf/features/case/data/source_models/referral_districts_m
 import 'package:tatpar_acf/features/case/data/source_models/referrer_source_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
+import 'package:tatpar_acf/l10n/language_provider.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
 import 'package:tatpar_acf/utils/extensions/app_dio_exception.dart';
 import 'package:tatpar_acf/utils/extensions/extensions.dart';
+import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'configurations/configurations.dart';
 
@@ -78,11 +81,25 @@ Future<void> main() async {
     if (!kIsWeb) {
       initialDeepLink = (await appLinksRepository.getInitialLink())?.path;
     }
-
-    return TatparAcfAppBuilder(
-      appRouter: router,
-      initialDeepLink: initialDeepLink,
-      appLinksRepository: appLinksRepository,
+    return ChangeNotifierProvider(
+      create: (_) {
+        return LanguageProvider();
+      },
+      child: TatparAcfAppBuilder(
+        appRouter: router,
+        initialDeepLink: initialDeepLink,
+        appLinksRepository: appLinksRepository,
+      ),
     );
   });
+  getCurrentAppLangauge();
+}
+
+void getCurrentAppLangauge() async {
+  final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
+  String? lang = await preferences.then((SharedPreferences prefs) {
+    return prefs.getString('currentLanguage');
+  });
+  print(lang);
+  LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
 }

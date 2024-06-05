@@ -17,7 +17,7 @@ import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
-import 'package:provider/provider.dart';
+import 'package:tatpar_acf/l10n/language_provider.dart';
 import 'configurations/configurations.dart';
 
 class TatparAcfAppBuilder extends AppBuilder {
@@ -104,11 +104,6 @@ class TatparAcfAppBuilder extends AppBuilder {
                     previous.environment != current.environment,
                 listener: (context, state) async {},
                 builder: (context, appState) {
-                  // ChangeNotifierProvider(create: (_) {
-                  //   return LanguageProvider();
-                  // });
-                  //               getCurrentAppLangauge();
-
                   return MaterialApp.router(
                     debugShowCheckedModeBanner: false,
                     scaffoldMessengerKey:
@@ -118,9 +113,9 @@ class TatparAcfAppBuilder extends AppBuilder {
                     theme: AppTheme.light,
                     darkTheme: AppTheme.dark,
                     themeMode: appState.themeMode,
-                    locale: Locale(appState.locale, ''),
-                    // locale: Locale.fromSubtags(
-                    //     languageCode: LanguageProvider().currentLanguage),
+                    // locale: Locale(appState.locale, ''),
+                    locale: Locale.fromSubtags(
+                        languageCode: LanguageProvider().currentLanguage),
                     supportedLocales: const [
                       Locale('en', ''),
                     ],
@@ -173,8 +168,8 @@ class TatparAcfAppBuilder extends AppBuilder {
                 }),
           ),
         );
-  void getCurrentAppLangauge() async {
-//final lang = await Preferences.getValuefor(PreferencesString.localeKey);
-    // LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
-  }
+  //  void getCurrentAppLangauge() async {
+  //   // final lang = await Preferences.getValuefor(PreferencesString.localeKey);
+  //   // LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
+  // }
 }
