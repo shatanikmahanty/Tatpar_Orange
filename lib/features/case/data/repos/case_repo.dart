@@ -73,6 +73,8 @@ class CaseRepo {
   Future<MentalHealthScreeningModel> saveWHOSRQData(
       {required MentalHealthScreeningModel mentalHealthScreeningModel,
       required WHOSrqModel? whoSrqModel,
+      required WHOSrqModel? ipfuWhoSrqModel,
+      required WHOSrqModel? cpWhoSrqModel,
       required int? id,
       required int? caseId}) async {
     log(mentalHealthScreeningModel.toJson().toString());
@@ -82,7 +84,9 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...mentalHealthScreeningModel.toJson(),
-        ...whoSrqModel!.toJson(),
+        if (whoSrqModel != null) ...whoSrqModel.toJson(),
+        if (ipfuWhoSrqModel != null) ...ipfuWhoSrqModel.toJson(),
+        if (cpWhoSrqModel != null) ...cpWhoSrqModel.toJson(),
         'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
@@ -375,12 +379,14 @@ class CaseRepo {
           caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
       await dataBox.addAll(cases);
       final List<Case> storedData = dataBox.values.toList();
+
       log(storedData.toString());
 
       return cases;
     } else {
       Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<Case> storedData = dataBox.values.toList();
+
       if (result.error != null && result.error?.type is NetworkError) {
         log('No NETWORK');
         print('Using stored data Of cases from Hive: $storedData');

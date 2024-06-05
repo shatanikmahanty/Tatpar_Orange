@@ -22,11 +22,13 @@ class MentalHealthScreeningPage extends StatelessWidget {
   FormGroup _mentalHealthScreeningFormBuilder(
       {required MentalHealthScreeningModel? mentalHealthScreeningModel}) {
     return fb.group({
-      'stage': FormControl<List<String>>(),
-      'ip_stage': FormControl<String>(value: mentalHealthScreeningModel?.stage),
+      'stage': FormControl<String>(value: mentalHealthScreeningModel?.ipStage),
+      'ip_stage':
+          FormControl<String>(value: mentalHealthScreeningModel?.ipStage),
       'ipfu_stage':
-          FormControl<String>(value: mentalHealthScreeningModel?.stage),
-      'cp_stage': FormControl<String>(value: mentalHealthScreeningModel?.stage),
+          FormControl<String>(value: mentalHealthScreeningModel?.ipfuStage),
+      'cp_stage':
+          FormControl<String>(value: mentalHealthScreeningModel?.cpStage),
       'screening_date': FormControl<DateTime>(
           value: (mentalHealthScreeningModel?.ipScreeningDate)),
       'screening_status': FormControl<String>(
@@ -42,45 +44,33 @@ class MentalHealthScreeningPage extends StatelessWidget {
       'talk_to_helpline': FormControl<String>(
           value: mentalHealthScreeningModel?.ipfutalkToHelpline),
       'ipfu_screening_date': FormControl<DateTime>(
-          //   value: (mentalHealthScreeningModel?.ipfuScreeningDate)
-          ),
+          value: (mentalHealthScreeningModel?.ipfuScreeningDate)),
       'ipfu_screening_status': FormControl<String>(
-          // value: mentalHealthScreeningModel?.ipfuScreeningStatus
-          ),
+          value: mentalHealthScreeningModel?.ipfuScreeningStatus),
       'ipfu_screening_score': FormControl<String>(
-          //   value: mentalHealthScreeningModel?.ipfuScreeningScore
-          ),
+          value: mentalHealthScreeningModel?.ipfuScreeningScore),
       'ipfu_counselling_linked': FormControl<DateTime>(
-          // value: mentalHealthScreeningModel?.ipfuCounsellingLinked
-          ),
+          value: mentalHealthScreeningModel?.ipfuCounsellingLinked),
       'ipfu_psychiatrist_linked': FormControl<DateTime>(
-          // value: mentalHealthScreeningModel?.ipfuPsychiatristLinked
-          ),
+          value: mentalHealthScreeningModel?.ipfuPsychiatristLinked),
       'ipfu_feeling_better_after_linkage': FormControl<String>(
           value: mentalHealthScreeningModel?.ipfuFeelingBetter),
       'ipfu_talk_to_helpline': FormControl<String>(
           value: mentalHealthScreeningModel?.ipfutalkToHelpline),
       'cp_screening_date': FormControl<DateTime>(
-          //value: (mentalHealthScreeningModel?.cpScreeningDate)
-          ),
+          value: (mentalHealthScreeningModel?.cpScreeningDate)),
       'cp_screening_status': FormControl<String>(
-          //value: mentalHealthScreeningModel?.cpScreeningStatus
-          ),
+          value: mentalHealthScreeningModel?.cpScreeningStatus),
       'cp_screening_score': FormControl<String>(
-          // value: mentalHealthScreeningModel?.cpScreeningScore
-          ),
+          value: mentalHealthScreeningModel?.cpScreeningScore),
       'cp_counselling_linked': FormControl<DateTime>(
-          // value: mentalHealthScreeningModel?.cpCounsellingLinked
-          ),
+          value: mentalHealthScreeningModel?.cpCounsellingLinked),
       'cp_psychiatrist_linked': FormControl<DateTime>(
-          //  value: mentalHealthScreeningModel?.cpPsychiatristLinked
-          ),
+          value: mentalHealthScreeningModel?.cpPsychiatristLinked),
       'cp_feeling_better_after_linkage': FormControl<String>(
-          //  value: mentalHealthScreeningModel?.cpFeelingBetter
-          ),
+          value: mentalHealthScreeningModel?.cpFeelingBetter),
       'cp_talk_to_helpline': FormControl<String>(
-          //  value: mentalHealthScreeningModel?.cptalkToHelpline
-          ),
+          value: mentalHealthScreeningModel?.cptalkToHelpline),
     });
   }
 
@@ -96,44 +86,33 @@ class MentalHealthScreeningPage extends StatelessWidget {
       final model = caseCubit.state.mentalHealthScreeningModel ??
           const MentalHealthScreeningModel();
       //final whoSrqJson = whoSrqModel?.toJson() ?? <String, dynamic>{};
-      if (formGroup.control('stage').value == 'IP') {
-        final updatedModel = model.copyWith(
-          //  stage: formData['stage'] as String?,
-          ipScreeningDate: formData['screening_date'] as DateTime?,
-          ipScreeningStatus: formData['screening_status'] as String?,
-          ipScreeningScore: formData['screening_score'] as String?,
-          ipCounsellingLinked: formData['counselling_linked'] as DateTime?,
-          ipPsychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
-        );
-        caseCubit.updateWHOSRQData(updatedModel, whoSrqModel);
-      } else if (formGroup.control('stage').value == 'IPFU') {
-        final updatedModel = model.copyWith(
-          //  stage: formData['stage'] as String?,
-          ipScreeningDate: formData['ipfu_screening_date'] as DateTime?,
-          ipScreeningStatus: formData['ipfu_screening_status'] as String?,
-          ipScreeningScore: formData['ipfu_screening_score'] as String?,
-          ipCounsellingLinked: formData['ipfu_counselling_linked'] as DateTime?,
-          ipPsychiatristLinked:
-              formData['ipfu_psychiatrist_linked'] as DateTime?,
-          ipfuFeelingBetter:
-              formData['ipfu_feeling_better_after_linkage'] as String?,
-          ipfutalkToHelpline: formData['ipfu_talk_to_helpline'] as String?,
-        );
-        caseCubit.updateWHOSRQData(updatedModel, ipfuWhoSrqModel);
-      } else {
-        final updatedModel = model.copyWith(
-          // stage: formData['stage'] as String?,
-          ipScreeningDate: formData['cp_screening_date'] as DateTime?,
-          ipScreeningStatus: formData['cp_screening_status'] as String?,
-          ipScreeningScore: formData['cp_screening_score'] as String?,
-          ipCounsellingLinked: formData['cp_counselling_linked'] as DateTime?,
-          ipPsychiatristLinked: formData['cp_psychiatrist_linked'] as DateTime?,
-          ipfuFeelingBetter:
-              formData['cp_feeling_better_after_linkage'] as String?,
-          ipfutalkToHelpline: formData['cp_talk_to_helpline'] as String?,
-        );
-        caseCubit.updateWHOSRQData(updatedModel, cpWhoSrqModel);
-      }
+
+      final updatedModel = model.copyWith(
+        ipStage: formData['stage'] as String?,
+        ipScreeningDate: formData['screening_date'] as DateTime?,
+        ipScreeningStatus: formData['screening_status'] as String?,
+        ipScreeningScore: formData['screening_score'] as String?,
+        ipCounsellingLinked: formData['counselling_linked'] as DateTime?,
+        ipPsychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
+        ipfuScreeningDate: formData['ipfu_screening_date'] as DateTime?,
+        ipfuScreeningStatus: formData['ipfu_screening_status'] as String?,
+        ipfuScreeningScore: formData['ipfu_screening_score'] as String?,
+        ipfuCounsellingLinked: formData['ipfu_counselling_linked'] as DateTime?,
+        ipfuPsychiatristLinked:
+            formData['ipfu_psychiatrist_linked'] as DateTime?,
+        ipfuFeelingBetter:
+            formData['ipfu_feeling_better_after_linkage'] as String?,
+        ipfutalkToHelpline: formData['ipfu_talk_to_helpline'] as String?,
+        cpScreeningDate: formData['cp_screening_date'] as DateTime?,
+        cpScreeningStatus: formData['cp_screening_status'] as String?,
+        cpScreeningScore: formData['cp_screening_score'] as String?,
+        cpCounsellingLinked: formData['cp_counselling_linked'] as DateTime?,
+        cpPsychiatristLinked: formData['cp_psychiatrist_linked'] as DateTime?,
+        cpFeelingBetter: formData['cp_feeling_better_after_linkage'] as String?,
+        cptalkToHelpline: formData['cp_talk_to_helpline'] as String?,
+      );
+      caseCubit.updateWHOSRQData(
+          updatedModel, whoSrqModel, ipfuWhoSrqModel, cpWhoSrqModel);
     } else {
       formGroup.markAllAsTouched();
       // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
@@ -182,7 +161,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                 CrossAxisAlignment.start,
                                             children: [
                                               ChipRadioButtons(
-                                                allowMultiSelect: true,
+                                                allowMultiSelect: false,
                                                 label: 'Stage',
                                                 options: const [
                                                   'IP',
@@ -191,52 +170,28 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                 ],
                                                 crossAxisCount: 3,
                                                 onChanged: (value) {
-                                                  if (value.isEmpty) {
-                                                    formGroup
-                                                        .control('stage')
-                                                        .value = null;
-                                                    return;
-                                                  }
-                                                  final listOfValues =
-                                                      value.split(',');
-
                                                   formGroup
                                                       .control('stage')
-                                                      .value = listOfValues;
-                                                  print(
-                                                    formGroup
-                                                        .control('stage')
-                                                        .value,
-                                                  );
-                                                  print(
-                                                    (formGroup
-                                                                .control('stage')
-                                                                .value
-                                                            as List<String>)
-                                                        .contains('IPFU'),
-                                                  );
+                                                      .value = value;
                                                 },
+                                                selected: formGroup
+                                                    .control('stage')
+                                                    .value,
                                               ),
                                               const SizedBox(
                                                   height: kPadding * 2),
                                               ReactiveValueListenableBuilder<
-                                                  List<String>>(
+                                                  String>(
                                                 formControlName: 'stage',
                                                 builder: (context, control,
                                                         child) =>
                                                     Visibility(
                                                         visible: formGroup
-                                                                    .control(
-                                                                        'stage')
-                                                                    .value !=
-                                                                null &&
-                                                            (formGroup
-                                                                        .control(
-                                                                            'stage')
-                                                                        .value
-                                                                    as List<
-                                                                        String>)
-                                                                .contains('IP'),
+                                                                .control(
+                                                                    'stage')
+                                                                .value
+                                                                .toString() ==
+                                                            'IP',
                                                         child: Column(
                                                           children: [
                                                             DateTextInput(
@@ -347,46 +302,38 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                         )),
                                               ),
                                               ReactiveValueListenableBuilder<
-                                                  List<String>>(
+                                                  String>(
                                                 formControlName: 'stage',
                                                 builder:
                                                     (context, control, child) =>
                                                         Visibility(
-                                                  visible:
-                                                      formGroup
-                                                                  .control(
-                                                                      'stage')
-                                                                  .value !=
-                                                              null &&
-                                                          (formGroup
-                                                                      .control(
-                                                                          'stage')
-                                                                      .value
-                                                                  as List<
-                                                                      String>)
-                                                              .contains('IPFU'),
+                                                  visible: formGroup
+                                                          .control('stage')
+                                                          .value
+                                                          .toString() ==
+                                                      'IPFU',
                                                   child: Column(
                                                     children: [
-                                                      const SizedBox(
-                                                          height: kPadding * 2),
-                                                      Text(
-                                                        'IPFU',
-                                                        textAlign:
-                                                            TextAlign.left,
-                                                        style: Theme.of(context)
-                                                            .textTheme
-                                                            .labelLarge
-                                                            ?.copyWith(
-                                                                fontWeight:
-                                                                    FontWeight
-                                                                        .w600,
-                                                                fontSize: 20,
-                                                                height: 1.2,
-                                                                letterSpacing:
-                                                                    0.5),
-                                                      ),
-                                                      const SizedBox(
-                                                          height: kPadding * 2),
+                                                      // const SizedBox(
+                                                      //     height: kPadding * 2),
+                                                      // Text(
+                                                      //   'IPFU',
+                                                      //   textAlign:
+                                                      //       TextAlign.left,
+                                                      //   style: Theme.of(context)
+                                                      //       .textTheme
+                                                      //       .labelLarge
+                                                      //       ?.copyWith(
+                                                      //           fontWeight:
+                                                      //               FontWeight
+                                                      //                   .w600,
+                                                      //           fontSize: 20,
+                                                      //           height: 1.2,
+                                                      //           letterSpacing:
+                                                      //               0.5),
+                                                      // ),
+                                                      // const SizedBox(
+                                                      //     height: kPadding * 2),
                                                       DateTextInput(
                                                         firstDate:
                                                             DateTime(2002),
@@ -551,55 +498,48 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                 ),
                                               ),
                                               ReactiveValueListenableBuilder<
-                                                      List<String>>(
+                                                      String>(
                                                   formControlName: 'stage',
                                                   builder: (context, control,
                                                           child) =>
                                                       Visibility(
                                                           visible: formGroup
-                                                                      .control(
-                                                                          'stage')
-                                                                      .value !=
-                                                                  null &&
-                                                              (formGroup
-                                                                          .control(
-                                                                              'stage')
-                                                                          .value
-                                                                      as List<
-                                                                          String>)
-                                                                  .contains(
-                                                                      'CP'),
+                                                                  .control(
+                                                                      'stage')
+                                                                  .value
+                                                                  .toString() ==
+                                                              'CP',
                                                           child: Column(
                                                             children: [
-                                                              const SizedBox(
-                                                                  height:
-                                                                      kPadding *
-                                                                          2),
-                                                              Text(
-                                                                'CP',
-                                                                textAlign:
-                                                                    TextAlign
-                                                                        .left,
-                                                                style: Theme
-                                                                        .of(
-                                                                            context)
-                                                                    .textTheme
-                                                                    .labelLarge
-                                                                    ?.copyWith(
-                                                                        fontWeight:
-                                                                            FontWeight
-                                                                                .w600,
-                                                                        fontSize:
-                                                                            20,
-                                                                        height:
-                                                                            1.2,
-                                                                        letterSpacing:
-                                                                            0.5),
-                                                              ),
-                                                              const SizedBox(
-                                                                  height:
-                                                                      kPadding *
-                                                                          2),
+                                                              // const SizedBox(
+                                                              //     height:
+                                                              //         kPadding *
+                                                              //             2),
+                                                              // Text(
+                                                              //   'CP',
+                                                              //   textAlign:
+                                                              //       TextAlign
+                                                              //           .left,
+                                                              //   style: Theme
+                                                              //           .of(
+                                                              //               context)
+                                                              //       .textTheme
+                                                              //       .labelLarge
+                                                              //       ?.copyWith(
+                                                              //           fontWeight:
+                                                              //               FontWeight
+                                                              //                   .w600,
+                                                              //           fontSize:
+                                                              //               20,
+                                                              //           height:
+                                                              //               1.2,
+                                                              //           letterSpacing:
+                                                              //               0.5),
+                                                              // ),
+                                                              // const SizedBox(
+                                                              //     height:
+                                                              //         kPadding *
+                                                              //             2),
                                                               DateTextInput(
                                                                 firstDate:
                                                                     DateTime

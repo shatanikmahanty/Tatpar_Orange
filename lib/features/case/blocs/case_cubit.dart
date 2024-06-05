@@ -357,12 +357,16 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateWHOSRQData(
       MentalHealthScreeningModel mentalHealthScreeningModel,
-      WHOSrqModel? whoSrqModel) async {
+      WHOSrqModel? whoSrqModel,
+      WHOSrqModel? ipfuWhoSrqModel,
+      WHOSrqModel? cpWhoSrqModel) async {
     final response = await caseRepo.saveWHOSRQData(
         mentalHealthScreeningModel: mentalHealthScreeningModel,
         whoSrqModel: whoSrqModel,
         id: state.caseWorkedUpon.whoSrq,
-        caseId: state.caseWorkedUpon.id);
+        caseId: state.caseWorkedUpon.id,
+        ipfuWhoSrqModel: ipfuWhoSrqModel,
+        cpWhoSrqModel: cpWhoSrqModel);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon.copyWith(whoSrq: response.id),
