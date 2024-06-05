@@ -22,7 +22,11 @@ class TreatmentModel with _$TreatmentModel {
   const factory TreatmentModel({
     @JsonKey(name: 'id', includeToJson: false) int? id,
     @JsonKey(name: 'case_definition') String? caseDefinition,
-    @JsonKey(name: 'tb_treated') String? previouslyTbTreated,
+    @JsonKey(name: 'tb_site') String? tbSite,
+    @JsonKey(name: 'case_history') String? caseHistory,
+    String? drugSensitive,
+    String? diagnosisStatus,
+    String? previouslyTBTreated,
     @JsonKey(name: 'rif_sensitivity') String? rifSensitivity,
     @JsonKey(
       name: 'ihv_date',
@@ -41,11 +45,11 @@ class TreatmentModel with _$TreatmentModel {
     int? selectedTreatmentSupporterPanchayat,
     @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
     @JsonKey(
-      name: 'ipt_start_date',
+      name: 'ip_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson,
     )
-    DateTime? iptStartDate,
+    DateTime? ipStartDate,
     @JsonKey(name: 'hiv_done') String? hivDone,
     @JsonKey(name: 'hiv_result') String? hivResult,
     @JsonKey(
@@ -55,7 +59,7 @@ class TreatmentModel with _$TreatmentModel {
     )
     DateTime? hivDate,
     @JsonKey(name: 'hb_done') String? hbDone,
-    @JsonKey(name: 'hb_result') int? hbResult,
+    @JsonKey(name: 'hb_result') double? hbResult,
     @JsonKey(
       name: 'hb_date',
       fromJson: fromJsonToDateTime,
@@ -63,7 +67,7 @@ class TreatmentModel with _$TreatmentModel {
     )
     DateTime? hbDate,
     @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
-    @JsonKey(name: 'blood_sugar_result') String? bloodSugarResult,
+    @JsonKey(name: 'blood_sugar_result') int? bloodSugarResult,
     @JsonKey(
       name: 'blood_sugar_date',
       fromJson: fromJsonToDateTime,
@@ -71,8 +75,9 @@ class TreatmentModel with _$TreatmentModel {
     )
     DateTime? bloodSugarDate,
     @JsonKey(name: 'alcohol') String? alcohol,
-    @JsonKey(name: 'tb_consumption') String? tbConsumption,
+    @JsonKey(name: 'tb_consumption') String? tobaccoConsumption,
     @JsonKey(name: 'nutrition_screening') String? nutrition,
+    String? nutritionEligibility,
     @JsonKey(
       name: 'nutrition_screening_date',
       fromJson: fromJsonToDateTime,
@@ -83,18 +88,40 @@ class TreatmentModel with _$TreatmentModel {
       name: 'nutrition_linkage',
     )
     String? nutritionLinkage,
-    @JsonKey(name: 'ip_followup_nat_test') String? ipNatTest,
+    DateTime? nutritionLinkageDate,
+    int? height,
+    int? weight,
+    String? stage,
+    DateTime? ipfuDate,
+    String? ipfuAfbDone,
+    String? ipfuAfbLabNo,
     @JsonKey(
-      name: 'ip_afb_date',
+      name: 'ipfu_afb_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson,
     )
-    DateTime? ipAfbDate,
-    @JsonKey(name: 'ip_followup_afb_lab_number') String? ipAfbLabNo,
-    @JsonKey(name: 'ip_followup_nat_result') String? ipNatResult,
-    @JsonKey(name: 'ip_followup_lab_number') String? ipLabNo,
-    @JsonKey(name: 'ip_chest_xray') String? ipChestXray,
-    @JsonKey(name: 'ip_nutrition_support') String? ipNutritionSupport,
+    DateTime? ipfuAfbDate,
+    String? ipfuAfbResult,
+    @JsonKey(name: 'ip_followup_naat_test') String? ipfuNaatTest,
+    @JsonKey(name: 'ip_followup_naat_result') String? ipfuNaatResult,
+    @JsonKey(name: 'ip_followup_lab_number') String? ipfuLabNo,
+    @JsonKey(name: 'ip_chest_xray') String? ipfuChestXray,
+    @JsonKey(name: 'ip_nutrition_support') String? ipfuNutritionSupport,
+    DateTime? cpDate,
+    String? cpAfbDone,
+    String? cpAfbLabNo,
+    @JsonKey(
+      name: 'cp_afb_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson,
+    )
+    DateTime? cpAfbDate,
+    String? cpAfbResult,
+    @JsonKey(name: 'cp_followup_naat_test') String? cpNaatTest,
+    @JsonKey(name: 'cp_followup_naat_result') String? cpNaatResult,
+    @JsonKey(name: 'cp_followup_lab_number') String? cpLabNo,
+    @JsonKey(name: 'cp_chest_xray') String? cpChestXray,
+    @JsonKey(name: 'cp_nutrition_support') String? cpNutritionSupport,
   }) = _TreatmentModel;
 
   factory TreatmentModel.fromJson(Map<String, dynamic> json) =>

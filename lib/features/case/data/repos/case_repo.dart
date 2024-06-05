@@ -1,7 +1,6 @@
 import 'dart:developer';
 
 import 'package:hive/hive.dart';
-import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
