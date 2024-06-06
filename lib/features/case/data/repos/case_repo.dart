@@ -377,9 +377,22 @@ class CaseRepo {
       final List<dynamic> caseDataList = result.data['data']['cases'];
       final List<Case> cases =
           caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
-      await dataBox.addAll(cases);
-      final List<Case> storedData = dataBox.values.toList();
+      // Iterate through the cases fetched from the network
+      for (final caseItem in cases) {
+        // Check if the case with the same ID already exists in the Hive box
+        final existingCaseIndex = dataBox.values
+            .toList()
+            .indexWhere((existingCase) => existingCase.id == caseItem.id);
+        if (existingCaseIndex != -1) {
+          // If case with the same ID exists, update it
+          dataBox.putAt(existingCaseIndex, caseItem);
+        } else {
+          // If case with the same ID doesn't exist, add it
+          dataBox.add(caseItem);
+        }
+      }
 
+      final List<Case> storedData = dataBox.values.toList();
       log(storedData.toString());
 
       return cases;

@@ -70,6 +70,7 @@ Future<void> main() async {
     ///caseListGetAPI
     Hive.registerAdapter(CaseAdapter());
     await Hive.openBox<Case>('caseList');
+    // await Hive.deleteBoxFromDisk('caseList');
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
