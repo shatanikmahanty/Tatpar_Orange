@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -57,8 +56,7 @@ class AuthRepo {
   Future<void> verifyOtp(
     String otp,
   ) async {
-
-    if (kIsWeb){
+    if (kIsWeb) {
       final userCredential = await _confirmationResult!.confirm(otp);
       handlePostLogin(userCredential);
       return;

@@ -391,7 +391,6 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> updateTreatmentData(TreatmentModel treatmentModel) async {
-    print('Calling UPdate Treatment');
     final response = await caseRepo.saveTreatmentData(
         treatmentModel: treatmentModel,
         id: state.caseWorkedUpon.treatment,

@@ -142,7 +142,6 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      print(result.status);
       return TreatmentModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
@@ -372,7 +371,6 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      print(result.status);
       Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<dynamic> caseDataList = result.data['data']['cases'];
       final List<Case> cases =
@@ -402,7 +400,6 @@ class CaseRepo {
 
       if (result.error != null && result.error?.type is NetworkError) {
         log('No NETWORK');
-        print('Using stored data Of cases from Hive: $storedData');
         return storedData;
       } else {
         throw ApplicationError(

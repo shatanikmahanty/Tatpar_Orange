@@ -17,7 +17,6 @@ import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
-import 'package:provider/provider.dart';
 import 'configurations/configurations.dart';
 
 class TatparAcfAppBuilder extends AppBuilder {

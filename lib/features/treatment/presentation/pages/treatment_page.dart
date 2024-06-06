@@ -179,10 +179,8 @@ class TreatmentPage extends StatelessWidget {
         var panchayatData = block.panchayat?.firstWhere(
             (p) => p.id == panchayat,
             orElse: () => const Panchayat(id: 0));
-        print('Treatment PAnchayat =======$panchayatData');
         if (panchayatData?.id != 0) {
           panchayatName = panchayatData?.panchayat;
-          print(panchayatName);
           break;
         }
       }
@@ -265,7 +263,6 @@ class TreatmentPage extends StatelessWidget {
         ipfuNutritionSupport: formData['ipfu_nutrition_support'] as String?,
       );
       await cubit.updateTreatmentData(treatmentModel);
-      print(treatmentModel);
     } else {
       formGroup.markAllAsTouched();
       // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
@@ -1278,7 +1275,7 @@ class DecimalTextInputFormatter extends TextInputFormatter {
 
     return newValue.copyWith(
       text: newText,
-      selection: newText.length > 0
+      selection: newText.isNotEmpty
           ? TextSelection.collapsed(offset: newText.length)
           : newValue.selection,
     );

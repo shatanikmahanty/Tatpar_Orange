@@ -46,8 +46,6 @@ class ReferralDetailsPage extends StatelessWidget {
       orElse: () => const Block(block: null),
     );
     final String? blockName = blockData?.block;
-    print(panchayat);
-    print(cubit.state.dataModel?.blocks!);
     String? panchayatName =
         _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
 
@@ -151,10 +149,8 @@ class ReferralDetailsPage extends StatelessWidget {
         var panchayatData = block.panchayat?.firstWhere(
             (p) => p.id == panchayat,
             orElse: () => const Panchayat(id: 0));
-        print(panchayatData);
         if (panchayatData?.id != 0) {
           panchayatName = panchayatData?.panchayat;
-          print(panchayatName);
           break;
         }
       }

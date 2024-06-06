@@ -31,7 +31,7 @@ class CaseAppBar extends StatelessWidget implements PreferredSizeWidget {
               icon: const Icon(Icons.close))
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(kToolbarHeight + kPadding * 2.5),
+          preferredSize: const Size.fromHeight(kToolbarHeight + kPadding * 2.5),
           child: UserNameBar(
             context.read<CaseCubit>().state.caseWorkedUpon.referralName ?? '',
           ),
