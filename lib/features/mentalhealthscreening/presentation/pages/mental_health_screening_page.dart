@@ -447,50 +447,40 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                           ),
                                                                         ],
                                                                       ),
-                                                                      const SizedBox(
-                                                                          height:
-                                                                              kPadding * 2),
-                                                                      ChipRadioButtons(
-                                                                        label:
-                                                                            'Feeling better after linkage',
-                                                                        options: const [
-                                                                          'Yes',
-                                                                          'No'
-                                                                        ],
-                                                                        crossAxisCount:
-                                                                            2,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          formGroup
-                                                                              .control('ipfu_feeling_better_after_linkage')
-                                                                              .value = value;
-                                                                        },
-                                                                        selected: formGroup
-                                                                            .control('ipfu_feeling_better_after_linkage')
-                                                                            .value,
-                                                                      ),
-                                                                      const SizedBox(
-                                                                          height:
-                                                                              kPadding * 2),
-                                                                      ChipRadioButtons(
-                                                                        label:
-                                                                            'Talk to helpline again',
-                                                                        options: const [
-                                                                          'Yes',
-                                                                          'No'
-                                                                        ],
-                                                                        crossAxisCount:
-                                                                            2,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          formGroup
-                                                                              .control('ipfu_talk_to_helpline')
-                                                                              .value = value;
-                                                                        },
-                                                                        selected: formGroup
-                                                                            .control('ipfu_talk_to_helpline')
-                                                                            .value,
-                                                                      ),
+                                                                      ReactiveValueListenableBuilder<
+                                                                              String>(
+                                                                          formControlName:
+                                                                              'screening_status',
+                                                                          builder: (context, control, child) => Visibility(
+                                                                              visible: (formGroup.control('screening_status').value) == 'Positive',
+                                                                              child: Column(children: [
+                                                                                const SizedBox(height: kPadding * 2),
+                                                                                ChipRadioButtons(
+                                                                                  label: 'Feeling better after linkage',
+                                                                                  options: const [
+                                                                                    'Yes',
+                                                                                    'No'
+                                                                                  ],
+                                                                                  crossAxisCount: 2,
+                                                                                  onChanged: (value) {
+                                                                                    formGroup.control('ipfu_feeling_better_after_linkage').value = value;
+                                                                                  },
+                                                                                  selected: formGroup.control('ipfu_feeling_better_after_linkage').value,
+                                                                                ),
+                                                                                const SizedBox(height: kPadding * 2),
+                                                                                ChipRadioButtons(
+                                                                                  label: 'Talk to helpline again',
+                                                                                  options: const [
+                                                                                    'Yes',
+                                                                                    'No'
+                                                                                  ],
+                                                                                  crossAxisCount: 2,
+                                                                                  onChanged: (value) {
+                                                                                    formGroup.control('ipfu_talk_to_helpline').value = value;
+                                                                                  },
+                                                                                  selected: formGroup.control('ipfu_talk_to_helpline').value,
+                                                                                ),
+                                                                              ]))),
                                                                     ],
                                                                   ))),
                                                     ],
@@ -654,46 +644,47 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                       const SizedBox(
                                                                           height:
                                                                               kPadding * 2),
-                                                                      ChipRadioButtons(
-                                                                        label:
-                                                                            'Feeling better after linkage',
-                                                                        options: const [
-                                                                          'Yes',
-                                                                          'No'
-                                                                        ],
-                                                                        crossAxisCount:
-                                                                            2,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          formGroup
-                                                                              .control('cp_feeling_better_after_linkage')
-                                                                              .value = value;
-                                                                        },
-                                                                        selected: formGroup
-                                                                            .control('cp_feeling_better_after_linkage')
-                                                                            .value,
-                                                                      ),
-                                                                      const SizedBox(
-                                                                          height:
-                                                                              kPadding * 2),
-                                                                      ChipRadioButtons(
-                                                                        label:
-                                                                            'Talk to helpline again',
-                                                                        options: const [
-                                                                          'Yes',
-                                                                          'No'
-                                                                        ],
-                                                                        crossAxisCount:
-                                                                            2,
-                                                                        onChanged:
-                                                                            (value) {
-                                                                          formGroup
-                                                                              .control('cp_talk_to_helpline')
-                                                                              .value = value;
-                                                                        },
-                                                                        selected: formGroup
-                                                                            .control('cp_talk_to_helpline')
-                                                                            .value,
+                                                                      ReactiveValueListenableBuilder<
+                                                                          String>(
+                                                                        formControlName:
+                                                                            'screening_status',
+                                                                        builder: (context,
+                                                                                control,
+                                                                                child) =>
+                                                                            Visibility(
+                                                                          visible:
+                                                                              (formGroup.control('screening_status').value) == 'Positive',
+                                                                          child:
+                                                                              Column(
+                                                                            children: [
+                                                                              ChipRadioButtons(
+                                                                                label: 'Feeling better after linkage',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('cp_feeling_better_after_linkage').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('cp_feeling_better_after_linkage').value,
+                                                                              ),
+                                                                              const SizedBox(height: kPadding * 2),
+                                                                              ChipRadioButtons(
+                                                                                label: 'Talk to helpline again',
+                                                                                options: const [
+                                                                                  'Yes',
+                                                                                  'No'
+                                                                                ],
+                                                                                crossAxisCount: 2,
+                                                                                onChanged: (value) {
+                                                                                  formGroup.control('cp_talk_to_helpline').value = value;
+                                                                                },
+                                                                                selected: formGroup.control('cp_talk_to_helpline').value,
+                                                                              ),
+                                                                            ],
+                                                                          ),
+                                                                        ),
                                                                       ),
                                                                     ],
                                                                   ),

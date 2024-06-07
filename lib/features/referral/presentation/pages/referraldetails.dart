@@ -555,13 +555,16 @@ class ReferralDetailsPage extends StatelessWidget {
                                           current.isLoading) ||
                                       previous.dataModel != current.dataModel),
                                   builder: (context, state) {
-                                    List<String> panchayats =
-                                        (state.dataModel != null)
-                                            ? state.dataModel!.blocks!
-                                                .expand((e) => e.panchayat!.map(
-                                                    (e) => '${e.panchayat}'))
-                                                .toList()
-                                            : [];
+                                    List<String> panchayats = (state
+                                        .dataModel!.blocks!
+                                        .where((element) =>
+                                            element.block ==
+                                            formGroup
+                                                .control('referral_block')
+                                                .value)
+                                        .expand((e) => e.panchayat!
+                                            .map((e) => '${e.panchayat}'))
+                                        .toList());
 
                                     if (state.isLoading ?? false) {
                                       return const SizedBox(

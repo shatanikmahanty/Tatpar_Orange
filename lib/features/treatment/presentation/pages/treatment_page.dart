@@ -638,15 +638,23 @@ class TreatmentPage extends StatelessWidget {
                                                                     builder:
                                                                         (context,
                                                                             state) {
-                                                                      List<
-                                                                          String> panchayats = (state.dataModel !=
-                                                                              null)
-                                                                          ? state
-                                                                              .dataModel!
-                                                                              .blocks!
-                                                                              .expand((e) => e.panchayat!.map((e) => '${e.panchayat}'))
-                                                                              .toList()
-                                                                          : [];
+                                                                      final cubit =
+                                                                          context
+                                                                              .read<CaseCubit>();
+                                                                      var block = (cubit
+                                                                          .state
+                                                                          .caseWorkedUpon
+                                                                          .referralBlock);
+                                                                      List<String> panchayats = (state
+                                                                          .dataModel!
+                                                                          .blocks!
+                                                                          .where((element) =>
+                                                                              element.block ==
+                                                                              block)
+                                                                          .expand((e) => e
+                                                                              .panchayat!
+                                                                              .map((e) => '${e.panchayat}'))
+                                                                          .toList());
 
                                                                       if (state
                                                                               .isLoading ??

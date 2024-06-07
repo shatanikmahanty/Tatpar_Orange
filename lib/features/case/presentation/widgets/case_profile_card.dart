@@ -5,16 +5,21 @@ import 'package:tatpar_acf/features/case/presentation/widgets/info_tile.dart';
 import '../../../../configurations/theme/size_constants.dart';
 
 class CaseProfileCard extends StatelessWidget {
-  const CaseProfileCard({
-    super.key,
-    required this.patientName,
-    required this.mobileNumber,
-    required this.panchayat,
-    required this.district,
-    required this.screeningStatus,
-  });
+  const CaseProfileCard(
+      {super.key,
+      required this.patientName,
+      required this.mobileNumber,
+      required this.panchayat,
+      required this.district,
+      required this.screeningStatus,
+      required this.diagnosisStatus});
 
-  final String patientName, mobileNumber, panchayat, district, screeningStatus;
+  final String patientName,
+      mobileNumber,
+      panchayat,
+      district,
+      screeningStatus,
+      diagnosisStatus;
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +43,7 @@ class CaseProfileCard extends StatelessWidget {
           InfoTile('Panchayat', fieldValue: panchayat),
           InfoTile('District', fieldValue: district),
           InfoTile('Screening Status', fieldValue: screeningStatus),
+          InfoTile('Diagnosis Status', fieldValue: diagnosisStatus),
         ],
       ),
     );
