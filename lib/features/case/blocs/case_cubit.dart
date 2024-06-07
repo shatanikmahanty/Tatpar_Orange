@@ -97,6 +97,8 @@ class CaseCubit extends Cubit<CaseState> {
   int? _selectedTreatmentPanchayatCodeId;
   int? _selectedIPFUAFBResult;
   int? _selectedCPAFBResult;
+  int? _selectedTreatmentIPFUNaatResult;
+  int? _selectedTreatmentCPFUNaatResult;
 
   ///ContactTracingPage
   int? _selectedTPTRegimen;
@@ -140,6 +142,10 @@ class CaseCubit extends Cubit<CaseState> {
       _selectedIPFUAFBResult = selectedIPFUAFBResult;
   set selectCPAFBResult(int? selectedCPAFBResult) =>
       _selectedCPAFBResult = selectedCPAFBResult;
+  set selectTreatmentIPFUNaatResult(int? selectedTreatmentIPFUNaatResult) =>
+      _selectedTreatmentIPFUNaatResult = selectedTreatmentIPFUNaatResult;
+  set selectTreatmentCPFUNaatResult(int? selectedTreatmentCPFUNaatResult) =>
+      _selectedTreatmentCPFUNaatResult = selectedTreatmentCPFUNaatResult;
 
   set selectTPTRegimen(int? selectedTPTRegimen) =>
       _selectedTPTRegimen = selectedTPTRegimen;
@@ -172,6 +178,8 @@ class CaseCubit extends Cubit<CaseState> {
   int? get selectedTreatmentOutcome => _selectedTreatmentOutcome;
   int? get selectedIPFUAFBResult => _selectedIPFUAFBResult;
   int? get selectedCPAFBResult => _selectedCPAFBResult;
+  int? get selectedTreatmentIPFUNaatResult => _selectedTreatmentIPFUNaatResult;
+  int? get selectedTreatmentCPFUNaatResult => _selectedTreatmentCPFUNaatResult;
 
   String? updateScreeningOutcome(FormGroup formGroup) {
     final cough = formGroup.control('cough').value;

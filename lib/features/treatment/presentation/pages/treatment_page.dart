@@ -21,31 +21,37 @@ class TreatmentPage extends StatelessWidget {
   const TreatmentPage({super.key});
   FormGroup _treatmentFormBuilder(
       {required TreatmentModel? treatmentModel, required SourceCubit cubit}) {
+    final ipfuAfbResult = treatmentModel?.selectedIpfuAFBResult;
+    final cpAfbResult = treatmentModel?.selectedCpAFBResult;
+    final ipfuNaatResult = treatmentModel?.selectedIpfuNaatResult;
+    final cpNaatResult = treatmentModel?.selectedCpNaatResult;
+
     final panchayat = treatmentModel?.selectedTreatmentSupporterPanchayat;
     String? panchayatName =
         _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
+    final ipfuAfbResultName = _getAFBResultName(cubit, ipfuAfbResult);
+    final cpAfbResultName = _getAFBResultName(cubit, cpAfbResult);
+    final ipfuNaatResultName = _getNaatResultName(cubit, ipfuNaatResult);
+    final cpNaatResultName = _getNaatResultName(cubit, cpNaatResult);
 
     return fb.group({
       'case_definition': FormControl<String>(
         value: treatmentModel?.caseDefinition,
       ),
       'tb_site': FormControl<String>(
-        value: '',
+        value: treatmentModel?.tbSite,
       ),
       'case_history': FormControl<String>(
-        value: '',
+        value: treatmentModel?.caseHistory,
       ),
       'drug_sensitive': FormControl<String>(
-        value: '',
+        value: treatmentModel?.drugSensitive,
       ),
       'diagnosis_status': FormControl<String>(
-        value: '',
-      ),
-      'rif_sensitivity': FormControl<String>(
-        value: treatmentModel?.rifSensitivity,
+        value: treatmentModel?.diagnosisStatus,
       ),
       'ihv_date': FormControl<DateTime>(
-        value: treatmentModel?.ihvDate,
+        value: treatmentModel?.ihvDate ?? DateTime.now(),
       ),
       'treatment_regimen': FormControl<String>(
         value: treatmentModel?.treatmentRegimen,
@@ -69,7 +75,7 @@ class TreatmentPage extends StatelessWidget {
         value: treatmentModel?.treatmentSupporterWard,
       ),
       'ip_start_date': FormControl<DateTime>(
-        value: treatmentModel?.ipStartDate,
+        value: treatmentModel?.ipStartDate ?? DateTime.now(),
       ),
       'hiv_done': FormControl<String>(
         value: treatmentModel?.hivDone,
@@ -78,26 +84,22 @@ class TreatmentPage extends StatelessWidget {
         value: treatmentModel?.hivResult,
       ),
       'hiv_date': FormControl<DateTime>(
-        value: treatmentModel?.hivDate,
+        value: treatmentModel?.hivDate ?? DateTime.now(),
       ),
       'hb_done': FormControl<String>(
         value: treatmentModel?.hbDone,
       ),
-      'hb_result': FormControl<double>(
-        validators: [
-          Validators.min(1.0),
-          Validators.max(40.0),
-        ],
-      ),
+      'hb_result': FormControl<double>(value: treatmentModel?.hbResult),
       'hb_date': FormControl<DateTime>(
-        value: treatmentModel?.hbDate,
+        value: treatmentModel?.hbDate ?? DateTime.now(),
       ),
       'blood_sugar_done': FormControl<String>(
         value: treatmentModel?.bloodSugarDone,
       ),
-      'blood_sugar_result': FormControl<int>(),
+      'blood_sugar_result':
+          FormControl<int>(value: treatmentModel?.bloodSugarResult),
       'blood_sugar_date': FormControl<DateTime>(
-        value: treatmentModel?.bloodSugarDate,
+        value: treatmentModel?.bloodSugarDate ?? DateTime.now(),
       ),
       'alcohol': FormControl<String>(
         value: treatmentModel?.alcohol,
@@ -106,35 +108,38 @@ class TreatmentPage extends StatelessWidget {
         value: treatmentModel?.tobaccoConsumption,
       ),
       'nutrition': FormControl<String>(
-        value: treatmentModel?.nutrition,
+        value: treatmentModel?.nutritionScreening,
       ),
-      'nutrition_eligibility': FormControl<String>(),
+      'nutrition_eligibility':
+          FormControl<String>(value: treatmentModel?.nutritionEligibility),
       'screening_date_nutrition': FormControl<DateTime>(
-        value: treatmentModel?.screeningDateNutrition,
+        value: treatmentModel?.screeningDateNutrition ?? DateTime.now(),
       ),
       'nutrition_linkage': FormControl<String>(
         value: treatmentModel?.nutritionLinkage,
       ),
       'nutrition_linkage_date': FormControl<DateTime>(
-        value: treatmentModel?.nutritionLinkageDate,
+        value: treatmentModel?.nutritionLinkageDate ?? DateTime.now(),
       ),
-      'height': FormControl<int>(),
-      'weight': FormControl<int>(),
-      'stage': FormControl<String>(),
-      'ipfu_date': FormControl<DateTime>(),
-      'ipfu_afb_done': FormControl<String>(),
+      'height': FormControl<int>(value: treatmentModel?.height),
+      'weight': FormControl<int>(value: treatmentModel?.weight),
+      'stage': FormControl<String>(value: treatmentModel?.stage),
+      'ipfu_date': FormControl<DateTime>(
+          value: treatmentModel?.ipfuDate ?? DateTime.now()),
+      'ipfu_afb_done': FormControl<String>(value: treatmentModel?.ipfuAfbDone),
       'ipfu_afb_lab_no': FormControl<String>(
         value: treatmentModel?.ipfuAfbLabNo,
       ),
       'ipfu_afb_date': FormControl<DateTime>(
-        value: treatmentModel?.ipfuAfbDate,
+        value: treatmentModel?.ipfuAfbDate ?? DateTime.now(),
       ),
-      'ipfu_afb_result': FormControl<String>(),
+      'ipfu_afb_result': FormControl<String>(
+          value: ipfuAfbResultName ?? treatmentModel?.ipfuAfbResult),
       'ipfu_naat_test': FormControl<String>(
         value: treatmentModel?.ipfuNaatTest,
       ),
       'ipfu_naat_result': FormControl<String>(
-        value: treatmentModel?.ipfuNaatResult,
+        value: ipfuNaatResultName ?? treatmentModel?.ipfuNaatResult,
       ),
       'ipfu_lab_no': FormControl<String>(
         value: treatmentModel?.ipfuLabNo,
@@ -145,20 +150,22 @@ class TreatmentPage extends StatelessWidget {
       'ipfu_nutrition_support': FormControl<String>(
         value: treatmentModel?.ipfuNutritionSupport,
       ),
-      'cp_date': FormControl<DateTime>(),
-      'cp_afb_done': FormControl<String>(),
+      'cp_date': FormControl<DateTime>(
+          value: treatmentModel?.cpDate ?? DateTime.now()),
+      'cp_afb_done': FormControl<String>(value: treatmentModel?.cpAfbDone),
       'cp_afb_lab_no': FormControl<String>(
         value: treatmentModel?.ipfuAfbLabNo,
       ),
       'cp_afb_date': FormControl<DateTime>(
-        value: treatmentModel?.ipfuAfbDate,
+        value: treatmentModel?.cpAfbDate ?? DateTime.now(),
       ),
-      'cp_afb_result': FormControl<String>(),
+      'cp_afb_result': FormControl<String>(
+          value: cpAfbResultName ?? treatmentModel?.cpAfbResult),
       'cp_naat_test': FormControl<String>(
         value: treatmentModel?.cpNaatTest,
       ),
       'cp_naat_result': FormControl<String>(
-        value: treatmentModel?.cpNaatResult,
+        value: cpNaatResultName ?? treatmentModel?.cpNaatResult,
       ),
       'cp_lab_no': FormControl<String>(
         value: treatmentModel?.cpLabNo,
@@ -170,6 +177,20 @@ class TreatmentPage extends StatelessWidget {
         value: treatmentModel?.cpNutritionSupport,
       ),
     });
+  }
+
+  String? _getAFBResultName(SourceCubit cubit, int? afb) {
+    final afbResultData = cubit.state.diagnosisData?.afbResult?.firstWhere(
+        (element) => element.id == afb,
+        orElse: () => const AFBResult(name: null));
+    return afbResultData?.name;
+  }
+
+  String? _getNaatResultName(SourceCubit cubit, int? mtb) {
+    final mtbResultData = cubit.state.diagnosisData?.mtbResult?.firstWhere(
+        (element) => element.id == mtb,
+        orElse: () => const MTBResult(name: null));
+    return mtbResultData?.name;
   }
 
   String? _getPanchayatName(List<Block>? blocks, int? panchayat) {
@@ -222,46 +243,81 @@ class TreatmentPage extends StatelessWidget {
                   element.name == formGroup.control('cp_afb_result').value,
               orElse: () => const AFBResult(id: null))
           .id;
+      context.read<CaseCubit>().selectTreatmentIPFUNaatResult = sourceCubit
+          .state.diagnosisData!.mtbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('ipfu_naat_result').value,
+              orElse: () => const MTBResult(id: null))
+          .id;
+      context.read<CaseCubit>().selectTreatmentCPFUNaatResult = sourceCubit
+          .state.diagnosisData!.mtbResult!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('cp_naat_result').value,
+              orElse: () => const MTBResult(id: null))
+          .id;
+
       final model = cubit.state.treatmentModel ?? const TreatmentModel();
       final treatmentModel = model.copyWith(
-        caseDefinition: formData['case_definition'] as String?,
-        // previouslyTbTreated: formData['previously_tb_treated'] as String?,
-        rifSensitivity: formData['rif_sensitivity'] as String?,
-        ihvDate: formData['ihv_date'] as DateTime?,
-        treatmentRegimen: formData['treatment_regimen'] as String?,
-        patientOccupation: formData['patient_occupation'] as String?,
-        treatmentSupporterName: formData['treatment_supporter_name'] as String?,
-        treatmentSupporterPosition:
-            formData['treatment_supporter_position'] as String?,
-        treatmentSupporterPhone:
-            formData['treatment_supporter_phone'] as String?,
-        selectedTreatmentSupporterPanchayat:
-            cubit.selectedTreatmentPanchayatCodeId,
-        treatmentSupporterWard: formData['treatment_supporter_ward'] as int?,
-        ipStartDate: formData['ip_start_date'] as DateTime?,
-        hivDone: formData['hiv_done'] as String?,
-        hivResult: formData['hiv_result'] as String?,
-        hivDate: formData['hiv_date'] as DateTime?,
-        hbDone: formData['hb_done'] as String?,
-        hbResult: formData['hb_result'] as double?,
-        hbDate: formData['hb_date'] as DateTime?,
-        bloodSugarDone: formData['blood_sugar_done'] as String?,
-        bloodSugarResult: formData['blood_sugar_result'] as int?,
-        bloodSugarDate: formData['blood_sugar_date'] as DateTime?,
-        alcohol: formData['alcohol'] as String?,
-        tobaccoConsumption: formData['tobacco_consumption'] as String?,
-        nutrition: formData['nutrition'] as String?,
-        screeningDateNutrition:
-            formData['screening_date_nutrition'] as DateTime?,
-        nutritionLinkage: formData['nutrition_linkage'] as String?,
-        ipfuNaatTest: formData['ipfu_naat_test'] as String?,
-        ipfuAfbDate: formData['ipfu_afb_date'] as DateTime?,
-        ipfuAfbLabNo: formData['ipfu_afb_lab_no'] as String?,
-        ipfuNaatResult: formData['ipfu_naat_result'] as String?,
-        ipfuLabNo: formData['ipfu_lab_no'] as String?,
-        ipfuChestXray: formData['ipfu_chest_xray'] as String?,
-        ipfuNutritionSupport: formData['ipfu_nutrition_support'] as String?,
-      );
+          caseDefinition: formData['case_definition'] as String?,
+          tbSite: formData['tb_site'] as String?,
+          caseHistory: formData['case_history'] as String?,
+          drugSensitive: formData['drug_sensitive'] as String?,
+          diagnosisStatus: formData['diagnosis_status'] as String?,
+          ihvDate: formData['ihv_date'] as DateTime?,
+          treatmentRegimen: formData['treatment_regimen'] as String?,
+          patientOccupation: formData['patient_occupation'] as String?,
+          treatmentSupporterName:
+              formData['treatment_supporter_name'] as String?,
+          treatmentSupporterPosition:
+              formData['treatment_supporter_position'] as String?,
+          treatmentSupporterPhone:
+              formData['treatment_supporter_phone'] as String?,
+          selectedTreatmentSupporterPanchayat:
+              cubit.selectedTreatmentPanchayatCodeId,
+          treatmentSupporterWard: formData['treatment_supporter_ward'] as int?,
+          height: formData['height'] as int?,
+          weight: formData['weight'] as int?,
+          stage: formData['stage'] as String?,
+          ipStartDate: formData['ip_start_date'] as DateTime?,
+          hivDone: formData['hiv_done'] as String?,
+          hivResult: formData['hiv_result'] as String?,
+          hivDate: formData['hiv_date'] as DateTime?,
+          hbDone: formData['hb_done'] as String?,
+          hbResult: formData['hb_result'] as double?,
+          hbDate: formData['hb_date'] as DateTime?,
+          bloodSugarDone: formData['blood_sugar_done'] as String?,
+          bloodSugarResult: formData['blood_sugar_result'] as int?,
+          bloodSugarDate: formData['blood_sugar_date'] as DateTime?,
+          alcohol: formData['alcohol'] as String?,
+          tobaccoConsumption: formData['tobacco_consumption'] as String?,
+          nutritionScreening: formData['nutrition'] as String?,
+          screeningDateNutrition:
+              formData['screening_date_nutrition'] as DateTime?,
+          nutritionEligibility: formData['nutrition_eligibility'] as String?,
+          nutritionLinkage: formData['nutrition_linkage'] as String?,
+          nutritionLinkageDate: formData['nutrition_linkage_date'] as DateTime?,
+          ipfuDate: formData['ipfu_date'] as DateTime?,
+          ipfuAfbDone: formData['ipfu_afb_done'] as String?,
+          ipfuAfbDate: formData['ipfu_afb_date'] as DateTime?,
+          ipfuAfbLabNo: formData['ipfu_afb_lab_no'] as String?,
+          selectedIpfuAFBResult: cubit.selectedIPFUAFBResult,
+          ipfuNaatTest: formData['ipfu_naat_test'] as String?,
+          selectedIpfuNaatResult: cubit.selectedTreatmentIPFUNaatResult,
+          ipfuLabNo: formData['ipfu_lab_no'] as String?,
+          ipfuChestXray: formData['ipfu_chest_xray'] as String?,
+          ipfuNutritionSupport: formData['ipfu_nutrition_support'] as String?,
+          cpDate: formData['cp_date'] as DateTime?,
+          cpAfbDone: formData['cp_afb_done'] as String?,
+          cpAfbDate: formData['cp_afb_date'] as DateTime?,
+          cpAfbLabNo: formData['cp_afb_lab_no'] as String?,
+          selectedCpAFBResult: cubit.selectedIPFUAFBResult,
+          cpNaatTest: formData['cp_naat_test'] as String?,
+          selectedCpNaatResult: cubit.selectedTreatmentCPFUNaatResult,
+          cpLabNo: formData['cp_lab_no'] as String?,
+          cpChestXray: formData['cp_chest_xray'] as String?,
+          cpNutritionSupport: formData['cp_nutrition_support'] as String?);
       await cubit.updateTreatmentData(treatmentModel);
     } else {
       formGroup.markAllAsTouched();
@@ -353,7 +409,7 @@ class TreatmentPage extends StatelessWidget {
                                               ChipRadioButtons(
                                                 label: 'Drug Sensitivy',
                                                 options: const [
-                                                  'Sesnsitive',
+                                                  'Sensitive',
                                                   'Resistant'
                                                 ],
                                                 crossAxisCount: 2,
@@ -802,8 +858,7 @@ class TreatmentPage extends StatelessWidget {
                                                                                         prefixIcon: Icons.account_circle_outlined,
                                                                                         keyboardType: const TextInputType.numberWithOptions(decimal: true),
                                                                                         inputFormatter: [
-                                                                                          DecimalTextInputFormatter(),
-                                                                                          LengthLimitingTextInputFormatter(4), // Adjust length as needed
+                                                                                          FilteringTextInputFormatter.allow(RegExp(r'^\d*\.?\d*$')),
                                                                                         ],
                                                                                       ),
                                                                                       const SizedBox(height: kPadding * 2),
@@ -836,7 +891,7 @@ class TreatmentPage extends StatelessWidget {
                                                                                   visible: (control.value == 'Yes'),
                                                                                   child: Column(
                                                                                     children: [
-                                                                                      PrimaryTextField<double>(
+                                                                                      PrimaryTextField(
                                                                                         formControlName: 'blood_sugar_result',
                                                                                         label: 'Blood Sugar Result?',
                                                                                         prefixIcon: Icons.account_circle_outlined,
@@ -1254,30 +1309,5 @@ class TreatmentPage extends StatelessWidget {
                             const SizedBox(height: kPadding * 2),
                           ]),
                         ))));
-  }
-}
-
-class DecimalTextInputFormatter extends TextInputFormatter {
-  @override
-  TextEditingValue formatEditUpdate(
-      TextEditingValue oldValue, TextEditingValue newValue) {
-    final text = newValue.text;
-
-    if (text.isEmpty) {
-      return newValue;
-    }
-
-    // Allow digits and a single decimal point
-    final newText = text.replaceAll(RegExp(r'[^0-9.]'), '');
-    if (newText.contains('.') && newText.split('.').length > 2) {
-      return oldValue;
-    }
-
-    return newValue.copyWith(
-      text: newText,
-      selection: newText.isNotEmpty
-          ? TextSelection.collapsed(offset: newText.length)
-          : newValue.selection,
-    );
   }
 }

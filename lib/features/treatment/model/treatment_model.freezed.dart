@@ -28,11 +28,10 @@ mixin _$TreatmentModel {
   String? get tbSite => throw _privateConstructorUsedError;
   @JsonKey(name: 'case_history')
   String? get caseHistory => throw _privateConstructorUsedError;
+  @JsonKey(name: 'drug_sensitive')
   String? get drugSensitive => throw _privateConstructorUsedError;
+  @JsonKey(name: 'diagnosis_status')
   String? get diagnosisStatus => throw _privateConstructorUsedError;
-  String? get previouslyTBTreated => throw _privateConstructorUsedError;
-  @JsonKey(name: 'rif_sensitivity')
-  String? get rifSensitivity => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get ihvDate => throw _privateConstructorUsedError;
@@ -54,7 +53,7 @@ mixin _$TreatmentModel {
   @JsonKey(name: 'treatment_supporter_ward')
   int? get treatmentSupporterWard => throw _privateConstructorUsedError;
   @JsonKey(
-      name: 'ip_start_date',
+      name: 'ipt_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipStartDate => throw _privateConstructorUsedError;
@@ -86,7 +85,8 @@ mixin _$TreatmentModel {
   @JsonKey(name: 'tb_consumption')
   String? get tobaccoConsumption => throw _privateConstructorUsedError;
   @JsonKey(name: 'nutrition_screening')
-  String? get nutrition => throw _privateConstructorUsedError;
+  String? get nutritionScreening => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nutrition_eligibility')
   String? get nutritionEligibility => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'nutrition_screening_date',
@@ -95,43 +95,68 @@ mixin _$TreatmentModel {
   DateTime? get screeningDateNutrition => throw _privateConstructorUsedError;
   @JsonKey(name: 'nutrition_linkage')
   String? get nutritionLinkage => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'nutrition_linkage_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get nutritionLinkageDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'height')
   int? get height => throw _privateConstructorUsedError;
+  @JsonKey(name: 'weight')
   int? get weight => throw _privateConstructorUsedError;
+  @JsonKey(name: 'stage')
   String? get stage => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'ipfu_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get ipfuDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ipfu_afb_done')
   String? get ipfuAfbDone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_followup_afb_lab_number')
   String? get ipfuAfbLabNo => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'ipfu_afb_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipfuAfbDate => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
   String? get ipfuAfbResult => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ip_followup_naat_test')
+  @JsonKey(name: 'ipfu_afb_result')
+  int? get selectedIpfuAFBResult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_followup_nat_test')
   String? get ipfuNaatTest => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ip_followup_naat_result')
+  @JsonKey(includeToJson: false)
   String? get ipfuNaatResult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'ip_followup_naat_result')
+  int? get selectedIpfuNaatResult => throw _privateConstructorUsedError;
   @JsonKey(name: 'ip_followup_lab_number')
   String? get ipfuLabNo => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ip_chest_xray')
+  @JsonKey(name: 'ipfu_chest_xray')
   String? get ipfuChestXray => throw _privateConstructorUsedError;
-  @JsonKey(name: 'ip_nutrition_support')
+  @JsonKey(name: 'ipfu_nutrition_support')
   String? get ipfuNutritionSupport => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'cp_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get cpDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cp_afb_done')
   String? get cpAfbDone => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cp_afb_lab_number')
   String? get cpAfbLabNo => throw _privateConstructorUsedError;
   @JsonKey(
       name: 'cp_afb_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get cpAfbDate => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
   String? get cpAfbResult => throw _privateConstructorUsedError;
-  @JsonKey(name: 'cp_followup_naat_test')
+  @JsonKey(name: 'cp_afb_result')
+  int? get selectedCpAFBResult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cp_naat_test')
   String? get cpNaatTest => throw _privateConstructorUsedError;
-  @JsonKey(name: 'cp_followup_naat_result')
+  @JsonKey(includeToJson: false)
   String? get cpNaatResult => throw _privateConstructorUsedError;
-  @JsonKey(name: 'cp_followup_lab_number')
+  @JsonKey(name: 'cp_naat_result')
+  int? get selectedCpNaatResult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cp_lab_no')
   String? get cpLabNo => throw _privateConstructorUsedError;
   @JsonKey(name: 'cp_chest_xray')
   String? get cpChestXray => throw _privateConstructorUsedError;
@@ -155,14 +180,9 @@ abstract class $TreatmentModelCopyWith<$Res> {
       @JsonKey(name: 'case_definition') String? caseDefinition,
       @JsonKey(name: 'tb_site') String? tbSite,
       @JsonKey(name: 'case_history') String? caseHistory,
-      String? drugSensitive,
-      String? diagnosisStatus,
-      String? previouslyTBTreated,
-      @JsonKey(name: 'rif_sensitivity') String? rifSensitivity,
-      @JsonKey(
-          name: 'ihv_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'drug_sensitive') String? drugSensitive,
+      @JsonKey(name: 'diagnosis_status') String? diagnosisStatus,
+      @JsonKey(name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? ihvDate,
       @JsonKey(name: 'treatment_regimen') String? treatmentRegimen,
       @JsonKey(name: 'patient_occupation') String? patientOccupation,
@@ -176,23 +196,17 @@ abstract class $TreatmentModelCopyWith<$Res> {
       int? selectedTreatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
       @JsonKey(
-          name: 'ip_start_date',
+          name: 'ipt_start_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipStartDate,
       @JsonKey(name: 'hiv_done') String? hivDone,
       @JsonKey(name: 'hiv_result') String? hivResult,
-      @JsonKey(
-          name: 'hiv_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'hiv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? hivDate,
       @JsonKey(name: 'hb_done') String? hbDone,
       @JsonKey(name: 'hb_result') double? hbResult,
-      @JsonKey(
-          name: 'hb_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'hb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? hbDate,
       @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
       @JsonKey(name: 'blood_sugar_result') int? bloodSugarResult,
@@ -203,44 +217,51 @@ abstract class $TreatmentModelCopyWith<$Res> {
       DateTime? bloodSugarDate,
       @JsonKey(name: 'alcohol') String? alcohol,
       @JsonKey(name: 'tb_consumption') String? tobaccoConsumption,
-      @JsonKey(name: 'nutrition_screening') String? nutrition,
-      String? nutritionEligibility,
+      @JsonKey(name: 'nutrition_screening') String? nutritionScreening,
+      @JsonKey(name: 'nutrition_eligibility') String? nutritionEligibility,
       @JsonKey(
           name: 'nutrition_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? screeningDateNutrition,
       @JsonKey(name: 'nutrition_linkage') String? nutritionLinkage,
+      @JsonKey(
+          name: 'nutrition_linkage_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? nutritionLinkageDate,
-      int? height,
-      int? weight,
-      String? stage,
+      @JsonKey(name: 'height') int? height,
+      @JsonKey(name: 'weight') int? weight,
+      @JsonKey(name: 'stage') String? stage,
+      @JsonKey(name: 'ipfu_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? ipfuDate,
-      String? ipfuAfbDone,
-      String? ipfuAfbLabNo,
+      @JsonKey(name: 'ipfu_afb_done') String? ipfuAfbDone,
+      @JsonKey(name: 'ip_followup_afb_lab_number') String? ipfuAfbLabNo,
       @JsonKey(
           name: 'ipfu_afb_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuAfbDate,
-      String? ipfuAfbResult,
-      @JsonKey(name: 'ip_followup_naat_test') String? ipfuNaatTest,
-      @JsonKey(name: 'ip_followup_naat_result') String? ipfuNaatResult,
+      @JsonKey(includeToJson: false) String? ipfuAfbResult,
+      @JsonKey(name: 'ipfu_afb_result') int? selectedIpfuAFBResult,
+      @JsonKey(name: 'ip_followup_nat_test') String? ipfuNaatTest,
+      @JsonKey(includeToJson: false) String? ipfuNaatResult,
+      @JsonKey(name: 'ip_followup_naat_result') int? selectedIpfuNaatResult,
       @JsonKey(name: 'ip_followup_lab_number') String? ipfuLabNo,
-      @JsonKey(name: 'ip_chest_xray') String? ipfuChestXray,
-      @JsonKey(name: 'ip_nutrition_support') String? ipfuNutritionSupport,
+      @JsonKey(name: 'ipfu_chest_xray') String? ipfuChestXray,
+      @JsonKey(name: 'ipfu_nutrition_support') String? ipfuNutritionSupport,
+      @JsonKey(name: 'cp_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? cpDate,
-      String? cpAfbDone,
-      String? cpAfbLabNo,
-      @JsonKey(
-          name: 'cp_afb_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'cp_afb_done') String? cpAfbDone,
+      @JsonKey(name: 'cp_afb_lab_number') String? cpAfbLabNo,
+      @JsonKey(name: 'cp_afb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? cpAfbDate,
-      String? cpAfbResult,
-      @JsonKey(name: 'cp_followup_naat_test') String? cpNaatTest,
-      @JsonKey(name: 'cp_followup_naat_result') String? cpNaatResult,
-      @JsonKey(name: 'cp_followup_lab_number') String? cpLabNo,
+      @JsonKey(includeToJson: false) String? cpAfbResult,
+      @JsonKey(name: 'cp_afb_result') int? selectedCpAFBResult,
+      @JsonKey(name: 'cp_naat_test') String? cpNaatTest,
+      @JsonKey(includeToJson: false) String? cpNaatResult,
+      @JsonKey(name: 'cp_naat_result') int? selectedCpNaatResult,
+      @JsonKey(name: 'cp_lab_no') String? cpLabNo,
       @JsonKey(name: 'cp_chest_xray') String? cpChestXray,
       @JsonKey(name: 'cp_nutrition_support') String? cpNutritionSupport});
 }
@@ -264,8 +285,6 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? caseHistory = freezed,
     Object? drugSensitive = freezed,
     Object? diagnosisStatus = freezed,
-    Object? previouslyTBTreated = freezed,
-    Object? rifSensitivity = freezed,
     Object? ihvDate = freezed,
     Object? treatmentRegimen = freezed,
     Object? patientOccupation = freezed,
@@ -287,7 +306,7 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? bloodSugarDate = freezed,
     Object? alcohol = freezed,
     Object? tobaccoConsumption = freezed,
-    Object? nutrition = freezed,
+    Object? nutritionScreening = freezed,
     Object? nutritionEligibility = freezed,
     Object? screeningDateNutrition = freezed,
     Object? nutritionLinkage = freezed,
@@ -300,8 +319,10 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? ipfuAfbLabNo = freezed,
     Object? ipfuAfbDate = freezed,
     Object? ipfuAfbResult = freezed,
+    Object? selectedIpfuAFBResult = freezed,
     Object? ipfuNaatTest = freezed,
     Object? ipfuNaatResult = freezed,
+    Object? selectedIpfuNaatResult = freezed,
     Object? ipfuLabNo = freezed,
     Object? ipfuChestXray = freezed,
     Object? ipfuNutritionSupport = freezed,
@@ -310,8 +331,10 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? cpAfbLabNo = freezed,
     Object? cpAfbDate = freezed,
     Object? cpAfbResult = freezed,
+    Object? selectedCpAFBResult = freezed,
     Object? cpNaatTest = freezed,
     Object? cpNaatResult = freezed,
+    Object? selectedCpNaatResult = freezed,
     Object? cpLabNo = freezed,
     Object? cpChestXray = freezed,
     Object? cpNutritionSupport = freezed,
@@ -341,14 +364,6 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.diagnosisStatus
           : diagnosisStatus // ignore: cast_nullable_to_non_nullable
               as String?,
-      previouslyTBTreated: freezed == previouslyTBTreated
-          ? _value.previouslyTBTreated
-          : previouslyTBTreated // ignore: cast_nullable_to_non_nullable
-              as String?,
-      rifSensitivity: freezed == rifSensitivity
-          ? _value.rifSensitivity
-          : rifSensitivity // ignore: cast_nullable_to_non_nullable
-              as String?,
       ihvDate: freezed == ihvDate
           ? _value.ihvDate
           : ihvDate // ignore: cast_nullable_to_non_nullable
@@ -434,9 +449,9 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.tobaccoConsumption
           : tobaccoConsumption // ignore: cast_nullable_to_non_nullable
               as String?,
-      nutrition: freezed == nutrition
-          ? _value.nutrition
-          : nutrition // ignore: cast_nullable_to_non_nullable
+      nutritionScreening: freezed == nutritionScreening
+          ? _value.nutritionScreening
+          : nutritionScreening // ignore: cast_nullable_to_non_nullable
               as String?,
       nutritionEligibility: freezed == nutritionEligibility
           ? _value.nutritionEligibility
@@ -486,6 +501,10 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.ipfuAfbResult
           : ipfuAfbResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedIpfuAFBResult: freezed == selectedIpfuAFBResult
+          ? _value.selectedIpfuAFBResult
+          : selectedIpfuAFBResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       ipfuNaatTest: freezed == ipfuNaatTest
           ? _value.ipfuNaatTest
           : ipfuNaatTest // ignore: cast_nullable_to_non_nullable
@@ -494,6 +513,10 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.ipfuNaatResult
           : ipfuNaatResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedIpfuNaatResult: freezed == selectedIpfuNaatResult
+          ? _value.selectedIpfuNaatResult
+          : selectedIpfuNaatResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       ipfuLabNo: freezed == ipfuLabNo
           ? _value.ipfuLabNo
           : ipfuLabNo // ignore: cast_nullable_to_non_nullable
@@ -526,6 +549,10 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.cpAfbResult
           : cpAfbResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedCpAFBResult: freezed == selectedCpAFBResult
+          ? _value.selectedCpAFBResult
+          : selectedCpAFBResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       cpNaatTest: freezed == cpNaatTest
           ? _value.cpNaatTest
           : cpNaatTest // ignore: cast_nullable_to_non_nullable
@@ -534,6 +561,10 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.cpNaatResult
           : cpNaatResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedCpNaatResult: freezed == selectedCpNaatResult
+          ? _value.selectedCpNaatResult
+          : selectedCpNaatResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       cpLabNo: freezed == cpLabNo
           ? _value.cpLabNo
           : cpLabNo // ignore: cast_nullable_to_non_nullable
@@ -563,14 +594,9 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       @JsonKey(name: 'case_definition') String? caseDefinition,
       @JsonKey(name: 'tb_site') String? tbSite,
       @JsonKey(name: 'case_history') String? caseHistory,
-      String? drugSensitive,
-      String? diagnosisStatus,
-      String? previouslyTBTreated,
-      @JsonKey(name: 'rif_sensitivity') String? rifSensitivity,
-      @JsonKey(
-          name: 'ihv_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'drug_sensitive') String? drugSensitive,
+      @JsonKey(name: 'diagnosis_status') String? diagnosisStatus,
+      @JsonKey(name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? ihvDate,
       @JsonKey(name: 'treatment_regimen') String? treatmentRegimen,
       @JsonKey(name: 'patient_occupation') String? patientOccupation,
@@ -584,23 +610,17 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       int? selectedTreatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
       @JsonKey(
-          name: 'ip_start_date',
+          name: 'ipt_start_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipStartDate,
       @JsonKey(name: 'hiv_done') String? hivDone,
       @JsonKey(name: 'hiv_result') String? hivResult,
-      @JsonKey(
-          name: 'hiv_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'hiv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? hivDate,
       @JsonKey(name: 'hb_done') String? hbDone,
       @JsonKey(name: 'hb_result') double? hbResult,
-      @JsonKey(
-          name: 'hb_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'hb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? hbDate,
       @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
       @JsonKey(name: 'blood_sugar_result') int? bloodSugarResult,
@@ -611,44 +631,51 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       DateTime? bloodSugarDate,
       @JsonKey(name: 'alcohol') String? alcohol,
       @JsonKey(name: 'tb_consumption') String? tobaccoConsumption,
-      @JsonKey(name: 'nutrition_screening') String? nutrition,
-      String? nutritionEligibility,
+      @JsonKey(name: 'nutrition_screening') String? nutritionScreening,
+      @JsonKey(name: 'nutrition_eligibility') String? nutritionEligibility,
       @JsonKey(
           name: 'nutrition_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? screeningDateNutrition,
       @JsonKey(name: 'nutrition_linkage') String? nutritionLinkage,
+      @JsonKey(
+          name: 'nutrition_linkage_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? nutritionLinkageDate,
-      int? height,
-      int? weight,
-      String? stage,
+      @JsonKey(name: 'height') int? height,
+      @JsonKey(name: 'weight') int? weight,
+      @JsonKey(name: 'stage') String? stage,
+      @JsonKey(name: 'ipfu_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? ipfuDate,
-      String? ipfuAfbDone,
-      String? ipfuAfbLabNo,
+      @JsonKey(name: 'ipfu_afb_done') String? ipfuAfbDone,
+      @JsonKey(name: 'ip_followup_afb_lab_number') String? ipfuAfbLabNo,
       @JsonKey(
           name: 'ipfu_afb_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuAfbDate,
-      String? ipfuAfbResult,
-      @JsonKey(name: 'ip_followup_naat_test') String? ipfuNaatTest,
-      @JsonKey(name: 'ip_followup_naat_result') String? ipfuNaatResult,
+      @JsonKey(includeToJson: false) String? ipfuAfbResult,
+      @JsonKey(name: 'ipfu_afb_result') int? selectedIpfuAFBResult,
+      @JsonKey(name: 'ip_followup_nat_test') String? ipfuNaatTest,
+      @JsonKey(includeToJson: false) String? ipfuNaatResult,
+      @JsonKey(name: 'ip_followup_naat_result') int? selectedIpfuNaatResult,
       @JsonKey(name: 'ip_followup_lab_number') String? ipfuLabNo,
-      @JsonKey(name: 'ip_chest_xray') String? ipfuChestXray,
-      @JsonKey(name: 'ip_nutrition_support') String? ipfuNutritionSupport,
+      @JsonKey(name: 'ipfu_chest_xray') String? ipfuChestXray,
+      @JsonKey(name: 'ipfu_nutrition_support') String? ipfuNutritionSupport,
+      @JsonKey(name: 'cp_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? cpDate,
-      String? cpAfbDone,
-      String? cpAfbLabNo,
-      @JsonKey(
-          name: 'cp_afb_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'cp_afb_done') String? cpAfbDone,
+      @JsonKey(name: 'cp_afb_lab_number') String? cpAfbLabNo,
+      @JsonKey(name: 'cp_afb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       DateTime? cpAfbDate,
-      String? cpAfbResult,
-      @JsonKey(name: 'cp_followup_naat_test') String? cpNaatTest,
-      @JsonKey(name: 'cp_followup_naat_result') String? cpNaatResult,
-      @JsonKey(name: 'cp_followup_lab_number') String? cpLabNo,
+      @JsonKey(includeToJson: false) String? cpAfbResult,
+      @JsonKey(name: 'cp_afb_result') int? selectedCpAFBResult,
+      @JsonKey(name: 'cp_naat_test') String? cpNaatTest,
+      @JsonKey(includeToJson: false) String? cpNaatResult,
+      @JsonKey(name: 'cp_naat_result') int? selectedCpNaatResult,
+      @JsonKey(name: 'cp_lab_no') String? cpLabNo,
       @JsonKey(name: 'cp_chest_xray') String? cpChestXray,
       @JsonKey(name: 'cp_nutrition_support') String? cpNutritionSupport});
 }
@@ -670,8 +697,6 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? caseHistory = freezed,
     Object? drugSensitive = freezed,
     Object? diagnosisStatus = freezed,
-    Object? previouslyTBTreated = freezed,
-    Object? rifSensitivity = freezed,
     Object? ihvDate = freezed,
     Object? treatmentRegimen = freezed,
     Object? patientOccupation = freezed,
@@ -693,7 +718,7 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? bloodSugarDate = freezed,
     Object? alcohol = freezed,
     Object? tobaccoConsumption = freezed,
-    Object? nutrition = freezed,
+    Object? nutritionScreening = freezed,
     Object? nutritionEligibility = freezed,
     Object? screeningDateNutrition = freezed,
     Object? nutritionLinkage = freezed,
@@ -706,8 +731,10 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? ipfuAfbLabNo = freezed,
     Object? ipfuAfbDate = freezed,
     Object? ipfuAfbResult = freezed,
+    Object? selectedIpfuAFBResult = freezed,
     Object? ipfuNaatTest = freezed,
     Object? ipfuNaatResult = freezed,
+    Object? selectedIpfuNaatResult = freezed,
     Object? ipfuLabNo = freezed,
     Object? ipfuChestXray = freezed,
     Object? ipfuNutritionSupport = freezed,
@@ -716,8 +743,10 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? cpAfbLabNo = freezed,
     Object? cpAfbDate = freezed,
     Object? cpAfbResult = freezed,
+    Object? selectedCpAFBResult = freezed,
     Object? cpNaatTest = freezed,
     Object? cpNaatResult = freezed,
+    Object? selectedCpNaatResult = freezed,
     Object? cpLabNo = freezed,
     Object? cpChestXray = freezed,
     Object? cpNutritionSupport = freezed,
@@ -746,14 +775,6 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
       diagnosisStatus: freezed == diagnosisStatus
           ? _value.diagnosisStatus
           : diagnosisStatus // ignore: cast_nullable_to_non_nullable
-              as String?,
-      previouslyTBTreated: freezed == previouslyTBTreated
-          ? _value.previouslyTBTreated
-          : previouslyTBTreated // ignore: cast_nullable_to_non_nullable
-              as String?,
-      rifSensitivity: freezed == rifSensitivity
-          ? _value.rifSensitivity
-          : rifSensitivity // ignore: cast_nullable_to_non_nullable
               as String?,
       ihvDate: freezed == ihvDate
           ? _value.ihvDate
@@ -840,9 +861,9 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.tobaccoConsumption
           : tobaccoConsumption // ignore: cast_nullable_to_non_nullable
               as String?,
-      nutrition: freezed == nutrition
-          ? _value.nutrition
-          : nutrition // ignore: cast_nullable_to_non_nullable
+      nutritionScreening: freezed == nutritionScreening
+          ? _value.nutritionScreening
+          : nutritionScreening // ignore: cast_nullable_to_non_nullable
               as String?,
       nutritionEligibility: freezed == nutritionEligibility
           ? _value.nutritionEligibility
@@ -892,6 +913,10 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.ipfuAfbResult
           : ipfuAfbResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedIpfuAFBResult: freezed == selectedIpfuAFBResult
+          ? _value.selectedIpfuAFBResult
+          : selectedIpfuAFBResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       ipfuNaatTest: freezed == ipfuNaatTest
           ? _value.ipfuNaatTest
           : ipfuNaatTest // ignore: cast_nullable_to_non_nullable
@@ -900,6 +925,10 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.ipfuNaatResult
           : ipfuNaatResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedIpfuNaatResult: freezed == selectedIpfuNaatResult
+          ? _value.selectedIpfuNaatResult
+          : selectedIpfuNaatResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       ipfuLabNo: freezed == ipfuLabNo
           ? _value.ipfuLabNo
           : ipfuLabNo // ignore: cast_nullable_to_non_nullable
@@ -932,6 +961,10 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.cpAfbResult
           : cpAfbResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedCpAFBResult: freezed == selectedCpAFBResult
+          ? _value.selectedCpAFBResult
+          : selectedCpAFBResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       cpNaatTest: freezed == cpNaatTest
           ? _value.cpNaatTest
           : cpNaatTest // ignore: cast_nullable_to_non_nullable
@@ -940,6 +973,10 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.cpNaatResult
           : cpNaatResult // ignore: cast_nullable_to_non_nullable
               as String?,
+      selectedCpNaatResult: freezed == selectedCpNaatResult
+          ? _value.selectedCpNaatResult
+          : selectedCpNaatResult // ignore: cast_nullable_to_non_nullable
+              as int?,
       cpLabNo: freezed == cpLabNo
           ? _value.cpLabNo
           : cpLabNo // ignore: cast_nullable_to_non_nullable
@@ -964,10 +1001,8 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       @JsonKey(name: 'case_definition') this.caseDefinition,
       @JsonKey(name: 'tb_site') this.tbSite,
       @JsonKey(name: 'case_history') this.caseHistory,
-      this.drugSensitive,
-      this.diagnosisStatus,
-      this.previouslyTBTreated,
-      @JsonKey(name: 'rif_sensitivity') this.rifSensitivity,
+      @JsonKey(name: 'drug_sensitive') this.drugSensitive,
+      @JsonKey(name: 'diagnosis_status') this.diagnosisStatus,
       @JsonKey(
           name: 'ihv_date',
           fromJson: fromJsonToDateTime,
@@ -984,7 +1019,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       this.selectedTreatmentSupporterPanchayat,
       @JsonKey(name: 'treatment_supporter_ward') this.treatmentSupporterWard,
       @JsonKey(
-          name: 'ip_start_date',
+          name: 'ipt_start_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipStartDate,
@@ -1011,44 +1046,60 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       this.bloodSugarDate,
       @JsonKey(name: 'alcohol') this.alcohol,
       @JsonKey(name: 'tb_consumption') this.tobaccoConsumption,
-      @JsonKey(name: 'nutrition_screening') this.nutrition,
-      this.nutritionEligibility,
+      @JsonKey(name: 'nutrition_screening') this.nutritionScreening,
+      @JsonKey(name: 'nutrition_eligibility') this.nutritionEligibility,
       @JsonKey(
           name: 'nutrition_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.screeningDateNutrition,
       @JsonKey(name: 'nutrition_linkage') this.nutritionLinkage,
+      @JsonKey(
+          name: 'nutrition_linkage_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       this.nutritionLinkageDate,
-      this.height,
-      this.weight,
-      this.stage,
+      @JsonKey(name: 'height') this.height,
+      @JsonKey(name: 'weight') this.weight,
+      @JsonKey(name: 'stage') this.stage,
+      @JsonKey(
+          name: 'ipfu_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       this.ipfuDate,
-      this.ipfuAfbDone,
-      this.ipfuAfbLabNo,
+      @JsonKey(name: 'ipfu_afb_done') this.ipfuAfbDone,
+      @JsonKey(name: 'ip_followup_afb_lab_number') this.ipfuAfbLabNo,
       @JsonKey(
           name: 'ipfu_afb_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipfuAfbDate,
-      this.ipfuAfbResult,
-      @JsonKey(name: 'ip_followup_naat_test') this.ipfuNaatTest,
-      @JsonKey(name: 'ip_followup_naat_result') this.ipfuNaatResult,
+      @JsonKey(includeToJson: false) this.ipfuAfbResult,
+      @JsonKey(name: 'ipfu_afb_result') this.selectedIpfuAFBResult,
+      @JsonKey(name: 'ip_followup_nat_test') this.ipfuNaatTest,
+      @JsonKey(includeToJson: false) this.ipfuNaatResult,
+      @JsonKey(name: 'ip_followup_naat_result') this.selectedIpfuNaatResult,
       @JsonKey(name: 'ip_followup_lab_number') this.ipfuLabNo,
-      @JsonKey(name: 'ip_chest_xray') this.ipfuChestXray,
-      @JsonKey(name: 'ip_nutrition_support') this.ipfuNutritionSupport,
+      @JsonKey(name: 'ipfu_chest_xray') this.ipfuChestXray,
+      @JsonKey(name: 'ipfu_nutrition_support') this.ipfuNutritionSupport,
+      @JsonKey(
+          name: 'cp_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       this.cpDate,
-      this.cpAfbDone,
-      this.cpAfbLabNo,
+      @JsonKey(name: 'cp_afb_done') this.cpAfbDone,
+      @JsonKey(name: 'cp_afb_lab_number') this.cpAfbLabNo,
       @JsonKey(
           name: 'cp_afb_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.cpAfbDate,
-      this.cpAfbResult,
-      @JsonKey(name: 'cp_followup_naat_test') this.cpNaatTest,
-      @JsonKey(name: 'cp_followup_naat_result') this.cpNaatResult,
-      @JsonKey(name: 'cp_followup_lab_number') this.cpLabNo,
+      @JsonKey(includeToJson: false) this.cpAfbResult,
+      @JsonKey(name: 'cp_afb_result') this.selectedCpAFBResult,
+      @JsonKey(name: 'cp_naat_test') this.cpNaatTest,
+      @JsonKey(includeToJson: false) this.cpNaatResult,
+      @JsonKey(name: 'cp_naat_result') this.selectedCpNaatResult,
+      @JsonKey(name: 'cp_lab_no') this.cpLabNo,
       @JsonKey(name: 'cp_chest_xray') this.cpChestXray,
       @JsonKey(name: 'cp_nutrition_support') this.cpNutritionSupport});
 
@@ -1068,14 +1119,11 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @JsonKey(name: 'case_history')
   final String? caseHistory;
   @override
+  @JsonKey(name: 'drug_sensitive')
   final String? drugSensitive;
   @override
+  @JsonKey(name: 'diagnosis_status')
   final String? diagnosisStatus;
-  @override
-  final String? previouslyTBTreated;
-  @override
-  @JsonKey(name: 'rif_sensitivity')
-  final String? rifSensitivity;
   @override
   @JsonKey(
       name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
@@ -1106,7 +1154,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   final int? treatmentSupporterWard;
   @override
   @JsonKey(
-      name: 'ip_start_date',
+      name: 'ipt_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? ipStartDate;
@@ -1150,8 +1198,9 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   final String? tobaccoConsumption;
   @override
   @JsonKey(name: 'nutrition_screening')
-  final String? nutrition;
+  final String? nutritionScreening;
   @override
+  @JsonKey(name: 'nutrition_eligibility')
   final String? nutritionEligibility;
   @override
   @JsonKey(
@@ -1163,18 +1212,29 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @JsonKey(name: 'nutrition_linkage')
   final String? nutritionLinkage;
   @override
+  @JsonKey(
+      name: 'nutrition_linkage_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   final DateTime? nutritionLinkageDate;
   @override
+  @JsonKey(name: 'height')
   final int? height;
   @override
+  @JsonKey(name: 'weight')
   final int? weight;
   @override
+  @JsonKey(name: 'stage')
   final String? stage;
   @override
+  @JsonKey(
+      name: 'ipfu_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? ipfuDate;
   @override
+  @JsonKey(name: 'ipfu_afb_done')
   final String? ipfuAfbDone;
   @override
+  @JsonKey(name: 'ip_followup_afb_lab_number')
   final String? ipfuAfbLabNo;
   @override
   @JsonKey(
@@ -1183,27 +1243,38 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       toJson: _dateTimeToJson)
   final DateTime? ipfuAfbDate;
   @override
+  @JsonKey(includeToJson: false)
   final String? ipfuAfbResult;
   @override
-  @JsonKey(name: 'ip_followup_naat_test')
+  @JsonKey(name: 'ipfu_afb_result')
+  final int? selectedIpfuAFBResult;
+  @override
+  @JsonKey(name: 'ip_followup_nat_test')
   final String? ipfuNaatTest;
   @override
-  @JsonKey(name: 'ip_followup_naat_result')
+  @JsonKey(includeToJson: false)
   final String? ipfuNaatResult;
+  @override
+  @JsonKey(name: 'ip_followup_naat_result')
+  final int? selectedIpfuNaatResult;
   @override
   @JsonKey(name: 'ip_followup_lab_number')
   final String? ipfuLabNo;
   @override
-  @JsonKey(name: 'ip_chest_xray')
+  @JsonKey(name: 'ipfu_chest_xray')
   final String? ipfuChestXray;
   @override
-  @JsonKey(name: 'ip_nutrition_support')
+  @JsonKey(name: 'ipfu_nutrition_support')
   final String? ipfuNutritionSupport;
   @override
+  @JsonKey(
+      name: 'cp_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? cpDate;
   @override
+  @JsonKey(name: 'cp_afb_done')
   final String? cpAfbDone;
   @override
+  @JsonKey(name: 'cp_afb_lab_number')
   final String? cpAfbLabNo;
   @override
   @JsonKey(
@@ -1212,15 +1283,22 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       toJson: _dateTimeToJson)
   final DateTime? cpAfbDate;
   @override
+  @JsonKey(includeToJson: false)
   final String? cpAfbResult;
   @override
-  @JsonKey(name: 'cp_followup_naat_test')
+  @JsonKey(name: 'cp_afb_result')
+  final int? selectedCpAFBResult;
+  @override
+  @JsonKey(name: 'cp_naat_test')
   final String? cpNaatTest;
   @override
-  @JsonKey(name: 'cp_followup_naat_result')
+  @JsonKey(includeToJson: false)
   final String? cpNaatResult;
   @override
-  @JsonKey(name: 'cp_followup_lab_number')
+  @JsonKey(name: 'cp_naat_result')
+  final int? selectedCpNaatResult;
+  @override
+  @JsonKey(name: 'cp_lab_no')
   final String? cpLabNo;
   @override
   @JsonKey(name: 'cp_chest_xray')
@@ -1231,7 +1309,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
 
   @override
   String toString() {
-    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, tbSite: $tbSite, caseHistory: $caseHistory, drugSensitive: $drugSensitive, diagnosisStatus: $diagnosisStatus, previouslyTBTreated: $previouslyTBTreated, rifSensitivity: $rifSensitivity, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat: $selectedTreatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, ipStartDate: $ipStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tobaccoConsumption: $tobaccoConsumption, nutrition: $nutrition, nutritionEligibility: $nutritionEligibility, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, nutritionLinkageDate: $nutritionLinkageDate, height: $height, weight: $weight, stage: $stage, ipfuDate: $ipfuDate, ipfuAfbDone: $ipfuAfbDone, ipfuAfbLabNo: $ipfuAfbLabNo, ipfuAfbDate: $ipfuAfbDate, ipfuAfbResult: $ipfuAfbResult, ipfuNaatTest: $ipfuNaatTest, ipfuNaatResult: $ipfuNaatResult, ipfuLabNo: $ipfuLabNo, ipfuChestXray: $ipfuChestXray, ipfuNutritionSupport: $ipfuNutritionSupport, cpDate: $cpDate, cpAfbDone: $cpAfbDone, cpAfbLabNo: $cpAfbLabNo, cpAfbDate: $cpAfbDate, cpAfbResult: $cpAfbResult, cpNaatTest: $cpNaatTest, cpNaatResult: $cpNaatResult, cpLabNo: $cpLabNo, cpChestXray: $cpChestXray, cpNutritionSupport: $cpNutritionSupport)';
+    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, tbSite: $tbSite, caseHistory: $caseHistory, drugSensitive: $drugSensitive, diagnosisStatus: $diagnosisStatus, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat: $selectedTreatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, ipStartDate: $ipStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tobaccoConsumption: $tobaccoConsumption, nutritionScreening: $nutritionScreening, nutritionEligibility: $nutritionEligibility, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, nutritionLinkageDate: $nutritionLinkageDate, height: $height, weight: $weight, stage: $stage, ipfuDate: $ipfuDate, ipfuAfbDone: $ipfuAfbDone, ipfuAfbLabNo: $ipfuAfbLabNo, ipfuAfbDate: $ipfuAfbDate, ipfuAfbResult: $ipfuAfbResult, selectedIpfuAFBResult: $selectedIpfuAFBResult, ipfuNaatTest: $ipfuNaatTest, ipfuNaatResult: $ipfuNaatResult, selectedIpfuNaatResult: $selectedIpfuNaatResult, ipfuLabNo: $ipfuLabNo, ipfuChestXray: $ipfuChestXray, ipfuNutritionSupport: $ipfuNutritionSupport, cpDate: $cpDate, cpAfbDone: $cpAfbDone, cpAfbLabNo: $cpAfbLabNo, cpAfbDate: $cpAfbDate, cpAfbResult: $cpAfbResult, selectedCpAFBResult: $selectedCpAFBResult, cpNaatTest: $cpNaatTest, cpNaatResult: $cpNaatResult, selectedCpNaatResult: $selectedCpNaatResult, cpLabNo: $cpLabNo, cpChestXray: $cpChestXray, cpNutritionSupport: $cpNutritionSupport)';
   }
 
   @override
@@ -1249,10 +1327,6 @@ class _$TreatmentModelImpl implements _TreatmentModel {
                 other.drugSensitive == drugSensitive) &&
             (identical(other.diagnosisStatus, diagnosisStatus) ||
                 other.diagnosisStatus == diagnosisStatus) &&
-            (identical(other.previouslyTBTreated, previouslyTBTreated) ||
-                other.previouslyTBTreated == previouslyTBTreated) &&
-            (identical(other.rifSensitivity, rifSensitivity) ||
-                other.rifSensitivity == rifSensitivity) &&
             (identical(other.ihvDate, ihvDate) || other.ihvDate == ihvDate) &&
             (identical(other.treatmentRegimen, treatmentRegimen) ||
                 other.treatmentRegimen == treatmentRegimen) &&
@@ -1292,8 +1366,8 @@ class _$TreatmentModelImpl implements _TreatmentModel {
             (identical(other.alcohol, alcohol) || other.alcohol == alcohol) &&
             (identical(other.tobaccoConsumption, tobaccoConsumption) ||
                 other.tobaccoConsumption == tobaccoConsumption) &&
-            (identical(other.nutrition, nutrition) ||
-                other.nutrition == nutrition) &&
+            (identical(other.nutritionScreening, nutritionScreening) ||
+                other.nutritionScreening == nutritionScreening) &&
             (identical(other.nutritionEligibility, nutritionEligibility) ||
                 other.nutritionEligibility == nutritionEligibility) &&
             (identical(other.screeningDateNutrition, screeningDateNutrition) ||
@@ -1309,8 +1383,10 @@ class _$TreatmentModelImpl implements _TreatmentModel {
             (identical(other.ipfuAfbLabNo, ipfuAfbLabNo) || other.ipfuAfbLabNo == ipfuAfbLabNo) &&
             (identical(other.ipfuAfbDate, ipfuAfbDate) || other.ipfuAfbDate == ipfuAfbDate) &&
             (identical(other.ipfuAfbResult, ipfuAfbResult) || other.ipfuAfbResult == ipfuAfbResult) &&
+            (identical(other.selectedIpfuAFBResult, selectedIpfuAFBResult) || other.selectedIpfuAFBResult == selectedIpfuAFBResult) &&
             (identical(other.ipfuNaatTest, ipfuNaatTest) || other.ipfuNaatTest == ipfuNaatTest) &&
             (identical(other.ipfuNaatResult, ipfuNaatResult) || other.ipfuNaatResult == ipfuNaatResult) &&
+            (identical(other.selectedIpfuNaatResult, selectedIpfuNaatResult) || other.selectedIpfuNaatResult == selectedIpfuNaatResult) &&
             (identical(other.ipfuLabNo, ipfuLabNo) || other.ipfuLabNo == ipfuLabNo) &&
             (identical(other.ipfuChestXray, ipfuChestXray) || other.ipfuChestXray == ipfuChestXray) &&
             (identical(other.ipfuNutritionSupport, ipfuNutritionSupport) || other.ipfuNutritionSupport == ipfuNutritionSupport) &&
@@ -1319,8 +1395,10 @@ class _$TreatmentModelImpl implements _TreatmentModel {
             (identical(other.cpAfbLabNo, cpAfbLabNo) || other.cpAfbLabNo == cpAfbLabNo) &&
             (identical(other.cpAfbDate, cpAfbDate) || other.cpAfbDate == cpAfbDate) &&
             (identical(other.cpAfbResult, cpAfbResult) || other.cpAfbResult == cpAfbResult) &&
+            (identical(other.selectedCpAFBResult, selectedCpAFBResult) || other.selectedCpAFBResult == selectedCpAFBResult) &&
             (identical(other.cpNaatTest, cpNaatTest) || other.cpNaatTest == cpNaatTest) &&
             (identical(other.cpNaatResult, cpNaatResult) || other.cpNaatResult == cpNaatResult) &&
+            (identical(other.selectedCpNaatResult, selectedCpNaatResult) || other.selectedCpNaatResult == selectedCpNaatResult) &&
             (identical(other.cpLabNo, cpLabNo) || other.cpLabNo == cpLabNo) &&
             (identical(other.cpChestXray, cpChestXray) || other.cpChestXray == cpChestXray) &&
             (identical(other.cpNutritionSupport, cpNutritionSupport) || other.cpNutritionSupport == cpNutritionSupport));
@@ -1336,8 +1414,6 @@ class _$TreatmentModelImpl implements _TreatmentModel {
         caseHistory,
         drugSensitive,
         diagnosisStatus,
-        previouslyTBTreated,
-        rifSensitivity,
         ihvDate,
         treatmentRegimen,
         patientOccupation,
@@ -1359,7 +1435,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
         bloodSugarDate,
         alcohol,
         tobaccoConsumption,
-        nutrition,
+        nutritionScreening,
         nutritionEligibility,
         screeningDateNutrition,
         nutritionLinkage,
@@ -1372,8 +1448,10 @@ class _$TreatmentModelImpl implements _TreatmentModel {
         ipfuAfbLabNo,
         ipfuAfbDate,
         ipfuAfbResult,
+        selectedIpfuAFBResult,
         ipfuNaatTest,
         ipfuNaatResult,
+        selectedIpfuNaatResult,
         ipfuLabNo,
         ipfuChestXray,
         ipfuNutritionSupport,
@@ -1382,8 +1460,10 @@ class _$TreatmentModelImpl implements _TreatmentModel {
         cpAfbLabNo,
         cpAfbDate,
         cpAfbResult,
+        selectedCpAFBResult,
         cpNaatTest,
         cpNaatResult,
+        selectedCpNaatResult,
         cpLabNo,
         cpChestXray,
         cpNutritionSupport
@@ -1410,14 +1490,9 @@ abstract class _TreatmentModel implements TreatmentModel {
       @JsonKey(name: 'case_definition') final String? caseDefinition,
       @JsonKey(name: 'tb_site') final String? tbSite,
       @JsonKey(name: 'case_history') final String? caseHistory,
-      final String? drugSensitive,
-      final String? diagnosisStatus,
-      final String? previouslyTBTreated,
-      @JsonKey(name: 'rif_sensitivity') final String? rifSensitivity,
-      @JsonKey(
-          name: 'ihv_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'drug_sensitive') final String? drugSensitive,
+      @JsonKey(name: 'diagnosis_status') final String? diagnosisStatus,
+      @JsonKey(name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       final DateTime? ihvDate,
       @JsonKey(name: 'treatment_regimen') final String? treatmentRegimen,
       @JsonKey(name: 'patient_occupation') final String? patientOccupation,
@@ -1433,23 +1508,17 @@ abstract class _TreatmentModel implements TreatmentModel {
       @JsonKey(name: 'treatment_supporter_ward')
       final int? treatmentSupporterWard,
       @JsonKey(
-          name: 'ip_start_date',
+          name: 'ipt_start_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? ipStartDate,
       @JsonKey(name: 'hiv_done') final String? hivDone,
       @JsonKey(name: 'hiv_result') final String? hivResult,
-      @JsonKey(
-          name: 'hiv_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'hiv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       final DateTime? hivDate,
       @JsonKey(name: 'hb_done') final String? hbDone,
       @JsonKey(name: 'hb_result') final double? hbResult,
-      @JsonKey(
-          name: 'hb_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'hb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       final DateTime? hbDate,
       @JsonKey(name: 'blood_sugar_done') final String? bloodSugarDone,
       @JsonKey(name: 'blood_sugar_result') final int? bloodSugarResult,
@@ -1460,7 +1529,8 @@ abstract class _TreatmentModel implements TreatmentModel {
       final DateTime? bloodSugarDate,
       @JsonKey(name: 'alcohol') final String? alcohol,
       @JsonKey(name: 'tb_consumption') final String? tobaccoConsumption,
-      @JsonKey(name: 'nutrition_screening') final String? nutrition,
+      @JsonKey(name: 'nutrition_screening') final String? nutritionScreening,
+      @JsonKey(name: 'nutrition_eligibility')
       final String? nutritionEligibility,
       @JsonKey(
           name: 'nutrition_screening_date',
@@ -1468,36 +1538,42 @@ abstract class _TreatmentModel implements TreatmentModel {
           toJson: _dateTimeToJson)
       final DateTime? screeningDateNutrition,
       @JsonKey(name: 'nutrition_linkage') final String? nutritionLinkage,
+      @JsonKey(
+          name: 'nutrition_linkage_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       final DateTime? nutritionLinkageDate,
-      final int? height,
-      final int? weight,
-      final String? stage,
+      @JsonKey(name: 'height') final int? height,
+      @JsonKey(name: 'weight') final int? weight,
+      @JsonKey(name: 'stage') final String? stage,
+      @JsonKey(name: 'ipfu_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       final DateTime? ipfuDate,
-      final String? ipfuAfbDone,
-      final String? ipfuAfbLabNo,
-      @JsonKey(
-          name: 'ipfu_afb_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'ipfu_afb_done') final String? ipfuAfbDone,
+      @JsonKey(name: 'ip_followup_afb_lab_number') final String? ipfuAfbLabNo,
+      @JsonKey(name: 'ipfu_afb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       final DateTime? ipfuAfbDate,
-      final String? ipfuAfbResult,
-      @JsonKey(name: 'ip_followup_naat_test') final String? ipfuNaatTest,
-      @JsonKey(name: 'ip_followup_naat_result') final String? ipfuNaatResult,
+      @JsonKey(includeToJson: false) final String? ipfuAfbResult,
+      @JsonKey(name: 'ipfu_afb_result') final int? selectedIpfuAFBResult,
+      @JsonKey(name: 'ip_followup_nat_test') final String? ipfuNaatTest,
+      @JsonKey(includeToJson: false) final String? ipfuNaatResult,
+      @JsonKey(name: 'ip_followup_naat_result')
+      final int? selectedIpfuNaatResult,
       @JsonKey(name: 'ip_followup_lab_number') final String? ipfuLabNo,
-      @JsonKey(name: 'ip_chest_xray') final String? ipfuChestXray,
-      @JsonKey(name: 'ip_nutrition_support') final String? ipfuNutritionSupport,
+      @JsonKey(name: 'ipfu_chest_xray') final String? ipfuChestXray,
+      @JsonKey(name: 'ipfu_nutrition_support')
+      final String? ipfuNutritionSupport,
+      @JsonKey(name: 'cp_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       final DateTime? cpDate,
-      final String? cpAfbDone,
-      final String? cpAfbLabNo,
-      @JsonKey(
-          name: 'cp_afb_date',
-          fromJson: fromJsonToDateTime,
-          toJson: _dateTimeToJson)
+      @JsonKey(name: 'cp_afb_done') final String? cpAfbDone,
+      @JsonKey(name: 'cp_afb_lab_number') final String? cpAfbLabNo,
+      @JsonKey(name: 'cp_afb_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
       final DateTime? cpAfbDate,
-      final String? cpAfbResult,
-      @JsonKey(name: 'cp_followup_naat_test') final String? cpNaatTest,
-      @JsonKey(name: 'cp_followup_naat_result') final String? cpNaatResult,
-      @JsonKey(name: 'cp_followup_lab_number') final String? cpLabNo,
+      @JsonKey(includeToJson: false) final String? cpAfbResult,
+      @JsonKey(name: 'cp_afb_result') final int? selectedCpAFBResult,
+      @JsonKey(name: 'cp_naat_test') final String? cpNaatTest,
+      @JsonKey(includeToJson: false) final String? cpNaatResult,
+      @JsonKey(name: 'cp_naat_result') final int? selectedCpNaatResult,
+      @JsonKey(name: 'cp_lab_no') final String? cpLabNo,
       @JsonKey(name: 'cp_chest_xray') final String? cpChestXray,
       @JsonKey(name: 'cp_nutrition_support')
       final String? cpNutritionSupport}) = _$TreatmentModelImpl;
@@ -1518,14 +1594,11 @@ abstract class _TreatmentModel implements TreatmentModel {
   @JsonKey(name: 'case_history')
   String? get caseHistory;
   @override
+  @JsonKey(name: 'drug_sensitive')
   String? get drugSensitive;
   @override
+  @JsonKey(name: 'diagnosis_status')
   String? get diagnosisStatus;
-  @override
-  String? get previouslyTBTreated;
-  @override
-  @JsonKey(name: 'rif_sensitivity')
-  String? get rifSensitivity;
   @override
   @JsonKey(
       name: 'ihv_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
@@ -1556,7 +1629,7 @@ abstract class _TreatmentModel implements TreatmentModel {
   int? get treatmentSupporterWard;
   @override
   @JsonKey(
-      name: 'ip_start_date',
+      name: 'ipt_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipStartDate;
@@ -1600,8 +1673,9 @@ abstract class _TreatmentModel implements TreatmentModel {
   String? get tobaccoConsumption;
   @override
   @JsonKey(name: 'nutrition_screening')
-  String? get nutrition;
+  String? get nutritionScreening;
   @override
+  @JsonKey(name: 'nutrition_eligibility')
   String? get nutritionEligibility;
   @override
   @JsonKey(
@@ -1613,18 +1687,29 @@ abstract class _TreatmentModel implements TreatmentModel {
   @JsonKey(name: 'nutrition_linkage')
   String? get nutritionLinkage;
   @override
+  @JsonKey(
+      name: 'nutrition_linkage_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
   DateTime? get nutritionLinkageDate;
   @override
+  @JsonKey(name: 'height')
   int? get height;
   @override
+  @JsonKey(name: 'weight')
   int? get weight;
   @override
+  @JsonKey(name: 'stage')
   String? get stage;
   @override
+  @JsonKey(
+      name: 'ipfu_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get ipfuDate;
   @override
+  @JsonKey(name: 'ipfu_afb_done')
   String? get ipfuAfbDone;
   @override
+  @JsonKey(name: 'ip_followup_afb_lab_number')
   String? get ipfuAfbLabNo;
   @override
   @JsonKey(
@@ -1633,27 +1718,38 @@ abstract class _TreatmentModel implements TreatmentModel {
       toJson: _dateTimeToJson)
   DateTime? get ipfuAfbDate;
   @override
+  @JsonKey(includeToJson: false)
   String? get ipfuAfbResult;
   @override
-  @JsonKey(name: 'ip_followup_naat_test')
+  @JsonKey(name: 'ipfu_afb_result')
+  int? get selectedIpfuAFBResult;
+  @override
+  @JsonKey(name: 'ip_followup_nat_test')
   String? get ipfuNaatTest;
   @override
-  @JsonKey(name: 'ip_followup_naat_result')
+  @JsonKey(includeToJson: false)
   String? get ipfuNaatResult;
+  @override
+  @JsonKey(name: 'ip_followup_naat_result')
+  int? get selectedIpfuNaatResult;
   @override
   @JsonKey(name: 'ip_followup_lab_number')
   String? get ipfuLabNo;
   @override
-  @JsonKey(name: 'ip_chest_xray')
+  @JsonKey(name: 'ipfu_chest_xray')
   String? get ipfuChestXray;
   @override
-  @JsonKey(name: 'ip_nutrition_support')
+  @JsonKey(name: 'ipfu_nutrition_support')
   String? get ipfuNutritionSupport;
   @override
+  @JsonKey(
+      name: 'cp_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get cpDate;
   @override
+  @JsonKey(name: 'cp_afb_done')
   String? get cpAfbDone;
   @override
+  @JsonKey(name: 'cp_afb_lab_number')
   String? get cpAfbLabNo;
   @override
   @JsonKey(
@@ -1662,15 +1758,22 @@ abstract class _TreatmentModel implements TreatmentModel {
       toJson: _dateTimeToJson)
   DateTime? get cpAfbDate;
   @override
+  @JsonKey(includeToJson: false)
   String? get cpAfbResult;
   @override
-  @JsonKey(name: 'cp_followup_naat_test')
+  @JsonKey(name: 'cp_afb_result')
+  int? get selectedCpAFBResult;
+  @override
+  @JsonKey(name: 'cp_naat_test')
   String? get cpNaatTest;
   @override
-  @JsonKey(name: 'cp_followup_naat_result')
+  @JsonKey(includeToJson: false)
   String? get cpNaatResult;
   @override
-  @JsonKey(name: 'cp_followup_lab_number')
+  @JsonKey(name: 'cp_naat_result')
+  int? get selectedCpNaatResult;
+  @override
+  @JsonKey(name: 'cp_lab_no')
   String? get cpLabNo;
   @override
   @JsonKey(name: 'cp_chest_xray')

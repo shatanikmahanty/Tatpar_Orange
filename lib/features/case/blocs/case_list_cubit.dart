@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
@@ -84,6 +86,7 @@ class CaseListCubit extends Cubit<CaseListState> {
     emit(state.copyWith(isLoading: true));
     final cases = await caseRepo.getCasesForHealthWorker();
     cases.sort((a, b) => b.createdOn!.compareTo(a.createdOn!));
+    log(cases.toString());
     emit(
       state.copyWith(
         isLoading: false,
