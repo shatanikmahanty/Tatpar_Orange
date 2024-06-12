@@ -37,16 +37,17 @@ class CaseAdapter extends TypeAdapter<Case> {
       whoSrq: fields[17] as int?,
       diagnosis: fields[18] as int?,
       outcomeValue: fields[19] as int?,
-      contactTracing: fields[20] as int?,
+      contactTracingList: (fields[20] as List?)?.cast<int>(),
       treatment: fields[21] as int?,
       referralBlock: fields[22] as String?,
+      contactTracing: fields[23] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Case obj) {
     writer
-      ..writeByte(23)
+      ..writeByte(24)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -88,11 +89,13 @@ class CaseAdapter extends TypeAdapter<Case> {
       ..writeByte(19)
       ..write(obj.outcomeValue)
       ..writeByte(20)
-      ..write(obj.contactTracing)
+      ..write(obj.contactTracingList)
       ..writeByte(21)
       ..write(obj.treatment)
       ..writeByte(22)
-      ..write(obj.referralBlock);
+      ..write(obj.referralBlock)
+      ..writeByte(23)
+      ..write(obj.contactTracing);
   }
 
   @override
@@ -131,9 +134,12 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
       whoSrq: (json['whosrq_id'] as num?)?.toInt(),
       diagnosis: (json['diagnosis_id'] as num?)?.toInt(),
       outcomeValue: (json['outcome_id'] as num?)?.toInt(),
-      contactTracing: (json['contact_tracing_id'] as num?)?.toInt(),
+      contactTracingList: (json['contact_tracing_id'] as List<dynamic>?)
+          ?.map((e) => (e as num).toInt())
+          .toList(),
       treatment: (json['treatment_id'] as num?)?.toInt(),
       referralBlock: json['referral_block'] as String?,
+      contactTracing: (json['contactTracing'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
@@ -158,7 +164,7 @@ Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
       'whosrq_id': instance.whoSrq,
       'diagnosis_id': instance.diagnosis,
       'outcome_id': instance.outcomeValue,
-      'contact_tracing_id': instance.contactTracing,
+      'contact_tracing_id': instance.contactTracingList,
       'treatment_id': instance.treatment,
       'referral_block': instance.referralBlock,
     };

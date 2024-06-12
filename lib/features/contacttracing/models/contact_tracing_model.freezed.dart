@@ -30,10 +30,17 @@ mixin _$ContactTracingModel {
   String? get screeningOutcome => throw _privateConstructorUsedError;
   @JsonKey(name: 'test_conducted')
   String? get testConducted => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'cxr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get cxrDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'cxr_result')
   String? get cxrResult => throw _privateConstructorUsedError;
+  @JsonKey(
+      name: 'tbi_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get tbiDate => throw _privateConstructorUsedError;
+  @JsonKey(name: 'tbi_result')
   String? get tbiResult => throw _privateConstructorUsedError;
+  @JsonKey(name: 'nikshay_id')
   String? get nikshayID => throw _privateConstructorUsedError;
   @JsonKey(name: 'tpt_eligible')
   String? get tptEligible => throw _privateConstructorUsedError;
@@ -76,11 +83,19 @@ abstract class $ContactTracingModelCopyWith<$Res> {
       @JsonKey(name: 'age') int? age,
       @JsonKey(name: 'screening_outcome') String? screeningOutcome,
       @JsonKey(name: 'test_conducted') String? testConducted,
+      @JsonKey(
+          name: 'cxr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? cxrDate,
-      String? cxrResult,
+      @JsonKey(name: 'cxr_result') String? cxrResult,
+      @JsonKey(
+          name: 'tbi_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? tbiDate,
-      String? tbiResult,
-      String? nikshayID,
+      @JsonKey(name: 'tbi_result') String? tbiResult,
+      @JsonKey(name: 'nikshay_id') String? nikshayID,
       @JsonKey(name: 'tpt_eligible') String? tptEligible,
       @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
       @JsonKey(includeIfNull: false) String? tptRegimen,
@@ -222,11 +237,19 @@ abstract class _$$ContactTracingModelImplCopyWith<$Res>
       @JsonKey(name: 'age') int? age,
       @JsonKey(name: 'screening_outcome') String? screeningOutcome,
       @JsonKey(name: 'test_conducted') String? testConducted,
+      @JsonKey(
+          name: 'cxr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? cxrDate,
-      String? cxrResult,
+      @JsonKey(name: 'cxr_result') String? cxrResult,
+      @JsonKey(
+          name: 'tbi_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? tbiDate,
-      String? tbiResult,
-      String? nikshayID,
+      @JsonKey(name: 'tbi_result') String? tbiResult,
+      @JsonKey(name: 'nikshay_id') String? nikshayID,
       @JsonKey(name: 'tpt_eligible') String? tptEligible,
       @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
       @JsonKey(includeIfNull: false) String? tptRegimen,
@@ -361,11 +384,19 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
       @JsonKey(name: 'age') this.age,
       @JsonKey(name: 'screening_outcome') this.screeningOutcome,
       @JsonKey(name: 'test_conducted') this.testConducted,
+      @JsonKey(
+          name: 'cxr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       this.cxrDate,
-      this.cxrResult,
+      @JsonKey(name: 'cxr_result') this.cxrResult,
+      @JsonKey(
+          name: 'tbi_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       this.tbiDate,
-      this.tbiResult,
-      this.nikshayID,
+      @JsonKey(name: 'tbi_result') this.tbiResult,
+      @JsonKey(name: 'nikshay_id') this.nikshayID,
       @JsonKey(name: 'tpt_eligible') this.tptEligible,
       @JsonKey(name: 'tpt_regimen') this.selectedTptRegimen,
       @JsonKey(includeIfNull: false) this.tptRegimen,
@@ -402,14 +433,21 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
   @JsonKey(name: 'test_conducted')
   final String? testConducted;
   @override
+  @JsonKey(
+      name: 'cxr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? cxrDate;
   @override
+  @JsonKey(name: 'cxr_result')
   final String? cxrResult;
   @override
+  @JsonKey(
+      name: 'tbi_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? tbiDate;
   @override
+  @JsonKey(name: 'tbi_result')
   final String? tbiResult;
   @override
+  @JsonKey(name: 'nikshay_id')
   final String? nikshayID;
   @override
   @JsonKey(name: 'tpt_eligible')
@@ -530,11 +568,19 @@ abstract class _ContactTracingModel implements ContactTracingModel {
           @JsonKey(name: 'age') final int? age,
           @JsonKey(name: 'screening_outcome') final String? screeningOutcome,
           @JsonKey(name: 'test_conducted') final String? testConducted,
+          @JsonKey(
+              name: 'cxr_date',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
           final DateTime? cxrDate,
-          final String? cxrResult,
+          @JsonKey(name: 'cxr_result') final String? cxrResult,
+          @JsonKey(
+              name: 'tbi_date',
+              fromJson: fromJsonToDateTime,
+              toJson: _dateTimeToJson)
           final DateTime? tbiDate,
-          final String? tbiResult,
-          final String? nikshayID,
+          @JsonKey(name: 'tbi_result') final String? tbiResult,
+          @JsonKey(name: 'nikshay_id') final String? nikshayID,
           @JsonKey(name: 'tpt_eligible') final String? tptEligible,
           @JsonKey(name: 'tpt_regimen') final int? selectedTptRegimen,
           @JsonKey(includeIfNull: false) final String? tptRegimen,
@@ -572,14 +618,21 @@ abstract class _ContactTracingModel implements ContactTracingModel {
   @JsonKey(name: 'test_conducted')
   String? get testConducted;
   @override
+  @JsonKey(
+      name: 'cxr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get cxrDate;
   @override
+  @JsonKey(name: 'cxr_result')
   String? get cxrResult;
   @override
+  @JsonKey(
+      name: 'tbi_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get tbiDate;
   @override
+  @JsonKey(name: 'tbi_result')
   String? get tbiResult;
   @override
+  @JsonKey(name: 'nikshay_id')
   String? get nikshayID;
   @override
   @JsonKey(name: 'tpt_eligible')

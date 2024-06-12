@@ -25,11 +25,15 @@ class ContactTracingModel with _$ContactTracingModel {
     @JsonKey(name: 'age') int? age,
     @JsonKey(name: 'screening_outcome') String? screeningOutcome,
     @JsonKey(name: 'test_conducted') String? testConducted,
+    @JsonKey(
+        name: 'cxr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
     DateTime? cxrDate,
-    String? cxrResult,
+    @JsonKey(name: 'cxr_result') String? cxrResult,
+    @JsonKey(
+        name: 'tbi_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
     DateTime? tbiDate,
-    String? tbiResult,
-    String? nikshayID,
+    @JsonKey(name: 'tbi_result') String? tbiResult,
+    @JsonKey(name: 'nikshay_id') String? nikshayID,
     @JsonKey(name: 'tpt_eligible') String? tptEligible,
     @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
     @JsonKey(includeIfNull: false) String? tptRegimen,

@@ -14,15 +14,11 @@ _$ContactTracingModelImpl _$$ContactTracingModelImplFromJson(
       age: (json['age'] as num?)?.toInt(),
       screeningOutcome: json['screening_outcome'] as String?,
       testConducted: json['test_conducted'] as String?,
-      cxrDate: json['cxrDate'] == null
-          ? null
-          : DateTime.parse(json['cxrDate'] as String),
-      cxrResult: json['cxrResult'] as String?,
-      tbiDate: json['tbiDate'] == null
-          ? null
-          : DateTime.parse(json['tbiDate'] as String),
-      tbiResult: json['tbiResult'] as String?,
-      nikshayID: json['nikshayID'] as String?,
+      cxrDate: fromJsonToDateTime(json['cxr_date'] as String?),
+      cxrResult: json['cxr_result'] as String?,
+      tbiDate: fromJsonToDateTime(json['tbi_date'] as String?),
+      tbiResult: json['tbi_result'] as String?,
+      nikshayID: json['nikshay_id'] as String?,
       tptEligible: json['tpt_eligible'] as String?,
       selectedTptRegimen: (json['tpt_regimen'] as num?)?.toInt(),
       tptRegimen: json['tptRegimen'] as String?,
@@ -40,11 +36,11 @@ Map<String, dynamic> _$$ContactTracingModelImplToJson(
     'age': instance.age,
     'screening_outcome': instance.screeningOutcome,
     'test_conducted': instance.testConducted,
-    'cxrDate': instance.cxrDate?.toIso8601String(),
-    'cxrResult': instance.cxrResult,
-    'tbiDate': instance.tbiDate?.toIso8601String(),
-    'tbiResult': instance.tbiResult,
-    'nikshayID': instance.nikshayID,
+    'cxr_date': _dateTimeToJson(instance.cxrDate),
+    'cxr_result': instance.cxrResult,
+    'tbi_date': _dateTimeToJson(instance.tbiDate),
+    'tbi_result': instance.tbiResult,
+    'nikshay_id': instance.nikshayID,
     'tpt_eligible': instance.tptEligible,
     'tpt_regimen': instance.selectedTptRegimen,
   };

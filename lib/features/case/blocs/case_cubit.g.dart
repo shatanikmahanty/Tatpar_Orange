@@ -8,7 +8,12 @@ part of 'case_cubit.dart';
 
 _$CaseStateImpl _$$CaseStateImplFromJson(Map<String, dynamic> json) =>
     _$CaseStateImpl(
-      isLoading: json['isLoading'] as bool?,
+      isLoading: json['isLoading'] as bool? ?? false,
+      contactTracingList: (json['contactTracingList'] as List<dynamic>?)
+              ?.map((e) =>
+                  ContactTracingModel.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const [],
       caseWorkedUpon:
           Case.fromJson(json['caseWorkedUpon'] as Map<String, dynamic>),
       dataModel: json['dataModel'] == null
@@ -30,6 +35,7 @@ _$CaseStateImpl _$$CaseStateImplFromJson(Map<String, dynamic> json) =>
           : MentalHealthScreeningModel.fromJson(
               json['mentalHealthScreeningModel'] as Map<String, dynamic>),
       screeningOutcome: json['screeningOutcome'] as String?,
+      contactTracingId: (json['contactTracingId'] as num?)?.toInt(),
       diagnsosisModel: json['diagnsosisModel'] == null
           ? null
           : DiagnosisModel.fromJson(
@@ -54,6 +60,7 @@ _$CaseStateImpl _$$CaseStateImplFromJson(Map<String, dynamic> json) =>
 Map<String, dynamic> _$$CaseStateImplToJson(_$CaseStateImpl instance) =>
     <String, dynamic>{
       'isLoading': instance.isLoading,
+      'contactTracingList': instance.contactTracingList,
       'caseWorkedUpon': instance.caseWorkedUpon,
       'dataModel': instance.dataModel,
       'referralDetailsModel': instance.referralDetailsModel,
@@ -61,6 +68,7 @@ Map<String, dynamic> _$$CaseStateImplToJson(_$CaseStateImpl instance) =>
       'whoSrqModel': instance.whoSrqModel,
       'mentalHealthScreeningModel': instance.mentalHealthScreeningModel,
       'screeningOutcome': instance.screeningOutcome,
+      'contactTracingId': instance.contactTracingId,
       'diagnsosisModel': instance.diagnsosisModel,
       'diagnosisData': instance.diagnosisData,
       'treatmentModel': instance.treatmentModel,

@@ -20,7 +20,9 @@ CaseState _$CaseStateFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$CaseState {
-  bool? get isLoading => throw _privateConstructorUsedError;
+  bool get isLoading => throw _privateConstructorUsedError;
+  List<ContactTracingModel> get contactTracingList =>
+      throw _privateConstructorUsedError;
   Case get caseWorkedUpon => throw _privateConstructorUsedError;
   DataModel? get dataModel => throw _privateConstructorUsedError;
   ReferralDetailsModel? get referralDetailsModel =>
@@ -30,6 +32,7 @@ mixin _$CaseState {
   MentalHealthScreeningModel? get mentalHealthScreeningModel =>
       throw _privateConstructorUsedError;
   String? get screeningOutcome => throw _privateConstructorUsedError;
+  int? get contactTracingId => throw _privateConstructorUsedError;
   DiagnosisModel? get diagnsosisModel => throw _privateConstructorUsedError;
   DiagnosisData? get diagnosisData => throw _privateConstructorUsedError;
   TreatmentModel? get treatmentModel => throw _privateConstructorUsedError;
@@ -49,7 +52,8 @@ abstract class $CaseStateCopyWith<$Res> {
       _$CaseStateCopyWithImpl<$Res, CaseState>;
   @useResult
   $Res call(
-      {bool? isLoading,
+      {bool isLoading,
+      List<ContactTracingModel> contactTracingList,
       Case caseWorkedUpon,
       DataModel? dataModel,
       ReferralDetailsModel? referralDetailsModel,
@@ -57,6 +61,7 @@ abstract class $CaseStateCopyWith<$Res> {
       WHOSrqModel? whoSrqModel,
       MentalHealthScreeningModel? mentalHealthScreeningModel,
       String? screeningOutcome,
+      int? contactTracingId,
       DiagnosisModel? diagnsosisModel,
       DiagnosisData? diagnosisData,
       TreatmentModel? treatmentModel,
@@ -89,7 +94,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
+    Object? isLoading = null,
+    Object? contactTracingList = null,
     Object? caseWorkedUpon = null,
     Object? dataModel = freezed,
     Object? referralDetailsModel = freezed,
@@ -97,6 +103,7 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     Object? whoSrqModel = freezed,
     Object? mentalHealthScreeningModel = freezed,
     Object? screeningOutcome = freezed,
+    Object? contactTracingId = freezed,
     Object? diagnsosisModel = freezed,
     Object? diagnosisData = freezed,
     Object? treatmentModel = freezed,
@@ -104,10 +111,14 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     Object? outcomeModel = freezed,
   }) {
     return _then(_value.copyWith(
-      isLoading: freezed == isLoading
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
+      contactTracingList: null == contactTracingList
+          ? _value.contactTracingList
+          : contactTracingList // ignore: cast_nullable_to_non_nullable
+              as List<ContactTracingModel>,
       caseWorkedUpon: null == caseWorkedUpon
           ? _value.caseWorkedUpon
           : caseWorkedUpon // ignore: cast_nullable_to_non_nullable
@@ -136,6 +147,10 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
           ? _value.screeningOutcome
           : screeningOutcome // ignore: cast_nullable_to_non_nullable
               as String?,
+      contactTracingId: freezed == contactTracingId
+          ? _value.contactTracingId
+          : contactTracingId // ignore: cast_nullable_to_non_nullable
+              as int?,
       diagnsosisModel: freezed == diagnsosisModel
           ? _value.diagnsosisModel
           : diagnsosisModel // ignore: cast_nullable_to_non_nullable
@@ -300,7 +315,8 @@ abstract class _$$CaseStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool? isLoading,
+      {bool isLoading,
+      List<ContactTracingModel> contactTracingList,
       Case caseWorkedUpon,
       DataModel? dataModel,
       ReferralDetailsModel? referralDetailsModel,
@@ -308,6 +324,7 @@ abstract class _$$CaseStateImplCopyWith<$Res>
       WHOSrqModel? whoSrqModel,
       MentalHealthScreeningModel? mentalHealthScreeningModel,
       String? screeningOutcome,
+      int? contactTracingId,
       DiagnosisModel? diagnsosisModel,
       DiagnosisData? diagnosisData,
       TreatmentModel? treatmentModel,
@@ -349,7 +366,8 @@ class __$$CaseStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? isLoading = freezed,
+    Object? isLoading = null,
+    Object? contactTracingList = null,
     Object? caseWorkedUpon = null,
     Object? dataModel = freezed,
     Object? referralDetailsModel = freezed,
@@ -357,6 +375,7 @@ class __$$CaseStateImplCopyWithImpl<$Res>
     Object? whoSrqModel = freezed,
     Object? mentalHealthScreeningModel = freezed,
     Object? screeningOutcome = freezed,
+    Object? contactTracingId = freezed,
     Object? diagnsosisModel = freezed,
     Object? diagnosisData = freezed,
     Object? treatmentModel = freezed,
@@ -364,10 +383,14 @@ class __$$CaseStateImplCopyWithImpl<$Res>
     Object? outcomeModel = freezed,
   }) {
     return _then(_$CaseStateImpl(
-      isLoading: freezed == isLoading
+      isLoading: null == isLoading
           ? _value.isLoading
           : isLoading // ignore: cast_nullable_to_non_nullable
-              as bool?,
+              as bool,
+      contactTracingList: null == contactTracingList
+          ? _value._contactTracingList
+          : contactTracingList // ignore: cast_nullable_to_non_nullable
+              as List<ContactTracingModel>,
       caseWorkedUpon: null == caseWorkedUpon
           ? _value.caseWorkedUpon
           : caseWorkedUpon // ignore: cast_nullable_to_non_nullable
@@ -396,6 +419,10 @@ class __$$CaseStateImplCopyWithImpl<$Res>
           ? _value.screeningOutcome
           : screeningOutcome // ignore: cast_nullable_to_non_nullable
               as String?,
+      contactTracingId: freezed == contactTracingId
+          ? _value.contactTracingId
+          : contactTracingId // ignore: cast_nullable_to_non_nullable
+              as int?,
       diagnsosisModel: freezed == diagnsosisModel
           ? _value.diagnsosisModel
           : diagnsosisModel // ignore: cast_nullable_to_non_nullable
@@ -424,7 +451,8 @@ class __$$CaseStateImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$CaseStateImpl implements _CaseState {
   const _$CaseStateImpl(
-      {this.isLoading,
+      {this.isLoading = false,
+      final List<ContactTracingModel> contactTracingList = const [],
       required this.caseWorkedUpon,
       this.dataModel,
       this.referralDetailsModel,
@@ -432,17 +460,30 @@ class _$CaseStateImpl implements _CaseState {
       this.whoSrqModel,
       this.mentalHealthScreeningModel,
       this.screeningOutcome,
+      this.contactTracingId,
       this.diagnsosisModel,
       this.diagnosisData,
       this.treatmentModel,
       this.contactTracingModel,
-      this.outcomeModel});
+      this.outcomeModel})
+      : _contactTracingList = contactTracingList;
 
   factory _$CaseStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaseStateImplFromJson(json);
 
   @override
-  final bool? isLoading;
+  @JsonKey()
+  final bool isLoading;
+  final List<ContactTracingModel> _contactTracingList;
+  @override
+  @JsonKey()
+  List<ContactTracingModel> get contactTracingList {
+    if (_contactTracingList is EqualUnmodifiableListView)
+      return _contactTracingList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_contactTracingList);
+  }
+
   @override
   final Case caseWorkedUpon;
   @override
@@ -458,6 +499,8 @@ class _$CaseStateImpl implements _CaseState {
   @override
   final String? screeningOutcome;
   @override
+  final int? contactTracingId;
+  @override
   final DiagnosisModel? diagnsosisModel;
   @override
   final DiagnosisData? diagnosisData;
@@ -470,7 +513,7 @@ class _$CaseStateImpl implements _CaseState {
 
   @override
   String toString() {
-    return 'CaseState(isLoading: $isLoading, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel)';
+    return 'CaseState(isLoading: $isLoading, contactTracingList: $contactTracingList, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, contactTracingId: $contactTracingId, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel)';
   }
 
   @override
@@ -480,6 +523,8 @@ class _$CaseStateImpl implements _CaseState {
             other is _$CaseStateImpl &&
             (identical(other.isLoading, isLoading) ||
                 other.isLoading == isLoading) &&
+            const DeepCollectionEquality()
+                .equals(other._contactTracingList, _contactTracingList) &&
             (identical(other.caseWorkedUpon, caseWorkedUpon) ||
                 other.caseWorkedUpon == caseWorkedUpon) &&
             (identical(other.dataModel, dataModel) ||
@@ -496,6 +541,8 @@ class _$CaseStateImpl implements _CaseState {
                     mentalHealthScreeningModel) &&
             (identical(other.screeningOutcome, screeningOutcome) ||
                 other.screeningOutcome == screeningOutcome) &&
+            (identical(other.contactTracingId, contactTracingId) ||
+                other.contactTracingId == contactTracingId) &&
             (identical(other.diagnsosisModel, diagnsosisModel) ||
                 other.diagnsosisModel == diagnsosisModel) &&
             (identical(other.diagnosisData, diagnosisData) ||
@@ -513,6 +560,7 @@ class _$CaseStateImpl implements _CaseState {
   int get hashCode => Object.hash(
       runtimeType,
       isLoading,
+      const DeepCollectionEquality().hash(_contactTracingList),
       caseWorkedUpon,
       dataModel,
       referralDetailsModel,
@@ -520,6 +568,7 @@ class _$CaseStateImpl implements _CaseState {
       whoSrqModel,
       mentalHealthScreeningModel,
       screeningOutcome,
+      contactTracingId,
       diagnsosisModel,
       diagnosisData,
       treatmentModel,
@@ -542,7 +591,8 @@ class _$CaseStateImpl implements _CaseState {
 
 abstract class _CaseState implements CaseState {
   const factory _CaseState(
-      {final bool? isLoading,
+      {final bool isLoading,
+      final List<ContactTracingModel> contactTracingList,
       required final Case caseWorkedUpon,
       final DataModel? dataModel,
       final ReferralDetailsModel? referralDetailsModel,
@@ -550,6 +600,7 @@ abstract class _CaseState implements CaseState {
       final WHOSrqModel? whoSrqModel,
       final MentalHealthScreeningModel? mentalHealthScreeningModel,
       final String? screeningOutcome,
+      final int? contactTracingId,
       final DiagnosisModel? diagnsosisModel,
       final DiagnosisData? diagnosisData,
       final TreatmentModel? treatmentModel,
@@ -560,7 +611,9 @@ abstract class _CaseState implements CaseState {
       _$CaseStateImpl.fromJson;
 
   @override
-  bool? get isLoading;
+  bool get isLoading;
+  @override
+  List<ContactTracingModel> get contactTracingList;
   @override
   Case get caseWorkedUpon;
   @override
@@ -575,6 +628,8 @@ abstract class _CaseState implements CaseState {
   MentalHealthScreeningModel? get mentalHealthScreeningModel;
   @override
   String? get screeningOutcome;
+  @override
+  int? get contactTracingId;
   @override
   DiagnosisModel? get diagnsosisModel;
   @override
