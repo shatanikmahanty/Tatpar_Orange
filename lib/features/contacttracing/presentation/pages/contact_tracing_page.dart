@@ -52,9 +52,7 @@ class ContactTracingPage extends StatelessWidget {
         value: contactTracingModel?.tptEligible,
       ),
       'tpt_regimen': FormControl<String?>(
-        value: tptRegimenName != null
-            ? '$tptRegimen:\t$tptRegimenName'
-            : contactTracingModel?.tptRegimen,
+        value: tptRegimenName ?? contactTracingModel?.tptRegimen,
       ),
       'tpt_start_date': FormControl<DateTime>(
         value: contactTracingModel?.tptStartDate,

@@ -36,26 +36,4 @@ class ContactTracingCubit extends Cubit<ContactTracingState> {
       state.copyWith(contactTracingList: contactCopy),
     );
   }
-
-  // void searchCases(String query) {
-  //   applyFilters(
-  //       caseFilter: state.casesFilter
-  //           .copyWith(searchWord: query.isEmpty ? null : query));
-  // }
-  // void applyFilters({CasesFilterModel? caseFilter}) {
-  //   final filters = caseFilter ?? state.casesFilter;
-  //   final cases = state.cases;
-  //   List<Case> filteredCases = cases;
-  //   if (filters.isEmpty) {
-  //     return emit(state.copyWith(filteredCases: null, casesFilter: filters));
-  //   }
-  //   if (filters.searchWord != null) {
-  //     filteredCases = filteredCases.where((element) {
-  //       final queryLower = filters.searchWord!.toLowerCase();
-  //       final patientName = element.referralName;
-  //       final patientNumber = element.referralMobileNumber;
-  //       return patientName!.toLowerCase().contains(queryLower) ||
-  //           patientNumber!.contains(queryLower);
-  //     }).toList();
-  //   }
 }

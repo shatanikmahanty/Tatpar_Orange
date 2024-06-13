@@ -39,6 +39,8 @@ mixin _$CaseState {
   ContactTracingModel? get contactTracingModel =>
       throw _privateConstructorUsedError;
   OutcomeModel? get outcomeModel => throw _privateConstructorUsedError;
+  List<ContactTracingModel>? get filteredContacts =>
+      throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -66,7 +68,8 @@ abstract class $CaseStateCopyWith<$Res> {
       DiagnosisData? diagnosisData,
       TreatmentModel? treatmentModel,
       ContactTracingModel? contactTracingModel,
-      OutcomeModel? outcomeModel});
+      OutcomeModel? outcomeModel,
+      List<ContactTracingModel>? filteredContacts});
 
   $CaseCopyWith<$Res> get caseWorkedUpon;
   $DataModelCopyWith<$Res>? get dataModel;
@@ -109,6 +112,7 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     Object? treatmentModel = freezed,
     Object? contactTracingModel = freezed,
     Object? outcomeModel = freezed,
+    Object? filteredContacts = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -171,6 +175,10 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
           ? _value.outcomeModel
           : outcomeModel // ignore: cast_nullable_to_non_nullable
               as OutcomeModel?,
+      filteredContacts: freezed == filteredContacts
+          ? _value.filteredContacts
+          : filteredContacts // ignore: cast_nullable_to_non_nullable
+              as List<ContactTracingModel>?,
     ) as $Val);
   }
 
@@ -329,7 +337,8 @@ abstract class _$$CaseStateImplCopyWith<$Res>
       DiagnosisData? diagnosisData,
       TreatmentModel? treatmentModel,
       ContactTracingModel? contactTracingModel,
-      OutcomeModel? outcomeModel});
+      OutcomeModel? outcomeModel,
+      List<ContactTracingModel>? filteredContacts});
 
   @override
   $CaseCopyWith<$Res> get caseWorkedUpon;
@@ -381,6 +390,7 @@ class __$$CaseStateImplCopyWithImpl<$Res>
     Object? treatmentModel = freezed,
     Object? contactTracingModel = freezed,
     Object? outcomeModel = freezed,
+    Object? filteredContacts = freezed,
   }) {
     return _then(_$CaseStateImpl(
       isLoading: null == isLoading
@@ -443,6 +453,10 @@ class __$$CaseStateImplCopyWithImpl<$Res>
           ? _value.outcomeModel
           : outcomeModel // ignore: cast_nullable_to_non_nullable
               as OutcomeModel?,
+      filteredContacts: freezed == filteredContacts
+          ? _value._filteredContacts
+          : filteredContacts // ignore: cast_nullable_to_non_nullable
+              as List<ContactTracingModel>?,
     ));
   }
 }
@@ -465,8 +479,10 @@ class _$CaseStateImpl implements _CaseState {
       this.diagnosisData,
       this.treatmentModel,
       this.contactTracingModel,
-      this.outcomeModel})
-      : _contactTracingList = contactTracingList;
+      this.outcomeModel,
+      final List<ContactTracingModel>? filteredContacts})
+      : _contactTracingList = contactTracingList,
+        _filteredContacts = filteredContacts;
 
   factory _$CaseStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$CaseStateImplFromJson(json);
@@ -510,10 +526,20 @@ class _$CaseStateImpl implements _CaseState {
   final ContactTracingModel? contactTracingModel;
   @override
   final OutcomeModel? outcomeModel;
+  final List<ContactTracingModel>? _filteredContacts;
+  @override
+  List<ContactTracingModel>? get filteredContacts {
+    final value = _filteredContacts;
+    if (value == null) return null;
+    if (_filteredContacts is EqualUnmodifiableListView)
+      return _filteredContacts;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'CaseState(isLoading: $isLoading, contactTracingList: $contactTracingList, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, contactTracingId: $contactTracingId, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel)';
+    return 'CaseState(isLoading: $isLoading, contactTracingList: $contactTracingList, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, contactTracingId: $contactTracingId, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel, filteredContacts: $filteredContacts)';
   }
 
   @override
@@ -552,7 +578,9 @@ class _$CaseStateImpl implements _CaseState {
             (identical(other.contactTracingModel, contactTracingModel) ||
                 other.contactTracingModel == contactTracingModel) &&
             (identical(other.outcomeModel, outcomeModel) ||
-                other.outcomeModel == outcomeModel));
+                other.outcomeModel == outcomeModel) &&
+            const DeepCollectionEquality()
+                .equals(other._filteredContacts, _filteredContacts));
   }
 
   @JsonKey(ignore: true)
@@ -573,7 +601,8 @@ class _$CaseStateImpl implements _CaseState {
       diagnosisData,
       treatmentModel,
       contactTracingModel,
-      outcomeModel);
+      outcomeModel,
+      const DeepCollectionEquality().hash(_filteredContacts));
 
   @JsonKey(ignore: true)
   @override
@@ -605,7 +634,8 @@ abstract class _CaseState implements CaseState {
       final DiagnosisData? diagnosisData,
       final TreatmentModel? treatmentModel,
       final ContactTracingModel? contactTracingModel,
-      final OutcomeModel? outcomeModel}) = _$CaseStateImpl;
+      final OutcomeModel? outcomeModel,
+      final List<ContactTracingModel>? filteredContacts}) = _$CaseStateImpl;
 
   factory _CaseState.fromJson(Map<String, dynamic> json) =
       _$CaseStateImpl.fromJson;
@@ -640,6 +670,8 @@ abstract class _CaseState implements CaseState {
   ContactTracingModel? get contactTracingModel;
   @override
   OutcomeModel? get outcomeModel;
+  @override
+  List<ContactTracingModel>? get filteredContacts;
   @override
   @JsonKey(ignore: true)
   _$$CaseStateImplCopyWith<_$CaseStateImpl> get copyWith =>

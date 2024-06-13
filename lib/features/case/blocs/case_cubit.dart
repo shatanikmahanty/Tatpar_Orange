@@ -22,22 +22,24 @@ part 'case_cubit.g.dart';
 
 @freezed
 class CaseState with _$CaseState {
-  const factory CaseState(
-      {@Default(false) bool isLoading,
-      @Default([]) List<ContactTracingModel> contactTracingList,
-      required Case caseWorkedUpon,
-      DataModel? dataModel,
-      ReferralDetailsModel? referralDetailsModel,
-      TBScreeningModel? tbScreeningModel,
-      WHOSrqModel? whoSrqModel,
-      MentalHealthScreeningModel? mentalHealthScreeningModel,
-      String? screeningOutcome,
-      int? contactTracingId,
-      DiagnosisModel? diagnsosisModel,
-      DiagnosisData? diagnosisData,
-      TreatmentModel? treatmentModel,
-      ContactTracingModel? contactTracingModel,
-      OutcomeModel? outcomeModel}) = _CaseState;
+  const factory CaseState({
+    @Default(false) bool isLoading,
+    @Default([]) List<ContactTracingModel> contactTracingList,
+    required Case caseWorkedUpon,
+    DataModel? dataModel,
+    ReferralDetailsModel? referralDetailsModel,
+    TBScreeningModel? tbScreeningModel,
+    WHOSrqModel? whoSrqModel,
+    MentalHealthScreeningModel? mentalHealthScreeningModel,
+    String? screeningOutcome,
+    int? contactTracingId,
+    DiagnosisModel? diagnsosisModel,
+    DiagnosisData? diagnosisData,
+    TreatmentModel? treatmentModel,
+    ContactTracingModel? contactTracingModel,
+    OutcomeModel? outcomeModel,
+    List<ContactTracingModel>? filteredContacts,
+  }) = _CaseState;
 
   factory CaseState.fromJson(Map<String, dynamic> json) =>
       _$CaseStateFromJson(json);
@@ -553,5 +555,24 @@ class CaseCubit extends Cubit<CaseState> {
     emit(
       state.copyWith(contactTracingList: contactCopy),
     );
+  }
+
+  void searchCases(String? query) {
+    applyFilters(caseFilter: query);
+  }
+
+  void applyFilters({String? caseFilter}) {
+    final cases = state.contactTracingList;
+    List<ContactTracingModel> filteredContacts = cases;
+    if (caseFilter == null) {
+      return emit(state.copyWith(filteredContacts: null));
+    } else {
+      filteredContacts = filteredContacts.where((element) {
+        final queryLower = caseFilter.toLowerCase();
+        final patientName = element.tbContactName;
+        return patientName!.toLowerCase().contains(queryLower);
+      }).toList();
+      return emit(state.copyWith(filteredContacts: filteredContacts));
+    }
   }
 }

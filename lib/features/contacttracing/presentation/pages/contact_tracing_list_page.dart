@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
-import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
@@ -18,6 +17,7 @@ class ContactTracingListPage extends StatelessWidget {
     final cubit = context.read<CaseCubit>();
     // final contactCubit = context.read<ContactTracingCubit>();
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: const CaseAppBar('Contact Tracing List'),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: Padding(
@@ -49,7 +49,7 @@ class ContactTracingListPage extends StatelessWidget {
               )
             : RefreshIndicator(
                 onRefresh: () async {
-                  //contactCubit.searchCases('');
+                  cubit.searchCases('');
                   cubit.getContactTracingListData();
                 },
                 child: Column(
@@ -63,10 +63,10 @@ class ContactTracingListPage extends StatelessWidget {
                             child: TextField(
                               decoration: const InputDecoration(
                                 prefixIcon: Icon(Icons.search),
-                                hintText: 'Search by name or no.',
+                                hintText: 'Search by name ',
                               ),
                               onChanged: (value) {
-                                //  contactCubit.searchCases(value);
+                                cubit.searchCases(value);
                               },
                             ),
                           ),
@@ -92,36 +92,12 @@ class ContactTracingListPage extends StatelessWidget {
                         ],
                       ),
                     ),
-                    // SizedBox(
-                    //   height: 70,
-                    //   child: Padding(
-                    //     padding: const EdgeInsets.symmetric(
-                    //         vertical: kPadding * 1.5, horizontal: kPadding * 2),
-                    //     child: ListView.separated(
-                    //       scrollDirection: Axis.horizontal,
-                    //       itemCount: FilterShortCut.values.length,
-                    //       itemBuilder: (_, index) => AppFilterChip(
-                    //           label: FilterShortCut.values[index].label,
-                    //           isSelected: (state.casesFilter.selectedShortCut ==
-                    //               FilterShortCut.values[index]),
-                    //           onCLicked: () => cubit.applyPendingStageFilter(
-                    //               FilterShortCut.values[index])),
-                    //       separatorBuilder: (BuildContext context, int index) =>
-                    //           const SizedBox(
-                    //         width: kPadding,
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
-                    if (state.contactTracingList.isEmpty
-                        // (state.filteredCases != null &&
-                        //     state.filteredCases!.isEmpty)
-                        )
-                      Container(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: kPadding * 10,
-                        ),
+                    if (state.contactTracingList.isEmpty ||
+                        (state.filteredContacts != null &&
+                            state.filteredContacts!.isEmpty))
+                      Expanded(
                         child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Icon(
                               Icons.search_off,
@@ -139,54 +115,24 @@ class ContactTracingListPage extends StatelessWidget {
                         ),
                       ),
                     Expanded(
-                        child:
-                            // state.filteredCases == null
-                            //     ?
-                            ListView.builder(
-                      padding:
-                          const EdgeInsets.symmetric(horizontal: kPadding * 2),
-                      itemBuilder: (context, index) => Padding(
-                        padding: const EdgeInsets.only(
-                          bottom: kPadding * 2,
-                        ),
-                        child: ContactTracingCard(
-                          model: state.contactTracingList[index],
-                        ),
-                      ),
-                      itemCount: state.contactTracingList.length,
-                    )
-                        // : ListView.builder(
-                        //     padding: const EdgeInsets.symmetric(
-                        //         horizontal: kPadding * 2),
-                        //     itemBuilder: (context, index) => Padding(
-                        //       padding: const EdgeInsets.only(
-                        //         bottom: kPadding * 2,
-                        //       ),
-                        //       child: CaseCard(
-                        //         caseModel: state.filteredCases![index],
-                        //       ),
-                        //     ),
-                        //     itemCount: state.filteredCases!.length,
-                        //   ),
-                        ),
-                    if (context.read<AuthCubit>().state.user?.isSupervisor ??
-                        false)
-                      Container(
+                      child: ListView.builder(
                         padding: const EdgeInsets.symmetric(
-                          horizontal: kPadding * 2,
-                          vertical: kPadding / 2,
+                            horizontal: kPadding * 2),
+                        itemBuilder: (context, index) => Padding(
+                          padding: const EdgeInsets.only(
+                            bottom: kPadding * 2,
+                          ),
+                          child: ContactTracingCard(
+                            model: state.filteredContacts == null
+                                ? state.contactTracingList[index]
+                                : state.filteredContacts![index],
+                          ),
                         ),
-                        child: Row(
-                          children: [
-                            const Text('Assigned to me cases only'),
-                            const Spacer(),
-                            Switch(
-                              value: true,
-                              onChanged: (value) {},
-                            ),
-                          ],
-                        ),
+                        itemCount: state.filteredContacts == null
+                            ? state.contactTracingList.length
+                            : state.filteredContacts!.length,
                       ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
                           vertical: kPadding, horizontal: kPadding * 2),
