@@ -87,8 +87,11 @@ class PhoneLoginPage extends StatelessWidget {
                         onClick: (ReactiveForm.of(context)?.valid ?? false)
                             ? () async {
                                 final phoneControl = form.control('phone');
-                                kIsWeb ? await authCubit
-                                    .loginWithPhoneOnWeb(phoneControl.value) : await authCubit.loginWithPhone(phoneControl.value);
+                                kIsWeb
+                                    ? await authCubit
+                                        .loginWithPhoneOnWeb(phoneControl.value)
+                                    : await authCubit
+                                        .loginWithPhone(phoneControl.value);
                               }
                             : null,
                       );

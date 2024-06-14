@@ -81,25 +81,26 @@ Future<void> main() async {
     if (!kIsWeb) {
       initialDeepLink = (await appLinksRepository.getInitialLink())?.path;
     }
-    return ChangeNotifierProvider(
-      create: (_) {
-        return LanguageProvider();
-      },
-      child: TatparAcfAppBuilder(
+    return ChangeNotifierProvider(create: (_) {
+      return LanguageProvider();
+    }, builder: (context, child) {
+      final provider = Provider.of<LanguageProvider>(context);
+
+      return TatparAcfAppBuilder(
         appRouter: router,
         initialDeepLink: initialDeepLink,
         appLinksRepository: appLinksRepository,
-      ),
-    );
+        provider: provider,
+      );
+    });
   });
-  getCurrentAppLangauge();
 }
 
-void getCurrentAppLangauge() async {
+void getCurrentAppLanguage() async {
   final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
   String? lang = await preferences.then((SharedPreferences prefs) {
     return prefs.getString('currentLanguage');
   });
-  print(lang);
-  LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
+  // LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
+//  print('Current Language===========${LanguageProvider().currentLanguage}');
 }

@@ -19,6 +19,7 @@ import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 import 'package:tatpar_acf/l10n/language_provider.dart';
 import 'configurations/configurations.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TatparAcfAppBuilder extends AppBuilder {
   TatparAcfAppBuilder({
@@ -26,6 +27,7 @@ class TatparAcfAppBuilder extends AppBuilder {
     super.onDispose,
     required AppRouter appRouter,
     required AppLinksRepository appLinksRepository,
+    required LanguageProvider provider,
     final String? initialDeepLink,
   }) : super(
           onInitState: (context) {},
@@ -114,12 +116,12 @@ class TatparAcfAppBuilder extends AppBuilder {
                     darkTheme: AppTheme.dark,
                     themeMode: appState.themeMode,
                     // locale: Locale(appState.locale, ''),
-                    locale: Locale.fromSubtags(
-                        languageCode: LanguageProvider().currentLanguage),
+                    locale: provider.locale,
                     supportedLocales: const [
                       Locale('en', ''),
                     ],
                     localizationsDelegates: const [
+                      AppLocalizations.delegate,
                       GlobalMaterialLocalizations.delegate,
                       GlobalWidgetsLocalizations.delegate,
                       GlobalCupertinoLocalizations.delegate,

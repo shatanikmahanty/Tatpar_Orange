@@ -36,10 +36,10 @@ class NetworkManager {
       }
       // Language
       // todo add language interceptor
-      /*final AppLocale locale = Get.find<LocalizationService>().currentLocale;
-          if (locale.languageCode != null) {
-            options.headers['Accept-Language'] = locale.languageCode;
-          }*/
+      // final AppLocale locale = Get.find<LocalizationService>().currentLocale;
+      // if (locale.languageCode != null) {
+      //   options.headers['Accept-Language'] = locale.languageCode;
+      // }
       return handler.next(options);
     }));
     _dio.interceptors.add(PrettyDioLogger(
