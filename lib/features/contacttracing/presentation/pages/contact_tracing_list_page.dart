@@ -15,11 +15,10 @@ class ContactTracingListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final cubit = context.read<CaseCubit>();
-    // final contactCubit = context.read<ContactTracingCubit>();
+
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: const CaseAppBar('Contact Tracing List'),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: Padding(
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1),
@@ -36,116 +35,90 @@ class ContactTracingListPage extends StatelessWidget {
               ),
               onPressed: () {
                 context.router.navigate(ContactTracingRouter(
-                    contactTracingModel: const ContactTracingModel()));
+                  contactTracingModel: const ContactTracingModel(),
+                ));
               },
             ),
           ),
         ),
       ),
+      //  ),
       body: BlocBuilder<CaseCubit, CaseState>(
-        builder: (context, state) => state.isLoading
-            ? const Center(
-                child: CircularProgressIndicator(),
-              )
-            : RefreshIndicator(
-                onRefresh: () async {
-                  cubit.searchCases('');
-                  cubit.getContactTracingListData();
-                },
-                child: Column(
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: kPadding, horizontal: kPadding * 2),
-                      child: Row(
+        builder: (context, state) {
+          if (state.isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+
+          return RefreshIndicator(
+            onRefresh: () async {
+              cubit.searchCases('');
+              cubit.getContactTracingListData();
+            },
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: kPadding, left: kPadding * 2, right: kPadding * 2),
+              child: Column(
+                children: [
+                  TextField(
+                    decoration: const InputDecoration(
+                      prefixIcon: Icon(Icons.search),
+                      hintText: 'Search by name',
+                    ),
+                    onChanged: (value) {
+                      cubit.searchCases(value);
+                    },
+                  ),
+                  const SizedBox(height: kPadding * 2),
+                  if (state.contactTracingList.isEmpty ||
+                      (state.filteredContacts != null &&
+                          state.filteredContacts!.isEmpty))
+                    Expanded(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
-                          Expanded(
-                            child: TextField(
-                              decoration: const InputDecoration(
-                                prefixIcon: Icon(Icons.search),
-                                hintText: 'Search by name ',
-                              ),
-                              onChanged: (value) {
-                                cubit.searchCases(value);
-                              },
-                            ),
+                          Icon(
+                            Icons.search_off,
+                            size: kPadding * 8,
+                            color: theme.primaryColor,
                           ),
-                          const SizedBox(width: kPadding),
-                          GestureDetector(
-                            // onTap: () {
-                            //   context.router
-                            //       .navigate(const CasesFilterDialogRoute());
-                            // },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  color: AppColors.blueMedium,
-                                  borderRadius: BorderRadius.circular(4)),
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: kPadding * 1.8,
-                                  horizontal: kPadding * 1.8),
-                              child: const Icon(
-                                Icons.filter_alt_outlined,
-                                color: Colors.white,
-                              ),
-                            ),
-                          )
+                          const SizedBox(height: kPadding),
+                          Text(
+                            'No Cases found',
+                            style: theme.textTheme.bodyLarge,
+                          ),
                         ],
                       ),
                     ),
-                    if (state.contactTracingList.isEmpty ||
-                        (state.filteredContacts != null &&
-                            state.filteredContacts!.isEmpty))
-                      Expanded(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(
-                              Icons.search_off,
-                              size: kPadding * 8,
-                              color: theme.primaryColor,
-                            ),
-                            const SizedBox(
-                              height: kPadding,
-                            ),
-                            Text(
-                              'No Cases found',
-                              style: theme.textTheme.bodyLarge,
-                            ),
-                          ],
-                        ),
-                      ),
-                    Expanded(
-                      child: ListView.builder(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: kPadding * 2),
-                        itemBuilder: (context, index) => Padding(
-                          padding: const EdgeInsets.only(
-                            bottom: kPadding * 2,
-                          ),
-                          child: ContactTracingCard(
-                            model: state.filteredContacts == null
-                                ? state.contactTracingList[index]
-                                : state.filteredContacts![index],
-                          ),
-                        ),
-                        itemCount: state.filteredContacts == null
-                            ? state.contactTracingList.length
-                            : state.filteredContacts!.length,
-                      ),
+                  Expanded(
+                    child: ListView.builder(
+                      itemBuilder: (context, index) {
+                        final model = state.filteredContacts == null
+                            ? state.contactTracingList[index]
+                            : state.filteredContacts![index];
+                        return Padding(
+                          padding: const EdgeInsets.only(bottom: kPadding * 2),
+                          child: ContactTracingCard(model: model),
+                        );
+                      },
+                      itemCount: state.filteredContacts == null
+                          ? state.contactTracingList.length
+                          : state.filteredContacts!.length,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: kPadding, horizontal: kPadding * 2),
-                      child: AuthButton(
-                          text: 'Next',
-                          onClick: () {
-                            context.router.navigate(const OutcomeRoute());
-                          }),
-                    ),
-                    const SizedBox(height: kPadding * 2),
-                  ],
-                ),
+                  ),
+                  AuthButton(
+                    text: 'Next',
+                    onClick: () {
+                      context.router.navigate(const OutcomeRoute());
+                    },
+                  ),
+                  const SizedBox(height: kPadding * 2),
+                ],
               ),
+            ),
+          );
+        },
       ),
     );
   }

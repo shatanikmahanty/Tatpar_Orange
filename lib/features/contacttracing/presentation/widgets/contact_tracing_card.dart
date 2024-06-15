@@ -115,44 +115,42 @@ class ContactTracingCard extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(
-                  horizontal: kPadding, vertical: kPadding),
-              child: Expanded(
-                  child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    '${model.tbContactName}\t•\t ${model.age}',
-                    style: textTheme.labelLarge?.copyWith(
-                      fontWeight: FontWeight.w600,
-                      height: 1.14,
-                      letterSpacing: 0.2,
-                      color: Colors.black,
+                padding: const EdgeInsets.symmetric(
+                    horizontal: kPadding, vertical: kPadding),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      '${model.tbContactName}\t•\t ${model.age}',
+                      style: textTheme.labelLarge?.copyWith(
+                        fontWeight: FontWeight.w600,
+                        height: 1.14,
+                        letterSpacing: 0.2,
+                        color: Colors.black,
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: kPadding * 0.75,
-                  ),
-                  Text(
-                    'TPT Regimen:\t ${calculateTPTRegimen(context)}', //${model.hub.toString()}',
-                    style: textTheme.bodyMedium?.copyWith(
-                      height: 1.33,
-                      letterSpacing: 0.2,
+                    const SizedBox(
+                      height: kPadding * 0.75,
                     ),
-                  ),
-                  const SizedBox(
-                    height: kPadding * 0.75,
-                  ),
-                  Text(
-                    'TPT Outcome:\t ${model.tptOutcome}', //${model.hub.toString()}',
-                    style: textTheme.bodyMedium?.copyWith(
-                      height: 1.33,
-                      letterSpacing: 0.2,
+                    Text(
+                      'TPT Regimen:\t ${calculateTPTRegimen(context)}', //${model.hub.toString()}',
+                      style: textTheme.bodyMedium?.copyWith(
+                        height: 1.33,
+                        letterSpacing: 0.2,
+                      ),
                     ),
-                  ),
-                ],
-              )),
-            ),
+                    const SizedBox(
+                      height: kPadding * 0.75,
+                    ),
+                    Text(
+                      'TPT Outcome:\t ${model.tptOutcome}', //${model.hub.toString()}',
+                      style: textTheme.bodyMedium?.copyWith(
+                        height: 1.33,
+                        letterSpacing: 0.2,
+                      ),
+                    ),
+                  ],
+                )),
           ]),
         ));
   }
