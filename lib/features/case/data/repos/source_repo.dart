@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
@@ -21,17 +23,16 @@ class SourceRepo {
       await dataBox.put('latestData', dataModel);
 
       final storedData = dataBox.get(dataBox.keyAt(dataBox.length - 1));
-      print('STORED DATA=====================$storedData');
+      log(storedData.toString());
 
       return dataModel;
     } else {
       Box<DataModel> dataBox = Hive.box<DataModel>('dataModel');
       final DataModel? storedData =
           dataBox.get(dataBox.keyAt(dataBox.length - 1));
-      print('Using stored data from Hive: $storedData');
 
       if (response.error != null && response.error?.type is NetworkError) {
-        print('Using stored data from Hive: $storedData');
+        log('Using stored data from Hive: $storedData');
         return storedData;
       } else {
         throw ApplicationError(
@@ -56,16 +57,17 @@ class SourceRepo {
           DiagnosisData.fromJson(response.data['data']);
       await dataBox.put('latestData', diagnosisData);
       final storedData = dataBox.get(dataBox.keyAt(dataBox.length - 1));
-      print('STORED DATA=====================$storedData');
+      log('STORED DATA=====================$storedData');
+      log(storedData.toString());
 
       return diagnosisData;
     } else {
       Box<DiagnosisData> dataBox = Hive.box<DiagnosisData>('diagnosisData');
       final DiagnosisData? storedData = dataBox.get('latestData');
-      print('Using stored data from Hive: $storedData');
+      log('Using stored data from Hive: $storedData');
 
       if (response.error != null && response.error?.type is NetworkError) {
-        print('Using stored data from Hive: $storedData');
+        log('Using stored data from Hive: $storedData');
         return storedData;
       } else {
         throw ApplicationError(

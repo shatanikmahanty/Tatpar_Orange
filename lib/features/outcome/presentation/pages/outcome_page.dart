@@ -25,9 +25,6 @@ class OutcomePage extends StatelessWidget {
       'nikshay_id': FormControl<String?>(
         value: outcomeModel?.nikshayId,
       ),
-      'fc_name': FormControl<String?>(
-        value: outcomeModel?.fcName,
-      ),
       'nutrition_provided': FormControl<String?>(
         value: outcomeModel?.nutritionProvided,
       ),
@@ -92,13 +89,6 @@ class OutcomePage extends StatelessWidget {
                                         const PrimaryTextField(
                                           formControlName: 'nikshay_id',
                                           label: 'Nikshay ID',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        const PrimaryTextField(
-                                          formControlName: 'fc_name',
-                                          label: 'FC Name',
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                         ),

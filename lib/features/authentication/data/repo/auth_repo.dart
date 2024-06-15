@@ -1,5 +1,4 @@
 import 'dart:developer';
-import 'dart:ui';
 
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -57,8 +56,7 @@ class AuthRepo {
   Future<void> verifyOtp(
     String otp,
   ) async {
-
-    if (kIsWeb){
+    if (kIsWeb) {
       final userCredential = await _confirmationResult!.confirm(otp);
       handlePostLogin(userCredential);
       return;
@@ -90,7 +88,7 @@ class AuthRepo {
     UserCredential userCredential,
   ) async {
     if (userCredential.user != null) {
-      String? token = await _auth.currentUser!.getIdToken();
+      //String? token = await _auth.currentUser!.getIdToken();
       // if (userCredential.additionalUserInfo!.isNewUser) {
       //   register(userCredential.user!.uid);
       // } else {

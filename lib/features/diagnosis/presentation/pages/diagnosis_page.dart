@@ -1110,7 +1110,6 @@ class DiagnosisPage extends StatelessWidget {
                                                                   ),
                                                                 );
                                                               }
-                                                              print(list);
                                                               return TextFieldWithList(
                                                                 controlName:
                                                                     'xdr_result',

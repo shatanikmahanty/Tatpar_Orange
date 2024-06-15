@@ -73,6 +73,8 @@ class CaseRepo {
   Future<MentalHealthScreeningModel> saveWHOSRQData(
       {required MentalHealthScreeningModel mentalHealthScreeningModel,
       required WHOSrqModel? whoSrqModel,
+      required WHOSrqModel? ipfuWhoSrqModel,
+      required WHOSrqModel? cpWhoSrqModel,
       required int? id,
       required int? caseId}) async {
     log(mentalHealthScreeningModel.toJson().toString());
@@ -82,7 +84,9 @@ class CaseRepo {
       isAuthorized: true,
       data: {
         ...mentalHealthScreeningModel.toJson(),
-        ...whoSrqModel!.toJson(),
+        if (whoSrqModel != null) ...whoSrqModel.toJson(),
+        if (ipfuWhoSrqModel != null) ...ipfuWhoSrqModel.toJson(),
+        if (cpWhoSrqModel != null) ...cpWhoSrqModel.toJson(),
         'case_id': caseId ?? AuthCubit.instance.workingCaseId,
       },
     );
@@ -138,7 +142,6 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      print(result.status);
       return TreatmentModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
@@ -368,12 +371,25 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      print(result.status);
       Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<dynamic> caseDataList = result.data['data']['cases'];
       final List<Case> cases =
           caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
-      await dataBox.addAll(cases);
+      // Iterate through the cases fetched from the network
+      for (final caseItem in cases) {
+        // Check if the case with the same ID already exists in the Hive box
+        final existingCaseIndex = dataBox.values
+            .toList()
+            .indexWhere((existingCase) => existingCase.id == caseItem.id);
+        if (existingCaseIndex != -1) {
+          // If case with the same ID exists, update it
+          dataBox.putAt(existingCaseIndex, caseItem);
+        } else {
+          // If case with the same ID doesn't exist, add it
+          dataBox.add(caseItem);
+        }
+      }
+
       final List<Case> storedData = dataBox.values.toList();
       log(storedData.toString());
 
@@ -381,9 +397,9 @@ class CaseRepo {
     } else {
       Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<Case> storedData = dataBox.values.toList();
+
       if (result.error != null && result.error?.type is NetworkError) {
         log('No NETWORK');
-        print('Using stored data Of cases from Hive: $storedData');
         return storedData;
       } else {
         throw ApplicationError(

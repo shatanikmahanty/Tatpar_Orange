@@ -59,6 +59,8 @@ class CaseProfilePage extends StatelessWidget {
                             screeningStatus:
                                 (caseWorkedUpon.tbScreeningOutcome ?? '')
                                     .toString(),
+                            diagnosisStatus:
+                                (caseWorkedUpon.diagnosisName ?? '').toString(),
                           ),
                           Positioned(
                             child: Row(

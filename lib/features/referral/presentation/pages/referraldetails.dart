@@ -46,8 +46,6 @@ class ReferralDetailsPage extends StatelessWidget {
       orElse: () => const Block(block: null),
     );
     final String? blockName = blockData?.block;
-    print(panchayat);
-    print(cubit.state.dataModel?.blocks!);
     String? panchayatName =
         _getPanchayatName(cubit.state.dataModel?.blocks!, panchayat);
 
@@ -151,10 +149,8 @@ class ReferralDetailsPage extends StatelessWidget {
         var panchayatData = block.panchayat?.firstWhere(
             (p) => p.id == panchayat,
             orElse: () => const Panchayat(id: 0));
-        print(panchayatData);
         if (panchayatData?.id != 0) {
           panchayatName = panchayatData?.panchayat;
-          print(panchayatName);
           break;
         }
       }
@@ -559,13 +555,16 @@ class ReferralDetailsPage extends StatelessWidget {
                                           current.isLoading) ||
                                       previous.dataModel != current.dataModel),
                                   builder: (context, state) {
-                                    List<String> panchayats =
-                                        (state.dataModel != null)
-                                            ? state.dataModel!.blocks!
-                                                .expand((e) => e.panchayat!.map(
-                                                    (e) => '${e.panchayat}'))
-                                                .toList()
-                                            : [];
+                                    List<String> panchayats = (state
+                                        .dataModel!.blocks!
+                                        .where((element) =>
+                                            element.block ==
+                                            formGroup
+                                                .control('referral_block')
+                                                .value)
+                                        .expand((e) => e.panchayat!
+                                            .map((e) => '${e.panchayat}'))
+                                        .toList());
 
                                     if (state.isLoading ?? false) {
                                       return const SizedBox(

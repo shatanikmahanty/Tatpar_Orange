@@ -97,6 +97,8 @@ class CaseCubit extends Cubit<CaseState> {
   int? _selectedTreatmentPanchayatCodeId;
   int? _selectedIPFUAFBResult;
   int? _selectedCPAFBResult;
+  int? _selectedTreatmentIPFUNaatResult;
+  int? _selectedTreatmentCPFUNaatResult;
 
   ///ContactTracingPage
   int? _selectedTPTRegimen;
@@ -140,6 +142,10 @@ class CaseCubit extends Cubit<CaseState> {
       _selectedIPFUAFBResult = selectedIPFUAFBResult;
   set selectCPAFBResult(int? selectedCPAFBResult) =>
       _selectedCPAFBResult = selectedCPAFBResult;
+  set selectTreatmentIPFUNaatResult(int? selectedTreatmentIPFUNaatResult) =>
+      _selectedTreatmentIPFUNaatResult = selectedTreatmentIPFUNaatResult;
+  set selectTreatmentCPFUNaatResult(int? selectedTreatmentCPFUNaatResult) =>
+      _selectedTreatmentCPFUNaatResult = selectedTreatmentCPFUNaatResult;
 
   set selectTPTRegimen(int? selectedTPTRegimen) =>
       _selectedTPTRegimen = selectedTPTRegimen;
@@ -172,6 +178,8 @@ class CaseCubit extends Cubit<CaseState> {
   int? get selectedTreatmentOutcome => _selectedTreatmentOutcome;
   int? get selectedIPFUAFBResult => _selectedIPFUAFBResult;
   int? get selectedCPAFBResult => _selectedCPAFBResult;
+  int? get selectedTreatmentIPFUNaatResult => _selectedTreatmentIPFUNaatResult;
+  int? get selectedTreatmentCPFUNaatResult => _selectedTreatmentCPFUNaatResult;
 
   String? updateScreeningOutcome(FormGroup formGroup) {
     final cough = formGroup.control('cough').value;
@@ -357,12 +365,16 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateWHOSRQData(
       MentalHealthScreeningModel mentalHealthScreeningModel,
-      WHOSrqModel? whoSrqModel) async {
+      WHOSrqModel? whoSrqModel,
+      WHOSrqModel? ipfuWhoSrqModel,
+      WHOSrqModel? cpWhoSrqModel) async {
     final response = await caseRepo.saveWHOSRQData(
         mentalHealthScreeningModel: mentalHealthScreeningModel,
         whoSrqModel: whoSrqModel,
         id: state.caseWorkedUpon.whoSrq,
-        caseId: state.caseWorkedUpon.id);
+        caseId: state.caseWorkedUpon.id,
+        ipfuWhoSrqModel: ipfuWhoSrqModel,
+        cpWhoSrqModel: cpWhoSrqModel);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon.copyWith(whoSrq: response.id),
@@ -387,7 +399,6 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> updateTreatmentData(TreatmentModel treatmentModel) async {
-    print('Calling UPdate Treatment');
     final response = await caseRepo.saveTreatmentData(
         treatmentModel: treatmentModel,
         id: state.caseWorkedUpon.treatment,
