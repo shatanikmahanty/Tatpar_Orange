@@ -15,9 +15,15 @@ import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
 @RoutePage()
 class OutcomePage extends StatelessWidget {
   const OutcomePage({super.key});
-  FormGroup _outcomeFormBuilder({
-    required OutcomeModel? outcomeModel,
-  }) {
+  FormGroup _outcomeFormBuilder(
+      {required OutcomeModel? outcomeModel, required SourceCubit sourceCubit}) {
+    final treatmentOutcome = outcomeModel?.selectedtreatmentOutcome;
+    final treatmentOutcomeData =
+        sourceCubit.state.diagnosisData?.treatmentOutcome?.firstWhere(
+      (element) => element.id == treatmentOutcome,
+      orElse: () => const TreatmentOutcome(name: null),
+    );
+    final String? treatmentOutcomeName = treatmentOutcomeData?.name;
     return fb.group({
       'treatment_completion_date': FormControl<DateTime>(
         value: outcomeModel?.treatmentCompletionDate,
@@ -29,7 +35,7 @@ class OutcomePage extends StatelessWidget {
         value: outcomeModel?.nutritionProvided,
       ),
       'treatment_outcome': FormControl<String?>(
-        value: outcomeModel?.treatmentOutcome,
+        value: treatmentOutcomeName ?? outcomeModel?.treatmentOutcome,
       ),
       'treatment_comments': FormControl<String?>(
         value: outcomeModel?.treatmentComments,
@@ -41,7 +47,15 @@ class OutcomePage extends StatelessWidget {
     if (formGroup.valid) {
       final formData = formGroup.value;
       final cubit = context.read<CaseCubit>();
+      final sourceCubit = context.read<SourceCubit>();
       final model = cubit.state.outcomeModel ?? const OutcomeModel();
+      context.read<CaseCubit>().selectTreatmentOutcome = sourceCubit
+          .state.diagnosisData!.treatmentOutcome!
+          .firstWhere(
+              (element) =>
+                  element.name == formGroup.control('treatment_outcome').value,
+              orElse: () => const TreatmentOutcome(id: 0))
+          .id;
       final outcomeModel = model.copyWith(
         treatmentCompletionDate:
             formData['treatment_completion_date'] as DateTime?,
@@ -63,8 +77,9 @@ class OutcomePage extends StatelessWidget {
         builder: (context, state) => Scaffold(
             appBar: const CaseAppBar('Outcome'),
             body: ReactiveFormBuilder(
-                form: () =>
-                    _outcomeFormBuilder(outcomeModel: state.outcomeModel),
+                form: () => _outcomeFormBuilder(
+                    outcomeModel: state.outcomeModel,
+                    sourceCubit: context.read<SourceCubit>()),
                 builder: (BuildContext context, FormGroup formGroup,
                         Widget? child) =>
                     AutofillGroup(
@@ -137,20 +152,6 @@ class OutcomePage extends StatelessWidget {
                                                       .control(
                                                           'treatment_outcome')
                                                       .value = value;
-                                                  context
-                                                          .read<CaseCubit>()
-                                                          .selectTreatmentOutcome =
-                                                      state.diagnosisData!
-                                                          .treatmentOutcome!
-                                                          .firstWhere(
-                                                              (element) =>
-                                                                  element
-                                                                      .name ==
-                                                                  value,
-                                                              orElse: () =>
-                                                                  const TreatmentOutcome(
-                                                                      id: 0))
-                                                          .id;
                                                 },
                                                 selected: formGroup
                                                     .control(

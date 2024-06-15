@@ -22,20 +22,24 @@ part 'case_cubit.g.dart';
 
 @freezed
 class CaseState with _$CaseState {
-  const factory CaseState(
-      {bool? isLoading,
-      required Case caseWorkedUpon,
-      DataModel? dataModel,
-      ReferralDetailsModel? referralDetailsModel,
-      TBScreeningModel? tbScreeningModel,
-      WHOSrqModel? whoSrqModel,
-      MentalHealthScreeningModel? mentalHealthScreeningModel,
-      String? screeningOutcome,
-      DiagnosisModel? diagnsosisModel,
-      DiagnosisData? diagnosisData,
-      TreatmentModel? treatmentModel,
-      ContactTracingModel? contactTracingModel,
-      OutcomeModel? outcomeModel}) = _CaseState;
+  const factory CaseState({
+    @Default(false) bool isLoading,
+    @Default([]) List<ContactTracingModel> contactTracingList,
+    required Case caseWorkedUpon,
+    DataModel? dataModel,
+    ReferralDetailsModel? referralDetailsModel,
+    TBScreeningModel? tbScreeningModel,
+    WHOSrqModel? whoSrqModel,
+    MentalHealthScreeningModel? mentalHealthScreeningModel,
+    String? screeningOutcome,
+    int? contactTracingId,
+    DiagnosisModel? diagnsosisModel,
+    DiagnosisData? diagnosisData,
+    TreatmentModel? treatmentModel,
+    ContactTracingModel? contactTracingModel,
+    OutcomeModel? outcomeModel,
+    List<ContactTracingModel>? filteredContacts,
+  }) = _CaseState;
 
   factory CaseState.fromJson(Map<String, dynamic> json) =>
       _$CaseStateFromJson(json);
@@ -44,8 +48,10 @@ class CaseState with _$CaseState {
 class CaseCubit extends Cubit<CaseState> {
   final CaseRepo caseRepo;
 
-  CaseCubit({required this.caseRepo, required Case caseModel})
-      : super(CaseState(caseWorkedUpon: caseModel)) {
+  CaseCubit({
+    required this.caseRepo,
+    required Case caseModel,
+  }) : super(CaseState(caseWorkedUpon: caseModel)) {
     if (caseModel.referralDetails != null) {
       getReferralDetailsData(caseModel.referralDetails);
     }
@@ -65,8 +71,8 @@ class CaseCubit extends Cubit<CaseState> {
     if (caseModel.outcomeValue != null) {
       getOutcomeData(caseModel.outcomeValue);
     }
-    if (caseModel.contactTracing != null) {
-      getContactTracingData(caseModel.contactTracing);
+    if (caseModel.contactTracingList!.isNotEmpty) {
+      getContactTracingListData();
     }
   }
   Case? selectedCase;
@@ -320,8 +326,18 @@ class CaseCubit extends Cubit<CaseState> {
     );
   }
 
+  Future<void> getContactTracingListData() async {
+    final response =
+        await caseRepo.getContactTracingList(caseId: state.caseWorkedUpon.id);
+    emit(
+      state.copyWith(
+        contactTracingList: response,
+      ),
+    );
+  }
+
   Future<void> getContactTracingData(int? formId) async {
-    if (state.caseWorkedUpon.contactTracing == null) return;
+    if (state.caseWorkedUpon.contactTracingList == null) return;
     final response = await caseRepo.getContactTracing(id: formId);
     emit(
       state.copyWith(
@@ -413,10 +429,10 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> updateContactTracingData(
-      ContactTracingModel contactTracingModel) async {
+      ContactTracingModel contactTracingModel, int? id) async {
     final response = await caseRepo.saveContactTracingData(
         contactTracingModel: contactTracingModel,
-        id: state.caseWorkedUpon.contactTracing,
+        id: id,
         caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
@@ -425,7 +441,7 @@ class CaseCubit extends Cubit<CaseState> {
         contactTracingModel: response,
       ),
     );
-    getContactTracingData(state.caseWorkedUpon.contactTracing);
+    getContactTracingData(response.id);
   }
 
   Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {
@@ -480,7 +496,7 @@ class CaseCubit extends Cubit<CaseState> {
         status: false,
       ),
       WorkflowItem(
-        route: const ContactTracingRoute(),
+        route: const ContactTracingListRoute(),
         title: 'Contact Tracing',
         description: 'Contact Tracing Status',
         backendKey: 'contract_casing_status',
@@ -528,4 +544,35 @@ class CaseCubit extends Cubit<CaseState> {
   //     ),
   //   );
   // }
+  void updateSingleCase(ContactTracingModel updatedContact) {
+    final contactList = state.contactTracingList;
+    final index =
+        contactList.indexWhere((element) => element.id == updatedContact.id);
+
+    if (index == -1) return;
+    List<ContactTracingModel> contactCopy = List.from(contactList);
+    contactCopy[index] = updatedContact;
+    emit(
+      state.copyWith(contactTracingList: contactCopy),
+    );
+  }
+
+  void searchCases(String? query) {
+    applyFilters(caseFilter: query);
+  }
+
+  void applyFilters({String? caseFilter}) {
+    final cases = state.contactTracingList;
+    List<ContactTracingModel> filteredContacts = cases;
+    if (caseFilter == null) {
+      return emit(state.copyWith(filteredContacts: null));
+    } else {
+      filteredContacts = filteredContacts.where((element) {
+        final queryLower = caseFilter.toLowerCase();
+        final patientName = element.tbContactName;
+        return patientName!.toLowerCase().contains(queryLower);
+      }).toList();
+      return emit(state.copyWith(filteredContacts: filteredContacts));
+    }
+  }
 }

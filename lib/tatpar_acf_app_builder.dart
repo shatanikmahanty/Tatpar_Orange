@@ -16,6 +16,7 @@ import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
+
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 import 'package:tatpar_acf/l10n/language_provider.dart';
 import 'configurations/configurations.dart';
@@ -79,6 +80,12 @@ class TatparAcfAppBuilder extends AppBuilder {
             //     create: (context) => SubordinatesCaseCubit()),
             // BlocProvider(
             //   create: (_) => SplashBloc(),
+            // ),
+            // BlocProvider<ContactTracingCubit>(
+            //   create: (context) => ContactTracingCubit(
+            //     repo: context.read<CaseRepo>(),
+            //     contactTracingModel: const ContactTracingModel(),
+            //   ),
             // ),
 
             BlocProvider<CaseListCubit>(

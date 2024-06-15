@@ -155,8 +155,9 @@ class CaseRepo {
       {required ContactTracingModel contactTracingModel,
       required int? id,
       required int? caseId}) async {
+    print(id);
     final request = NetworkRequest(
-      '$contactTracingModel${id == null ? '' : '/$id'}',
+      '$contactTracingUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
       isAuthorized: true,
       data: {
@@ -332,6 +333,33 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       return OutcomeModel.fromJson(result.data['data']);
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error Retrieving data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<List<ContactTracingModel>> getContactTracingList({
+    required int? caseId,
+  }) async {
+    // int caseId = 2;
+    final request = NetworkRequest(
+      '$contactTracingListUrl/$caseId',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      final List<dynamic> contactData = result.data['data'];
+      final List<ContactTracingModel> contactDataList = contactData
+          .map<ContactTracingModel>((e) => ContactTracingModel.fromJson(e))
+          .toList();
+      contactDataList.sort((a, b) => b.id!.compareTo(a.id!));
+
+      return contactDataList;
     } else {
       throw ApplicationError(
         errorMsg: 'Error Retrieving data',

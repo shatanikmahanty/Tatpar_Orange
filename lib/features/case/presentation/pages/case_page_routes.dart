@@ -34,7 +34,11 @@ final caseRoutes = [
     page: OutcomeRoute.page,
   ),
   AutoRoute(
+    path: 'contact_tracing_list_page',
+    page: ContactTracingListRoute.page,
+  ),
+  AutoRoute(
     path: 'contact_tracing_page',
-    page: ContactTracingRoute.page,
+    page: ContactTracingRouter.page,
   ),
 ];
