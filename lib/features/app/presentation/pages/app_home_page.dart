@@ -59,7 +59,7 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        AppLocalizations.of(context)!.language,
+                        'Welcome',
                         // style: AppTextStyle.titleMedium.copyWith(
                         //     fontWeight: FontWeight.w400,
                         //     height: 2,
