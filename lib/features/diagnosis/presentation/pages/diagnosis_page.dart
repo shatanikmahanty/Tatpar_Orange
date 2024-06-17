@@ -11,6 +11,7 @@ import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_field
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../app/presentation/widgets/chip_radio_buttons.dart';
 
@@ -304,7 +305,8 @@ class DiagnosisPage extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             ChipRadioButtons(
-                              label: 'Diagnosis Initiated',
+                              label: AppLocalizations.of(context)!
+                                  .diagnosisInitiated,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -317,7 +319,8 @@ class DiagnosisPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: 'First Consultation',
+                              label: AppLocalizations.of(context)!
+                                  .firstConsultation,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -338,7 +341,8 @@ class DiagnosisPage extends StatelessWidget {
                                             firstDate: DateTime(2002),
                                             controlName:
                                                 'first_consultation_date',
-                                            label: 'First Consultation Date',
+                                            label: AppLocalizations.of(context)!
+                                                .firstConsultationDate,
                                           ),
                                           // const SizedBox(height: kPadding * 2),
                                         ]))),
@@ -353,7 +357,8 @@ class DiagnosisPage extends StatelessWidget {
                                         child: Column(children: [
                                           const SizedBox(height: kPadding * 2),
                                           ChipRadioButtons(
-                                            label: 'Chest Xray',
+                                            label: AppLocalizations.of(context)!
+                                                .chestXray,
                                             options: const ['Yes', 'No'],
                                             crossAxisCount: 2,
                                             onChanged: (value) {
@@ -385,15 +390,17 @@ class DiagnosisPage extends StatelessWidget {
                                                               DateTime(2002),
                                                           controlName:
                                                               'chest_xray_date',
-                                                          label:
-                                                              'Chest Xray Date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .chestXrayDate,
                                                         ),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'Chest Xray Result',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .chestXrayResult,
                                                           options: const [
                                                             'Normal',
                                                             'Abnormal'
@@ -413,7 +420,8 @@ class DiagnosisPage extends StatelessWidget {
                                                       ]))),
                                           const SizedBox(height: kPadding * 2),
                                           ChipRadioButtons(
-                                            label: 'AFB Done',
+                                            label: AppLocalizations.of(context)!
+                                                .afbDone,
                                             options: const ['Yes', 'No'],
                                             crossAxisCount: 2,
                                             onChanged: (value) {
@@ -438,11 +446,12 @@ class DiagnosisPage extends StatelessWidget {
                                                               .value) ==
                                                           'Yes',
                                                       child: Column(children: [
-                                                        const PrimaryTextField(
+                                                        PrimaryTextField(
                                                           formControlName:
                                                               'afb_lab_number',
-                                                          label:
-                                                              'AFB Lab Number',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .afbLabNumber,
                                                           prefixIcon: Icons
                                                               .account_circle_outlined,
                                                         ),
@@ -488,8 +497,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               return TextFieldWithList(
                                                                 controlName:
                                                                     'afb1_result',
-                                                                label:
-                                                                    'AFB-1 Result',
+                                                                label: AppLocalizations.of(
+                                                                        context)!
+                                                                    .afb1Result,
                                                                 padding:
                                                                     EdgeInsets
                                                                         .zero,
@@ -516,8 +526,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               DateTime(2002),
                                                           controlName:
                                                               'afb1_result_date',
-                                                          label:
-                                                              'AFB-1 Result Date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .afb1ResultDate,
                                                         ),
                                                         const SizedBox(
                                                             height:
@@ -561,8 +572,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               return TextFieldWithList(
                                                                 controlName:
                                                                     'afb2_result',
-                                                                label:
-                                                                    'AFB-2 Result',
+                                                                label: AppLocalizations.of(
+                                                                        context)!
+                                                                    .afb2Result,
                                                                 padding:
                                                                     EdgeInsets
                                                                         .zero,
@@ -589,15 +601,17 @@ class DiagnosisPage extends StatelessWidget {
                                                               DateTime(2002),
                                                           controlName:
                                                               'afb2_result_date',
-                                                          label:
-                                                              'AFB-2 Result Date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .afb2ResultDate,
                                                         ),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
                                                       ]))),
                                           ChipRadioButtons(
-                                            label: 'NAAT Test',
+                                            label: AppLocalizations.of(context)!
+                                                .naatTest,
                                             options: const ['Yes', 'No'],
                                             crossAxisCount: 2,
                                             onChanged: (value) {
@@ -658,8 +672,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               return TextFieldWithList(
                                                                 controlName:
                                                                     'naat_machine',
-                                                                label:
-                                                                    'NAAT Machine',
+                                                                label: AppLocalizations.of(
+                                                                        context)!
+                                                                    .naatMachine,
                                                                 padding:
                                                                     EdgeInsets
                                                                         .zero,
@@ -682,7 +697,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label: 'NAAT Site',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .naatSite,
                                                           options: const [
                                                             'Internal',
                                                             'GOV'
@@ -724,11 +741,12 @@ class DiagnosisPage extends StatelessWidget {
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        const PrimaryTextField(
+                                                        PrimaryTextField(
                                                           formControlName:
                                                               'naat_lab_number',
-                                                          label:
-                                                              'NAAT Lab Number',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .naatLabNumber,
                                                           prefixIcon: Icons
                                                               .account_circle_outlined,
                                                         ),
@@ -740,8 +758,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               DateTime(2002),
                                                           controlName:
                                                               'sample_collection_date',
-                                                          label:
-                                                              'Sample Collection Date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .sampleCollectionDate,
                                                         ),
                                                         const SizedBox(
                                                             height:
@@ -751,8 +770,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               DateTime(2002),
                                                           controlName:
                                                               'naat_result_date',
-                                                          label:
-                                                              'NAAT Result Date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .naatResultDate,
                                                         ),
                                                         const SizedBox(
                                                             height:
@@ -796,8 +816,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               return TextFieldWithList(
                                                                 controlName:
                                                                     'mtb_result',
-                                                                label:
-                                                                    'MTB Result',
+                                                                label: AppLocalizations.of(
+                                                                        context)!
+                                                                    .mtbResult,
                                                                 padding:
                                                                     EdgeInsets
                                                                         .zero,
@@ -822,8 +843,9 @@ class DiagnosisPage extends StatelessWidget {
                                                         TextFieldWithList(
                                                           controlName:
                                                               'rif_resistance',
-                                                          label:
-                                                              'RIF Resistance',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .rifResistance,
                                                           padding:
                                                               EdgeInsets.zero,
                                                           prefixIcon: Icons
@@ -869,7 +891,9 @@ class DiagnosisPage extends StatelessWidget {
                                                         //     height:
                                                         //         kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label: 'XDR Done',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .xdrDone,
                                                           options: const [
                                                             'Yes',
                                                             'No'
@@ -904,17 +928,19 @@ class DiagnosisPage extends StatelessWidget {
                                                               DateTime(2002),
                                                           controlName:
                                                               'xdr_result_date',
-                                                          label:
-                                                              'XDR Result Date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .xdrResultDate,
                                                         ),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        const PrimaryTextField(
+                                                        PrimaryTextField(
                                                           formControlName:
                                                               'xdr_lab_number',
-                                                          label:
-                                                              'XDR Lab Number',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .xdrLabNumber,
                                                           prefixIcon: Icons
                                                               .account_circle_outlined,
                                                         ),
@@ -922,7 +948,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label: 'XDR Site',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .xdrSite,
                                                           options: const [
                                                             'Internal',
                                                             'GOV'
@@ -943,8 +971,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'INH Resistance',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .inhResistance,
                                                           options: const [
                                                             'Sensitive',
                                                             'Resistant'
@@ -965,8 +994,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'FLQ Resistance',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .flqResistance,
                                                           options: const [
                                                             'Sensitive',
                                                             'Resistant'
@@ -987,8 +1017,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'AMK Resistance',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .amkResistance,
                                                           options: const [
                                                             'Sensitive',
                                                             'Resistant'
@@ -1009,8 +1040,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'KAN Resistance',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .kanResistance,
                                                           options: const [
                                                             'Sensitive',
                                                             'Resistant'
@@ -1031,8 +1063,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'CAP Resistance',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .capResistance,
                                                           options: const [
                                                             'Sensitive',
                                                             'Resistant'
@@ -1053,8 +1086,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'ETH Resistance',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .ethResistance,
                                                           options: const [
                                                             'Sensitive',
                                                             'Resistant'
@@ -1113,8 +1147,9 @@ class DiagnosisPage extends StatelessWidget {
                                                               return TextFieldWithList(
                                                                 controlName:
                                                                     'xdr_result',
-                                                                label:
-                                                                    'XDR Result',
+                                                                label: AppLocalizations.of(
+                                                                        context)!
+                                                                    .xdrResult,
                                                                 padding:
                                                                     EdgeInsets
                                                                         .zero,
@@ -1138,7 +1173,8 @@ class DiagnosisPage extends StatelessWidget {
                                                                 kPadding * 2),
                                                       ]))),
                                           ChipRadioButtons(
-                                            label: 'FNAC',
+                                            label: AppLocalizations.of(context)!
+                                                .fnac,
                                             options: const ['Yes', 'No'],
                                             crossAxisCount: 2,
                                             onChanged: (value) {
@@ -1161,12 +1197,16 @@ class DiagnosisPage extends StatelessWidget {
                                                   DateTextInput(
                                                     firstDate: DateTime(2002),
                                                     controlName: 'fnac_date',
-                                                    label: 'FNAC Date',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .fnacDate,
                                                   ),
                                                   const SizedBox(
                                                       height: kPadding * 2),
                                                   ChipRadioButtons(
-                                                    label: 'FNAC Result',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .fnacResult,
                                                     options: const [
                                                       'Normal',
                                                       'Abnormal'
@@ -1184,10 +1224,12 @@ class DiagnosisPage extends StatelessWidget {
                                                   ),
                                                   const SizedBox(
                                                       height: kPadding * 2),
-                                                  const PrimaryTextField(
+                                                  PrimaryTextField(
                                                     formControlName:
                                                         'fnac_comments',
-                                                    label: 'FNAC Comments',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .fnacComments,
                                                     prefixIcon: Icons
                                                         .account_circle_outlined,
                                                   ),
@@ -1198,7 +1240,8 @@ class DiagnosisPage extends StatelessWidget {
                                             ),
                                           ),
                                           ChipRadioButtons(
-                                            label: 'USG',
+                                            label: AppLocalizations.of(context)!
+                                                .usg,
                                             options: const ['Yes', 'No'],
                                             crossAxisCount: 2,
                                             onChanged: (value) {
@@ -1221,12 +1264,16 @@ class DiagnosisPage extends StatelessWidget {
                                                   DateTextInput(
                                                     firstDate: DateTime(2002),
                                                     controlName: 'usg_date',
-                                                    label: 'USG Date',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .usgDate,
                                                   ),
                                                   const SizedBox(
                                                       height: kPadding * 2),
                                                   ChipRadioButtons(
-                                                    label: 'USG Result',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .usgResult,
                                                     options: const [
                                                       'Normal',
                                                       'Abnormal'
@@ -1243,10 +1290,12 @@ class DiagnosisPage extends StatelessWidget {
                                                   ),
                                                   const SizedBox(
                                                       height: kPadding * 2),
-                                                  const PrimaryTextField(
+                                                  PrimaryTextField(
                                                     formControlName:
                                                         'usg_comments',
-                                                    label: 'USG Comments',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .usgComments,
                                                     prefixIcon: Icons
                                                         .account_circle_outlined,
                                                   ),
@@ -1257,7 +1306,8 @@ class DiagnosisPage extends StatelessWidget {
                                             ),
                                           ),
                                           ChipRadioButtons(
-                                            label: 'Other Test',
+                                            label: AppLocalizations.of(context)!
+                                                .otherTest,
                                             options: const ['Yes', 'No'],
                                             crossAxisCount: 2,
                                             onChanged: (value) {
@@ -1284,16 +1334,19 @@ class DiagnosisPage extends StatelessWidget {
                                                               DateTime(2002),
                                                           controlName:
                                                               'other_test_date',
-                                                          label:
-                                                              'Other Test Date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .otherTestDate,
                                                         ),
                                                         const SizedBox(
                                                             height:
                                                                 kPadding * 2),
-                                                        const PrimaryTextField(
+                                                        PrimaryTextField(
                                                           formControlName:
                                                               'test_name',
-                                                          label: 'Test Name',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .testName,
                                                           prefixIcon: Icons
                                                               .account_circle_outlined,
                                                         ),
@@ -1301,8 +1354,9 @@ class DiagnosisPage extends StatelessWidget {
                                                             height:
                                                                 kPadding * 2),
                                                         ChipRadioButtons(
-                                                          label:
-                                                              'Other Test Result',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .otherTestResult,
                                                           options: const [
                                                             'Normal',
                                                             'Abnormal'
@@ -1325,7 +1379,8 @@ class DiagnosisPage extends StatelessWidget {
                                                       ]))),
                                           TextFieldWithList(
                                             controlName: 'diagnosis',
-                                            label: 'Diagnosis',
+                                            label: AppLocalizations.of(context)!
+                                                .diagnosis,
                                             padding: EdgeInsets.zero,
                                             prefixIcon:
                                                 Icons.account_circle_outlined,
@@ -1346,13 +1401,15 @@ class DiagnosisPage extends StatelessWidget {
                                           DateTextInput(
                                             firstDate: DateTime(2002),
                                             controlName: 'diagnosis_date',
-                                            label: 'Diagnosis Date',
+                                            label: AppLocalizations.of(context)!
+                                                .diagnosisDate,
                                           ),
                                           const SizedBox(height: kPadding * 2),
-                                          const PrimaryTextField(
+                                          PrimaryTextField(
                                             formControlName:
                                                 'diagnosis_comments',
-                                            label: 'Diagnosis Comments',
+                                            label: AppLocalizations.of(context)!
+                                                .diagnosisComments,
                                             prefixIcon:
                                                 Icons.account_circle_outlined,
                                           ),

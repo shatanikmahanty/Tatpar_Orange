@@ -1,4 +1,3 @@
-import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -137,9 +136,9 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
               ),
               child: BottomNavigationBar(
                 onTap: (value) {
-                  if (value > 1) {
-                    DjangoflowAppSnackbar.showInfo('Coming Soon');
-                  }
+                  // if (value > 1) {
+                  //   DjangoflowAppSnackbar.showInfo('Coming Soon');
+                  // }
                   tabsRouter.setActiveIndex(value);
                 },
                 currentIndex: activeIndex,

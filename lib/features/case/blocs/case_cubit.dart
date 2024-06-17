@@ -71,9 +71,9 @@ class CaseCubit extends Cubit<CaseState> {
     if (caseModel.outcomeValue != null) {
       getOutcomeData(caseModel.outcomeValue);
     }
-    if (caseModel.contactTracingList!.isNotEmpty) {
-      getContactTracingListData();
-    }
+    // if (caseModel.contactTracingList!.isNotEmpty) {
+    //   getContactTracingListData();
+    // }
   }
   Case? selectedCase;
 

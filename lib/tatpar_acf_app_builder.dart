@@ -18,6 +18,7 @@ import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
 
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
+import 'package:tatpar_acf/l10n/l10n.dart';
 import 'package:tatpar_acf/l10n/language_provider.dart';
 import 'configurations/configurations.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
@@ -124,9 +125,7 @@ class TatparAcfAppBuilder extends AppBuilder {
                     themeMode: appState.themeMode,
                     // locale: Locale(appState.locale, ''),
                     locale: provider.locale,
-                    supportedLocales: const [
-                      Locale('en', ''),
-                    ],
+                    supportedLocales: L10n.all,
                     localizationsDelegates: const [
                       AppLocalizations.delegate,
                       GlobalMaterialLocalizations.delegate,

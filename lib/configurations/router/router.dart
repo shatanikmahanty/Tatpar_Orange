@@ -50,6 +50,9 @@ class AppRouter extends $AppRouter {
     AutoRoute(path: '/basic', page: BasicDetails.page, guards: [
       AuthGuard(),
     ]),
+    AutoRoute(path: '/settings', page: SettingsRoute.page, guards: [
+      AuthGuard(),
+    ]),
   ];
 }
 
