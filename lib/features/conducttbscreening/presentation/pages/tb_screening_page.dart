@@ -11,6 +11,7 @@ import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_fie
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../app/presentation/widgets/date_text_input.dart';
 import '../../../referral/presentation/widgets/bottom_button_bar.dart';
@@ -117,7 +118,7 @@ class TBScreeningPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(builder: (context, state) {
       return Scaffold(
-          appBar: const CaseAppBar('TB Screening'),
+          appBar: CaseAppBar(AppLocalizations.of(context)!.conducttbscreening),
           body: ReactiveFormBuilder(form: () {
             return _tbScreeningDetailsFormBuilder(
                 tbScreeningModel: state.tbScreeningModel,
@@ -140,17 +141,18 @@ class TBScreeningPage extends StatelessWidget {
                             DateTextInput(
                               firstDate: DateTime(2002),
                               controlName: 'screening_date',
-                              label: 'Screening Date',
+                              label:
+                                  AppLocalizations.of(context)!.screeningDate,
                             ),
                             const SizedBox(height: kPadding * 2),
-                            const PrimaryTextField(
+                            PrimaryTextField(
                               formControlName: 'screened_by',
-                              label: 'Screened By',
+                              label: AppLocalizations.of(context)!.screenedBy,
                               prefixIcon: Icons.account_circle_outlined,
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.1 Cough for 2 weeks ?',
+                              label: AppLocalizations.of(context)!.cough,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -160,7 +162,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.2 Sputum for 2 weeks ?',
+                              label: AppLocalizations.of(context)!.sputum,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -170,7 +172,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.3 Hemoptysis ?',
+                              label: AppLocalizations.of(context)!.hemoptysis,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -180,7 +182,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.4 Fever for 2 weeks ?',
+                              label: AppLocalizations.of(context)!.fever,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -190,7 +192,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.5 Night sweats for 2 weeks ?',
+                              label: AppLocalizations.of(context)!.nightSweats,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -200,7 +202,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.6 Chest pain for 1 month ?',
+                              label: AppLocalizations.of(context)!.chestPain,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -210,7 +212,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.7 Weight loss for 2 weeks ?',
+                              label: AppLocalizations.of(context)!.weightLoss,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -221,7 +223,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '1.8 Swollen gland ?',
+                              label: AppLocalizations.of(context)!.swollenGland,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -233,7 +235,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '2. TB medicine before ?',
+                              label: AppLocalizations.of(context)!.tbMedicine,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -244,7 +246,7 @@ class TBScreeningPage extends StatelessWidget {
                             ),
                             const SizedBox(height: kPadding * 2),
                             ChipRadioButtons(
-                              label: '3. Are you Pregnant?',
+                              label: AppLocalizations.of(context)!.pregnant,
                               options: const ['Yes', 'No'],
                               crossAxisCount: 2,
                               onChanged: (value) {
@@ -285,7 +287,8 @@ class TBScreeningPage extends StatelessWidget {
                                           const SizedBox(height: kPadding * 2),
                                           ChipRadioButtons(
                                             crossAxisCount: 2,
-                                            label: 'Trimester Of PW',
+                                            label: AppLocalizations.of(context)!
+                                                .trimester,
                                             options: list,
                                             selected: formGroup
                                                 .control('trimester')
@@ -317,14 +320,15 @@ class TBScreeningPage extends StatelessWidget {
                                   formGroup.control('screening_outcome').value =
                                       state.screeningOutcome;
                                   return SecondaryTextField(
-                                      label: 'Screening Outcome',
+                                      label: AppLocalizations.of(context)!
+                                          .screeningOutcome,
                                       text: state.screeningOutcome ?? '');
                                 }),
                             const SizedBox(height: kPadding * 2),
-                            const Column(children: [
+                            Column(children: [
                               PrimaryTextField(
                                 formControlName: 'comments',
-                                label: 'Comments',
+                                label: AppLocalizations.of(context)!.comments,
                                 prefixIcon: Icons.account_circle_outlined,
                               ),
                             ]),

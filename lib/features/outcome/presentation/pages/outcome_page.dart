@@ -11,6 +11,7 @@ import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.
 import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class OutcomePage extends StatelessWidget {
@@ -60,7 +61,6 @@ class OutcomePage extends StatelessWidget {
         treatmentCompletionDate:
             formData['treatment_completion_date'] as DateTime?,
         nikshayId: formData['nikshay_id'] as String?,
-        fcName: formData['fc_name'] as String?,
         nutritionProvided: formData['nutrition_provided'] as String?,
         selectedtreatmentOutcome: cubit.selectedTreatmentOutcome,
         treatmentComments: formData['treatment_comments'] as String?,
@@ -98,20 +98,22 @@ class OutcomePage extends StatelessWidget {
                                           firstDate: DateTime(2002),
                                           controlName:
                                               'treatment_completion_date',
-                                          label: 'Treatment Completion Date',
+                                          label: AppLocalizations.of(context)!
+                                              .treatmentCompletionDate,
                                         ),
                                         const SizedBox(height: kPadding * 2),
-                                        const PrimaryTextField(
+                                        PrimaryTextField(
                                           formControlName: 'nikshay_id',
-                                          label: 'Nikshay ID',
+                                          label: AppLocalizations.of(context)!
+                                              .nikshayId,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                         ),
                                         const SizedBox(height: kPadding * 2),
-                                        const PrimaryTextField(
+                                        PrimaryTextField(
                                           formControlName: 'nutrition_provided',
-                                          label:
-                                              'Nutrition Provided For Months',
+                                          label: AppLocalizations.of(context)!
+                                              .nutritionProvided,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                         ),
@@ -144,7 +146,9 @@ class OutcomePage extends StatelessWidget {
                                               }
 
                                               return ChipRadioButtons(
-                                                label: 'Treatment Outcome',
+                                                label: AppLocalizations.of(
+                                                        context)!
+                                                    .treatmentOutcome,
                                                 options: treatmentOutcome,
                                                 crossAxisCount: 2,
                                                 onChanged: (value) {
@@ -160,9 +164,10 @@ class OutcomePage extends StatelessWidget {
                                               );
                                             }),
                                         const SizedBox(height: kPadding * 2),
-                                        const PrimaryTextField(
+                                        PrimaryTextField(
                                           formControlName: 'treatment_comments',
-                                          label: 'Treatment Comments*',
+                                          label: AppLocalizations.of(context)!
+                                              .treatmentComments,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                         ),

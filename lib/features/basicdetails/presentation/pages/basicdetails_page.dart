@@ -14,6 +14,7 @@ import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
@@ -213,7 +214,7 @@ class BasicDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
-            appBar: const CaseAppBar('Referral Details'),
+            appBar: CaseAppBar(AppLocalizations.of(context)!.addReferral),
             body: ReactiveFormBuilder(
               form: () {
                 return _basicDetailsFormBuilder(
@@ -233,16 +234,16 @@ class BasicDetails extends StatelessWidget {
                               horizontal: kPadding * 2),
                           child: Column(
                             children: [
-                              const PrimaryTextField(
+                              PrimaryTextField(
                                 formControlName: 'referral_id',
-                                label: 'Referral_ID',
+                                label: AppLocalizations.of(context)!.referralID,
                                 prefixIcon: Icons.account_circle_outlined,
                               ),
                               const SizedBox(height: kPadding * 2),
                               _loadDistricts(formGroup, context),
                               PrimaryTextField<int?>(
                                 formControlName: 'ward',
-                                label: 'Referral Ward(1-40)',
+                                label: AppLocalizations.of(context)!.ward,
                                 prefixIcon: Icons.account_circle_outlined,
                                 keyboardType: TextInputType.number,
                                 inputFormatter: [
@@ -254,18 +255,20 @@ class BasicDetails extends StatelessWidget {
                               DateTextInput(
                                 firstDate: DateTime(2002),
                                 controlName: 'referral_date',
-                                label: 'Referral Date',
+                                label:
+                                    AppLocalizations.of(context)!.referralDate,
                               ),
                               const SizedBox(height: kPadding * 2),
-                              const PrimaryTextField(
+                              PrimaryTextField(
                                 formControlName: 'referral_name',
-                                label: 'Referral Name',
+                                label:
+                                    AppLocalizations.of(context)!.referralName,
                                 prefixIcon: Icons.account_circle_outlined,
                               ),
                               const SizedBox(height: kPadding * 2),
                               PrimaryTextField<int?>(
                                 formControlName: 'age',
-                                label: 'Age',
+                                label: AppLocalizations.of(context)!.age,
                                 prefixIcon: Icons.account_circle_outlined,
                                 keyboardType: TextInputType.number,
                                 inputFormatter: [
@@ -275,7 +278,7 @@ class BasicDetails extends StatelessWidget {
                               ),
                               const SizedBox(height: kPadding * 2),
                               ChipRadioButtons(
-                                label: 'Gender',
+                                label: AppLocalizations.of(context)!.gender,
                                 options: const ['Male', 'Female', 'Other'],
                                 selected: formGroup.control('gender').value,
                                 onChanged: (value) {
@@ -283,15 +286,17 @@ class BasicDetails extends StatelessWidget {
                                 },
                               ),
                               const SizedBox(height: kPadding * 2),
-                              const PrimaryTextField(
+                              PrimaryTextField(
                                 formControlName: 'guardian_name',
-                                label: 'Guardian Name',
+                                label:
+                                    AppLocalizations.of(context)!.guardianName,
                                 prefixIcon: Icons.account_circle_outlined,
                               ),
                               const SizedBox(height: kPadding * 2),
                               PrimaryTextField(
                                 formControlName: 'guardian_phone_number',
-                                label: 'Guardian Phone Number',
+                                label: AppLocalizations.of(context)!
+                                    .guardianPhoneNumber,
                                 maxLength: 10,
                                 prefixIcon: Icons.phone_outlined,
                                 keyboardType: TextInputType.number,
@@ -323,7 +328,8 @@ class BasicDetails extends StatelessWidget {
                                     }
                                     return ChipRadioButtons(
                                       crossAxisCount: 2,
-                                      label: 'Caste Category',
+                                      label: AppLocalizations.of(context)!
+                                          .casteCategory,
                                       options: list,
                                       selected: formGroup
                                           .control('caste_category')
@@ -360,7 +366,8 @@ class BasicDetails extends StatelessWidget {
                                     return ChipRadioButtons(
                                       allowMultiSelect: true,
                                       crossAxisCount: 2,
-                                      label: 'Key Population',
+                                      label: AppLocalizations.of(context)!
+                                          .keyPopulation,
                                       selectedList: formGroup
                                           .control('key_population')
                                           .value,
@@ -430,7 +437,9 @@ class BasicDetails extends StatelessWidget {
                                                 children: [
                                                   ChipRadioButtons(
                                                     crossAxisCount: 2,
-                                                    label: 'Trimester Of PW',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .trimester,
                                                     options: list,
                                                     selected: formGroup
                                                         .control('trimester')
@@ -447,9 +456,9 @@ class BasicDetails extends StatelessWidget {
                                               ),
                                             ));
                                   }),
-                              const PrimaryTextField(
+                              PrimaryTextField(
                                 formControlName: 'referred_by',
-                                label: 'Referred by Name',
+                                label: AppLocalizations.of(context)!.referredBy,
                                 prefixIcon: Icons.location_city_outlined,
                               ),
                               const SizedBox(height: kPadding * 2),
@@ -476,7 +485,8 @@ class BasicDetails extends StatelessWidget {
                                     }
                                     return ChipRadioButtons(
                                       crossAxisCount: 2,
-                                      label: 'Referred Source',
+                                      label: AppLocalizations.of(context)!
+                                          .referrerSource,
                                       options: list,
                                       selected: formGroup
                                           .control('referrer_source')
@@ -520,7 +530,8 @@ class BasicDetails extends StatelessWidget {
                                     }
                                     return TextFieldWithList(
                                       controlName: 'referrer_panchayat_code',
-                                      label: 'Referrer Panchayat Code',
+                                      label: AppLocalizations.of(context)!
+                                          .referrerPanchayatCode,
                                       padding: EdgeInsets.zero,
                                       prefixIcon: Icons.account_circle_outlined,
                                       listData: panchayats,
@@ -536,7 +547,8 @@ class BasicDetails extends StatelessWidget {
                               const SizedBox(height: kPadding * 2),
                               PrimaryTextField<int?>(
                                 formControlName: 'referred_ward',
-                                label: 'Referred Ward',
+                                label:
+                                    AppLocalizations.of(context)!.referredWard,
                                 prefixIcon: Icons.account_circle_outlined,
                                 keyboardType: TextInputType.number,
                                 inputFormatter: [
@@ -599,7 +611,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
           children: [
             TextFieldWithList(
               controlName: 'district',
-              label: ' Referral District',
+              label: AppLocalizations.of(context)!.district,
               padding: EdgeInsets.zero,
               prefixIcon: Icons.account_circle_outlined,
               listData: districts,
@@ -619,13 +631,14 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
             const SizedBox(height: kPadding * 2),
             TextFieldWithList(
               controlName: 'referral_block',
-              label: 'Referral Block',
+              label: AppLocalizations.of(context)!.block,
               padding: EdgeInsets.zero,
               prefixIcon: Icons.account_circle_outlined,
               listData: blocks,
               allowMultiSelection: false,
               onSelected: (value) {
                 formGroup.control('referral_block').value = value[0];
+                print(formGroup.control('referral_block').value);
 
                 panchayats.clear();
 
@@ -639,7 +652,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
             const SizedBox(height: kPadding * 2),
             TextFieldWithList(
               controlName: 'panchayat_code',
-              label: 'Refferal Panchayat Code',
+              label: AppLocalizations.of(context)!.panchayatCode,
               padding: EdgeInsets.zero,
               prefixIcon: Icons.account_circle_outlined,
               listData: panchayats,

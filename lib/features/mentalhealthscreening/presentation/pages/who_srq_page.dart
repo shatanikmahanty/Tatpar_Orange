@@ -5,6 +5,7 @@ import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_acf/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
@@ -102,7 +103,8 @@ class WHOSRQPage extends StatelessWidget {
                                     horizontal: kPadding * 2),
                                 child: Column(children: [
                                   ChipRadioButtons(
-                                    label: '1. Do you often have headaches?',
+                                    label:
+                                        AppLocalizations.of(context)!.headache,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -114,7 +116,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '2. Is your apetite poor?',
+                                    label:
+                                        AppLocalizations.of(context)!.apetite,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -126,7 +129,7 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '3. Do you sleep badly?',
+                                    label: AppLocalizations.of(context)!.sleep,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -136,7 +139,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '4. Are you easily frightened?',
+                                    label: AppLocalizations.of(context)!
+                                        .frightened,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -148,7 +152,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '5. Do your hands shake?',
+                                    label: AppLocalizations.of(context)!
+                                        .handsShake,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -161,7 +166,7 @@ class WHOSRQPage extends StatelessWidget {
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
                                     label:
-                                        '6. Do you feel nervous, tense or worried?',
+                                        AppLocalizations.of(context)!.nervous,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -173,7 +178,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '7. Is your digestion poor?',
+                                    label: AppLocalizations.of(context)!
+                                        .digestionPoor,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -187,8 +193,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '8. Do you have trouble thinking clearly?',
+                                    label: AppLocalizations.of(context)!
+                                        .troubleThinking,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -202,7 +208,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '9. Do you feel unhappy?',
+                                    label:
+                                        AppLocalizations.of(context)!.unhappy,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -214,7 +221,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '10. Do you cry more than usual?',
+                                    label:
+                                        AppLocalizations.of(context)!.cryMore,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -226,8 +234,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '11. Do you find it difficult to enjoy your daily activities?',
+                                    label: AppLocalizations.of(context)!
+                                        .dailyActivities,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -241,8 +249,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '12. Do you find it difficult to make decisions?',
+                                    label: AppLocalizations.of(context)!
+                                        .decisionMaking,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -256,7 +264,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '13. Is your daily work suffering?',
+                                    label: AppLocalizations.of(context)!
+                                        .dailyWorkSuffering,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -270,8 +279,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '14. Are you unable to play a useful part in your life?',
+                                    label: AppLocalizations.of(context)!
+                                        .playUsefulPart,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -285,8 +294,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '15. Have you lost interest in things?',
+                                    label: AppLocalizations.of(context)!
+                                        .lostInterest,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -299,8 +308,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '16. Do you feel that you are a worthless person?',
+                                    label: AppLocalizations.of(context)!
+                                        .worthlessPerson,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -314,8 +323,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '17. Has the thought of ending your life been on your mind?',
+                                    label: AppLocalizations.of(context)!
+                                        .endingYourLife,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -329,8 +338,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '18. Do you feel tired all the time?',
+                                    label: AppLocalizations.of(context)!
+                                        .tiredAllTheTime,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -344,8 +353,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label:
-                                        '19. Do you have uncomfortable feeling in your stomach?',
+                                    label: AppLocalizations.of(context)!
+                                        .uncomfortableFeelings,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {
@@ -359,7 +368,8 @@ class WHOSRQPage extends StatelessWidget {
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   ChipRadioButtons(
-                                    label: '20. Are you easily tired?',
+                                    label: AppLocalizations.of(context)!
+                                        .easily_tired,
                                     options: const ['Yes', 'No'],
                                     crossAxisCount: 2,
                                     onChanged: (value) {

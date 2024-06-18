@@ -11,6 +11,7 @@ import 'package:tatpar_acf/features/case/presentation/widgets/secondary_text_fie
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../../app/presentation/widgets/date_text_input.dart';
 import '../../../referral/presentation/widgets/case_app_bar.dart';
@@ -134,7 +135,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
     String screeningStatus, ipfuScreeningStatus, cpScreeningStatus;
 
     return Scaffold(
-        appBar: const CaseAppBar('Mental Health Screening'),
+        appBar: CaseAppBar(AppLocalizations.of(context)!.mentalHealthScreening),
         body: BlocBuilder<CaseCubit, CaseState>(
             buildWhen: (previous, current) =>
                 (previous.isLoading != current.isLoading) ||
@@ -162,7 +163,9 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                             children: [
                                               ChipRadioButtons(
                                                 allowMultiSelect: false,
-                                                label: 'Stage',
+                                                label: AppLocalizations.of(
+                                                        context)!
+                                                    .stage,
                                                 options: const [
                                                   'IP',
                                                   'IPFU',
@@ -200,8 +203,9 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                       .now(),
                                                               controlName:
                                                                   'screening_date',
-                                                              label:
-                                                                  ' SRQ Screening Date',
+                                                              label: AppLocalizations
+                                                                      .of(context)!
+                                                                  .screeningDate,
                                                             ),
                                                             const SizedBox(
                                                                 height:
@@ -262,14 +266,14 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                 Expanded(
                                                                                   child: SecondaryTextField(
                                                                                     text: formGroup.control('screening_score').value ?? '',
-                                                                                    label: 'Screening Score',
+                                                                                    label: AppLocalizations.of(context)!.screeningScore,
                                                                                   ),
                                                                                 ),
                                                                                 const SizedBox(width: kPadding * 1.25),
                                                                                 Expanded(
                                                                                   child: SecondaryTextField(
                                                                                     text: formGroup.control('screening_status').value ?? '',
-                                                                                    label: 'Screening Status',
+                                                                                    label: AppLocalizations.of(context)!.screeningStatus,
                                                                                   ),
                                                                                 ),
                                                                                 const SizedBox(height: kPadding * 2),
@@ -282,7 +286,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                   child: DateTextInput(
                                                                                     firstDate: DateTime(2000),
                                                                                     controlName: 'counselling_linked',
-                                                                                    label: 'Counselling Linked',
+                                                                                    label: AppLocalizations.of(context)!.counsellingLinked,
                                                                                   ),
                                                                                 ),
                                                                                 const SizedBox(width: kPadding * 1.25),
@@ -290,7 +294,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                   child: DateTextInput(
                                                                                     firstDate: DateTime(2002),
                                                                                     controlName: 'psychiatrist_linked',
-                                                                                    label: 'Psychiatrist Linked',
+                                                                                    label: AppLocalizations.of(context)!.psychiatristLinked,
                                                                                   ),
                                                                                 ),
                                                                               ],
@@ -340,7 +344,9 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                         controlName:
                                                             'ipfu_screening_date',
                                                         label:
-                                                            ' SRQ Screening Date',
+                                                            AppLocalizations.of(
+                                                                    context)!
+                                                                .screeningDate,
                                                       ),
                                                       const SizedBox(
                                                           height: kPadding * 2),
@@ -406,7 +412,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                             child:
                                                                                 SecondaryTextField(
                                                                               text: formGroup.control('ipfu_screening_score').value ?? '',
-                                                                              label: 'Screening Score',
+                                                                              label: AppLocalizations.of(context)!.screeningScore,
                                                                             ),
                                                                           ),
                                                                           const SizedBox(
@@ -415,7 +421,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                             child:
                                                                                 SecondaryTextField(
                                                                               text: formGroup.control('ipfu_screening_status').value ?? '',
-                                                                              label: 'Screening Status',
+                                                                              label: AppLocalizations.of(context)!.screeningStatus,
                                                                             ),
                                                                           ),
                                                                           const SizedBox(
@@ -432,7 +438,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                 DateTextInput(
                                                                               firstDate: DateTime(2000),
                                                                               controlName: 'ipfu_counselling_linked',
-                                                                              label: 'Counselling Linked',
+                                                                              label: AppLocalizations.of(context)!.counsellingLinked,
                                                                             ),
                                                                           ),
                                                                           const SizedBox(
@@ -442,7 +448,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                 DateTextInput(
                                                                               firstDate: DateTime(2002),
                                                                               controlName: 'ipfu_psychiatrist_linked',
-                                                                              label: 'Psychiatrist Linked',
+                                                                              label: AppLocalizations.of(context)!.psychiatristLinked,
                                                                             ),
                                                                           ),
                                                                         ],
@@ -536,8 +542,9 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                         .now(),
                                                                 controlName:
                                                                     'cp_screening_date',
-                                                                label:
-                                                                    ' SRQ Screening Date',
+                                                                label: AppLocalizations.of(
+                                                                        context)!
+                                                                    .screeningDate,
                                                               ),
                                                               const SizedBox(
                                                                   height:
@@ -600,7 +607,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                             child:
                                                                                 SecondaryTextField(
                                                                               text: formGroup.control('cp_screening_score').value ?? '',
-                                                                              label: 'Screening Score',
+                                                                              label: AppLocalizations.of(context)!.screeningScore,
                                                                             ),
                                                                           ),
                                                                           const SizedBox(
@@ -609,7 +616,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                             child:
                                                                                 SecondaryTextField(
                                                                               text: formGroup.control('cp_screening_status').value ?? '',
-                                                                              label: 'Screening Status',
+                                                                              label: AppLocalizations.of(context)!.screeningStatus,
                                                                             ),
                                                                           ),
                                                                           const SizedBox(
@@ -626,7 +633,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                 DateTextInput(
                                                                               firstDate: DateTime(2000),
                                                                               controlName: 'cp_counselling_linked',
-                                                                              label: 'Counselling Linked',
+                                                                              label: AppLocalizations.of(context)!.counsellingLinked,
                                                                             ),
                                                                           ),
                                                                           const SizedBox(
@@ -636,7 +643,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                 DateTextInput(
                                                                               firstDate: DateTime(2002),
                                                                               controlName: 'cp_psychiatrist_linked',
-                                                                              label: 'Psychiatrist Linked',
+                                                                              label: AppLocalizations.of(context)!.psychiatristLinked,
                                                                             ),
                                                                           ),
                                                                         ],
