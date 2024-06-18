@@ -163,7 +163,6 @@
     "cpNutritionSupport":"CP Nutrition Support",
     "treatmentCompletionDate":"tt_completion_Date",
     "nikshayId":"Nikshay ID",
-    "fcName":"Stage",
     "nutritionProvided":"No. of month nutrition provided",
     "treatmentOutcome":"tt_outcome",
     "treatmentComments":"Tt Comments"
