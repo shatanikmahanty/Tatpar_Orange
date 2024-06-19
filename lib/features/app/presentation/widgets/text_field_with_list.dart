@@ -68,6 +68,17 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
   }
 
   @override
+  void didUpdateWidget(TextFieldWithList oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.listData != oldWidget.listData) {
+      setState(() {
+        searchList = widget.listData;
+        selectedList.clear();
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Padding(
@@ -164,66 +175,63 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
                   ),
                   padding: const EdgeInsets.symmetric(vertical: kPadding / 2),
                   itemBuilder: (context, index) => GestureDetector(
-                    child: Container(
-                      padding: const EdgeInsets.all(kPadding / 2),
-                      decoration: BoxDecoration(
-                        border:
-                            Border.all(color: Theme.of(context).primaryColor),
-                        borderRadius: BorderRadius.circular(kPadding),
-                      ),
-                      child: Row(
-                        children: [
-                          if (!selectedList.contains(searchList[index]))
-                            Icon(
-                              Icons.circle,
-                              color: theme.colorScheme.secondary,
-                            )
-                          else
-                            Icon(
-                              Icons.check_circle,
-                              color: theme.colorScheme.primary,
+                      child: Container(
+                        padding: const EdgeInsets.all(kPadding / 2),
+                        decoration: BoxDecoration(
+                          border:
+                              Border.all(color: Theme.of(context).primaryColor),
+                          borderRadius: BorderRadius.circular(kPadding),
+                        ),
+                        child: Row(
+                          children: [
+                            if (!selectedList.contains(searchList[index]))
+                              Icon(
+                                Icons.circle,
+                                color: theme.colorScheme.secondary,
+                              )
+                            else
+                              Icon(
+                                Icons.check_circle,
+                                color: theme.colorScheme.primary,
+                              ),
+                            const SizedBox(width: kPadding),
+                            Expanded(
+                              child: Text(
+                                searchList[index].split(':')[0],
+                              ),
                             ),
-                          const SizedBox(width: kPadding),
-                          Expanded(
-                            child: Text(
-                              searchList[index].split(':')[0],
-                            ),
-                          ),
-                        ],
+                          ],
+                        ),
                       ),
-                    ),
-                    onTap: () {
-                      final itemTapped = searchList[index];
+                      onTap: () {
+                        final itemTapped = searchList[index];
 
-                      if (!widget.allowMultiSelection) {
-                        if (selectedList.contains(itemTapped)) {
-                          selectedList.remove(itemTapped);
+                        if (!widget.allowMultiSelection) {
+                          if (selectedList.contains(itemTapped)) {
+                            selectedList.remove(itemTapped);
+                            setState(() {});
+                            widget.onSelected(selectedList);
+                            return;
+                          } else {
+                            selectedList.clear();
+                            selectedList.add(itemTapped);
+                            focusNode.unfocus();
+                          }
                           setState(() {});
                           widget.onSelected(selectedList);
                           return;
-                        } else {
-                          selectedList.clear();
-                          selectedList.add(itemTapped);
-                          focusNode.unfocus();
                         }
+
+                        // Multi selection logic
+                        if (selectedList.contains(itemTapped)) {
+                          selectedList.remove(itemTapped);
+                        } else {
+                          selectedList.add(itemTapped);
+                        }
+
                         setState(() {});
                         widget.onSelected(selectedList);
-                        return;
-                      }
-
-                      //Multi selection logic
-                      if (selectedList.contains(itemTapped)) {
-                        selectedList.remove(itemTapped);
-                        setState(() {});
-                        return;
-                      } else {
-                        selectedList.add(itemTapped);
-                        setState(() {});
-                      }
-
-                      widget.onSelected(selectedList);
-                    },
-                  ),
+                      }),
                 ),
               ),
             )

@@ -16,6 +16,12 @@ _$SourceStateImpl _$$SourceStateImplFromJson(Map<String, dynamic> json) =>
           ? null
           : DiagnosisData.fromJson(
               json['diagnosisData'] as Map<String, dynamic>),
+      panchayatList: (json['panchayatList'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
+      blockList: (json['blockList'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList(),
     );
 
 Map<String, dynamic> _$$SourceStateImplToJson(_$SourceStateImpl instance) =>
@@ -23,4 +29,6 @@ Map<String, dynamic> _$$SourceStateImplToJson(_$SourceStateImpl instance) =>
       'isLoading': instance.isLoading,
       'dataModel': instance.dataModel,
       'diagnosisData': instance.diagnosisData,
+      'panchayatList': instance.panchayatList,
+      'blockList': instance.blockList,
     };

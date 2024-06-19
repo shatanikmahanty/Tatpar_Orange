@@ -23,6 +23,8 @@ mixin _$SourceState {
   bool? get isLoading => throw _privateConstructorUsedError;
   DataModel? get dataModel => throw _privateConstructorUsedError;
   DiagnosisData? get diagnosisData => throw _privateConstructorUsedError;
+  List<String>? get panchayatList => throw _privateConstructorUsedError;
+  List<String>? get blockList => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -37,7 +39,11 @@ abstract class $SourceStateCopyWith<$Res> {
       _$SourceStateCopyWithImpl<$Res, SourceState>;
   @useResult
   $Res call(
-      {bool? isLoading, DataModel? dataModel, DiagnosisData? diagnosisData});
+      {bool? isLoading,
+      DataModel? dataModel,
+      DiagnosisData? diagnosisData,
+      List<String>? panchayatList,
+      List<String>? blockList});
 
   $DataModelCopyWith<$Res>? get dataModel;
   $DiagnosisDataCopyWith<$Res>? get diagnosisData;
@@ -59,6 +65,8 @@ class _$SourceStateCopyWithImpl<$Res, $Val extends SourceState>
     Object? isLoading = freezed,
     Object? dataModel = freezed,
     Object? diagnosisData = freezed,
+    Object? panchayatList = freezed,
+    Object? blockList = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: freezed == isLoading
@@ -73,6 +81,14 @@ class _$SourceStateCopyWithImpl<$Res, $Val extends SourceState>
           ? _value.diagnosisData
           : diagnosisData // ignore: cast_nullable_to_non_nullable
               as DiagnosisData?,
+      panchayatList: freezed == panchayatList
+          ? _value.panchayatList
+          : panchayatList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      blockList: freezed == blockList
+          ? _value.blockList
+          : blockList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ) as $Val);
   }
 
@@ -110,7 +126,11 @@ abstract class _$$SourceStateImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {bool? isLoading, DataModel? dataModel, DiagnosisData? diagnosisData});
+      {bool? isLoading,
+      DataModel? dataModel,
+      DiagnosisData? diagnosisData,
+      List<String>? panchayatList,
+      List<String>? blockList});
 
   @override
   $DataModelCopyWith<$Res>? get dataModel;
@@ -132,6 +152,8 @@ class __$$SourceStateImplCopyWithImpl<$Res>
     Object? isLoading = freezed,
     Object? dataModel = freezed,
     Object? diagnosisData = freezed,
+    Object? panchayatList = freezed,
+    Object? blockList = freezed,
   }) {
     return _then(_$SourceStateImpl(
       isLoading: freezed == isLoading
@@ -146,6 +168,14 @@ class __$$SourceStateImplCopyWithImpl<$Res>
           ? _value.diagnosisData
           : diagnosisData // ignore: cast_nullable_to_non_nullable
               as DiagnosisData?,
+      panchayatList: freezed == panchayatList
+          ? _value._panchayatList
+          : panchayatList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
+      blockList: freezed == blockList
+          ? _value._blockList
+          : blockList // ignore: cast_nullable_to_non_nullable
+              as List<String>?,
     ));
   }
 }
@@ -153,7 +183,14 @@ class __$$SourceStateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$SourceStateImpl implements _SourceState {
-  const _$SourceStateImpl({this.isLoading, this.dataModel, this.diagnosisData});
+  const _$SourceStateImpl(
+      {this.isLoading,
+      this.dataModel,
+      this.diagnosisData,
+      final List<String>? panchayatList,
+      final List<String>? blockList})
+      : _panchayatList = panchayatList,
+        _blockList = blockList;
 
   factory _$SourceStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$SourceStateImplFromJson(json);
@@ -164,10 +201,29 @@ class _$SourceStateImpl implements _SourceState {
   final DataModel? dataModel;
   @override
   final DiagnosisData? diagnosisData;
+  final List<String>? _panchayatList;
+  @override
+  List<String>? get panchayatList {
+    final value = _panchayatList;
+    if (value == null) return null;
+    if (_panchayatList is EqualUnmodifiableListView) return _panchayatList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  final List<String>? _blockList;
+  @override
+  List<String>? get blockList {
+    final value = _blockList;
+    if (value == null) return null;
+    if (_blockList is EqualUnmodifiableListView) return _blockList;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'SourceState(isLoading: $isLoading, dataModel: $dataModel, diagnosisData: $diagnosisData)';
+    return 'SourceState(isLoading: $isLoading, dataModel: $dataModel, diagnosisData: $diagnosisData, panchayatList: $panchayatList, blockList: $blockList)';
   }
 
   @override
@@ -180,13 +236,22 @@ class _$SourceStateImpl implements _SourceState {
             (identical(other.dataModel, dataModel) ||
                 other.dataModel == dataModel) &&
             (identical(other.diagnosisData, diagnosisData) ||
-                other.diagnosisData == diagnosisData));
+                other.diagnosisData == diagnosisData) &&
+            const DeepCollectionEquality()
+                .equals(other._panchayatList, _panchayatList) &&
+            const DeepCollectionEquality()
+                .equals(other._blockList, _blockList));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, dataModel, diagnosisData);
+  int get hashCode => Object.hash(
+      runtimeType,
+      isLoading,
+      dataModel,
+      diagnosisData,
+      const DeepCollectionEquality().hash(_panchayatList),
+      const DeepCollectionEquality().hash(_blockList));
 
   @JsonKey(ignore: true)
   @override
@@ -206,7 +271,9 @@ abstract class _SourceState implements SourceState {
   const factory _SourceState(
       {final bool? isLoading,
       final DataModel? dataModel,
-      final DiagnosisData? diagnosisData}) = _$SourceStateImpl;
+      final DiagnosisData? diagnosisData,
+      final List<String>? panchayatList,
+      final List<String>? blockList}) = _$SourceStateImpl;
 
   factory _SourceState.fromJson(Map<String, dynamic> json) =
       _$SourceStateImpl.fromJson;
@@ -217,6 +284,10 @@ abstract class _SourceState implements SourceState {
   DataModel? get dataModel;
   @override
   DiagnosisData? get diagnosisData;
+  @override
+  List<String>? get panchayatList;
+  @override
+  List<String>? get blockList;
   @override
   @JsonKey(ignore: true)
   _$$SourceStateImplCopyWith<_$SourceStateImpl> get copyWith =>

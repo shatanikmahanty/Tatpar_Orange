@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -215,15 +217,33 @@ class BasicDetails extends StatelessWidget {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
             appBar: CaseAppBar(AppLocalizations.of(context)!.addReferral),
-            body: ReactiveFormBuilder(
-              form: () {
-                return _basicDetailsFormBuilder(
-                  referralDetailsModel: state.referralDetailsModel,
-                );
-              },
-              builder:
-                  (BuildContext context, FormGroup formGroup, Widget? child) =>
-                      AutofillGroup(
+            body: ReactiveFormBuilder(form: () {
+              return _basicDetailsFormBuilder(
+                referralDetailsModel: state.referralDetailsModel,
+              );
+            }, builder:
+                (BuildContext context, FormGroup formGroup, Widget? child) {
+              (formGroup.control('district').valueChanges).listen((value) {
+                if (value != null) {
+                  formGroup.control('referral_block').reset();
+                  formGroup.control('panchayat_code').reset();
+                  formGroup.control('referrer_panchayat_code').reset();
+
+                  print('Fetching Blocks');
+                  context.read<SourceCubit>().fetchDataForBlock(value);
+                }
+              });
+              (formGroup.control('referral_block').valueChanges)
+                  .listen((value) {
+                if (value != null) {
+                  formGroup.control('panchayat_code').reset();
+
+                  formGroup.control('referrer_panchayat_code').reset();
+                  print('Listening to Changes');
+                  context.read<SourceCubit>().fetchDataForPanchayat(value);
+                }
+              });
+              return AutofillGroup(
                 child: Column(
                   children: [
                     const SizedBox(height: kPadding * 2),
@@ -499,51 +519,61 @@ class BasicDetails extends StatelessWidget {
                                     );
                                   }),
                               const SizedBox(height: kPadding * 2),
-                              BlocBuilder<SourceCubit, SourceState>(
-                                  buildWhen: ((previous, current) =>
-                                      (previous.isLoading !=
-                                          current.isLoading) ||
-                                      previous.dataModel != current.dataModel),
-                                  builder: (context, state) {
-                                    List<String> panchayats = (state
-                                                .dataModel !=
-                                            null)
-                                        ? (state.dataModel!.blocks!
-                                            .where((element) =>
-                                                element.block ==
-                                                formGroup
-                                                    .control('referral_block')
-                                                    .value)
-                                            .expand((e) => e.panchayat!
-                                                .map((e) => '${e.panchayat}'))
-                                            .toList())
-                                        : [];
+                              ReactiveValueListenableBuilder<String>(
+                                  formControlName: 'referral_block',
+                                  builder: (context, control, child) =>
+                                      Visibility(
+                                          visible: (formGroup
+                                                  .control('referral_block')
+                                                  .value) !=
+                                              null,
+                                          child: BlocBuilder<SourceCubit,
+                                                  SourceState>(
+                                              buildWhen: ((previous, current) =>
+                                                  (previous.isLoading !=
+                                                      current.isLoading) ||
+                                                  (previous.dataModel !=
+                                                      current.dataModel) ||
+                                                  (previous.panchayatList !=
+                                                      current.panchayatList)),
+                                              builder: (context, state) {
+                                                print(
+                                                    '===================================${formGroup.control('referral_block').value}'
+                                                        .toString());
+                                                List<String> panchayatList =
+                                                    state.panchayatList ?? [];
 
-                                    if (state.isLoading ?? false) {
-                                      return const SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                      );
-                                    }
-                                    return TextFieldWithList(
-                                      controlName: 'referrer_panchayat_code',
-                                      label: AppLocalizations.of(context)!
-                                          .referrerPanchayatCode,
-                                      padding: EdgeInsets.zero,
-                                      prefixIcon: Icons.account_circle_outlined,
-                                      listData: panchayats,
-                                      allowMultiSelection: false,
-                                      onSelected: (value) {
-                                        formGroup
-                                            .control('referrer_panchayat_code')
-                                            .value = value[0];
-                                      },
-                                      emptyString: 'No Panchayats available',
-                                    );
-                                  }),
+                                                if (state.isLoading ?? false) {
+                                                  return const SizedBox(
+                                                    height: 15,
+                                                    width: 15,
+                                                    child: Center(
+                                                      child:
+                                                          CircularProgressIndicator(),
+                                                    ),
+                                                  );
+                                                }
+                                                return TextFieldWithList(
+                                                  controlName:
+                                                      'referrer_panchayat_code',
+                                                  label: AppLocalizations.of(
+                                                          context)!
+                                                      .referrerPanchayatCode,
+                                                  padding: EdgeInsets.zero,
+                                                  prefixIcon: Icons
+                                                      .account_circle_outlined,
+                                                  listData: panchayatList,
+                                                  allowMultiSelection: false,
+                                                  onSelected: (value) {
+                                                    formGroup
+                                                        .control(
+                                                            'referrer_panchayat_code')
+                                                        .value = value[0];
+                                                  },
+                                                  emptyString:
+                                                      'No Panchayats available',
+                                                );
+                                              }))),
                               const SizedBox(height: kPadding * 2),
                               PrimaryTextField<int?>(
                                 formControlName: 'referred_ward',
@@ -581,35 +611,36 @@ class BasicDetails extends StatelessWidget {
                     const SizedBox(height: kPadding * 2),
                   ],
                 ),
-              ),
-            )));
+              );
+            })));
   }
 }
 
 _loadDistricts(FormGroup formGroup, BuildContext context) {
-  return BlocBuilder<SourceCubit, SourceState>(
-      buildWhen: ((previous, current) =>
-          (previous.isLoading != current.isLoading) ||
-          previous.dataModel != current.dataModel),
-      builder: (context, state) {
-        List<String> districts = (state.dataModel != null)
-            ? state.dataModel!.districts!.map((e) => '${e.district}').toList()
-            : [];
-        List<String> blocks = [];
-        List<String> panchayats = [];
-        if (state.isLoading ?? false) {
-          return const SizedBox(
-            height: 15,
-            width: 15,
-            child: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        }
+  return Column(
+    children: [
+      BlocBuilder<SourceCubit, SourceState>(
+          buildWhen: ((previous, current) =>
+              (previous.isLoading != current.isLoading) ||
+              previous.dataModel != current.dataModel),
+          builder: (context, state) {
+            List<String> districts = (state.dataModel != null)
+                ? state.dataModel!.districts!
+                    .map((e) => '${e.district}')
+                    .toList()
+                : [];
 
-        return Column(
-          children: [
-            TextFieldWithList(
+            if (state.isLoading ?? false) {
+              return const SizedBox(
+                height: 15,
+                width: 15,
+                child: Center(
+                  child: CircularProgressIndicator(),
+                ),
+              );
+            }
+
+            return TextFieldWithList(
               controlName: 'district',
               label: AppLocalizations.of(context)!.district,
               padding: EdgeInsets.zero,
@@ -618,52 +649,93 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
               allowMultiSelection: false,
               onSelected: (value) {
                 formGroup.control('district').value = value[0];
-
-                blocks.clear();
-
-                blocks.addAll(state.dataModel!.districts!
-                    .where((element) => element.district == value[0])
-                    .expand((e) => e.block!.map((e) => '${e.block}'))
-                    .toList());
               },
               emptyString: 'No Districts available',
-            ),
-            const SizedBox(height: kPadding * 2),
-            TextFieldWithList(
-              controlName: 'referral_block',
-              label: AppLocalizations.of(context)!.block,
-              padding: EdgeInsets.zero,
-              prefixIcon: Icons.account_circle_outlined,
-              listData: blocks,
-              allowMultiSelection: false,
-              onSelected: (value) {
-                formGroup.control('referral_block').value = value[0];
-                print(formGroup.control('referral_block').value);
+            );
+          }),
+      ReactiveValueListenableBuilder<String>(
+          formControlName: 'district',
+          builder: (context, control, child) => Visibility(
+                visible: (formGroup.control('district').value) != null,
+                child: BlocBuilder<SourceCubit, SourceState>(
+                    buildWhen: ((previous, current) =>
+                        (previous.isLoading != current.isLoading) ||
+                        (previous.dataModel != current.dataModel) ||
+                        (previous.blockList != current.blockList)),
+                    builder: (context, state) {
+                      List<String> blockList = state.blockList ?? [];
+                      if (state.isLoading ?? false) {
+                        return const SizedBox(
+                          height: 15,
+                          width: 15,
+                          child: Center(
+                            child: CircularProgressIndicator(),
+                          ),
+                        );
+                      }
+                      return Column(
+                        children: [
+                          const SizedBox(height: kPadding * 2),
+                          TextFieldWithList(
+                            controlName: 'referral_block',
+                            label: AppLocalizations.of(context)!.block,
+                            padding: EdgeInsets.zero,
+                            prefixIcon: Icons.account_circle_outlined,
+                            listData: blockList,
+                            allowMultiSelection: false,
+                            onSelected: (value) {
+                              formGroup.control('referral_block').value =
+                                  value[0];
+                            },
+                            emptyString: 'No Blocks available',
+                          ),
+                        ],
+                      );
+                    }),
+              )),
+      ReactiveValueListenableBuilder<String>(
+          formControlName: 'referral_block',
+          builder: (context, control, child) => Visibility(
+              visible: (formGroup.control('referral_block').value) != null,
+              child: BlocBuilder<SourceCubit, SourceState>(
+                  buildWhen: ((previous, current) =>
+                      (previous.isLoading != current.isLoading) ||
+                      (previous.dataModel != current.dataModel) ||
+                      (previous.panchayatList != current.panchayatList)),
+                  builder: (context, state) {
+                    print('Form is building again');
+                    List<String> panchayatList = state.panchayatList ?? [];
+                    print('Up+++++++++++++++++++$panchayatList');
 
-                panchayats.clear();
-
-                panchayats.addAll(state.dataModel!.blocks!
-                    .where((element) => element.block == value[0])
-                    .expand((e) => e.panchayat!.map((e) => '${e.panchayat}'))
-                    .toList());
-              },
-              emptyString: 'No Blocks available',
-            ),
-            const SizedBox(height: kPadding * 2),
-            TextFieldWithList(
-              controlName: 'panchayat_code',
-              label: AppLocalizations.of(context)!.panchayatCode,
-              padding: EdgeInsets.zero,
-              prefixIcon: Icons.account_circle_outlined,
-              listData: panchayats,
-              allowMultiSelection: false,
-              onSelected: (value) {
-                formGroup.control('panchayat_code').value = value[0];
-              },
-              emptyString: 'No Panchayats available',
-            ),
-            const SizedBox(height: kPadding * 2),
-          ],
-        );
-      });
+                    if (state.isLoading ?? false) {
+                      return const SizedBox(
+                        height: 15,
+                        width: 15,
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      );
+                    }
+                    return Column(
+                      children: [
+                        const SizedBox(height: kPadding * 2),
+                        TextFieldWithList(
+                          controlName: 'panchayat_code',
+                          label: AppLocalizations.of(context)!.panchayatCode,
+                          padding: EdgeInsets.zero,
+                          prefixIcon: Icons.account_circle_outlined,
+                          listData: panchayatList,
+                          allowMultiSelection: false,
+                          onSelected: (value) {
+                            formGroup.control('panchayat_code').value =
+                                value[0];
+                          },
+                          emptyString: 'No Panchayats available',
+                        ),
+                      ],
+                    );
+                  }))),
+      const SizedBox(height: kPadding * 2),
+    ],
+  );
 }

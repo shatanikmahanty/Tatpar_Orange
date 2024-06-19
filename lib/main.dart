@@ -83,7 +83,7 @@ Future<void> main() async {
       initialDeepLink = (await appLinksRepository.getInitialLink())?.path;
     }
     return ChangeNotifierProvider(create: (_) {
-      return LanguageProvider(Locale('hi'));
+      return LanguageProvider(const Locale('en'));
     }, builder: (context, child) {
       final provider = Provider.of<LanguageProvider>(context);
 
