@@ -244,374 +244,422 @@ class BasicDetails extends StatelessWidget {
                 }
               });
               return AutofillGroup(
-                child: Column(
-                  children: [
-                    const SizedBox(height: kPadding * 2),
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: kPadding * 2),
-                          child: Column(
-                            children: [
-                              PrimaryTextField(
-                                formControlName: 'referral_id',
-                                label: AppLocalizations.of(context)!.referralID,
-                                prefixIcon: Icons.account_circle_outlined,
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              _loadDistricts(formGroup, context),
-                              PrimaryTextField<int?>(
-                                formControlName: 'ward',
-                                label: AppLocalizations.of(context)!.ward,
-                                prefixIcon: Icons.account_circle_outlined,
-                                keyboardType: TextInputType.number,
-                                inputFormatter: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(2),
-                                ],
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              DateTextInput(
-                                firstDate: DateTime(2002),
-                                controlName: 'referral_date',
-                                label:
-                                    AppLocalizations.of(context)!.referralDate,
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              PrimaryTextField(
-                                formControlName: 'referral_name',
-                                label:
-                                    AppLocalizations.of(context)!.referralName,
-                                prefixIcon: Icons.account_circle_outlined,
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              PrimaryTextField<int?>(
-                                formControlName: 'age',
-                                label: AppLocalizations.of(context)!.age,
-                                prefixIcon: Icons.account_circle_outlined,
-                                keyboardType: TextInputType.number,
-                                inputFormatter: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(2)
-                                ],
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              ChipRadioButtons(
-                                label: AppLocalizations.of(context)!.gender,
-                                options: const ['Male', 'Female', 'Other'],
-                                selected: formGroup.control('gender').value,
-                                onChanged: (value) {
-                                  formGroup.control('gender').value = value;
-                                },
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              PrimaryTextField(
-                                formControlName: 'guardian_name',
-                                label:
-                                    AppLocalizations.of(context)!.guardianName,
-                                prefixIcon: Icons.account_circle_outlined,
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              PrimaryTextField(
-                                formControlName: 'guardian_phone_number',
-                                label: AppLocalizations.of(context)!
-                                    .guardianPhoneNumber,
-                                maxLength: 10,
-                                prefixIcon: Icons.phone_outlined,
-                                keyboardType: TextInputType.number,
-                                inputFormatter: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(10)
-                                ],
-                              ),
-                              BlocBuilder<SourceCubit, SourceState>(
-                                  buildWhen: ((previous, current) =>
-                                      (previous.isLoading !=
-                                          current.isLoading) ||
-                                      previous.dataModel != current.dataModel),
-                                  builder: (context, state) {
-                                    List<String> list = (state.dataModel !=
-                                            null)
-                                        ? state.dataModel!.casteCategory!
-                                            .map((e) => '${e.id}:\t${e.name}')
-                                            .toList()
-                                        : [];
-                                    if (state.isLoading ?? false) {
-                                      return const SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                      );
-                                    }
-                                    return ChipRadioButtons(
-                                      crossAxisCount: 2,
+                  child: GestureDetector(
+                      onTap: () =>
+                          FocusScope.of(context).unfocus(), // Unfocus on tap
+                      child: ListView(
+                        // padding:
+                        //     const EdgeInsets.symmetric(vertical: kPadding * 2),
+                        children: [
+                          const SizedBox(height: kPadding * 2),
+                          Expanded(
+                            child: SingleChildScrollView(
+                              child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: kPadding * 2),
+                                child: Column(
+                                  children: [
+                                    PrimaryTextField(
+                                      formControlName: 'referral_id',
                                       label: AppLocalizations.of(context)!
-                                          .casteCategory,
-                                      options: list,
-                                      selected: formGroup
-                                          .control('caste_category')
-                                          .value,
-                                      onChanged: (value) {
-                                        formGroup
-                                            .control('caste_category')
-                                            .value = value;
-                                      },
-                                    );
-                                  }),
-                              const SizedBox(height: kPadding * 2),
-                              BlocBuilder<SourceCubit, SourceState>(
-                                  buildWhen: ((previous, current) =>
-                                      (previous.isLoading !=
-                                          current.isLoading) ||
-                                      previous.dataModel != current.dataModel),
-                                  builder: (context, state) {
-                                    List<String> list = (state.dataModel !=
-                                            null)
-                                        ? state.dataModel!.keyPopulation!
-                                            .map((e) => '${e.id}:\t${e.name}')
-                                            .toList()
-                                        : [];
-                                    if (state.isLoading ?? false) {
-                                      return const SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                      );
-                                    }
-                                    return ChipRadioButtons(
-                                      allowMultiSelect: true,
-                                      crossAxisCount: 2,
+                                          .referralID,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    _loadDistricts(formGroup, context),
+                                    PrimaryTextField<int?>(
+                                      formControlName: 'ward',
+                                      label: AppLocalizations.of(context)!.ward,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatter: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(2),
+                                      ],
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    DateTextInput(
+                                      firstDate: DateTime(2002),
+                                      controlName: 'referral_date',
                                       label: AppLocalizations.of(context)!
-                                          .keyPopulation,
-                                      selectedList: formGroup
-                                          .control('key_population')
-                                          .value,
-                                      options: list,
+                                          .referralDate,
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    PrimaryTextField(
+                                      formControlName: 'referral_name',
+                                      label: AppLocalizations.of(context)!
+                                          .referralName,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    PrimaryTextField<int?>(
+                                      formControlName: 'age',
+                                      label: AppLocalizations.of(context)!.age,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatter: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(2)
+                                      ],
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    ChipRadioButtons(
+                                      label:
+                                          AppLocalizations.of(context)!.gender,
+                                      options: const [
+                                        'Male',
+                                        'Female',
+                                        'Other'
+                                      ],
+                                      selected:
+                                          formGroup.control('gender').value,
                                       onChanged: (value) {
-                                        if (value.isEmpty) {
-                                          formGroup
-                                              .control('key_population')
-                                              .value = null;
-                                          return;
-                                        }
-
-                                        // final List<int> listOfIds =
-                                        //     value.split(',').map((e) {
-                                        //   final parts = e.split(':');
-                                        //   return int.parse(parts[0]);
-                                        // }).toList();
-                                        // final List<String> values =
-                                        //     value.split(',').map((e) {
-                                        //   final parts = e.split(':');
-                                        //   return (parts[1]);
-                                        // }).toList();
-                                        // context
-                                        //     .read<SourceCubit>()
-                                        //     .selectKeyPopulation = listOfIds;
-                                        final listOfValues = value.split(',');
-
-                                        formGroup
-                                            .control('key_population')
-                                            .value = listOfValues;
+                                        formGroup.control('gender').value =
+                                            value;
                                       },
-                                    );
-                                  }),
-                              const SizedBox(height: kPadding * 2),
-                              BlocBuilder<SourceCubit, SourceState>(
-                                  buildWhen: ((previous, current) =>
-                                      (previous.isLoading !=
-                                          current.isLoading) ||
-                                      previous.dataModel != current.dataModel),
-                                  builder: (context, state) {
-                                    List<String> list = (state.dataModel !=
-                                            null)
-                                        ? state.dataModel!.trimester!
-                                            .map((e) => '${e.id}:\t${e.name}')
-                                            .toList()
-                                        : [];
-                                    if (state.isLoading ?? false) {
-                                      return const SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                      );
-                                    }
-                                    return ReactiveValueListenableBuilder<
-                                            List<String>>(
-                                        formControlName: 'key_population',
-                                        builder: (context, control, child) =>
-                                            Visibility(
-                                              visible: (formGroup
-                                                      .control('key_population')
-                                                      .value)
-                                                  .toString()
-                                                  .contains('PW'),
-                                              child: Column(
-                                                children: [
-                                                  ChipRadioButtons(
-                                                    crossAxisCount: 2,
-                                                    label: AppLocalizations.of(
-                                                            context)!
-                                                        .trimester,
-                                                    options: list,
-                                                    selected: formGroup
-                                                        .control('trimester')
-                                                        .value,
-                                                    onChanged: (value) {
-                                                      formGroup
-                                                          .control('trimester')
-                                                          .value = value;
-                                                    },
-                                                  ),
-                                                  const SizedBox(
-                                                      height: kPadding * 2),
-                                                ],
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    PrimaryTextField(
+                                      formControlName: 'guardian_name',
+                                      label: AppLocalizations.of(context)!
+                                          .guardianName,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    PrimaryTextField(
+                                      formControlName: 'guardian_phone_number',
+                                      label: AppLocalizations.of(context)!
+                                          .guardianPhoneNumber,
+                                      maxLength: 10,
+                                      prefixIcon: Icons.phone_outlined,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatter: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(10)
+                                      ],
+                                    ),
+                                    BlocBuilder<SourceCubit, SourceState>(
+                                        buildWhen: ((previous, current) =>
+                                            (previous.isLoading !=
+                                                current.isLoading) ||
+                                            previous.dataModel !=
+                                                current.dataModel),
+                                        builder: (context, state) {
+                                          List<String> list =
+                                              (state.dataModel != null)
+                                                  ? state
+                                                      .dataModel!.casteCategory!
+                                                      .map((e) =>
+                                                          '${e.id}:\t${e.name}')
+                                                      .toList()
+                                                  : [];
+                                          if (state.isLoading ?? false) {
+                                            return const SizedBox(
+                                              height: 15,
+                                              width: 15,
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(),
                                               ),
-                                            ));
-                                  }),
-                              PrimaryTextField(
-                                formControlName: 'referred_by',
-                                label: AppLocalizations.of(context)!.referredBy,
-                                prefixIcon: Icons.location_city_outlined,
-                              ),
-                              const SizedBox(height: kPadding * 2),
-                              BlocBuilder<SourceCubit, SourceState>(
-                                  buildWhen: ((previous, current) =>
-                                      (previous.isLoading !=
-                                          current.isLoading) ||
-                                      previous.dataModel != current.dataModel),
-                                  builder: (context, state) {
-                                    List<String> list = (state.dataModel !=
-                                            null)
-                                        ? state.dataModel!.referrerSource!
-                                            .map((e) => '${e.id}:\t${e.name}')
-                                            .toList()
-                                        : [];
-                                    if (state.isLoading ?? false) {
-                                      return const SizedBox(
-                                        height: 15,
-                                        width: 15,
-                                        child: Center(
-                                          child: CircularProgressIndicator(),
-                                        ),
-                                      );
-                                    }
-                                    return ChipRadioButtons(
-                                      crossAxisCount: 2,
-                                      label: AppLocalizations.of(context)!
-                                          .referrerSource,
-                                      options: list,
-                                      selected: formGroup
-                                          .control('referrer_source')
-                                          .value,
-                                      onChanged: (value) {
-                                        formGroup
-                                            .control('referrer_source')
-                                            .value = value;
-                                      },
-                                    );
-                                  }),
-                              const SizedBox(height: kPadding * 2),
-                              ReactiveValueListenableBuilder<String>(
-                                  formControlName: 'referral_block',
-                                  builder: (context, control, child) =>
-                                      Visibility(
-                                          visible: (formGroup
-                                                  .control('referral_block')
-                                                  .value) !=
-                                              null,
-                                          child: BlocBuilder<SourceCubit,
-                                                  SourceState>(
-                                              buildWhen: ((previous, current) =>
-                                                  (previous.isLoading !=
-                                                      current.isLoading) ||
-                                                  (previous.dataModel !=
-                                                      current.dataModel) ||
-                                                  (previous.panchayatList !=
-                                                      current.panchayatList)),
-                                              builder: (context, state) {
-                                                print(
-                                                    '===================================${formGroup.control('referral_block').value}'
-                                                        .toString());
-                                                List<String> panchayatList =
-                                                    state.panchayatList ?? [];
+                                            );
+                                          }
+                                          return ChipRadioButtons(
+                                            crossAxisCount: 2,
+                                            label: AppLocalizations.of(context)!
+                                                .casteCategory,
+                                            options: list,
+                                            selected: formGroup
+                                                .control('caste_category')
+                                                .value,
+                                            onChanged: (value) {
+                                              formGroup
+                                                  .control('caste_category')
+                                                  .value = value;
+                                            },
+                                          );
+                                        }),
+                                    const SizedBox(height: kPadding * 2),
+                                    BlocBuilder<SourceCubit, SourceState>(
+                                        buildWhen: ((previous, current) =>
+                                            (previous.isLoading !=
+                                                current.isLoading) ||
+                                            previous.dataModel !=
+                                                current.dataModel),
+                                        builder: (context, state) {
+                                          List<String> list =
+                                              (state.dataModel != null)
+                                                  ? state
+                                                      .dataModel!.keyPopulation!
+                                                      .map((e) =>
+                                                          '${e.id}:\t${e.name}')
+                                                      .toList()
+                                                  : [];
+                                          if (state.isLoading ?? false) {
+                                            return const SizedBox(
+                                              height: 15,
+                                              width: 15,
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            );
+                                          }
+                                          return ChipRadioButtons(
+                                            allowMultiSelect: true,
+                                            crossAxisCount: 2,
+                                            label: AppLocalizations.of(context)!
+                                                .keyPopulation,
+                                            selectedList: formGroup
+                                                .control('key_population')
+                                                .value,
+                                            options: list,
+                                            onChanged: (value) {
+                                              if (value.isEmpty) {
+                                                formGroup
+                                                    .control('key_population')
+                                                    .value = null;
+                                                return;
+                                              }
 
-                                                if (state.isLoading ?? false) {
-                                                  return const SizedBox(
-                                                    height: 15,
-                                                    width: 15,
-                                                    child: Center(
-                                                      child:
-                                                          CircularProgressIndicator(),
+                                              // final List<int> listOfIds =
+                                              //     value.split(',').map((e) {
+                                              //   final parts = e.split(':');
+                                              //   return int.parse(parts[0]);
+                                              // }).toList();
+                                              // final List<String> values =
+                                              //     value.split(',').map((e) {
+                                              //   final parts = e.split(':');
+                                              //   return (parts[1]);
+                                              // }).toList();
+                                              // context
+                                              //     .read<SourceCubit>()
+                                              //     .selectKeyPopulation = listOfIds;
+                                              final listOfValues =
+                                                  value.split(',');
+
+                                              formGroup
+                                                  .control('key_population')
+                                                  .value = listOfValues;
+                                            },
+                                          );
+                                        }),
+                                    const SizedBox(height: kPadding * 2),
+                                    BlocBuilder<SourceCubit, SourceState>(
+                                        buildWhen: ((previous, current) =>
+                                            (previous.isLoading !=
+                                                current.isLoading) ||
+                                            previous.dataModel !=
+                                                current.dataModel),
+                                        builder: (context, state) {
+                                          List<String> list =
+                                              (state.dataModel != null)
+                                                  ? state.dataModel!.trimester!
+                                                      .map((e) =>
+                                                          '${e.id}:\t${e.name}')
+                                                      .toList()
+                                                  : [];
+                                          if (state.isLoading ?? false) {
+                                            return const SizedBox(
+                                              height: 15,
+                                              width: 15,
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            );
+                                          }
+                                          return ReactiveValueListenableBuilder<
+                                                  List<String>>(
+                                              formControlName: 'key_population',
+                                              builder: (context, control,
+                                                      child) =>
+                                                  Visibility(
+                                                    visible: (formGroup
+                                                            .control(
+                                                                'key_population')
+                                                            .value)
+                                                        .toString()
+                                                        .contains('PW'),
+                                                    child: Column(
+                                                      children: [
+                                                        ChipRadioButtons(
+                                                          crossAxisCount: 2,
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .trimester,
+                                                          options: list,
+                                                          selected: formGroup
+                                                              .control(
+                                                                  'trimester')
+                                                              .value,
+                                                          onChanged: (value) {
+                                                            formGroup
+                                                                .control(
+                                                                    'trimester')
+                                                                .value = value;
+                                                          },
+                                                        ),
+                                                        const SizedBox(
+                                                            height:
+                                                                kPadding * 2),
+                                                      ],
                                                     ),
-                                                  );
-                                                }
-                                                return TextFieldWithList(
-                                                  controlName:
-                                                      'referrer_panchayat_code',
-                                                  label: AppLocalizations.of(
-                                                          context)!
-                                                      .referrerPanchayatCode,
-                                                  padding: EdgeInsets.zero,
-                                                  prefixIcon: Icons
-                                                      .account_circle_outlined,
-                                                  listData: panchayatList,
-                                                  allowMultiSelection: false,
-                                                  onSelected: (value) {
-                                                    formGroup
+                                                  ));
+                                        }),
+                                    PrimaryTextField(
+                                      formControlName: 'referred_by',
+                                      label: AppLocalizations.of(context)!
+                                          .referredBy,
+                                      prefixIcon: Icons.location_city_outlined,
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    BlocBuilder<SourceCubit, SourceState>(
+                                        buildWhen: ((previous, current) =>
+                                            (previous.isLoading !=
+                                                current.isLoading) ||
+                                            previous.dataModel !=
+                                                current.dataModel),
+                                        builder: (context, state) {
+                                          List<String> list =
+                                              (state.dataModel != null)
+                                                  ? state.dataModel!
+                                                      .referrerSource!
+                                                      .map((e) =>
+                                                          '${e.id}:\t${e.name}')
+                                                      .toList()
+                                                  : [];
+                                          if (state.isLoading ?? false) {
+                                            return const SizedBox(
+                                              height: 15,
+                                              width: 15,
+                                              child: Center(
+                                                child:
+                                                    CircularProgressIndicator(),
+                                              ),
+                                            );
+                                          }
+                                          return ChipRadioButtons(
+                                            crossAxisCount: 2,
+                                            label: AppLocalizations.of(context)!
+                                                .referrerSource,
+                                            options: list,
+                                            selected: formGroup
+                                                .control('referrer_source')
+                                                .value,
+                                            onChanged: (value) {
+                                              formGroup
+                                                  .control('referrer_source')
+                                                  .value = value;
+                                            },
+                                          );
+                                        }),
+                                    const SizedBox(height: kPadding * 2),
+                                    ReactiveValueListenableBuilder<String>(
+                                        formControlName: 'referral_block',
+                                        builder: (context, control,
+                                                child) =>
+                                            Visibility(
+                                                visible: (formGroup
                                                         .control(
-                                                            'referrer_panchayat_code')
-                                                        .value = value[0];
-                                                  },
-                                                  emptyString:
-                                                      'No Panchayats available',
-                                                );
-                                              }))),
-                              const SizedBox(height: kPadding * 2),
-                              PrimaryTextField<int?>(
-                                formControlName: 'referred_ward',
-                                label:
-                                    AppLocalizations.of(context)!.referredWard,
-                                prefixIcon: Icons.account_circle_outlined,
-                                keyboardType: TextInputType.number,
-                                inputFormatter: [
-                                  FilteringTextInputFormatter.digitsOnly,
-                                  LengthLimitingTextInputFormatter(2),
-                                ],
+                                                            'referral_block')
+                                                        .value) !=
+                                                    null,
+                                                child: BlocBuilder<SourceCubit,
+                                                        SourceState>(
+                                                    buildWhen: ((previous,
+                                                            current) =>
+                                                        (previous
+                                                                .isLoading !=
+                                                            current
+                                                                .isLoading) ||
+                                                        (previous.dataModel !=
+                                                            current
+                                                                .dataModel) ||
+                                                        (previous
+                                                                .panchayatList !=
+                                                            current
+                                                                .panchayatList)),
+                                                    builder: (context, state) {
+                                                      print(
+                                                          '===================================${formGroup.control('referral_block').value}'
+                                                              .toString());
+                                                      List<String>
+                                                          panchayatList =
+                                                          state.panchayatList ??
+                                                              [];
+
+                                                      if (state.isLoading ??
+                                                          false) {
+                                                        return const SizedBox(
+                                                          height: 15,
+                                                          width: 15,
+                                                          child: Center(
+                                                            child:
+                                                                CircularProgressIndicator(),
+                                                          ),
+                                                        );
+                                                      }
+                                                      return TextFieldWithList(
+                                                        controlName:
+                                                            'referrer_panchayat_code',
+                                                        label: AppLocalizations
+                                                                .of(context)!
+                                                            .referrerPanchayatCode,
+                                                        padding:
+                                                            EdgeInsets.zero,
+                                                        prefixIcon: Icons
+                                                            .account_circle_outlined,
+                                                        listData: panchayatList,
+                                                        allowMultiSelection:
+                                                            false,
+                                                        onSelected: (value) {
+                                                          formGroup
+                                                              .control(
+                                                                  'referrer_panchayat_code')
+                                                              .value = value[0];
+                                                        },
+                                                        emptyString:
+                                                            'No Panchayats available',
+                                                      );
+                                                    }))),
+                                    const SizedBox(height: kPadding * 2),
+                                    PrimaryTextField<int?>(
+                                      formControlName: 'referred_ward',
+                                      label: AppLocalizations.of(context)!
+                                          .referredWard,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                      keyboardType: TextInputType.number,
+                                      inputFormatter: [
+                                        FilteringTextInputFormatter.digitsOnly,
+                                        LengthLimitingTextInputFormatter(2),
+                                      ],
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    // const PrimaryTextField(
+                                    //   formControlName: 'source',
+                                    //   label: 'Source',
+                                    //   prefixIcon: Icons.location_city_outlined,
+                                    // ),
+                                    // const SizedBox(height: kPadding * 2)
+                                  ],
+                                ),
                               ),
-                              const SizedBox(height: kPadding * 2),
-                              // const PrimaryTextField(
-                              //   formControlName: 'source',
-                              //   label: 'Source',
-                              //   prefixIcon: Icons.location_city_outlined,
-                              // ),
-                              // const SizedBox(height: kPadding * 2)
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
-                    ),
-                    BottomButtonBar(
-                      onSave: (_) async {
-                        await _onSave(context, formGroup);
-                      },
-                      nextPage: CaseRouter(
-                          caseModel: context.read<CaseCubit>().selectedCase ??
-                              const Case(),
-                          children: const [TBScreeningRoute()]),
-                      enableValidator: false,
-                    ),
-                    const SizedBox(height: kPadding * 2),
-                  ],
-                ),
-              );
+                          BottomButtonBar(
+                            onSave: (_) async {
+                              await _onSave(context, formGroup);
+                            },
+                            nextPage: CaseRouter(
+                                caseModel:
+                                    context.read<CaseCubit>().selectedCase ??
+                                        const Case(),
+                                children: const [TBScreeningRoute()]),
+                            enableValidator: false,
+                          ),
+                          const SizedBox(height: kPadding * 2),
+                        ],
+                      )));
             })));
   }
 }
