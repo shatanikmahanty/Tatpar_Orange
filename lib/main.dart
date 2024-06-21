@@ -82,8 +82,10 @@ Future<void> main() async {
     if (!kIsWeb) {
       initialDeepLink = (await appLinksRepository.getInitialLink())?.path;
     }
+    final savedLocale = await LanguageProvider.getSavedLocale();
+
     return ChangeNotifierProvider(create: (_) {
-      return LanguageProvider(const Locale('en'));
+      return LanguageProvider(savedLocale);
     }, builder: (context, child) {
       final provider = Provider.of<LanguageProvider>(context);
 
@@ -97,11 +99,11 @@ Future<void> main() async {
   });
 }
 
-void getCurrentAppLanguage() async {
-  final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
-  String? lang = await preferences.then((SharedPreferences prefs) {
-    return prefs.getString('currentLanguage');
-  });
+// void getCurrentAppLanguage() async {
+//   final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
+//   String? lang = await preferences.then((SharedPreferences prefs) {
+//     return prefs.getString('currentLanguage');
+//   });
   // LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
 //  print('Current Language===========${LanguageProvider().currentLanguage}');
-}
+// }

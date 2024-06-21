@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -247,7 +245,7 @@ class BasicDetails extends StatelessWidget {
                   child: GestureDetector(
                       onTap: () =>
                           FocusScope.of(context).unfocus(), // Unfocus on tap
-                      child: ListView(
+                      child: Column(
                         // padding:
                         //     const EdgeInsets.symmetric(vertical: kPadding * 2),
                         children: [

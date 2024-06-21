@@ -25,6 +25,7 @@ class PrimaryTextField<T> extends StatelessWidget {
     this.validationMessages,
     this.focusNode,
     this.autofillHints,
+    this.readOnly = false, // Added readOnly parameter
   });
 
   final String formControlName;
@@ -43,6 +44,7 @@ class PrimaryTextField<T> extends StatelessWidget {
   final Map<String, String Function(Object)>? validationMessages;
   final FocusNode? focusNode;
   final List<String>? autofillHints;
+  final bool readOnly; // Added readOnly parameter
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -70,6 +72,7 @@ class PrimaryTextField<T> extends StatelessWidget {
                 ...reactiveFormValidators(label: label, maxLength: maxLength),
                 ...validationMessages ?? {},
               },
+              readOnly: readOnly,
               textAlignVertical: TextAlignVertical.top,
               decoration: InputDecoration(
                 hintText: placeholder,

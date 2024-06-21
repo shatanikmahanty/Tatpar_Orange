@@ -30,39 +30,15 @@ class CasesPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: kPadding, horizontal: kPadding * 2),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.search),
-                              hintText: 'Search by name or no.',
-                            ),
-                            onChanged: (value) {
-                              cubit.searchCases(value);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: kPadding),
-                        GestureDetector(
-                          // onTap: () {
-                          //   context.router
-                          //       .navigate(const CasesFilterDialogRoute());
-                          // },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: AppColors.blueMedium,
-                                borderRadius: BorderRadius.circular(4)),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: kPadding * 1.8,
-                                horizontal: kPadding * 1.8),
-                            child: const Icon(
-                              Icons.filter_alt_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      ],
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: 'Search by name or no.',
+                        hintStyle: theme.textTheme.bodyMedium,
+                      ),
+                      onChanged: (value) {
+                        cubit.searchCases(value);
+                      },
                     ),
                   ),
                   // SizedBox(
