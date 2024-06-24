@@ -78,28 +78,32 @@ class ContactTracingListPage extends StatelessWidget {
                     child: state.contactTracingList.isEmpty ||
                             (state.filteredContacts != null &&
                                 state.filteredContacts!.isEmpty)
-                        ? SingleChildScrollView(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                vertical: kPadding * 10,
+                        ? ListView(
+                            children: [
+                              SingleChildScrollView(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                    vertical: kPadding * 10,
+                                  ),
+                                  child: Column(
+                                    children: [
+                                      Icon(
+                                        Icons.search_off,
+                                        size: kPadding * 8,
+                                        color: theme.primaryColor,
+                                      ),
+                                      const SizedBox(
+                                        height: kPadding,
+                                      ),
+                                      Text(
+                                        'No Cases found',
+                                        style: theme.textTheme.bodyLarge,
+                                      ),
+                                    ],
+                                  ),
+                                ),
                               ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.search_off,
-                                    size: kPadding * 8,
-                                    color: theme.primaryColor,
-                                  ),
-                                  const SizedBox(
-                                    height: kPadding,
-                                  ),
-                                  Text(
-                                    'No Cases found',
-                                    style: theme.textTheme.bodyLarge,
-                                  ),
-                                ],
-                              ),
-                            ),
+                            ],
                           )
                         : ListView.builder(
                             itemBuilder: (context, index) {

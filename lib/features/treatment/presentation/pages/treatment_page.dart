@@ -1333,7 +1333,7 @@ class TreatmentPage extends StatelessWidget {
                             BottomButtonBar(
                               onSave: (_) async =>
                                   await _onSave(context, formGroup),
-                              nextPage: const ContactTracingRoute(),
+                              nextPage: const ContactTracingListRoute(),
                             ),
                             const SizedBox(height: kPadding * 2),
                           ]),

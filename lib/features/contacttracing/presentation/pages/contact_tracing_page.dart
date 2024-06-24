@@ -357,7 +357,8 @@ class ContactTracingPage extends StatelessWidget {
                                       const SizedBox(height: kPadding * 2),
                                       PrimaryTextField<int>(
                                         formControlName: 'weight',
-                                        label: '',
+                                        label: AppLocalizations.of(context)!
+                                            .weight,
                                         prefixIcon: Icons.monitor_weight,
                                         keyboardType: TextInputType.number,
                                         inputFormatter: [
