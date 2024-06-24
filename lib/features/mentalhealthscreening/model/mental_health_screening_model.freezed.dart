@@ -21,85 +21,112 @@ MentalHealthScreeningModel _$MentalHealthScreeningModelFromJson(
 
 /// @nodoc
 mixin _$MentalHealthScreeningModel {
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(includeToJson: false)
   String? get stage => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'ip_stage')
   String? get ipStage => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'ipfu_stage')
   String? get ipfuStage => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'cp_stage')
   String? get cpStage => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(
       name: 'ip_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipScreeningDate => throw _privateConstructorUsedError;
+  @HiveField(6)
   @JsonKey(
       name: 'ipfu_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipfuScreeningDate => throw _privateConstructorUsedError;
+  @HiveField(7)
   @JsonKey(
       name: 'cp_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get cpScreeningDate => throw _privateConstructorUsedError;
+  @HiveField(8)
   @JsonKey(name: 'ip_case_status')
   String? get ipScreeningStatus => throw _privateConstructorUsedError;
+  @HiveField(9)
   @JsonKey(name: 'ipfu_case_status')
   String? get ipfuScreeningStatus => throw _privateConstructorUsedError;
+  @HiveField(10)
   @JsonKey(name: 'cp_case_status')
   String? get cpScreeningStatus => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(name: 'ip_score')
   String? get ipScreeningScore => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(name: 'ipfu_score')
   String? get ipfuScreeningScore => throw _privateConstructorUsedError;
+  @HiveField(13)
   @JsonKey(name: 'cp_score')
   String? get cpScreeningScore => throw _privateConstructorUsedError;
+  @HiveField(14)
   @JsonKey(
       name: 'ip_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipCounsellingLinked => throw _privateConstructorUsedError;
+  @HiveField(15)
   @JsonKey(
       name: 'ipfu_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipfuCounsellingLinked => throw _privateConstructorUsedError;
+  @HiveField(16)
   @JsonKey(
       name: 'cp_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get cpCounsellingLinked => throw _privateConstructorUsedError;
+  @HiveField(17)
   @JsonKey(
       name: 'ip_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipPsychiatristLinked => throw _privateConstructorUsedError;
+  @HiveField(18)
   @JsonKey(
       name: 'ipfu_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipfuPsychiatristLinked => throw _privateConstructorUsedError;
+  @HiveField(19)
   @JsonKey(
       name: 'cp_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get cpPsychiatristLinked => throw _privateConstructorUsedError;
+  @HiveField(20)
   @JsonKey(name: 'ip_feeling_better_linkage')
   String? get ipFeelingBetter => throw _privateConstructorUsedError;
+  @HiveField(21)
   @JsonKey(name: 'ipfu_feeling_better_linkage')
   String? get ipfuFeelingBetter => throw _privateConstructorUsedError;
+  @HiveField(22)
   @JsonKey(name: 'cp_feeling_better_linkage')
   String? get cpFeelingBetter => throw _privateConstructorUsedError;
+  @HiveField(23)
   @JsonKey(name: 'ip_talk_helpline_again')
   String? get iptalkToHelpline => throw _privateConstructorUsedError;
+  @HiveField(24)
   @JsonKey(name: 'ipfu_talk_helpline_again')
   String? get ipfutalkToHelpline => throw _privateConstructorUsedError;
+  @HiveField(25)
   @JsonKey(name: 'cp_talk_helpline_again')
   String? get cptalkToHelpline => throw _privateConstructorUsedError;
+  @HiveField(26)
   @JsonKey(includeToJson: false)
   WHOSrqModel? get whoSrqModel => throw _privateConstructorUsedError;
 
@@ -117,69 +144,92 @@ abstract class $MentalHealthScreeningModelCopyWith<$Res> {
           MentalHealthScreeningModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
-      @JsonKey(includeToJson: false) String? stage,
-      @JsonKey(name: 'ip_stage') String? ipStage,
-      @JsonKey(name: 'ipfu_stage') String? ipfuStage,
-      @JsonKey(name: 'cp_stage') String? cpStage,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1) @JsonKey(includeToJson: false) String? stage,
+      @HiveField(2) @JsonKey(name: 'ip_stage') String? ipStage,
+      @HiveField(3) @JsonKey(name: 'ipfu_stage') String? ipfuStage,
+      @HiveField(4) @JsonKey(name: 'cp_stage') String? cpStage,
+      @HiveField(5)
       @JsonKey(
           name: 'ip_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipScreeningDate,
+      @HiveField(6)
       @JsonKey(
           name: 'ipfu_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuScreeningDate,
+      @HiveField(7)
       @JsonKey(
           name: 'cp_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cpScreeningDate,
-      @JsonKey(name: 'ip_case_status') String? ipScreeningStatus,
-      @JsonKey(name: 'ipfu_case_status') String? ipfuScreeningStatus,
-      @JsonKey(name: 'cp_case_status') String? cpScreeningStatus,
-      @JsonKey(name: 'ip_score') String? ipScreeningScore,
-      @JsonKey(name: 'ipfu_score') String? ipfuScreeningScore,
-      @JsonKey(name: 'cp_score') String? cpScreeningScore,
+      @HiveField(8) @JsonKey(name: 'ip_case_status') String? ipScreeningStatus,
+      @HiveField(9)
+      @JsonKey(name: 'ipfu_case_status')
+      String? ipfuScreeningStatus,
+      @HiveField(10) @JsonKey(name: 'cp_case_status') String? cpScreeningStatus,
+      @HiveField(11) @JsonKey(name: 'ip_score') String? ipScreeningScore,
+      @HiveField(12) @JsonKey(name: 'ipfu_score') String? ipfuScreeningScore,
+      @HiveField(13) @JsonKey(name: 'cp_score') String? cpScreeningScore,
+      @HiveField(14)
       @JsonKey(
           name: 'ip_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipCounsellingLinked,
+      @HiveField(15)
       @JsonKey(
           name: 'ipfu_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuCounsellingLinked,
+      @HiveField(16)
       @JsonKey(
           name: 'cp_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cpCounsellingLinked,
+      @HiveField(17)
       @JsonKey(
           name: 'ip_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipPsychiatristLinked,
+      @HiveField(18)
       @JsonKey(
           name: 'ipfu_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuPsychiatristLinked,
+      @HiveField(19)
       @JsonKey(
           name: 'cp_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cpPsychiatristLinked,
-      @JsonKey(name: 'ip_feeling_better_linkage') String? ipFeelingBetter,
-      @JsonKey(name: 'ipfu_feeling_better_linkage') String? ipfuFeelingBetter,
-      @JsonKey(name: 'cp_feeling_better_linkage') String? cpFeelingBetter,
-      @JsonKey(name: 'ip_talk_helpline_again') String? iptalkToHelpline,
-      @JsonKey(name: 'ipfu_talk_helpline_again') String? ipfutalkToHelpline,
-      @JsonKey(name: 'cp_talk_helpline_again') String? cptalkToHelpline,
-      @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
+      @HiveField(20)
+      @JsonKey(name: 'ip_feeling_better_linkage')
+      String? ipFeelingBetter,
+      @HiveField(21)
+      @JsonKey(name: 'ipfu_feeling_better_linkage')
+      String? ipfuFeelingBetter,
+      @HiveField(22)
+      @JsonKey(name: 'cp_feeling_better_linkage')
+      String? cpFeelingBetter,
+      @HiveField(23)
+      @JsonKey(name: 'ip_talk_helpline_again')
+      String? iptalkToHelpline,
+      @HiveField(24)
+      @JsonKey(name: 'ipfu_talk_helpline_again')
+      String? ipfutalkToHelpline,
+      @HiveField(25)
+      @JsonKey(name: 'cp_talk_helpline_again')
+      String? cptalkToHelpline,
+      @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
 
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
 }
@@ -361,69 +411,92 @@ abstract class _$$MentalHealthScreeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
-      @JsonKey(includeToJson: false) String? stage,
-      @JsonKey(name: 'ip_stage') String? ipStage,
-      @JsonKey(name: 'ipfu_stage') String? ipfuStage,
-      @JsonKey(name: 'cp_stage') String? cpStage,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1) @JsonKey(includeToJson: false) String? stage,
+      @HiveField(2) @JsonKey(name: 'ip_stage') String? ipStage,
+      @HiveField(3) @JsonKey(name: 'ipfu_stage') String? ipfuStage,
+      @HiveField(4) @JsonKey(name: 'cp_stage') String? cpStage,
+      @HiveField(5)
       @JsonKey(
           name: 'ip_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipScreeningDate,
+      @HiveField(6)
       @JsonKey(
           name: 'ipfu_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuScreeningDate,
+      @HiveField(7)
       @JsonKey(
           name: 'cp_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cpScreeningDate,
-      @JsonKey(name: 'ip_case_status') String? ipScreeningStatus,
-      @JsonKey(name: 'ipfu_case_status') String? ipfuScreeningStatus,
-      @JsonKey(name: 'cp_case_status') String? cpScreeningStatus,
-      @JsonKey(name: 'ip_score') String? ipScreeningScore,
-      @JsonKey(name: 'ipfu_score') String? ipfuScreeningScore,
-      @JsonKey(name: 'cp_score') String? cpScreeningScore,
+      @HiveField(8) @JsonKey(name: 'ip_case_status') String? ipScreeningStatus,
+      @HiveField(9)
+      @JsonKey(name: 'ipfu_case_status')
+      String? ipfuScreeningStatus,
+      @HiveField(10) @JsonKey(name: 'cp_case_status') String? cpScreeningStatus,
+      @HiveField(11) @JsonKey(name: 'ip_score') String? ipScreeningScore,
+      @HiveField(12) @JsonKey(name: 'ipfu_score') String? ipfuScreeningScore,
+      @HiveField(13) @JsonKey(name: 'cp_score') String? cpScreeningScore,
+      @HiveField(14)
       @JsonKey(
           name: 'ip_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipCounsellingLinked,
+      @HiveField(15)
       @JsonKey(
           name: 'ipfu_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuCounsellingLinked,
+      @HiveField(16)
       @JsonKey(
           name: 'cp_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cpCounsellingLinked,
+      @HiveField(17)
       @JsonKey(
           name: 'ip_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipPsychiatristLinked,
+      @HiveField(18)
       @JsonKey(
           name: 'ipfu_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? ipfuPsychiatristLinked,
+      @HiveField(19)
       @JsonKey(
           name: 'cp_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cpPsychiatristLinked,
-      @JsonKey(name: 'ip_feeling_better_linkage') String? ipFeelingBetter,
-      @JsonKey(name: 'ipfu_feeling_better_linkage') String? ipfuFeelingBetter,
-      @JsonKey(name: 'cp_feeling_better_linkage') String? cpFeelingBetter,
-      @JsonKey(name: 'ip_talk_helpline_again') String? iptalkToHelpline,
-      @JsonKey(name: 'ipfu_talk_helpline_again') String? ipfutalkToHelpline,
-      @JsonKey(name: 'cp_talk_helpline_again') String? cptalkToHelpline,
-      @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
+      @HiveField(20)
+      @JsonKey(name: 'ip_feeling_better_linkage')
+      String? ipFeelingBetter,
+      @HiveField(21)
+      @JsonKey(name: 'ipfu_feeling_better_linkage')
+      String? ipfuFeelingBetter,
+      @HiveField(22)
+      @JsonKey(name: 'cp_feeling_better_linkage')
+      String? cpFeelingBetter,
+      @HiveField(23)
+      @JsonKey(name: 'ip_talk_helpline_again')
+      String? iptalkToHelpline,
+      @HiveField(24)
+      @JsonKey(name: 'ipfu_talk_helpline_again')
+      String? ipfutalkToHelpline,
+      @HiveField(25)
+      @JsonKey(name: 'cp_talk_helpline_again')
+      String? cptalkToHelpline,
+      @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
 
   @override
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
@@ -587,180 +660,228 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
   const _$MentalHealthScreeningModelImpl(
-      {@JsonKey(name: 'id', includeToJson: false) this.id,
-      @JsonKey(includeToJson: false) this.stage,
-      @JsonKey(name: 'ip_stage') this.ipStage,
-      @JsonKey(name: 'ipfu_stage') this.ipfuStage,
-      @JsonKey(name: 'cp_stage') this.cpStage,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) this.id,
+      @HiveField(1) @JsonKey(includeToJson: false) this.stage,
+      @HiveField(2) @JsonKey(name: 'ip_stage') this.ipStage,
+      @HiveField(3) @JsonKey(name: 'ipfu_stage') this.ipfuStage,
+      @HiveField(4) @JsonKey(name: 'cp_stage') this.cpStage,
+      @HiveField(5)
       @JsonKey(
           name: 'ip_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipScreeningDate,
+      @HiveField(6)
       @JsonKey(
           name: 'ipfu_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipfuScreeningDate,
+      @HiveField(7)
       @JsonKey(
           name: 'cp_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.cpScreeningDate,
-      @JsonKey(name: 'ip_case_status') this.ipScreeningStatus,
-      @JsonKey(name: 'ipfu_case_status') this.ipfuScreeningStatus,
-      @JsonKey(name: 'cp_case_status') this.cpScreeningStatus,
-      @JsonKey(name: 'ip_score') this.ipScreeningScore,
-      @JsonKey(name: 'ipfu_score') this.ipfuScreeningScore,
-      @JsonKey(name: 'cp_score') this.cpScreeningScore,
+      @HiveField(8) @JsonKey(name: 'ip_case_status') this.ipScreeningStatus,
+      @HiveField(9) @JsonKey(name: 'ipfu_case_status') this.ipfuScreeningStatus,
+      @HiveField(10) @JsonKey(name: 'cp_case_status') this.cpScreeningStatus,
+      @HiveField(11) @JsonKey(name: 'ip_score') this.ipScreeningScore,
+      @HiveField(12) @JsonKey(name: 'ipfu_score') this.ipfuScreeningScore,
+      @HiveField(13) @JsonKey(name: 'cp_score') this.cpScreeningScore,
+      @HiveField(14)
       @JsonKey(
           name: 'ip_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipCounsellingLinked,
+      @HiveField(15)
       @JsonKey(
           name: 'ipfu_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipfuCounsellingLinked,
+      @HiveField(16)
       @JsonKey(
           name: 'cp_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.cpCounsellingLinked,
+      @HiveField(17)
       @JsonKey(
           name: 'ip_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipPsychiatristLinked,
+      @HiveField(18)
       @JsonKey(
           name: 'ipfu_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.ipfuPsychiatristLinked,
+      @HiveField(19)
       @JsonKey(
           name: 'cp_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.cpPsychiatristLinked,
-      @JsonKey(name: 'ip_feeling_better_linkage') this.ipFeelingBetter,
-      @JsonKey(name: 'ipfu_feeling_better_linkage') this.ipfuFeelingBetter,
-      @JsonKey(name: 'cp_feeling_better_linkage') this.cpFeelingBetter,
-      @JsonKey(name: 'ip_talk_helpline_again') this.iptalkToHelpline,
-      @JsonKey(name: 'ipfu_talk_helpline_again') this.ipfutalkToHelpline,
-      @JsonKey(name: 'cp_talk_helpline_again') this.cptalkToHelpline,
-      @JsonKey(includeToJson: false) this.whoSrqModel});
+      @HiveField(20)
+      @JsonKey(name: 'ip_feeling_better_linkage')
+      this.ipFeelingBetter,
+      @HiveField(21)
+      @JsonKey(name: 'ipfu_feeling_better_linkage')
+      this.ipfuFeelingBetter,
+      @HiveField(22)
+      @JsonKey(name: 'cp_feeling_better_linkage')
+      this.cpFeelingBetter,
+      @HiveField(23)
+      @JsonKey(name: 'ip_talk_helpline_again')
+      this.iptalkToHelpline,
+      @HiveField(24)
+      @JsonKey(name: 'ipfu_talk_helpline_again')
+      this.ipfutalkToHelpline,
+      @HiveField(25)
+      @JsonKey(name: 'cp_talk_helpline_again')
+      this.cptalkToHelpline,
+      @HiveField(26) @JsonKey(includeToJson: false) this.whoSrqModel});
 
   factory _$MentalHealthScreeningModelImpl.fromJson(
           Map<String, dynamic> json) =>
       _$$MentalHealthScreeningModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(includeToJson: false)
   final String? stage;
   @override
+  @HiveField(2)
   @JsonKey(name: 'ip_stage')
   final String? ipStage;
   @override
+  @HiveField(3)
   @JsonKey(name: 'ipfu_stage')
   final String? ipfuStage;
   @override
+  @HiveField(4)
   @JsonKey(name: 'cp_stage')
   final String? cpStage;
   @override
+  @HiveField(5)
   @JsonKey(
       name: 'ip_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? ipScreeningDate;
   @override
+  @HiveField(6)
   @JsonKey(
       name: 'ipfu_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? ipfuScreeningDate;
   @override
+  @HiveField(7)
   @JsonKey(
       name: 'cp_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? cpScreeningDate;
   @override
+  @HiveField(8)
   @JsonKey(name: 'ip_case_status')
   final String? ipScreeningStatus;
   @override
+  @HiveField(9)
   @JsonKey(name: 'ipfu_case_status')
   final String? ipfuScreeningStatus;
   @override
+  @HiveField(10)
   @JsonKey(name: 'cp_case_status')
   final String? cpScreeningStatus;
   @override
+  @HiveField(11)
   @JsonKey(name: 'ip_score')
   final String? ipScreeningScore;
   @override
+  @HiveField(12)
   @JsonKey(name: 'ipfu_score')
   final String? ipfuScreeningScore;
   @override
+  @HiveField(13)
   @JsonKey(name: 'cp_score')
   final String? cpScreeningScore;
   @override
+  @HiveField(14)
   @JsonKey(
       name: 'ip_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? ipCounsellingLinked;
   @override
+  @HiveField(15)
   @JsonKey(
       name: 'ipfu_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? ipfuCounsellingLinked;
   @override
+  @HiveField(16)
   @JsonKey(
       name: 'cp_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? cpCounsellingLinked;
   @override
+  @HiveField(17)
   @JsonKey(
       name: 'ip_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? ipPsychiatristLinked;
   @override
+  @HiveField(18)
   @JsonKey(
       name: 'ipfu_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? ipfuPsychiatristLinked;
   @override
+  @HiveField(19)
   @JsonKey(
       name: 'cp_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? cpPsychiatristLinked;
   @override
+  @HiveField(20)
   @JsonKey(name: 'ip_feeling_better_linkage')
   final String? ipFeelingBetter;
   @override
+  @HiveField(21)
   @JsonKey(name: 'ipfu_feeling_better_linkage')
   final String? ipfuFeelingBetter;
   @override
+  @HiveField(22)
   @JsonKey(name: 'cp_feeling_better_linkage')
   final String? cpFeelingBetter;
   @override
+  @HiveField(23)
   @JsonKey(name: 'ip_talk_helpline_again')
   final String? iptalkToHelpline;
   @override
+  @HiveField(24)
   @JsonKey(name: 'ipfu_talk_helpline_again')
   final String? ipfutalkToHelpline;
   @override
+  @HiveField(25)
   @JsonKey(name: 'cp_talk_helpline_again')
   final String? cptalkToHelpline;
   @override
+  @HiveField(26)
   @JsonKey(includeToJson: false)
   final WHOSrqModel? whoSrqModel;
 
@@ -877,70 +998,98 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
 abstract class _MentalHealthScreeningModel
     implements MentalHealthScreeningModel {
   const factory _MentalHealthScreeningModel(
-      {@JsonKey(name: 'id', includeToJson: false) final int? id,
-      @JsonKey(includeToJson: false) final String? stage,
-      @JsonKey(name: 'ip_stage') final String? ipStage,
-      @JsonKey(name: 'ipfu_stage') final String? ipfuStage,
-      @JsonKey(name: 'cp_stage') final String? cpStage,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) final int? id,
+      @HiveField(1) @JsonKey(includeToJson: false) final String? stage,
+      @HiveField(2) @JsonKey(name: 'ip_stage') final String? ipStage,
+      @HiveField(3) @JsonKey(name: 'ipfu_stage') final String? ipfuStage,
+      @HiveField(4) @JsonKey(name: 'cp_stage') final String? cpStage,
+      @HiveField(5)
       @JsonKey(
           name: 'ip_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? ipScreeningDate,
+      @HiveField(6)
       @JsonKey(
           name: 'ipfu_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? ipfuScreeningDate,
+      @HiveField(7)
       @JsonKey(
           name: 'cp_screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? cpScreeningDate,
-      @JsonKey(name: 'ip_case_status') final String? ipScreeningStatus,
-      @JsonKey(name: 'ipfu_case_status') final String? ipfuScreeningStatus,
-      @JsonKey(name: 'cp_case_status') final String? cpScreeningStatus,
-      @JsonKey(name: 'ip_score') final String? ipScreeningScore,
-      @JsonKey(name: 'ipfu_score') final String? ipfuScreeningScore,
-      @JsonKey(name: 'cp_score') final String? cpScreeningScore,
+      @HiveField(8)
+      @JsonKey(name: 'ip_case_status')
+      final String? ipScreeningStatus,
+      @HiveField(9)
+      @JsonKey(name: 'ipfu_case_status')
+      final String? ipfuScreeningStatus,
+      @HiveField(10)
+      @JsonKey(name: 'cp_case_status')
+      final String? cpScreeningStatus,
+      @HiveField(11) @JsonKey(name: 'ip_score') final String? ipScreeningScore,
+      @HiveField(12)
+      @JsonKey(name: 'ipfu_score')
+      final String? ipfuScreeningScore,
+      @HiveField(13) @JsonKey(name: 'cp_score') final String? cpScreeningScore,
+      @HiveField(14)
       @JsonKey(
           name: 'ip_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? ipCounsellingLinked,
+      @HiveField(15)
       @JsonKey(
           name: 'ipfu_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? ipfuCounsellingLinked,
+      @HiveField(16)
       @JsonKey(
           name: 'cp_counselling_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? cpCounsellingLinked,
+      @HiveField(17)
       @JsonKey(
           name: 'ip_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? ipPsychiatristLinked,
+      @HiveField(18)
       @JsonKey(
           name: 'ipfu_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? ipfuPsychiatristLinked,
+      @HiveField(19)
       @JsonKey(
           name: 'cp_psychiatrist_linked',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? cpPsychiatristLinked,
-      @JsonKey(name: 'ip_feeling_better_linkage') final String? ipFeelingBetter,
+      @HiveField(20)
+      @JsonKey(name: 'ip_feeling_better_linkage')
+      final String? ipFeelingBetter,
+      @HiveField(21)
       @JsonKey(name: 'ipfu_feeling_better_linkage')
       final String? ipfuFeelingBetter,
-      @JsonKey(name: 'cp_feeling_better_linkage') final String? cpFeelingBetter,
-      @JsonKey(name: 'ip_talk_helpline_again') final String? iptalkToHelpline,
+      @HiveField(22)
+      @JsonKey(name: 'cp_feeling_better_linkage')
+      final String? cpFeelingBetter,
+      @HiveField(23)
+      @JsonKey(name: 'ip_talk_helpline_again')
+      final String? iptalkToHelpline,
+      @HiveField(24)
       @JsonKey(name: 'ipfu_talk_helpline_again')
       final String? ipfutalkToHelpline,
-      @JsonKey(name: 'cp_talk_helpline_again') final String? cptalkToHelpline,
+      @HiveField(25)
+      @JsonKey(name: 'cp_talk_helpline_again')
+      final String? cptalkToHelpline,
+      @HiveField(26)
       @JsonKey(includeToJson: false)
       final WHOSrqModel? whoSrqModel}) = _$MentalHealthScreeningModelImpl;
 
@@ -948,111 +1097,138 @@ abstract class _MentalHealthScreeningModel
       _$MentalHealthScreeningModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(includeToJson: false)
   String? get stage;
   @override
+  @HiveField(2)
   @JsonKey(name: 'ip_stage')
   String? get ipStage;
   @override
+  @HiveField(3)
   @JsonKey(name: 'ipfu_stage')
   String? get ipfuStage;
   @override
+  @HiveField(4)
   @JsonKey(name: 'cp_stage')
   String? get cpStage;
   @override
+  @HiveField(5)
   @JsonKey(
       name: 'ip_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipScreeningDate;
   @override
+  @HiveField(6)
   @JsonKey(
       name: 'ipfu_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipfuScreeningDate;
   @override
+  @HiveField(7)
   @JsonKey(
       name: 'cp_screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get cpScreeningDate;
   @override
+  @HiveField(8)
   @JsonKey(name: 'ip_case_status')
   String? get ipScreeningStatus;
   @override
+  @HiveField(9)
   @JsonKey(name: 'ipfu_case_status')
   String? get ipfuScreeningStatus;
   @override
+  @HiveField(10)
   @JsonKey(name: 'cp_case_status')
   String? get cpScreeningStatus;
   @override
+  @HiveField(11)
   @JsonKey(name: 'ip_score')
   String? get ipScreeningScore;
   @override
+  @HiveField(12)
   @JsonKey(name: 'ipfu_score')
   String? get ipfuScreeningScore;
   @override
+  @HiveField(13)
   @JsonKey(name: 'cp_score')
   String? get cpScreeningScore;
   @override
+  @HiveField(14)
   @JsonKey(
       name: 'ip_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipCounsellingLinked;
   @override
+  @HiveField(15)
   @JsonKey(
       name: 'ipfu_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipfuCounsellingLinked;
   @override
+  @HiveField(16)
   @JsonKey(
       name: 'cp_counselling_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get cpCounsellingLinked;
   @override
+  @HiveField(17)
   @JsonKey(
       name: 'ip_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipPsychiatristLinked;
   @override
+  @HiveField(18)
   @JsonKey(
       name: 'ipfu_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get ipfuPsychiatristLinked;
   @override
+  @HiveField(19)
   @JsonKey(
       name: 'cp_psychiatrist_linked',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get cpPsychiatristLinked;
   @override
+  @HiveField(20)
   @JsonKey(name: 'ip_feeling_better_linkage')
   String? get ipFeelingBetter;
   @override
+  @HiveField(21)
   @JsonKey(name: 'ipfu_feeling_better_linkage')
   String? get ipfuFeelingBetter;
   @override
+  @HiveField(22)
   @JsonKey(name: 'cp_feeling_better_linkage')
   String? get cpFeelingBetter;
   @override
+  @HiveField(23)
   @JsonKey(name: 'ip_talk_helpline_again')
   String? get iptalkToHelpline;
   @override
+  @HiveField(24)
   @JsonKey(name: 'ipfu_talk_helpline_again')
   String? get ipfutalkToHelpline;
   @override
+  @HiveField(25)
   @JsonKey(name: 'cp_talk_helpline_again')
   String? get cptalkToHelpline;
   @override
+  @HiveField(26)
   @JsonKey(includeToJson: false)
   WHOSrqModel? get whoSrqModel;
   @override

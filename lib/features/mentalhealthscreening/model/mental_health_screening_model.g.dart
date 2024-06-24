@@ -3,6 +3,123 @@
 part of 'mental_health_screening_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class MentalHealthScreeningModelAdapter
+    extends TypeAdapter<MentalHealthScreeningModel> {
+  @override
+  final int typeId = 17;
+
+  @override
+  MentalHealthScreeningModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return MentalHealthScreeningModel(
+      id: fields[0] as int?,
+      stage: fields[1] as String?,
+      ipStage: fields[2] as String?,
+      ipfuStage: fields[3] as String?,
+      cpStage: fields[4] as String?,
+      ipScreeningDate: fields[5] as DateTime?,
+      ipfuScreeningDate: fields[6] as DateTime?,
+      cpScreeningDate: fields[7] as DateTime?,
+      ipScreeningStatus: fields[8] as String?,
+      ipfuScreeningStatus: fields[9] as String?,
+      cpScreeningStatus: fields[10] as String?,
+      ipScreeningScore: fields[11] as String?,
+      ipfuScreeningScore: fields[12] as String?,
+      cpScreeningScore: fields[13] as String?,
+      ipCounsellingLinked: fields[14] as DateTime?,
+      ipfuCounsellingLinked: fields[15] as DateTime?,
+      cpCounsellingLinked: fields[16] as DateTime?,
+      ipPsychiatristLinked: fields[17] as DateTime?,
+      ipfuPsychiatristLinked: fields[18] as DateTime?,
+      cpPsychiatristLinked: fields[19] as DateTime?,
+      ipFeelingBetter: fields[20] as String?,
+      ipfuFeelingBetter: fields[21] as String?,
+      cpFeelingBetter: fields[22] as String?,
+      iptalkToHelpline: fields[23] as String?,
+      ipfutalkToHelpline: fields[24] as String?,
+      cptalkToHelpline: fields[25] as String?,
+      whoSrqModel: fields[26] as WHOSrqModel?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, MentalHealthScreeningModel obj) {
+    writer
+      ..writeByte(27)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.stage)
+      ..writeByte(2)
+      ..write(obj.ipStage)
+      ..writeByte(3)
+      ..write(obj.ipfuStage)
+      ..writeByte(4)
+      ..write(obj.cpStage)
+      ..writeByte(5)
+      ..write(obj.ipScreeningDate)
+      ..writeByte(6)
+      ..write(obj.ipfuScreeningDate)
+      ..writeByte(7)
+      ..write(obj.cpScreeningDate)
+      ..writeByte(8)
+      ..write(obj.ipScreeningStatus)
+      ..writeByte(9)
+      ..write(obj.ipfuScreeningStatus)
+      ..writeByte(10)
+      ..write(obj.cpScreeningStatus)
+      ..writeByte(11)
+      ..write(obj.ipScreeningScore)
+      ..writeByte(12)
+      ..write(obj.ipfuScreeningScore)
+      ..writeByte(13)
+      ..write(obj.cpScreeningScore)
+      ..writeByte(14)
+      ..write(obj.ipCounsellingLinked)
+      ..writeByte(15)
+      ..write(obj.ipfuCounsellingLinked)
+      ..writeByte(16)
+      ..write(obj.cpCounsellingLinked)
+      ..writeByte(17)
+      ..write(obj.ipPsychiatristLinked)
+      ..writeByte(18)
+      ..write(obj.ipfuPsychiatristLinked)
+      ..writeByte(19)
+      ..write(obj.cpPsychiatristLinked)
+      ..writeByte(20)
+      ..write(obj.ipFeelingBetter)
+      ..writeByte(21)
+      ..write(obj.ipfuFeelingBetter)
+      ..writeByte(22)
+      ..write(obj.cpFeelingBetter)
+      ..writeByte(23)
+      ..write(obj.iptalkToHelpline)
+      ..writeByte(24)
+      ..write(obj.ipfutalkToHelpline)
+      ..writeByte(25)
+      ..write(obj.cptalkToHelpline)
+      ..writeByte(26)
+      ..write(obj.whoSrqModel);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is MentalHealthScreeningModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

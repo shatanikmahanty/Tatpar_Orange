@@ -3,6 +3,101 @@
 part of 'who_srq_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class WHOSrqModelAdapter extends TypeAdapter<WHOSrqModel> {
+  @override
+  final int typeId = 18;
+
+  @override
+  WHOSrqModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return WHOSrqModel(
+      headache: fields[0] as String?,
+      apetite: fields[1] as String?,
+      sleep: fields[2] as String?,
+      frightened: fields[3] as String?,
+      handsShake: fields[4] as String?,
+      nervous: fields[5] as String?,
+      digestionPoor: fields[6] as String?,
+      troubleThinking: fields[7] as String?,
+      unhappy: fields[8] as String?,
+      cryMore: fields[9] as String?,
+      dailyActivities: fields[10] as String?,
+      decisionMaking: fields[11] as String?,
+      dailyWorkSuffering: fields[12] as String?,
+      playAUsefulPart: fields[13] as String?,
+      lostInterest: fields[14] as String?,
+      worthlessPerson: fields[15] as String?,
+      endingLife: fields[16] as String?,
+      tiredAllTheTime: fields[17] as String?,
+      uncomfortableFeelings: fields[18] as String?,
+      easilyTired: fields[19] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, WHOSrqModel obj) {
+    writer
+      ..writeByte(20)
+      ..writeByte(0)
+      ..write(obj.headache)
+      ..writeByte(1)
+      ..write(obj.apetite)
+      ..writeByte(2)
+      ..write(obj.sleep)
+      ..writeByte(3)
+      ..write(obj.frightened)
+      ..writeByte(4)
+      ..write(obj.handsShake)
+      ..writeByte(5)
+      ..write(obj.nervous)
+      ..writeByte(6)
+      ..write(obj.digestionPoor)
+      ..writeByte(7)
+      ..write(obj.troubleThinking)
+      ..writeByte(8)
+      ..write(obj.unhappy)
+      ..writeByte(9)
+      ..write(obj.cryMore)
+      ..writeByte(10)
+      ..write(obj.dailyActivities)
+      ..writeByte(11)
+      ..write(obj.decisionMaking)
+      ..writeByte(12)
+      ..write(obj.dailyWorkSuffering)
+      ..writeByte(13)
+      ..write(obj.playAUsefulPart)
+      ..writeByte(14)
+      ..write(obj.lostInterest)
+      ..writeByte(15)
+      ..write(obj.worthlessPerson)
+      ..writeByte(16)
+      ..write(obj.endingLife)
+      ..writeByte(17)
+      ..write(obj.tiredAllTheTime)
+      ..writeByte(18)
+      ..write(obj.uncomfortableFeelings)
+      ..writeByte(19)
+      ..write(obj.easilyTired);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is WHOSrqModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

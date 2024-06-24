@@ -20,13 +20,17 @@ import 'package:tatpar_acf/features/case/data/source_models/key_population_model
 import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/referrer_source_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart';
+import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
+import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
+import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
+import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/l10n/language_provider.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
 import 'package:tatpar_acf/utils/extensions/app_dio_exception.dart';
 import 'package:tatpar_acf/utils/extensions/extensions.dart';
 import 'package:provider/provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 
 import 'configurations/configurations.dart';
 
@@ -75,9 +79,36 @@ Future<void> main() async {
     await Hive.openBox<Case>('caseList');
     // await Hive.deleteBoxFromDisk('caseList');
 
+    ///ReferralDetailsUpdateAPI
+    Hive.registerAdapter(ReferralDetailsModelAdapter());
+    await Hive.openBox<ReferralDetailsModel>('referralDetailsModel');
+
+    ///TBScreeningUpdateAPI
+    Hive.registerAdapter(TBScreeningModelAdapter());
+    await Hive.openBox<TBScreeningModel>('tbScreeningModel');
+
+    ///MentalHealthScreeningUpdateAPI
+    Hive.registerAdapter(MentalHealthScreeningModelAdapter());
+    Hive.registerAdapter(WHOSrqModelAdapter());
+    await Hive.openBox<WHOSrqModel>('whoSrqModel');
+    await Hive.openBox<MentalHealthScreeningModel>(
+        'mentalHealthScreeningModel');
+
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
     );
+    const fatalError = true;
+    // Non-async exceptions
+    FlutterError.onError = (errorDetails) {
+      if (fatalError) {
+        // If you want to record a "fatal" exception
+        FirebaseCrashlytics.instance.recordFlutterFatalError(errorDetails);
+        // ignore: dead_code
+      } else {
+        // If you want to record a "non-fatal" exception
+        FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
+      }
+    };
     final router = AppRouter();
     if (!kIsWeb) {
       initialDeepLink = (await appLinksRepository.getInitialLink())?.path;
@@ -98,12 +129,3 @@ Future<void> main() async {
     });
   });
 }
-
-// void getCurrentAppLanguage() async {
-//   final Future<SharedPreferences> preferences = SharedPreferences.getInstance();
-//   String? lang = await preferences.then((SharedPreferences prefs) {
-//     return prefs.getString('currentLanguage');
-//   });
-  // LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
-//  print('Current Language===========${LanguageProvider().currentLanguage}');
-// }

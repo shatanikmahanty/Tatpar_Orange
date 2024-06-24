@@ -22,6 +22,8 @@ class CaseRepo {
   Future<ReferralDetailsModel> saveReferralDetails(
       {required ReferralDetailsModel referralDetailsModel,
       required int? id}) async {
+    // Box<ReferralDetailsModel> dataBox =
+    //     Hive.box<ReferralDetailsModel>('referralDetailsModel');
     final request = NetworkRequest(
       '$referralDetailsUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -230,6 +232,7 @@ class CaseRepo {
       data: {},
     );
     final result = await NetworkManager.instance.perform(request);
+
     if (result.status == Status.ok) {
       return ReferralDetailsModel.fromJson(result.data['data']);
     } else {

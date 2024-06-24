@@ -165,6 +165,19 @@
     "nikshayId":"Nikshay ID",
     "nutritionProvided":"No. of month nutrition provided",
     "treatmentOutcome":"tt_outcome",
-    "treatmentComments":"Tt Comments"
-
+    "treatmentComments":"Tt Comments",
+    "tbContactName":"Name of TB Contact",
+    "testConducted":"Any Test Conducted?",
+    "cxr_date":"CXR Date",
+    "cxr_result":"CXR Result",
+    "tbi_date":"TBI Date",
+    "tbi_result":"TBI Result",
+    "nikshay_id":"Nikshay ID",
+    "tpt_eligible":"TPT eligible",
+    "tpt_regimen":"TPT Regimen",
+    "tpt_start_date":"TPT Start Date",
+    "weight":"Weight at Start",
+    "tpt_side_effects":"Side Effects of TPT(If any)",
+    "tpt_outcome_date":"TPT Outcome Date",
+    "tpt_outcome":"TPT Outcome"
 }

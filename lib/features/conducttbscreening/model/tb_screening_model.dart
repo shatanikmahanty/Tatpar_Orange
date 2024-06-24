@@ -1,6 +1,6 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 part 'tb_screening_model.freezed.dart';
 part 'tb_screening_model.g.dart';
 
@@ -17,31 +17,34 @@ DateTime? fromJsonToDateTime(String? date) {
 String? _dateTimeToJson(DateTime? date) =>
     date?.toIso8601String().substring(0, 10);
 
+//ignore_for_file: invalid_annotation_target
 @freezed
+@HiveType(typeId: 16)
 class TBScreeningModel with _$TBScreeningModel {
   const factory TBScreeningModel({
-    @JsonKey(name: 'id', includeToJson: false) int? id,
+    @HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+    @HiveField(1)
     @JsonKey(
       name: 'screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson,
     )
     DateTime? screeningDate,
-    @JsonKey(name: 'screened_by') String? screenedBy,
-    @JsonKey(includeToJson: false) String? pregnant,
-    @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
-    @JsonKey(includeIfNull: false) String? trimester,
-    @JsonKey(name: 'cough_2_weeks') String? cough,
-    @JsonKey(name: 'sputum_2_weeks') String? sputum,
-    @JsonKey(name: 'hemoptysis') String? hemoptysis,
-    @JsonKey(name: 'fever_2_weeks') String? fever,
-    @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
-    @JsonKey(name: 'chest_pain_2_months') String? chestPain,
-    @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
-    @JsonKey(name: 'swollen_gland') String? swollenGland,
-    @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
-    @JsonKey(name: 'screening_outcome') String? screeningOutcome,
-    @JsonKey(name: 'comments') String? comments,
+    @HiveField(2) @JsonKey(name: 'screened_by') String? screenedBy,
+    @HiveField(3) @JsonKey(includeToJson: false) String? pregnant,
+    @HiveField(4) @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
+    @HiveField(5) @JsonKey(includeIfNull: false) String? trimester,
+    @HiveField(6) @JsonKey(name: 'cough_2_weeks') String? cough,
+    @HiveField(7) @JsonKey(name: 'sputum_2_weeks') String? sputum,
+    @HiveField(8) @JsonKey(name: 'hemoptysis') String? hemoptysis,
+    @HiveField(9) @JsonKey(name: 'fever_2_weeks') String? fever,
+    @HiveField(10) @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
+    @HiveField(11) @JsonKey(name: 'chest_pain_2_months') String? chestPain,
+    @HiveField(12) @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
+    @HiveField(13) @JsonKey(name: 'swollen_gland') String? swollenGland,
+    @HiveField(14) @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
+    @HiveField(15) @JsonKey(name: 'screening_outcome') String? screeningOutcome,
+    @HiveField(16) @JsonKey(name: 'comments') String? comments,
   }) = _TBScreeningModel;
 
   factory TBScreeningModel.fromJson(Map<String, dynamic> json) =>

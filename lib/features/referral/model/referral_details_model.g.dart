@@ -3,6 +3,128 @@
 part of 'referral_details_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class ReferralDetailsModelAdapter extends TypeAdapter<ReferralDetailsModel> {
+  @override
+  final int typeId = 15;
+
+  @override
+  ReferralDetailsModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return ReferralDetailsModel(
+      caseId: fields[0] as int?,
+      id: fields[1] as int?,
+      referralID: fields[2] as String?,
+      referralDate: fields[3] as DateTime?,
+      referralName: fields[4] as String?,
+      age: fields[5] as int?,
+      gender: fields[6] as String?,
+      selectedDistrict: fields[7] as int?,
+      selectedBlock: fields[8] as int?,
+      selectedPanchayatCode: fields[9] as int?,
+      district: fields[10] as String?,
+      block: fields[11] as String?,
+      panchayatCode: fields[12] as String?,
+      ward: fields[13] as int?,
+      guardianName: fields[14] as String?,
+      guardianPhoneNumber: fields[15] as String?,
+      selectedCasteCategory: fields[16] as int?,
+      casteCategory: fields[17] as String?,
+      selectedKeyPopulation: (fields[18] as List?)?.cast<int>(),
+      keyPopulation: (fields[19] as List?)?.cast<String>(),
+      selectedTrimester: fields[20] as int?,
+      trimester: fields[21] as String?,
+      referredBy: fields[22] as String?,
+      selectedrReferrerSource: fields[23] as int?,
+      referrerSource: fields[24] as String?,
+      referredWard: fields[25] as int?,
+      selectedReferrerPanchayatCode: fields[26] as int?,
+      referrerPanchayatCode: fields[27] as String?,
+      source: fields[28] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, ReferralDetailsModel obj) {
+    writer
+      ..writeByte(29)
+      ..writeByte(0)
+      ..write(obj.caseId)
+      ..writeByte(1)
+      ..write(obj.id)
+      ..writeByte(2)
+      ..write(obj.referralID)
+      ..writeByte(3)
+      ..write(obj.referralDate)
+      ..writeByte(4)
+      ..write(obj.referralName)
+      ..writeByte(5)
+      ..write(obj.age)
+      ..writeByte(6)
+      ..write(obj.gender)
+      ..writeByte(7)
+      ..write(obj.selectedDistrict)
+      ..writeByte(8)
+      ..write(obj.selectedBlock)
+      ..writeByte(9)
+      ..write(obj.selectedPanchayatCode)
+      ..writeByte(10)
+      ..write(obj.district)
+      ..writeByte(11)
+      ..write(obj.block)
+      ..writeByte(12)
+      ..write(obj.panchayatCode)
+      ..writeByte(13)
+      ..write(obj.ward)
+      ..writeByte(14)
+      ..write(obj.guardianName)
+      ..writeByte(15)
+      ..write(obj.guardianPhoneNumber)
+      ..writeByte(16)
+      ..write(obj.selectedCasteCategory)
+      ..writeByte(17)
+      ..write(obj.casteCategory)
+      ..writeByte(18)
+      ..write(obj.selectedKeyPopulation)
+      ..writeByte(19)
+      ..write(obj.keyPopulation)
+      ..writeByte(20)
+      ..write(obj.selectedTrimester)
+      ..writeByte(21)
+      ..write(obj.trimester)
+      ..writeByte(22)
+      ..write(obj.referredBy)
+      ..writeByte(23)
+      ..write(obj.selectedrReferrerSource)
+      ..writeByte(24)
+      ..write(obj.referrerSource)
+      ..writeByte(25)
+      ..write(obj.referredWard)
+      ..writeByte(26)
+      ..write(obj.selectedReferrerPanchayatCode)
+      ..writeByte(27)
+      ..write(obj.referrerPanchayatCode)
+      ..writeByte(28)
+      ..write(obj.source);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is ReferralDetailsModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

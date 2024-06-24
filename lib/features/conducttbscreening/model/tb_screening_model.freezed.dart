@@ -20,41 +20,58 @@ TBScreeningModel _$TBScreeningModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$TBScreeningModel {
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(
       name: 'screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get screeningDate => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'screened_by')
   String? get screenedBy => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(includeToJson: false)
   String? get pregnant => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'trimester_of_pw')
   int? get selectedTrimester => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(includeIfNull: false)
   String? get trimester => throw _privateConstructorUsedError;
+  @HiveField(6)
   @JsonKey(name: 'cough_2_weeks')
   String? get cough => throw _privateConstructorUsedError;
+  @HiveField(7)
   @JsonKey(name: 'sputum_2_weeks')
   String? get sputum => throw _privateConstructorUsedError;
+  @HiveField(8)
   @JsonKey(name: 'hemoptysis')
   String? get hemoptysis => throw _privateConstructorUsedError;
+  @HiveField(9)
   @JsonKey(name: 'fever_2_weeks')
   String? get fever => throw _privateConstructorUsedError;
+  @HiveField(10)
   @JsonKey(name: 'night_sweats_2_weeks')
   String? get nightSweats => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(name: 'chest_pain_2_months')
   String? get chestPain => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(name: 'weight_loss_3_months')
   String? get weightLoss => throw _privateConstructorUsedError;
+  @HiveField(13)
   @JsonKey(name: 'swollen_gland')
   String? get swollenGland => throw _privateConstructorUsedError;
+  @HiveField(14)
   @JsonKey(name: 'tb_medicine_before')
   String? get tbMedicine => throw _privateConstructorUsedError;
+  @HiveField(15)
   @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome => throw _privateConstructorUsedError;
+  @HiveField(16)
   @JsonKey(name: 'comments')
   String? get comments => throw _privateConstructorUsedError;
 
@@ -71,27 +88,30 @@ abstract class $TBScreeningModelCopyWith<$Res> {
       _$TBScreeningModelCopyWithImpl<$Res, TBScreeningModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1)
       @JsonKey(
           name: 'screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? screeningDate,
-      @JsonKey(name: 'screened_by') String? screenedBy,
-      @JsonKey(includeToJson: false) String? pregnant,
-      @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
-      @JsonKey(includeIfNull: false) String? trimester,
-      @JsonKey(name: 'cough_2_weeks') String? cough,
-      @JsonKey(name: 'sputum_2_weeks') String? sputum,
-      @JsonKey(name: 'hemoptysis') String? hemoptysis,
-      @JsonKey(name: 'fever_2_weeks') String? fever,
-      @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
-      @JsonKey(name: 'chest_pain_2_months') String? chestPain,
-      @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
-      @JsonKey(name: 'swollen_gland') String? swollenGland,
-      @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
-      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
-      @JsonKey(name: 'comments') String? comments});
+      @HiveField(2) @JsonKey(name: 'screened_by') String? screenedBy,
+      @HiveField(3) @JsonKey(includeToJson: false) String? pregnant,
+      @HiveField(4) @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
+      @HiveField(5) @JsonKey(includeIfNull: false) String? trimester,
+      @HiveField(6) @JsonKey(name: 'cough_2_weeks') String? cough,
+      @HiveField(7) @JsonKey(name: 'sputum_2_weeks') String? sputum,
+      @HiveField(8) @JsonKey(name: 'hemoptysis') String? hemoptysis,
+      @HiveField(9) @JsonKey(name: 'fever_2_weeks') String? fever,
+      @HiveField(10) @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
+      @HiveField(11) @JsonKey(name: 'chest_pain_2_months') String? chestPain,
+      @HiveField(12) @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
+      @HiveField(13) @JsonKey(name: 'swollen_gland') String? swollenGland,
+      @HiveField(14) @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
+      @HiveField(15)
+      @JsonKey(name: 'screening_outcome')
+      String? screeningOutcome,
+      @HiveField(16) @JsonKey(name: 'comments') String? comments});
 }
 
 /// @nodoc
@@ -207,27 +227,30 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1)
       @JsonKey(
           name: 'screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? screeningDate,
-      @JsonKey(name: 'screened_by') String? screenedBy,
-      @JsonKey(includeToJson: false) String? pregnant,
-      @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
-      @JsonKey(includeIfNull: false) String? trimester,
-      @JsonKey(name: 'cough_2_weeks') String? cough,
-      @JsonKey(name: 'sputum_2_weeks') String? sputum,
-      @JsonKey(name: 'hemoptysis') String? hemoptysis,
-      @JsonKey(name: 'fever_2_weeks') String? fever,
-      @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
-      @JsonKey(name: 'chest_pain_2_months') String? chestPain,
-      @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
-      @JsonKey(name: 'swollen_gland') String? swollenGland,
-      @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
-      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
-      @JsonKey(name: 'comments') String? comments});
+      @HiveField(2) @JsonKey(name: 'screened_by') String? screenedBy,
+      @HiveField(3) @JsonKey(includeToJson: false) String? pregnant,
+      @HiveField(4) @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
+      @HiveField(5) @JsonKey(includeIfNull: false) String? trimester,
+      @HiveField(6) @JsonKey(name: 'cough_2_weeks') String? cough,
+      @HiveField(7) @JsonKey(name: 'sputum_2_weeks') String? sputum,
+      @HiveField(8) @JsonKey(name: 'hemoptysis') String? hemoptysis,
+      @HiveField(9) @JsonKey(name: 'fever_2_weeks') String? fever,
+      @HiveField(10) @JsonKey(name: 'night_sweats_2_weeks') String? nightSweats,
+      @HiveField(11) @JsonKey(name: 'chest_pain_2_months') String? chestPain,
+      @HiveField(12) @JsonKey(name: 'weight_loss_3_months') String? weightLoss,
+      @HiveField(13) @JsonKey(name: 'swollen_gland') String? swollenGland,
+      @HiveField(14) @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
+      @HiveField(15)
+      @JsonKey(name: 'screening_outcome')
+      String? screeningOutcome,
+      @HiveField(16) @JsonKey(name: 'comments') String? comments});
 }
 
 /// @nodoc
@@ -336,83 +359,101 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$TBScreeningModelImpl implements _TBScreeningModel {
   const _$TBScreeningModelImpl(
-      {@JsonKey(name: 'id', includeToJson: false) this.id,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) this.id,
+      @HiveField(1)
       @JsonKey(
           name: 'screening_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.screeningDate,
-      @JsonKey(name: 'screened_by') this.screenedBy,
-      @JsonKey(includeToJson: false) this.pregnant,
-      @JsonKey(name: 'trimester_of_pw') this.selectedTrimester,
-      @JsonKey(includeIfNull: false) this.trimester,
-      @JsonKey(name: 'cough_2_weeks') this.cough,
-      @JsonKey(name: 'sputum_2_weeks') this.sputum,
-      @JsonKey(name: 'hemoptysis') this.hemoptysis,
-      @JsonKey(name: 'fever_2_weeks') this.fever,
-      @JsonKey(name: 'night_sweats_2_weeks') this.nightSweats,
-      @JsonKey(name: 'chest_pain_2_months') this.chestPain,
-      @JsonKey(name: 'weight_loss_3_months') this.weightLoss,
-      @JsonKey(name: 'swollen_gland') this.swollenGland,
-      @JsonKey(name: 'tb_medicine_before') this.tbMedicine,
-      @JsonKey(name: 'screening_outcome') this.screeningOutcome,
-      @JsonKey(name: 'comments') this.comments});
+      @HiveField(2) @JsonKey(name: 'screened_by') this.screenedBy,
+      @HiveField(3) @JsonKey(includeToJson: false) this.pregnant,
+      @HiveField(4) @JsonKey(name: 'trimester_of_pw') this.selectedTrimester,
+      @HiveField(5) @JsonKey(includeIfNull: false) this.trimester,
+      @HiveField(6) @JsonKey(name: 'cough_2_weeks') this.cough,
+      @HiveField(7) @JsonKey(name: 'sputum_2_weeks') this.sputum,
+      @HiveField(8) @JsonKey(name: 'hemoptysis') this.hemoptysis,
+      @HiveField(9) @JsonKey(name: 'fever_2_weeks') this.fever,
+      @HiveField(10) @JsonKey(name: 'night_sweats_2_weeks') this.nightSweats,
+      @HiveField(11) @JsonKey(name: 'chest_pain_2_months') this.chestPain,
+      @HiveField(12) @JsonKey(name: 'weight_loss_3_months') this.weightLoss,
+      @HiveField(13) @JsonKey(name: 'swollen_gland') this.swollenGland,
+      @HiveField(14) @JsonKey(name: 'tb_medicine_before') this.tbMedicine,
+      @HiveField(15) @JsonKey(name: 'screening_outcome') this.screeningOutcome,
+      @HiveField(16) @JsonKey(name: 'comments') this.comments});
 
   factory _$TBScreeningModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TBScreeningModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(
       name: 'screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? screeningDate;
   @override
+  @HiveField(2)
   @JsonKey(name: 'screened_by')
   final String? screenedBy;
   @override
+  @HiveField(3)
   @JsonKey(includeToJson: false)
   final String? pregnant;
   @override
+  @HiveField(4)
   @JsonKey(name: 'trimester_of_pw')
   final int? selectedTrimester;
   @override
+  @HiveField(5)
   @JsonKey(includeIfNull: false)
   final String? trimester;
   @override
+  @HiveField(6)
   @JsonKey(name: 'cough_2_weeks')
   final String? cough;
   @override
+  @HiveField(7)
   @JsonKey(name: 'sputum_2_weeks')
   final String? sputum;
   @override
+  @HiveField(8)
   @JsonKey(name: 'hemoptysis')
   final String? hemoptysis;
   @override
+  @HiveField(9)
   @JsonKey(name: 'fever_2_weeks')
   final String? fever;
   @override
+  @HiveField(10)
   @JsonKey(name: 'night_sweats_2_weeks')
   final String? nightSweats;
   @override
+  @HiveField(11)
   @JsonKey(name: 'chest_pain_2_months')
   final String? chestPain;
   @override
+  @HiveField(12)
   @JsonKey(name: 'weight_loss_3_months')
   final String? weightLoss;
   @override
+  @HiveField(13)
   @JsonKey(name: 'swollen_gland')
   final String? swollenGland;
   @override
+  @HiveField(14)
   @JsonKey(name: 'tb_medicine_before')
   final String? tbMedicine;
   @override
+  @HiveField(15)
   @JsonKey(name: 'screening_outcome')
   final String? screeningOutcome;
   @override
+  @HiveField(16)
   @JsonKey(name: 'comments')
   final String? comments;
 
@@ -497,84 +538,115 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
 
 abstract class _TBScreeningModel implements TBScreeningModel {
   const factory _TBScreeningModel(
-          {@JsonKey(name: 'id', includeToJson: false) final int? id,
-          @JsonKey(
-              name: 'screening_date',
-              fromJson: fromJsonToDateTime,
-              toJson: _dateTimeToJson)
-          final DateTime? screeningDate,
-          @JsonKey(name: 'screened_by') final String? screenedBy,
-          @JsonKey(includeToJson: false) final String? pregnant,
-          @JsonKey(name: 'trimester_of_pw') final int? selectedTrimester,
-          @JsonKey(includeIfNull: false) final String? trimester,
-          @JsonKey(name: 'cough_2_weeks') final String? cough,
-          @JsonKey(name: 'sputum_2_weeks') final String? sputum,
-          @JsonKey(name: 'hemoptysis') final String? hemoptysis,
-          @JsonKey(name: 'fever_2_weeks') final String? fever,
-          @JsonKey(name: 'night_sweats_2_weeks') final String? nightSweats,
-          @JsonKey(name: 'chest_pain_2_months') final String? chestPain,
-          @JsonKey(name: 'weight_loss_3_months') final String? weightLoss,
-          @JsonKey(name: 'swollen_gland') final String? swollenGland,
-          @JsonKey(name: 'tb_medicine_before') final String? tbMedicine,
-          @JsonKey(name: 'screening_outcome') final String? screeningOutcome,
-          @JsonKey(name: 'comments') final String? comments}) =
-      _$TBScreeningModelImpl;
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) final int? id,
+      @HiveField(1)
+      @JsonKey(
+          name: 'screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? screeningDate,
+      @HiveField(2) @JsonKey(name: 'screened_by') final String? screenedBy,
+      @HiveField(3) @JsonKey(includeToJson: false) final String? pregnant,
+      @HiveField(4)
+      @JsonKey(name: 'trimester_of_pw')
+      final int? selectedTrimester,
+      @HiveField(5) @JsonKey(includeIfNull: false) final String? trimester,
+      @HiveField(6) @JsonKey(name: 'cough_2_weeks') final String? cough,
+      @HiveField(7) @JsonKey(name: 'sputum_2_weeks') final String? sputum,
+      @HiveField(8) @JsonKey(name: 'hemoptysis') final String? hemoptysis,
+      @HiveField(9) @JsonKey(name: 'fever_2_weeks') final String? fever,
+      @HiveField(10)
+      @JsonKey(name: 'night_sweats_2_weeks')
+      final String? nightSweats,
+      @HiveField(11)
+      @JsonKey(name: 'chest_pain_2_months')
+      final String? chestPain,
+      @HiveField(12)
+      @JsonKey(name: 'weight_loss_3_months')
+      final String? weightLoss,
+      @HiveField(13) @JsonKey(name: 'swollen_gland') final String? swollenGland,
+      @HiveField(14)
+      @JsonKey(name: 'tb_medicine_before')
+      final String? tbMedicine,
+      @HiveField(15)
+      @JsonKey(name: 'screening_outcome')
+      final String? screeningOutcome,
+      @HiveField(16)
+      @JsonKey(name: 'comments')
+      final String? comments}) = _$TBScreeningModelImpl;
 
   factory _TBScreeningModel.fromJson(Map<String, dynamic> json) =
       _$TBScreeningModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(
       name: 'screening_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get screeningDate;
   @override
+  @HiveField(2)
   @JsonKey(name: 'screened_by')
   String? get screenedBy;
   @override
+  @HiveField(3)
   @JsonKey(includeToJson: false)
   String? get pregnant;
   @override
+  @HiveField(4)
   @JsonKey(name: 'trimester_of_pw')
   int? get selectedTrimester;
   @override
+  @HiveField(5)
   @JsonKey(includeIfNull: false)
   String? get trimester;
   @override
+  @HiveField(6)
   @JsonKey(name: 'cough_2_weeks')
   String? get cough;
   @override
+  @HiveField(7)
   @JsonKey(name: 'sputum_2_weeks')
   String? get sputum;
   @override
+  @HiveField(8)
   @JsonKey(name: 'hemoptysis')
   String? get hemoptysis;
   @override
+  @HiveField(9)
   @JsonKey(name: 'fever_2_weeks')
   String? get fever;
   @override
+  @HiveField(10)
   @JsonKey(name: 'night_sweats_2_weeks')
   String? get nightSweats;
   @override
+  @HiveField(11)
   @JsonKey(name: 'chest_pain_2_months')
   String? get chestPain;
   @override
+  @HiveField(12)
   @JsonKey(name: 'weight_loss_3_months')
   String? get weightLoss;
   @override
+  @HiveField(13)
   @JsonKey(name: 'swollen_gland')
   String? get swollenGland;
   @override
+  @HiveField(14)
   @JsonKey(name: 'tb_medicine_before')
   String? get tbMedicine;
   @override
+  @HiveField(15)
   @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome;
   @override
+  @HiveField(16)
   @JsonKey(name: 'comments')
   String? get comments;
   @override

@@ -3,6 +3,92 @@
 part of 'tb_screening_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class TBScreeningModelAdapter extends TypeAdapter<TBScreeningModel> {
+  @override
+  final int typeId = 16;
+
+  @override
+  TBScreeningModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return TBScreeningModel(
+      id: fields[0] as int?,
+      screeningDate: fields[1] as DateTime?,
+      screenedBy: fields[2] as String?,
+      pregnant: fields[3] as String?,
+      selectedTrimester: fields[4] as int?,
+      trimester: fields[5] as String?,
+      cough: fields[6] as String?,
+      sputum: fields[7] as String?,
+      hemoptysis: fields[8] as String?,
+      fever: fields[9] as String?,
+      nightSweats: fields[10] as String?,
+      chestPain: fields[11] as String?,
+      weightLoss: fields[12] as String?,
+      swollenGland: fields[13] as String?,
+      tbMedicine: fields[14] as String?,
+      screeningOutcome: fields[15] as String?,
+      comments: fields[16] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, TBScreeningModel obj) {
+    writer
+      ..writeByte(17)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.screeningDate)
+      ..writeByte(2)
+      ..write(obj.screenedBy)
+      ..writeByte(3)
+      ..write(obj.pregnant)
+      ..writeByte(4)
+      ..write(obj.selectedTrimester)
+      ..writeByte(5)
+      ..write(obj.trimester)
+      ..writeByte(6)
+      ..write(obj.cough)
+      ..writeByte(7)
+      ..write(obj.sputum)
+      ..writeByte(8)
+      ..write(obj.hemoptysis)
+      ..writeByte(9)
+      ..write(obj.fever)
+      ..writeByte(10)
+      ..write(obj.nightSweats)
+      ..writeByte(11)
+      ..write(obj.chestPain)
+      ..writeByte(12)
+      ..write(obj.weightLoss)
+      ..writeByte(13)
+      ..write(obj.swollenGland)
+      ..writeByte(14)
+      ..write(obj.tbMedicine)
+      ..writeByte(15)
+      ..write(obj.screeningOutcome)
+      ..writeByte(16)
+      ..write(obj.comments);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TBScreeningModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 

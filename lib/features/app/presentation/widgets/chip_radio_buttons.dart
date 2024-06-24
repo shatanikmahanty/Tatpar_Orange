@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
 import '../../../../configurations/configurations.dart';
 
@@ -60,6 +61,7 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
           ),
           GridView.builder(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: widget.crossAxisCount,
               crossAxisSpacing: kPadding,

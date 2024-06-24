@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
-import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 
 import '../widgets/case_card.dart';
@@ -115,24 +114,24 @@ class CasesPage extends StatelessWidget {
                             itemCount: state.filteredCases!.length,
                           ),
                   ),
-                  if (context.read<AuthCubit>().state.user?.isSupervisor ??
-                      false)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding * 2,
-                        vertical: kPadding / 2,
-                      ),
-                      child: Row(
-                        children: [
-                          const Text('Assigned to me cases only'),
-                          const Spacer(),
-                          Switch(
-                            value: true,
-                            onChanged: (value) {},
-                          ),
-                        ],
-                      ),
-                    ),
+                  // if (context.read<AuthCubit>().state.user?.isSupervisor ??
+                  //     false)
+                  //   Container(
+                  //     padding: const EdgeInsets.symmetric(
+                  //       horizontal: kPadding * 2,
+                  //       vertical: kPadding / 2,
+                  //     ),
+                  //     child: Row(
+                  //       children: [
+                  //         const Text('Assigned to me cases only'),
+                  //         const Spacer(),
+                  //         Switch(
+                  //           value: true,
+                  //           onChanged: (value) {},
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
                 ],
               ),
             ),

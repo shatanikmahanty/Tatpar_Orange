@@ -116,4 +116,11 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
       ),
     );
   }
+
+  Future<void> loadUserDetails() async {
+    try {
+      final model = await _authRepo.getUserDetails();
+      emit(state.copyWith(user: model));
+    } on Exception {}
+  }
 }

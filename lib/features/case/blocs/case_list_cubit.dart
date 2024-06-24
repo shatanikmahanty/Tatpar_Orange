@@ -120,20 +120,20 @@ class CaseListCubit extends Cubit<CaseListState> {
   //   );
   // }
 
-  void toggleShowAssignedToMeOnly() {
-    final showAssignedToMeOnly = !state.showAssignedToMeOnly;
-    final assignedToList = state.casesFilter.assignedTo.toList();
-    if (showAssignedToMeOnly) {
-      assignedToList.add(AuthCubit.instance.state.user!.id);
-    } else {
-      assignedToList.removeWhere(
-          (element) => element == AuthCubit.instance.state.user!.id);
-    }
-    emit(state.copyWith(
-        showAssignedToMeOnly: showAssignedToMeOnly,
-        casesFilter: state.casesFilter.copyWith(assignedTo: assignedToList)));
-    applyFilters();
-  }
+  // void toggleShowAssignedToMeOnly() {
+  //   final showAssignedToMeOnly = !state.showAssignedToMeOnly;
+  //   final assignedToList = state.casesFilter.assignedTo.toList();
+  //   if (showAssignedToMeOnly) {
+  //     assignedToList.add(AuthCubit.instance.state.user!.id);
+  //   } else {
+  //     assignedToList.removeWhere(
+  //         (element) => element == AuthCubit.instance.state.user!.id);
+  //   }
+  //   emit(state.copyWith(
+  //       showAssignedToMeOnly: showAssignedToMeOnly,
+  //       casesFilter: state.casesFilter.copyWith(assignedTo: assignedToList)));
+  //   applyFilters();
+  // }
 
   void updateSingleCase(Case updatedCase) {
     final cases = state.cases;

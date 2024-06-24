@@ -15,6 +15,7 @@ import 'package:tatpar_acf/features/contacttracing/data/contact_tracing_cubit.da
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 @RoutePage()
 class ContactTracingPage extends StatelessWidget {
@@ -40,15 +41,16 @@ class ContactTracingPage extends StatelessWidget {
       'test_conducted': FormControl<String?>(
         value: contactTracingModel?.testConducted,
       ),
-      'cxr_date': FormControl<DateTime>(value: DateTime.now()),
-      'cxr_result': FormControl<String>(value: ''),
+      'cxr_date': FormControl<DateTime>(
+          value: contactTracingModel?.cxrDate ?? DateTime.now()),
+      'cxr_result': FormControl<String>(value: contactTracingModel?.cxrResult),
       'tbi_date': FormControl<DateTime>(
-        value: DateTime.now(),
+        value: contactTracingModel?.tbiDate ?? DateTime.now(),
       ),
       'tbi_result': FormControl<String>(
-        value: '',
+        value: contactTracingModel?.tbiResult,
       ),
-      'nikshay_id': FormControl<String>(value: ''),
+      'nikshay_id': FormControl<String>(value: contactTracingModel?.nikshayID),
       'tpt_eligible': FormControl<String?>(
         value: contactTracingModel?.tptEligible,
       ),
@@ -90,6 +92,11 @@ class ContactTracingPage extends StatelessWidget {
         age: formData['age'] as int?,
         screeningOutcome: formData['screening_outcome'] as String?,
         testConducted: formData['test_conducted'] as String?,
+        cxrDate: formData['cxr_date'] as DateTime?,
+        cxrResult: formData['cxr_result'] as String?,
+        tbiDate: formData['tbi_date'] as DateTime?,
+        tbiResult: formData['tbi_result'] as String?,
+        nikshayID: formData['nikshay_id'] as String?,
         tptEligible: formData['tpt_eligible'] as String?,
         selectedTptRegimen: cubit.selectedTPTRegimen,
         tptStartDate: formData['tpt_start_date'] as DateTime?,
@@ -119,8 +126,6 @@ class ContactTracingPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<ContactTracingCubit, ContactTracingState>(
         builder: (context, state) {
-      print('STATEmODEL========${state.contactTracingModel}');
-
       return Scaffold(
           appBar: const CaseAppBar('Contact Tracing'),
           body: ReactiveFormBuilder(
@@ -142,16 +147,18 @@ class ContactTracingPage extends StatelessWidget {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.start,
                                     children: [
-                                      const PrimaryTextField(
+                                      PrimaryTextField(
                                         formControlName: 'tb_contact_name',
-                                        label: 'Name of TB Contact',
+                                        label: AppLocalizations.of(context)!
+                                            .tbContactName,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
                                       ),
                                       const SizedBox(height: kPadding * 2),
                                       PrimaryTextField<int>(
                                         formControlName: 'age',
-                                        label: 'Age',
+                                        label:
+                                            AppLocalizations.of(context)!.age,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
                                         keyboardType: TextInputType.number,
@@ -164,7 +171,8 @@ class ContactTracingPage extends StatelessWidget {
                                       const SizedBox(height: kPadding * 2),
                                       TextFieldWithList(
                                         controlName: 'screening_outcome',
-                                        label: 'Screening Outcome',
+                                        label: AppLocalizations.of(context)!
+                                            .screeningOutcome,
                                         padding: EdgeInsets.zero,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
@@ -184,7 +192,8 @@ class ContactTracingPage extends StatelessWidget {
                                       ),
                                       const SizedBox(height: kPadding * 2),
                                       ChipRadioButtons(
-                                        label: 'Any Test Conducted?',
+                                        label: AppLocalizations.of(context)!
+                                            .testConducted,
                                         options: const ['Yes', 'No'],
                                         crossAxisCount: 2,
                                         onChanged: (value) {
@@ -207,12 +216,18 @@ class ContactTracingPage extends StatelessWidget {
                                                     DateTextInput(
                                                       firstDate: DateTime(2002),
                                                       controlName: 'cxr_date',
-                                                      label: 'CXR Date',
+                                                      label:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .cxr_date,
                                                     ),
                                                     const SizedBox(
                                                         height: kPadding * 2),
                                                     ChipRadioButtons(
-                                                      label: 'CXR Result',
+                                                      label:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .cxr_result,
                                                       options: const [
                                                         'Normal',
                                                         'Abnormal'
@@ -233,14 +248,20 @@ class ContactTracingPage extends StatelessWidget {
                                                     DateTextInput(
                                                       firstDate: DateTime(2002),
                                                       controlName: 'tbi_date',
-                                                      label: 'TBI Date',
+                                                      label:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .tbi_date,
                                                     ),
                                                     const SizedBox(
                                                         height: kPadding * 2),
                                                     ChipRadioButtons(
-                                                      label: 'TBI Result',
+                                                      label:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .tbi_result,
                                                       options: const [
-                                                        'Negatuve',
+                                                        'Negative',
                                                         'Positive'
                                                       ],
                                                       crossAxisCount: 2,
@@ -256,10 +277,13 @@ class ContactTracingPage extends StatelessWidget {
                                                     ),
                                                     const SizedBox(
                                                         height: kPadding * 2),
-                                                    const PrimaryTextField(
+                                                    PrimaryTextField(
                                                       formControlName:
                                                           'nikshay_id',
-                                                      label: 'Nikashay ID',
+                                                      label:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .nikshay_id,
                                                       prefixIcon: Icons
                                                           .account_circle_outlined,
                                                     ),
@@ -267,7 +291,8 @@ class ContactTracingPage extends StatelessWidget {
                                                         height: kPadding * 2),
                                                   ]))),
                                       ChipRadioButtons(
-                                        label: 'TPT eligible',
+                                        label: AppLocalizations.of(context)!
+                                            .tpt_eligible,
                                         options: const ['Yes', 'No'],
                                         crossAxisCount: 2,
                                         onChanged: (value) {
@@ -307,7 +332,9 @@ class ContactTracingPage extends StatelessWidget {
                                             }
 
                                             return ChipRadioButtons(
-                                              label: 'TPT Regimen',
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .tpt_regimen,
                                               options: tptRegimen,
                                               crossAxisCount: 2,
                                               onChanged: (value) {
@@ -324,12 +351,13 @@ class ContactTracingPage extends StatelessWidget {
                                       DateTextInput(
                                         firstDate: DateTime(2002),
                                         controlName: 'tpt_start_date',
-                                        label: 'TPT Start Date',
+                                        label: AppLocalizations.of(context)!
+                                            .tpt_start_date,
                                       ),
                                       const SizedBox(height: kPadding * 2),
                                       PrimaryTextField<int>(
                                         formControlName: 'weight',
-                                        label: 'Weight at Start',
+                                        label: '',
                                         prefixIcon: Icons.monitor_weight,
                                         keyboardType: TextInputType.number,
                                         inputFormatter: [
@@ -339,9 +367,10 @@ class ContactTracingPage extends StatelessWidget {
                                         ],
                                       ),
                                       const SizedBox(height: kPadding * 2),
-                                      const PrimaryTextField(
+                                      PrimaryTextField(
                                         formControlName: 'tpt_side_effects',
-                                        label: 'Side Effects of TPT(If any)',
+                                        label: AppLocalizations.of(context)!
+                                            .tpt_side_effects,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
                                       ),
@@ -349,12 +378,14 @@ class ContactTracingPage extends StatelessWidget {
                                       DateTextInput(
                                         firstDate: DateTime(2002),
                                         controlName: 'tpt_outcome_date',
-                                        label: 'TPT Outcome Date',
+                                        label: AppLocalizations.of(context)!
+                                            .tpt_outcome_date,
                                       ),
                                       const SizedBox(height: kPadding * 2),
                                       TextFieldWithList(
                                         controlName: 'tpt_outcome',
-                                        label: 'TPT Outcome',
+                                        label: AppLocalizations.of(context)!
+                                            .tpt_outcome,
                                         padding: EdgeInsets.zero,
                                         prefixIcon:
                                             Icons.account_circle_outlined,
