@@ -214,7 +214,12 @@ class BasicDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
-            appBar: CaseAppBar(AppLocalizations.of(context)!.addReferral),
+            appBar: CaseAppBar(
+              AppLocalizations.of(context)!.addReferral,
+              onClick: () {
+                context.router.replace(const AppHomeRoute());
+              },
+            ),
             body: ReactiveFormBuilder(form: () {
               return _basicDetailsFormBuilder(
                 referralDetailsModel: state.referralDetailsModel,
@@ -227,7 +232,6 @@ class BasicDetails extends StatelessWidget {
                   formGroup.control('panchayat_code').reset();
                   formGroup.control('referrer_panchayat_code').reset();
 
-                  print('Fetching Blocks');
                   context.read<SourceCubit>().fetchDataForBlock(value);
                 }
               });
@@ -237,7 +241,6 @@ class BasicDetails extends StatelessWidget {
                   formGroup.control('panchayat_code').reset();
 
                   formGroup.control('referrer_panchayat_code').reset();
-                  print('Listening to Changes');
                   context.read<SourceCubit>().fetchDataForPanchayat(value);
                 }
               });
@@ -578,9 +581,6 @@ class BasicDetails extends StatelessWidget {
                                                             current
                                                                 .panchayatList)),
                                                     builder: (context, state) {
-                                                      print(
-                                                          '===================================${formGroup.control('referral_block').value}'
-                                                              .toString());
                                                       List<String>
                                                           panchayatList =
                                                           state.panchayatList ??
@@ -749,9 +749,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
                       (previous.dataModel != current.dataModel) ||
                       (previous.panchayatList != current.panchayatList)),
                   builder: (context, state) {
-                    print('Form is building again');
                     List<String> panchayatList = state.panchayatList ?? [];
-                    print('Up+++++++++++++++++++$panchayatList');
 
                     if (state.isLoading ?? false) {
                       return const SizedBox(

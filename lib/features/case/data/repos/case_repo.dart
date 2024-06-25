@@ -157,7 +157,6 @@ class CaseRepo {
       {required ContactTracingModel contactTracingModel,
       required int? id,
       required int? caseId}) async {
-    print(id);
     final request = NetworkRequest(
       '$contactTracingUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.dart';
@@ -11,7 +10,6 @@ import '../../../../configurations/configurations.dart';
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
   FormGroup _profileFormBuilder({required AppUser? appUserModel}) {
-    print(appUserModel?.id.toString());
     return fb.group({
       'id': FormControl<int>(value: appUserModel?.id),
       'status': FormControl<String?>(

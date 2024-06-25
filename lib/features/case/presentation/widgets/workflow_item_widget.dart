@@ -18,7 +18,7 @@ class WorkFlowItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) => InkWell(
         onTap: () {
-          context.router.navigate(workflow.route);
+          context.router.replace(workflow.route);
         },
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.center,

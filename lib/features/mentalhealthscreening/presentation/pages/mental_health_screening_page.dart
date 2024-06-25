@@ -135,7 +135,12 @@ class MentalHealthScreeningPage extends StatelessWidget {
     String screeningStatus, ipfuScreeningStatus, cpScreeningStatus;
 
     return Scaffold(
-        appBar: CaseAppBar(AppLocalizations.of(context)!.mentalHealthScreening),
+        appBar: CaseAppBar(
+          AppLocalizations.of(context)!.mentalHealthScreening,
+          onClick: () {
+            context.router.replace(const CaseProfileRoute());
+          },
+        ),
         body: BlocBuilder<CaseCubit, CaseState>(
             buildWhen: (previous, current) =>
                 (previous.isLoading != current.isLoading) ||

@@ -20,7 +20,12 @@ class ContactTracingListPage extends StatelessWidget {
 
     return Scaffold(
       resizeToAvoidBottomInset: true,
-      appBar: const CaseAppBar('Contact Tracing List'),
+      appBar: CaseAppBar(
+        'Contact Tracing List',
+        onClick: () {
+          context.router.replace(const CaseProfileRoute());
+        },
+      ),
       floatingActionButton: Padding(
         padding:
             EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.1),

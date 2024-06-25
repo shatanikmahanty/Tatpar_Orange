@@ -13,7 +13,7 @@ import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
-import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
+import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
@@ -338,7 +338,12 @@ class TreatmentPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
-            appBar: const CaseAppBar('Treatment'),
+            appBar: CaseAppBar(
+              'Treatment',
+              onClick: () {
+                context.router.replace(CaseProfileRoute());
+              },
+            ),
             body: ReactiveFormBuilder(
                 form: () => _treatmentFormBuilder(
                     treatmentModel: state.treatmentModel,

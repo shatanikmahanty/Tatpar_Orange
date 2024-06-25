@@ -9,10 +9,10 @@ import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
-import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 
 @RoutePage()
 class OutcomePage extends StatelessWidget {
@@ -85,7 +85,12 @@ class OutcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
-            appBar: const CaseAppBar('Outcome'),
+            appBar: CaseAppBar(
+              'Outcome',
+              onClick: () {
+                context.router.replace(const CaseProfileRoute());
+              },
+            ),
             body: ReactiveFormBuilder(
                 form: () => _outcomeFormBuilder(
                     outcomeModel: state.outcomeModel,

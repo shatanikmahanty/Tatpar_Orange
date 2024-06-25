@@ -86,7 +86,12 @@ class WHOSRQPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: const CaseAppBar('WHO SRQ'),
+        appBar: CaseAppBar(
+          'WHO SRQ',
+          onClick: () {
+            context.router.replace(const MentalHealthScreeningRoute());
+          },
+        ),
         body: BlocBuilder<CaseCubit, CaseState>(builder: (context, state) {
           return ReactiveFormBuilder(
               form: () => _whoSrqFormBuilder(

@@ -10,12 +10,12 @@ import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.
 import 'package:tatpar_acf/features/app/presentation/widgets/text_field_with_list.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
-import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/contacttracing/data/contact_tracing_cubit.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/bottom_button_bar.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 
 @RoutePage()
 class ContactTracingPage extends StatelessWidget {
@@ -127,7 +127,12 @@ class ContactTracingPage extends StatelessWidget {
     return BlocBuilder<ContactTracingCubit, ContactTracingState>(
         builder: (context, state) {
       return Scaffold(
-          appBar: const CaseAppBar('Contact Tracing'),
+          appBar: CaseAppBar(
+            'Contact Tracing',
+            onClick: () {
+              context.router.replace(const CaseProfileRoute());
+            },
+          ),
           body: ReactiveFormBuilder(
               form: () => _contactTracingFormBuilder(
                     contactTracingModel: state.contactTracingModel,

@@ -10,7 +10,6 @@ class LanguageProvider extends ChangeNotifier {
 
   void setLocale(Locale locale) async {
     if (!L10n.all.contains(locale)) return;
-    print('Setting locale to $locale');
     _locale = locale;
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     await prefs.setString('currentLanguage', locale.languageCode);
