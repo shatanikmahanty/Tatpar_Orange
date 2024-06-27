@@ -20,13 +20,17 @@ class CaseProfilePage extends StatelessWidget {
     final workflows = caseCubit.workflows(caseCubit.state.caseWorkedUpon);
     return PopScope(
       onPopInvoked: (didPop) {
-        context.router.pop();
+        context.router.pushAndPopUntil(
+            const AppHomeRoute(children: [CasesRoute()]),
+            predicate: (Route<dynamic> route) => false);
       },
       child: Scaffold(
         appBar: CaseAppBar(
           'Case Profile',
           onClick: () {
-            context.router.pop();
+            context.router.pushAndPopUntil(
+                const AppHomeRoute(children: [CasesRoute()]),
+                predicate: (Route<dynamic> route) => false);
           },
         ),
         body: Padding(

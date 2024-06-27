@@ -22,8 +22,8 @@ class CaseRepo {
   Future<ReferralDetailsModel> saveReferralDetails(
       {required ReferralDetailsModel referralDetailsModel,
       required int? id}) async {
-    Box<ReferralDetailsModel> dataBox =
-        Hive.box<ReferralDetailsModel>('referralDetailsPostModel');
+    // Box<ReferralDetailsModel> dataBox =
+    //     Hive.box<ReferralDetailsModel>('referralDetailsPostModel');
     final request = NetworkRequest(
       '$referralDetailsUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -35,9 +35,9 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      Box<ReferralDetailsModel> dataBox =
-          Hive.box<ReferralDetailsModel>('referralDetailsGetModel');
-          await dataBox.put('referralModels', ReferralDetailsModel.fromJson(result.data['data']))
+      // Box<ReferralDetailsModel> dataBox =
+      //     Hive.box<ReferralDetailsModel>('referralDetailsGetModel');
+      //     await dataBox.put('referralModels', ReferralDetailsModel.fromJson(result.data['data']))
 
       AuthCubit.instance.caseId = result.data['data']['case_id'];
       // updateCase(AuthCubit.instance.workingCaseId ?? 0, {
@@ -45,15 +45,15 @@ class CaseRepo {
       // });
       return ReferralDetailsModel.fromJson(result.data['data']);
     } else {
-      if (result.error != null && result.error?.type is NetworkError) {
-        // log('Using stored data from Hive: $storedData');
-        // return storedData;
-      } else {
-        throw ApplicationError(
-          errorMsg: 'Error fetching data',
-          type: UnExpected(),
-        );
-      }
+      // if (result.error != null && result.error?.type is NetworkError) {
+      //   // log('Using stored data from Hive: $storedData');
+      //   // return storedData;
+      // } else {
+      throw ApplicationError(
+        errorMsg: 'Error fetching data',
+        type: UnExpected(),
+      );
+      // }
     }
   }
 
