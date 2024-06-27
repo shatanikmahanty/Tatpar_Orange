@@ -121,7 +121,9 @@ class TBScreeningPage extends StatelessWidget {
           appBar: CaseAppBar(
             AppLocalizations.of(context)!.conducttbscreening,
             onClick: () {
-              context.router.replace(const CaseProfileRoute());
+              context.router.pushAndPopUntil(
+                  const AppHomeRoute(children: [CasesRoute()]),
+                  predicate: (Route<dynamic> route) => false);
             },
           ),
           body: ReactiveFormBuilder(form: () {

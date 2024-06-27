@@ -138,7 +138,9 @@ class MentalHealthScreeningPage extends StatelessWidget {
         appBar: CaseAppBar(
           AppLocalizations.of(context)!.mentalHealthScreening,
           onClick: () {
-            context.router.replace(const CaseProfileRoute());
+            context.router.pushAndPopUntil(
+                const AppHomeRoute(children: [CasesRoute()]),
+                predicate: (Route<dynamic> route) => false);
           },
         ),
         body: BlocBuilder<CaseCubit, CaseState>(

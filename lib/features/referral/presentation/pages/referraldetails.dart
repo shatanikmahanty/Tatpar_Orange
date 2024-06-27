@@ -275,9 +275,11 @@ class ReferralDetailsPage extends StatelessWidget {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
             appBar: CaseAppBar(
-              'Referral Details',
+              AppLocalizations.of(context)!.addReferral,
               onClick: () {
-                context.router.replace(const CaseProfileRoute());
+                context.router.pushAndPopUntil(
+                    const AppHomeRoute(children: [CasesRoute()]),
+                    predicate: (Route<dynamic> route) => false);
               },
             ),
             body: ReactiveFormBuilder(form: () {

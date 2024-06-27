@@ -442,6 +442,7 @@ class CaseCubit extends Cubit<CaseState> {
       ),
     );
     getContactTracingData(response.id);
+    getContactTracingListData();
   }
 
   Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {

@@ -299,7 +299,9 @@ class DiagnosisPage extends StatelessWidget {
             appBar: CaseAppBar(
               'Diagnosis',
               onClick: () {
-                context.router.replace(const CaseProfileRoute());
+                context.router.pushAndPopUntil(
+                    const AppHomeRoute(children: [CasesRoute()]),
+                    predicate: (Route<dynamic> route) => false);
               },
             ),
             body: ReactiveFormBuilder(

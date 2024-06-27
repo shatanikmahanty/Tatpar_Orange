@@ -130,7 +130,8 @@ class ContactTracingPage extends StatelessWidget {
           appBar: CaseAppBar(
             'Contact Tracing',
             onClick: () {
-              context.router.replace(const CaseProfileRoute());
+              context.router.pushAndPopUntil(const ContactTracingListRoute(),
+                  predicate: (Route<dynamic> route) => false);
             },
           ),
           body: ReactiveFormBuilder(

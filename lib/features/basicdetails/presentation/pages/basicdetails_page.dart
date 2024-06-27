@@ -217,7 +217,8 @@ class BasicDetails extends StatelessWidget {
             appBar: CaseAppBar(
               AppLocalizations.of(context)!.addReferral,
               onClick: () {
-                context.router.replace(const AppHomeRoute());
+                context.router.pushAndPopUntil(const AppHomeRoute(),
+                    predicate: (Route<dynamic> route) => false);
               },
             ),
             body: ReactiveFormBuilder(form: () {

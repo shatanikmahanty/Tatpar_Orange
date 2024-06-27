@@ -88,7 +88,9 @@ class OutcomePage extends StatelessWidget {
             appBar: CaseAppBar(
               'Outcome',
               onClick: () {
-                context.router.replace(const CaseProfileRoute());
+                context.router.pushAndPopUntil(
+                    const AppHomeRoute(children: [CasesRoute()]),
+                    predicate: (Route<dynamic> route) => false);
               },
             ),
             body: ReactiveFormBuilder(
