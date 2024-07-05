@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
-import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 
 import '../widgets/case_card.dart';
@@ -30,39 +29,15 @@ class CasesPage extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         vertical: kPadding, horizontal: kPadding * 2),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          child: TextField(
-                            decoration: const InputDecoration(
-                              prefixIcon: Icon(Icons.search),
-                              hintText: 'Search by name or no.',
-                            ),
-                            onChanged: (value) {
-                              cubit.searchCases(value);
-                            },
-                          ),
-                        ),
-                        const SizedBox(width: kPadding),
-                        GestureDetector(
-                          // onTap: () {
-                          //   context.router
-                          //       .navigate(const CasesFilterDialogRoute());
-                          // },
-                          child: Container(
-                            decoration: BoxDecoration(
-                                color: AppColors.blueMedium,
-                                borderRadius: BorderRadius.circular(4)),
-                            padding: const EdgeInsets.symmetric(
-                                vertical: kPadding * 1.8,
-                                horizontal: kPadding * 1.8),
-                            child: const Icon(
-                              Icons.filter_alt_outlined,
-                              color: Colors.white,
-                            ),
-                          ),
-                        )
-                      ],
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: const Icon(Icons.search),
+                        hintText: 'Search by name or no.',
+                        hintStyle: theme.textTheme.bodyMedium,
+                      ),
+                      onChanged: (value) {
+                        cubit.searchCases(value);
+                      },
                     ),
                   ),
                   // SizedBox(
@@ -139,24 +114,24 @@ class CasesPage extends StatelessWidget {
                             itemCount: state.filteredCases!.length,
                           ),
                   ),
-                  if (context.read<AuthCubit>().state.user?.isSupervisor ??
-                      false)
-                    Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: kPadding * 2,
-                        vertical: kPadding / 2,
-                      ),
-                      child: Row(
-                        children: [
-                          const Text('Assigned to me cases only'),
-                          const Spacer(),
-                          Switch(
-                            value: true,
-                            onChanged: (value) {},
-                          ),
-                        ],
-                      ),
-                    ),
+                  // if (context.read<AuthCubit>().state.user?.isSupervisor ??
+                  //     false)
+                  //   Container(
+                  //     padding: const EdgeInsets.symmetric(
+                  //       horizontal: kPadding * 2,
+                  //       vertical: kPadding / 2,
+                  //     ),
+                  //     child: Row(
+                  //       children: [
+                  //         const Text('Assigned to me cases only'),
+                  //         const Spacer(),
+                  //         Switch(
+                  //           value: true,
+                  //           onChanged: (value) {},
+                  //         ),
+                  //       ],
+                  //     ),
+                  //   ),
                 ],
               ),
             ),

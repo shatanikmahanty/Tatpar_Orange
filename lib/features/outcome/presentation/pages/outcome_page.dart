@@ -1,3 +1,4 @@
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -8,10 +9,10 @@ import 'package:tatpar_acf/features/app/presentation/widgets/primary_text_field.
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
-import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 
 @RoutePage()
 class OutcomePage extends StatelessWidget {
@@ -68,6 +69,15 @@ class OutcomePage extends StatelessWidget {
       await cubit.updateOutcomeData(outcomeModel);
     } else {
       formGroup.markAllAsTouched();
+      // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
+      final fields = [];
+      formGroup.controls.forEach((key, value) {
+        if (value.invalid) {
+          fields.add(key.replaceFirst('patient_', ''));
+        }
+      });
+      DjangoflowAppSnackbar.showError(
+          'please enter the fields: ${fields.join(', ')}');
     }
   }
 
@@ -75,7 +85,14 @@ class OutcomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
-            appBar: const CaseAppBar('Outcome'),
+            appBar: CaseAppBar(
+              'Outcome',
+              onClick: () {
+                context.router.pushAndPopUntil(
+                    const AppHomeRoute(children: [CasesRoute()]),
+                    predicate: (Route<dynamic> route) => false);
+              },
+            ),
             body: ReactiveFormBuilder(
                 form: () => _outcomeFormBuilder(
                     outcomeModel: state.outcomeModel,

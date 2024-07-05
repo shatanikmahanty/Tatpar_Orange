@@ -10,10 +10,10 @@ final appHomeRoutes = [
     path: 'cases',
     page: CasesRoute.page,
   ),
-  AutoRoute(
-    path: 'tasks',
-    page: TasksRoute.page,
-  ),
+  // AutoRoute(
+  //   path: 'tasks',
+  //   page: TasksRoute.page,
+  // ),
   AutoRoute(
     path: 'settings',
     page: SettingsRoute.page,

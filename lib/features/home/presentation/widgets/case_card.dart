@@ -46,7 +46,9 @@ class CaseCard extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   DiseaseChip(calculateScreeningStatus(),
-                      color: AppColors.blueLight),
+                      color: calculateScreeningStatus() == 'Scr Neg'
+                          ? AppColors.redLight
+                          : AppColors.blueLight),
                   const Spacer(),
                   Text(
                     getFormattedDate(caseModel.createdOn),
@@ -146,13 +148,49 @@ class CaseCard extends StatelessWidget {
                         const SizedBox(
                           height: kPadding * 0.75,
                         ),
-                        Text(
-                          'Scr by: ${caseModel.screenedBy} • Ref by: ${caseModel.referredBy}', //${caseModel.hub.toString()}',
-                          style: textTheme.bodyMedium?.copyWith(
-                            height: 1.33,
-                            letterSpacing: 0.2,
+                        RichText(
+                          textAlign: TextAlign.start,
+                          text: TextSpan(
+                            text: '',
+                            children: [
+                              TextSpan(
+                                text: 'Scr by :\t',
+                                style: textTheme.bodyMedium?.copyWith(
+                                    height: 1.33,
+                                    letterSpacing: 0.2,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              TextSpan(
+                                text: '${caseModel.screenedBy} \t \t',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  height: 1.33,
+                                  letterSpacing: 0.2,
+                                ),
+                              ),
+                              TextSpan(
+                                text: 'Ref by :\t',
+                                style: textTheme.bodyMedium?.copyWith(
+                                    height: 1.33,
+                                    letterSpacing: 0.2,
+                                    fontWeight: FontWeight.w600),
+                              ),
+                              TextSpan(
+                                text: '${caseModel.referredBy}',
+                                style: textTheme.bodyMedium?.copyWith(
+                                  height: 1.33,
+                                  letterSpacing: 0.2,
+                                ),
+                              )
+                            ],
                           ),
                         ),
+                        // Text(
+                        //   'Scr by: ${caseModel.screenedBy} • Ref by: ${caseModel.referredBy}', //${caseModel.hub.toString()}',
+                        //   style: textTheme.bodyMedium?.copyWith(
+                        //     height: 1.33,
+                        //     letterSpacing: 0.2,
+                        //   ),
+                        // ),
                       ],
                     ),
                   )),

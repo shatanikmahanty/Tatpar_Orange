@@ -3,7 +3,6 @@ import 'dart:developer';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
-import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 
@@ -120,20 +119,20 @@ class CaseListCubit extends Cubit<CaseListState> {
   //   );
   // }
 
-  void toggleShowAssignedToMeOnly() {
-    final showAssignedToMeOnly = !state.showAssignedToMeOnly;
-    final assignedToList = state.casesFilter.assignedTo.toList();
-    if (showAssignedToMeOnly) {
-      assignedToList.add(AuthCubit.instance.state.user!.id);
-    } else {
-      assignedToList.removeWhere(
-          (element) => element == AuthCubit.instance.state.user!.id);
-    }
-    emit(state.copyWith(
-        showAssignedToMeOnly: showAssignedToMeOnly,
-        casesFilter: state.casesFilter.copyWith(assignedTo: assignedToList)));
-    applyFilters();
-  }
+  // void toggleShowAssignedToMeOnly() {
+  //   final showAssignedToMeOnly = !state.showAssignedToMeOnly;
+  //   final assignedToList = state.casesFilter.assignedTo.toList();
+  //   if (showAssignedToMeOnly) {
+  //     assignedToList.add(AuthCubit.instance.state.user!.id);
+  //   } else {
+  //     assignedToList.removeWhere(
+  //         (element) => element == AuthCubit.instance.state.user!.id);
+  //   }
+  //   emit(state.copyWith(
+  //       showAssignedToMeOnly: showAssignedToMeOnly,
+  //       casesFilter: state.casesFilter.copyWith(assignedTo: assignedToList)));
+  //   applyFilters();
+  // }
 
   void updateSingleCase(Case updatedCase) {
     final cases = state.cases;

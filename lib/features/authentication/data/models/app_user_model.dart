@@ -7,24 +7,21 @@ part 'app_user_model.g.dart';
 @freezed
 class AppUser with _$AppUser {
   const factory AppUser({
-    required int id,
-    @JsonKey(name: 'first_name') required String firstName,
-    @JsonKey(name: 'last_name') required String lastName,
+    @JsonKey(name: 'id') required int? id,
+    @JsonKey(name: 'status') required String? status,
     @JsonKey(name: 'mobile_number') required String mobileNumber,
-    @JsonKey(name: 'alternate_number') String? alternateNumber,
-    @JsonKey(name: 'profile_photo') String? profilePhoto,
-    String? email,
-    int? age,
-    String? education,
-    required String gender,
-    //Whether the worker is of type supervisor
-    @JsonKey(name: 'is_supervisor') required bool isSupervisor,
-    @JsonKey(name: 'is_active') required bool isActive,
-    @JsonKey(name: 'created_at') required String createdAt,
-    @JsonKey(name: 'updated_at') String? updatedAt,
-    //Supervisor assigned to the person
-    int? supervisor,
+    @JsonKey(name: 'alternate_number') required String? alternateNumber,
+    @JsonKey(name: 'aadhar_number') required String? aadhaarNumber,
+    @JsonKey(name: 'first_name') required String? firstName,
+    @JsonKey(name: 'last_name') required String? lastName,
+    @JsonKey(name: 'city') required String? city,
+    @JsonKey(name: 'district') required String? district,
+    @JsonKey(name: 'state') required String? state,
+    @JsonKey(name: 'pincode') required String? pinCode,
+    @JsonKey(name: 'address') required String? address,
+    @JsonKey(name: 'email') required String? email,
   }) = _AppUser;
 
-  factory AppUser.fromJson(Map<String, dynamic> json) => _$AppUserFromJson(json);
+  factory AppUser.fromJson(Map<String, dynamic> json) =>
+      _$AppUserFromJson(json);
 }

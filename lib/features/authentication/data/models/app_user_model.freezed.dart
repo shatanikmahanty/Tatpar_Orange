@@ -20,32 +20,32 @@ AppUser _$AppUserFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$AppUser {
-  int get id => throw _privateConstructorUsedError;
-  @JsonKey(name: 'first_name')
-  String get firstName => throw _privateConstructorUsedError;
-  @JsonKey(name: 'last_name')
-  String get lastName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
+  @JsonKey(name: 'status')
+  String? get status => throw _privateConstructorUsedError;
   @JsonKey(name: 'mobile_number')
   String get mobileNumber => throw _privateConstructorUsedError;
   @JsonKey(name: 'alternate_number')
   String? get alternateNumber => throw _privateConstructorUsedError;
-  @JsonKey(name: 'profile_photo')
-  String? get profilePhoto => throw _privateConstructorUsedError;
+  @JsonKey(name: 'aadhar_number')
+  String? get aadhaarNumber => throw _privateConstructorUsedError;
+  @JsonKey(name: 'first_name')
+  String? get firstName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'last_name')
+  String? get lastName => throw _privateConstructorUsedError;
+  @JsonKey(name: 'city')
+  String? get city => throw _privateConstructorUsedError;
+  @JsonKey(name: 'district')
+  String? get district => throw _privateConstructorUsedError;
+  @JsonKey(name: 'state')
+  String? get state => throw _privateConstructorUsedError;
+  @JsonKey(name: 'pincode')
+  String? get pinCode => throw _privateConstructorUsedError;
+  @JsonKey(name: 'address')
+  String? get address => throw _privateConstructorUsedError;
+  @JsonKey(name: 'email')
   String? get email => throw _privateConstructorUsedError;
-  int? get age => throw _privateConstructorUsedError;
-  String? get education => throw _privateConstructorUsedError;
-  String get gender =>
-      throw _privateConstructorUsedError; //Whether the worker is of type supervisor
-  @JsonKey(name: 'is_supervisor')
-  bool get isSupervisor => throw _privateConstructorUsedError;
-  @JsonKey(name: 'is_active')
-  bool get isActive => throw _privateConstructorUsedError;
-  @JsonKey(name: 'created_at')
-  String get createdAt => throw _privateConstructorUsedError;
-  @JsonKey(name: 'updated_at')
-  String? get updatedAt =>
-      throw _privateConstructorUsedError; //Supervisor assigned to the person
-  int? get supervisor => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -58,21 +58,19 @@ abstract class $AppUserCopyWith<$Res> {
       _$AppUserCopyWithImpl<$Res, AppUser>;
   @useResult
   $Res call(
-      {int id,
-      @JsonKey(name: 'first_name') String firstName,
-      @JsonKey(name: 'last_name') String lastName,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'mobile_number') String mobileNumber,
       @JsonKey(name: 'alternate_number') String? alternateNumber,
-      @JsonKey(name: 'profile_photo') String? profilePhoto,
-      String? email,
-      int? age,
-      String? education,
-      String gender,
-      @JsonKey(name: 'is_supervisor') bool isSupervisor,
-      @JsonKey(name: 'is_active') bool isActive,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'updated_at') String? updatedAt,
-      int? supervisor});
+      @JsonKey(name: 'aadhar_number') String? aadhaarNumber,
+      @JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'city') String? city,
+      @JsonKey(name: 'district') String? district,
+      @JsonKey(name: 'state') String? state,
+      @JsonKey(name: 'pincode') String? pinCode,
+      @JsonKey(name: 'address') String? address,
+      @JsonKey(name: 'email') String? email});
 }
 
 /// @nodoc
@@ -88,35 +86,29 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? id = freezed,
+    Object? status = freezed,
     Object? mobileNumber = null,
     Object? alternateNumber = freezed,
-    Object? profilePhoto = freezed,
+    Object? aadhaarNumber = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? city = freezed,
+    Object? district = freezed,
+    Object? state = freezed,
+    Object? pinCode = freezed,
+    Object? address = freezed,
     Object? email = freezed,
-    Object? age = freezed,
-    Object? education = freezed,
-    Object? gender = null,
-    Object? isSupervisor = null,
-    Object? isActive = null,
-    Object? createdAt = null,
-    Object? updatedAt = freezed,
-    Object? supervisor = freezed,
   }) {
     return _then(_value.copyWith(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -125,46 +117,42 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
           ? _value.alternateNumber
           : alternateNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      profilePhoto: freezed == profilePhoto
-          ? _value.profilePhoto
-          : profilePhoto // ignore: cast_nullable_to_non_nullable
+      aadhaarNumber: freezed == aadhaarNumber
+          ? _value.aadhaarNumber
+          : aadhaarNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      district: freezed == district
+          ? _value.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      age: freezed == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int?,
-      education: freezed == education
-          ? _value.education
-          : education // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gender: null == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      isSupervisor: null == isSupervisor
-          ? _value.isSupervisor
-          : isSupervisor // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isActive: null == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      supervisor: freezed == supervisor
-          ? _value.supervisor
-          : supervisor // ignore: cast_nullable_to_non_nullable
-              as int?,
     ) as $Val);
   }
 }
@@ -177,21 +165,19 @@ abstract class _$$AppUserImplCopyWith<$Res> implements $AppUserCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int id,
-      @JsonKey(name: 'first_name') String firstName,
-      @JsonKey(name: 'last_name') String lastName,
+      {@JsonKey(name: 'id') int? id,
+      @JsonKey(name: 'status') String? status,
       @JsonKey(name: 'mobile_number') String mobileNumber,
       @JsonKey(name: 'alternate_number') String? alternateNumber,
-      @JsonKey(name: 'profile_photo') String? profilePhoto,
-      String? email,
-      int? age,
-      String? education,
-      String gender,
-      @JsonKey(name: 'is_supervisor') bool isSupervisor,
-      @JsonKey(name: 'is_active') bool isActive,
-      @JsonKey(name: 'created_at') String createdAt,
-      @JsonKey(name: 'updated_at') String? updatedAt,
-      int? supervisor});
+      @JsonKey(name: 'aadhar_number') String? aadhaarNumber,
+      @JsonKey(name: 'first_name') String? firstName,
+      @JsonKey(name: 'last_name') String? lastName,
+      @JsonKey(name: 'city') String? city,
+      @JsonKey(name: 'district') String? district,
+      @JsonKey(name: 'state') String? state,
+      @JsonKey(name: 'pincode') String? pinCode,
+      @JsonKey(name: 'address') String? address,
+      @JsonKey(name: 'email') String? email});
 }
 
 /// @nodoc
@@ -205,35 +191,29 @@ class __$$AppUserImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? id = null,
-    Object? firstName = null,
-    Object? lastName = null,
+    Object? id = freezed,
+    Object? status = freezed,
     Object? mobileNumber = null,
     Object? alternateNumber = freezed,
-    Object? profilePhoto = freezed,
+    Object? aadhaarNumber = freezed,
+    Object? firstName = freezed,
+    Object? lastName = freezed,
+    Object? city = freezed,
+    Object? district = freezed,
+    Object? state = freezed,
+    Object? pinCode = freezed,
+    Object? address = freezed,
     Object? email = freezed,
-    Object? age = freezed,
-    Object? education = freezed,
-    Object? gender = null,
-    Object? isSupervisor = null,
-    Object? isActive = null,
-    Object? createdAt = null,
-    Object? updatedAt = freezed,
-    Object? supervisor = freezed,
   }) {
     return _then(_$AppUserImpl(
-      id: null == id
+      id: freezed == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int,
-      firstName: null == firstName
-          ? _value.firstName
-          : firstName // ignore: cast_nullable_to_non_nullable
-              as String,
-      lastName: null == lastName
-          ? _value.lastName
-          : lastName // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int?,
+      status: freezed == status
+          ? _value.status
+          : status // ignore: cast_nullable_to_non_nullable
+              as String?,
       mobileNumber: null == mobileNumber
           ? _value.mobileNumber
           : mobileNumber // ignore: cast_nullable_to_non_nullable
@@ -242,46 +222,42 @@ class __$$AppUserImplCopyWithImpl<$Res>
           ? _value.alternateNumber
           : alternateNumber // ignore: cast_nullable_to_non_nullable
               as String?,
-      profilePhoto: freezed == profilePhoto
-          ? _value.profilePhoto
-          : profilePhoto // ignore: cast_nullable_to_non_nullable
+      aadhaarNumber: freezed == aadhaarNumber
+          ? _value.aadhaarNumber
+          : aadhaarNumber // ignore: cast_nullable_to_non_nullable
+              as String?,
+      firstName: freezed == firstName
+          ? _value.firstName
+          : firstName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      lastName: freezed == lastName
+          ? _value.lastName
+          : lastName // ignore: cast_nullable_to_non_nullable
+              as String?,
+      city: freezed == city
+          ? _value.city
+          : city // ignore: cast_nullable_to_non_nullable
+              as String?,
+      district: freezed == district
+          ? _value.district
+          : district // ignore: cast_nullable_to_non_nullable
+              as String?,
+      state: freezed == state
+          ? _value.state
+          : state // ignore: cast_nullable_to_non_nullable
+              as String?,
+      pinCode: freezed == pinCode
+          ? _value.pinCode
+          : pinCode // ignore: cast_nullable_to_non_nullable
+              as String?,
+      address: freezed == address
+          ? _value.address
+          : address // ignore: cast_nullable_to_non_nullable
               as String?,
       email: freezed == email
           ? _value.email
           : email // ignore: cast_nullable_to_non_nullable
               as String?,
-      age: freezed == age
-          ? _value.age
-          : age // ignore: cast_nullable_to_non_nullable
-              as int?,
-      education: freezed == education
-          ? _value.education
-          : education // ignore: cast_nullable_to_non_nullable
-              as String?,
-      gender: null == gender
-          ? _value.gender
-          : gender // ignore: cast_nullable_to_non_nullable
-              as String,
-      isSupervisor: null == isSupervisor
-          ? _value.isSupervisor
-          : isSupervisor // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isActive: null == isActive
-          ? _value.isActive
-          : isActive // ignore: cast_nullable_to_non_nullable
-              as bool,
-      createdAt: null == createdAt
-          ? _value.createdAt
-          : createdAt // ignore: cast_nullable_to_non_nullable
-              as String,
-      updatedAt: freezed == updatedAt
-          ? _value.updatedAt
-          : updatedAt // ignore: cast_nullable_to_non_nullable
-              as String?,
-      supervisor: freezed == supervisor
-          ? _value.supervisor
-          : supervisor // ignore: cast_nullable_to_non_nullable
-              as int?,
     ));
   }
 }
@@ -290,33 +266,29 @@ class __$$AppUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AppUserImpl implements _AppUser {
   const _$AppUserImpl(
-      {required this.id,
+      {@JsonKey(name: 'id') required this.id,
+      @JsonKey(name: 'status') required this.status,
+      @JsonKey(name: 'mobile_number') required this.mobileNumber,
+      @JsonKey(name: 'alternate_number') required this.alternateNumber,
+      @JsonKey(name: 'aadhar_number') required this.aadhaarNumber,
       @JsonKey(name: 'first_name') required this.firstName,
       @JsonKey(name: 'last_name') required this.lastName,
-      @JsonKey(name: 'mobile_number') required this.mobileNumber,
-      @JsonKey(name: 'alternate_number') this.alternateNumber,
-      @JsonKey(name: 'profile_photo') this.profilePhoto,
-      this.email,
-      this.age,
-      this.education,
-      required this.gender,
-      @JsonKey(name: 'is_supervisor') required this.isSupervisor,
-      @JsonKey(name: 'is_active') required this.isActive,
-      @JsonKey(name: 'created_at') required this.createdAt,
-      @JsonKey(name: 'updated_at') this.updatedAt,
-      this.supervisor});
+      @JsonKey(name: 'city') required this.city,
+      @JsonKey(name: 'district') required this.district,
+      @JsonKey(name: 'state') required this.state,
+      @JsonKey(name: 'pincode') required this.pinCode,
+      @JsonKey(name: 'address') required this.address,
+      @JsonKey(name: 'email') required this.email});
 
   factory _$AppUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppUserImplFromJson(json);
 
   @override
-  final int id;
+  @JsonKey(name: 'id')
+  final int? id;
   @override
-  @JsonKey(name: 'first_name')
-  final String firstName;
-  @override
-  @JsonKey(name: 'last_name')
-  final String lastName;
+  @JsonKey(name: 'status')
+  final String? status;
   @override
   @JsonKey(name: 'mobile_number')
   final String mobileNumber;
@@ -324,36 +296,36 @@ class _$AppUserImpl implements _AppUser {
   @JsonKey(name: 'alternate_number')
   final String? alternateNumber;
   @override
-  @JsonKey(name: 'profile_photo')
-  final String? profilePhoto;
+  @JsonKey(name: 'aadhar_number')
+  final String? aadhaarNumber;
   @override
+  @JsonKey(name: 'first_name')
+  final String? firstName;
+  @override
+  @JsonKey(name: 'last_name')
+  final String? lastName;
+  @override
+  @JsonKey(name: 'city')
+  final String? city;
+  @override
+  @JsonKey(name: 'district')
+  final String? district;
+  @override
+  @JsonKey(name: 'state')
+  final String? state;
+  @override
+  @JsonKey(name: 'pincode')
+  final String? pinCode;
+  @override
+  @JsonKey(name: 'address')
+  final String? address;
+  @override
+  @JsonKey(name: 'email')
   final String? email;
-  @override
-  final int? age;
-  @override
-  final String? education;
-  @override
-  final String gender;
-//Whether the worker is of type supervisor
-  @override
-  @JsonKey(name: 'is_supervisor')
-  final bool isSupervisor;
-  @override
-  @JsonKey(name: 'is_active')
-  final bool isActive;
-  @override
-  @JsonKey(name: 'created_at')
-  final String createdAt;
-  @override
-  @JsonKey(name: 'updated_at')
-  final String? updatedAt;
-//Supervisor assigned to the person
-  @override
-  final int? supervisor;
 
   @override
   String toString() {
-    return 'AppUser(id: $id, firstName: $firstName, lastName: $lastName, mobileNumber: $mobileNumber, alternateNumber: $alternateNumber, profilePhoto: $profilePhoto, email: $email, age: $age, education: $education, gender: $gender, isSupervisor: $isSupervisor, isActive: $isActive, createdAt: $createdAt, updatedAt: $updatedAt, supervisor: $supervisor)';
+    return 'AppUser(id: $id, status: $status, mobileNumber: $mobileNumber, alternateNumber: $alternateNumber, aadhaarNumber: $aadhaarNumber, firstName: $firstName, lastName: $lastName, city: $city, district: $district, state: $state, pinCode: $pinCode, address: $address, email: $email)';
   }
 
   @override
@@ -362,31 +334,24 @@ class _$AppUserImpl implements _AppUser {
         (other.runtimeType == runtimeType &&
             other is _$AppUserImpl &&
             (identical(other.id, id) || other.id == id) &&
-            (identical(other.firstName, firstName) ||
-                other.firstName == firstName) &&
-            (identical(other.lastName, lastName) ||
-                other.lastName == lastName) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.mobileNumber, mobileNumber) ||
                 other.mobileNumber == mobileNumber) &&
             (identical(other.alternateNumber, alternateNumber) ||
                 other.alternateNumber == alternateNumber) &&
-            (identical(other.profilePhoto, profilePhoto) ||
-                other.profilePhoto == profilePhoto) &&
-            (identical(other.email, email) || other.email == email) &&
-            (identical(other.age, age) || other.age == age) &&
-            (identical(other.education, education) ||
-                other.education == education) &&
-            (identical(other.gender, gender) || other.gender == gender) &&
-            (identical(other.isSupervisor, isSupervisor) ||
-                other.isSupervisor == isSupervisor) &&
-            (identical(other.isActive, isActive) ||
-                other.isActive == isActive) &&
-            (identical(other.createdAt, createdAt) ||
-                other.createdAt == createdAt) &&
-            (identical(other.updatedAt, updatedAt) ||
-                other.updatedAt == updatedAt) &&
-            (identical(other.supervisor, supervisor) ||
-                other.supervisor == supervisor));
+            (identical(other.aadhaarNumber, aadhaarNumber) ||
+                other.aadhaarNumber == aadhaarNumber) &&
+            (identical(other.firstName, firstName) ||
+                other.firstName == firstName) &&
+            (identical(other.lastName, lastName) ||
+                other.lastName == lastName) &&
+            (identical(other.city, city) || other.city == city) &&
+            (identical(other.district, district) ||
+                other.district == district) &&
+            (identical(other.state, state) || other.state == state) &&
+            (identical(other.pinCode, pinCode) || other.pinCode == pinCode) &&
+            (identical(other.address, address) || other.address == address) &&
+            (identical(other.email, email) || other.email == email));
   }
 
   @JsonKey(ignore: true)
@@ -394,20 +359,18 @@ class _$AppUserImpl implements _AppUser {
   int get hashCode => Object.hash(
       runtimeType,
       id,
-      firstName,
-      lastName,
+      status,
       mobileNumber,
       alternateNumber,
-      profilePhoto,
-      email,
-      age,
-      education,
-      gender,
-      isSupervisor,
-      isActive,
-      createdAt,
-      updatedAt,
-      supervisor);
+      aadhaarNumber,
+      firstName,
+      lastName,
+      city,
+      district,
+      state,
+      pinCode,
+      address,
+      email);
 
   @JsonKey(ignore: true)
   @override
@@ -425,32 +388,28 @@ class _$AppUserImpl implements _AppUser {
 
 abstract class _AppUser implements AppUser {
   const factory _AppUser(
-      {required final int id,
-      @JsonKey(name: 'first_name') required final String firstName,
-      @JsonKey(name: 'last_name') required final String lastName,
+      {@JsonKey(name: 'id') required final int? id,
+      @JsonKey(name: 'status') required final String? status,
       @JsonKey(name: 'mobile_number') required final String mobileNumber,
-      @JsonKey(name: 'alternate_number') final String? alternateNumber,
-      @JsonKey(name: 'profile_photo') final String? profilePhoto,
-      final String? email,
-      final int? age,
-      final String? education,
-      required final String gender,
-      @JsonKey(name: 'is_supervisor') required final bool isSupervisor,
-      @JsonKey(name: 'is_active') required final bool isActive,
-      @JsonKey(name: 'created_at') required final String createdAt,
-      @JsonKey(name: 'updated_at') final String? updatedAt,
-      final int? supervisor}) = _$AppUserImpl;
+      @JsonKey(name: 'alternate_number') required final String? alternateNumber,
+      @JsonKey(name: 'aadhar_number') required final String? aadhaarNumber,
+      @JsonKey(name: 'first_name') required final String? firstName,
+      @JsonKey(name: 'last_name') required final String? lastName,
+      @JsonKey(name: 'city') required final String? city,
+      @JsonKey(name: 'district') required final String? district,
+      @JsonKey(name: 'state') required final String? state,
+      @JsonKey(name: 'pincode') required final String? pinCode,
+      @JsonKey(name: 'address') required final String? address,
+      @JsonKey(name: 'email') required final String? email}) = _$AppUserImpl;
 
   factory _AppUser.fromJson(Map<String, dynamic> json) = _$AppUserImpl.fromJson;
 
   @override
-  int get id;
+  @JsonKey(name: 'id')
+  int? get id;
   @override
-  @JsonKey(name: 'first_name')
-  String get firstName;
-  @override
-  @JsonKey(name: 'last_name')
-  String get lastName;
+  @JsonKey(name: 'status')
+  String? get status;
   @override
   @JsonKey(name: 'mobile_number')
   String get mobileNumber;
@@ -458,30 +417,32 @@ abstract class _AppUser implements AppUser {
   @JsonKey(name: 'alternate_number')
   String? get alternateNumber;
   @override
-  @JsonKey(name: 'profile_photo')
-  String? get profilePhoto;
+  @JsonKey(name: 'aadhar_number')
+  String? get aadhaarNumber;
   @override
+  @JsonKey(name: 'first_name')
+  String? get firstName;
+  @override
+  @JsonKey(name: 'last_name')
+  String? get lastName;
+  @override
+  @JsonKey(name: 'city')
+  String? get city;
+  @override
+  @JsonKey(name: 'district')
+  String? get district;
+  @override
+  @JsonKey(name: 'state')
+  String? get state;
+  @override
+  @JsonKey(name: 'pincode')
+  String? get pinCode;
+  @override
+  @JsonKey(name: 'address')
+  String? get address;
+  @override
+  @JsonKey(name: 'email')
   String? get email;
-  @override
-  int? get age;
-  @override
-  String? get education;
-  @override
-  String get gender;
-  @override //Whether the worker is of type supervisor
-  @JsonKey(name: 'is_supervisor')
-  bool get isSupervisor;
-  @override
-  @JsonKey(name: 'is_active')
-  bool get isActive;
-  @override
-  @JsonKey(name: 'created_at')
-  String get createdAt;
-  @override
-  @JsonKey(name: 'updated_at')
-  String? get updatedAt;
-  @override //Supervisor assigned to the person
-  int? get supervisor;
   @override
   @JsonKey(ignore: true)
   _$$AppUserImplCopyWith<_$AppUserImpl> get copyWith =>

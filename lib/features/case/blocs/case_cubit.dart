@@ -71,9 +71,9 @@ class CaseCubit extends Cubit<CaseState> {
     if (caseModel.outcomeValue != null) {
       getOutcomeData(caseModel.outcomeValue);
     }
-    // if (caseModel.contactTracingList!.isNotEmpty) {
-    //   getContactTracingListData();
-    // }
+    if (caseModel.id != null && caseModel.contactTracingList!.isNotEmpty) {
+      getContactTracingListData();
+    }
   }
   Case? selectedCase;
 
@@ -442,6 +442,7 @@ class CaseCubit extends Cubit<CaseState> {
       ),
     );
     getContactTracingData(response.id);
+    getContactTracingListData();
   }
 
   Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {

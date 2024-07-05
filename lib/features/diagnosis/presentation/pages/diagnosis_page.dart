@@ -1,3 +1,4 @@
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -9,9 +10,9 @@ import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/bottom_button_bar.dart';
-import 'package:tatpar_acf/features/case/presentation/widgets/case_app_bar.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
 import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
 
 import '../../../app/presentation/widgets/chip_radio_buttons.dart';
 
@@ -279,6 +280,15 @@ class DiagnosisPage extends StatelessWidget {
       await cubit.updateDiagnosisData(diagnosisModel);
     } else {
       formGroup.markAllAsTouched();
+      // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
+      final fields = [];
+      formGroup.controls.forEach((key, value) {
+        if (value.invalid) {
+          fields.add(key.replaceFirst('patient_', ''));
+        }
+      });
+      DjangoflowAppSnackbar.showError(
+          'please enter the fields: ${fields.join(', ')}');
     }
   }
 
@@ -286,7 +296,14 @@ class DiagnosisPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(
         builder: (context, state) => Scaffold(
-            appBar: const CaseAppBar('Diagnosis'),
+            appBar: CaseAppBar(
+              'Diagnosis',
+              onClick: () {
+                context.router.pushAndPopUntil(
+                    const AppHomeRoute(children: [CasesRoute()]),
+                    predicate: (Route<dynamic> route) => false);
+              },
+            ),
             body: ReactiveFormBuilder(
                 form: () => _diagnosisFormBuilder(
                     diagnosisModel: state.diagnsosisModel,

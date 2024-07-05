@@ -118,7 +118,14 @@ class TBScreeningPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocBuilder<CaseCubit, CaseState>(builder: (context, state) {
       return Scaffold(
-          appBar: CaseAppBar(AppLocalizations.of(context)!.conducttbscreening),
+          appBar: CaseAppBar(
+            AppLocalizations.of(context)!.conducttbscreening,
+            onClick: () {
+              context.router.pushAndPopUntil(
+                  const AppHomeRoute(children: [CasesRoute()]),
+                  predicate: (Route<dynamic> route) => false);
+            },
+          ),
           body: ReactiveFormBuilder(form: () {
             return _tbScreeningDetailsFormBuilder(
                 tbScreeningModel: state.tbScreeningModel,

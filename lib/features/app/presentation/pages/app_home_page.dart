@@ -1,5 +1,3 @@
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
-
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,7 +14,7 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
         routes: const [
           HomeRoute(),
           CasesRoute(),
-          TasksRoute(),
+          //  TasksRoute(),
           ProfileRoute(),
           SettingsRoute(),
         ],
@@ -80,13 +78,13 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                   )
                 : const Offstage(),
             actions: [
-              AppBarAction(
-                icon: Icons.notifications_outlined,
-                onclick: () {},
-              ),
-              const SizedBox(
-                width: kPadding,
-              ),
+              // AppBarAction(
+              //   icon: Icons.notifications_outlined,
+              //   onclick: () {},
+              // ),
+              // const SizedBox(
+              //   width: kPadding,
+              // ),
               AppBarAction(
                 icon: Icons.logout,
                 onclick: () {
@@ -156,20 +154,20 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                         : CupertinoIcons.doc_text,
                     label: 'Cases',
                   ),
+                  // _BottomNavBarItem(
+                  //   icon: activeIndex == 2
+                  //       ? Icons.more_horiz
+                  //       : Icons.more_horiz_outlined,
+                  //   label: 'Tasks',
+                  // ),
                   _BottomNavBarItem(
                     icon: activeIndex == 2
-                        ? Icons.more_horiz
-                        : Icons.more_horiz_outlined,
-                    label: 'Tasks',
-                  ),
-                  _BottomNavBarItem(
-                    icon: activeIndex == 3
                         ? CupertinoIcons.person_fill
                         : CupertinoIcons.person,
                     label: 'Profile',
                   ),
                   _BottomNavBarItem(
-                    icon: activeIndex == 4
+                    icon: activeIndex == 3
                         ? CupertinoIcons.settings_solid
                         : CupertinoIcons.settings,
                     label: 'Settings',

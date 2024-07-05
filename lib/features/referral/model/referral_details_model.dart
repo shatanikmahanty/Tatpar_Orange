@@ -1,6 +1,6 @@
-// ignore_for_file: invalid_annotation_target
-
 import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+
 part 'referral_details_model.freezed.dart';
 part 'referral_details_model.g.dart';
 
@@ -17,45 +17,58 @@ DateTime? fromJsonToDateTime(String? date) {
 String? _dateTimeToJson(DateTime? date) =>
     date?.toIso8601String().substring(0, 10);
 
+//ignore_for_file: invalid_annotation_target
 @freezed
+@HiveType(typeId: 15)
 class ReferralDetailsModel with _$ReferralDetailsModel {
   const factory ReferralDetailsModel({
-    @JsonKey(name: 'case_id', includeToJson: false) int? caseId,
-    @JsonKey(name: 'id', includeToJson: false) int? id,
-    @JsonKey(name: 'referral_id') String? referralID,
+    @HiveField(0) @JsonKey(name: 'case_id', includeToJson: false) int? caseId,
+    @HiveField(1) @JsonKey(name: 'id', includeToJson: false) int? id,
+    @HiveField(2) @JsonKey(name: 'referral_id') String? referralID,
+    @HiveField(3)
     @JsonKey(
       name: 'referral_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson,
     )
     DateTime? referralDate,
-    @JsonKey(name: 'referral_name') String? referralName,
-    @JsonKey(name: 'age') int? age,
-    @JsonKey(name: 'gender') String? gender,
-    @JsonKey(name: 'referral_district') int? selectedDistrict,
-    @JsonKey(name: 'referral_block') int? selectedBlock,
-    @JsonKey(name: 'referral_panchayat') int? selectedPanchayatCode,
-    @JsonKey(includeIfNull: false) String? district,
-    @JsonKey(includeIfNull: false) String? block,
-    @JsonKey(includeIfNull: false) String? panchayatCode,
-    @JsonKey(name: 'referral_ward') int? ward,
-    @JsonKey(name: 'guardian_name') String? guardianName,
-    @JsonKey(name: 'guardian_phone_number') String? guardianPhoneNumber,
-    @JsonKey(name: 'caste_category') int? selectedCasteCategory,
-    @JsonKey(includeIfNull: false) String? casteCategory,
-    @JsonKey(name: 'key_population') List<int>? selectedKeyPopulation,
-    @JsonKey(includeIfNull: false) List<String>? keyPopulation,
-    @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
-    @JsonKey(includeIfNull: false) String? trimester,
-    @JsonKey(name: 'referred_by_name') String? referredBy,
-    @JsonKey(name: 'referrer_source') int? selectedrReferrerSource,
-    @JsonKey(includeIfNull: false) String? referrerSource,
-    @JsonKey(name: 'referred_ward') int? referredWard,
+    @HiveField(4) @JsonKey(name: 'referral_name') String? referralName,
+    @HiveField(5) @JsonKey(name: 'age') int? age,
+    @HiveField(6) @JsonKey(name: 'gender') String? gender,
+    @HiveField(7) @JsonKey(name: 'referral_district') int? selectedDistrict,
+    @HiveField(8) @JsonKey(name: 'referral_block') int? selectedBlock,
+    @HiveField(9)
+    @JsonKey(name: 'referral_panchayat')
+    int? selectedPanchayatCode,
+    @HiveField(10) @JsonKey(includeIfNull: false) String? district,
+    @HiveField(11) @JsonKey(includeIfNull: false) String? block,
+    @HiveField(12) @JsonKey(includeIfNull: false) String? panchayatCode,
+    @HiveField(13) @JsonKey(name: 'referral_ward') int? ward,
+    @HiveField(14) @JsonKey(name: 'guardian_name') String? guardianName,
+    @HiveField(15)
+    @JsonKey(name: 'guardian_phone_number')
+    String? guardianPhoneNumber,
+    @HiveField(16) @JsonKey(name: 'caste_category') int? selectedCasteCategory,
+    @HiveField(17) @JsonKey(includeIfNull: false) String? casteCategory,
+    @HiveField(18)
+    @JsonKey(name: 'key_population')
+    List<int>? selectedKeyPopulation,
+    @HiveField(19) @JsonKey(includeIfNull: false) List<String>? keyPopulation,
+    @HiveField(20) @JsonKey(name: 'trimester_of_pw') int? selectedTrimester,
+    @HiveField(21) @JsonKey(includeIfNull: false) String? trimester,
+    @HiveField(22) @JsonKey(name: 'referred_by_name') String? referredBy,
+    @HiveField(23)
+    @JsonKey(name: 'referrer_source')
+    int? selectedrReferrerSource,
+    @HiveField(24) @JsonKey(includeIfNull: false) String? referrerSource,
+    @HiveField(25) @JsonKey(name: 'referred_ward') int? referredWard,
+    @HiveField(26)
     @JsonKey(name: 'referrer_panchayat_code')
     int? selectedReferrerPanchayatCode,
-    @JsonKey(includeIfNull: false) String? referrerPanchayatCode,
-    @JsonKey(includeToJson: false) String? source,
+    @HiveField(27) @JsonKey(includeIfNull: false) String? referrerPanchayatCode,
+    @HiveField(28) @JsonKey(includeToJson: false) String? source,
   }) = _ReferralDetailsModel;
+
   factory ReferralDetailsModel.fromJson(Map<String, dynamic> json) =>
       _$ReferralDetailsModelFromJson(json);
 }

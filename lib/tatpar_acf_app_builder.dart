@@ -103,6 +103,8 @@ class TatparAcfAppBuilder extends AppBuilder {
             initialUser: context.read<AuthCubit>().state.user,
             onLogin: (context, user) {
               ///For performing tasks after login
+              context.read<AuthCubit>().loadUserDetails();
+
               context.read<SourceCubit>().loadDistricts();
               context.read<SourceCubit>().loadDiagnosisData();
 

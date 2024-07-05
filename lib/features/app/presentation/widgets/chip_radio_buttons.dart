@@ -60,6 +60,7 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
           ),
           GridView.builder(
             shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
             gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisCount: widget.crossAxisCount,
               crossAxisSpacing: kPadding,

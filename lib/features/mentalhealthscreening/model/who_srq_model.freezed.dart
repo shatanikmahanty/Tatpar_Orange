@@ -20,44 +20,64 @@ WHOSrqModel _$WHOSrqModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$WHOSrqModel {
+  @HiveField(0)
   @JsonKey(name: 'have_headaches')
   String? get headache => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'appetite_poor')
   String? get apetite => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'sleep_badly')
   String? get sleep => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'easily_frightened')
   String? get frightened => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'hands_shake')
   String? get handsShake => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(name: 'feel_nervous')
   String? get nervous => throw _privateConstructorUsedError;
+  @HiveField(6)
   @JsonKey(name: 'digestion_poor')
   String? get digestionPoor => throw _privateConstructorUsedError;
+  @HiveField(7)
   @JsonKey(name: 'trouble_thinking')
   String? get troubleThinking => throw _privateConstructorUsedError;
+  @HiveField(8)
   @JsonKey(name: 'feel_unhappy')
   String? get unhappy => throw _privateConstructorUsedError;
+  @HiveField(9)
   @JsonKey(name: 'cry')
   String? get cryMore => throw _privateConstructorUsedError;
+  @HiveField(10)
   @JsonKey(name: 'daily_activities')
   String? get dailyActivities => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(name: 'decisions')
   String? get decisionMaking => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(name: 'daily_work')
   String? get dailyWorkSuffering => throw _privateConstructorUsedError;
+  @HiveField(13)
   @JsonKey(name: 'useful_part_life')
   String? get playAUsefulPart => throw _privateConstructorUsedError;
+  @HiveField(14)
   @JsonKey(name: 'lost_interest')
   String? get lostInterest => throw _privateConstructorUsedError;
+  @HiveField(15)
   @JsonKey(name: 'worthless_person')
   String? get worthlessPerson => throw _privateConstructorUsedError;
+  @HiveField(16)
   @JsonKey(name: 'end_life')
   String? get endingLife => throw _privateConstructorUsedError;
+  @HiveField(17)
   @JsonKey(name: 'feel_tired')
   String? get tiredAllTheTime => throw _privateConstructorUsedError;
+  @HiveField(18)
   @JsonKey(name: 'uncomfortable_stomach')
   String? get uncomfortableFeelings => throw _privateConstructorUsedError;
+  @HiveField(19)
   @JsonKey(name: 'easily_tired')
   String? get easilyTired => throw _privateConstructorUsedError;
 
@@ -74,26 +94,28 @@ abstract class $WHOSrqModelCopyWith<$Res> {
       _$WHOSrqModelCopyWithImpl<$Res, WHOSrqModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'have_headaches') String? headache,
-      @JsonKey(name: 'appetite_poor') String? apetite,
-      @JsonKey(name: 'sleep_badly') String? sleep,
-      @JsonKey(name: 'easily_frightened') String? frightened,
-      @JsonKey(name: 'hands_shake') String? handsShake,
-      @JsonKey(name: 'feel_nervous') String? nervous,
-      @JsonKey(name: 'digestion_poor') String? digestionPoor,
-      @JsonKey(name: 'trouble_thinking') String? troubleThinking,
-      @JsonKey(name: 'feel_unhappy') String? unhappy,
-      @JsonKey(name: 'cry') String? cryMore,
-      @JsonKey(name: 'daily_activities') String? dailyActivities,
-      @JsonKey(name: 'decisions') String? decisionMaking,
-      @JsonKey(name: 'daily_work') String? dailyWorkSuffering,
-      @JsonKey(name: 'useful_part_life') String? playAUsefulPart,
-      @JsonKey(name: 'lost_interest') String? lostInterest,
-      @JsonKey(name: 'worthless_person') String? worthlessPerson,
-      @JsonKey(name: 'end_life') String? endingLife,
-      @JsonKey(name: 'feel_tired') String? tiredAllTheTime,
-      @JsonKey(name: 'uncomfortable_stomach') String? uncomfortableFeelings,
-      @JsonKey(name: 'easily_tired') String? easilyTired});
+      {@HiveField(0) @JsonKey(name: 'have_headaches') String? headache,
+      @HiveField(1) @JsonKey(name: 'appetite_poor') String? apetite,
+      @HiveField(2) @JsonKey(name: 'sleep_badly') String? sleep,
+      @HiveField(3) @JsonKey(name: 'easily_frightened') String? frightened,
+      @HiveField(4) @JsonKey(name: 'hands_shake') String? handsShake,
+      @HiveField(5) @JsonKey(name: 'feel_nervous') String? nervous,
+      @HiveField(6) @JsonKey(name: 'digestion_poor') String? digestionPoor,
+      @HiveField(7) @JsonKey(name: 'trouble_thinking') String? troubleThinking,
+      @HiveField(8) @JsonKey(name: 'feel_unhappy') String? unhappy,
+      @HiveField(9) @JsonKey(name: 'cry') String? cryMore,
+      @HiveField(10) @JsonKey(name: 'daily_activities') String? dailyActivities,
+      @HiveField(11) @JsonKey(name: 'decisions') String? decisionMaking,
+      @HiveField(12) @JsonKey(name: 'daily_work') String? dailyWorkSuffering,
+      @HiveField(13) @JsonKey(name: 'useful_part_life') String? playAUsefulPart,
+      @HiveField(14) @JsonKey(name: 'lost_interest') String? lostInterest,
+      @HiveField(15) @JsonKey(name: 'worthless_person') String? worthlessPerson,
+      @HiveField(16) @JsonKey(name: 'end_life') String? endingLife,
+      @HiveField(17) @JsonKey(name: 'feel_tired') String? tiredAllTheTime,
+      @HiveField(18)
+      @JsonKey(name: 'uncomfortable_stomach')
+      String? uncomfortableFeelings,
+      @HiveField(19) @JsonKey(name: 'easily_tired') String? easilyTired});
 }
 
 /// @nodoc
@@ -224,26 +246,28 @@ abstract class _$$WHOSrqModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'have_headaches') String? headache,
-      @JsonKey(name: 'appetite_poor') String? apetite,
-      @JsonKey(name: 'sleep_badly') String? sleep,
-      @JsonKey(name: 'easily_frightened') String? frightened,
-      @JsonKey(name: 'hands_shake') String? handsShake,
-      @JsonKey(name: 'feel_nervous') String? nervous,
-      @JsonKey(name: 'digestion_poor') String? digestionPoor,
-      @JsonKey(name: 'trouble_thinking') String? troubleThinking,
-      @JsonKey(name: 'feel_unhappy') String? unhappy,
-      @JsonKey(name: 'cry') String? cryMore,
-      @JsonKey(name: 'daily_activities') String? dailyActivities,
-      @JsonKey(name: 'decisions') String? decisionMaking,
-      @JsonKey(name: 'daily_work') String? dailyWorkSuffering,
-      @JsonKey(name: 'useful_part_life') String? playAUsefulPart,
-      @JsonKey(name: 'lost_interest') String? lostInterest,
-      @JsonKey(name: 'worthless_person') String? worthlessPerson,
-      @JsonKey(name: 'end_life') String? endingLife,
-      @JsonKey(name: 'feel_tired') String? tiredAllTheTime,
-      @JsonKey(name: 'uncomfortable_stomach') String? uncomfortableFeelings,
-      @JsonKey(name: 'easily_tired') String? easilyTired});
+      {@HiveField(0) @JsonKey(name: 'have_headaches') String? headache,
+      @HiveField(1) @JsonKey(name: 'appetite_poor') String? apetite,
+      @HiveField(2) @JsonKey(name: 'sleep_badly') String? sleep,
+      @HiveField(3) @JsonKey(name: 'easily_frightened') String? frightened,
+      @HiveField(4) @JsonKey(name: 'hands_shake') String? handsShake,
+      @HiveField(5) @JsonKey(name: 'feel_nervous') String? nervous,
+      @HiveField(6) @JsonKey(name: 'digestion_poor') String? digestionPoor,
+      @HiveField(7) @JsonKey(name: 'trouble_thinking') String? troubleThinking,
+      @HiveField(8) @JsonKey(name: 'feel_unhappy') String? unhappy,
+      @HiveField(9) @JsonKey(name: 'cry') String? cryMore,
+      @HiveField(10) @JsonKey(name: 'daily_activities') String? dailyActivities,
+      @HiveField(11) @JsonKey(name: 'decisions') String? decisionMaking,
+      @HiveField(12) @JsonKey(name: 'daily_work') String? dailyWorkSuffering,
+      @HiveField(13) @JsonKey(name: 'useful_part_life') String? playAUsefulPart,
+      @HiveField(14) @JsonKey(name: 'lost_interest') String? lostInterest,
+      @HiveField(15) @JsonKey(name: 'worthless_person') String? worthlessPerson,
+      @HiveField(16) @JsonKey(name: 'end_life') String? endingLife,
+      @HiveField(17) @JsonKey(name: 'feel_tired') String? tiredAllTheTime,
+      @HiveField(18)
+      @JsonKey(name: 'uncomfortable_stomach')
+      String? uncomfortableFeelings,
+      @HiveField(19) @JsonKey(name: 'easily_tired') String? easilyTired});
 }
 
 /// @nodoc
@@ -367,88 +391,110 @@ class __$$WHOSrqModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$WHOSrqModelImpl implements _WHOSrqModel {
   const _$WHOSrqModelImpl(
-      {@JsonKey(name: 'have_headaches') this.headache,
-      @JsonKey(name: 'appetite_poor') this.apetite,
-      @JsonKey(name: 'sleep_badly') this.sleep,
-      @JsonKey(name: 'easily_frightened') this.frightened,
-      @JsonKey(name: 'hands_shake') this.handsShake,
-      @JsonKey(name: 'feel_nervous') this.nervous,
-      @JsonKey(name: 'digestion_poor') this.digestionPoor,
-      @JsonKey(name: 'trouble_thinking') this.troubleThinking,
-      @JsonKey(name: 'feel_unhappy') this.unhappy,
-      @JsonKey(name: 'cry') this.cryMore,
-      @JsonKey(name: 'daily_activities') this.dailyActivities,
-      @JsonKey(name: 'decisions') this.decisionMaking,
-      @JsonKey(name: 'daily_work') this.dailyWorkSuffering,
-      @JsonKey(name: 'useful_part_life') this.playAUsefulPart,
-      @JsonKey(name: 'lost_interest') this.lostInterest,
-      @JsonKey(name: 'worthless_person') this.worthlessPerson,
-      @JsonKey(name: 'end_life') this.endingLife,
-      @JsonKey(name: 'feel_tired') this.tiredAllTheTime,
-      @JsonKey(name: 'uncomfortable_stomach') this.uncomfortableFeelings,
-      @JsonKey(name: 'easily_tired') this.easilyTired});
+      {@HiveField(0) @JsonKey(name: 'have_headaches') this.headache,
+      @HiveField(1) @JsonKey(name: 'appetite_poor') this.apetite,
+      @HiveField(2) @JsonKey(name: 'sleep_badly') this.sleep,
+      @HiveField(3) @JsonKey(name: 'easily_frightened') this.frightened,
+      @HiveField(4) @JsonKey(name: 'hands_shake') this.handsShake,
+      @HiveField(5) @JsonKey(name: 'feel_nervous') this.nervous,
+      @HiveField(6) @JsonKey(name: 'digestion_poor') this.digestionPoor,
+      @HiveField(7) @JsonKey(name: 'trouble_thinking') this.troubleThinking,
+      @HiveField(8) @JsonKey(name: 'feel_unhappy') this.unhappy,
+      @HiveField(9) @JsonKey(name: 'cry') this.cryMore,
+      @HiveField(10) @JsonKey(name: 'daily_activities') this.dailyActivities,
+      @HiveField(11) @JsonKey(name: 'decisions') this.decisionMaking,
+      @HiveField(12) @JsonKey(name: 'daily_work') this.dailyWorkSuffering,
+      @HiveField(13) @JsonKey(name: 'useful_part_life') this.playAUsefulPart,
+      @HiveField(14) @JsonKey(name: 'lost_interest') this.lostInterest,
+      @HiveField(15) @JsonKey(name: 'worthless_person') this.worthlessPerson,
+      @HiveField(16) @JsonKey(name: 'end_life') this.endingLife,
+      @HiveField(17) @JsonKey(name: 'feel_tired') this.tiredAllTheTime,
+      @HiveField(18)
+      @JsonKey(name: 'uncomfortable_stomach')
+      this.uncomfortableFeelings,
+      @HiveField(19) @JsonKey(name: 'easily_tired') this.easilyTired});
 
   factory _$WHOSrqModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$WHOSrqModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'have_headaches')
   final String? headache;
   @override
+  @HiveField(1)
   @JsonKey(name: 'appetite_poor')
   final String? apetite;
   @override
+  @HiveField(2)
   @JsonKey(name: 'sleep_badly')
   final String? sleep;
   @override
+  @HiveField(3)
   @JsonKey(name: 'easily_frightened')
   final String? frightened;
   @override
+  @HiveField(4)
   @JsonKey(name: 'hands_shake')
   final String? handsShake;
   @override
+  @HiveField(5)
   @JsonKey(name: 'feel_nervous')
   final String? nervous;
   @override
+  @HiveField(6)
   @JsonKey(name: 'digestion_poor')
   final String? digestionPoor;
   @override
+  @HiveField(7)
   @JsonKey(name: 'trouble_thinking')
   final String? troubleThinking;
   @override
+  @HiveField(8)
   @JsonKey(name: 'feel_unhappy')
   final String? unhappy;
   @override
+  @HiveField(9)
   @JsonKey(name: 'cry')
   final String? cryMore;
   @override
+  @HiveField(10)
   @JsonKey(name: 'daily_activities')
   final String? dailyActivities;
   @override
+  @HiveField(11)
   @JsonKey(name: 'decisions')
   final String? decisionMaking;
   @override
+  @HiveField(12)
   @JsonKey(name: 'daily_work')
   final String? dailyWorkSuffering;
   @override
+  @HiveField(13)
   @JsonKey(name: 'useful_part_life')
   final String? playAUsefulPart;
   @override
+  @HiveField(14)
   @JsonKey(name: 'lost_interest')
   final String? lostInterest;
   @override
+  @HiveField(15)
   @JsonKey(name: 'worthless_person')
   final String? worthlessPerson;
   @override
+  @HiveField(16)
   @JsonKey(name: 'end_life')
   final String? endingLife;
   @override
+  @HiveField(17)
   @JsonKey(name: 'feel_tired')
   final String? tiredAllTheTime;
   @override
+  @HiveField(18)
   @JsonKey(name: 'uncomfortable_stomach')
   final String? uncomfortableFeelings;
   @override
+  @HiveField(19)
   @JsonKey(name: 'easily_tired')
   final String? easilyTired;
 
@@ -541,90 +587,126 @@ class _$WHOSrqModelImpl implements _WHOSrqModel {
 
 abstract class _WHOSrqModel implements WHOSrqModel {
   const factory _WHOSrqModel(
-          {@JsonKey(name: 'have_headaches') final String? headache,
-          @JsonKey(name: 'appetite_poor') final String? apetite,
-          @JsonKey(name: 'sleep_badly') final String? sleep,
-          @JsonKey(name: 'easily_frightened') final String? frightened,
-          @JsonKey(name: 'hands_shake') final String? handsShake,
-          @JsonKey(name: 'feel_nervous') final String? nervous,
-          @JsonKey(name: 'digestion_poor') final String? digestionPoor,
-          @JsonKey(name: 'trouble_thinking') final String? troubleThinking,
-          @JsonKey(name: 'feel_unhappy') final String? unhappy,
-          @JsonKey(name: 'cry') final String? cryMore,
-          @JsonKey(name: 'daily_activities') final String? dailyActivities,
-          @JsonKey(name: 'decisions') final String? decisionMaking,
-          @JsonKey(name: 'daily_work') final String? dailyWorkSuffering,
-          @JsonKey(name: 'useful_part_life') final String? playAUsefulPart,
-          @JsonKey(name: 'lost_interest') final String? lostInterest,
-          @JsonKey(name: 'worthless_person') final String? worthlessPerson,
-          @JsonKey(name: 'end_life') final String? endingLife,
-          @JsonKey(name: 'feel_tired') final String? tiredAllTheTime,
-          @JsonKey(name: 'uncomfortable_stomach')
-          final String? uncomfortableFeelings,
-          @JsonKey(name: 'easily_tired') final String? easilyTired}) =
-      _$WHOSrqModelImpl;
+      {@HiveField(0) @JsonKey(name: 'have_headaches') final String? headache,
+      @HiveField(1) @JsonKey(name: 'appetite_poor') final String? apetite,
+      @HiveField(2) @JsonKey(name: 'sleep_badly') final String? sleep,
+      @HiveField(3)
+      @JsonKey(name: 'easily_frightened')
+      final String? frightened,
+      @HiveField(4) @JsonKey(name: 'hands_shake') final String? handsShake,
+      @HiveField(5) @JsonKey(name: 'feel_nervous') final String? nervous,
+      @HiveField(6)
+      @JsonKey(name: 'digestion_poor')
+      final String? digestionPoor,
+      @HiveField(7)
+      @JsonKey(name: 'trouble_thinking')
+      final String? troubleThinking,
+      @HiveField(8) @JsonKey(name: 'feel_unhappy') final String? unhappy,
+      @HiveField(9) @JsonKey(name: 'cry') final String? cryMore,
+      @HiveField(10)
+      @JsonKey(name: 'daily_activities')
+      final String? dailyActivities,
+      @HiveField(11) @JsonKey(name: 'decisions') final String? decisionMaking,
+      @HiveField(12)
+      @JsonKey(name: 'daily_work')
+      final String? dailyWorkSuffering,
+      @HiveField(13)
+      @JsonKey(name: 'useful_part_life')
+      final String? playAUsefulPart,
+      @HiveField(14) @JsonKey(name: 'lost_interest') final String? lostInterest,
+      @HiveField(15)
+      @JsonKey(name: 'worthless_person')
+      final String? worthlessPerson,
+      @HiveField(16) @JsonKey(name: 'end_life') final String? endingLife,
+      @HiveField(17) @JsonKey(name: 'feel_tired') final String? tiredAllTheTime,
+      @HiveField(18)
+      @JsonKey(name: 'uncomfortable_stomach')
+      final String? uncomfortableFeelings,
+      @HiveField(19)
+      @JsonKey(name: 'easily_tired')
+      final String? easilyTired}) = _$WHOSrqModelImpl;
 
   factory _WHOSrqModel.fromJson(Map<String, dynamic> json) =
       _$WHOSrqModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'have_headaches')
   String? get headache;
   @override
+  @HiveField(1)
   @JsonKey(name: 'appetite_poor')
   String? get apetite;
   @override
+  @HiveField(2)
   @JsonKey(name: 'sleep_badly')
   String? get sleep;
   @override
+  @HiveField(3)
   @JsonKey(name: 'easily_frightened')
   String? get frightened;
   @override
+  @HiveField(4)
   @JsonKey(name: 'hands_shake')
   String? get handsShake;
   @override
+  @HiveField(5)
   @JsonKey(name: 'feel_nervous')
   String? get nervous;
   @override
+  @HiveField(6)
   @JsonKey(name: 'digestion_poor')
   String? get digestionPoor;
   @override
+  @HiveField(7)
   @JsonKey(name: 'trouble_thinking')
   String? get troubleThinking;
   @override
+  @HiveField(8)
   @JsonKey(name: 'feel_unhappy')
   String? get unhappy;
   @override
+  @HiveField(9)
   @JsonKey(name: 'cry')
   String? get cryMore;
   @override
+  @HiveField(10)
   @JsonKey(name: 'daily_activities')
   String? get dailyActivities;
   @override
+  @HiveField(11)
   @JsonKey(name: 'decisions')
   String? get decisionMaking;
   @override
+  @HiveField(12)
   @JsonKey(name: 'daily_work')
   String? get dailyWorkSuffering;
   @override
+  @HiveField(13)
   @JsonKey(name: 'useful_part_life')
   String? get playAUsefulPart;
   @override
+  @HiveField(14)
   @JsonKey(name: 'lost_interest')
   String? get lostInterest;
   @override
+  @HiveField(15)
   @JsonKey(name: 'worthless_person')
   String? get worthlessPerson;
   @override
+  @HiveField(16)
   @JsonKey(name: 'end_life')
   String? get endingLife;
   @override
+  @HiveField(17)
   @JsonKey(name: 'feel_tired')
   String? get tiredAllTheTime;
   @override
+  @HiveField(18)
   @JsonKey(name: 'uncomfortable_stomach')
   String? get uncomfortableFeelings;
   @override
+  @HiveField(19)
   @JsonKey(name: 'easily_tired')
   String? get easilyTired;
   @override
