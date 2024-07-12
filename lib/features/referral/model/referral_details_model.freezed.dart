@@ -110,6 +110,12 @@ mixin _$ReferralDetailsModel {
   @HiveField(28)
   @JsonKey(includeToJson: false)
   String? get source => throw _privateConstructorUsedError;
+  @HiveField(29)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated => throw _privateConstructorUsedError;
+  @HiveField(30)
+  @JsonKey(name: 'is_case_updated', includeToJson: false)
+  bool? get isCaseUpdated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -173,7 +179,11 @@ abstract class $ReferralDetailsModelCopyWith<$Res> {
       @HiveField(27)
       @JsonKey(includeIfNull: false)
       String? referrerPanchayatCode,
-      @HiveField(28) @JsonKey(includeToJson: false) String? source});
+      @HiveField(28) @JsonKey(includeToJson: false) String? source,
+      @HiveField(29) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(30)
+      @JsonKey(name: 'is_case_updated', includeToJson: false)
+      bool? isCaseUpdated});
 }
 
 /// @nodoc
@@ -219,6 +229,8 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
     Object? selectedReferrerPanchayatCode = freezed,
     Object? referrerPanchayatCode = freezed,
     Object? source = freezed,
+    Object? isUpdated = freezed,
+    Object? isCaseUpdated = freezed,
   }) {
     return _then(_value.copyWith(
       caseId: freezed == caseId
@@ -337,6 +349,14 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isCaseUpdated: freezed == isCaseUpdated
+          ? _value.isCaseUpdated
+          : isCaseUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -399,7 +419,11 @@ abstract class _$$ReferralDetailsModelImplCopyWith<$Res>
       @HiveField(27)
       @JsonKey(includeIfNull: false)
       String? referrerPanchayatCode,
-      @HiveField(28) @JsonKey(includeToJson: false) String? source});
+      @HiveField(28) @JsonKey(includeToJson: false) String? source,
+      @HiveField(29) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(30)
+      @JsonKey(name: 'is_case_updated', includeToJson: false)
+      bool? isCaseUpdated});
 }
 
 /// @nodoc
@@ -442,6 +466,8 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
     Object? selectedReferrerPanchayatCode = freezed,
     Object? referrerPanchayatCode = freezed,
     Object? source = freezed,
+    Object? isUpdated = freezed,
+    Object? isCaseUpdated = freezed,
   }) {
     return _then(_$ReferralDetailsModelImpl(
       caseId: freezed == caseId
@@ -560,6 +586,14 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
           ? _value.source
           : source // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      isCaseUpdated: freezed == isCaseUpdated
+          ? _value.isCaseUpdated
+          : isCaseUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -617,7 +651,11 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
       @JsonKey(name: 'referrer_panchayat_code')
       this.selectedReferrerPanchayatCode,
       @HiveField(27) @JsonKey(includeIfNull: false) this.referrerPanchayatCode,
-      @HiveField(28) @JsonKey(includeToJson: false) this.source})
+      @HiveField(28) @JsonKey(includeToJson: false) this.source,
+      @HiveField(29) @JsonKey(name: 'is_updated') this.isUpdated,
+      @HiveField(30)
+      @JsonKey(name: 'is_case_updated', includeToJson: false)
+      this.isCaseUpdated})
       : _selectedKeyPopulation = selectedKeyPopulation,
         _keyPopulation = keyPopulation;
 
@@ -760,10 +798,18 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
   @HiveField(28)
   @JsonKey(includeToJson: false)
   final String? source;
+  @override
+  @HiveField(29)
+  @JsonKey(name: 'is_updated')
+  final bool? isUpdated;
+  @override
+  @HiveField(30)
+  @JsonKey(name: 'is_case_updated', includeToJson: false)
+  final bool? isCaseUpdated;
 
   @override
   String toString() {
-    return 'ReferralDetailsModel(caseId: $caseId, id: $id, referralID: $referralID, referralDate: $referralDate, referralName: $referralName, age: $age, gender: $gender, selectedDistrict: $selectedDistrict, selectedBlock: $selectedBlock, selectedPanchayatCode: $selectedPanchayatCode, district: $district, block: $block, panchayatCode: $panchayatCode, ward: $ward, guardianName: $guardianName, guardianPhoneNumber: $guardianPhoneNumber, selectedCasteCategory: $selectedCasteCategory, casteCategory: $casteCategory, selectedKeyPopulation: $selectedKeyPopulation, keyPopulation: $keyPopulation, selectedTrimester: $selectedTrimester, trimester: $trimester, referredBy: $referredBy, selectedrReferrerSource: $selectedrReferrerSource, referrerSource: $referrerSource, referredWard: $referredWard, selectedReferrerPanchayatCode: $selectedReferrerPanchayatCode, referrerPanchayatCode: $referrerPanchayatCode, source: $source)';
+    return 'ReferralDetailsModel(caseId: $caseId, id: $id, referralID: $referralID, referralDate: $referralDate, referralName: $referralName, age: $age, gender: $gender, selectedDistrict: $selectedDistrict, selectedBlock: $selectedBlock, selectedPanchayatCode: $selectedPanchayatCode, district: $district, block: $block, panchayatCode: $panchayatCode, ward: $ward, guardianName: $guardianName, guardianPhoneNumber: $guardianPhoneNumber, selectedCasteCategory: $selectedCasteCategory, casteCategory: $casteCategory, selectedKeyPopulation: $selectedKeyPopulation, keyPopulation: $keyPopulation, selectedTrimester: $selectedTrimester, trimester: $trimester, referredBy: $referredBy, selectedrReferrerSource: $selectedrReferrerSource, referrerSource: $referrerSource, referredWard: $referredWard, selectedReferrerPanchayatCode: $selectedReferrerPanchayatCode, referrerPanchayatCode: $referrerPanchayatCode, source: $source, isUpdated: $isUpdated, isCaseUpdated: $isCaseUpdated)';
   }
 
   @override
@@ -824,7 +870,11 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
                     selectedReferrerPanchayatCode) &&
             (identical(other.referrerPanchayatCode, referrerPanchayatCode) ||
                 other.referrerPanchayatCode == referrerPanchayatCode) &&
-            (identical(other.source, source) || other.source == source));
+            (identical(other.source, source) || other.source == source) &&
+            (identical(other.isUpdated, isUpdated) ||
+                other.isUpdated == isUpdated) &&
+            (identical(other.isCaseUpdated, isCaseUpdated) ||
+                other.isCaseUpdated == isCaseUpdated));
   }
 
   @JsonKey(ignore: true)
@@ -859,7 +909,9 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
         referredWard,
         selectedReferrerPanchayatCode,
         referrerPanchayatCode,
-        source
+        source,
+        isUpdated,
+        isCaseUpdated
       ]);
 
   @JsonKey(ignore: true)
@@ -939,9 +991,11 @@ abstract class _ReferralDetailsModel implements ReferralDetailsModel {
       @HiveField(27)
       @JsonKey(includeIfNull: false)
       final String? referrerPanchayatCode,
-      @HiveField(28)
-      @JsonKey(includeToJson: false)
-      final String? source}) = _$ReferralDetailsModelImpl;
+      @HiveField(28) @JsonKey(includeToJson: false) final String? source,
+      @HiveField(29) @JsonKey(name: 'is_updated') final bool? isUpdated,
+      @HiveField(30)
+      @JsonKey(name: 'is_case_updated', includeToJson: false)
+      final bool? isCaseUpdated}) = _$ReferralDetailsModelImpl;
 
   factory _ReferralDetailsModel.fromJson(Map<String, dynamic> json) =
       _$ReferralDetailsModelImpl.fromJson;
@@ -1065,6 +1119,14 @@ abstract class _ReferralDetailsModel implements ReferralDetailsModel {
   @HiveField(28)
   @JsonKey(includeToJson: false)
   String? get source;
+  @override
+  @HiveField(29)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated;
+  @override
+  @HiveField(30)
+  @JsonKey(name: 'is_case_updated', includeToJson: false)
+  bool? get isCaseUpdated;
   @override
   @JsonKey(ignore: true)
   _$$ReferralDetailsModelImplCopyWith<_$ReferralDetailsModelImpl>

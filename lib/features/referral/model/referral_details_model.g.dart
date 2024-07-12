@@ -46,13 +46,15 @@ class ReferralDetailsModelAdapter extends TypeAdapter<ReferralDetailsModel> {
       selectedReferrerPanchayatCode: fields[26] as int?,
       referrerPanchayatCode: fields[27] as String?,
       source: fields[28] as String?,
+      isUpdated: fields[29] as bool?,
+      isCaseUpdated: fields[30] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ReferralDetailsModel obj) {
     writer
-      ..writeByte(29)
+      ..writeByte(31)
       ..writeByte(0)
       ..write(obj.caseId)
       ..writeByte(1)
@@ -110,7 +112,11 @@ class ReferralDetailsModelAdapter extends TypeAdapter<ReferralDetailsModel> {
       ..writeByte(27)
       ..write(obj.referrerPanchayatCode)
       ..writeByte(28)
-      ..write(obj.source);
+      ..write(obj.source)
+      ..writeByte(29)
+      ..write(obj.isUpdated)
+      ..writeByte(30)
+      ..write(obj.isCaseUpdated);
   }
 
   @override
@@ -165,6 +171,8 @@ _$ReferralDetailsModelImpl _$$ReferralDetailsModelImplFromJson(
           (json['referrer_panchayat_code'] as num?)?.toInt(),
       referrerPanchayatCode: json['referrerPanchayatCode'] as String?,
       source: json['source'] as String?,
+      isUpdated: json['is_updated'] as bool?,
+      isCaseUpdated: json['is_case_updated'] as bool?,
     );
 
 Map<String, dynamic> _$$ReferralDetailsModelImplToJson(
@@ -204,5 +212,6 @@ Map<String, dynamic> _$$ReferralDetailsModelImplToJson(
   val['referred_ward'] = instance.referredWard;
   val['referrer_panchayat_code'] = instance.selectedReferrerPanchayatCode;
   writeNotNull('referrerPanchayatCode', instance.referrerPanchayatCode);
+  val['is_updated'] = instance.isUpdated;
   return val;
 }

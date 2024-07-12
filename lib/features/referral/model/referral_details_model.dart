@@ -67,6 +67,10 @@ class ReferralDetailsModel with _$ReferralDetailsModel {
     int? selectedReferrerPanchayatCode,
     @HiveField(27) @JsonKey(includeIfNull: false) String? referrerPanchayatCode,
     @HiveField(28) @JsonKey(includeToJson: false) String? source,
+    @HiveField(29) @JsonKey(name: 'is_updated') bool? isUpdated,
+    @HiveField(30)
+    @JsonKey(name: 'is_case_updated', includeToJson: false)
+    bool? isCaseUpdated,
   }) = _ReferralDetailsModel;
 
   factory ReferralDetailsModel.fromJson(Map<String, dynamic> json) =>

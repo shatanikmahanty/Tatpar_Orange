@@ -119,6 +119,7 @@ class MentalHealthScreeningModel with _$MentalHealthScreeningModel {
     @JsonKey(name: 'cp_talk_helpline_again')
     String? cptalkToHelpline,
     @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel,
+    @HiveField(27) @JsonKey(name: 'is_updated') bool? isUpdated,
   }) = _MentalHealthScreeningModel;
 
   factory MentalHealthScreeningModel.fromJson(Map<String, dynamic> json) =>

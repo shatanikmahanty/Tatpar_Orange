@@ -173,27 +173,27 @@ class BasicDetails extends StatelessWidget {
           caseCubit.state.referralDetailsModel ?? const ReferralDetailsModel();
 
       final referralDetailsData = model.copyWith(
-        referralID: formData['referral_id'] as String?,
-        referralDate: formData['referral_date'] as DateTime,
-        referralName: formData['referral_name'] as String?,
-        age: formData['age'] as int?,
-        gender: formData['gender'] as String?,
-        selectedDistrict: caseCubit.selectedDistrictId,
-        selectedBlock: caseCubit.selectedBlockId,
-        selectedPanchayatCode: caseCubit.selectedPanchayatCodeId,
-        ward: formData['ward'] as int?,
-        guardianName: formData['guardian_name'] as String?,
-        guardianPhoneNumber: formData['guardian_phone_number'] as String?,
-        selectedCasteCategory: caseCubit.selectedCasteCategory,
-        selectedKeyPopulation: caseCubit.selectedKeyPopulation,
-        selectedTrimester: caseCubit.selectedTrimester,
-        referredBy: formData['referred_by'] as String?,
-        selectedrReferrerSource: caseCubit.selectedReferrerSource,
-        referredWard: formData['referred_ward'] as int?,
-        selectedReferrerPanchayatCode:
-            caseCubit.selectedReferrerPanchayatCodeId,
-        source: formData['source'] as String?,
-      );
+          referralID: formData['referral_id'] as String?,
+          referralDate: formData['referral_date'] as DateTime,
+          referralName: formData['referral_name'] as String?,
+          age: formData['age'] as int?,
+          gender: formData['gender'] as String?,
+          selectedDistrict: caseCubit.selectedDistrictId,
+          selectedBlock: caseCubit.selectedBlockId,
+          selectedPanchayatCode: caseCubit.selectedPanchayatCodeId,
+          ward: formData['ward'] as int?,
+          guardianName: formData['guardian_name'] as String?,
+          guardianPhoneNumber: formData['guardian_phone_number'] as String?,
+          selectedCasteCategory: caseCubit.selectedCasteCategory,
+          selectedKeyPopulation: caseCubit.selectedKeyPopulation,
+          selectedTrimester: caseCubit.selectedTrimester,
+          referredBy: formData['referred_by'] as String?,
+          selectedrReferrerSource: caseCubit.selectedReferrerSource,
+          referredWard: formData['referred_ward'] as int?,
+          selectedReferrerPanchayatCode:
+              caseCubit.selectedReferrerPanchayatCodeId,
+          source: formData['source'] as String?,
+          isUpdated: false);
 
       await caseCubit.updateReferralDetailsData(referralDetailsData);
     } else {
@@ -217,6 +217,8 @@ class BasicDetails extends StatelessWidget {
             appBar: CaseAppBar(
               AppLocalizations.of(context)!.addReferral,
               onClick: () {
+                context.read<CaseCubit>().resetSelectedCase();
+
                 context.router.pushAndPopUntil(const AppHomeRoute(),
                     predicate: (Route<dynamic> route) => false);
               },

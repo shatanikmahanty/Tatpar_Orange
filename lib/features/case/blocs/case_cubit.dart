@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -71,13 +73,17 @@ class CaseCubit extends Cubit<CaseState> {
     if (caseModel.outcomeValue != null) {
       getOutcomeData(caseModel.outcomeValue);
     }
-    if (caseModel.id != null && caseModel.contactTracingList!.isNotEmpty) {
+    if (caseModel.id != null &&
+        caseModel.contactTracingList != null &&
+        caseModel.contactTracingList!.isNotEmpty) {
       getContactTracingListData();
     }
   }
-  Case? selectedCase;
+  Case? _selectedCase;
 
-  set selectCase(Case? selectedCase) => selectedCase = selectedCase;
+  Case? get selectedCase => _selectedCase;
+
+  set selectCase(Case? selectedCase) => _selectedCase = selectedCase;
 
   ///ReferralDetailsPage
   int? _selectedDistrictId;
@@ -260,7 +266,7 @@ class CaseCubit extends Cubit<CaseState> {
     };
   }
 
-  Future<Case> getCaseModel(int? caseId) async {
+  Future<Case?> getCaseModel(int? caseId) async {
     final response = await caseRepo.getCaseModel(caseId: caseId);
     return response;
   }
@@ -268,6 +274,7 @@ class CaseCubit extends Cubit<CaseState> {
   Future<void> getReferralDetailsData(int? formId) async {
     if (state.caseWorkedUpon.referralDetails == null) return;
     final response = await caseRepo.getReferralDetails(id: formId);
+    log(response.toString());
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon.copyWith(referralDetails: formId),
@@ -346,19 +353,30 @@ class CaseCubit extends Cubit<CaseState> {
     );
   }
 
+  void resetSelectedCase() {
+    selectCase = null;
+    emit(state.copyWith(caseWorkedUpon: const Case()));
+  }
+
   Future<int?> updateReferralDetailsData(
       ReferralDetailsModel referralDetailsModel) async {
     final response = await caseRepo.saveReferralDetails(
         referralDetailsModel: referralDetailsModel,
         id: state.caseWorkedUpon.referralDetails);
+    // log('CASE CUBIT : state.caseWorkedUpon===========${state.caseWorkedUpon.toString()}');
+    // log('CASE CUBIT : ReferralDetailsModel===========${referralDetailsModel.toString()}');
+    //  log('CASE CUBIT : ReferralDetailsID===========${state.caseWorkedUpon.referralDetails.toString()}');
+    selectCase = await getCaseModel(response.caseId);
+    // print('Fetched Case Model: ${selectedCase.toString()}');
+
     emit(
       state.copyWith(
-        caseWorkedUpon:
-            state.caseWorkedUpon.copyWith(referralDetails: response.id),
+        caseWorkedUpon: (selectedCase ?? state.caseWorkedUpon)
+            .copyWith(referralDetails: response.id, id: response.caseId),
         referralDetailsModel: response,
       ),
     );
-    selectCase = await getCaseModel(response.caseId);
+    //  log('Response.caseID================${response.caseId.toString()}');
 
     getReferralDetailsData(state.caseWorkedUpon.referralDetails);
     return response.caseId;

@@ -99,7 +99,9 @@ class TBScreeningPage extends StatelessWidget {
           swollenGland: formData['swollen_gland'] as String?,
           tbMedicine: formData['tb_medicine'] as String?,
           screeningOutcome: formData['screening_outcome'] as String?,
-          comments: formData['comments'] as String?);
+          comments: formData['comments'] as String?,
+          isUpdated: false);
+
       await cubit.updateTbScreeningData(tbScreeningModel);
     } else {
       formGroup.markAllAsTouched();

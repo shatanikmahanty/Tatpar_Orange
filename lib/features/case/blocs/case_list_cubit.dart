@@ -84,7 +84,7 @@ class CaseListCubit extends Cubit<CaseListState> {
   Future<void> getCasesForHealthWorker() async {
     emit(state.copyWith(isLoading: true));
     final cases = await caseRepo.getCasesForHealthWorker();
-    cases.sort((a, b) => b.createdOn!.compareTo(a.createdOn!));
+    // cases.sort((a, b) => b.createdOn!.compareTo(a.createdOn!));
     log(cases.toString());
     emit(
       state.copyWith(

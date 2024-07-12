@@ -1,8 +1,8 @@
 import 'package:dio/dio.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:connectivity/connectivity.dart';
 
 import 'api_constants.dart';
 import 'api_response.dart';
@@ -51,8 +51,8 @@ class NetworkManager {
   }
 
   Future<bool> isInternetAvailable() async {
-    var connectivityResult = await Connectivity().checkConnectivity();
-    return connectivityResult != ConnectivityResult.none;
+    bool connectivityResult = await InternetConnection().hasInternetAccess;
+    return connectivityResult;
   }
 
   Future<ApiResponse<T>> perform<T>(NetworkRequest request) async {

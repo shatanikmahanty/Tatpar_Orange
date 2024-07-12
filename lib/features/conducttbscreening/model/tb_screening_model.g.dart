@@ -34,13 +34,14 @@ class TBScreeningModelAdapter extends TypeAdapter<TBScreeningModel> {
       tbMedicine: fields[14] as String?,
       screeningOutcome: fields[15] as String?,
       comments: fields[16] as String?,
+      isUpdated: fields[17] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TBScreeningModel obj) {
     writer
-      ..writeByte(17)
+      ..writeByte(18)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -74,7 +75,9 @@ class TBScreeningModelAdapter extends TypeAdapter<TBScreeningModel> {
       ..writeByte(15)
       ..write(obj.screeningOutcome)
       ..writeByte(16)
-      ..write(obj.comments);
+      ..write(obj.comments)
+      ..writeByte(17)
+      ..write(obj.isUpdated);
   }
 
   @override
@@ -112,6 +115,7 @@ _$TBScreeningModelImpl _$$TBScreeningModelImplFromJson(
       tbMedicine: json['tb_medicine_before'] as String?,
       screeningOutcome: json['screening_outcome'] as String?,
       comments: json['comments'] as String?,
+      isUpdated: json['is_updated'] as bool?,
     );
 
 Map<String, dynamic> _$$TBScreeningModelImplToJson(
@@ -140,5 +144,6 @@ Map<String, dynamic> _$$TBScreeningModelImplToJson(
   val['tb_medicine_before'] = instance.tbMedicine;
   val['screening_outcome'] = instance.screeningOutcome;
   val['comments'] = instance.comments;
+  val['is_updated'] = instance.isUpdated;
   return val;
 }

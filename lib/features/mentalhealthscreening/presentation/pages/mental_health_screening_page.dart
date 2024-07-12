@@ -89,29 +89,31 @@ class MentalHealthScreeningPage extends StatelessWidget {
       //final whoSrqJson = whoSrqModel?.toJson() ?? <String, dynamic>{};
 
       final updatedModel = model.copyWith(
-        ipStage: formData['stage'] as String?,
-        ipScreeningDate: formData['screening_date'] as DateTime?,
-        ipScreeningStatus: formData['screening_status'] as String?,
-        ipScreeningScore: formData['screening_score'] as String?,
-        ipCounsellingLinked: formData['counselling_linked'] as DateTime?,
-        ipPsychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
-        ipfuScreeningDate: formData['ipfu_screening_date'] as DateTime?,
-        ipfuScreeningStatus: formData['ipfu_screening_status'] as String?,
-        ipfuScreeningScore: formData['ipfu_screening_score'] as String?,
-        ipfuCounsellingLinked: formData['ipfu_counselling_linked'] as DateTime?,
-        ipfuPsychiatristLinked:
-            formData['ipfu_psychiatrist_linked'] as DateTime?,
-        ipfuFeelingBetter:
-            formData['ipfu_feeling_better_after_linkage'] as String?,
-        ipfutalkToHelpline: formData['ipfu_talk_to_helpline'] as String?,
-        cpScreeningDate: formData['cp_screening_date'] as DateTime?,
-        cpScreeningStatus: formData['cp_screening_status'] as String?,
-        cpScreeningScore: formData['cp_screening_score'] as String?,
-        cpCounsellingLinked: formData['cp_counselling_linked'] as DateTime?,
-        cpPsychiatristLinked: formData['cp_psychiatrist_linked'] as DateTime?,
-        cpFeelingBetter: formData['cp_feeling_better_after_linkage'] as String?,
-        cptalkToHelpline: formData['cp_talk_to_helpline'] as String?,
-      );
+          ipStage: formData['stage'] as String?,
+          ipScreeningDate: formData['screening_date'] as DateTime?,
+          ipScreeningStatus: formData['screening_status'] as String?,
+          ipScreeningScore: formData['screening_score'] as String?,
+          ipCounsellingLinked: formData['counselling_linked'] as DateTime?,
+          ipPsychiatristLinked: formData['psychiatrist_linked'] as DateTime?,
+          ipfuScreeningDate: formData['ipfu_screening_date'] as DateTime?,
+          ipfuScreeningStatus: formData['ipfu_screening_status'] as String?,
+          ipfuScreeningScore: formData['ipfu_screening_score'] as String?,
+          ipfuCounsellingLinked:
+              formData['ipfu_counselling_linked'] as DateTime?,
+          ipfuPsychiatristLinked:
+              formData['ipfu_psychiatrist_linked'] as DateTime?,
+          ipfuFeelingBetter:
+              formData['ipfu_feeling_better_after_linkage'] as String?,
+          ipfutalkToHelpline: formData['ipfu_talk_to_helpline'] as String?,
+          cpScreeningDate: formData['cp_screening_date'] as DateTime?,
+          cpScreeningStatus: formData['cp_screening_status'] as String?,
+          cpScreeningScore: formData['cp_screening_score'] as String?,
+          cpCounsellingLinked: formData['cp_counselling_linked'] as DateTime?,
+          cpPsychiatristLinked: formData['cp_psychiatrist_linked'] as DateTime?,
+          cpFeelingBetter:
+              formData['cp_feeling_better_after_linkage'] as String?,
+          cptalkToHelpline: formData['cp_talk_to_helpline'] as String?,
+          isUpdated: false);
       caseCubit.updateWHOSRQData(
           updatedModel, whoSrqModel, ipfuWhoSrqModel, cpWhoSrqModel);
     } else {

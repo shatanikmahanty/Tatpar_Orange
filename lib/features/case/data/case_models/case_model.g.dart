@@ -41,13 +41,14 @@ class CaseAdapter extends TypeAdapter<Case> {
       treatment: fields[21] as int?,
       referralBlock: fields[22] as String?,
       contactTracing: fields[23] as int?,
+      isUpdated: fields[24] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Case obj) {
     writer
-      ..writeByte(24)
+      ..writeByte(25)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -95,7 +96,9 @@ class CaseAdapter extends TypeAdapter<Case> {
       ..writeByte(22)
       ..write(obj.referralBlock)
       ..writeByte(23)
-      ..write(obj.contactTracing);
+      ..write(obj.contactTracing)
+      ..writeByte(24)
+      ..write(obj.isUpdated);
   }
 
   @override
@@ -140,6 +143,7 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
       treatment: (json['treatment_id'] as num?)?.toInt(),
       referralBlock: json['referral_block'] as String?,
       contactTracing: (json['contactTracing'] as num?)?.toInt(),
+      isUpdated: json['is_updated'] as bool?,
     );
 
 Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
@@ -167,4 +171,5 @@ Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
       'contact_tracing_id': instance.contactTracingList,
       'treatment_id': instance.treatment,
       'referral_block': instance.referralBlock,
+      'is_updated': instance.isUpdated,
     };

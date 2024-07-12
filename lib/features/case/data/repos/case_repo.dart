@@ -1,6 +1,8 @@
 import 'dart:developer';
 
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:hive/hive.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
@@ -17,13 +19,22 @@ import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.da
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
+import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
 
 class CaseRepo {
-  Future<ReferralDetailsModel> saveReferralDetails(
-      {required ReferralDetailsModel referralDetailsModel,
-      required int? id}) async {
-    // Box<ReferralDetailsModel> dataBox =
-    //     Hive.box<ReferralDetailsModel>('referralDetailsPostModel');
+  Future<ReferralDetailsModel> saveReferralDetails({
+    required ReferralDetailsModel referralDetailsModel,
+    required int? id,
+  }) async {
+    Box<ReferralDetailsModel> dataBox =
+        Hive.box<ReferralDetailsModel>('referralDetailsModel');
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+    ((referralDetailsModel.isCaseUpdated == false ||
+                referralDetailsModel.isCaseUpdated == null) &&
+            hasInternet)
+        ? id = null
+        : id;
     final request = NetworkRequest(
       '$referralDetailsUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -33,27 +44,79 @@ class CaseRepo {
         'logged_in_user': AuthCubit.instance.state.user!.mobileNumber,
       },
     );
+
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      // Box<ReferralDetailsModel> dataBox =
-      //     Hive.box<ReferralDetailsModel>('referralDetailsGetModel');
-      //     await dataBox.put('referralModels', ReferralDetailsModel.fromJson(result.data['data']))
+      final savedModel = ReferralDetailsModel.fromJson(result.data['data']);
+
+      await dataBox.put(savedModel.id.toString(), savedModel);
+      print(referralDetailsModel.toString());
+      if ((referralDetailsModel.isCaseUpdated == null) ||
+          (referralDetailsModel.isCaseUpdated == false)) {
+        var key = dataBox
+            .keyAt(dataBox.values.toList().indexOf(referralDetailsModel));
+        // Print the details of the record being deleted
+        log('Deleting ReferralModel: ${dataBox.get(key)}');
+        // Delete the old model
+        await dataBox.delete(key);
+
+        deleteCase(referralDetailsModel.caseId);
+      }
+      pushPendingReferralDetails();
+
+      updateCaseBox(model: savedModel, tbModel: null, caseModel: null);
 
       AuthCubit.instance.caseId = result.data['data']['case_id'];
-      // updateCase(AuthCubit.instance.workingCaseId ?? 0, {
-      //   'referral': result.data['case_id'],
-      // });
-      return ReferralDetailsModel.fromJson(result.data['data']);
+      return savedModel;
     } else {
-      // if (result.error != null && result.error?.type is NetworkError) {
-      //   // log('Using stored data from Hive: $storedData');
-      //   // return storedData;
-      // } else {
-      throw ApplicationError(
-        errorMsg: 'Error fetching data',
-        type: UnExpected(),
-      );
-      // }
+      if (result.error != null && result.error?.type is NetworkError) {
+        final userMobile = AuthCubit.instance.state.user!.mobileNumber;
+
+        // Retrieve all stored models
+        final modelsList = dataBox.values.toList();
+        ReferralDetailsModel updateModel = referralDetailsModel;
+
+        // Check if referral form ID already exists in the list and id is not null
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          // If the model exists, update it
+          await dataBox.put(updateModel.id.toString(), updateModel);
+
+          DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          print('Updated Referral in Hive: $updateModel');
+          updateCaseBox(model: updateModel, tbModel: null, caseModel: null);
+
+          return updateModel;
+        } else {
+          await CounterManager.instance.initialize();
+          int counter = await CounterManager.instance.getNextCounter();
+
+          final userMobilePrefix = userMobile.substring(0, 5);
+          final modelToSave = updateModel.copyWith(
+            isCaseUpdated: false,
+            caseId: int.tryParse('$userMobilePrefix$counter'),
+            id: int.tryParse(
+                '$userMobilePrefix$counter'), // Assign unique referral form id
+          );
+
+          // Save the new model to Hive
+          await dataBox.put(modelToSave.id.toString(), modelToSave);
+          updateCaseBox(model: modelToSave, tbModel: null, caseModel: null);
+
+          DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          print('Stored new Referral in Hive: $modelToSave');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -75,7 +138,7 @@ class CaseRepo {
       return TBScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error submitting TB Screening Form data',
         type: Unauthorized(),
       );
     }
@@ -88,7 +151,7 @@ class CaseRepo {
       required WHOSrqModel? cpWhoSrqModel,
       required int? id,
       required int? caseId}) async {
-    log(mentalHealthScreeningModel.toJson().toString());
+    print(mentalHealthScreeningModel.toJson().toString());
     final request = NetworkRequest(
       '$whoSrqUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -106,7 +169,7 @@ class CaseRepo {
       return MentalHealthScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error submitting Who Srq Form data',
         type: Unauthorized(),
       );
     }
@@ -132,7 +195,7 @@ class CaseRepo {
       return DiagnosisModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error submitting Diagnosis Form data',
         type: Unauthorized(),
       );
     }
@@ -156,7 +219,7 @@ class CaseRepo {
       return TreatmentModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error submitting Treatment Form data',
         type: Unauthorized(),
       );
     }
@@ -180,7 +243,7 @@ class CaseRepo {
       return ContactTracingModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error submitting Contact Tracing Form data',
         type: Unauthorized(),
       );
     }
@@ -204,15 +267,17 @@ class CaseRepo {
       return OutcomeModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error submitting data',
+        errorMsg: 'Error submitting Outcome Form data',
         type: Unauthorized(),
       );
     }
   }
 
-  Future<Case> getCaseModel({
+  Future<Case?> getCaseModel({
     required int? caseId,
   }) async {
+    Box<Case> dataBox = Hive.box<Case>('caseList');
+
     final request = NetworkRequest(
       '$getSingleCaseUrl/$caseId',
       RequestMethod.get,
@@ -221,18 +286,48 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return Case.fromJson(result.data['data']);
+      final newCase = Case.fromJson(result.data['data']);
+      print('Getting Case Model======================$newCase)}'.toString());
+      final existingCaseIndex = dataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == newCase.id);
+      if (existingCaseIndex != -1) {
+        // If case with the same ID exists, update it
+        dataBox.putAt(existingCaseIndex, newCase);
+      } else {
+        // If case with the same ID doesn't exist, add it
+        dataBox.add(newCase);
+      }
+      return newCase;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
-        type: Unauthorized(),
-      );
+      if (result.error != null && result.error?.type is NetworkError) {
+        final existingCase = dataBox.get(dataBox.keyAt(dataBox.values
+            .toList()
+            .indexWhere((existingCase) => existingCase.id == caseId)));
+        if (existingCase != null) {
+          log('Getting Case Model=======================${existingCase}');
+
+          return existingCase;
+        } else {
+          throw ApplicationError(
+            errorMsg: 'Error Retrieving data',
+            type: Unauthorized(),
+          );
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving data',
+          type: Unauthorized(),
+        );
+      }
     }
   }
 
   Future<ReferralDetailsModel> getReferralDetails({
     required int? id,
   }) async {
+    Box<ReferralDetailsModel> dataBox =
+        Hive.box<ReferralDetailsModel>('referralDetailsModel');
     final request = NetworkRequest(
       '$referralDetailsUrl/$id',
       RequestMethod.get,
@@ -243,9 +338,25 @@ class CaseRepo {
 
     if (result.status == Status.ok) {
       return ReferralDetailsModel.fromJson(result.data['data']);
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(dataBox.values.toString());
+      final model = dataBox.get(dataBox.keyAt(dataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
+      if (model != null) {
+        print(
+            'Retrieving ReferralModel======================$model'.toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving Referral Form data',
+          type: Unauthorized(),
+        );
+      }
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving Referral Form data',
         type: Unauthorized(),
       );
     }
@@ -265,7 +376,7 @@ class CaseRepo {
       return TBScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving TB Screening Form data',
         type: Unauthorized(),
       );
     }
@@ -282,11 +393,10 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      log(MentalHealthScreeningModel.fromJson(result.data['data']).toString());
       return MentalHealthScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving WHO Srq Form data',
         type: Unauthorized(),
       );
     }
@@ -306,7 +416,7 @@ class CaseRepo {
       return DiagnosisModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving Diagnosis Form data',
         type: Unauthorized(),
       );
     }
@@ -326,7 +436,7 @@ class CaseRepo {
       return TreatmentModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving Treatment Form data',
         type: Unauthorized(),
       );
     }
@@ -346,7 +456,7 @@ class CaseRepo {
       return OutcomeModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving Outcome Form data',
         type: Unauthorized(),
       );
     }
@@ -373,7 +483,7 @@ class CaseRepo {
       return contactDataList;
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving ContactTracing List data',
         type: Unauthorized(),
       );
     }
@@ -393,7 +503,7 @@ class CaseRepo {
       return ContactTracingModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving data',
+        errorMsg: 'Error Retrieving ContactTracing Form data',
         type: Unauthorized(),
       );
     }
@@ -429,105 +539,166 @@ class CaseRepo {
         }
       }
 
-      final List<Case> storedData = dataBox.values.toList();
-      log(storedData.toString());
-
       return cases;
     } else {
       Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<Case> storedData = dataBox.values.toList();
 
       if (result.error != null && result.error?.type is NetworkError) {
-        log('No NETWORK');
+        print(
+            'List Of Cases Stored in Hive============${storedData.toString()}');
+
         return storedData;
       } else {
         throw ApplicationError(
-          errorMsg: 'Error fetching data',
+          errorMsg: 'Error fetching Case List data',
           type: UnExpected(),
         );
       }
     }
   }
 
-  // Future<ContactTracingModel> getContactCasingFormData(
-  //     {required int contactCasingFormId}) async {
-  //   final request = NetworkRequest(
-  //     '$contractCasingsUrl$contactCasingFormId/',
-  //     RequestMethod.get,
-  //     isAuthorized: true,
-  //     data: {
-  //       'healthworker_id': AuthCubit.instance.state.user!.id,
-  //     },
-  //   );
-  //   final result = await NetworkManager.instance.perform(request);
-  //   final ContactTracingModel contactTracing =
-  //       ContactTracingModel.fromJson(result.data);
-  //   return contactTracing;
-  // }
+  Future<void> pushPendingReferralDetails() async {
+    Box<ReferralDetailsModel> dataBox =
+        Hive.box<ReferralDetailsModel>('referralDetailsModel');
 
-  // // Future<PatientModel> getPatientDetailsFormData(
-  // //     {required int patientId}) async {
-  // //   final request = NetworkRequest(
-  // //     nikshayIdentitiesUrl,
-  // //     RequestMethod.get,
-  // //     isAuthorized: true,
-  // //     data: {
-  // //       'id': patientId,
-  // //     },
-  // //   );
-  // //   final result = await NetworkManager.instance.perform(request);
-  // //   final PatientModel patientModel = PatientModel.fromJson(result.data);
-  // //   return patientModel;
-  // // }
+    // Get all referral details models from the box
+    List<ReferralDetailsModel> referralList = dataBox.values.toList();
 
-  // Future<ApiResponse> assignSubordinate(int caseId,
-  //     {required SubordinatesModel subordinatesModel}) async {
-  //   final response = await NetworkManager.instance.perform(
-  //     NetworkRequest(
-  //       '$casesUrl$caseId/',
-  //       RequestMethod.put,
-  //       data: {
-  //         'assigned_to': subordinatesModel.id,
-  //         'healthworker_id': AuthCubit.instance.state.user!.id,
-  //       },
-  //       isAuthorized: true,
-  //     ),
-  //   );
-  //   return response;
-  // }
+    for (var referral in referralList) {
+      if (referral.isUpdated != null) {
+        if (referral.isUpdated == false) {
+          final model = (referral.isCaseUpdated == null) ||
+                  (referral.isCaseUpdated == false)
+              ? referral.copyWith(caseId: null, id: null)
+              : referral;
+          try {
+            log('Pushing ReferralModel to the Server:${model.toString()}');
+            // Attempt to push the referral details to the server
+            final request = NetworkRequest(
+              '$referralDetailsUrl${model.id == null ? '' : '/${model.id}'}',
+              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              isAuthorized: true,
+              data: {
+                ...model.toJson(),
+                'logged_in_user': AuthCubit.instance.state.user!.mobileNumber,
+              },
+            );
+            final result = await NetworkManager.instance.perform(request);
 
-  // Future<ApiResponse> closeCase(
-  //         {required int caseId, required String outcome}) async =>
-  //     await NetworkManager.instance.perform(
-  //       NetworkRequest(
-  //         '$casesUrl$caseId/',
-  //         RequestMethod.patch,
-  //         data: {
-  //           'outcome': outcome,
-  //           'healthworker_id': AuthCubit.instance.state.user!.id,
-  //         },
-  //         isAuthorized: true,
-  //       ),
-  //     );
+            if (result.status == Status.ok) {
+              ReferralDetailsModel updatedModel =
+                  ReferralDetailsModel.fromJson(result.data['data']);
+              if ((referral.isCaseUpdated == null) ||
+                  (referral.isCaseUpdated == false)) {
+                // Get the key of the existing model
+                var key =
+                    dataBox.keyAt(dataBox.values.toList().indexOf(referral));
+                // Print the details of the record being deleted
+                log('Deleting ReferralModel: ${dataBox.get(key)}');
+                // Delete the old model
+                await dataBox.delete(key);
 
-  // Future<Case> updateCase(int caseId, Map<String, dynamic> caseDetails) async {
-  //   final request = NetworkRequest(
-  //     '$casesUrl$caseId/',
-  //     RequestMethod.patch,
-  //     isAuthorized: true,
-  //     data: {
-  //       ...caseDetails,
-  //       'healthworker_id': AuthCubit.instance.state.user!.id,
-  //     },
-  //   );
-  //   final caseUpdateResult = await NetworkManager.instance.perform(request);
-  //   if (caseUpdateResult.status == Status.ok) {
-  //     return Case.fromJson(caseUpdateResult.data);
-  //   } else {
-  //     throw ApplicationError(
-  //       errorMsg: 'Error submitting data',
-  //       type: Unauthorized(),
-  //     );
-  //   }
-  // }
+                deleteCase(referral.caseId);
+              }
+              // Add the new model with the server-assigned ID
+              await dataBox.put(updatedModel.id, updatedModel);
+              log('ReferralModel DataBox Contains===========${dataBox.values.toList().toString()}');
+              AuthCubit.instance.caseId = result.data['data']['case_id'];
+            } else {
+              // Handle error if needed
+              throw Exception(
+                  'Failed to push referral details from Local Storage');
+            }
+          } catch (e) {
+            // Handle the exception if needed
+            print('Error pushing referral details: $e');
+            break; // Exit the loop if there's an error
+          }
+        }
+      }
+    }
+  }
+
+  void deleteCase(int? caseId) {
+    Box<Case> caseBox = Hive.box<Case>('caseList');
+    int caseKey = caseBox.keys
+        .firstWhere((key) => caseBox.get(key)?.id == caseId, orElse: () => -1);
+
+    if (caseKey != -1) {
+      log('Deleting CaseModel: ${caseBox.get(caseKey)}');
+      caseBox.delete(caseKey);
+    }
+  }
+
+  Future<void> updateCaseBox({
+    required ReferralDetailsModel? model,
+    required TBScreeningModel? tbModel,
+    required Case? caseModel,
+  }) async {
+    Box<Case> caseBox = Hive.box<Case>('caseList');
+    Case caseModelToSave;
+    if (caseModel == null) {
+      caseModelToSave = Case(
+        id: model?.caseId,
+        referralBlock: model?.block,
+        referralName: model?.referralName,
+        gender: model?.gender,
+        age: model?.age,
+        screenedBy: tbModel?.screenedBy,
+        referredBy: model?.referredBy,
+        referralMobileNumber: model?.guardianPhoneNumber,
+        tbScreeningOutcome: tbModel?.screeningOutcome,
+        referralDetails: model?.id,
+        tbScreening: tbModel?.id,
+        isUpdated: false,
+      );
+    } else {
+      caseModelToSave = caseModel;
+    }
+    final existingCaseIndex = caseBox.values
+        .toList()
+        .indexWhere((existingCase) => existingCase.id == model?.caseId);
+    if (existingCaseIndex != -1) {
+      // update CaseModel
+      caseBox.putAt(existingCaseIndex, caseModelToSave);
+    } else {
+      // If case with the same ID doesn't exist, add it
+      caseBox.add(caseModelToSave);
+    }
+    print('New case in Hive: $caseModelToSave');
+    log('CASE BOX CONTAINS===========${caseBox.values.toList()}');
+  }
+}
+
+class CounterManager {
+  CounterManager._privateConstructor();
+
+  static final CounterManager instance = CounterManager._privateConstructor();
+
+  static const String _counterKey = 'counter_key';
+
+  int _counter = 1;
+
+  Future<void> initialize() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _counter = prefs.getInt(_counterKey) ?? 1;
+  }
+
+  Future<int> getNextCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _counter++;
+    await prefs.setInt(_counterKey, _counter);
+    return _counter;
+  }
+
+  Future<void> resetCounter() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    _counter = 1;
+    await prefs.setInt(_counterKey, _counter);
+  }
+
+  int getCurrentCounter() {
+    return _counter;
+  }
 }

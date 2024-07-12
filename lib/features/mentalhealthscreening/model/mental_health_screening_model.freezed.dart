@@ -129,6 +129,9 @@ mixin _$MentalHealthScreeningModel {
   @HiveField(26)
   @JsonKey(includeToJson: false)
   WHOSrqModel? get whoSrqModel => throw _privateConstructorUsedError;
+  @HiveField(27)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -229,7 +232,8 @@ abstract class $MentalHealthScreeningModelCopyWith<$Res> {
       @HiveField(25)
       @JsonKey(name: 'cp_talk_helpline_again')
       String? cptalkToHelpline,
-      @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
+      @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel,
+      @HiveField(27) @JsonKey(name: 'is_updated') bool? isUpdated});
 
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
 }
@@ -275,6 +279,7 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
     Object? ipfutalkToHelpline = freezed,
     Object? cptalkToHelpline = freezed,
     Object? whoSrqModel = freezed,
+    Object? isUpdated = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -385,6 +390,10 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
           ? _value.whoSrqModel
           : whoSrqModel // ignore: cast_nullable_to_non_nullable
               as WHOSrqModel?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 
@@ -496,7 +505,8 @@ abstract class _$$MentalHealthScreeningModelImplCopyWith<$Res>
       @HiveField(25)
       @JsonKey(name: 'cp_talk_helpline_again')
       String? cptalkToHelpline,
-      @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel});
+      @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel,
+      @HiveField(27) @JsonKey(name: 'is_updated') bool? isUpdated});
 
   @override
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
@@ -542,6 +552,7 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
     Object? ipfutalkToHelpline = freezed,
     Object? cptalkToHelpline = freezed,
     Object? whoSrqModel = freezed,
+    Object? isUpdated = freezed,
   }) {
     return _then(_$MentalHealthScreeningModelImpl(
       id: freezed == id
@@ -652,6 +663,10 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
           ? _value.whoSrqModel
           : whoSrqModel // ignore: cast_nullable_to_non_nullable
               as WHOSrqModel?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -743,7 +758,8 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
       @HiveField(25)
       @JsonKey(name: 'cp_talk_helpline_again')
       this.cptalkToHelpline,
-      @HiveField(26) @JsonKey(includeToJson: false) this.whoSrqModel});
+      @HiveField(26) @JsonKey(includeToJson: false) this.whoSrqModel,
+      @HiveField(27) @JsonKey(name: 'is_updated') this.isUpdated});
 
   factory _$MentalHealthScreeningModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -884,10 +900,14 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
   @HiveField(26)
   @JsonKey(includeToJson: false)
   final WHOSrqModel? whoSrqModel;
+  @override
+  @HiveField(27)
+  @JsonKey(name: 'is_updated')
+  final bool? isUpdated;
 
   @override
   String toString() {
-    return 'MentalHealthScreeningModel(id: $id, stage: $stage, ipStage: $ipStage, ipfuStage: $ipfuStage, cpStage: $cpStage, ipScreeningDate: $ipScreeningDate, ipfuScreeningDate: $ipfuScreeningDate, cpScreeningDate: $cpScreeningDate, ipScreeningStatus: $ipScreeningStatus, ipfuScreeningStatus: $ipfuScreeningStatus, cpScreeningStatus: $cpScreeningStatus, ipScreeningScore: $ipScreeningScore, ipfuScreeningScore: $ipfuScreeningScore, cpScreeningScore: $cpScreeningScore, ipCounsellingLinked: $ipCounsellingLinked, ipfuCounsellingLinked: $ipfuCounsellingLinked, cpCounsellingLinked: $cpCounsellingLinked, ipPsychiatristLinked: $ipPsychiatristLinked, ipfuPsychiatristLinked: $ipfuPsychiatristLinked, cpPsychiatristLinked: $cpPsychiatristLinked, ipFeelingBetter: $ipFeelingBetter, ipfuFeelingBetter: $ipfuFeelingBetter, cpFeelingBetter: $cpFeelingBetter, iptalkToHelpline: $iptalkToHelpline, ipfutalkToHelpline: $ipfutalkToHelpline, cptalkToHelpline: $cptalkToHelpline, whoSrqModel: $whoSrqModel)';
+    return 'MentalHealthScreeningModel(id: $id, stage: $stage, ipStage: $ipStage, ipfuStage: $ipfuStage, cpStage: $cpStage, ipScreeningDate: $ipScreeningDate, ipfuScreeningDate: $ipfuScreeningDate, cpScreeningDate: $cpScreeningDate, ipScreeningStatus: $ipScreeningStatus, ipfuScreeningStatus: $ipfuScreeningStatus, cpScreeningStatus: $cpScreeningStatus, ipScreeningScore: $ipScreeningScore, ipfuScreeningScore: $ipfuScreeningScore, cpScreeningScore: $cpScreeningScore, ipCounsellingLinked: $ipCounsellingLinked, ipfuCounsellingLinked: $ipfuCounsellingLinked, cpCounsellingLinked: $cpCounsellingLinked, ipPsychiatristLinked: $ipPsychiatristLinked, ipfuPsychiatristLinked: $ipfuPsychiatristLinked, cpPsychiatristLinked: $cpPsychiatristLinked, ipFeelingBetter: $ipFeelingBetter, ipfuFeelingBetter: $ipfuFeelingBetter, cpFeelingBetter: $cpFeelingBetter, iptalkToHelpline: $iptalkToHelpline, ipfutalkToHelpline: $ipfutalkToHelpline, cptalkToHelpline: $cptalkToHelpline, whoSrqModel: $whoSrqModel, isUpdated: $isUpdated)';
   }
 
   @override
@@ -944,7 +964,9 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
             (identical(other.cptalkToHelpline, cptalkToHelpline) ||
                 other.cptalkToHelpline == cptalkToHelpline) &&
             (identical(other.whoSrqModel, whoSrqModel) ||
-                other.whoSrqModel == whoSrqModel));
+                other.whoSrqModel == whoSrqModel) &&
+            (identical(other.isUpdated, isUpdated) ||
+                other.isUpdated == isUpdated));
   }
 
   @JsonKey(ignore: true)
@@ -977,7 +999,8 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
         iptalkToHelpline,
         ipfutalkToHelpline,
         cptalkToHelpline,
-        whoSrqModel
+        whoSrqModel,
+        isUpdated
       ]);
 
   @JsonKey(ignore: true)
@@ -1091,7 +1114,10 @@ abstract class _MentalHealthScreeningModel
       final String? cptalkToHelpline,
       @HiveField(26)
       @JsonKey(includeToJson: false)
-      final WHOSrqModel? whoSrqModel}) = _$MentalHealthScreeningModelImpl;
+      final WHOSrqModel? whoSrqModel,
+      @HiveField(27)
+      @JsonKey(name: 'is_updated')
+      final bool? isUpdated}) = _$MentalHealthScreeningModelImpl;
 
   factory _MentalHealthScreeningModel.fromJson(Map<String, dynamic> json) =
       _$MentalHealthScreeningModelImpl.fromJson;
@@ -1231,6 +1257,10 @@ abstract class _MentalHealthScreeningModel
   @HiveField(26)
   @JsonKey(includeToJson: false)
   WHOSrqModel? get whoSrqModel;
+  @override
+  @HiveField(27)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated;
   @override
   @JsonKey(ignore: true)
   _$$MentalHealthScreeningModelImplCopyWith<_$MentalHealthScreeningModelImpl>

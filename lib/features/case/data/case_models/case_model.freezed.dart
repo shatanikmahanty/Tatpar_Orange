@@ -96,6 +96,9 @@ mixin _$Case {
   @HiveField(23)
   @JsonKey(includeToJson: false)
   int? get contactTracing => throw _privateConstructorUsedError;
+  @HiveField(24)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -145,7 +148,8 @@ abstract class $CaseCopyWith<$Res> {
       List<int>? contactTracingList,
       @HiveField(21) @JsonKey(name: 'treatment_id') int? treatment,
       @HiveField(22) @JsonKey(name: 'referral_block') String? referralBlock,
-      @HiveField(23) @JsonKey(includeToJson: false) int? contactTracing});
+      @HiveField(23) @JsonKey(includeToJson: false) int? contactTracing,
+      @HiveField(24) @JsonKey(name: 'is_updated') bool? isUpdated});
 }
 
 /// @nodoc
@@ -185,6 +189,7 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
     Object? treatment = freezed,
     Object? referralBlock = freezed,
     Object? contactTracing = freezed,
+    Object? isUpdated = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -283,6 +288,10 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.contactTracing
           : contactTracing // ignore: cast_nullable_to_non_nullable
               as int?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -332,7 +341,8 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
       List<int>? contactTracingList,
       @HiveField(21) @JsonKey(name: 'treatment_id') int? treatment,
       @HiveField(22) @JsonKey(name: 'referral_block') String? referralBlock,
-      @HiveField(23) @JsonKey(includeToJson: false) int? contactTracing});
+      @HiveField(23) @JsonKey(includeToJson: false) int? contactTracing,
+      @HiveField(24) @JsonKey(name: 'is_updated') bool? isUpdated});
 }
 
 /// @nodoc
@@ -369,6 +379,7 @@ class __$$CaseImplCopyWithImpl<$Res>
     Object? treatment = freezed,
     Object? referralBlock = freezed,
     Object? contactTracing = freezed,
+    Object? isUpdated = freezed,
   }) {
     return _then(_$CaseImpl(
       id: freezed == id
@@ -467,6 +478,10 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.contactTracing
           : contactTracing // ignore: cast_nullable_to_non_nullable
               as int?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -512,7 +527,8 @@ class _$CaseImpl implements _Case {
       final List<int>? contactTracingList,
       @HiveField(21) @JsonKey(name: 'treatment_id') this.treatment,
       @HiveField(22) @JsonKey(name: 'referral_block') this.referralBlock,
-      @HiveField(23) @JsonKey(includeToJson: false) this.contactTracing})
+      @HiveField(23) @JsonKey(includeToJson: false) this.contactTracing,
+      @HiveField(24) @JsonKey(name: 'is_updated') this.isUpdated})
       : _contactTracingList = contactTracingList;
 
   factory _$CaseImpl.fromJson(Map<String, dynamic> json) =>
@@ -627,10 +643,14 @@ class _$CaseImpl implements _Case {
   @HiveField(23)
   @JsonKey(includeToJson: false)
   final int? contactTracing;
+  @override
+  @HiveField(24)
+  @JsonKey(name: 'is_updated')
+  final bool? isUpdated;
 
   @override
   String toString() {
-    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, district: $district, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, outcomeValue: $outcomeValue, contactTracingList: $contactTracingList, treatment: $treatment, referralBlock: $referralBlock, contactTracing: $contactTracing)';
+    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, district: $district, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, outcomeValue: $outcomeValue, contactTracingList: $contactTracingList, treatment: $treatment, referralBlock: $referralBlock, contactTracing: $contactTracing, isUpdated: $isUpdated)';
   }
 
   @override
@@ -680,7 +700,9 @@ class _$CaseImpl implements _Case {
             (identical(other.referralBlock, referralBlock) ||
                 other.referralBlock == referralBlock) &&
             (identical(other.contactTracing, contactTracing) ||
-                other.contactTracing == contactTracing));
+                other.contactTracing == contactTracing) &&
+            (identical(other.isUpdated, isUpdated) ||
+                other.isUpdated == isUpdated));
   }
 
   @JsonKey(ignore: true)
@@ -710,7 +732,8 @@ class _$CaseImpl implements _Case {
         const DeepCollectionEquality().hash(_contactTracingList),
         treatment,
         referralBlock,
-        contactTracing
+        contactTracing,
+        isUpdated
       ]);
 
   @JsonKey(ignore: true)
@@ -770,9 +793,10 @@ abstract class _Case implements Case {
       @HiveField(22)
       @JsonKey(name: 'referral_block')
       final String? referralBlock,
-      @HiveField(23)
-      @JsonKey(includeToJson: false)
-      final int? contactTracing}) = _$CaseImpl;
+      @HiveField(23) @JsonKey(includeToJson: false) final int? contactTracing,
+      @HiveField(24)
+      @JsonKey(name: 'is_updated')
+      final bool? isUpdated}) = _$CaseImpl;
 
   factory _Case.fromJson(Map<String, dynamic> json) = _$CaseImpl.fromJson;
 
@@ -876,6 +900,10 @@ abstract class _Case implements Case {
   @HiveField(23)
   @JsonKey(includeToJson: false)
   int? get contactTracing;
+  @override
+  @HiveField(24)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated;
   @override
   @JsonKey(ignore: true)
   _$$CaseImplCopyWith<_$CaseImpl> get copyWith =>

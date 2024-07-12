@@ -45,13 +45,14 @@ class MentalHealthScreeningModelAdapter
       ipfutalkToHelpline: fields[24] as String?,
       cptalkToHelpline: fields[25] as String?,
       whoSrqModel: fields[26] as WHOSrqModel?,
+      isUpdated: fields[27] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, MentalHealthScreeningModel obj) {
     writer
-      ..writeByte(27)
+      ..writeByte(28)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -105,7 +106,9 @@ class MentalHealthScreeningModelAdapter
       ..writeByte(25)
       ..write(obj.cptalkToHelpline)
       ..writeByte(26)
-      ..write(obj.whoSrqModel);
+      ..write(obj.whoSrqModel)
+      ..writeByte(27)
+      ..write(obj.isUpdated);
   }
 
   @override
@@ -162,6 +165,7 @@ _$MentalHealthScreeningModelImpl _$$MentalHealthScreeningModelImplFromJson(
       whoSrqModel: json['whoSrqModel'] == null
           ? null
           : WHOSrqModel.fromJson(json['whoSrqModel'] as Map<String, dynamic>),
+      isUpdated: json['is_updated'] as bool?,
     );
 
 Map<String, dynamic> _$$MentalHealthScreeningModelImplToJson(
@@ -193,4 +197,5 @@ Map<String, dynamic> _$$MentalHealthScreeningModelImplToJson(
       'ip_talk_helpline_again': instance.iptalkToHelpline,
       'ipfu_talk_helpline_again': instance.ipfutalkToHelpline,
       'cp_talk_helpline_again': instance.cptalkToHelpline,
+      'is_updated': instance.isUpdated,
     };

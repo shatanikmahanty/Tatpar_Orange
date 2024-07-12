@@ -45,6 +45,7 @@ class TBScreeningModel with _$TBScreeningModel {
     @HiveField(14) @JsonKey(name: 'tb_medicine_before') String? tbMedicine,
     @HiveField(15) @JsonKey(name: 'screening_outcome') String? screeningOutcome,
     @HiveField(16) @JsonKey(name: 'comments') String? comments,
+    @HiveField(17) @JsonKey(name: 'is_updated') bool? isUpdated,
   }) = _TBScreeningModel;
 
   factory TBScreeningModel.fromJson(Map<String, dynamic> json) =>
