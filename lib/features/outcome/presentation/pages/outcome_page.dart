@@ -1,6 +1,7 @@
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
@@ -88,113 +89,144 @@ class OutcomePage extends StatelessWidget {
             appBar: CaseAppBar(
               'Outcome',
               onClick: () {
-                context.router.pushAndPopUntil(
+                // Navigate after the current frame
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  context.router.pushAndPopUntil(
                     const AppHomeRoute(children: [CasesRoute()]),
-                    predicate: (Route<dynamic> route) => false);
+                    predicate: (Route<dynamic> route) => false,
+                  );
+                });
+                context.read<CaseCubit>().close();
               },
             ),
-            body: ReactiveFormBuilder(
-                form: () => _outcomeFormBuilder(
-                    outcomeModel: state.outcomeModel,
-                    sourceCubit: context.read<SourceCubit>()),
-                builder: (BuildContext context, FormGroup formGroup,
-                        Widget? child) =>
-                    AutofillGroup(
-                        child: Column(children: [
-                      const SizedBox(height: kPadding * 2),
-                      Expanded(
-                          child: SingleChildScrollView(
-                              child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: kPadding * 2),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        DateTextInput(
-                                          firstDate: DateTime(2002),
-                                          controlName:
-                                              'treatment_completion_date',
-                                          label: AppLocalizations.of(context)!
-                                              .treatmentCompletionDate,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'nikshay_id',
-                                          label: AppLocalizations.of(context)!
-                                              .nikshayId,
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'nutrition_provided',
-                                          label: AppLocalizations.of(context)!
-                                              .nutritionProvided,
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                        BlocBuilder<SourceCubit, SourceState>(
-                                            buildWhen: ((previous, current) =>
-                                                (previous.isLoading !=
-                                                    current.isLoading) ||
-                                                previous.dataModel !=
-                                                    current.dataModel),
-                                            builder: (context, state) {
-                                              List<String> treatmentOutcome =
-                                                  (state.diagnosisData != null)
-                                                      ? state.diagnosisData!
-                                                          .treatmentOutcome!
-                                                          .map((e) =>
-                                                              '${e.name}')
-                                                          .toList()
-                                                      : [];
+            body: state.isLoading || state.outcomeModel == null
+                ? Center(
+                    child: Lottie.asset(
+                      'assets/lottie/registration_loading.json', // Path to your Lottie animation
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : ReactiveFormBuilder(
+                    form: () => _outcomeFormBuilder(
+                        outcomeModel: state.outcomeModel,
+                        sourceCubit: context.read<SourceCubit>()),
+                    builder: (BuildContext context, FormGroup formGroup,
+                            Widget? child) =>
+                        AutofillGroup(
+                            child: Column(children: [
+                          const SizedBox(height: kPadding * 2),
+                          Expanded(
+                              child: SingleChildScrollView(
+                                  child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: kPadding * 2),
+                                      child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            DateTextInput(
+                                              firstDate: DateTime(2002),
+                                              controlName:
+                                                  'treatment_completion_date',
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .treatmentCompletionDate,
+                                            ),
+                                            const SizedBox(
+                                                height: kPadding * 2),
+                                            PrimaryTextField(
+                                              formControlName: 'nikshay_id',
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .nikshayId,
+                                              prefixIcon:
+                                                  Icons.account_circle_outlined,
+                                            ),
+                                            const SizedBox(
+                                                height: kPadding * 2),
+                                            PrimaryTextField(
+                                              formControlName:
+                                                  'nutrition_provided',
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .nutritionProvided,
+                                              prefixIcon:
+                                                  Icons.account_circle_outlined,
+                                            ),
+                                            const SizedBox(
+                                                height: kPadding * 2),
+                                            BlocBuilder<SourceCubit,
+                                                    SourceState>(
+                                                buildWhen: ((previous,
+                                                        current) =>
+                                                    (previous.isLoading !=
+                                                        current.isLoading) ||
+                                                    previous.dataModel !=
+                                                        current.dataModel),
+                                                builder: (context, state) {
+                                                  List<String>
+                                                      treatmentOutcome =
+                                                      (state.diagnosisData !=
+                                                              null)
+                                                          ? state.diagnosisData!
+                                                              .treatmentOutcome!
+                                                              .map((e) =>
+                                                                  '${e.name}')
+                                                              .toList()
+                                                          : [];
 
-                                              if (state.isLoading ?? false) {
-                                                return const SizedBox(
-                                                  height: 15,
-                                                  width: 15,
-                                                  child: Center(
-                                                    child:
-                                                        CircularProgressIndicator(),
-                                                  ),
-                                                );
-                                              }
+                                                  if (state.isLoading ??
+                                                      false) {
+                                                    return const SizedBox(
+                                                      height: 15,
+                                                      width: 15,
+                                                      child: Center(
+                                                        child:
+                                                            CircularProgressIndicator(),
+                                                      ),
+                                                    );
+                                                  }
 
-                                              return ChipRadioButtons(
-                                                label: AppLocalizations.of(
-                                                        context)!
-                                                    .treatmentOutcome,
-                                                options: treatmentOutcome,
-                                                crossAxisCount: 2,
-                                                onChanged: (value) {
-                                                  formGroup
-                                                      .control(
-                                                          'treatment_outcome')
-                                                      .value = value;
-                                                },
-                                                selected: formGroup
-                                                    .control(
-                                                        'treatment_outcome')
-                                                    .value,
-                                              );
-                                            }),
-                                        const SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'treatment_comments',
-                                          label: AppLocalizations.of(context)!
-                                              .treatmentComments,
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                        ),
-                                        const SizedBox(height: kPadding * 2),
-                                      ])))),
-                      BottomButtonBar(
-                        onSave: (_) async => await _onSave(context, formGroup),
-                        nextPage: const AppHomeRoute(),
-                      ),
-                      const SizedBox(height: kPadding * 2),
-                    ])))));
+                                                  return ChipRadioButtons(
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .treatmentOutcome,
+                                                    options: treatmentOutcome,
+                                                    crossAxisCount: 2,
+                                                    onChanged: (value) {
+                                                      formGroup
+                                                          .control(
+                                                              'treatment_outcome')
+                                                          .value = value;
+                                                    },
+                                                    selected: formGroup
+                                                        .control(
+                                                            'treatment_outcome')
+                                                        .value,
+                                                  );
+                                                }),
+                                            const SizedBox(
+                                                height: kPadding * 2),
+                                            PrimaryTextField(
+                                              formControlName:
+                                                  'treatment_comments',
+                                              label:
+                                                  AppLocalizations.of(context)!
+                                                      .treatmentComments,
+                                              prefixIcon:
+                                                  Icons.account_circle_outlined,
+                                            ),
+                                            const SizedBox(
+                                                height: kPadding * 2),
+                                          ])))),
+                          BottomButtonBar(
+                            onSave: (_) async =>
+                                await _onSave(context, formGroup),
+                            nextPage: const AppHomeRoute(),
+                          ),
+                          const SizedBox(height: kPadding * 2),
+                        ])))));
   }
 }

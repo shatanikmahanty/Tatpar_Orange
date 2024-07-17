@@ -41,7 +41,11 @@ class CaseCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: kPadding),
+              padding: const EdgeInsets.only(
+                  left: kPadding,
+                  top: kPadding,
+                  right: kPadding,
+                  bottom: kPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -59,58 +63,58 @@ class CaseCard extends StatelessWidget {
                       color: AppColors.grey30,
                     ),
                   ),
-                  // const SizedBox(width: kPadding),
-                  PopupMenuButton<String>(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    icon: const Icon(Icons.more_vert),
-                    offset: const Offset(30, 30), // Kebab icon
-                    onSelected: (String value) async {
-                      if (value == 'reassign') {
-                        context.router.navigate(
-                          CaseRouter(
-                              caseModel: caseModel,
-                              children: const [ReferralDetailsRoute()]),
-                        );
-                      }
-                    },
-                    itemBuilder: (BuildContext context) =>
-                        <PopupMenuEntry<String>>[
-                      PopupMenuItem<String>(
-                        value: 'reassign',
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Reassign',
-                            style: textTheme.labelMedium?.copyWith(
-                              fontSize: 14,
-                              height: 1.7,
-                              letterSpacing: 0.2,
-                              color: AppColors.grey30,
-                            ),
-                          ),
-                        ),
-                      ),
-                      PopupMenuItem<String>(
-                        value: 'edit',
-                        child: Container(
-                          width: double.infinity,
-                          alignment: Alignment.center,
-                          child: Text(
-                            'Edit',
-                            style: textTheme.labelMedium?.copyWith(
-                              fontSize: 14,
-                              height: 1.7,
-                              letterSpacing: 0.2,
-                              color: AppColors.grey30,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
+                  const SizedBox(width: kPadding),
+                  // PopupMenuButton<String>(
+                  //   shape: RoundedRectangleBorder(
+                  //     borderRadius: BorderRadius.circular(10.0),
+                  //   ),
+                  //   icon: const Icon(Icons.more_vert),
+                  //   offset: const Offset(30, 30), // Kebab icon
+                  //   onSelected: (String value) async {
+                  //     if (value == 'reassign') {
+                  //       context.router.navigate(
+                  //         CaseRouter(
+                  //             caseModel: caseModel,
+                  //             children: const [ReferralDetailsRoute()]),
+                  //       );
+                  //     }
+                  //   },
+                  //   itemBuilder: (BuildContext context) =>
+                  //       <PopupMenuEntry<String>>[
+                  //     PopupMenuItem<String>(
+                  //       value: 'reassign',
+                  //       child: Container(
+                  //         width: double.infinity,
+                  //         alignment: Alignment.center,
+                  //         child: Text(
+                  //           'Reassign',
+                  //           style: textTheme.labelMedium?.copyWith(
+                  //             fontSize: 14,
+                  //             height: 1.7,
+                  //             letterSpacing: 0.2,
+                  //             color: AppColors.grey30,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     PopupMenuItem<String>(
+                  //       value: 'edit',
+                  //       child: Container(
+                  //         width: double.infinity,
+                  //         alignment: Alignment.center,
+                  //         child: Text(
+                  //           'Edit',
+                  //           style: textTheme.labelMedium?.copyWith(
+                  //             fontSize: 14,
+                  //             height: 1.7,
+                  //             letterSpacing: 0.2,
+                  //             color: AppColors.grey30,
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
                 ],
               ),
             ),

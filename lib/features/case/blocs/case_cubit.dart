@@ -54,6 +54,8 @@ class CaseCubit extends Cubit<CaseState> {
     required this.caseRepo,
     required Case caseModel,
   }) : super(CaseState(caseWorkedUpon: caseModel)) {
+    bool isClosed = false;
+
     if (caseModel.referralDetails != null) {
       getReferralDetailsData(caseModel.referralDetails);
     }
@@ -272,11 +274,14 @@ class CaseCubit extends Cubit<CaseState> {
   }
 
   Future<void> getReferralDetailsData(int? formId) async {
+    emit(state.copyWith(isLoading: true));
+
     if (state.caseWorkedUpon.referralDetails == null) return;
     final response = await caseRepo.getReferralDetails(id: formId);
     log(response.toString());
     emit(
       state.copyWith(
+        isLoading: false,
         caseWorkedUpon: state.caseWorkedUpon.copyWith(referralDetails: formId),
         referralDetailsModel: response,
       ),
@@ -285,19 +290,31 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getTBScreeningData(int? formId) async {
     if (state.caseWorkedUpon.tbScreening == null) return;
-    final response = await caseRepo.getTBScreening(id: formId);
-    emit(
-      state.copyWith(
-        tbScreeningModel: response,
-      ),
-    );
+    log('LOADING');
+    emit(state.copyWith(isLoading: true));
+
+    caseRepo.getTBScreening(id: formId).then((value) {
+      log('emitting form sate');
+
+      log('CASE CUBIT TB SCREENING MODEL+++++++++++++${value.toString()}');
+
+      emit(
+        state.copyWith(
+          isLoading: false,
+          tbScreeningModel: value,
+        ),
+      );
+    });
   }
 
   Future<void> getMentalHealthScreeningData(int? formId) async {
     if (state.caseWorkedUpon.whoSrq == null) return;
+    emit(state.copyWith(isLoading: true));
+
     final response = await caseRepo.getWhoSrq(id: formId);
     emit(
       state.copyWith(
+        isLoading: false,
         mentalHealthScreeningModel: response,
       ),
     );
@@ -305,9 +322,12 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getDiagnosisData(int? formId) async {
     if (state.caseWorkedUpon.diagnosis == null) return;
+    emit(state.copyWith(isLoading: true));
+
     final response = await caseRepo.getDiagnosis(id: formId);
     emit(
       state.copyWith(
+        isLoading: false,
         diagnsosisModel: response,
       ),
     );
@@ -315,9 +335,12 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getTreatmentData(int? formId) async {
     if (state.caseWorkedUpon.treatment == null) return;
+    emit(state.copyWith(isLoading: true));
+
     final response = await caseRepo.getTreatment(id: formId);
     emit(
       state.copyWith(
+        isLoading: false,
         treatmentModel: response,
       ),
     );
@@ -325,9 +348,12 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getOutcomeData(int? formId) async {
     if (state.caseWorkedUpon.outcomeValue == null) return;
+    emit(state.copyWith(isLoading: true));
+
     final response = await caseRepo.getOutcome(id: formId);
     emit(
       state.copyWith(
+        isLoading: false,
         outcomeModel: response,
       ),
     );
@@ -345,9 +371,12 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getContactTracingData(int? formId) async {
     if (state.caseWorkedUpon.contactTracingList == null) return;
+    emit(state.copyWith(isLoading: true));
+
     final response = await caseRepo.getContactTracing(id: formId);
     emit(
       state.copyWith(
+        isLoading: false,
         contactTracingModel: response,
       ),
     );
@@ -371,8 +400,8 @@ class CaseCubit extends Cubit<CaseState> {
 
     emit(
       state.copyWith(
-        caseWorkedUpon: (selectedCase ?? state.caseWorkedUpon)
-            .copyWith(referralDetails: response.id, id: response.caseId),
+        caseWorkedUpon:
+            (state.caseWorkedUpon).copyWith(referralDetails: response.id),
         referralDetailsModel: response,
       ),
     );

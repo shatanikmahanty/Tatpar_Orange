@@ -1,6 +1,7 @@
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/date_text_input.dart';
@@ -299,1150 +300,1226 @@ class DiagnosisPage extends StatelessWidget {
             appBar: CaseAppBar(
               'Diagnosis',
               onClick: () {
-                context.router.pushAndPopUntil(
+                // Navigate after the current frame
+                WidgetsBinding.instance.addPostFrameCallback((_) {
+                  context.router.pushAndPopUntil(
                     const AppHomeRoute(children: [CasesRoute()]),
-                    predicate: (Route<dynamic> route) => false);
+                    predicate: (Route<dynamic> route) => false,
+                  );
+                });
+                context.read<CaseCubit>().close();
               },
             ),
-            body: ReactiveFormBuilder(
-                form: () => _diagnosisFormBuilder(
-                    diagnosisModel: state.diagnsosisModel,
-                    cubit: context.read<SourceCubit>()),
-                builder: (BuildContext context, FormGroup formGroup,
-                        Widget? child) =>
-                    AutofillGroup(
-                        child: Column(children: [
-                      const SizedBox(height: kPadding * 2),
-                      Expanded(
-                          child: SingleChildScrollView(
-                              child: Padding(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: kPadding * 2),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!
-                                  .diagnosisInitiated,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('diagnosis_initiated').value =
-                                    value;
-                              },
-                              selected: formGroup
-                                  .control('diagnosis_initiated')
-                                  .value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!
-                                  .firstConsultation,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('first_consultation').value =
-                                    value;
-                              },
-                              selected:
-                                  formGroup.control('first_consultation').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ReactiveValueListenableBuilder<String>(
-                                formControlName: 'first_consultation',
-                                builder: (context, control, child) =>
-                                    Visibility(
-                                        visible: (control.value == 'Yes'),
-                                        child: Column(children: [
-                                          DateTextInput(
-                                            firstDate: DateTime(2002),
-                                            controlName:
-                                                'first_consultation_date',
-                                            label: AppLocalizations.of(context)!
-                                                .firstConsultationDate,
-                                          ),
-                                          // const SizedBox(height: kPadding * 2),
-                                        ]))),
-                            ReactiveValueListenableBuilder<String>(
-                                formControlName: 'diagnosis_initiated',
-                                builder: (context, control, child) =>
-                                    Visibility(
-                                        visible: (formGroup
-                                                .control('diagnosis_initiated')
-                                                .value) ==
-                                            'Yes',
-                                        child: Column(children: [
-                                          const SizedBox(height: kPadding * 2),
-                                          ChipRadioButtons(
-                                            label: AppLocalizations.of(context)!
-                                                .chestXray,
-                                            options: const ['Yes', 'No'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('chest_xray')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('chest_xray')
-                                                .value,
-                                          ),
-                                          ReactiveValueListenableBuilder<
-                                                  String>(
-                                              formControlName: 'chest_xray',
-                                              builder: (context, control,
-                                                      child) =>
-                                                  Visibility(
-                                                      visible: (formGroup
-                                                              .control(
-                                                                  'chest_xray')
-                                                              .value) ==
-                                                          'Yes',
-                                                      child: Column(children: [
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'chest_xray_date',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .chestXrayDate,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .chestXrayResult,
-                                                          options: const [
-                                                            'Normal',
-                                                            'Abnormal'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'chest_xray_result')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'chest_xray_result')
-                                                              .value,
-                                                        ),
-                                                      ]))),
-                                          const SizedBox(height: kPadding * 2),
-                                          ChipRadioButtons(
-                                            label: AppLocalizations.of(context)!
-                                                .afbDone,
-                                            options: const ['Yes', 'No'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('afb_done')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('afb_done')
-                                                .value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ReactiveValueListenableBuilder<
-                                                  String>(
-                                              formControlName: 'afb_done',
-                                              builder: (context, control,
-                                                      child) =>
-                                                  Visibility(
-                                                      visible: (formGroup
-                                                              .control(
-                                                                  'afb_done')
-                                                              .value) ==
-                                                          'Yes',
-                                                      child: Column(children: [
-                                                        PrimaryTextField(
-                                                          formControlName:
-                                                              'afb_lab_number',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .afbLabNumber,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        BlocBuilder<SourceCubit,
-                                                                SourceState>(
-                                                            buildWhen: ((previous,
-                                                                    current) =>
-                                                                (previous
-                                                                        .isLoading !=
-                                                                    current
-                                                                        .isLoading) ||
-                                                                previous.diagnosisData !=
-                                                                    current
-                                                                        .diagnosisData),
-                                                            builder: (context,
-                                                                state) {
-                                                              List<
-                                                                  String> list = (state
-                                                                          .diagnosisData !=
-                                                                      null)
-                                                                  ? state
-                                                                      .diagnosisData!
-                                                                      .afbResult!
-                                                                      .map((e) =>
-                                                                          '${e.name}')
-                                                                      .toList()
-                                                                  : [];
-                                                              if (state
-                                                                      .isLoading ??
-                                                                  false) {
-                                                                return const SizedBox(
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  child: Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              return TextFieldWithList(
-                                                                controlName:
-                                                                    'afb1_result',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
-                                                                    .afb1Result,
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                prefixIcon: Icons
-                                                                    .account_circle_outlined,
-                                                                listData: list,
-                                                                allowMultiSelection:
-                                                                    false,
-                                                                onSelected:
-                                                                    (value) {
-                                                                  formGroup
-                                                                      .control(
-                                                                          'afb1_result')
-                                                                      .value = value[0];
-                                                                },
-                                                                emptyString: '',
-                                                              );
-                                                            }),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'afb1_result_date',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .afb1ResultDate,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        BlocBuilder<SourceCubit,
-                                                                SourceState>(
-                                                            buildWhen: ((previous,
-                                                                    current) =>
-                                                                (previous
-                                                                        .isLoading !=
-                                                                    current
-                                                                        .isLoading) ||
-                                                                previous.diagnosisData !=
-                                                                    current
-                                                                        .diagnosisData),
-                                                            builder: (context,
-                                                                state) {
-                                                              List<
-                                                                  String> list = (state
-                                                                          .diagnosisData !=
-                                                                      null)
-                                                                  ? state
-                                                                      .diagnosisData!
-                                                                      .afbResult!
-                                                                      .map((e) =>
-                                                                          '${e.name}')
-                                                                      .toList()
-                                                                  : [];
-                                                              if (state
-                                                                      .isLoading ??
-                                                                  false) {
-                                                                return const SizedBox(
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  child: Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              return TextFieldWithList(
-                                                                controlName:
-                                                                    'afb2_result',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
-                                                                    .afb2Result,
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                prefixIcon: Icons
-                                                                    .account_circle_outlined,
-                                                                listData: list,
-                                                                allowMultiSelection:
-                                                                    false,
-                                                                onSelected:
-                                                                    (value) {
-                                                                  formGroup
-                                                                      .control(
-                                                                          'afb2_result')
-                                                                      .value = value[0];
-                                                                },
-                                                                emptyString: '',
-                                                              );
-                                                            }),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'afb2_result_date',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .afb2ResultDate,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                      ]))),
-                                          ChipRadioButtons(
-                                            label: AppLocalizations.of(context)!
-                                                .naatTest,
-                                            options: const ['Yes', 'No'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('naat_test')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('naat_test')
-                                                .value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ReactiveValueListenableBuilder<
-                                                  String>(
-                                              formControlName: 'naat_test',
-                                              builder: (context, control,
-                                                      child) =>
-                                                  Visibility(
-                                                      visible: (control.value ==
-                                                          'Yes'),
-                                                      child: Column(children: [
-                                                        BlocBuilder<SourceCubit,
-                                                                SourceState>(
-                                                            buildWhen: ((previous,
-                                                                    current) =>
-                                                                (previous
-                                                                        .isLoading !=
-                                                                    current
-                                                                        .isLoading) ||
-                                                                previous.diagnosisData !=
-                                                                    current
-                                                                        .diagnosisData),
-                                                            builder: (context,
-                                                                state) {
-                                                              List<
-                                                                  String> list = (state
-                                                                          .diagnosisData !=
-                                                                      null)
-                                                                  ? state
-                                                                      .diagnosisData!
-                                                                      .naatMachine!
-                                                                      .map((e) =>
-                                                                          '${e.name}')
-                                                                      .toList()
-                                                                  : [];
-                                                              if (state
-                                                                      .isLoading ??
-                                                                  false) {
-                                                                return const SizedBox(
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  child: Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              return TextFieldWithList(
-                                                                controlName:
-                                                                    'naat_machine',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
-                                                                    .naatMachine,
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                prefixIcon: Icons
-                                                                    .account_circle_outlined,
-                                                                listData: list,
-                                                                allowMultiSelection:
-                                                                    false,
-                                                                onSelected:
-                                                                    (value) {
-                                                                  formGroup
-                                                                      .control(
-                                                                          'naat_machine')
-                                                                      .value = value[0];
-                                                                },
-                                                                emptyString: '',
-                                                              );
-                                                            }),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .naatSite,
-                                                          options: const [
-                                                            'Internal',
-                                                            'GOV'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'naat_site')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'naat_site')
-                                                              .value,
-                                                        ),
-                                                        // TextFieldWithList(
-                                                        //   controlName:
-                                                        //       'naat_site',
-                                                        //   label: ' NAAT Site',
-                                                        //   padding:
-                                                        //       EdgeInsets.zero,
-                                                        //   prefixIcon: Icons
-                                                        //       .account_circle_outlined,
-                                                        //   listData: const [
-                                                        //     'Government',
-                                                        //     'Internal',
-                                                        //   ],
-                                                        //   allowMultiSelection:
-                                                        //       false,
-                                                        //   onSelected: (value) {
-                                                        //     formGroup
-                                                        //         .control(
-                                                        //             'naat_site')
-                                                        //         .value = value[0];
-                                                        //   },
-                                                        //   emptyString: '',
-                                                        // ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        PrimaryTextField(
-                                                          formControlName:
-                                                              'naat_lab_number',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .naatLabNumber,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'sample_collection_date',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .sampleCollectionDate,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'naat_result_date',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .naatResultDate,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        BlocBuilder<SourceCubit,
-                                                                SourceState>(
-                                                            buildWhen: ((previous,
-                                                                    current) =>
-                                                                (previous
-                                                                        .isLoading !=
-                                                                    current
-                                                                        .isLoading) ||
-                                                                previous.diagnosisData !=
-                                                                    current
-                                                                        .diagnosisData),
-                                                            builder: (context,
-                                                                state) {
-                                                              List<
-                                                                  String> list = (state
-                                                                          .diagnosisData !=
-                                                                      null)
-                                                                  ? state
-                                                                      .diagnosisData!
-                                                                      .mtbResult!
-                                                                      .map((e) =>
-                                                                          '${e.name}')
-                                                                      .toList()
-                                                                  : [];
-                                                              if (state
-                                                                      .isLoading ??
-                                                                  false) {
-                                                                return const SizedBox(
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  child: Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              return TextFieldWithList(
-                                                                controlName:
-                                                                    'mtb_result',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
-                                                                    .mtbResult,
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                prefixIcon: Icons
-                                                                    .account_circle_outlined,
-                                                                listData: list,
-                                                                allowMultiSelection:
-                                                                    false,
-                                                                onSelected:
-                                                                    (value) {
-                                                                  formGroup
-                                                                      .control(
-                                                                          'mtb_result')
-                                                                      .value = value[0];
-                                                                },
-                                                                emptyString: '',
-                                                              );
-                                                            }),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        TextFieldWithList(
-                                                          controlName:
-                                                              'rif_resistance',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .rifResistance,
-                                                          padding:
-                                                              EdgeInsets.zero,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                          listData: const [
-                                                            'Detected',
-                                                            'Indeterminate',
-                                                            'Not Detected'
-                                                          ],
-                                                          allowMultiSelection:
-                                                              false,
-                                                          onSelected: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'rif_resistance')
-                                                                .value = value[0];
-                                                          },
-                                                          emptyString: '',
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        // ChipRadioButtons(
-                                                        //   label:
-                                                        //       'Drug Resistance',
-                                                        //   options: const [
-                                                        //     'Sensitive',
-                                                        //     'Resistant'
-                                                        //   ],
-                                                        //   crossAxisCount: 2,
-                                                        //   onChanged: (value) {
-                                                        //     formGroup
-                                                        //         .control(
-                                                        //             'drug_resistance')
-                                                        //         .value = value;
-                                                        //   },
-                                                        //   selected: formGroup
-                                                        //       .control(
-                                                        //           'drug_resistance')
-                                                        //       .value,
-                                                        // ),
-                                                        // const SizedBox(
-                                                        //     height:
-                                                        //         kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .xdrDone,
-                                                          options: const [
-                                                            'Yes',
-                                                            'No'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'xdr_done')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'xdr_done')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                      ]))),
-                                          ReactiveValueListenableBuilder<
-                                                  String>(
-                                              formControlName: 'xdr_done',
-                                              builder: (context, control,
-                                                      child) =>
-                                                  Visibility(
-                                                      visible: (control.value ==
-                                                          'Yes'),
-                                                      child: Column(children: [
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'xdr_result_date',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .xdrResultDate,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        PrimaryTextField(
-                                                          formControlName:
-                                                              'xdr_lab_number',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .xdrLabNumber,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .xdrSite,
-                                                          options: const [
-                                                            'Internal',
-                                                            'GOV'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'xdr_site')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'xdr_site')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .inhResistance,
-                                                          options: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'inh_resistance')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'inh_resistance')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .flqResistance,
-                                                          options: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'flq_resistance')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'flq_resistance')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .amkResistance,
-                                                          options: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'amk_resistance')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'amk_resistance')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .kanResistance,
-                                                          options: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'kan_resistance')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'kan_resistance')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .capResistance,
-                                                          options: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'cap_resistance')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'cap_resistance')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .ethResistance,
-                                                          options: const [
-                                                            'Sensitive',
-                                                            'Resistant'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'eth_resistance')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'eth_resistance')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        BlocBuilder<SourceCubit,
-                                                                SourceState>(
-                                                            buildWhen: ((previous,
-                                                                    current) =>
-                                                                (previous
-                                                                        .isLoading !=
-                                                                    current
-                                                                        .isLoading) ||
-                                                                previous.diagnosisData !=
-                                                                    current
-                                                                        .diagnosisData),
-                                                            builder: (context,
-                                                                state) {
-                                                              List<
-                                                                  String> list = (state
-                                                                          .diagnosisData !=
-                                                                      null)
-                                                                  ? state
-                                                                      .diagnosisData!
-                                                                      .mtbResult!
-                                                                      .map((e) =>
-                                                                          '${e.name}')
-                                                                      .toList()
-                                                                  : [];
-                                                              if (state
-                                                                      .isLoading ??
-                                                                  false) {
-                                                                return const SizedBox(
-                                                                  height: 15,
-                                                                  width: 15,
-                                                                  child: Center(
-                                                                    child:
-                                                                        CircularProgressIndicator(),
-                                                                  ),
-                                                                );
-                                                              }
-                                                              return TextFieldWithList(
-                                                                controlName:
-                                                                    'xdr_result',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
-                                                                    .xdrResult,
-                                                                padding:
-                                                                    EdgeInsets
-                                                                        .zero,
-                                                                prefixIcon: Icons
-                                                                    .account_circle_outlined,
-                                                                listData: list,
-                                                                allowMultiSelection:
-                                                                    false,
-                                                                onSelected:
-                                                                    (value) {
-                                                                  formGroup
-                                                                      .control(
-                                                                          'xdr_result')
-                                                                      .value = value[0];
-                                                                },
-                                                                emptyString: '',
-                                                              );
-                                                            }),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                      ]))),
-                                          ChipRadioButtons(
-                                            label: AppLocalizations.of(context)!
-                                                .fnac,
-                                            options: const ['Yes', 'No'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup.control('fnac').value =
-                                                  value;
-                                            },
-                                            selected:
-                                                formGroup.control('fnac').value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ReactiveValueListenableBuilder<
-                                              String>(
-                                            formControlName: 'fnac',
-                                            builder:
-                                                (context, control, child) =>
-                                                    Visibility(
-                                              visible: (control.value == 'Yes'),
-                                              child: Column(
-                                                children: [
+            body: (state.isLoading || state.diagnsosisModel == null)
+                ? Center(
+                    child: Lottie.asset(
+                      'assets/lottie/registration_loading.json', // Path to your Lottie animation
+                      width: 200,
+                      height: 200,
+                      fit: BoxFit.cover,
+                    ),
+                  )
+                : ReactiveFormBuilder(
+                    form: () => _diagnosisFormBuilder(
+                        diagnosisModel: state.diagnsosisModel,
+                        cubit: context.read<SourceCubit>()),
+                    builder:
+                        (BuildContext context, FormGroup formGroup,
+                                Widget? child) =>
+                            AutofillGroup(
+                                child: Column(children: [
+                              const SizedBox(height: kPadding * 2),
+                              Expanded(
+                                  child: SingleChildScrollView(
+                                      child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: kPadding * 2),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    ChipRadioButtons(
+                                      label: AppLocalizations.of(context)!
+                                          .diagnosisInitiated,
+                                      options: const ['Yes', 'No'],
+                                      crossAxisCount: 2,
+                                      onChanged: (value) {
+                                        formGroup
+                                            .control('diagnosis_initiated')
+                                            .value = value;
+                                      },
+                                      selected: formGroup
+                                          .control('diagnosis_initiated')
+                                          .value,
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    ChipRadioButtons(
+                                      label: AppLocalizations.of(context)!
+                                          .firstConsultation,
+                                      options: const ['Yes', 'No'],
+                                      crossAxisCount: 2,
+                                      onChanged: (value) {
+                                        formGroup
+                                            .control('first_consultation')
+                                            .value = value;
+                                      },
+                                      selected: formGroup
+                                          .control('first_consultation')
+                                          .value,
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    ReactiveValueListenableBuilder<String>(
+                                        formControlName: 'first_consultation',
+                                        builder: (context, control, child) =>
+                                            Visibility(
+                                                visible:
+                                                    (control.value == 'Yes'),
+                                                child: Column(children: [
                                                   DateTextInput(
                                                     firstDate: DateTime(2002),
-                                                    controlName: 'fnac_date',
+                                                    controlName:
+                                                        'first_consultation_date',
                                                     label: AppLocalizations.of(
                                                             context)!
-                                                        .fnacDate,
+                                                        .firstConsultationDate,
                                                   ),
+                                                  // const SizedBox(height: kPadding * 2),
+                                                ]))),
+                                    ReactiveValueListenableBuilder<String>(
+                                        formControlName: 'diagnosis_initiated',
+                                        builder: (context, control, child) =>
+                                            Visibility(
+                                                visible: (formGroup
+                                                        .control(
+                                                            'diagnosis_initiated')
+                                                        .value) ==
+                                                    'Yes',
+                                                child: Column(children: [
                                                   const SizedBox(
                                                       height: kPadding * 2),
                                                   ChipRadioButtons(
                                                     label: AppLocalizations.of(
                                                             context)!
-                                                        .fnacResult,
+                                                        .chestXray,
                                                     options: const [
-                                                      'Normal',
-                                                      'Abnormal'
+                                                      'Yes',
+                                                      'No'
                                                     ],
                                                     crossAxisCount: 2,
                                                     onChanged: (value) {
                                                       formGroup
-                                                          .control(
-                                                              'fnac_result')
+                                                          .control('chest_xray')
                                                           .value = value;
                                                     },
                                                     selected: formGroup
-                                                        .control('fnac_result')
+                                                        .control('chest_xray')
                                                         .value,
                                                   ),
-                                                  const SizedBox(
-                                                      height: kPadding * 2),
-                                                  PrimaryTextField(
-                                                    formControlName:
-                                                        'fnac_comments',
-                                                    label: AppLocalizations.of(
-                                                            context)!
-                                                        .fnacComments,
-                                                    prefixIcon: Icons
-                                                        .account_circle_outlined,
-                                                  ),
-                                                  const SizedBox(
-                                                      height: kPadding * 2),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          ChipRadioButtons(
-                                            label: AppLocalizations.of(context)!
-                                                .usg,
-                                            options: const ['Yes', 'No'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup.control('usg').value =
-                                                  value;
-                                            },
-                                            selected:
-                                                formGroup.control('usg').value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ReactiveValueListenableBuilder<
-                                              String>(
-                                            formControlName: 'usg',
-                                            builder:
-                                                (context, control, child) =>
-                                                    Visibility(
-                                              visible: (control.value == 'Yes'),
-                                              child: Column(
-                                                children: [
-                                                  DateTextInput(
-                                                    firstDate: DateTime(2002),
-                                                    controlName: 'usg_date',
-                                                    label: AppLocalizations.of(
-                                                            context)!
-                                                        .usgDate,
-                                                  ),
+                                                  ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'chest_xray',
+                                                      builder: (context,
+                                                              control, child) =>
+                                                          Visibility(
+                                                              visible: (formGroup
+                                                                      .control(
+                                                                          'chest_xray')
+                                                                      .value) ==
+                                                                  'Yes',
+                                                              child: Column(
+                                                                  children: [
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    DateTextInput(
+                                                                      firstDate:
+                                                                          DateTime(
+                                                                              2002),
+                                                                      controlName:
+                                                                          'chest_xray_date',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .chestXrayDate,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .chestXrayResult,
+                                                                      options: const [
+                                                                        'Normal',
+                                                                        'Abnormal'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('chest_xray_result')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'chest_xray_result')
+                                                                          .value,
+                                                                    ),
+                                                                  ]))),
                                                   const SizedBox(
                                                       height: kPadding * 2),
                                                   ChipRadioButtons(
                                                     label: AppLocalizations.of(
                                                             context)!
-                                                        .usgResult,
+                                                        .afbDone,
                                                     options: const [
-                                                      'Normal',
-                                                      'Abnormal'
+                                                      'Yes',
+                                                      'No'
                                                     ],
                                                     crossAxisCount: 2,
                                                     onChanged: (value) {
                                                       formGroup
-                                                          .control('usg_result')
+                                                          .control('afb_done')
                                                           .value = value;
                                                     },
                                                     selected: formGroup
-                                                        .control('usg_result')
+                                                        .control('afb_done')
                                                         .value,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'afb_done',
+                                                      builder: (context,
+                                                              control, child) =>
+                                                          Visibility(
+                                                              visible: (formGroup
+                                                                      .control(
+                                                                          'afb_done')
+                                                                      .value) ==
+                                                                  'Yes',
+                                                              child: Column(
+                                                                  children: [
+                                                                    PrimaryTextField(
+                                                                      formControlName:
+                                                                          'afb_lab_number',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .afbLabNumber,
+                                                                      prefixIcon:
+                                                                          Icons
+                                                                              .account_circle_outlined,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    BlocBuilder<
+                                                                            SourceCubit,
+                                                                            SourceState>(
+                                                                        buildWhen: ((previous,
+                                                                                current) =>
+                                                                            (previous.isLoading != current.isLoading) ||
+                                                                            previous.diagnosisData !=
+                                                                                current
+                                                                                    .diagnosisData),
+                                                                        builder:
+                                                                            (context,
+                                                                                state) {
+                                                                          List<String> list = (state.diagnosisData != null)
+                                                                              ? state.diagnosisData!.afbResult!.map((e) => '${e.name}').toList()
+                                                                              : [];
+                                                                          if (state.isLoading ??
+                                                                              false) {
+                                                                            return const SizedBox(
+                                                                              height: 15,
+                                                                              width: 15,
+                                                                              child: Center(
+                                                                                child: CircularProgressIndicator(),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                          return TextFieldWithList(
+                                                                            controlName:
+                                                                                'afb1_result',
+                                                                            label:
+                                                                                AppLocalizations.of(context)!.afb1Result,
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            prefixIcon:
+                                                                                Icons.account_circle_outlined,
+                                                                            listData:
+                                                                                list,
+                                                                            allowMultiSelection:
+                                                                                false,
+                                                                            onSelected:
+                                                                                (value) {
+                                                                              formGroup.control('afb1_result').value = value[0];
+                                                                            },
+                                                                            emptyString:
+                                                                                '',
+                                                                          );
+                                                                        }),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    DateTextInput(
+                                                                      firstDate:
+                                                                          DateTime(
+                                                                              2002),
+                                                                      controlName:
+                                                                          'afb1_result_date',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .afb1ResultDate,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    BlocBuilder<
+                                                                            SourceCubit,
+                                                                            SourceState>(
+                                                                        buildWhen: ((previous,
+                                                                                current) =>
+                                                                            (previous.isLoading != current.isLoading) ||
+                                                                            previous.diagnosisData !=
+                                                                                current
+                                                                                    .diagnosisData),
+                                                                        builder:
+                                                                            (context,
+                                                                                state) {
+                                                                          List<String> list = (state.diagnosisData != null)
+                                                                              ? state.diagnosisData!.afbResult!.map((e) => '${e.name}').toList()
+                                                                              : [];
+                                                                          if (state.isLoading ??
+                                                                              false) {
+                                                                            return const SizedBox(
+                                                                              height: 15,
+                                                                              width: 15,
+                                                                              child: Center(
+                                                                                child: CircularProgressIndicator(),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                          return TextFieldWithList(
+                                                                            controlName:
+                                                                                'afb2_result',
+                                                                            label:
+                                                                                AppLocalizations.of(context)!.afb2Result,
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            prefixIcon:
+                                                                                Icons.account_circle_outlined,
+                                                                            listData:
+                                                                                list,
+                                                                            allowMultiSelection:
+                                                                                false,
+                                                                            onSelected:
+                                                                                (value) {
+                                                                              formGroup.control('afb2_result').value = value[0];
+                                                                            },
+                                                                            emptyString:
+                                                                                '',
+                                                                          );
+                                                                        }),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    DateTextInput(
+                                                                      firstDate:
+                                                                          DateTime(
+                                                                              2002),
+                                                                      controlName:
+                                                                          'afb2_result_date',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .afb2ResultDate,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                  ]))),
+                                                  ChipRadioButtons(
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .naatTest,
+                                                    options: const [
+                                                      'Yes',
+                                                      'No'
+                                                    ],
+                                                    crossAxisCount: 2,
+                                                    onChanged: (value) {
+                                                      formGroup
+                                                          .control('naat_test')
+                                                          .value = value;
+                                                    },
+                                                    selected: formGroup
+                                                        .control('naat_test')
+                                                        .value,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'naat_test',
+                                                      builder: (context,
+                                                              control, child) =>
+                                                          Visibility(
+                                                              visible: (control
+                                                                      .value ==
+                                                                  'Yes'),
+                                                              child: Column(
+                                                                  children: [
+                                                                    BlocBuilder<
+                                                                            SourceCubit,
+                                                                            SourceState>(
+                                                                        buildWhen: ((previous,
+                                                                                current) =>
+                                                                            (previous.isLoading != current.isLoading) ||
+                                                                            previous.diagnosisData !=
+                                                                                current
+                                                                                    .diagnosisData),
+                                                                        builder:
+                                                                            (context,
+                                                                                state) {
+                                                                          List<String> list = (state.diagnosisData != null)
+                                                                              ? state.diagnosisData!.naatMachine!.map((e) => '${e.name}').toList()
+                                                                              : [];
+                                                                          if (state.isLoading ??
+                                                                              false) {
+                                                                            return const SizedBox(
+                                                                              height: 15,
+                                                                              width: 15,
+                                                                              child: Center(
+                                                                                child: CircularProgressIndicator(),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                          return TextFieldWithList(
+                                                                            controlName:
+                                                                                'naat_machine',
+                                                                            label:
+                                                                                AppLocalizations.of(context)!.naatMachine,
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            prefixIcon:
+                                                                                Icons.account_circle_outlined,
+                                                                            listData:
+                                                                                list,
+                                                                            allowMultiSelection:
+                                                                                false,
+                                                                            onSelected:
+                                                                                (value) {
+                                                                              formGroup.control('naat_machine').value = value[0];
+                                                                            },
+                                                                            emptyString:
+                                                                                '',
+                                                                          );
+                                                                        }),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .naatSite,
+                                                                      options: const [
+                                                                        'Internal',
+                                                                        'GOV'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('naat_site')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'naat_site')
+                                                                          .value,
+                                                                    ),
+                                                                    // TextFieldWithList(
+                                                                    //   controlName:
+                                                                    //       'naat_site',
+                                                                    //   label: ' NAAT Site',
+                                                                    //   padding:
+                                                                    //       EdgeInsets.zero,
+                                                                    //   prefixIcon: Icons
+                                                                    //       .account_circle_outlined,
+                                                                    //   listData: const [
+                                                                    //     'Government',
+                                                                    //     'Internal',
+                                                                    //   ],
+                                                                    //   allowMultiSelection:
+                                                                    //       false,
+                                                                    //   onSelected: (value) {
+                                                                    //     formGroup
+                                                                    //         .control(
+                                                                    //             'naat_site')
+                                                                    //         .value = value[0];
+                                                                    //   },
+                                                                    //   emptyString: '',
+                                                                    // ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    PrimaryTextField(
+                                                                      formControlName:
+                                                                          'naat_lab_number',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .naatLabNumber,
+                                                                      prefixIcon:
+                                                                          Icons
+                                                                              .account_circle_outlined,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    DateTextInput(
+                                                                      firstDate:
+                                                                          DateTime(
+                                                                              2002),
+                                                                      controlName:
+                                                                          'sample_collection_date',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .sampleCollectionDate,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    DateTextInput(
+                                                                      firstDate:
+                                                                          DateTime(
+                                                                              2002),
+                                                                      controlName:
+                                                                          'naat_result_date',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .naatResultDate,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    BlocBuilder<
+                                                                            SourceCubit,
+                                                                            SourceState>(
+                                                                        buildWhen: ((previous,
+                                                                                current) =>
+                                                                            (previous.isLoading != current.isLoading) ||
+                                                                            previous.diagnosisData !=
+                                                                                current
+                                                                                    .diagnosisData),
+                                                                        builder:
+                                                                            (context,
+                                                                                state) {
+                                                                          List<String> list = (state.diagnosisData != null)
+                                                                              ? state.diagnosisData!.mtbResult!.map((e) => '${e.name}').toList()
+                                                                              : [];
+                                                                          if (state.isLoading ??
+                                                                              false) {
+                                                                            return const SizedBox(
+                                                                              height: 15,
+                                                                              width: 15,
+                                                                              child: Center(
+                                                                                child: CircularProgressIndicator(),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                          return TextFieldWithList(
+                                                                            controlName:
+                                                                                'mtb_result',
+                                                                            label:
+                                                                                AppLocalizations.of(context)!.mtbResult,
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            prefixIcon:
+                                                                                Icons.account_circle_outlined,
+                                                                            listData:
+                                                                                list,
+                                                                            allowMultiSelection:
+                                                                                false,
+                                                                            onSelected:
+                                                                                (value) {
+                                                                              formGroup.control('mtb_result').value = value[0];
+                                                                            },
+                                                                            emptyString:
+                                                                                '',
+                                                                          );
+                                                                        }),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    TextFieldWithList(
+                                                                      controlName:
+                                                                          'rif_resistance',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .rifResistance,
+                                                                      padding:
+                                                                          EdgeInsets
+                                                                              .zero,
+                                                                      prefixIcon:
+                                                                          Icons
+                                                                              .account_circle_outlined,
+                                                                      listData: const [
+                                                                        'Detected',
+                                                                        'Indeterminate',
+                                                                        'Not Detected'
+                                                                      ],
+                                                                      allowMultiSelection:
+                                                                          false,
+                                                                      onSelected:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('rif_resistance')
+                                                                            .value = value[0];
+                                                                      },
+                                                                      emptyString:
+                                                                          '',
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    // ChipRadioButtons(
+                                                                    //   label:
+                                                                    //       'Drug Resistance',
+                                                                    //   options: const [
+                                                                    //     'Sensitive',
+                                                                    //     'Resistant'
+                                                                    //   ],
+                                                                    //   crossAxisCount: 2,
+                                                                    //   onChanged: (value) {
+                                                                    //     formGroup
+                                                                    //         .control(
+                                                                    //             'drug_resistance')
+                                                                    //         .value = value;
+                                                                    //   },
+                                                                    //   selected: formGroup
+                                                                    //       .control(
+                                                                    //           'drug_resistance')
+                                                                    //       .value,
+                                                                    // ),
+                                                                    // const SizedBox(
+                                                                    //     height:
+                                                                    //         kPadding * 2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .xdrDone,
+                                                                      options: const [
+                                                                        'Yes',
+                                                                        'No'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('xdr_done')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'xdr_done')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                  ]))),
+                                                  ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'xdr_done',
+                                                      builder: (context,
+                                                              control, child) =>
+                                                          Visibility(
+                                                              visible: (control
+                                                                      .value ==
+                                                                  'Yes'),
+                                                              child: Column(
+                                                                  children: [
+                                                                    DateTextInput(
+                                                                      firstDate:
+                                                                          DateTime(
+                                                                              2002),
+                                                                      controlName:
+                                                                          'xdr_result_date',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .xdrResultDate,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    PrimaryTextField(
+                                                                      formControlName:
+                                                                          'xdr_lab_number',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .xdrLabNumber,
+                                                                      prefixIcon:
+                                                                          Icons
+                                                                              .account_circle_outlined,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .xdrSite,
+                                                                      options: const [
+                                                                        'Internal',
+                                                                        'GOV'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('xdr_site')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'xdr_site')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .inhResistance,
+                                                                      options: const [
+                                                                        'Sensitive',
+                                                                        'Resistant'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('inh_resistance')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'inh_resistance')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .flqResistance,
+                                                                      options: const [
+                                                                        'Sensitive',
+                                                                        'Resistant'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('flq_resistance')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'flq_resistance')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .amkResistance,
+                                                                      options: const [
+                                                                        'Sensitive',
+                                                                        'Resistant'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('amk_resistance')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'amk_resistance')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .kanResistance,
+                                                                      options: const [
+                                                                        'Sensitive',
+                                                                        'Resistant'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('kan_resistance')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'kan_resistance')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .capResistance,
+                                                                      options: const [
+                                                                        'Sensitive',
+                                                                        'Resistant'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('cap_resistance')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'cap_resistance')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .ethResistance,
+                                                                      options: const [
+                                                                        'Sensitive',
+                                                                        'Resistant'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('eth_resistance')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'eth_resistance')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    BlocBuilder<
+                                                                            SourceCubit,
+                                                                            SourceState>(
+                                                                        buildWhen: ((previous,
+                                                                                current) =>
+                                                                            (previous.isLoading != current.isLoading) ||
+                                                                            previous.diagnosisData !=
+                                                                                current
+                                                                                    .diagnosisData),
+                                                                        builder:
+                                                                            (context,
+                                                                                state) {
+                                                                          List<String> list = (state.diagnosisData != null)
+                                                                              ? state.diagnosisData!.mtbResult!.map((e) => '${e.name}').toList()
+                                                                              : [];
+                                                                          if (state.isLoading ??
+                                                                              false) {
+                                                                            return const SizedBox(
+                                                                              height: 15,
+                                                                              width: 15,
+                                                                              child: Center(
+                                                                                child: CircularProgressIndicator(),
+                                                                              ),
+                                                                            );
+                                                                          }
+                                                                          return TextFieldWithList(
+                                                                            controlName:
+                                                                                'xdr_result',
+                                                                            label:
+                                                                                AppLocalizations.of(context)!.xdrResult,
+                                                                            padding:
+                                                                                EdgeInsets.zero,
+                                                                            prefixIcon:
+                                                                                Icons.account_circle_outlined,
+                                                                            listData:
+                                                                                list,
+                                                                            allowMultiSelection:
+                                                                                false,
+                                                                            onSelected:
+                                                                                (value) {
+                                                                              formGroup.control('xdr_result').value = value[0];
+                                                                            },
+                                                                            emptyString:
+                                                                                '',
+                                                                          );
+                                                                        }),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                  ]))),
+                                                  ChipRadioButtons(
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .fnac,
+                                                    options: const [
+                                                      'Yes',
+                                                      'No'
+                                                    ],
+                                                    crossAxisCount: 2,
+                                                    onChanged: (value) {
+                                                      formGroup
+                                                          .control('fnac')
+                                                          .value = value;
+                                                    },
+                                                    selected: formGroup
+                                                        .control('fnac')
+                                                        .value,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  ReactiveValueListenableBuilder<
+                                                      String>(
+                                                    formControlName: 'fnac',
+                                                    builder: (context, control,
+                                                            child) =>
+                                                        Visibility(
+                                                      visible: (control.value ==
+                                                          'Yes'),
+                                                      child: Column(
+                                                        children: [
+                                                          DateTextInput(
+                                                            firstDate:
+                                                                DateTime(2002),
+                                                            controlName:
+                                                                'fnac_date',
+                                                            label: AppLocalizations
+                                                                    .of(context)!
+                                                                .fnacDate,
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                          ChipRadioButtons(
+                                                            label: AppLocalizations
+                                                                    .of(context)!
+                                                                .fnacResult,
+                                                            options: const [
+                                                              'Normal',
+                                                              'Abnormal'
+                                                            ],
+                                                            crossAxisCount: 2,
+                                                            onChanged: (value) {
+                                                              formGroup
+                                                                  .control(
+                                                                      'fnac_result')
+                                                                  .value = value;
+                                                            },
+                                                            selected: formGroup
+                                                                .control(
+                                                                    'fnac_result')
+                                                                .value,
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                          PrimaryTextField(
+                                                            formControlName:
+                                                                'fnac_comments',
+                                                            label: AppLocalizations
+                                                                    .of(context)!
+                                                                .fnacComments,
+                                                            prefixIcon: Icons
+                                                                .account_circle_outlined,
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  ChipRadioButtons(
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .usg,
+                                                    options: const [
+                                                      'Yes',
+                                                      'No'
+                                                    ],
+                                                    crossAxisCount: 2,
+                                                    onChanged: (value) {
+                                                      formGroup
+                                                          .control('usg')
+                                                          .value = value;
+                                                    },
+                                                    selected: formGroup
+                                                        .control('usg')
+                                                        .value,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  ReactiveValueListenableBuilder<
+                                                      String>(
+                                                    formControlName: 'usg',
+                                                    builder: (context, control,
+                                                            child) =>
+                                                        Visibility(
+                                                      visible: (control.value ==
+                                                          'Yes'),
+                                                      child: Column(
+                                                        children: [
+                                                          DateTextInput(
+                                                            firstDate:
+                                                                DateTime(2002),
+                                                            controlName:
+                                                                'usg_date',
+                                                            label: AppLocalizations
+                                                                    .of(context)!
+                                                                .usgDate,
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                          ChipRadioButtons(
+                                                            label: AppLocalizations
+                                                                    .of(context)!
+                                                                .usgResult,
+                                                            options: const [
+                                                              'Normal',
+                                                              'Abnormal'
+                                                            ],
+                                                            crossAxisCount: 2,
+                                                            onChanged: (value) {
+                                                              formGroup
+                                                                  .control(
+                                                                      'usg_result')
+                                                                  .value = value;
+                                                            },
+                                                            selected: formGroup
+                                                                .control(
+                                                                    'usg_result')
+                                                                .value,
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                          PrimaryTextField(
+                                                            formControlName:
+                                                                'usg_comments',
+                                                            label: AppLocalizations
+                                                                    .of(context)!
+                                                                .usgComments,
+                                                            prefixIcon: Icons
+                                                                .account_circle_outlined,
+                                                          ),
+                                                          const SizedBox(
+                                                              height:
+                                                                  kPadding * 2),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                  ChipRadioButtons(
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .otherTest,
+                                                    options: const [
+                                                      'Yes',
+                                                      'No'
+                                                    ],
+                                                    crossAxisCount: 2,
+                                                    onChanged: (value) {
+                                                      formGroup
+                                                          .control('other_test')
+                                                          .value = value;
+                                                    },
+                                                    selected: formGroup
+                                                        .control('other_test')
+                                                        .value,
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  ReactiveValueListenableBuilder<
+                                                          String>(
+                                                      formControlName:
+                                                          'other_test',
+                                                      builder: (context,
+                                                              control, child) =>
+                                                          Visibility(
+                                                              visible: (control
+                                                                      .value ==
+                                                                  'Yes'),
+                                                              child: Column(
+                                                                  children: [
+                                                                    DateTextInput(
+                                                                      firstDate:
+                                                                          DateTime(
+                                                                              2002),
+                                                                      controlName:
+                                                                          'other_test_date',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .otherTestDate,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    PrimaryTextField(
+                                                                      formControlName:
+                                                                          'test_name',
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .testName,
+                                                                      prefixIcon:
+                                                                          Icons
+                                                                              .account_circle_outlined,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                    ChipRadioButtons(
+                                                                      label: AppLocalizations.of(
+                                                                              context)!
+                                                                          .otherTestResult,
+                                                                      options: const [
+                                                                        'Normal',
+                                                                        'Abnormal'
+                                                                      ],
+                                                                      crossAxisCount:
+                                                                          2,
+                                                                      onChanged:
+                                                                          (value) {
+                                                                        formGroup
+                                                                            .control('other_test_result')
+                                                                            .value = value;
+                                                                      },
+                                                                      selected: formGroup
+                                                                          .control(
+                                                                              'other_test_result')
+                                                                          .value,
+                                                                    ),
+                                                                    const SizedBox(
+                                                                        height:
+                                                                            kPadding *
+                                                                                2),
+                                                                  ]))),
+                                                  TextFieldWithList(
+                                                    controlName: 'diagnosis',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .diagnosis,
+                                                    padding: EdgeInsets.zero,
+                                                    prefixIcon: Icons
+                                                        .account_circle_outlined,
+                                                    listData: const [
+                                                      'TB',
+                                                      'No TB',
+                                                      'Case Closed TB'
+                                                    ],
+                                                    allowMultiSelection: false,
+                                                    onSelected: (value) {
+                                                      formGroup
+                                                          .control('diagnosis')
+                                                          .value = value[0];
+                                                    },
+                                                    emptyString: '',
+                                                  ),
+                                                  const SizedBox(
+                                                      height: kPadding * 2),
+                                                  DateTextInput(
+                                                    firstDate: DateTime(2002),
+                                                    controlName:
+                                                        'diagnosis_date',
+                                                    label: AppLocalizations.of(
+                                                            context)!
+                                                        .diagnosisDate,
                                                   ),
                                                   const SizedBox(
                                                       height: kPadding * 2),
                                                   PrimaryTextField(
                                                     formControlName:
-                                                        'usg_comments',
+                                                        'diagnosis_comments',
                                                     label: AppLocalizations.of(
                                                             context)!
-                                                        .usgComments,
+                                                        .diagnosisComments,
                                                     prefixIcon: Icons
                                                         .account_circle_outlined,
                                                   ),
                                                   const SizedBox(
                                                       height: kPadding * 2),
-                                                ],
-                                              ),
-                                            ),
-                                          ),
-                                          ChipRadioButtons(
-                                            label: AppLocalizations.of(context)!
-                                                .otherTest,
-                                            options: const ['Yes', 'No'],
-                                            crossAxisCount: 2,
-                                            onChanged: (value) {
-                                              formGroup
-                                                  .control('other_test')
-                                                  .value = value;
-                                            },
-                                            selected: formGroup
-                                                .control('other_test')
-                                                .value,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          ReactiveValueListenableBuilder<
-                                                  String>(
-                                              formControlName: 'other_test',
-                                              builder: (context, control,
-                                                      child) =>
-                                                  Visibility(
-                                                      visible: (control.value ==
-                                                          'Yes'),
-                                                      child: Column(children: [
-                                                        DateTextInput(
-                                                          firstDate:
-                                                              DateTime(2002),
-                                                          controlName:
-                                                              'other_test_date',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .otherTestDate,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        PrimaryTextField(
-                                                          formControlName:
-                                                              'test_name',
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .testName,
-                                                          prefixIcon: Icons
-                                                              .account_circle_outlined,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                        ChipRadioButtons(
-                                                          label: AppLocalizations
-                                                                  .of(context)!
-                                                              .otherTestResult,
-                                                          options: const [
-                                                            'Normal',
-                                                            'Abnormal'
-                                                          ],
-                                                          crossAxisCount: 2,
-                                                          onChanged: (value) {
-                                                            formGroup
-                                                                .control(
-                                                                    'other_test_result')
-                                                                .value = value;
-                                                          },
-                                                          selected: formGroup
-                                                              .control(
-                                                                  'other_test_result')
-                                                              .value,
-                                                        ),
-                                                        const SizedBox(
-                                                            height:
-                                                                kPadding * 2),
-                                                      ]))),
-                                          TextFieldWithList(
-                                            controlName: 'diagnosis',
-                                            label: AppLocalizations.of(context)!
-                                                .diagnosis,
-                                            padding: EdgeInsets.zero,
-                                            prefixIcon:
-                                                Icons.account_circle_outlined,
-                                            listData: const [
-                                              'TB',
-                                              'No TB',
-                                              'Case Closed TB'
-                                            ],
-                                            allowMultiSelection: false,
-                                            onSelected: (value) {
-                                              formGroup
-                                                  .control('diagnosis')
-                                                  .value = value[0];
-                                            },
-                                            emptyString: '',
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          DateTextInput(
-                                            firstDate: DateTime(2002),
-                                            controlName: 'diagnosis_date',
-                                            label: AppLocalizations.of(context)!
-                                                .diagnosisDate,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                          PrimaryTextField(
-                                            formControlName:
-                                                'diagnosis_comments',
-                                            label: AppLocalizations.of(context)!
-                                                .diagnosisComments,
-                                            prefixIcon:
-                                                Icons.account_circle_outlined,
-                                          ),
-                                          const SizedBox(height: kPadding * 2),
-                                        ]))),
-                          ],
-                        ),
-                      ))),
-                      BottomButtonBar(
-                        onSave: (_) async => await _onSave(context, formGroup),
-                        nextPage: formGroup.control('diagnosis').value ==
-                                'Case Closed TB'
-                            ? const AppHomeRoute()
-                            : const TreatmentRoute(),
-                      ),
-                      const SizedBox(height: kPadding * 2),
-                    ])))));
+                                                ]))),
+                                  ],
+                                ),
+                              ))),
+                              BottomButtonBar(
+                                onSave: (_) async =>
+                                    await _onSave(context, formGroup),
+                                nextPage:
+                                    formGroup.control('diagnosis').value ==
+                                            'Case Closed TB'
+                                        ? const AppHomeRoute()
+                                        : const TreatmentRoute(),
+                              ),
+                              const SizedBox(height: kPadding * 2),
+                            ])))));
   }
 }

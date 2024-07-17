@@ -97,12 +97,26 @@ class $AssetsJsonGen {
   List<String> get values => [districts];
 }
 
+class $AssetsLottieGen {
+  const $AssetsLottieGen();
+
+  /// File path: assets/lottie/form_loading.json
+  String get formLoading => 'assets/lottie/form_loading.json';
+
+  /// File path: assets/lottie/registration_loading.json
+  String get registrationLoading => 'assets/lottie/registration_loading.json';
+
+  /// List of all assets
+  List<String> get values => [formLoading, registrationLoading];
+}
+
 class Assets {
   Assets._();
 
   static const $AssetsIconsGen icons = $AssetsIconsGen();
   static const $AssetsImagesGen images = $AssetsImagesGen();
   static const $AssetsJsonGen json = $AssetsJsonGen();
+  static const $AssetsLottieGen lottie = $AssetsLottieGen();
 }
 
 class AssetGenImage {

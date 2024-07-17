@@ -373,6 +373,7 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
+      log(TBScreeningModel.fromJson(result.data['data']).toString());
       return TBScreeningModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(
@@ -412,7 +413,7 @@ class CaseRepo {
       data: {},
     );
     final result = await NetworkManager.instance.perform(request);
-    if (result.status == Status.ok) {
+    if (result.status == Status.ok && result.data['data'] != null) {
       return DiagnosisModel.fromJson(result.data['data']);
     } else {
       throw ApplicationError(

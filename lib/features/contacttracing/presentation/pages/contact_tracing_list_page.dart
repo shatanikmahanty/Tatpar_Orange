@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
@@ -28,9 +29,14 @@ class ContactTracingListPage extends StatelessWidget {
         appBar: CaseAppBar(
           'Contact Tracing List',
           onClick: () {
-            context.router.pushAndPopUntil(
+            // Navigate after the current frame
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              context.router.pushAndPopUntil(
                 const AppHomeRoute(children: [CasesRoute()]),
-                predicate: (Route<dynamic> route) => false);
+                predicate: (Route<dynamic> route) => false,
+              );
+            });
+            context.read<CaseCubit>().close();
           },
         ),
         floatingActionButton: Padding(
@@ -60,8 +66,6 @@ class ContactTracingListPage extends StatelessWidget {
         body: BlocBuilder<CaseCubit, CaseState>(
           buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
-            print(
-                'PAge===============================${state.contactTracingList}');
             if (state.isLoading) {
               return const Center(
                 child: CircularProgressIndicator(),

@@ -1,6 +1,9 @@
+import 'dart:developer';
+
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:lottie/lottie.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/app/presentation/widgets/chip_radio_buttons.dart';
@@ -123,232 +126,280 @@ class TBScreeningPage extends StatelessWidget {
           appBar: CaseAppBar(
             AppLocalizations.of(context)!.conducttbscreening,
             onClick: () {
-              context.router.pushAndPopUntil(
+              // Navigate after the current frame
+              WidgetsBinding.instance.addPostFrameCallback((_) {
+                context.router.pushAndPopUntil(
                   const AppHomeRoute(children: [CasesRoute()]),
-                  predicate: (Route<dynamic> route) => false);
+                  predicate: (Route<dynamic> route) => false,
+                );
+              });
+              context.read<CaseCubit>().close();
             },
           ),
-          body: ReactiveFormBuilder(form: () {
-            return _tbScreeningDetailsFormBuilder(
-                tbScreeningModel: state.tbScreeningModel,
-                cubit: context.read<SourceCubit>());
-          }, builder:
-              (BuildContext context, FormGroup formGroup, Widget? child) {
-            formGroup.valueChanges.listen((_) {
-              context.read<CaseCubit>().updateScreeningOutcome(formGroup);
-            });
+          body: (state.isLoading || state.tbScreeningModel == null)
+              ? Center(
+                  child: Lottie.asset(
+                    'assets/lottie/registration_loading.json', // Path to your Lottie animation
+                    width: 200,
+                    height: 200,
+                    fit: BoxFit.cover,
+                  ),
+                )
+              : ReactiveFormBuilder(form: () {
+                  log(state.tbScreeningModel.toString());
 
-            return AutofillGroup(
-                child: Column(children: [
-              const SizedBox(height: kPadding * 2),
-              Expanded(
-                  child: SingleChildScrollView(
-                      child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: kPadding * 2),
-                          child: Column(children: [
-                            DateTextInput(
-                              firstDate: DateTime(2002),
-                              controlName: 'screening_date',
-                              label:
-                                  AppLocalizations.of(context)!.screeningDate,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            PrimaryTextField(
-                              formControlName: 'screened_by',
-                              label: AppLocalizations.of(context)!.screenedBy,
-                              prefixIcon: Icons.account_circle_outlined,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.cough,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('cough').value = value;
-                              },
-                              selected: formGroup.control('cough').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.sputum,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('sputum').value = value;
-                              },
-                              selected: formGroup.control('sputum').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.hemoptysis,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('hemoptysis').value = value;
-                              },
-                              selected: formGroup.control('hemoptysis').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.fever,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('fever').value = value;
-                              },
-                              selected: formGroup.control('fever').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.nightSweats,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('night_sweats').value = value;
-                              },
-                              selected: formGroup.control('night_sweats').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.chestPain,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('chest_pain').value = value;
-                              },
-                              selected: formGroup.control('chest_pain').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.weightLoss,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('weight_loss').value = value;
-                                // extractFormData(formGroup, context);
-                              },
-                              selected: formGroup.control('weight_loss').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.swollenGland,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('swollen_gland').value =
-                                    value;
-                              },
-                              selected:
-                                  formGroup.control('swollen_gland').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.tbMedicine,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('tb_medicine').value = value;
-                                // extractFormData(formGroup, context);
-                              },
-                              selected: formGroup.control('tb_medicine').value,
-                            ),
-                            const SizedBox(height: kPadding * 2),
-                            ChipRadioButtons(
-                              label: AppLocalizations.of(context)!.pregnant,
-                              options: const ['Yes', 'No'],
-                              crossAxisCount: 2,
-                              onChanged: (value) {
-                                formGroup.control('pregnant').value = value;
-                              },
-                              selected: formGroup.control('pregnant').value,
-                            ),
-                            BlocBuilder<SourceCubit, SourceState>(
-                                buildWhen: ((previous, current) =>
-                                    (previous.isLoading != current.isLoading) ||
-                                    previous.dataModel != current.dataModel),
-                                builder: (context, state) {
-                                  List<String> list = (state.dataModel != null)
-                                      ? state.dataModel!.trimester!
-                                          .map((e) => '${e.id}:\t${e.name}')
-                                          .toList()
-                                      : [];
-                                  if (state.isLoading ?? false) {
-                                    return const SizedBox(
-                                      height: 15,
-                                      width: 15,
-                                      child: Center(
-                                        child: CircularProgressIndicator(),
-                                      ),
-                                    );
-                                  }
+                  return _tbScreeningDetailsFormBuilder(
+                      tbScreeningModel: state.tbScreeningModel,
+                      cubit: context.read<SourceCubit>());
+                }, builder:
+                  (BuildContext context, FormGroup formGroup, Widget? child) {
+                  formGroup.valueChanges.listen((_) {
+                    context.read<CaseCubit>().updateScreeningOutcome(formGroup);
+                  });
+                  log('in state===${state.tbScreeningModel}');
 
-                                  return ReactiveValueListenableBuilder<String>(
-                                    formControlName: 'pregnant',
-                                    builder: (context, control, child) =>
-                                        Visibility(
-                                      visible: (formGroup
-                                              .control('pregnant')
-                                              .value) ==
-                                          'Yes',
-                                      child: Column(
-                                        children: [
-                                          const SizedBox(height: kPadding * 2),
-                                          ChipRadioButtons(
-                                            crossAxisCount: 2,
-                                            label: AppLocalizations.of(context)!
-                                                .trimester,
-                                            options: list,
-                                            selected: formGroup
-                                                .control('trimester')
-                                                .value,
-                                            onChanged: (value) {
-                                              // final selectedId =
-                                              //     int.tryParse(value.split(':')[0]);
-                                              formGroup
-                                                  .control('trimester')
-                                                  .value = value;
-                                              // context
-                                              //     .read<CaseCubit>()
-                                              //     .selectTBTrimester = selectedId;
-                                            },
+                  return AutofillGroup(
+                      child: Column(children: [
+                    const SizedBox(height: kPadding * 2),
+                    Expanded(
+                        child: SingleChildScrollView(
+                            child: Padding(
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: kPadding * 2),
+                                child: Column(children: [
+                                  DateTextInput(
+                                    firstDate: DateTime(2002),
+                                    controlName: 'screening_date',
+                                    label: AppLocalizations.of(context)!
+                                        .screeningDate,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  PrimaryTextField(
+                                    formControlName: 'screened_by',
+                                    label: AppLocalizations.of(context)!
+                                        .screenedBy,
+                                    prefixIcon: Icons.account_circle_outlined,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!.cough,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('cough').value = value;
+                                    },
+                                    selected: formGroup.control('cough').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!.sputum,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('sputum').value = value;
+                                    },
+                                    selected: formGroup.control('sputum').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!
+                                        .hemoptysis,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('hemoptysis').value =
+                                          value;
+                                    },
+                                    selected:
+                                        formGroup.control('hemoptysis').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!.fever,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('fever').value = value;
+                                    },
+                                    selected: formGroup.control('fever').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!
+                                        .nightSweats,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('night_sweats').value =
+                                          value;
+                                    },
+                                    selected:
+                                        formGroup.control('night_sweats').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label:
+                                        AppLocalizations.of(context)!.chestPain,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('chest_pain').value =
+                                          value;
+                                    },
+                                    selected:
+                                        formGroup.control('chest_pain').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!
+                                        .weightLoss,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('weight_loss').value =
+                                          value;
+                                      // extractFormData(formGroup, context);
+                                    },
+                                    selected:
+                                        formGroup.control('weight_loss').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!
+                                        .swollenGland,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('swollen_gland').value =
+                                          value;
+                                    },
+                                    selected: formGroup
+                                        .control('swollen_gland')
+                                        .value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label: AppLocalizations.of(context)!
+                                        .tbMedicine,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('tb_medicine').value =
+                                          value;
+                                      // extractFormData(formGroup, context);
+                                    },
+                                    selected:
+                                        formGroup.control('tb_medicine').value,
+                                  ),
+                                  const SizedBox(height: kPadding * 2),
+                                  ChipRadioButtons(
+                                    label:
+                                        AppLocalizations.of(context)!.pregnant,
+                                    options: const ['Yes', 'No'],
+                                    crossAxisCount: 2,
+                                    onChanged: (value) {
+                                      formGroup.control('pregnant').value =
+                                          value;
+                                    },
+                                    selected:
+                                        formGroup.control('pregnant').value,
+                                  ),
+                                  BlocBuilder<SourceCubit, SourceState>(
+                                      buildWhen: ((previous, current) =>
+                                          (previous.isLoading !=
+                                              current.isLoading) ||
+                                          previous.dataModel !=
+                                              current.dataModel),
+                                      builder: (context, state) {
+                                        List<String> list =
+                                            (state.dataModel != null)
+                                                ? state.dataModel!.trimester!
+                                                    .map((e) =>
+                                                        '${e.id}:\t${e.name}')
+                                                    .toList()
+                                                : [];
+                                        if (state.isLoading ?? false) {
+                                          return const SizedBox(
+                                            height: 15,
+                                            width: 15,
+                                            child: Center(
+                                              child:
+                                                  CircularProgressIndicator(),
+                                            ),
+                                          );
+                                        }
+
+                                        return ReactiveValueListenableBuilder<
+                                            String>(
+                                          formControlName: 'pregnant',
+                                          builder: (context, control, child) =>
+                                              Visibility(
+                                            visible: (formGroup
+                                                    .control('pregnant')
+                                                    .value) ==
+                                                'Yes',
+                                            child: Column(
+                                              children: [
+                                                const SizedBox(
+                                                    height: kPadding * 2),
+                                                ChipRadioButtons(
+                                                  crossAxisCount: 2,
+                                                  label: AppLocalizations.of(
+                                                          context)!
+                                                      .trimester,
+                                                  options: list,
+                                                  selected: formGroup
+                                                      .control('trimester')
+                                                      .value,
+                                                  onChanged: (value) {
+                                                    // final selectedId =
+                                                    //     int.tryParse(value.split(':')[0]);
+                                                    formGroup
+                                                        .control('trimester')
+                                                        .value = value;
+                                                    // context
+                                                    //     .read<CaseCubit>()
+                                                    //     .selectTBTrimester = selectedId;
+                                                  },
+                                                ),
+                                              ],
+                                            ),
                                           ),
-                                        ],
-                                      ),
-                                    ),
-                                  );
-                                }),
-                            const SizedBox(height: kPadding * 2),
-                            BlocBuilder<CaseCubit, CaseState>(
-                                buildWhen: ((previous, current) =>
-                                    (previous.screeningOutcome !=
-                                        current.screeningOutcome) ||
-                                    previous.tbScreeningModel !=
-                                        current.tbScreeningModel),
-                                builder: (context, state) {
-                                  formGroup.control('screening_outcome').value =
-                                      state.screeningOutcome;
-                                  return SecondaryTextField(
+                                        );
+                                      }),
+                                  const SizedBox(height: kPadding * 2),
+                                  BlocBuilder<CaseCubit, CaseState>(
+                                      buildWhen: ((previous, current) =>
+                                          (previous.screeningOutcome !=
+                                              current.screeningOutcome) ||
+                                          previous.tbScreeningModel !=
+                                              current.tbScreeningModel),
+                                      builder: (context, state) {
+                                        formGroup
+                                            .control('screening_outcome')
+                                            .value = state.screeningOutcome;
+                                        return SecondaryTextField(
+                                            label: AppLocalizations.of(context)!
+                                                .screeningOutcome,
+                                            text: state.screeningOutcome ?? '');
+                                      }),
+                                  const SizedBox(height: kPadding * 2),
+                                  Column(children: [
+                                    PrimaryTextField(
+                                      formControlName: 'comments',
                                       label: AppLocalizations.of(context)!
-                                          .screeningOutcome,
-                                      text: state.screeningOutcome ?? '');
-                                }),
-                            const SizedBox(height: kPadding * 2),
-                            Column(children: [
-                              PrimaryTextField(
-                                formControlName: 'comments',
-                                label: AppLocalizations.of(context)!.comments,
-                                prefixIcon: Icons.account_circle_outlined,
-                              ),
-                            ]),
-                          ])))),
-              BottomButtonBar(
-                onSave: (_) async => await _onSave(context, formGroup),
-                nextPage: const MentalHealthRouterRoute(),
-              ),
-              const SizedBox(height: kPadding * 2),
-            ]));
-          }));
+                                          .comments,
+                                      prefixIcon: Icons.account_circle_outlined,
+                                    ),
+                                  ]),
+                                ])))),
+                    BottomButtonBar(
+                      onSave: (_) async => await _onSave(context, formGroup),
+                      nextPage: const MentalHealthRouterRoute(),
+                    ),
+                    const SizedBox(height: kPadding * 2),
+                  ]));
+                }));
     });
   }
 }
