@@ -36,18 +36,14 @@ class CaseRepo {
             referralDetailsModel.isCaseUpdated == null) &&
         hasInternet &&
         existingModelIndex != -1) {
-      print(
-          'Pushing data to Server because network is available while trying to update in Local${referralDetailsModel.toString()}');
+      log('Pushing data to Server because network is available while trying to update in Local${referralDetailsModel.toString()}');
 
-      var key =
-          dataBox.keyAt(dataBox.values.toList().indexOf(referralDetailsModel));
       // Print the details of the record being deleted
-      log('Deleting ReferralModel: ${dataBox.get(key)}');
+      log('Deleting ReferralModel: ${dataBox.getAt(existingModelIndex)}');
       // Delete the old model
-      await dataBox.delete(key);
+      await dataBox.deleteAt(existingModelIndex);
 
       deleteCase(referralDetailsModel.caseId);
-
       id = null;
     }
     final request = NetworkRequest(
