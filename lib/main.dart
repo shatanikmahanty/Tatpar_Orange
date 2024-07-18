@@ -82,7 +82,7 @@ Future<void> main() async {
     ///ReferralDetailsUpdateAPI
     Hive.registerAdapter(ReferralDetailsModelAdapter());
     await Hive.openBox<ReferralDetailsModel>('referralDetailsModel');
-    // await Hive.deleteBoxFromDisk('referralDetailsModel');
+    //await Hive.deleteBoxFromDisk('referralDetailsModel');
 
     ///TBScreeningUpdateAPI
     Hive.registerAdapter(TBScreeningModelAdapter());

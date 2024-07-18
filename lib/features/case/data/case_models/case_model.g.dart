@@ -42,13 +42,15 @@ class CaseAdapter extends TypeAdapter<Case> {
       referralBlock: fields[22] as String?,
       contactTracing: fields[23] as int?,
       isUpdated: fields[24] as bool?,
+      statusAfterDx: fields[25] as String?,
+      treatmentOutcome: fields[26] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Case obj) {
     writer
-      ..writeByte(25)
+      ..writeByte(27)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -98,7 +100,11 @@ class CaseAdapter extends TypeAdapter<Case> {
       ..writeByte(23)
       ..write(obj.contactTracing)
       ..writeByte(24)
-      ..write(obj.isUpdated);
+      ..write(obj.isUpdated)
+      ..writeByte(25)
+      ..write(obj.statusAfterDx)
+      ..writeByte(26)
+      ..write(obj.treatmentOutcome);
   }
 
   @override
@@ -144,6 +150,8 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
       referralBlock: json['referral_block'] as String?,
       contactTracing: (json['contactTracing'] as num?)?.toInt(),
       isUpdated: json['is_updated'] as bool?,
+      statusAfterDx: json['diagnosis_status'] as String?,
+      treatmentOutcome: json['treatment_outcome'] as String?,
     );
 
 Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
@@ -172,4 +180,6 @@ Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
       'treatment_id': instance.treatment,
       'referral_block': instance.referralBlock,
       'is_updated': instance.isUpdated,
+      'diagnosis_status': instance.statusAfterDx,
+      'treatment_outcome': instance.treatmentOutcome,
     };

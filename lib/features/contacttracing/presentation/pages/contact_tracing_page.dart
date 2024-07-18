@@ -33,8 +33,7 @@ class ContactTracingPage extends StatelessWidget {
       'tb_contact_name': FormControl<String?>(
         value: contactTracingModel?.tbContactName,
       ),
-      'age': FormControl<int>(
-          value: contactTracingModel?.age, validators: [Validators.required]),
+      'age': FormControl<int>(value: contactTracingModel?.age),
       'screening_outcome': FormControl<String>(
         value: contactTracingModel?.screeningOutcome,
       ),
@@ -60,9 +59,7 @@ class ContactTracingPage extends StatelessWidget {
       'tpt_start_date': FormControl<DateTime>(
         value: contactTracingModel?.tptStartDate,
       ),
-      'weight': FormControl<int>(
-          value: contactTracingModel?.weight,
-          validators: [Validators.required]),
+      'weight': FormControl<int>(value: contactTracingModel?.weight),
       'tpt_side_effects':
           FormControl<String?>(value: contactTracingModel?.tptSideEffects),
       'tpt_outcome_date':

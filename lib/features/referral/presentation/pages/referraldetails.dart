@@ -294,7 +294,9 @@ class ReferralDetailsPage extends StatelessWidget {
                     context.read<CaseCubit>().close();
                   },
                 ),
-                body: state.isLoading || state.referralDetailsModel == null
+                body: state.isLoading ||
+                        (state.caseWorkedUpon.referralDetails != null &&
+                            state.referralDetailsModel == null)
                     ? Center(
                         child: Lottie.asset(
                           'assets/lottie/registration_loading.json', // Path to your Lottie animation

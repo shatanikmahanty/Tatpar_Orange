@@ -29,12 +29,11 @@ mixin _$OutcomeModel {
   DateTime? get treatmentCompletionDate => throw _privateConstructorUsedError;
   @JsonKey(name: 'nikshay_id')
   String? get nikshayId => throw _privateConstructorUsedError;
-  @JsonKey(name: 'fc_name')
-  String? get fcName => throw _privateConstructorUsedError;
   @JsonKey(name: 'nutrition_provided')
   String? get nutritionProvided => throw _privateConstructorUsedError;
   @JsonKey(name: 'treatment_outcome')
   int? get selectedtreatmentOutcome => throw _privateConstructorUsedError;
+  @JsonKey(includeToJson: false)
   String? get treatmentOutcome => throw _privateConstructorUsedError;
   @JsonKey(name: 'treatment_comments')
   String? get treatmentComments => throw _privateConstructorUsedError;
@@ -59,10 +58,9 @@ abstract class $OutcomeModelCopyWith<$Res> {
           toJson: _dateTimeToJson)
       DateTime? treatmentCompletionDate,
       @JsonKey(name: 'nikshay_id') String? nikshayId,
-      @JsonKey(name: 'fc_name') String? fcName,
       @JsonKey(name: 'nutrition_provided') String? nutritionProvided,
       @JsonKey(name: 'treatment_outcome') int? selectedtreatmentOutcome,
-      String? treatmentOutcome,
+      @JsonKey(includeToJson: false) String? treatmentOutcome,
       @JsonKey(name: 'treatment_comments') String? treatmentComments});
 }
 
@@ -82,7 +80,6 @@ class _$OutcomeModelCopyWithImpl<$Res, $Val extends OutcomeModel>
     Object? id = freezed,
     Object? treatmentCompletionDate = freezed,
     Object? nikshayId = freezed,
-    Object? fcName = freezed,
     Object? nutritionProvided = freezed,
     Object? selectedtreatmentOutcome = freezed,
     Object? treatmentOutcome = freezed,
@@ -100,10 +97,6 @@ class _$OutcomeModelCopyWithImpl<$Res, $Val extends OutcomeModel>
       nikshayId: freezed == nikshayId
           ? _value.nikshayId
           : nikshayId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fcName: freezed == fcName
-          ? _value.fcName
-          : fcName // ignore: cast_nullable_to_non_nullable
               as String?,
       nutritionProvided: freezed == nutritionProvided
           ? _value.nutritionProvided
@@ -141,10 +134,9 @@ abstract class _$$OutcomeModelImplCopyWith<$Res>
           toJson: _dateTimeToJson)
       DateTime? treatmentCompletionDate,
       @JsonKey(name: 'nikshay_id') String? nikshayId,
-      @JsonKey(name: 'fc_name') String? fcName,
       @JsonKey(name: 'nutrition_provided') String? nutritionProvided,
       @JsonKey(name: 'treatment_outcome') int? selectedtreatmentOutcome,
-      String? treatmentOutcome,
+      @JsonKey(includeToJson: false) String? treatmentOutcome,
       @JsonKey(name: 'treatment_comments') String? treatmentComments});
 }
 
@@ -162,7 +154,6 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
     Object? id = freezed,
     Object? treatmentCompletionDate = freezed,
     Object? nikshayId = freezed,
-    Object? fcName = freezed,
     Object? nutritionProvided = freezed,
     Object? selectedtreatmentOutcome = freezed,
     Object? treatmentOutcome = freezed,
@@ -180,10 +171,6 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
       nikshayId: freezed == nikshayId
           ? _value.nikshayId
           : nikshayId // ignore: cast_nullable_to_non_nullable
-              as String?,
-      fcName: freezed == fcName
-          ? _value.fcName
-          : fcName // ignore: cast_nullable_to_non_nullable
               as String?,
       nutritionProvided: freezed == nutritionProvided
           ? _value.nutritionProvided
@@ -216,10 +203,9 @@ class _$OutcomeModelImpl implements _OutcomeModel {
           toJson: _dateTimeToJson)
       this.treatmentCompletionDate,
       @JsonKey(name: 'nikshay_id') this.nikshayId,
-      @JsonKey(name: 'fc_name') this.fcName,
       @JsonKey(name: 'nutrition_provided') this.nutritionProvided,
       @JsonKey(name: 'treatment_outcome') this.selectedtreatmentOutcome,
-      this.treatmentOutcome,
+      @JsonKey(includeToJson: false) this.treatmentOutcome,
       @JsonKey(name: 'treatment_comments') this.treatmentComments});
 
   factory _$OutcomeModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -238,15 +224,13 @@ class _$OutcomeModelImpl implements _OutcomeModel {
   @JsonKey(name: 'nikshay_id')
   final String? nikshayId;
   @override
-  @JsonKey(name: 'fc_name')
-  final String? fcName;
-  @override
   @JsonKey(name: 'nutrition_provided')
   final String? nutritionProvided;
   @override
   @JsonKey(name: 'treatment_outcome')
   final int? selectedtreatmentOutcome;
   @override
+  @JsonKey(includeToJson: false)
   final String? treatmentOutcome;
   @override
   @JsonKey(name: 'treatment_comments')
@@ -254,7 +238,7 @@ class _$OutcomeModelImpl implements _OutcomeModel {
 
   @override
   String toString() {
-    return 'OutcomeModel(id: $id, treatmentCompletionDate: $treatmentCompletionDate, nikshayId: $nikshayId, fcName: $fcName, nutritionProvided: $nutritionProvided, selectedtreatmentOutcome: $selectedtreatmentOutcome, treatmentOutcome: $treatmentOutcome, treatmentComments: $treatmentComments)';
+    return 'OutcomeModel(id: $id, treatmentCompletionDate: $treatmentCompletionDate, nikshayId: $nikshayId, nutritionProvided: $nutritionProvided, selectedtreatmentOutcome: $selectedtreatmentOutcome, treatmentOutcome: $treatmentOutcome, treatmentComments: $treatmentComments)';
   }
 
   @override
@@ -268,7 +252,6 @@ class _$OutcomeModelImpl implements _OutcomeModel {
                 other.treatmentCompletionDate == treatmentCompletionDate) &&
             (identical(other.nikshayId, nikshayId) ||
                 other.nikshayId == nikshayId) &&
-            (identical(other.fcName, fcName) || other.fcName == fcName) &&
             (identical(other.nutritionProvided, nutritionProvided) ||
                 other.nutritionProvided == nutritionProvided) &&
             (identical(
@@ -287,7 +270,6 @@ class _$OutcomeModelImpl implements _OutcomeModel {
       id,
       treatmentCompletionDate,
       nikshayId,
-      fcName,
       nutritionProvided,
       selectedtreatmentOutcome,
       treatmentOutcome,
@@ -316,10 +298,9 @@ abstract class _OutcomeModel implements OutcomeModel {
           toJson: _dateTimeToJson)
       final DateTime? treatmentCompletionDate,
       @JsonKey(name: 'nikshay_id') final String? nikshayId,
-      @JsonKey(name: 'fc_name') final String? fcName,
       @JsonKey(name: 'nutrition_provided') final String? nutritionProvided,
       @JsonKey(name: 'treatment_outcome') final int? selectedtreatmentOutcome,
-      final String? treatmentOutcome,
+      @JsonKey(includeToJson: false) final String? treatmentOutcome,
       @JsonKey(name: 'treatment_comments')
       final String? treatmentComments}) = _$OutcomeModelImpl;
 
@@ -339,15 +320,13 @@ abstract class _OutcomeModel implements OutcomeModel {
   @JsonKey(name: 'nikshay_id')
   String? get nikshayId;
   @override
-  @JsonKey(name: 'fc_name')
-  String? get fcName;
-  @override
   @JsonKey(name: 'nutrition_provided')
   String? get nutritionProvided;
   @override
   @JsonKey(name: 'treatment_outcome')
   int? get selectedtreatmentOutcome;
   @override
+  @JsonKey(includeToJson: false)
   String? get treatmentOutcome;
   @override
   @JsonKey(name: 'treatment_comments')

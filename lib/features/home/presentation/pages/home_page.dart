@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/home_action_card.dart';
 
 import '../../../../configurations/configurations.dart';
@@ -22,6 +24,8 @@ class HomePage extends StatelessWidget {
                 title: 'Add Referral',
                 subText: 'Add a new case',
                 action: () {
+                  context.read<CaseCubit>().resetSelectedCase();
+
                   context.router.navigate(const BasicDetails());
                   // showModalBottomSheet(context: context, builder: (BuildContext context) => const AddNotificationBottomSheet());
                 },

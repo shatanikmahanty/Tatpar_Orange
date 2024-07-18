@@ -12,14 +12,18 @@ class CaseProfileCard extends StatelessWidget {
       required this.panchayat,
       required this.district,
       required this.screeningStatus,
-      required this.diagnosisStatus});
+      required this.diagnosisStatus,
+      required this.statusAfterDx,
+      required this.treatmentOutcome});
 
   final String patientName,
       mobileNumber,
       panchayat,
       district,
       screeningStatus,
-      diagnosisStatus;
+      diagnosisStatus,
+      statusAfterDx,
+      treatmentOutcome;
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +48,8 @@ class CaseProfileCard extends StatelessWidget {
           InfoTile('District', fieldValue: district),
           InfoTile('Screening Status', fieldValue: screeningStatus),
           InfoTile('Diagnosis Status', fieldValue: diagnosisStatus),
+          InfoTile('Status after Dx', fieldValue: statusAfterDx),
+          InfoTile('Treatment Outcome', fieldValue: treatmentOutcome),
         ],
       ),
     );

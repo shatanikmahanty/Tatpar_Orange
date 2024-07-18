@@ -136,7 +136,9 @@ class TBScreeningPage extends StatelessWidget {
               context.read<CaseCubit>().close();
             },
           ),
-          body: (state.isLoading || state.tbScreeningModel == null)
+          body: (state.isLoading) ||
+                  (state.caseWorkedUpon.tbScreening != null &&
+                      state.tbScreeningModel == null)
               ? Center(
                   child: Lottie.asset(
                     'assets/lottie/registration_loading.json', // Path to your Lottie animation
@@ -146,8 +148,6 @@ class TBScreeningPage extends StatelessWidget {
                   ),
                 )
               : ReactiveFormBuilder(form: () {
-                  log(state.tbScreeningModel.toString());
-
                   return _tbScreeningDetailsFormBuilder(
                       tbScreeningModel: state.tbScreeningModel,
                       cubit: context.read<SourceCubit>());

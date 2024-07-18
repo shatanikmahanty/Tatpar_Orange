@@ -157,8 +157,9 @@ class MentalHealthScreeningPage extends StatelessWidget {
                 (previous.mentalHealthScreeningModel !=
                     current.mentalHealthScreeningModel),
             builder: (context, state) {
-              return (state.isLoading ||
-                      state.mentalHealthScreeningModel == null)
+              return (state.isLoading) ||
+                      (state.caseWorkedUpon.whoSrq != null &&
+                          state.mentalHealthScreeningModel == null)
                   ? Center(
                       child: Lottie.asset(
                         'assets/lottie/registration_loading.json', // Path to your Lottie animation

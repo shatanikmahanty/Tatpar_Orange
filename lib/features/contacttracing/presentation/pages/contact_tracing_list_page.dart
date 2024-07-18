@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:lottie/lottie.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
@@ -66,7 +65,10 @@ class ContactTracingListPage extends StatelessWidget {
         body: BlocBuilder<CaseCubit, CaseState>(
           buildWhen: (previous, current) => previous != current,
           builder: (context, state) {
-            if (state.isLoading) {
+            if (state.isLoading ||
+                (state.caseWorkedUpon.contactTracingList != null &&
+                    state.caseWorkedUpon.contactTracingList!.isNotEmpty &&
+                    state.contactTracingList.isEmpty)) {
               return const Center(
                 child: CircularProgressIndicator(),
               );

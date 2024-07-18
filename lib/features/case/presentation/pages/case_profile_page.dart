@@ -19,19 +19,20 @@ class CaseProfilePage extends StatelessWidget {
     final workflows = caseCubit.workflows(caseCubit.state.caseWorkedUpon);
     return PopScope(
       onPopInvoked: (didPop) {
-        context.router.pushAndPopUntil(
-            const AppHomeRoute(children: [CasesRoute()]),
-            predicate: (Route<dynamic> route) => false);
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          context.router.pushAndPopUntil(
+              const AppHomeRoute(children: [CasesRoute()]),
+              predicate: (Route<dynamic> route) => false);
+        });
       },
       child: Scaffold(
-        appBar: CaseAppBar(
-          'Case Profile',
-          onClick: () {
+        appBar: CaseAppBar('Case Profile', onClick: () {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
             context.router.pushAndPopUntil(
                 const AppHomeRoute(children: [CasesRoute()]),
                 predicate: (Route<dynamic> route) => false);
-          },
-        ),
+          });
+        }),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: kPadding * 2),
           child: Column(
@@ -74,6 +75,12 @@ class CaseProfilePage extends StatelessWidget {
                                       .toString(),
                               diagnosisStatus:
                                   (caseWorkedUpon.diagnosisName ?? '')
+                                      .toString(),
+                              statusAfterDx:
+                                  (caseWorkedUpon.statusAfterDx ?? '')
+                                      .toString(),
+                              treatmentOutcome:
+                                  (caseWorkedUpon.treatmentOutcome ?? '')
                                       .toString(),
                             ),
                             Positioned(

@@ -29,10 +29,9 @@ class OutcomeModel with _$OutcomeModel {
     )
     DateTime? treatmentCompletionDate,
     @JsonKey(name: 'nikshay_id') String? nikshayId,
-    @JsonKey(name: 'fc_name') String? fcName,
     @JsonKey(name: 'nutrition_provided') String? nutritionProvided,
     @JsonKey(name: 'treatment_outcome') int? selectedtreatmentOutcome,
-    String? treatmentOutcome,
+    @JsonKey(includeToJson: false) String? treatmentOutcome,
     @JsonKey(name: 'treatment_comments') String? treatmentComments,
   }) = _OutcomeModel;
 

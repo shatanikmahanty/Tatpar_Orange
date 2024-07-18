@@ -54,12 +54,12 @@ class CaseCubit extends Cubit<CaseState> {
     required this.caseRepo,
     required Case caseModel,
   }) : super(CaseState(caseWorkedUpon: caseModel)) {
-    bool isClosed = false;
-
     if (caseModel.referralDetails != null) {
       getReferralDetailsData(caseModel.referralDetails);
     }
     if (caseModel.tbScreening != null) {
+      log(caseModel.toString());
+      log('Calling GET TBSCREENING');
       getTBScreeningData(caseModel.tbScreening);
     }
     if (caseModel.whoSrq != null) {
@@ -290,14 +290,8 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getTBScreeningData(int? formId) async {
     if (state.caseWorkedUpon.tbScreening == null) return;
-    log('LOADING');
-    emit(state.copyWith(isLoading: true));
-
     caseRepo.getTBScreening(id: formId).then((value) {
-      log('emitting form sate');
-
-      log('CASE CUBIT TB SCREENING MODEL+++++++++++++${value.toString()}');
-
+      emit(state.copyWith(isLoading: true));
       emit(
         state.copyWith(
           isLoading: false,
@@ -322,7 +316,7 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getDiagnosisData(int? formId) async {
     if (state.caseWorkedUpon.diagnosis == null) return;
-    emit(state.copyWith(isLoading: true));
+    // emit(state.copyWith(isLoading: true));
 
     final response = await caseRepo.getDiagnosis(id: formId);
     emit(
@@ -392,16 +386,16 @@ class CaseCubit extends Cubit<CaseState> {
     final response = await caseRepo.saveReferralDetails(
         referralDetailsModel: referralDetailsModel,
         id: state.caseWorkedUpon.referralDetails);
-    // log('CASE CUBIT : state.caseWorkedUpon===========${state.caseWorkedUpon.toString()}');
     // log('CASE CUBIT : ReferralDetailsModel===========${referralDetailsModel.toString()}');
-    //  log('CASE CUBIT : ReferralDetailsID===========${state.caseWorkedUpon.referralDetails.toString()}');
+    // log('CASE CUBIT : ReferralDetailsID===========${state.caseWorkedUpon.referralDetails.toString()}');
     selectCase = await getCaseModel(response.caseId);
     // print('Fetched Case Model: ${selectedCase.toString()}');
+    log('CASE CUBIT : state.caseWorkedUpon===========${selectedCase.toString()}');
 
     emit(
       state.copyWith(
-        caseWorkedUpon:
-            (state.caseWorkedUpon).copyWith(referralDetails: response.id),
+        caseWorkedUpon: (selectedCase ?? state.caseWorkedUpon)
+            .copyWith(referralDetails: response.id),
         referralDetailsModel: response,
       ),
     );

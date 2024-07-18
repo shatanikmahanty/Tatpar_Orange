@@ -62,6 +62,8 @@ class Case with _$Case {
     @HiveField(22) @JsonKey(name: 'referral_block') String? referralBlock,
     @HiveField(23) @JsonKey(includeToJson: false) int? contactTracing,
     @HiveField(24) @JsonKey(name: 'is_updated') bool? isUpdated,
+    @HiveField(25) @JsonKey(name: 'diagnosis_status') String? statusAfterDx,
+    @HiveField(26) @JsonKey(name: 'treatment_outcome') String? treatmentOutcome,
   }) = _Case;
 
   factory Case.fromJson(Map<String, dynamic> json) => _$CaseFromJson(json);

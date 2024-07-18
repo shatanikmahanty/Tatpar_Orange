@@ -99,7 +99,9 @@ class OutcomePage extends StatelessWidget {
                 context.read<CaseCubit>().close();
               },
             ),
-            body: state.isLoading || state.outcomeModel == null
+            body: state.isLoading ||
+                    (state.caseWorkedUpon.outcomeValue != null &&
+                        state.outcomeModel == null)
                 ? Center(
                     child: Lottie.asset(
                       'assets/lottie/registration_loading.json', // Path to your Lottie animation

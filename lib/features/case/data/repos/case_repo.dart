@@ -28,13 +28,28 @@ class CaseRepo {
   }) async {
     Box<ReferralDetailsModel> dataBox =
         Hive.box<ReferralDetailsModel>('referralDetailsModel');
+    final existingModelIndex =
+        dataBox.values.toList().indexWhere((model) => model.id == id);
 
     bool hasInternet = await InternetConnection().hasInternetAccess;
-    ((referralDetailsModel.isCaseUpdated == false ||
-                referralDetailsModel.isCaseUpdated == null) &&
-            hasInternet)
-        ? id = null
-        : id;
+    if ((referralDetailsModel.isCaseUpdated == false ||
+            referralDetailsModel.isCaseUpdated == null) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      print(
+          'Pushing data to Server because network is available while trying to update in Local${referralDetailsModel.toString()}');
+
+      var key =
+          dataBox.keyAt(dataBox.values.toList().indexOf(referralDetailsModel));
+      // Print the details of the record being deleted
+      log('Deleting ReferralModel: ${dataBox.get(key)}');
+      // Delete the old model
+      await dataBox.delete(key);
+
+      deleteCase(referralDetailsModel.caseId);
+
+      id = null;
+    }
     final request = NetworkRequest(
       '$referralDetailsUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -50,18 +65,7 @@ class CaseRepo {
       final savedModel = ReferralDetailsModel.fromJson(result.data['data']);
 
       await dataBox.put(savedModel.id.toString(), savedModel);
-      print(referralDetailsModel.toString());
-      if ((referralDetailsModel.isCaseUpdated == null) ||
-          (referralDetailsModel.isCaseUpdated == false)) {
-        var key = dataBox
-            .keyAt(dataBox.values.toList().indexOf(referralDetailsModel));
-        // Print the details of the record being deleted
-        log('Deleting ReferralModel: ${dataBox.get(key)}');
-        // Delete the old model
-        await dataBox.delete(key);
 
-        deleteCase(referralDetailsModel.caseId);
-      }
       pushPendingReferralDetails();
 
       updateCaseBox(model: savedModel, tbModel: null, caseModel: null);
@@ -641,19 +645,19 @@ class CaseRepo {
     Case caseModelToSave;
     if (caseModel == null) {
       caseModelToSave = Case(
-        id: model?.caseId,
-        referralBlock: model?.block,
-        referralName: model?.referralName,
-        gender: model?.gender,
-        age: model?.age,
-        screenedBy: tbModel?.screenedBy,
-        referredBy: model?.referredBy,
-        referralMobileNumber: model?.guardianPhoneNumber,
-        tbScreeningOutcome: tbModel?.screeningOutcome,
-        referralDetails: model?.id,
-        tbScreening: tbModel?.id,
-        isUpdated: false,
-      );
+          id: model?.caseId,
+          referralBlock: model?.block,
+          referralName: model?.referralName,
+          gender: model?.gender,
+          age: model?.age,
+          screenedBy: tbModel?.screenedBy,
+          referredBy: model?.referredBy,
+          referralMobileNumber: model?.guardianPhoneNumber,
+          tbScreeningOutcome: tbModel?.screeningOutcome,
+          referralDetails: model?.id,
+          tbScreening: tbModel?.id,
+          isUpdated: false,
+          createdOn: DateTime.now());
     } else {
       caseModelToSave = caseModel;
     }
