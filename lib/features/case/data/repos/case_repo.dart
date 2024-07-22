@@ -108,6 +108,7 @@ class CaseRepo {
 
           DjangoflowAppSnackbar.showInfo('Stored data Locally');
           print('Stored new Referral in Hive: $modelToSave');
+          AuthCubit.instance.caseId = modelToSave.caseId;
 
           return modelToSave;
         }
@@ -151,7 +152,6 @@ class CaseRepo {
       required WHOSrqModel? cpWhoSrqModel,
       required int? id,
       required int? caseId}) async {
-    print(mentalHealthScreeningModel.toJson().toString());
     final request = NetworkRequest(
       '$whoSrqUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -287,7 +287,6 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       final newCase = Case.fromJson(result.data['data']);
-      print('Getting Case Model======================$newCase)}'.toString());
       final existingCaseIndex = dataBox.values
           .toList()
           .indexWhere((existingCase) => existingCase.id == newCase.id);
@@ -344,8 +343,7 @@ class CaseRepo {
           .toList()
           .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
-        print(
-            'Retrieving ReferralModel======================$model'.toString());
+        log('Retrieving ReferralModel======================$model'.toString());
 
         return model;
       } else {

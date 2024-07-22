@@ -617,4 +617,8 @@ class CaseCubit extends Cubit<CaseState> {
       return emit(state.copyWith(filteredContacts: filteredContacts));
     }
   }
+
+  void pushLocalData() {
+    caseRepo.pushPendingReferralDetails();
+  }
 }

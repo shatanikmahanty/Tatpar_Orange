@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
@@ -129,6 +130,9 @@ class AuthRepo {
         if (user != null) {
           return AppUser.fromJson(user);
         } else {
+          DjangoflowAppSnackbar.showError(
+            'User not registered',
+          );
           log("User with mobile number ${_auth.currentUser!.phoneNumber}, not found.");
         }
       }

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/app_bar_action.dart';
 
 @RoutePage()
@@ -78,13 +79,15 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                   )
                 : const Offstage(),
             actions: [
-              // AppBarAction(
-              //   icon: Icons.notifications_outlined,
-              //   onclick: () {},
-              // ),
-              // const SizedBox(
-              //   width: kPadding,
-              // ),
+              AppBarAction(
+                icon: Icons.sync,
+                onclick: () {
+                  context.read<CaseCubit>().pushLocalData();
+                },
+              ),
+              const SizedBox(
+                width: kPadding,
+              ),
               AppBarAction(
                 icon: Icons.logout,
                 onclick: () {
