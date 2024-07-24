@@ -418,6 +418,7 @@ class CaseCubit extends Cubit<CaseState> {
       ),
     );
     getTBScreeningData(state.caseWorkedUpon.tbScreening);
+    getCaseModel(state.caseWorkedUpon.id);
   }
 
   Future<void> updateWHOSRQData(

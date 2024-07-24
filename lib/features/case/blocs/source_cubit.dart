@@ -22,6 +22,19 @@ class SourceState with _$SourceState {
 
 class SourceCubit extends Cubit<SourceState> {
   final SourceRepo repo;
+  String? _selectedDistrict;
+  String? _selectedBlock;
+  String? _selectedPanchayatCode;
+
+  set selectDistrict(String? selectedDistrict) =>
+      _selectedDistrict = selectedDistrict;
+  set selectBlock(String? selectedBlock) => _selectedBlock = selectedBlock;
+  set selectPanchayatCode(String? selectedPanchayatCode) =>
+      _selectedPanchayatCode = selectedPanchayatCode;
+
+  String? get selectedBlock => _selectedBlock;
+  String? get selectedDistrict => _selectedDistrict;
+  String? get selectedPanchayatCode => _selectedPanchayatCode;
 
   SourceCubit(this.repo) : super(const SourceState());
   Future<void> loadDistricts() async {

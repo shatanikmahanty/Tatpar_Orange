@@ -125,16 +125,15 @@ class CaseCard extends StatelessWidget {
                 children: [
                   Expanded(
                       child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: kPadding),
+                    padding: const EdgeInsets.only(bottom: kPadding),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          '${caseModel.referralName}\t•\t ${caseModel.gender},\t${caseModel.age}',
-                          // 'Vineeth Singh\t•\tM,\t35',
+                          '${caseModel.referralName}\t• ${caseModel.gender},\t${caseModel.age}',
                           style: textTheme.labelLarge?.copyWith(
                             fontWeight: FontWeight.w600,
-                            height: 1.14,
+                            height: 1.33,
                             letterSpacing: 0.2,
                             color: Colors.black,
                           ),
@@ -158,7 +157,7 @@ class CaseCard extends StatelessWidget {
                             text: '',
                             children: [
                               TextSpan(
-                                text: 'Scr by :\t',
+                                text: 'Scr by:\t',
                                 style: textTheme.bodyMedium?.copyWith(
                                     height: 1.33,
                                     letterSpacing: 0.2,
@@ -172,7 +171,7 @@ class CaseCard extends StatelessWidget {
                                 ),
                               ),
                               TextSpan(
-                                text: 'Ref by :\t',
+                                text: 'Ref by:\t',
                                 style: textTheme.bodyMedium?.copyWith(
                                     height: 1.33,
                                     letterSpacing: 0.2,
@@ -295,7 +294,7 @@ class CaseCard extends StatelessWidget {
     if (caseModel.tbScreeningOutcome == "No Symptom") {
       return 'Scr Neg';
     } else if (caseModel.tbScreeningOutcome == "") {
-      return 'Scr Not Screened';
+      return 'Referral';
     } else {
       return 'Scr Pos';
     }

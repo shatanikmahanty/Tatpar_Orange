@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:djangoflow_app/djangoflow_app.dart';
+
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
@@ -65,8 +66,11 @@ class CaseRepo {
       pushPendingReferralDetails();
 
       updateCaseBox(model: savedModel, tbModel: null, caseModel: null);
-
       AuthCubit.instance.caseId = result.data['data']['case_id'];
+      TBScreeningModel? tbScreeningModel =
+          getTBDataBox(referralDetailsModel.id);
+      updateTBDataBox(referralDetailsModel.id, tbScreeningModel,
+          AuthCubit.instance.workingCaseId);
       return savedModel;
     } else {
       if (result.error != null && result.error?.type is NetworkError) {
@@ -109,7 +113,7 @@ class CaseRepo {
           DjangoflowAppSnackbar.showInfo('Stored data Locally');
           print('Stored new Referral in Hive: $modelToSave');
           AuthCubit.instance.caseId = modelToSave.caseId;
-
+          log('oFFLINE CASEiD=========${AuthCubit.instance.workingCaseId}');
           return modelToSave;
         }
       } else {
@@ -125,6 +129,28 @@ class CaseRepo {
       {required TBScreeningModel tbScreeningModel,
       required int? id,
       required int? caseId}) async {
+    Box<TBScreeningModel> dataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
+    final existingModelIndex =
+        dataBox.values.toList().indexWhere((model) => model.id == id);
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+    if (hasInternet) {
+      await pushPendingReferralDetails();
+    }
+    if ((tbScreeningModel.isUpdated == false ||
+            tbScreeningModel.isUpdated == null) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      log('Pushing data to Server because network is available while trying to update in Local${tbScreeningModel.toString()}');
+
+      // Print the details of the record being deleted
+      log('Deleting TBScreeningModel: ${dataBox.getAt(existingModelIndex)}');
+      // Delete the old model
+      await dataBox.deleteAt(existingModelIndex);
+
+      id = null;
+    }
     final request = NetworkRequest(
       '$tbScreeningUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -136,12 +162,49 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return TBScreeningModel.fromJson(result.data['data']);
+      final savedModel = TBScreeningModel.fromJson(result.data['data']);
+
+      await dataBox.put(savedModel.id.toString(), savedModel);
+
+      updateCaseBox(model: null, tbModel: savedModel, caseModel: null);
+      return savedModel;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting TB Screening Form data',
-        type: Unauthorized(),
-      );
+      if (result.error != null && result.error?.type is NetworkError) {
+        final modelsList = dataBox.values.toList();
+        TBScreeningModel updateModel = tbScreeningModel;
+
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          await dataBox.put(updateModel.id.toString(), updateModel);
+
+          DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          print('Updated TBScreening in Hive: $updateModel');
+          updateCaseBox(model: null, tbModel: updateModel, caseModel: null);
+
+          return updateModel;
+        } else {
+          final modelToSave = updateModel.copyWith(
+              id: caseId ?? AuthCubit.instance.workingCaseId,
+              caseId: caseId ?? AuthCubit.instance.workingCaseId);
+
+          // Save the new model to Hive
+          await dataBox.put(modelToSave.id.toString(), modelToSave);
+          updateCaseBox(model: null, tbModel: modelToSave, caseModel: null);
+
+          DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          print('Stored new TBScreeningModel in Hive: $modelToSave');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -363,6 +426,8 @@ class CaseRepo {
   Future<TBScreeningModel> getTBScreening({
     required int? id,
   }) async {
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
     final request = NetworkRequest(
       '$tbScreeningUrl/$id',
       RequestMethod.get,
@@ -373,6 +438,23 @@ class CaseRepo {
     if (result.status == Status.ok) {
       log(TBScreeningModel.fromJson(result.data['data']).toString());
       return TBScreeningModel.fromJson(result.data['data']);
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(tbdataBox.values.toString());
+      final model = tbdataBox.get(tbdataBox.keyAt(tbdataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
+      log('id================$id');
+      if (model != null) {
+        log('Retrieving TB Screening Model======================$model'
+            .toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving TB Screening Form data',
+          type: Unauthorized(),
+        );
+      }
     } else {
       throw ApplicationError(
         errorMsg: 'Error Retrieving TB Screening Form data',
@@ -591,19 +673,28 @@ class CaseRepo {
               if ((referral.isCaseUpdated == null) ||
                   (referral.isCaseUpdated == false)) {
                 // Get the key of the existing model
-                var key =
-                    dataBox.keyAt(dataBox.values.toList().indexOf(referral));
-                // Print the details of the record being deleted
-                log('Deleting ReferralModel: ${dataBox.get(key)}');
-                // Delete the old model
-                await dataBox.delete(key);
+                final model = (dataBox.keyAt(dataBox.values.toList().indexWhere(
+                    (existingCase) => existingCase.id == referral.id)));
+                if (model != null) {
+                  log('Retrieving Referral Model======================$model'
+                      .toString());
 
-                deleteCase(referral.caseId);
+                  await dataBox.delete(model);
+                }
+                // var key =
+                //     dataBox.keyAt(dataBox.values.toList().indexOf(referral));
+                // // Print the details of the record being deleted
+                // log('Deleting ReferralModel: ${dataBox.get(key)}');
+                // // Delete the old model
+                // await dataBox.delete(key);
               }
               // Add the new model with the server-assigned ID
-              await dataBox.put(updatedModel.id, updatedModel);
+              await dataBox.put(updatedModel.id.toString(), updatedModel);
               log('ReferralModel DataBox Contains===========${dataBox.values.toList().toString()}');
               AuthCubit.instance.caseId = result.data['data']['case_id'];
+              TBScreeningModel? tbScreeningModel = getTBDataBox(referral.id);
+              updateTBDataBox(referral.id, tbScreeningModel,
+                  AuthCubit.instance.workingCaseId);
             } else {
               // Handle error if needed
               throw Exception(
@@ -611,12 +702,97 @@ class CaseRepo {
             }
           } catch (e) {
             // Handle the exception if needed
-            print('Error pushing referral details: $e');
+            log('Error pushing referral details: $e');
             break; // Exit the loop if there's an error
           }
         }
       }
     }
+    await pushPendingTBScreeningDetails();
+  }
+
+  Future<void> pushPendingTBScreeningDetails() async {
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
+    List<TBScreeningModel> tbModelsList = tbdataBox.values.toList();
+    for (var tbModel in tbModelsList) {
+      if (tbModel.isUpdated != null) {
+        if (tbModel.isUpdated == false) {
+          final model =
+              (tbModel.isUpdated == null) || (tbModel.isUpdated == false)
+                  ? tbModel.copyWith(id: null)
+                  : tbModel;
+          try {
+            log('Pushing TBModel to the Server:${model.toString()}');
+            // Attempt to push the tbModel details to the server
+            final request = NetworkRequest(
+              '$tbScreeningUrl${model.id == null ? '' : '/${model.id}'}',
+              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              isAuthorized: true,
+              data: {
+                ...model.toJson(),
+                'case_id': model.caseId ?? AuthCubit.instance.workingCaseId,
+              },
+            );
+            final result = await NetworkManager.instance.perform(request);
+            if (result.status == Status.ok) {
+              TBScreeningModel updatedModel =
+                  TBScreeningModel.fromJson(result.data['data']);
+              if ((tbModel.isUpdated == null) || (tbModel.isUpdated == false)) {
+                // Get the key of the existing model
+                var key =
+                    tbdataBox.keyAt(tbdataBox.values.toList().indexOf(tbModel));
+                // Print the details of the record being deleted
+                log('Deleting TBScreening Model: ${tbdataBox.get(key)}');
+                // Delete the old model
+                await tbdataBox.delete(key);
+              }
+              // Add the new model with the server-assigned ID
+              await tbdataBox.put(updatedModel.id.toString(), updatedModel);
+              log('TBScreening DataBox Contains===========${tbdataBox.values.toList().toString()}');
+            } else {
+              // Handle error if needed
+              throw Exception(
+                  'Failed to push tbModel details from Local Storage');
+            }
+          } catch (e) {
+            // Handle the exception if needed
+            log('Error pushing tbModel details: $e');
+            break; // Exit the loop if there's an error
+          }
+        }
+      }
+    }
+  }
+
+  TBScreeningModel? getTBDataBox(int? tbModelID) {
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
+    final model = tbdataBox.get(tbdataBox.keyAt(tbdataBox.values
+        .toList()
+        .indexWhere((existingCase) => existingCase.id == tbModelID)));
+    if (model != null) {
+      log('Retrieving TB Screening Model======================$model'
+          .toString());
+
+      return model;
+    } else {
+      return null;
+    }
+  }
+
+  void updateTBDataBox(
+      int? id, TBScreeningModel? tbScreeningModel, int? caseId) async {
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
+
+    TBScreeningModel updateModel;
+
+    updateModel = tbScreeningModel!.copyWith(caseId: caseId);
+    await tbdataBox.put(updateModel.id.toString(), updateModel);
+
+    print('Updated Case ID of the TBScreening Model: $updateModel');
+    updateCaseBox(model: null, tbModel: updateModel, caseModel: null);
   }
 
   void deleteCase(int? caseId) {
@@ -637,36 +813,88 @@ class CaseRepo {
   }) async {
     Box<Case> caseBox = Hive.box<Case>('caseList');
     Case caseModelToSave;
+
+    final caseIdToSearch = model?.caseId ?? tbModel?.caseId;
+    final existingCaseIndex = caseBox.values.toList().indexWhere(
+          (existingCase) => existingCase.id == caseIdToSearch,
+        );
+
+    print('Searching for caseId: $caseIdToSearch');
+    log('Existing case index: $existingCaseIndex');
+
     if (caseModel == null) {
-      caseModelToSave = Case(
-          id: model?.caseId,
-          referralBlock: model?.block,
-          referralName: model?.referralName,
-          gender: model?.gender,
-          age: model?.age,
-          screenedBy: tbModel?.screenedBy,
-          referredBy: model?.referredBy,
-          referralMobileNumber: model?.guardianPhoneNumber,
-          tbScreeningOutcome: tbModel?.screeningOutcome,
-          referralDetails: model?.id,
-          tbScreening: tbModel?.id,
-          isUpdated: false,
-          createdOn: DateTime.now());
+      if (existingCaseIndex == -1) {
+        // No existing case, create a new one if model is not null
+        if (model != null) {
+          caseModelToSave = Case(
+            id: model.caseId,
+            referralBlock: model.block,
+            referralName: model.referralName,
+            gender: model.gender,
+            age: model.age,
+            panchayat: model.panchayatCode,
+            referredBy: model.referredBy,
+            district: model.district,
+            referralMobileNumber: model.guardianPhoneNumber,
+            referralDetails: model.id,
+            isUpdated: false,
+            createdOn: DateTime.now(),
+          );
+          caseBox.add(caseModelToSave);
+          print('Added new case to Hive: $caseModelToSave');
+        } else {
+          print('No model provided to create a new case.');
+        }
+      } else {
+        // Existing case found, update the relevant fields
+        final existingCase = caseBox.getAt(existingCaseIndex)!;
+        log('Existing case: $existingCase');
+
+        if (model != null) {
+          caseModelToSave = existingCase.copyWith(
+            id: model.caseId,
+            referralBlock: model.block,
+            referralName: model.referralName,
+            gender: model.gender,
+            age: model.age,
+            panchayat: model.panchayatCode,
+            referredBy: model.referredBy,
+            district: model.district,
+            referralMobileNumber: model.guardianPhoneNumber,
+            referralDetails: model.id,
+            isUpdated: false,
+            createdOn: DateTime.now(),
+          );
+          caseBox.putAt(existingCaseIndex, caseModelToSave);
+          print('Updated case in Hive with referral details: $caseModelToSave');
+        }
+
+        if (tbModel != null) {
+          caseModelToSave = existingCase.copyWith(
+            screenedBy: tbModel.screenedBy,
+            tbScreeningOutcome: tbModel.screeningOutcome,
+            tbScreening: tbModel.id,
+          );
+          caseBox.putAt(existingCaseIndex, caseModelToSave);
+          print('Updated case in Hive with TB details: $caseModelToSave');
+        }
+      }
     } else {
       caseModelToSave = caseModel;
+      final existingCaseIndex = caseBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == caseModel.id);
+
+      if (existingCaseIndex != -1) {
+        caseBox.putAt(existingCaseIndex, caseModelToSave);
+        print('Updated existing case in Hive: $caseModelToSave');
+      } else {
+        caseBox.add(caseModelToSave);
+        print('Added new case to Hive: $caseModelToSave');
+      }
     }
-    final existingCaseIndex = caseBox.values
-        .toList()
-        .indexWhere((existingCase) => existingCase.id == model?.caseId);
-    if (existingCaseIndex != -1) {
-      // update CaseModel
-      caseBox.putAt(existingCaseIndex, caseModelToSave);
-    } else {
-      // If case with the same ID doesn't exist, add it
-      caseBox.add(caseModelToSave);
-    }
-    print('New case in Hive: $caseModelToSave');
-    log('CASE BOX CONTAINS===========${caseBox.values.toList()}');
+
+    log('CASE BOX CONTAINS: ${caseBox.values.toList()}');
   }
 }
 

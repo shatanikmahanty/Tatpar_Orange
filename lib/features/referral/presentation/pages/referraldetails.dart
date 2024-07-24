@@ -811,6 +811,7 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
               allowMultiSelection: false,
               onSelected: (value) {
                 formGroup.control('district').value = value[0];
+                context.read<SourceCubit>().selectDistrict = value[0];
               },
               emptyString: 'No Districts available',
             );
@@ -847,6 +848,8 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
                             allowMultiSelection: false,
                             onSelected: (value) {
                               formGroup.control('referral_block').value =
+                                  value[0];
+                              context.read<SourceCubit>().selectBlock =
                                   value[0];
                             },
                             emptyString: 'No Blocks available',
@@ -888,6 +891,8 @@ _loadDistricts(FormGroup formGroup, BuildContext context) {
                           allowMultiSelection: false,
                           onSelected: (value) {
                             formGroup.control('panchayat_code').value =
+                                value[0];
+                            context.read<SourceCubit>().selectPanchayatCode =
                                 value[0];
                           },
                           emptyString: 'No Panchayats available',
