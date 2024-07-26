@@ -47,6 +47,9 @@ class TBScreeningModel with _$TBScreeningModel {
     @HiveField(16) @JsonKey(name: 'comments') String? comments,
     @HiveField(17) @JsonKey(name: 'is_updated') bool? isUpdated,
     @HiveField(18) @JsonKey(name: 'case_id', includeToJson: false) int? caseId,
+    @HiveField(19)
+    @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+    bool? isFormIDAssigned,
   }) = _TBScreeningModel;
 
   factory TBScreeningModel.fromJson(Map<String, dynamic> json) =>

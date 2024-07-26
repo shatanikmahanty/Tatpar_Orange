@@ -80,6 +80,9 @@ mixin _$TBScreeningModel {
   @HiveField(18)
   @JsonKey(name: 'case_id', includeToJson: false)
   int? get caseId => throw _privateConstructorUsedError;
+  @HiveField(19)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -121,7 +124,10 @@ abstract class $TBScreeningModelCopyWith<$Res> {
       @HiveField(17) @JsonKey(name: 'is_updated') bool? isUpdated,
       @HiveField(18)
       @JsonKey(name: 'case_id', includeToJson: false)
-      int? caseId});
+      int? caseId,
+      @HiveField(19)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -156,6 +162,7 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
     Object? comments = freezed,
     Object? isUpdated = freezed,
     Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -234,6 +241,10 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
           ? _value.caseId
           : caseId // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -274,7 +285,10 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
       @HiveField(17) @JsonKey(name: 'is_updated') bool? isUpdated,
       @HiveField(18)
       @JsonKey(name: 'case_id', includeToJson: false)
-      int? caseId});
+      int? caseId,
+      @HiveField(19)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -307,6 +321,7 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
     Object? comments = freezed,
     Object? isUpdated = freezed,
     Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_$TBScreeningModelImpl(
       id: freezed == id
@@ -385,6 +400,10 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
           ? _value.caseId
           : caseId // ignore: cast_nullable_to_non_nullable
               as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -418,7 +437,10 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
       @HiveField(17) @JsonKey(name: 'is_updated') this.isUpdated,
       @HiveField(18)
       @JsonKey(name: 'case_id', includeToJson: false)
-      this.caseId});
+      this.caseId,
+      @HiveField(19)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      this.isFormIDAssigned});
 
   factory _$TBScreeningModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TBScreeningModelImplFromJson(json);
@@ -502,10 +524,14 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
   @HiveField(18)
   @JsonKey(name: 'case_id', includeToJson: false)
   final int? caseId;
+  @override
+  @HiveField(19)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  final bool? isFormIDAssigned;
 
   @override
   String toString() {
-    return 'TBScreeningModel(id: $id, screeningDate: $screeningDate, screenedBy: $screenedBy, pregnant: $pregnant, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments, isUpdated: $isUpdated, caseId: $caseId)';
+    return 'TBScreeningModel(id: $id, screeningDate: $screeningDate, screenedBy: $screenedBy, pregnant: $pregnant, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
   }
 
   @override
@@ -545,7 +571,9 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
                 other.comments == comments) &&
             (identical(other.isUpdated, isUpdated) ||
                 other.isUpdated == isUpdated) &&
-            (identical(other.caseId, caseId) || other.caseId == caseId));
+            (identical(other.caseId, caseId) || other.caseId == caseId) &&
+            (identical(other.isFormIDAssigned, isFormIDAssigned) ||
+                other.isFormIDAssigned == isFormIDAssigned));
   }
 
   @JsonKey(ignore: true)
@@ -570,7 +598,8 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
         screeningOutcome,
         comments,
         isUpdated,
-        caseId
+        caseId,
+        isFormIDAssigned
       ]);
 
   @JsonKey(ignore: true)
@@ -627,7 +656,10 @@ abstract class _TBScreeningModel implements TBScreeningModel {
       @HiveField(17) @JsonKey(name: 'is_updated') final bool? isUpdated,
       @HiveField(18)
       @JsonKey(name: 'case_id', includeToJson: false)
-      final int? caseId}) = _$TBScreeningModelImpl;
+      final int? caseId,
+      @HiveField(19)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      final bool? isFormIDAssigned}) = _$TBScreeningModelImpl;
 
   factory _TBScreeningModel.fromJson(Map<String, dynamic> json) =
       _$TBScreeningModelImpl.fromJson;
@@ -711,6 +743,10 @@ abstract class _TBScreeningModel implements TBScreeningModel {
   @HiveField(18)
   @JsonKey(name: 'case_id', includeToJson: false)
   int? get caseId;
+  @override
+  @HiveField(19)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned;
   @override
   @JsonKey(ignore: true)
   _$$TBScreeningModelImplCopyWith<_$TBScreeningModelImpl> get copyWith =>

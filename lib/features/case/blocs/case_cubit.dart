@@ -417,6 +417,7 @@ class CaseCubit extends Cubit<CaseState> {
         tbScreeningModel: response,
       ),
     );
+
     getTBScreeningData(state.caseWorkedUpon.tbScreening);
     getCaseModel(state.caseWorkedUpon.id);
   }

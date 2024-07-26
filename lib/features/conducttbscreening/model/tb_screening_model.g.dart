@@ -36,13 +36,14 @@ class TBScreeningModelAdapter extends TypeAdapter<TBScreeningModel> {
       comments: fields[16] as String?,
       isUpdated: fields[17] as bool?,
       caseId: fields[18] as int?,
+      isFormIDAssigned: fields[19] as bool?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TBScreeningModel obj) {
     writer
-      ..writeByte(19)
+      ..writeByte(20)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -80,7 +81,9 @@ class TBScreeningModelAdapter extends TypeAdapter<TBScreeningModel> {
       ..writeByte(17)
       ..write(obj.isUpdated)
       ..writeByte(18)
-      ..write(obj.caseId);
+      ..write(obj.caseId)
+      ..writeByte(19)
+      ..write(obj.isFormIDAssigned);
   }
 
   @override
@@ -120,6 +123,7 @@ _$TBScreeningModelImpl _$$TBScreeningModelImplFromJson(
       comments: json['comments'] as String?,
       isUpdated: json['is_updated'] as bool?,
       caseId: (json['case_id'] as num?)?.toInt(),
+      isFormIDAssigned: json['is_form_id_assigned'] as bool?,
     );
 
 Map<String, dynamic> _$$TBScreeningModelImplToJson(
