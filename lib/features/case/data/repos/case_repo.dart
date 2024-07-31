@@ -1,16 +1,21 @@
 import 'dart:developer';
 
 import 'package:djangoflow_app/djangoflow_app.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:hive/hive.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
 import 'package:tatpar_acf/configurations/network/network_request.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
+import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
+
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
 
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
@@ -65,7 +70,7 @@ class CaseRepo {
 
       pushPendingReferralDetails();
 
-      updateCaseBox(model: savedModel, tbModel: null, caseModel: null);
+      //updateCaseBox(model: savedModel, tbModel: null, caseModel: null);
       AuthCubit.instance.caseId = result.data['data']['case_id'];
       // TBScreeningModel? tbScreeningModel =
       //  a   getTBDataBox(referralDetailsModel.id);
@@ -92,7 +97,11 @@ class CaseRepo {
 
           DjangoflowAppSnackbar.showInfo('Updated data Locally');
           print('Updated Referral in Hive: $updateModel');
-          updateCaseBox(model: updateModel, tbModel: null, caseModel: null);
+          updateCaseBox(
+              model: updateModel,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null);
 
           return updateModel;
         } else {
@@ -109,7 +118,11 @@ class CaseRepo {
 
           // Save the new model to Hive
           await dataBox.put(modelToSave.id.toString(), modelToSave);
-          updateCaseBox(model: modelToSave, tbModel: null, caseModel: null);
+          updateCaseBox(
+              model: modelToSave,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null);
 
           DjangoflowAppSnackbar.showInfo('Stored data Locally');
           print('Stored new Referral in Hive: $modelToSave');
@@ -143,13 +156,17 @@ class CaseRepo {
         existingModelIndex != -1) {
       await tbdatabox.put(tbScreeningModel.id.toString(), tbScreeningModel);
 
-      updateCaseBox(model: null, tbModel: tbScreeningModel, caseModel: null);
+      updateCaseBox(
+          model: null,
+          tbModel: tbScreeningModel,
+          caseModel: null,
+          mentalHealthScreeningModel: null);
       log('TB Data Box Contains:${tbdatabox.values.toList().toString()}');
       log('Updating data to local Server because network is available while trying to update in Local${tbScreeningModel.toString()}');
       if (hasInternet) {
         await pushPendingReferralDetails();
       }
-      return tbScreeningModel;
+      return tbdatabox.getAt(existingModelIndex)!;
       // log('TB Data Box Contains:${tbdatabox.values.toList().toString()}');
       // // tbScreeningModel = tbdatabox.getAt(existingModelIndex)!;
 
@@ -176,7 +193,11 @@ class CaseRepo {
 
       await tbdatabox.put(savedModel.id.toString(), savedModel);
 
-      updateCaseBox(model: null, tbModel: savedModel, caseModel: null);
+      updateCaseBox(
+          model: null,
+          tbModel: savedModel,
+          caseModel: null,
+          mentalHealthScreeningModel: null);
       log('TB Data Box Contains:${tbdatabox.values.toList().toString()}');
 
       return savedModel;
@@ -194,7 +215,11 @@ class CaseRepo {
 
           DjangoflowAppSnackbar.showInfo('Updated data Locally');
           print('Updated TBScreening in Hive: $updateModel');
-          updateCaseBox(model: null, tbModel: updateModel, caseModel: null);
+          updateCaseBox(
+              model: null,
+              tbModel: updateModel,
+              caseModel: null,
+              mentalHealthScreeningModel: null);
           log('TB Data Box Contains:${modelsList.toString()}');
 
           return updateModel;
@@ -206,7 +231,11 @@ class CaseRepo {
 
           // Save the new model to Hive
           await tbdatabox.put(modelToSave.id.toString(), modelToSave);
-          updateCaseBox(model: null, tbModel: modelToSave, caseModel: null);
+          updateCaseBox(
+              model: null,
+              tbModel: modelToSave,
+              caseModel: null,
+              mentalHealthScreeningModel: null);
 
           DjangoflowAppSnackbar.showInfo('Stored data Locally');
           print('Stored new TBScreeningModel in Hive: $modelToSave');
@@ -230,6 +259,36 @@ class CaseRepo {
       required WHOSrqModel? cpWhoSrqModel,
       required int? id,
       required int? caseId}) async {
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    final existingModelIndex =
+        whodatabox.values.toList().indexWhere((model) => model.id == id);
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+
+    if ((mentalHealthScreeningModel.isFormIDAssigned == null ||
+            mentalHealthScreeningModel.isFormIDAssigned == false) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      await whodatabox.put(
+          mentalHealthScreeningModel.id.toString(), mentalHealthScreeningModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null);
+      log('Mental Health Screening Data Box Contains:${whodatabox.values.toList().toString()}');
+      log('Updating data to local Server because network is available while trying to update in Local${mentalHealthScreeningModel.toString()}');
+      if (hasInternet) {
+        await pushPendingReferralDetails();
+      }
+      return whodatabox.getAt(existingModelIndex)!;
+    }
+    if (hasInternet) {
+      await pushPendingReferralDetails();
+    }
+
     final request = NetworkRequest(
       '$whoSrqUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -244,12 +303,66 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return MentalHealthScreeningModel.fromJson(result.data['data']);
+      final savedModel =
+          MentalHealthScreeningModel.fromJson(result.data['data']);
+      await whodatabox.put(savedModel.id.toString(), savedModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: savedModel);
+      log('Mental Health Screening Data Box Contains:${whodatabox.values.toList().toString()}');
+
+      return savedModel;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting Who Srq Form data',
-        type: Unauthorized(),
-      );
+      if (result.error != null && result.error?.type is NetworkError) {
+        final modelsList = whodatabox.values.toList();
+        MentalHealthScreeningModel updateModel = mentalHealthScreeningModel;
+
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          await whodatabox.put(updateModel.id.toString(), updateModel);
+
+          DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          print('Updated Mental Health Screening Modelin hive: $updateModel');
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: updateModel);
+          log('MentalHealthScreening Data Box Contains:${modelsList.toString()}');
+
+          return updateModel;
+        } else {
+          final modelToSave = updateModel.copyWith(
+              id: caseId ?? AuthCubit.instance.workingCaseId,
+              caseId: caseId ?? AuthCubit.instance.workingCaseId,
+              isFormIDAssigned: false);
+
+          // Save the new model to Hive
+          await whodatabox.put(modelToSave.id.toString(), modelToSave);
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: modelToSave);
+
+          DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          print('Stored new MentalHealthScreeningModel in Hive: $modelToSave');
+          log('Mental Health Data Box Contains:${whodatabox.values.toList().toString()}');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -406,6 +519,9 @@ class CaseRepo {
   }) async {
     Box<ReferralDetailsModel> dataBox =
         Hive.box<ReferralDetailsModel>('referralDetailsModel');
+    log(' ReferralModel Box Contains======================${dataBox.values.toList()}'
+        .toString());
+
     final request = NetworkRequest(
       '$referralDetailsUrl/$id',
       RequestMethod.get,
@@ -444,6 +560,8 @@ class CaseRepo {
   }) async {
     Box<TBScreeningModel> tbdataBox =
         Hive.box<TBScreeningModel>('tbScreeningModel');
+    log(' TBScreening Box Contains======================${tbdataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$tbScreeningUrl/$id',
       RequestMethod.get,
@@ -480,6 +598,10 @@ class CaseRepo {
   Future<MentalHealthScreeningModel> getWhoSrq({
     required int? id,
   }) async {
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    log(' Mental Health Screening Box Contains======================${whodatabox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$whoSrqUrl/$id',
       RequestMethod.get,
@@ -489,9 +611,25 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       return MentalHealthScreeningModel.fromJson(result.data['data']);
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(whodatabox.values.toString());
+      final model = whodatabox.get(whodatabox.keyAt(whodatabox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
+      if (model != null) {
+        log('Retrieving Mental Health Screening Model======================$model'
+            .toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving Mental Health Screening Form data',
+          type: Unauthorized(),
+        );
+      }
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving WHO Srq Form data',
+        errorMsg: 'Error Retrieving Mental Health Screening Form data',
         type: Unauthorized(),
       );
     }
@@ -704,13 +842,23 @@ class CaseRepo {
               }
               // Add the new model with the server-assigned ID
               await dataBox.put(updatedModel.id.toString(), updatedModel);
+
               log('ReferralModel DataBox Contains===========${dataBox.values.toList().toString()}');
               AuthCubit.instance.caseId = result.data['data']['case_id'];
-
+              //getCaseModel(caseId: AuthCubit.instance.workingCaseId);
+              updateCaseBox(
+                  model: updatedModel,
+                  tbModel: null,
+                  caseModel: null,
+                  mentalHealthScreeningModel: null);
+              // getCaseModel(caseId: updatedModel.caseId);
               await updateTBDataBox(
                   referral.id, AuthCubit.instance.workingCaseId);
+              await updateWHODataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
             } else {
-              // Handle error if needed
+              // Handle error if need
+              //
               throw Exception(
                   'Failed to push referral details from Local Storage');
             }
@@ -722,6 +870,7 @@ class CaseRepo {
       }
     }
     await pushPendingTBScreeningDetails();
+    await pushPendingWhoSrqDetails();
   }
 
   Future<void> pushPendingTBScreeningDetails() async {
@@ -763,6 +912,13 @@ class CaseRepo {
               }
               // Add the new model with the server-assigned ID
               await tbdataBox.put(updatedModel.id.toString(), updatedModel);
+              updateCaseBox(
+                  model: null,
+                  tbModel: updatedModel,
+                  caseModel: null,
+                  mentalHealthScreeningModel: null);
+              //getCaseModel(caseId: updatedModel.caseId);
+
               log('TBScreening DataBox Contains===========${tbdataBox.values.toList().toString()}');
             } else {
               // Handle error if needed
@@ -776,6 +932,105 @@ class CaseRepo {
           }
         }
       }
+    }
+  }
+
+  Future<void> pushPendingWhoSrqDetails() async {
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    List<MentalHealthScreeningModel> whoModelsList = whodatabox.values.toList();
+    for (var mentalHealthModel in whoModelsList) {
+      if (mentalHealthModel.isUpdated != null) {
+        if (mentalHealthModel.isUpdated == false) {
+          final model = (mentalHealthModel.isFormIDAssigned == null) ||
+                  (mentalHealthModel.isFormIDAssigned == false)
+              ? mentalHealthModel.copyWith(id: null)
+              : mentalHealthModel;
+          try {
+            log('Pushing MentalHealthScreening Model to the Server:${model.toString()}');
+            // Attempt to push the tbModel details to the server
+            final request = NetworkRequest(
+              '$whoSrqUrl${model.id == null ? '' : '/${model.id}'}',
+              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              isAuthorized: true,
+              data: {
+                ...model.toJson(),
+                'case_id': model.caseId ?? AuthCubit.instance.workingCaseId,
+              },
+            );
+            final result = await NetworkManager.instance.perform(request);
+            if (result.status == Status.ok) {
+              MentalHealthScreeningModel updatedModel =
+                  MentalHealthScreeningModel.fromJson(result.data['data']);
+              if ((mentalHealthModel.isFormIDAssigned == null) ||
+                  (mentalHealthModel.isFormIDAssigned == false)) {
+                // Get the key of the existing model
+                var key = whodatabox.keyAt(
+                    whodatabox.values.toList().indexOf(mentalHealthModel));
+                // Print the details of the record being deleted
+                log('Deleting MentalHealthScreening Model: ${whodatabox.get(key)}');
+                // Delete the old model
+                await whodatabox.delete(key);
+              }
+              // Add the new model with the server-assigned ID
+              await whodatabox.put(updatedModel.id.toString(), updatedModel);
+              updateCaseBox(
+                  model: null,
+                  tbModel: null,
+                  caseModel: null,
+                  mentalHealthScreeningModel: updatedModel);
+              //getCaseModel(caseId: updatedModel.caseId);
+
+              log('MentalHealthScreening DataBox Contains===========${whodatabox.values.toList().toString()}');
+            } else {
+              // Handle error if needed
+              throw Exception(
+                  'Failed to push Mental Health details from Local Storage');
+            }
+          } catch (e) {
+            // Handle the exception if needed
+            log('Error pushing Mental Health details: $e');
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> updateWHODataBox(int? whoModelID, int? caseId) async {
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    MentalHealthScreeningModel? mentalHealthScreeningModel;
+    final model = whodatabox.keyAt(whodatabox.values
+        .toList()
+        .indexWhere((existingCase) => existingCase.id == whoModelID));
+
+    if (model != null) {
+      print('Found this Model${whodatabox.get(model).toString()}');
+      mentalHealthScreeningModel = whodatabox.get(model);
+    }
+
+    if (mentalHealthScreeningModel != null) {
+      MentalHealthScreeningModel updateModel =
+          mentalHealthScreeningModel.copyWith(caseId: caseId);
+
+      if (updateModel.id != null) {
+        await whodatabox.put(updateModel.id.toString(), updateModel);
+        log('Updated Case ID of the Mental Helath Screening model: ${updateModel.toString()}');
+        updateCaseBox(
+            model: null,
+            tbModel: null,
+            caseModel: null,
+            mentalHealthScreeningModel: updateModel);
+        // log('Deleting TB Screening Model======================${whodatabox.get(model)}'
+        //     .toString());
+        // await whodatabox.delete(model);
+        log('WHO Data Box Contains:${whodatabox.values.toList().toString()}');
+      } else {
+        log('Update Model ID is null, skipping Hive put operation');
+      }
+    } else {
+      log('Mental Health Screening Model is null, skipping update');
     }
   }
 
@@ -798,7 +1053,11 @@ class CaseRepo {
       if (updateModel.id != null) {
         await tbdataBox.put(updateModel.id.toString(), updateModel);
         log('Updated Case ID of the TBScreening Model: ${updateModel.toString()}');
-        updateCaseBox(model: null, tbModel: updateModel, caseModel: null);
+        updateCaseBox(
+            model: null,
+            tbModel: updateModel,
+            caseModel: null,
+            mentalHealthScreeningModel: null);
         // log('Deleting TB Screening Model======================${tbdataBox.get(model)}'
         //     .toString());
         // await tbdataBox.delete(model);
@@ -825,11 +1084,13 @@ class CaseRepo {
   Future<void> updateCaseBox({
     required ReferralDetailsModel? model,
     required TBScreeningModel? tbModel,
+    required MentalHealthScreeningModel? mentalHealthScreeningModel,
     required Case? caseModel,
   }) async {
+    final context = navigatorKey.currentContext!;
+    final sourceCubit = context.read<SourceCubit>();
     Box<Case> caseBox = Hive.box<Case>('caseList');
     Case caseModelToSave;
-
     final caseIdToSearch = model?.caseId ?? tbModel?.caseId;
     final existingCaseIndex = caseBox.values.toList().indexWhere(
           (existingCase) => existingCase.id == caseIdToSearch,
@@ -842,15 +1103,32 @@ class CaseRepo {
       if (existingCaseIndex == -1) {
         // No existing case, create a new one if model is not null
         if (model != null) {
+          final district = model.selectedDistrict;
+          final block = model.selectedBlock;
+
+          final panchayat = model.selectedPanchayatCode;
+          final districtData =
+              sourceCubit.state.dataModel?.districts?.firstWhere(
+            (element) => element.id == district,
+            orElse: () => const District(district: null),
+          );
+          final String? districtName = districtData?.district;
+          String? panchayatName = _getPanchayatName(
+              sourceCubit.state.dataModel?.blocks!, panchayat);
+          final blockData = sourceCubit.state.dataModel?.blocks?.firstWhere(
+            (element) => element.id == block,
+            orElse: () => const Block(block: null),
+          );
+          final String? blockName = blockData?.block;
           caseModelToSave = Case(
             id: model.caseId,
-            referralBlock: model.block,
+            referralBlock: blockName,
             referralName: model.referralName,
             gender: model.gender,
             age: model.age,
-            panchayat: model.panchayatCode,
+            panchayat: panchayatName,
             referredBy: model.referredBy,
-            district: model.district,
+            district: districtName,
             referralMobileNumber: model.guardianPhoneNumber,
             referralDetails: model.id,
             isUpdated: false,
@@ -867,15 +1145,32 @@ class CaseRepo {
         log('Existing case: $existingCase');
 
         if (model != null) {
+          final block = model.selectedBlock;
+
+          final district = model.selectedDistrict;
+          final panchayat = model.selectedPanchayatCode;
+          final districtData =
+              sourceCubit.state.dataModel?.districts?.firstWhere(
+            (element) => element.id == district,
+            orElse: () => const District(district: null),
+          );
+          final String? districtName = districtData?.district;
+          String? panchayatName = _getPanchayatName(
+              sourceCubit.state.dataModel?.blocks!, panchayat);
+          final blockData = sourceCubit.state.dataModel?.blocks?.firstWhere(
+            (element) => element.id == block,
+            orElse: () => const Block(block: null),
+          );
+          final String? blockName = blockData?.block;
           caseModelToSave = existingCase.copyWith(
             id: model.caseId,
-            referralBlock: model.block,
+            referralBlock: blockName,
             referralName: model.referralName,
             gender: model.gender,
             age: model.age,
-            panchayat: model.panchayatCode,
+            panchayat: panchayatName,
             referredBy: model.referredBy,
-            district: model.district,
+            district: districtName,
             referralMobileNumber: model.guardianPhoneNumber,
             referralDetails: model.id,
             isUpdated: false,
@@ -891,6 +1186,15 @@ class CaseRepo {
             tbScreeningOutcome: tbModel.screeningOutcome,
             tbScreening: tbModel.id,
           );
+
+          caseBox.putAt(existingCaseIndex, caseModelToSave);
+          print('Updated case in Hive with TB details: $caseModelToSave');
+        }
+        if (mentalHealthScreeningModel != null) {
+          caseModelToSave = existingCase.copyWith(
+            whoSrq: mentalHealthScreeningModel.id,
+          );
+
           caseBox.putAt(existingCaseIndex, caseModelToSave);
           print('Updated case in Hive with TB details: $caseModelToSave');
         }
@@ -911,6 +1215,23 @@ class CaseRepo {
     }
 
     log('CASE BOX CONTAINS: ${caseBox.values.toList()}');
+  }
+}
+
+String? _getPanchayatName(List<Block>? blocks, int? panchayat) {
+  String? panchayatName;
+  if (blocks != null) {
+    for (var block in blocks) {
+      var panchayatData = block.panchayat?.firstWhere((p) => p.id == panchayat,
+          orElse: () => const Panchayat(id: 0));
+      if (panchayatData?.id != 0) {
+        panchayatName = panchayatData?.panchayat;
+        break;
+      }
+    }
+    return panchayatName;
+  } else {
+    return null;
   }
 }
 

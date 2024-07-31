@@ -1,7 +1,9 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
@@ -111,34 +113,49 @@ class AuthRepo {
 
   // Get user details
   Future<AppUser?> getUserDetails() async {
-    try {
-      final request = NetworkRequest(
-        usersUrl,
-        RequestMethod.get,
-        isAuthorized: true,
-        data: {},
-      );
-      final result = await NetworkManager.instance.perform(request);
-      if (result.status == Status.ok && result.response!.statusCode == 200) {
-        final List<dynamic> usersList = result.data['data']['users'];
-        final user = usersList.firstWhere(
-          (user) =>
-              user['mobile_number'] ==
-              _auth.currentUser!.phoneNumber!.replaceFirst('+91', ''),
-          orElse: () => null,
+    final prefs = await SharedPreferences.getInstance();
+    final userJson = prefs.getString('user');
+
+    if (userJson != null) {
+      final Map<String, dynamic> userMap = json.decode(userJson);
+      return AppUser.fromJson(userMap);
+    } else {
+      try {
+        DjangoflowAppSnackbar.showInfo(
+          'Loading User Details',
         );
-        if (user != null) {
-          return AppUser.fromJson(user);
-        } else {
-          DjangoflowAppSnackbar.showError(
-            'User not registered',
+        final request = NetworkRequest(
+          usersUrl,
+          RequestMethod.get,
+          isAuthorized: true,
+          data: {},
+        );
+        final result = await NetworkManager.instance.perform(request);
+        if (result.status == Status.ok && result.response!.statusCode == 200) {
+          final List<dynamic> usersList = result.data['data']['users'];
+          final user = usersList.firstWhere(
+            (user) =>
+                user['mobile_number'] ==
+                _auth.currentUser!.phoneNumber!.replaceFirst('+91', ''),
+            orElse: () => null,
           );
-          log("User with mobile number ${_auth.currentUser!.phoneNumber}, not found.");
+          if (user != null) {
+            final appUser = AppUser.fromJson(user);
+
+            await prefs.setString('user', json.encode(appUser.toJson()));
+
+            return appUser;
+          } else {
+            DjangoflowAppSnackbar.showError(
+              'User not registered',
+            );
+            log("User with mobile number ${_auth.currentUser!.phoneNumber}, not found.");
+          }
         }
+      } catch (e) {
+        log('Error fetching user details: $e');
       }
-    } catch (e) {
-      log('Error fetching user details: $e');
+      return null;
     }
-    return null;
   }
 }

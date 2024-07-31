@@ -10,11 +10,14 @@ export 'package:auto_route/auto_route.dart';
 
 export 'router.gr.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
+
 @AutoRouterConfig(
   replaceInRouteName: 'Page,Route',
   deferredLoading: true,
 )
 class AppRouter extends $AppRouter {
+  AppRouter({super.navigatorKey});
   @override
   RouteType get defaultRouteType => const RouteType.adaptive();
 

@@ -111,7 +111,7 @@ Future<void> main() async {
         FirebaseCrashlytics.instance.recordFlutterError(errorDetails);
       }
     };
-    final router = AppRouter();
+    final router = AppRouter(navigatorKey: navigatorKey);
     if (!kIsWeb) {
       initialDeepLink = (await appLinksRepository.getInitialLink())?.path;
     }

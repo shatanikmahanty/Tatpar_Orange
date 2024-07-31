@@ -132,6 +132,12 @@ mixin _$MentalHealthScreeningModel {
   @HiveField(27)
   @JsonKey(name: 'is_updated')
   bool? get isUpdated => throw _privateConstructorUsedError;
+  @HiveField(28)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned => throw _privateConstructorUsedError;
+  @HiveField(29)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -233,7 +239,13 @@ abstract class $MentalHealthScreeningModelCopyWith<$Res> {
       @JsonKey(name: 'cp_talk_helpline_again')
       String? cptalkToHelpline,
       @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel,
-      @HiveField(27) @JsonKey(name: 'is_updated') bool? isUpdated});
+      @HiveField(27) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(28)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned,
+      @HiveField(29)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      int? caseId});
 
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
 }
@@ -280,6 +292,8 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
     Object? cptalkToHelpline = freezed,
     Object? whoSrqModel = freezed,
     Object? isUpdated = freezed,
+    Object? isFormIDAssigned = freezed,
+    Object? caseId = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -394,6 +408,14 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
           ? _value.isUpdated
           : isUpdated // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 
@@ -506,7 +528,13 @@ abstract class _$$MentalHealthScreeningModelImplCopyWith<$Res>
       @JsonKey(name: 'cp_talk_helpline_again')
       String? cptalkToHelpline,
       @HiveField(26) @JsonKey(includeToJson: false) WHOSrqModel? whoSrqModel,
-      @HiveField(27) @JsonKey(name: 'is_updated') bool? isUpdated});
+      @HiveField(27) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(28)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned,
+      @HiveField(29)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      int? caseId});
 
   @override
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
@@ -553,6 +581,8 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
     Object? cptalkToHelpline = freezed,
     Object? whoSrqModel = freezed,
     Object? isUpdated = freezed,
+    Object? isFormIDAssigned = freezed,
+    Object? caseId = freezed,
   }) {
     return _then(_$MentalHealthScreeningModelImpl(
       id: freezed == id
@@ -667,6 +697,14 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
           ? _value.isUpdated
           : isUpdated // ignore: cast_nullable_to_non_nullable
               as bool?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -759,7 +797,13 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
       @JsonKey(name: 'cp_talk_helpline_again')
       this.cptalkToHelpline,
       @HiveField(26) @JsonKey(includeToJson: false) this.whoSrqModel,
-      @HiveField(27) @JsonKey(name: 'is_updated') this.isUpdated});
+      @HiveField(27) @JsonKey(name: 'is_updated') this.isUpdated,
+      @HiveField(28)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      this.isFormIDAssigned,
+      @HiveField(29)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      this.caseId});
 
   factory _$MentalHealthScreeningModelImpl.fromJson(
           Map<String, dynamic> json) =>
@@ -904,10 +948,18 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
   @HiveField(27)
   @JsonKey(name: 'is_updated')
   final bool? isUpdated;
+  @override
+  @HiveField(28)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  final bool? isFormIDAssigned;
+  @override
+  @HiveField(29)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  final int? caseId;
 
   @override
   String toString() {
-    return 'MentalHealthScreeningModel(id: $id, stage: $stage, ipStage: $ipStage, ipfuStage: $ipfuStage, cpStage: $cpStage, ipScreeningDate: $ipScreeningDate, ipfuScreeningDate: $ipfuScreeningDate, cpScreeningDate: $cpScreeningDate, ipScreeningStatus: $ipScreeningStatus, ipfuScreeningStatus: $ipfuScreeningStatus, cpScreeningStatus: $cpScreeningStatus, ipScreeningScore: $ipScreeningScore, ipfuScreeningScore: $ipfuScreeningScore, cpScreeningScore: $cpScreeningScore, ipCounsellingLinked: $ipCounsellingLinked, ipfuCounsellingLinked: $ipfuCounsellingLinked, cpCounsellingLinked: $cpCounsellingLinked, ipPsychiatristLinked: $ipPsychiatristLinked, ipfuPsychiatristLinked: $ipfuPsychiatristLinked, cpPsychiatristLinked: $cpPsychiatristLinked, ipFeelingBetter: $ipFeelingBetter, ipfuFeelingBetter: $ipfuFeelingBetter, cpFeelingBetter: $cpFeelingBetter, iptalkToHelpline: $iptalkToHelpline, ipfutalkToHelpline: $ipfutalkToHelpline, cptalkToHelpline: $cptalkToHelpline, whoSrqModel: $whoSrqModel, isUpdated: $isUpdated)';
+    return 'MentalHealthScreeningModel(id: $id, stage: $stage, ipStage: $ipStage, ipfuStage: $ipfuStage, cpStage: $cpStage, ipScreeningDate: $ipScreeningDate, ipfuScreeningDate: $ipfuScreeningDate, cpScreeningDate: $cpScreeningDate, ipScreeningStatus: $ipScreeningStatus, ipfuScreeningStatus: $ipfuScreeningStatus, cpScreeningStatus: $cpScreeningStatus, ipScreeningScore: $ipScreeningScore, ipfuScreeningScore: $ipfuScreeningScore, cpScreeningScore: $cpScreeningScore, ipCounsellingLinked: $ipCounsellingLinked, ipfuCounsellingLinked: $ipfuCounsellingLinked, cpCounsellingLinked: $cpCounsellingLinked, ipPsychiatristLinked: $ipPsychiatristLinked, ipfuPsychiatristLinked: $ipfuPsychiatristLinked, cpPsychiatristLinked: $cpPsychiatristLinked, ipFeelingBetter: $ipFeelingBetter, ipfuFeelingBetter: $ipfuFeelingBetter, cpFeelingBetter: $cpFeelingBetter, iptalkToHelpline: $iptalkToHelpline, ipfutalkToHelpline: $ipfutalkToHelpline, cptalkToHelpline: $cptalkToHelpline, whoSrqModel: $whoSrqModel, isUpdated: $isUpdated, isFormIDAssigned: $isFormIDAssigned, caseId: $caseId)';
   }
 
   @override
@@ -966,7 +1018,10 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
             (identical(other.whoSrqModel, whoSrqModel) ||
                 other.whoSrqModel == whoSrqModel) &&
             (identical(other.isUpdated, isUpdated) ||
-                other.isUpdated == isUpdated));
+                other.isUpdated == isUpdated) &&
+            (identical(other.isFormIDAssigned, isFormIDAssigned) ||
+                other.isFormIDAssigned == isFormIDAssigned) &&
+            (identical(other.caseId, caseId) || other.caseId == caseId));
   }
 
   @JsonKey(ignore: true)
@@ -1000,7 +1055,9 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
         ipfutalkToHelpline,
         cptalkToHelpline,
         whoSrqModel,
-        isUpdated
+        isUpdated,
+        isFormIDAssigned,
+        caseId
       ]);
 
   @JsonKey(ignore: true)
@@ -1115,9 +1172,13 @@ abstract class _MentalHealthScreeningModel
       @HiveField(26)
       @JsonKey(includeToJson: false)
       final WHOSrqModel? whoSrqModel,
-      @HiveField(27)
-      @JsonKey(name: 'is_updated')
-      final bool? isUpdated}) = _$MentalHealthScreeningModelImpl;
+      @HiveField(27) @JsonKey(name: 'is_updated') final bool? isUpdated,
+      @HiveField(28)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      final bool? isFormIDAssigned,
+      @HiveField(29)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      final int? caseId}) = _$MentalHealthScreeningModelImpl;
 
   factory _MentalHealthScreeningModel.fromJson(Map<String, dynamic> json) =
       _$MentalHealthScreeningModelImpl.fromJson;
@@ -1261,6 +1322,14 @@ abstract class _MentalHealthScreeningModel
   @HiveField(27)
   @JsonKey(name: 'is_updated')
   bool? get isUpdated;
+  @override
+  @HiveField(28)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned;
+  @override
+  @HiveField(29)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId;
   @override
   @JsonKey(ignore: true)
   _$$MentalHealthScreeningModelImplCopyWith<_$MentalHealthScreeningModelImpl>

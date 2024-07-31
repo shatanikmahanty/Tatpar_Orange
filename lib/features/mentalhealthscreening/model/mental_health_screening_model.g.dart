@@ -46,13 +46,15 @@ class MentalHealthScreeningModelAdapter
       cptalkToHelpline: fields[25] as String?,
       whoSrqModel: fields[26] as WHOSrqModel?,
       isUpdated: fields[27] as bool?,
+      isFormIDAssigned: fields[28] as bool?,
+      caseId: fields[29] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, MentalHealthScreeningModel obj) {
     writer
-      ..writeByte(28)
+      ..writeByte(30)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -108,7 +110,11 @@ class MentalHealthScreeningModelAdapter
       ..writeByte(26)
       ..write(obj.whoSrqModel)
       ..writeByte(27)
-      ..write(obj.isUpdated);
+      ..write(obj.isUpdated)
+      ..writeByte(28)
+      ..write(obj.isFormIDAssigned)
+      ..writeByte(29)
+      ..write(obj.caseId);
   }
 
   @override
@@ -166,6 +172,8 @@ _$MentalHealthScreeningModelImpl _$$MentalHealthScreeningModelImplFromJson(
           ? null
           : WHOSrqModel.fromJson(json['whoSrqModel'] as Map<String, dynamic>),
       isUpdated: json['is_updated'] as bool?,
+      isFormIDAssigned: json['is_form_id_assigned'] as bool?,
+      caseId: (json['case_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$MentalHealthScreeningModelImplToJson(

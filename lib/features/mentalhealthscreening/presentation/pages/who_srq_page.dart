@@ -96,306 +96,288 @@ class WHOSRQPage extends StatelessWidget {
           return ReactiveFormBuilder(
               form: () => _whoSrqFormBuilder(
                   whoSrqModel: state.mentalHealthScreeningModel?.whoSrqModel),
-              builder: (BuildContext context, FormGroup formGroup,
-                      Widget? child) =>
-                  AutofillGroup(
-                      child: Column(children: [
-                    const SizedBox(height: kPadding * 2),
-                    Expanded(
-                        child: SingleChildScrollView(
-                            child: Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: kPadding * 2),
-                                child: Column(children: [
-                                  ChipRadioButtons(
-                                    label:
-                                        AppLocalizations.of(context)!.headache,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('headache').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('headache').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label:
-                                        AppLocalizations.of(context)!.apetite,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('apetite').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('apetite').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!.sleep,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('sleep').value = value;
-                                    },
-                                    selected: formGroup.control('sleep').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .frightened,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('frightened').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('frightened').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .handsShake,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('hands_shake').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('hands_shake').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label:
-                                        AppLocalizations.of(context)!.nervous,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('nervous').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('nervous').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .digestionPoor,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('digestion_poor')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('digestion_poor')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .troubleThinking,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('trouble_thinking')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+              builder:
+                  (BuildContext context, FormGroup formGroup, Widget? child) {
+                return AutofillGroup(
+                    child: Column(children: [
+                  const SizedBox(height: kPadding * 2),
+                  Expanded(
+                      child: SingleChildScrollView(
+                          child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: kPadding * 2),
+                              child: Column(children: [
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!.headache,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('headache').value = value;
+                                  },
+                                  selected: formGroup.control('headache').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!.apetite,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('apetite').value = value;
+                                  },
+                                  selected: formGroup.control('apetite').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!.sleep,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('sleep').value = value;
+                                  },
+                                  selected: formGroup.control('sleep').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label:
+                                      AppLocalizations.of(context)!.frightened,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('frightened').value =
+                                        value;
+                                  },
+                                  selected:
+                                      formGroup.control('frightened').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label:
+                                      AppLocalizations.of(context)!.handsShake,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('hands_shake').value =
+                                        value;
+                                  },
+                                  selected:
+                                      formGroup.control('hands_shake').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!.nervous,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('nervous').value = value;
+                                  },
+                                  selected: formGroup.control('nervous').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .digestionPoor,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('digestion_poor').value =
+                                        value;
+                                  },
+                                  selected:
+                                      formGroup.control('digestion_poor').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .troubleThinking,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('trouble_thinking')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label:
-                                        AppLocalizations.of(context)!.unhappy,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('unhappy').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('unhappy').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label:
-                                        AppLocalizations.of(context)!.cryMore,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('cry_more').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('cry_more').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .dailyActivities,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('daily_activities')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('trouble_thinking')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!.unhappy,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('unhappy').value = value;
+                                  },
+                                  selected: formGroup.control('unhappy').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!.cryMore,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('cry_more').value = value;
+                                  },
+                                  selected: formGroup.control('cry_more').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .dailyActivities,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('daily_activities')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .decisionMaking,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('decision_making')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
-                                        .control('decision_making')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .dailyWorkSuffering,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('daily_work_suffering')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('daily_activities')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .decisionMaking,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('decision_making').value =
+                                        value;
+                                  },
+                                  selected: formGroup
+                                      .control('decision_making')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .dailyWorkSuffering,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('daily_work_suffering')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .playUsefulPart,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('play_a_useful_part')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('daily_work_suffering')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .playUsefulPart,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('play_a_useful_part')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .lostInterest,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('lost_interest').value =
-                                          value;
-                                    },
-                                    selected: formGroup
-                                        .control('lost_interest')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .worthlessPerson,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('worthless_person')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('play_a_useful_part')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .lostInterest,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('lost_interest').value =
+                                        value;
+                                  },
+                                  selected:
+                                      formGroup.control('lost_interest').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .worthlessPerson,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('worthless_person')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .endingYourLife,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('ending_your_life')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('worthless_person')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .endingYourLife,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('ending_your_life')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .tiredAllTheTime,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('tired_all_the_time')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('ending_your_life')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .tiredAllTheTime,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('tired_all_the_time')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .uncomfortableFeelings,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup
-                                          .control('uncomfortable_feelings')
-                                          .value = value;
-                                    },
-                                    selected: formGroup
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('tired_all_the_time')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .uncomfortableFeelings,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup
                                         .control('uncomfortable_feelings')
-                                        .value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  ChipRadioButtons(
-                                    label: AppLocalizations.of(context)!
-                                        .easily_tired,
-                                    options: const ['Yes', 'No'],
-                                    crossAxisCount: 2,
-                                    onChanged: (value) {
-                                      formGroup.control('easily_tired').value =
-                                          value;
-                                    },
-                                    selected:
-                                        formGroup.control('easily_tired').value,
-                                  ),
-                                  const SizedBox(height: kPadding * 2),
-                                  AuthButton(
-                                      text: 'Next',
-                                      onClick: () {
-                                        Map<String, dynamic>? calculatedValue =
-                                            _onSave(context, formGroup);
+                                        .value = value;
+                                  },
+                                  selected: formGroup
+                                      .control('uncomfortable_feelings')
+                                      .value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                ChipRadioButtons(
+                                  label: AppLocalizations.of(context)!
+                                      .easily_tired,
+                                  options: const ['Yes', 'No'],
+                                  crossAxisCount: 2,
+                                  onChanged: (value) {
+                                    formGroup.control('easily_tired').value =
+                                        value;
+                                  },
+                                  selected:
+                                      formGroup.control('easily_tired').value,
+                                ),
+                                const SizedBox(height: kPadding * 2),
+                                AuthButton(
+                                    text: 'Next',
+                                    onClick: () {
+                                      Map<String, dynamic>? calculatedValue =
+                                          _onSave(context, formGroup);
 
-                                        context.router.pop(calculatedValue);
-                                      }),
-                                ])))),
-                    const SizedBox(height: kPadding * 2),
-                  ])));
+                                      context.router.pop(calculatedValue);
+                                    }),
+                              ])))),
+                  const SizedBox(height: kPadding * 2),
+                ]));
+              });
         }));
   }
 }
