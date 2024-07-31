@@ -178,14 +178,4 @@ class TatparAcfAppBuilder extends AppBuilder {
                 }),
           ),
         );
-  //  void getCurrentAppLangauge() async {
-  //   // final lang = await Preferences.getValuefor(PreferencesString.localeKey);
-  //   // LanguageProvider().language = lang!.isEmpty ? 'en' : (lang);
-  // }
 }
-
-// class NavigationService {
-//  
-
-//   // ... other methods and getters
-// }
