@@ -28,8 +28,6 @@ class PhoneVerifyPage extends StatelessWidget {
         listener: (context, state) {
           if (state.user != null) {
             context.router.replace(const AppHomeRoute());
-          } else {
-            context.router.replace(RegisterRoute());
           }
         },
         listenWhen: (pastState, currentState) =>

@@ -1,8 +1,7 @@
-import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:in_app_update/in_app_update.dart';
+import 'package:provider/provider.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
@@ -14,9 +13,6 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _checkForUpdate(context);
-    });
     return AutoTabsScaffold(
       routes: const [
         HomeRoute(),
@@ -191,30 +187,6 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
 
   @override
   Widget wrappedRoute(BuildContext context) => this;
-
-  Future<void> _checkForUpdate(BuildContext context) async {
-    print('Checking for Update');
-    try {
-      final info = await InAppUpdate.checkForUpdate();
-      if (info.updateAvailability == UpdateAvailability.updateAvailable) {
-        print('Update available');
-        await _update();
-      }
-    } catch (e) {
-      print('Error checking for update: ${e.toString()}');
-    }
-  }
-
-  Future<void> _update() async {
-    print('Updating');
-    try {
-      DjangoflowAppSnackbar.showInfo('Wait a Minute..Updating the app');
-      await InAppUpdate.startFlexibleUpdate();
-      await InAppUpdate.completeFlexibleUpdate();
-    } catch (e) {
-      print('Error during update: ${e.toString()}');
-    }
-  }
 }
 
 class _BottomNavBarItem extends BottomNavigationBarItem {

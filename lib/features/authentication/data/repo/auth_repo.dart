@@ -121,9 +121,12 @@ class AuthRepo {
       return AppUser.fromJson(userMap);
     } else {
       try {
-        DjangoflowAppSnackbar.showInfo(
-          'Loading User Details',
-        );
+        // WidgetsBinding.instance.addPostFrameCallback((_) {
+        //   DjangoflowAppSnackbar.showInfo(
+        //     'Loading User Details',
+        //   );
+        // });
+
         final request = NetworkRequest(
           usersUrl,
           RequestMethod.get,
