@@ -138,16 +138,16 @@ class CaseCard extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        if (caseModel.assignedTo != null) ...[
-                          const SizedBox(height: kPadding * 0.75),
-                          Text(
-                            '${caseModel.panchayat}',
-                            style: textTheme.bodyMedium?.copyWith(
-                              height: 1.33,
-                              letterSpacing: 0.2,
-                            ),
+
+                        const SizedBox(height: kPadding * 0.75),
+                        Text(
+                          '${caseModel.panchayat}',
+                          style: textTheme.bodyMedium?.copyWith(
+                            height: 1.33,
+                            letterSpacing: 0.2,
                           ),
-                        ],
+                        ),
+
                         const SizedBox(
                           height: kPadding * 0.75,
                         ),
