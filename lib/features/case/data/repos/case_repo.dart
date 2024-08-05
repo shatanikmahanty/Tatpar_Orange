@@ -852,6 +852,9 @@ class CaseRepo {
                   caseModel: null,
                   mentalHealthScreeningModel: null);
               // getCaseModel(caseId: updatedModel.caseId);
+              DjangoflowAppSnackbar.showInfo(
+                  'Successfully updated offline referral models');
+
               await updateTBDataBox(
                   referral.id, AuthCubit.instance.workingCaseId);
               await updateWHODataBox(
@@ -918,7 +921,8 @@ class CaseRepo {
                   caseModel: null,
                   mentalHealthScreeningModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
-
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline TB screening Models');
               log('TBScreening DataBox Contains===========${tbdataBox.values.toList().toString()}');
             } else {
               // Handle error if needed
@@ -980,7 +984,8 @@ class CaseRepo {
                   caseModel: null,
                   mentalHealthScreeningModel: updatedModel);
               //getCaseModel(caseId: updatedModel.caseId);
-
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Mental Health Screening Models');
               log('MentalHealthScreening DataBox Contains===========${whodatabox.values.toList().toString()}');
             } else {
               // Handle error if needed
@@ -1091,7 +1096,8 @@ class CaseRepo {
     final sourceCubit = context.read<SourceCubit>();
     Box<Case> caseBox = Hive.box<Case>('caseList');
     Case caseModelToSave;
-    final caseIdToSearch = model?.caseId ?? tbModel?.caseId;
+    final caseIdToSearch =
+        model?.caseId ?? tbModel?.caseId ?? mentalHealthScreeningModel?.caseId;
     final existingCaseIndex = caseBox.values.toList().indexWhere(
           (existingCase) => existingCase.id == caseIdToSearch,
         );
@@ -1196,7 +1202,8 @@ class CaseRepo {
           );
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print('Updated case in Hive with TB details: $caseModelToSave');
+          print(
+              'Updated case in Hive with Mental Health details: $caseModelToSave');
         }
       }
     } else {
