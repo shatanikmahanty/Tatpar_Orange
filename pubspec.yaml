@@ -45,7 +45,7 @@ dependencies:
   flutter_svg: ^2.0.10+1
   flex_color_scheme: ^7.3.1
   reactive_image_picker: ^5.0.0
-  dio: ^5.4.1
+  dio: ^5.5.0+1
   firebase_auth: ^4.17.4
   pretty_dio_logger: ^1.3.1
   firebase_storage: ^11.6.6
