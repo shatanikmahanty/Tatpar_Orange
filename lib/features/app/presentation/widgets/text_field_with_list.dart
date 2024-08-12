@@ -121,17 +121,18 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
                 textAlignVertical: TextAlignVertical.top,
                 decoration: InputDecoration(
                   hintText: widget.placeholder,
-                  prefixIcon: Row(
-                    children: [
-                      if (kIsWeb)
-                        IconButton(
-                          onPressed: () {
-                            focusNode.unfocus();
+                  suffix: kIsWeb
+                      ? GestureDetector(
+                          onTap: () {
+                            hasFocus = false;
+                            setState(() {});
                           },
-                          icon: const Icon(Icons.arrow_upward),
-                        ),
-                      if (widget.prefixIcon != null)
-                        Container(
+                          child: const Icon(Icons.arrow_upward),
+                        )
+                      : null,
+                  prefixIcon: widget.prefixIcon == null
+                      ? null
+                      : Container(
                           margin: const EdgeInsets.symmetric(vertical: kPadding * 1.25).copyWith(
                             right: kPadding / 2,
                           ),
@@ -153,8 +154,6 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
                             ),
                           ),
                         ),
-                    ],
-                  ),
                 ),
               ),
             ),
