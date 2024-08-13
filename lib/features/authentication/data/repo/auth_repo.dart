@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
@@ -42,8 +43,7 @@ class AuthRepo {
         phoneNumber: '+91${phoneNo.trim()}',
         timeout: const Duration(seconds: 30),
         verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
-          final userCredentials =
-              await _auth.signInWithCredential(phoneAuthCredential);
+          final userCredentials = await _auth.signInWithCredential(phoneAuthCredential);
           handlePostLogin(userCredentials);
         },
         verificationFailed: (FirebaseAuthException error) {
@@ -75,8 +75,7 @@ class AuthRepo {
         handlePostLogin(userCredential);
         return;
       }
-      final credential = PhoneAuthProvider.credential(
-          verificationId: _verificationId ?? '', smsCode: otp);
+      final credential = PhoneAuthProvider.credential(verificationId: _verificationId ?? '', smsCode: otp);
       final userCredential = await _auth.signInWithCredential(credential);
       handlePostLogin(userCredential);
     } catch (e) {
@@ -131,15 +130,12 @@ class AuthRepo {
           usersUrl,
           RequestMethod.get,
           isAuthorized: true,
-          data: {},
         );
         final result = await NetworkManager.instance.perform(request);
         if (result.status == Status.ok && result.response!.statusCode == 200) {
           final List<dynamic> usersList = result.data['data']['users'];
           final user = usersList.firstWhere(
-            (user) =>
-                user['mobile_number'] ==
-                _auth.currentUser!.phoneNumber!.replaceFirst('+91', ''),
+            (user) => user['mobile_number'] == _auth.currentUser!.phoneNumber!.replaceFirst('+91', ''),
             orElse: () => null,
           );
           if (user != null) {

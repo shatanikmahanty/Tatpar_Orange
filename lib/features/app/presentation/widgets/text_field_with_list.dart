@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:reactive_forms/reactive_forms.dart';
@@ -60,10 +61,6 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
   @override
   void initState() {
     super.initState();
-    focusNode.addListener(() {
-      hasFocus = focusNode.hasFocus;
-      setState(() {});
-    });
     searchList = widget.listData;
   }
 
@@ -81,6 +78,7 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final listData = widget.listData;
     return Padding(
       padding: widget.padding,
       child: Column(
@@ -98,145 +96,152 @@ class _TextFieldWithListState extends State<TextFieldWithList> {
             const SizedBox(
               height: kPadding,
             ),
-          ReactiveTextField<String>(
-            onChanged: (control) {
-              searchList = widget.listData
-                  .where((element) => element
-                      .toLowerCase()
-                      .contains((control.value ?? '').toLowerCase()))
-                  .toList();
-              setState(() {});
-            },
-            focusNode: focusNode,
-            formControlName: widget.controlName,
-            autofocus: widget.autoFocus,
-            inputFormatters: widget.inputFormatter,
-            maxLength: widget.maxLength,
-            keyboardType: widget.keyboardType,
-            maxLines: widget.minLines > 1
-                ? (widget.maxLines == 1 ? 3 : widget.maxLines)
-                : 1,
-            minLines: widget.minLines,
-            textAlignVertical: TextAlignVertical.top,
-            decoration: InputDecoration(
-              hintText: widget.placeholder,
-              prefixIcon: widget.prefixIcon == null
-                  ? null
-                  : Container(
-                      margin:
-                          const EdgeInsets.symmetric(vertical: kPadding * 1.25)
-                              .copyWith(
-                        right: kPadding / 2,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border(
-                          right: BorderSide(
-                            width: 1,
-                            color: Theme.of(context).dividerColor,
+          FocusScope(
+            child: Focus(
+              onFocusChange: (focus) {
+                if (!focus && kIsWeb) return;
+                hasFocus = focus;
+                setState(() {});
+              },
+              child: ReactiveTextField<String>(
+                onChanged: (control) {
+                  searchList = listData
+                      .where((element) => element.toLowerCase().contains((control.value ?? '').toLowerCase()))
+                      .toList();
+                  setState(() {});
+                },
+                focusNode: focusNode,
+                formControlName: widget.controlName,
+                autofocus: widget.autoFocus,
+                inputFormatters: widget.inputFormatter,
+                maxLength: widget.maxLength,
+                keyboardType: widget.keyboardType,
+                maxLines: widget.minLines > 1 ? (widget.maxLines == 1 ? 3 : widget.maxLines) : 1,
+                minLines: widget.minLines,
+                textAlignVertical: TextAlignVertical.top,
+                decoration: InputDecoration(
+                  hintText: widget.placeholder,
+                  suffix: kIsWeb
+                      ? GestureDetector(
+                          onTap: () {
+                            hasFocus = false;
+                            setState(() {});
+                          },
+                          child: const Icon(Icons.arrow_upward),
+                        )
+                      : null,
+                  prefixIcon: widget.prefixIcon == null
+                      ? null
+                      : Container(
+                          margin: const EdgeInsets.symmetric(vertical: kPadding * 1.25).copyWith(
+                            right: kPadding / 2,
                           ),
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        widthFactor: 1.0,
-                        heightFactor: widget.minLines > 1
-                            ? widget.minLines.toDouble()
-                            : null,
-                        child: Icon(
-                          widget.prefixIcon,
-                          color: Theme.of(context).primaryColor,
-                        ),
-                      ),
-                    ),
-            ),
-          ),
-          if (widget.listData.isEmpty && hasFocus)
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: kPadding * 4),
-              child: Text(
-                widget.emptyString,
-                textAlign: TextAlign.center,
-                style: Theme.of(context).textTheme.labelMedium,
-              ),
-            ),
-          if (widget.listData.isNotEmpty && hasFocus)
-            Scrollbar(
-              controller: scrollController,
-              child: SizedBox(
-                height: kPadding * 15,
-                child: GridView.builder(
-                  controller: scrollController,
-                  itemCount: searchList.length,
-                  gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
-                    maxCrossAxisExtent: kPadding * 28,
-                    childAspectRatio: 3.1,
-                    crossAxisSpacing: kPadding,
-                    mainAxisSpacing: kPadding * 2,
-                  ),
-                  padding: const EdgeInsets.symmetric(vertical: kPadding / 2),
-                  itemBuilder: (context, index) => GestureDetector(
-                      child: Container(
-                        padding: const EdgeInsets.all(kPadding / 2),
-                        decoration: BoxDecoration(
-                          border:
-                              Border.all(color: Theme.of(context).primaryColor),
-                          borderRadius: BorderRadius.circular(kPadding),
-                        ),
-                        child: Row(
-                          children: [
-                            if (!selectedList.contains(searchList[index]))
-                              Icon(
-                                Icons.circle,
-                                color: theme.colorScheme.secondary,
-                              )
-                            else
-                              Icon(
-                                Icons.check_circle,
-                                color: theme.colorScheme.primary,
-                              ),
-                            const SizedBox(width: kPadding),
-                            Expanded(
-                              child: Text(
-                                searchList[index].split(':')[0],
+                          decoration: BoxDecoration(
+                            border: Border(
+                              right: BorderSide(
+                                width: 1,
+                                color: Theme.of(context).dividerColor,
                               ),
                             ),
-                          ],
+                          ),
+                          child: Align(
+                            alignment: Alignment.topCenter,
+                            widthFactor: 1.0,
+                            heightFactor: widget.minLines > 1 ? widget.minLines.toDouble() : null,
+                            child: Icon(
+                              widget.prefixIcon,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                          ),
                         ),
-                      ),
-                      onTap: () {
-                        final itemTapped = searchList[index];
+                ),
+              ),
+            ),
+          ),
+          if (hasFocus)
+            if (listData.isEmpty)
+              Padding(
+                padding: const EdgeInsets.symmetric(vertical: kPadding * 4),
+                child: Text(widget.emptyString,
+                    textAlign: TextAlign.center, style: Theme.of(context).textTheme.labelMedium),
+              )
+            else if (listData.isNotEmpty)
+              Scrollbar(
+                controller: scrollController,
+                child: SizedBox(
+                  height: kPadding * 15,
+                  child: GridView.builder(
+                    controller: scrollController,
+                    itemCount: searchList.length,
+                    gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+                      maxCrossAxisExtent: kPadding * 28,
+                      childAspectRatio: 3.1,
+                      crossAxisSpacing: kPadding,
+                      mainAxisSpacing: kPadding * 2,
+                    ),
+                    padding: const EdgeInsets.symmetric(vertical: kPadding / 2),
+                    itemBuilder: (context, index) => GestureDetector(
+                        child: Container(
+                          padding: const EdgeInsets.all(kPadding / 2),
+                          decoration: BoxDecoration(
+                            border: Border.all(color: Theme.of(context).primaryColor),
+                            borderRadius: BorderRadius.circular(kPadding),
+                          ),
+                          child: Row(
+                            children: [
+                              if (!selectedList.contains(searchList[index]))
+                                Icon(
+                                  Icons.circle,
+                                  color: theme.colorScheme.secondary,
+                                )
+                              else
+                                Icon(
+                                  Icons.check_circle,
+                                  color: theme.colorScheme.primary,
+                                ),
+                              const SizedBox(width: kPadding),
+                              Expanded(
+                                child: Text(
+                                  searchList[index].split(':')[0],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        onTap: () {
+                          final itemTapped = searchList[index];
 
-                        if (!widget.allowMultiSelection) {
-                          if (selectedList.contains(itemTapped)) {
-                            selectedList.remove(itemTapped);
+                          if (!widget.allowMultiSelection) {
+                            if (selectedList.contains(itemTapped)) {
+                              selectedList.remove(itemTapped);
+                              setState(() {});
+                              widget.onSelected(selectedList);
+                              return;
+                            } else {
+                              selectedList.clear();
+                              selectedList.add(itemTapped);
+                              focusNode.unfocus();
+                            }
                             setState(() {});
                             widget.onSelected(selectedList);
                             return;
-                          } else {
-                            selectedList.clear();
-                            selectedList.add(itemTapped);
-                            focusNode.unfocus();
                           }
+
+                          // Multi selection logic
+                          if (selectedList.contains(itemTapped)) {
+                            selectedList.remove(itemTapped);
+                          } else {
+                            selectedList.add(itemTapped);
+                          }
+
                           setState(() {});
                           widget.onSelected(selectedList);
-                          return;
-                        }
-
-                        // Multi selection logic
-                        if (selectedList.contains(itemTapped)) {
-                          selectedList.remove(itemTapped);
-                        } else {
-                          selectedList.add(itemTapped);
-                        }
-
-                        setState(() {});
-                        widget.onSelected(selectedList);
-                      }),
+                        }),
+                  ),
                 ),
-              ),
-            )
-          else
-            Container(),
+              )
+            else
+              Container(),
         ],
       ),
     );
