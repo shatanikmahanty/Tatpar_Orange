@@ -10,57 +10,58 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
+          // Check for infinite or invalid constraints
           if (constraints.maxHeight == double.infinity ||
               constraints.maxWidth == double.infinity) {
             return const Center(child: Text('Something went wrong'));
           }
 
-          final double availableHeight = constraints.maxHeight;
-          final double pallinosHeight = availableHeight * 0.1;
-          final double tatparLogoHeight = availableHeight * 0.1;
-          final double iihBgLogoHeight = availableHeight * 0.8;
-
           return Column(
             children: [
-              ColoredBox(
-                color: const Color.fromARGB(255, 25, 118, 210),
-                child: Padding(
-                  padding:
-                      EdgeInsets.symmetric(horizontal: availableHeight * 0.02),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Container(
-                        margin: const EdgeInsets.only(top: 150),
-                        alignment: Alignment.topCenter,
-                        height: availableHeight * 0.08,
-                        child: Assets.images.pallinos.image(
-                          height: pallinosHeight,
-                          width: pallinosHeight,
+              // Top section with the logos
+              Expanded(
+                flex: 3, // Take 20% of the available height
+                child: ColoredBox(
+                  color: const Color.fromARGB(255, 25, 118, 210),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(
+                        horizontal: constraints.maxHeight * 0.02),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const Spacer(
+                            flex:
+                                20), // Pushes the pallinos image to the top 5/50 space
+                        Expanded(
+                          flex: 10, // Pallinos image takes 8/50 of the space
+                          child: Assets.images.pallinos.image(),
                         ),
-                      ),
-                      SizedBox(
-                        height: tatparLogoHeight,
-                        child: Align(
+                        const Spacer(flex: 1), // Space between images
+                        Expanded(
+                          flex: 8, // Tatpar logo takes 8/50 of the space
+                          child: Align(
                             alignment: Alignment.topCenter,
-                            child: Assets.images.tatparLogo.image()),
-                      ),
-                      Container(
-                        height: availableHeight * 0.2,
-                        alignment: Alignment.bottomCenter,
-                        child: Assets.images.iihBgLogo.image(
-                          height: iihBgLogoHeight,
-                          width: iihBgLogoHeight,
+                            child: Assets.images.tatparLogo.image(),
+                          ),
                         ),
-                      ),
-                    ],
+                        const Spacer(flex: 5), // Space between images
+                        Expanded(
+                          flex:
+                              24, // IIH background logo takes 24/50 of the space
+                          child: Align(
+                            alignment: Alignment.bottomCenter,
+                            child: Assets.images.iihBgLogo.image(),
+                          ),
+                        ),
+                        const Spacer(flex: 5), // Space at the bottom
+                      ],
+                    ),
                   ),
                 ),
               ),
-              // Flexible to allow content to take only necessary space
-              Flexible(
-                fit: FlexFit.loose,
+              const Expanded(
+                flex: 3,
                 child: AutoRouter(),
               ),
             ],
