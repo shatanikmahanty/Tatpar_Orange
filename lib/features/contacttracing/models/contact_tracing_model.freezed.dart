@@ -20,50 +20,77 @@ ContactTracingModel _$ContactTracingModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$ContactTracingModel {
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'tb_contact_name')
   String? get tbContactName => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'age')
   int? get age => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'test_conducted')
   String? get testConducted => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(
       name: 'cxr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get cxrDate => throw _privateConstructorUsedError;
+  @HiveField(6)
   @JsonKey(name: 'cxr_result')
   String? get cxrResult => throw _privateConstructorUsedError;
+  @HiveField(7)
   @JsonKey(
       name: 'tbi_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get tbiDate => throw _privateConstructorUsedError;
+  @HiveField(8)
   @JsonKey(name: 'tbi_result')
   String? get tbiResult => throw _privateConstructorUsedError;
+  @HiveField(9)
   @JsonKey(name: 'nikshay_id')
   String? get nikshayID => throw _privateConstructorUsedError;
+  @HiveField(10)
   @JsonKey(name: 'tpt_eligible')
   String? get tptEligible => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(name: 'tpt_regimen')
   int? get selectedTptRegimen => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(includeIfNull: false)
   String? get tptRegimen => throw _privateConstructorUsedError;
+  @HiveField(13)
   @JsonKey(
       name: 'tpt_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get tptStartDate => throw _privateConstructorUsedError;
+  @HiveField(14)
   @JsonKey(name: 'weight')
   int? get weight => throw _privateConstructorUsedError;
+  @HiveField(15)
   @JsonKey(name: 'side_effects')
   String? get tptSideEffects => throw _privateConstructorUsedError;
+  @HiveField(16)
   @JsonKey(
       name: 'tpt_outcome_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get tptOutcomeDate => throw _privateConstructorUsedError;
+  @HiveField(17)
   @JsonKey(name: 'tpt_outcome')
   String? get tptOutcome => throw _privateConstructorUsedError;
+  @HiveField(18)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated => throw _privateConstructorUsedError;
+  @HiveField(19)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId => throw _privateConstructorUsedError;
+  @HiveField(20)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -78,40 +105,53 @@ abstract class $ContactTracingModelCopyWith<$Res> {
       _$ContactTracingModelCopyWithImpl<$Res, ContactTracingModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
-      @JsonKey(name: 'tb_contact_name') String? tbContactName,
-      @JsonKey(name: 'age') int? age,
-      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
-      @JsonKey(name: 'test_conducted') String? testConducted,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1) @JsonKey(name: 'tb_contact_name') String? tbContactName,
+      @HiveField(2) @JsonKey(name: 'age') int? age,
+      @HiveField(3)
+      @JsonKey(name: 'screening_outcome')
+      String? screeningOutcome,
+      @HiveField(4) @JsonKey(name: 'test_conducted') String? testConducted,
+      @HiveField(5)
       @JsonKey(
           name: 'cxr_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cxrDate,
-      @JsonKey(name: 'cxr_result') String? cxrResult,
+      @HiveField(6) @JsonKey(name: 'cxr_result') String? cxrResult,
+      @HiveField(7)
       @JsonKey(
           name: 'tbi_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? tbiDate,
-      @JsonKey(name: 'tbi_result') String? tbiResult,
-      @JsonKey(name: 'nikshay_id') String? nikshayID,
-      @JsonKey(name: 'tpt_eligible') String? tptEligible,
-      @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
-      @JsonKey(includeIfNull: false) String? tptRegimen,
+      @HiveField(8) @JsonKey(name: 'tbi_result') String? tbiResult,
+      @HiveField(9) @JsonKey(name: 'nikshay_id') String? nikshayID,
+      @HiveField(10) @JsonKey(name: 'tpt_eligible') String? tptEligible,
+      @HiveField(11) @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
+      @HiveField(12) @JsonKey(includeIfNull: false) String? tptRegimen,
+      @HiveField(13)
       @JsonKey(
           name: 'tpt_start_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? tptStartDate,
-      @JsonKey(name: 'weight') int? weight,
-      @JsonKey(name: 'side_effects') String? tptSideEffects,
+      @HiveField(14) @JsonKey(name: 'weight') int? weight,
+      @HiveField(15) @JsonKey(name: 'side_effects') String? tptSideEffects,
+      @HiveField(16)
       @JsonKey(
           name: 'tpt_outcome_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? tptOutcomeDate,
-      @JsonKey(name: 'tpt_outcome') String? tptOutcome});
+      @HiveField(17) @JsonKey(name: 'tpt_outcome') String? tptOutcome,
+      @HiveField(18) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(19)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      int? caseId,
+      @HiveField(20)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -145,6 +185,9 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
     Object? tptSideEffects = freezed,
     Object? tptOutcomeDate = freezed,
     Object? tptOutcome = freezed,
+    Object? isUpdated = freezed,
+    Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -219,6 +262,18 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
           ? _value.tptOutcome
           : tptOutcome // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -232,40 +287,53 @@ abstract class _$$ContactTracingModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
-      @JsonKey(name: 'tb_contact_name') String? tbContactName,
-      @JsonKey(name: 'age') int? age,
-      @JsonKey(name: 'screening_outcome') String? screeningOutcome,
-      @JsonKey(name: 'test_conducted') String? testConducted,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1) @JsonKey(name: 'tb_contact_name') String? tbContactName,
+      @HiveField(2) @JsonKey(name: 'age') int? age,
+      @HiveField(3)
+      @JsonKey(name: 'screening_outcome')
+      String? screeningOutcome,
+      @HiveField(4) @JsonKey(name: 'test_conducted') String? testConducted,
+      @HiveField(5)
       @JsonKey(
           name: 'cxr_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? cxrDate,
-      @JsonKey(name: 'cxr_result') String? cxrResult,
+      @HiveField(6) @JsonKey(name: 'cxr_result') String? cxrResult,
+      @HiveField(7)
       @JsonKey(
           name: 'tbi_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? tbiDate,
-      @JsonKey(name: 'tbi_result') String? tbiResult,
-      @JsonKey(name: 'nikshay_id') String? nikshayID,
-      @JsonKey(name: 'tpt_eligible') String? tptEligible,
-      @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
-      @JsonKey(includeIfNull: false) String? tptRegimen,
+      @HiveField(8) @JsonKey(name: 'tbi_result') String? tbiResult,
+      @HiveField(9) @JsonKey(name: 'nikshay_id') String? nikshayID,
+      @HiveField(10) @JsonKey(name: 'tpt_eligible') String? tptEligible,
+      @HiveField(11) @JsonKey(name: 'tpt_regimen') int? selectedTptRegimen,
+      @HiveField(12) @JsonKey(includeIfNull: false) String? tptRegimen,
+      @HiveField(13)
       @JsonKey(
           name: 'tpt_start_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? tptStartDate,
-      @JsonKey(name: 'weight') int? weight,
-      @JsonKey(name: 'side_effects') String? tptSideEffects,
+      @HiveField(14) @JsonKey(name: 'weight') int? weight,
+      @HiveField(15) @JsonKey(name: 'side_effects') String? tptSideEffects,
+      @HiveField(16)
       @JsonKey(
           name: 'tpt_outcome_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? tptOutcomeDate,
-      @JsonKey(name: 'tpt_outcome') String? tptOutcome});
+      @HiveField(17) @JsonKey(name: 'tpt_outcome') String? tptOutcome,
+      @HiveField(18) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(19)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      int? caseId,
+      @HiveField(20)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -297,6 +365,9 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
     Object? tptSideEffects = freezed,
     Object? tptOutcomeDate = freezed,
     Object? tptOutcome = freezed,
+    Object? isUpdated = freezed,
+    Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_$ContactTracingModelImpl(
       id: freezed == id
@@ -371,6 +442,18 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
           ? _value.tptOutcome
           : tptOutcome // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -379,110 +462,151 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$ContactTracingModelImpl implements _ContactTracingModel {
   const _$ContactTracingModelImpl(
-      {@JsonKey(name: 'id', includeToJson: false) this.id,
-      @JsonKey(name: 'tb_contact_name') this.tbContactName,
-      @JsonKey(name: 'age') this.age,
-      @JsonKey(name: 'screening_outcome') this.screeningOutcome,
-      @JsonKey(name: 'test_conducted') this.testConducted,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) this.id,
+      @HiveField(1) @JsonKey(name: 'tb_contact_name') this.tbContactName,
+      @HiveField(2) @JsonKey(name: 'age') this.age,
+      @HiveField(3) @JsonKey(name: 'screening_outcome') this.screeningOutcome,
+      @HiveField(4) @JsonKey(name: 'test_conducted') this.testConducted,
+      @HiveField(5)
       @JsonKey(
           name: 'cxr_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.cxrDate,
-      @JsonKey(name: 'cxr_result') this.cxrResult,
+      @HiveField(6) @JsonKey(name: 'cxr_result') this.cxrResult,
+      @HiveField(7)
       @JsonKey(
           name: 'tbi_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.tbiDate,
-      @JsonKey(name: 'tbi_result') this.tbiResult,
-      @JsonKey(name: 'nikshay_id') this.nikshayID,
-      @JsonKey(name: 'tpt_eligible') this.tptEligible,
-      @JsonKey(name: 'tpt_regimen') this.selectedTptRegimen,
-      @JsonKey(includeIfNull: false) this.tptRegimen,
+      @HiveField(8) @JsonKey(name: 'tbi_result') this.tbiResult,
+      @HiveField(9) @JsonKey(name: 'nikshay_id') this.nikshayID,
+      @HiveField(10) @JsonKey(name: 'tpt_eligible') this.tptEligible,
+      @HiveField(11) @JsonKey(name: 'tpt_regimen') this.selectedTptRegimen,
+      @HiveField(12) @JsonKey(includeIfNull: false) this.tptRegimen,
+      @HiveField(13)
       @JsonKey(
           name: 'tpt_start_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.tptStartDate,
-      @JsonKey(name: 'weight') this.weight,
-      @JsonKey(name: 'side_effects') this.tptSideEffects,
+      @HiveField(14) @JsonKey(name: 'weight') this.weight,
+      @HiveField(15) @JsonKey(name: 'side_effects') this.tptSideEffects,
+      @HiveField(16)
       @JsonKey(
           name: 'tpt_outcome_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.tptOutcomeDate,
-      @JsonKey(name: 'tpt_outcome') this.tptOutcome});
+      @HiveField(17) @JsonKey(name: 'tpt_outcome') this.tptOutcome,
+      @HiveField(18) @JsonKey(name: 'is_updated') this.isUpdated,
+      @HiveField(19)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      this.caseId,
+      @HiveField(20)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      this.isFormIDAssigned});
 
   factory _$ContactTracingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContactTracingModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'tb_contact_name')
   final String? tbContactName;
   @override
+  @HiveField(2)
   @JsonKey(name: 'age')
   final int? age;
   @override
+  @HiveField(3)
   @JsonKey(name: 'screening_outcome')
   final String? screeningOutcome;
   @override
+  @HiveField(4)
   @JsonKey(name: 'test_conducted')
   final String? testConducted;
   @override
+  @HiveField(5)
   @JsonKey(
       name: 'cxr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? cxrDate;
   @override
+  @HiveField(6)
   @JsonKey(name: 'cxr_result')
   final String? cxrResult;
   @override
+  @HiveField(7)
   @JsonKey(
       name: 'tbi_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? tbiDate;
   @override
+  @HiveField(8)
   @JsonKey(name: 'tbi_result')
   final String? tbiResult;
   @override
+  @HiveField(9)
   @JsonKey(name: 'nikshay_id')
   final String? nikshayID;
   @override
+  @HiveField(10)
   @JsonKey(name: 'tpt_eligible')
   final String? tptEligible;
   @override
+  @HiveField(11)
   @JsonKey(name: 'tpt_regimen')
   final int? selectedTptRegimen;
   @override
+  @HiveField(12)
   @JsonKey(includeIfNull: false)
   final String? tptRegimen;
   @override
+  @HiveField(13)
   @JsonKey(
       name: 'tpt_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? tptStartDate;
   @override
+  @HiveField(14)
   @JsonKey(name: 'weight')
   final int? weight;
   @override
+  @HiveField(15)
   @JsonKey(name: 'side_effects')
   final String? tptSideEffects;
   @override
+  @HiveField(16)
   @JsonKey(
       name: 'tpt_outcome_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? tptOutcomeDate;
   @override
+  @HiveField(17)
   @JsonKey(name: 'tpt_outcome')
   final String? tptOutcome;
+  @override
+  @HiveField(18)
+  @JsonKey(name: 'is_updated')
+  final bool? isUpdated;
+  @override
+  @HiveField(19)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  final int? caseId;
+  @override
+  @HiveField(20)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  final bool? isFormIDAssigned;
 
   @override
   String toString() {
-    return 'ContactTracingModel(id: $id, tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, cxrDate: $cxrDate, cxrResult: $cxrResult, tbiDate: $tbiDate, tbiResult: $tbiResult, nikshayID: $nikshayID, tptEligible: $tptEligible, selectedTptRegimen: $selectedTptRegimen, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome)';
+    return 'ContactTracingModel(id: $id, tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, cxrDate: $cxrDate, cxrResult: $cxrResult, tbiDate: $tbiDate, tbiResult: $tbiResult, nikshayID: $nikshayID, tptEligible: $tptEligible, selectedTptRegimen: $selectedTptRegimen, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
   }
 
   @override
@@ -520,31 +644,40 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
             (identical(other.tptOutcomeDate, tptOutcomeDate) ||
                 other.tptOutcomeDate == tptOutcomeDate) &&
             (identical(other.tptOutcome, tptOutcome) ||
-                other.tptOutcome == tptOutcome));
+                other.tptOutcome == tptOutcome) &&
+            (identical(other.isUpdated, isUpdated) ||
+                other.isUpdated == isUpdated) &&
+            (identical(other.caseId, caseId) || other.caseId == caseId) &&
+            (identical(other.isFormIDAssigned, isFormIDAssigned) ||
+                other.isFormIDAssigned == isFormIDAssigned));
   }
 
   @JsonKey(ignore: true)
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      id,
-      tbContactName,
-      age,
-      screeningOutcome,
-      testConducted,
-      cxrDate,
-      cxrResult,
-      tbiDate,
-      tbiResult,
-      nikshayID,
-      tptEligible,
-      selectedTptRegimen,
-      tptRegimen,
-      tptStartDate,
-      weight,
-      tptSideEffects,
-      tptOutcomeDate,
-      tptOutcome);
+  int get hashCode => Object.hashAll([
+        runtimeType,
+        id,
+        tbContactName,
+        age,
+        screeningOutcome,
+        testConducted,
+        cxrDate,
+        cxrResult,
+        tbiDate,
+        tbiResult,
+        nikshayID,
+        tptEligible,
+        selectedTptRegimen,
+        tptRegimen,
+        tptStartDate,
+        weight,
+        tptSideEffects,
+        tptOutcomeDate,
+        tptOutcome,
+        isUpdated,
+        caseId,
+        isFormIDAssigned
+      ]);
 
   @JsonKey(ignore: true)
   @override
@@ -563,107 +696,157 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
 
 abstract class _ContactTracingModel implements ContactTracingModel {
   const factory _ContactTracingModel(
-          {@JsonKey(name: 'id', includeToJson: false) final int? id,
-          @JsonKey(name: 'tb_contact_name') final String? tbContactName,
-          @JsonKey(name: 'age') final int? age,
-          @JsonKey(name: 'screening_outcome') final String? screeningOutcome,
-          @JsonKey(name: 'test_conducted') final String? testConducted,
-          @JsonKey(
-              name: 'cxr_date',
-              fromJson: fromJsonToDateTime,
-              toJson: _dateTimeToJson)
-          final DateTime? cxrDate,
-          @JsonKey(name: 'cxr_result') final String? cxrResult,
-          @JsonKey(
-              name: 'tbi_date',
-              fromJson: fromJsonToDateTime,
-              toJson: _dateTimeToJson)
-          final DateTime? tbiDate,
-          @JsonKey(name: 'tbi_result') final String? tbiResult,
-          @JsonKey(name: 'nikshay_id') final String? nikshayID,
-          @JsonKey(name: 'tpt_eligible') final String? tptEligible,
-          @JsonKey(name: 'tpt_regimen') final int? selectedTptRegimen,
-          @JsonKey(includeIfNull: false) final String? tptRegimen,
-          @JsonKey(
-              name: 'tpt_start_date',
-              fromJson: fromJsonToDateTime,
-              toJson: _dateTimeToJson)
-          final DateTime? tptStartDate,
-          @JsonKey(name: 'weight') final int? weight,
-          @JsonKey(name: 'side_effects') final String? tptSideEffects,
-          @JsonKey(
-              name: 'tpt_outcome_date',
-              fromJson: fromJsonToDateTime,
-              toJson: _dateTimeToJson)
-          final DateTime? tptOutcomeDate,
-          @JsonKey(name: 'tpt_outcome') final String? tptOutcome}) =
-      _$ContactTracingModelImpl;
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) final int? id,
+      @HiveField(1)
+      @JsonKey(name: 'tb_contact_name')
+      final String? tbContactName,
+      @HiveField(2) @JsonKey(name: 'age') final int? age,
+      @HiveField(3)
+      @JsonKey(name: 'screening_outcome')
+      final String? screeningOutcome,
+      @HiveField(4)
+      @JsonKey(name: 'test_conducted')
+      final String? testConducted,
+      @HiveField(5)
+      @JsonKey(
+          name: 'cxr_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? cxrDate,
+      @HiveField(6) @JsonKey(name: 'cxr_result') final String? cxrResult,
+      @HiveField(7)
+      @JsonKey(
+          name: 'tbi_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? tbiDate,
+      @HiveField(8) @JsonKey(name: 'tbi_result') final String? tbiResult,
+      @HiveField(9) @JsonKey(name: 'nikshay_id') final String? nikshayID,
+      @HiveField(10) @JsonKey(name: 'tpt_eligible') final String? tptEligible,
+      @HiveField(11)
+      @JsonKey(name: 'tpt_regimen')
+      final int? selectedTptRegimen,
+      @HiveField(12) @JsonKey(includeIfNull: false) final String? tptRegimen,
+      @HiveField(13)
+      @JsonKey(
+          name: 'tpt_start_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? tptStartDate,
+      @HiveField(14) @JsonKey(name: 'weight') final int? weight,
+      @HiveField(15)
+      @JsonKey(name: 'side_effects')
+      final String? tptSideEffects,
+      @HiveField(16)
+      @JsonKey(
+          name: 'tpt_outcome_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? tptOutcomeDate,
+      @HiveField(17) @JsonKey(name: 'tpt_outcome') final String? tptOutcome,
+      @HiveField(18) @JsonKey(name: 'is_updated') final bool? isUpdated,
+      @HiveField(19)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      final int? caseId,
+      @HiveField(20)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      final bool? isFormIDAssigned}) = _$ContactTracingModelImpl;
 
   factory _ContactTracingModel.fromJson(Map<String, dynamic> json) =
       _$ContactTracingModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'tb_contact_name')
   String? get tbContactName;
   @override
+  @HiveField(2)
   @JsonKey(name: 'age')
   int? get age;
   @override
+  @HiveField(3)
   @JsonKey(name: 'screening_outcome')
   String? get screeningOutcome;
   @override
+  @HiveField(4)
   @JsonKey(name: 'test_conducted')
   String? get testConducted;
   @override
+  @HiveField(5)
   @JsonKey(
       name: 'cxr_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get cxrDate;
   @override
+  @HiveField(6)
   @JsonKey(name: 'cxr_result')
   String? get cxrResult;
   @override
+  @HiveField(7)
   @JsonKey(
       name: 'tbi_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get tbiDate;
   @override
+  @HiveField(8)
   @JsonKey(name: 'tbi_result')
   String? get tbiResult;
   @override
+  @HiveField(9)
   @JsonKey(name: 'nikshay_id')
   String? get nikshayID;
   @override
+  @HiveField(10)
   @JsonKey(name: 'tpt_eligible')
   String? get tptEligible;
   @override
+  @HiveField(11)
   @JsonKey(name: 'tpt_regimen')
   int? get selectedTptRegimen;
   @override
+  @HiveField(12)
   @JsonKey(includeIfNull: false)
   String? get tptRegimen;
   @override
+  @HiveField(13)
   @JsonKey(
       name: 'tpt_start_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get tptStartDate;
   @override
+  @HiveField(14)
   @JsonKey(name: 'weight')
   int? get weight;
   @override
+  @HiveField(15)
   @JsonKey(name: 'side_effects')
   String? get tptSideEffects;
   @override
+  @HiveField(16)
   @JsonKey(
       name: 'tpt_outcome_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get tptOutcomeDate;
   @override
+  @HiveField(17)
   @JsonKey(name: 'tpt_outcome')
   String? get tptOutcome;
+  @override
+  @HiveField(18)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated;
+  @override
+  @HiveField(19)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId;
+  @override
+  @HiveField(20)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned;
   @override
   @JsonKey(ignore: true)
   _$$ContactTracingModelImplCopyWith<_$ContactTracingModelImpl> get copyWith =>

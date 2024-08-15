@@ -3,6 +3,206 @@
 part of 'diagnosis_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class DiagnosisModelAdapter extends TypeAdapter<DiagnosisModel> {
+  @override
+  final int typeId = 22;
+
+  @override
+  DiagnosisModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return DiagnosisModel(
+      id: fields[0] as int?,
+      diagnosisInitiated: fields[1] as String?,
+      firstConsultation: fields[2] as String?,
+      firstConsultationDate: fields[3] as DateTime?,
+      chestXray: fields[4] as String?,
+      chestXrayDate: fields[5] as DateTime?,
+      chestXrayResult: fields[6] as String?,
+      afbDone: fields[7] as String?,
+      afbLabNumber: fields[8] as String?,
+      afb1Result: fields[9] as String?,
+      selectedAfb1Result: fields[10] as int?,
+      afb1ResultDate: fields[11] as DateTime?,
+      afb2Result: fields[12] as String?,
+      selectedAfb2Result: fields[13] as int?,
+      afb2ResultDate: fields[14] as DateTime?,
+      naatTest: fields[15] as String?,
+      naatMachine: fields[16] as String?,
+      selectedNaatMachine: fields[17] as int?,
+      naatSite: fields[18] as String?,
+      naatLabNumber: fields[19] as String?,
+      sampleCollectionDate: fields[20] as DateTime?,
+      naatResultDate: fields[21] as DateTime?,
+      mtbResult: fields[22] as String?,
+      selectedMtbResult: fields[23] as int?,
+      rifResistance: fields[24] as String?,
+      xdrDone: fields[25] as String?,
+      xdrResult: fields[26] as String?,
+      selectedXdrResult: fields[27] as int?,
+      xdrResultDate: fields[28] as DateTime?,
+      xdrLabNumber: fields[29] as String?,
+      xdrSite: fields[30] as String?,
+      inhResistance: fields[31] as String?,
+      flqResistance: fields[32] as String?,
+      amkResistance: fields[33] as String?,
+      kanResistance: fields[34] as String?,
+      capResistance: fields[35] as String?,
+      ethResistance: fields[36] as String?,
+      fnac: fields[37] as String?,
+      fnacDate: fields[38] as DateTime?,
+      fnacResult: fields[39] as String?,
+      fnacComments: fields[40] as String?,
+      usg: fields[41] as String?,
+      usgDate: fields[42] as DateTime?,
+      usgResult: fields[43] as String?,
+      usgComments: fields[44] as String?,
+      otherTest: fields[45] as String?,
+      otherTestDate: fields[46] as DateTime?,
+      testName: fields[47] as String?,
+      otherTestResult: fields[48] as String?,
+      diagnosis: fields[49] as String?,
+      diagnosisComments: fields[50] as String?,
+      diagnosisDate: fields[51] as DateTime?,
+      isUpdated: fields[52] as bool?,
+      caseId: fields[53] as int?,
+      isFormIDAssigned: fields[54] as bool?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, DiagnosisModel obj) {
+    writer
+      ..writeByte(55)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.diagnosisInitiated)
+      ..writeByte(2)
+      ..write(obj.firstConsultation)
+      ..writeByte(3)
+      ..write(obj.firstConsultationDate)
+      ..writeByte(4)
+      ..write(obj.chestXray)
+      ..writeByte(5)
+      ..write(obj.chestXrayDate)
+      ..writeByte(6)
+      ..write(obj.chestXrayResult)
+      ..writeByte(7)
+      ..write(obj.afbDone)
+      ..writeByte(8)
+      ..write(obj.afbLabNumber)
+      ..writeByte(9)
+      ..write(obj.afb1Result)
+      ..writeByte(10)
+      ..write(obj.selectedAfb1Result)
+      ..writeByte(11)
+      ..write(obj.afb1ResultDate)
+      ..writeByte(12)
+      ..write(obj.afb2Result)
+      ..writeByte(13)
+      ..write(obj.selectedAfb2Result)
+      ..writeByte(14)
+      ..write(obj.afb2ResultDate)
+      ..writeByte(15)
+      ..write(obj.naatTest)
+      ..writeByte(16)
+      ..write(obj.naatMachine)
+      ..writeByte(17)
+      ..write(obj.selectedNaatMachine)
+      ..writeByte(18)
+      ..write(obj.naatSite)
+      ..writeByte(19)
+      ..write(obj.naatLabNumber)
+      ..writeByte(20)
+      ..write(obj.sampleCollectionDate)
+      ..writeByte(21)
+      ..write(obj.naatResultDate)
+      ..writeByte(22)
+      ..write(obj.mtbResult)
+      ..writeByte(23)
+      ..write(obj.selectedMtbResult)
+      ..writeByte(24)
+      ..write(obj.rifResistance)
+      ..writeByte(25)
+      ..write(obj.xdrDone)
+      ..writeByte(26)
+      ..write(obj.xdrResult)
+      ..writeByte(27)
+      ..write(obj.selectedXdrResult)
+      ..writeByte(28)
+      ..write(obj.xdrResultDate)
+      ..writeByte(29)
+      ..write(obj.xdrLabNumber)
+      ..writeByte(30)
+      ..write(obj.xdrSite)
+      ..writeByte(31)
+      ..write(obj.inhResistance)
+      ..writeByte(32)
+      ..write(obj.flqResistance)
+      ..writeByte(33)
+      ..write(obj.amkResistance)
+      ..writeByte(34)
+      ..write(obj.kanResistance)
+      ..writeByte(35)
+      ..write(obj.capResistance)
+      ..writeByte(36)
+      ..write(obj.ethResistance)
+      ..writeByte(37)
+      ..write(obj.fnac)
+      ..writeByte(38)
+      ..write(obj.fnacDate)
+      ..writeByte(39)
+      ..write(obj.fnacResult)
+      ..writeByte(40)
+      ..write(obj.fnacComments)
+      ..writeByte(41)
+      ..write(obj.usg)
+      ..writeByte(42)
+      ..write(obj.usgDate)
+      ..writeByte(43)
+      ..write(obj.usgResult)
+      ..writeByte(44)
+      ..write(obj.usgComments)
+      ..writeByte(45)
+      ..write(obj.otherTest)
+      ..writeByte(46)
+      ..write(obj.otherTestDate)
+      ..writeByte(47)
+      ..write(obj.testName)
+      ..writeByte(48)
+      ..write(obj.otherTestResult)
+      ..writeByte(49)
+      ..write(obj.diagnosis)
+      ..writeByte(50)
+      ..write(obj.diagnosisComments)
+      ..writeByte(51)
+      ..write(obj.diagnosisDate)
+      ..writeByte(52)
+      ..write(obj.isUpdated)
+      ..writeByte(53)
+      ..write(obj.caseId)
+      ..writeByte(54)
+      ..write(obj.isFormIDAssigned);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is DiagnosisModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
@@ -62,6 +262,9 @@ _$DiagnosisModelImpl _$$DiagnosisModelImplFromJson(Map<String, dynamic> json) =>
       diagnosis: json['diagnosis'] as String?,
       diagnosisComments: json['diagnosis_comments'] as String?,
       diagnosisDate: fromJsonToDateTime(json['diagnosis_date'] as String?),
+      isUpdated: json['is_updated'] as bool?,
+      caseId: (json['case_id'] as num?)?.toInt(),
+      isFormIDAssigned: json['is_form_id_assigned'] as bool?,
     );
 
 Map<String, dynamic> _$$DiagnosisModelImplToJson(
@@ -124,5 +327,6 @@ Map<String, dynamic> _$$DiagnosisModelImplToJson(
   val['diagnosis'] = instance.diagnosis;
   val['diagnosis_comments'] = instance.diagnosisComments;
   val['diagnosis_date'] = _dateTimeToJson(instance.diagnosisDate);
+  val['is_updated'] = instance.isUpdated;
   return val;
 }

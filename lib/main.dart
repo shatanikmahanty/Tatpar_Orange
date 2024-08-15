@@ -21,9 +21,13 @@ import 'package:tatpar_acf/features/case/data/source_models/referral_districts_m
 import 'package:tatpar_acf/features/case/data/source_models/referrer_source_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart';
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
+import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
+import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
+import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
+import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 import 'package:tatpar_acf/firebase_options.dart';
 import 'package:tatpar_acf/l10n/language_provider.dart';
 import 'package:tatpar_acf/tatpar_acf_app_builder.dart';
@@ -95,6 +99,22 @@ Future<void> main() async {
     await Hive.openBox<WHOSrqModel>('whoSrqModel');
     await Hive.openBox<MentalHealthScreeningModel>(
         'mentalHealthScreeningModel');
+
+    ///DiagnosisUpdateAPI
+    Hive.registerAdapter(DiagnosisModelAdapter());
+    await Hive.openBox<DiagnosisModel>('diagnosisModel');
+
+    ///TreatmentUpdateAPI
+    Hive.registerAdapter(TreatmentModelAdapter());
+    await Hive.openBox<TreatmentModel>('treatmentModel');
+
+    ///ContactTracingUpdateAPI
+    Hive.registerAdapter(ContactTracingModelAdapter());
+    await Hive.openBox<ContactTracingModel>('contactTracingModel');
+
+    ///OutcomeUpdateAPI
+    Hive.registerAdapter(OutcomeModelAdapter());
+    await Hive.openBox<OutcomeModel>('outcomeModel');
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

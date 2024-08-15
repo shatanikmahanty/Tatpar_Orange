@@ -20,23 +20,39 @@ OutcomeModel _$OutcomeModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$OutcomeModel {
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(
       name: 'treatment_completion_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get treatmentCompletionDate => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'nikshay_id')
   String? get nikshayId => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(name: 'nutrition_provided')
   String? get nutritionProvided => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'treatment_outcome')
   int? get selectedtreatmentOutcome => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(includeToJson: false)
   String? get treatmentOutcome => throw _privateConstructorUsedError;
+  @HiveField(6)
   @JsonKey(name: 'treatment_comments')
   String? get treatmentComments => throw _privateConstructorUsedError;
+  @HiveField(7)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated => throw _privateConstructorUsedError;
+  @HiveField(8)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId => throw _privateConstructorUsedError;
+  @HiveField(9)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -51,17 +67,29 @@ abstract class $OutcomeModelCopyWith<$Res> {
       _$OutcomeModelCopyWithImpl<$Res, OutcomeModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1)
       @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? treatmentCompletionDate,
-      @JsonKey(name: 'nikshay_id') String? nikshayId,
-      @JsonKey(name: 'nutrition_provided') String? nutritionProvided,
-      @JsonKey(name: 'treatment_outcome') int? selectedtreatmentOutcome,
-      @JsonKey(includeToJson: false) String? treatmentOutcome,
-      @JsonKey(name: 'treatment_comments') String? treatmentComments});
+      @HiveField(2) @JsonKey(name: 'nikshay_id') String? nikshayId,
+      @HiveField(3)
+      @JsonKey(name: 'nutrition_provided')
+      String? nutritionProvided,
+      @HiveField(4)
+      @JsonKey(name: 'treatment_outcome')
+      int? selectedtreatmentOutcome,
+      @HiveField(5) @JsonKey(includeToJson: false) String? treatmentOutcome,
+      @HiveField(6)
+      @JsonKey(name: 'treatment_comments')
+      String? treatmentComments,
+      @HiveField(7) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(8) @JsonKey(name: 'case_id', includeToJson: false) int? caseId,
+      @HiveField(9)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -84,6 +112,9 @@ class _$OutcomeModelCopyWithImpl<$Res, $Val extends OutcomeModel>
     Object? selectedtreatmentOutcome = freezed,
     Object? treatmentOutcome = freezed,
     Object? treatmentComments = freezed,
+    Object? isUpdated = freezed,
+    Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -114,6 +145,18 @@ class _$OutcomeModelCopyWithImpl<$Res, $Val extends OutcomeModel>
           ? _value.treatmentComments
           : treatmentComments // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -127,17 +170,29 @@ abstract class _$$OutcomeModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1)
       @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? treatmentCompletionDate,
-      @JsonKey(name: 'nikshay_id') String? nikshayId,
-      @JsonKey(name: 'nutrition_provided') String? nutritionProvided,
-      @JsonKey(name: 'treatment_outcome') int? selectedtreatmentOutcome,
-      @JsonKey(includeToJson: false) String? treatmentOutcome,
-      @JsonKey(name: 'treatment_comments') String? treatmentComments});
+      @HiveField(2) @JsonKey(name: 'nikshay_id') String? nikshayId,
+      @HiveField(3)
+      @JsonKey(name: 'nutrition_provided')
+      String? nutritionProvided,
+      @HiveField(4)
+      @JsonKey(name: 'treatment_outcome')
+      int? selectedtreatmentOutcome,
+      @HiveField(5) @JsonKey(includeToJson: false) String? treatmentOutcome,
+      @HiveField(6)
+      @JsonKey(name: 'treatment_comments')
+      String? treatmentComments,
+      @HiveField(7) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(8) @JsonKey(name: 'case_id', includeToJson: false) int? caseId,
+      @HiveField(9)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -158,6 +213,9 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
     Object? selectedtreatmentOutcome = freezed,
     Object? treatmentOutcome = freezed,
     Object? treatmentComments = freezed,
+    Object? isUpdated = freezed,
+    Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_$OutcomeModelImpl(
       id: freezed == id
@@ -188,6 +246,18 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
           ? _value.treatmentComments
           : treatmentComments // ignore: cast_nullable_to_non_nullable
               as String?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -196,49 +266,76 @@ class __$$OutcomeModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$OutcomeModelImpl implements _OutcomeModel {
   const _$OutcomeModelImpl(
-      {@JsonKey(name: 'id', includeToJson: false) this.id,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) this.id,
+      @HiveField(1)
       @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.treatmentCompletionDate,
-      @JsonKey(name: 'nikshay_id') this.nikshayId,
-      @JsonKey(name: 'nutrition_provided') this.nutritionProvided,
-      @JsonKey(name: 'treatment_outcome') this.selectedtreatmentOutcome,
-      @JsonKey(includeToJson: false) this.treatmentOutcome,
-      @JsonKey(name: 'treatment_comments') this.treatmentComments});
+      @HiveField(2) @JsonKey(name: 'nikshay_id') this.nikshayId,
+      @HiveField(3) @JsonKey(name: 'nutrition_provided') this.nutritionProvided,
+      @HiveField(4)
+      @JsonKey(name: 'treatment_outcome')
+      this.selectedtreatmentOutcome,
+      @HiveField(5) @JsonKey(includeToJson: false) this.treatmentOutcome,
+      @HiveField(6) @JsonKey(name: 'treatment_comments') this.treatmentComments,
+      @HiveField(7) @JsonKey(name: 'is_updated') this.isUpdated,
+      @HiveField(8) @JsonKey(name: 'case_id', includeToJson: false) this.caseId,
+      @HiveField(9)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      this.isFormIDAssigned});
 
   factory _$OutcomeModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$OutcomeModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(
       name: 'treatment_completion_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? treatmentCompletionDate;
   @override
+  @HiveField(2)
   @JsonKey(name: 'nikshay_id')
   final String? nikshayId;
   @override
+  @HiveField(3)
   @JsonKey(name: 'nutrition_provided')
   final String? nutritionProvided;
   @override
+  @HiveField(4)
   @JsonKey(name: 'treatment_outcome')
   final int? selectedtreatmentOutcome;
   @override
+  @HiveField(5)
   @JsonKey(includeToJson: false)
   final String? treatmentOutcome;
   @override
+  @HiveField(6)
   @JsonKey(name: 'treatment_comments')
   final String? treatmentComments;
+  @override
+  @HiveField(7)
+  @JsonKey(name: 'is_updated')
+  final bool? isUpdated;
+  @override
+  @HiveField(8)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  final int? caseId;
+  @override
+  @HiveField(9)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  final bool? isFormIDAssigned;
 
   @override
   String toString() {
-    return 'OutcomeModel(id: $id, treatmentCompletionDate: $treatmentCompletionDate, nikshayId: $nikshayId, nutritionProvided: $nutritionProvided, selectedtreatmentOutcome: $selectedtreatmentOutcome, treatmentOutcome: $treatmentOutcome, treatmentComments: $treatmentComments)';
+    return 'OutcomeModel(id: $id, treatmentCompletionDate: $treatmentCompletionDate, nikshayId: $nikshayId, nutritionProvided: $nutritionProvided, selectedtreatmentOutcome: $selectedtreatmentOutcome, treatmentOutcome: $treatmentOutcome, treatmentComments: $treatmentComments, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
   }
 
   @override
@@ -260,7 +357,12 @@ class _$OutcomeModelImpl implements _OutcomeModel {
             (identical(other.treatmentOutcome, treatmentOutcome) ||
                 other.treatmentOutcome == treatmentOutcome) &&
             (identical(other.treatmentComments, treatmentComments) ||
-                other.treatmentComments == treatmentComments));
+                other.treatmentComments == treatmentComments) &&
+            (identical(other.isUpdated, isUpdated) ||
+                other.isUpdated == isUpdated) &&
+            (identical(other.caseId, caseId) || other.caseId == caseId) &&
+            (identical(other.isFormIDAssigned, isFormIDAssigned) ||
+                other.isFormIDAssigned == isFormIDAssigned));
   }
 
   @JsonKey(ignore: true)
@@ -273,7 +375,10 @@ class _$OutcomeModelImpl implements _OutcomeModel {
       nutritionProvided,
       selectedtreatmentOutcome,
       treatmentOutcome,
-      treatmentComments);
+      treatmentComments,
+      isUpdated,
+      caseId,
+      isFormIDAssigned);
 
   @JsonKey(ignore: true)
   @override
@@ -291,46 +396,80 @@ class _$OutcomeModelImpl implements _OutcomeModel {
 
 abstract class _OutcomeModel implements OutcomeModel {
   const factory _OutcomeModel(
-      {@JsonKey(name: 'id', includeToJson: false) final int? id,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) final int? id,
+      @HiveField(1)
       @JsonKey(
           name: 'treatment_completion_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? treatmentCompletionDate,
-      @JsonKey(name: 'nikshay_id') final String? nikshayId,
-      @JsonKey(name: 'nutrition_provided') final String? nutritionProvided,
-      @JsonKey(name: 'treatment_outcome') final int? selectedtreatmentOutcome,
-      @JsonKey(includeToJson: false) final String? treatmentOutcome,
+      @HiveField(2) @JsonKey(name: 'nikshay_id') final String? nikshayId,
+      @HiveField(3)
+      @JsonKey(name: 'nutrition_provided')
+      final String? nutritionProvided,
+      @HiveField(4)
+      @JsonKey(name: 'treatment_outcome')
+      final int? selectedtreatmentOutcome,
+      @HiveField(5)
+      @JsonKey(includeToJson: false)
+      final String? treatmentOutcome,
+      @HiveField(6)
       @JsonKey(name: 'treatment_comments')
-      final String? treatmentComments}) = _$OutcomeModelImpl;
+      final String? treatmentComments,
+      @HiveField(7) @JsonKey(name: 'is_updated') final bool? isUpdated,
+      @HiveField(8)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      final int? caseId,
+      @HiveField(9)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      final bool? isFormIDAssigned}) = _$OutcomeModelImpl;
 
   factory _OutcomeModel.fromJson(Map<String, dynamic> json) =
       _$OutcomeModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(
       name: 'treatment_completion_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get treatmentCompletionDate;
   @override
+  @HiveField(2)
   @JsonKey(name: 'nikshay_id')
   String? get nikshayId;
   @override
+  @HiveField(3)
   @JsonKey(name: 'nutrition_provided')
   String? get nutritionProvided;
   @override
+  @HiveField(4)
   @JsonKey(name: 'treatment_outcome')
   int? get selectedtreatmentOutcome;
   @override
+  @HiveField(5)
   @JsonKey(includeToJson: false)
   String? get treatmentOutcome;
   @override
+  @HiveField(6)
   @JsonKey(name: 'treatment_comments')
   String? get treatmentComments;
+  @override
+  @HiveField(7)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated;
+  @override
+  @HiveField(8)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId;
+  @override
+  @HiveField(9)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned;
   @override
   @JsonKey(ignore: true)
   _$$OutcomeModelImplCopyWith<_$OutcomeModelImpl> get copyWith =>

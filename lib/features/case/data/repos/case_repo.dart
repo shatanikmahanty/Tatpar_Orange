@@ -70,7 +70,6 @@ class CaseRepo {
 
       pushPendingReferralDetails();
 
-      //updateCaseBox(model: savedModel, tbModel: null, caseModel: null);
       AuthCubit.instance.caseId = result.data['data']['case_id'];
       // TBScreeningModel? tbScreeningModel =
       //  a   getTBDataBox(referralDetailsModel.id);
@@ -101,7 +100,11 @@ class CaseRepo {
               model: updateModel,
               tbModel: null,
               caseModel: null,
-              mentalHealthScreeningModel: null);
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null);
 
           return updateModel;
         } else {
@@ -122,7 +125,11 @@ class CaseRepo {
               model: modelToSave,
               tbModel: null,
               caseModel: null,
-              mentalHealthScreeningModel: null);
+              mentalHealthScreeningModel: null,
+              contactTracingModel: null,
+              diagnosisModel: null,
+              outcomeModel: null,
+              treatmentModel: null);
 
           DjangoflowAppSnackbar.showInfo('Stored data Locally');
           print('Stored new Referral in Hive: $modelToSave');
@@ -160,20 +167,17 @@ class CaseRepo {
           model: null,
           tbModel: tbScreeningModel,
           caseModel: null,
-          mentalHealthScreeningModel: null);
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null);
       log('TB Data Box Contains:${tbdatabox.values.toList().toString()}');
       log('Updating data to local Server because network is available while trying to update in Local${tbScreeningModel.toString()}');
       if (hasInternet) {
         await pushPendingReferralDetails();
       }
       return tbdatabox.getAt(existingModelIndex)!;
-      // log('TB Data Box Contains:${tbdatabox.values.toList().toString()}');
-      // // tbScreeningModel = tbdatabox.getAt(existingModelIndex)!;
-
-      // // Print the details of the record being deleted
-      // log(' Deleting TBScreeningModel: ${tbdatabox.getAt(existingModelIndex)}');
-      // // Delete the old model
-      // await tbdatabox.deleteAt(existingModelIndex);11
     }
     if (hasInternet) {
       await pushPendingReferralDetails();
@@ -197,7 +201,11 @@ class CaseRepo {
           model: null,
           tbModel: savedModel,
           caseModel: null,
-          mentalHealthScreeningModel: null);
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null);
       log('TB Data Box Contains:${tbdatabox.values.toList().toString()}');
 
       return savedModel;
@@ -219,7 +227,11 @@ class CaseRepo {
               model: null,
               tbModel: updateModel,
               caseModel: null,
-              mentalHealthScreeningModel: null);
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null);
           log('TB Data Box Contains:${modelsList.toString()}');
 
           return updateModel;
@@ -235,7 +247,11 @@ class CaseRepo {
               model: null,
               tbModel: modelToSave,
               caseModel: null,
-              mentalHealthScreeningModel: null);
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null);
 
           DjangoflowAppSnackbar.showInfo('Stored data Locally');
           print('Stored new TBScreeningModel in Hive: $modelToSave');
@@ -277,7 +293,11 @@ class CaseRepo {
           model: null,
           tbModel: null,
           caseModel: null,
-          mentalHealthScreeningModel: null);
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null);
       log('Mental Health Screening Data Box Contains:${whodatabox.values.toList().toString()}');
       log('Updating data to local Server because network is available while trying to update in Local${mentalHealthScreeningModel.toString()}');
       if (hasInternet) {
@@ -311,7 +331,11 @@ class CaseRepo {
           model: null,
           tbModel: null,
           caseModel: null,
-          mentalHealthScreeningModel: savedModel);
+          mentalHealthScreeningModel: savedModel,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null);
       log('Mental Health Screening Data Box Contains:${whodatabox.values.toList().toString()}');
 
       return savedModel;
@@ -333,7 +357,11 @@ class CaseRepo {
               model: null,
               tbModel: null,
               caseModel: null,
-              mentalHealthScreeningModel: updateModel);
+              mentalHealthScreeningModel: updateModel,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null);
           log('MentalHealthScreening Data Box Contains:${modelsList.toString()}');
 
           return updateModel;
@@ -349,7 +377,11 @@ class CaseRepo {
               model: null,
               tbModel: null,
               caseModel: null,
-              mentalHealthScreeningModel: modelToSave);
+              mentalHealthScreeningModel: modelToSave,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null);
 
           DjangoflowAppSnackbar.showInfo('Stored data Locally');
           print('Stored new MentalHealthScreeningModel in Hive: $modelToSave');
@@ -370,6 +402,38 @@ class CaseRepo {
       {required DiagnosisModel diagnosisModel,
       required int? id,
       required int? caseId}) async {
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
+    final existingModelIndex =
+        diagnosisDataBox.values.toList().indexWhere((model) => model.id == id);
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+
+    if ((diagnosisModel.isFormIDAssigned == null ||
+            diagnosisModel.isFormIDAssigned == false) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      await diagnosisDataBox.put(diagnosisModel.id.toString(), diagnosisModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: diagnosisModel,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null);
+      log('Diagnosis DataBox Contains:${diagnosisDataBox.values.toList().toString()}');
+      log('Updating data to local Server because network is available while trying to update in Local${diagnosisModel.toString()}');
+      if (hasInternet) {
+        await pushPendingReferralDetails();
+      }
+      return diagnosisDataBox.getAt(existingModelIndex)!;
+    }
+    if (hasInternet) {
+      await pushPendingReferralDetails();
+    }
     final request = NetworkRequest(
       '$diagnosisUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -381,14 +445,78 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      //  await updateCase(caseId, {'dbt': result.data['id'], 'dbt_status': dbtDetails.isFormCompleated});
+      final savedModel = DiagnosisModel.fromJson(result.data['data']);
 
-      return DiagnosisModel.fromJson(result.data['data']);
+      await diagnosisDataBox.put(savedModel.id.toString(), savedModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: savedModel,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null);
+      log('Diagnosis DataBox Contains:${diagnosisDataBox.values.toList().toString()}');
+
+      return savedModel;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting Diagnosis Form data',
-        type: Unauthorized(),
-      );
+      if (result.error != null && result.error?.type is NetworkError) {
+        final modelsList = diagnosisDataBox.values.toList();
+        DiagnosisModel updateModel = diagnosisModel;
+
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          await diagnosisDataBox.put(updateModel.id.toString(), updateModel);
+
+          DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          print('Updated Diagnosis in Hive: $updateModel');
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: updateModel,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null);
+          log('Diagnosis DataBox Contains:${modelsList.toString()}');
+
+          return updateModel;
+        } else {
+          final modelToSave = updateModel.copyWith(
+              id: caseId ?? AuthCubit.instance.workingCaseId,
+              caseId: caseId ?? AuthCubit.instance.workingCaseId,
+              isFormIDAssigned: false);
+
+          // Save the new model to Hive
+          await diagnosisDataBox.put(modelToSave.id.toString(), modelToSave);
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: modelToSave,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null);
+
+          DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          print('Stored new Diagnosis Model in Hive: $modelToSave');
+          log('Diagnosis DataBox Contains:${diagnosisDataBox.values.toList().toString()}');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -396,6 +524,38 @@ class CaseRepo {
       {required TreatmentModel treatmentModel,
       required int? id,
       required int? caseId}) async {
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
+    final existingModelIndex =
+        treatmentDataBox.values.toList().indexWhere((model) => model.id == id);
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+
+    if ((treatmentModel.isFormIDAssigned == null ||
+            treatmentModel.isFormIDAssigned == false) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      await treatmentDataBox.put(treatmentModel.id.toString(), treatmentModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: treatmentModel,
+          contactTracingModel: null,
+          outcomeModel: null);
+      log('Treatment Data Box Contains:${treatmentDataBox.values.toList().toString()}');
+      log('Updating data to local Server because network is available while trying to update in Local${treatmentModel.toString()}');
+      if (hasInternet) {
+        await pushPendingReferralDetails();
+      }
+      return treatmentDataBox.getAt(existingModelIndex)!;
+    }
+    if (hasInternet) {
+      await pushPendingReferralDetails();
+    }
     final request = NetworkRequest(
       '$treatmentUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -407,12 +567,78 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return TreatmentModel.fromJson(result.data['data']);
+      final savedModel = TreatmentModel.fromJson(result.data['data']);
+
+      await treatmentDataBox.put(savedModel.id.toString(), savedModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: savedModel,
+          contactTracingModel: null,
+          outcomeModel: null);
+      log('Treatment Data Box Contains:${treatmentDataBox.values.toList().toString()}');
+
+      return savedModel;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting Treatment Form data',
-        type: Unauthorized(),
-      );
+      if (result.error != null && result.error?.type is NetworkError) {
+        final modelsList = treatmentDataBox.values.toList();
+        TreatmentModel updateModel = treatmentModel;
+
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          await treatmentDataBox.put(updateModel.id.toString(), updateModel);
+
+          DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          print('Updated Treatment in Hive: $updateModel');
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: updateModel,
+              contactTracingModel: null,
+              outcomeModel: null);
+          log('Treatment Data Box Contains:${modelsList.toString()}');
+
+          return updateModel;
+        } else {
+          final modelToSave = updateModel.copyWith(
+              id: caseId ?? AuthCubit.instance.workingCaseId,
+              caseId: caseId ?? AuthCubit.instance.workingCaseId,
+              isFormIDAssigned: false);
+
+          // Save the new model to Hive
+          await treatmentDataBox.put(modelToSave.id.toString(), modelToSave);
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: modelToSave,
+              contactTracingModel: null,
+              outcomeModel: null);
+
+          DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          print('Stored new TreatmentModel in Hive: $modelToSave');
+          log('TreatmentData Box Contains:${treatmentDataBox.values.toList().toString()}');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -420,6 +646,40 @@ class CaseRepo {
       {required ContactTracingModel contactTracingModel,
       required int? id,
       required int? caseId}) async {
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
+    final existingModelIndex = contactTracingDataBox.values
+        .toList()
+        .indexWhere((model) => model.id == id);
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+
+    if ((contactTracingModel.isFormIDAssigned == null ||
+            contactTracingModel.isFormIDAssigned == false) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      await contactTracingDataBox.put(
+          contactTracingModel.id.toString(), contactTracingModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: contactTracingModel,
+          outcomeModel: null);
+      log('Contact Tracing Data Box Contains:${contactTracingDataBox.values.toList().toString()}');
+      log('Updating data to local Server because network is available while trying to update in Local${contactTracingModel.toString()}');
+      if (hasInternet) {
+        await pushPendingReferralDetails();
+      }
+      return contactTracingDataBox.getAt(existingModelIndex)!;
+    }
+    if (hasInternet) {
+      await pushPendingReferralDetails();
+    }
     final request = NetworkRequest(
       '$contactTracingUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -431,12 +691,80 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return ContactTracingModel.fromJson(result.data['data']);
+      final savedModel = ContactTracingModel.fromJson(result.data['data']);
+
+      await contactTracingDataBox.put(savedModel.id.toString(), savedModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: savedModel,
+          outcomeModel: null);
+      log('Contact Tracing Data Box Contains:${contactTracingDataBox.values.toList().toString()}');
+
+      return savedModel;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting Contact Tracing Form data',
-        type: Unauthorized(),
-      );
+      if (result.error != null && result.error?.type is NetworkError) {
+        final modelsList = contactTracingDataBox.values.toList();
+        ContactTracingModel updateModel = contactTracingModel;
+
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          await contactTracingDataBox.put(
+              updateModel.id.toString(), updateModel);
+
+          DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          print('Updated Contact Tracing in Hive: $updateModel');
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: updateModel,
+              outcomeModel: null);
+          log('Contact Tracing Data Box Contains:${modelsList.toString()}');
+
+          return updateModel;
+        } else {
+          final modelToSave = updateModel.copyWith(
+              id: caseId ?? AuthCubit.instance.workingCaseId,
+              caseId: caseId ?? AuthCubit.instance.workingCaseId,
+              isFormIDAssigned: false);
+
+          // Save the new model to Hive
+          await contactTracingDataBox.put(
+              modelToSave.id.toString(), modelToSave);
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: modelToSave,
+              outcomeModel: null);
+
+          DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          print('Stored new ContactTracingModel in Hive: $modelToSave');
+          log('Contact Tracing Data Box Contains:${contactTracingDataBox.values.toList().toString()}');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -444,6 +772,37 @@ class CaseRepo {
       {required OutcomeModel outcomeModel,
       required int? id,
       required int? caseId}) async {
+    Box<OutcomeModel> outcomeDataBox = Hive.box<OutcomeModel>('outcomeModel');
+    final existingModelIndex =
+        outcomeDataBox.values.toList().indexWhere((model) => model.id == id);
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+
+    if ((outcomeModel.isFormIDAssigned == null ||
+            outcomeModel.isFormIDAssigned == false) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      await outcomeDataBox.put(outcomeModel.id.toString(), outcomeModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: outcomeModel);
+      log('Outcome Data Box Contains:${outcomeDataBox.values.toList().toString()}');
+      log('Updating data to local Server because network is available while trying to update in Local${outcomeModel.toString()}');
+      if (hasInternet) {
+        await pushPendingReferralDetails();
+      }
+      return outcomeDataBox.getAt(existingModelIndex)!;
+    }
+    if (hasInternet) {
+      await pushPendingReferralDetails();
+    }
     final request = NetworkRequest(
       '$outcomeUrl${id == null ? '' : '/$id'}',
       id == null ? RequestMethod.post : RequestMethod.patch,
@@ -455,12 +814,78 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return OutcomeModel.fromJson(result.data['data']);
+      final savedModel = OutcomeModel.fromJson(result.data['data']);
+
+      await outcomeDataBox.put(savedModel.id.toString(), savedModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: savedModel);
+      log('Outcome Data Box Contains:${outcomeDataBox.values.toList().toString()}');
+
+      return savedModel;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error submitting Outcome Form data',
-        type: Unauthorized(),
-      );
+      if (result.error != null && result.error?.type is NetworkError) {
+        final modelsList = outcomeDataBox.values.toList();
+        OutcomeModel updateModel = outcomeModel;
+
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          await outcomeDataBox.put(updateModel.id.toString(), updateModel);
+
+          DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          print('Updated Outcome in Hive: $updateModel');
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: updateModel);
+          log('Outcome Data Box Contains:${modelsList.toString()}');
+
+          return updateModel;
+        } else {
+          final modelToSave = updateModel.copyWith(
+              id: caseId ?? AuthCubit.instance.workingCaseId,
+              caseId: caseId ?? AuthCubit.instance.workingCaseId,
+              isFormIDAssigned: false);
+
+          // Save the new model to Hive
+          await outcomeDataBox.put(modelToSave.id.toString(), modelToSave);
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: modelToSave);
+
+          DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          print('Stored new OutcomeModel in Hive: $modelToSave');
+          log('Outcome Data Box Contains:${outcomeDataBox.values.toList().toString()}');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
@@ -638,6 +1063,10 @@ class CaseRepo {
   Future<DiagnosisModel> getDiagnosis({
     required int? id,
   }) async {
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
+    log('Diagnosis Box Contains======================${diagnosisDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$diagnosisUrl/$id',
       RequestMethod.get,
@@ -647,6 +1076,23 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok && result.data['data'] != null) {
       return DiagnosisModel.fromJson(result.data['data']);
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(diagnosisDataBox.values.toString());
+      final model = diagnosisDataBox.get(diagnosisDataBox.keyAt(diagnosisDataBox
+          .values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
+      if (model != null) {
+        log('Retrieving Diagnosis Model======================$model'
+            .toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving Diagnosis Form data',
+          type: Unauthorized(),
+        );
+      }
     } else {
       throw ApplicationError(
         errorMsg: 'Error Retrieving Diagnosis Form data',
@@ -658,6 +1104,10 @@ class CaseRepo {
   Future<TreatmentModel> getTreatment({
     required int? id,
   }) async {
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
+    log(' Treatment Box Contains======================${treatmentDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$treatmentUrl/$id',
       RequestMethod.get,
@@ -667,6 +1117,23 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       return TreatmentModel.fromJson(result.data['data']);
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(treatmentDataBox.values.toString());
+      final model = treatmentDataBox.get(treatmentDataBox.keyAt(treatmentDataBox
+          .values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
+      if (model != null) {
+        log('Retrieving Treatment Model======================$model'
+            .toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving Treatment Form data',
+          type: Unauthorized(),
+        );
+      }
     } else {
       throw ApplicationError(
         errorMsg: 'Error Retrieving Treatment Form data',
@@ -678,6 +1145,9 @@ class CaseRepo {
   Future<OutcomeModel> getOutcome({
     required int? id,
   }) async {
+    Box<OutcomeModel> outcomeDataBox = Hive.box<OutcomeModel>('outcomeModel');
+    log(' Outcome Box Contains======================${outcomeDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$outcomeUrl/$id',
       RequestMethod.get,
@@ -687,6 +1157,22 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       return OutcomeModel.fromJson(result.data['data']);
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(outcomeDataBox.values.toString());
+      final model = outcomeDataBox.get(outcomeDataBox.keyAt(outcomeDataBox
+          .values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
+      if (model != null) {
+        log('Retrieving Outcome Model======================$model'.toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving Outcome Form data',
+          type: Unauthorized(),
+        );
+      }
     } else {
       throw ApplicationError(
         errorMsg: 'Error Retrieving Outcome Form data',
@@ -698,7 +1184,8 @@ class CaseRepo {
   Future<List<ContactTracingModel>> getContactTracingList({
     required int? caseId,
   }) async {
-    // int caseId = 2;
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
     final request = NetworkRequest(
       '$contactTracingListUrl/$caseId',
       RequestMethod.get,
@@ -712,19 +1199,47 @@ class CaseRepo {
           .map<ContactTracingModel>((e) => ContactTracingModel.fromJson(e))
           .toList();
       contactDataList.sort((a, b) => b.id!.compareTo(a.id!));
+      // Iterate through the cases fetched from the network
+      for (final contact in contactDataList) {
+        // Check if the case with the same ID already exists in the Hive box
+        final existingCaseIndex = contactTracingDataBox.values
+            .toList()
+            .indexWhere((existingCase) => existingCase.id == contact.id);
+        if (existingCaseIndex != -1) {
+          // If case with the same ID exists, update it
+          contactTracingDataBox.putAt(existingCaseIndex, contact);
+        } else {
+          // If case with the same ID doesn't exist, add it
+          contactTracingDataBox.add(contact);
+        }
+      }
 
       return contactDataList;
     } else {
-      throw ApplicationError(
-        errorMsg: 'Error Retrieving ContactTracing List data',
-        type: Unauthorized(),
-      );
+      final List<ContactTracingModel> storedData =
+          contactTracingDataBox.values.toList();
+
+      if (result.error != null && result.error?.type is NetworkError) {
+        print(
+            'List Of Contact Tracing Models Stored in Hive============${storedData.toString()}');
+
+        return storedData;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching Contact Tracing List data',
+          type: UnExpected(),
+        );
+      }
     }
   }
 
   Future<ContactTracingModel> getContactTracing({
     required int? id,
   }) async {
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
+    log(' Contact Tracing Box Contains======================${contactTracingDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$contactTracingUrl/$id',
       RequestMethod.get,
@@ -733,16 +1248,47 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      return ContactTracingModel.fromJson(result.data['data']);
+      final newModel = ContactTracingModel.fromJson(result.data['data']);
+      final existingCaseIndex = contactTracingDataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == newModel.id);
+      if (existingCaseIndex != -1) {
+        log('Updating Server ContactTracing Model=======================${newModel.toString()}');
+
+        contactTracingDataBox.putAt(existingCaseIndex, newModel);
+      } else {
+        log('Creating Server Contact Tracing Model=======================${newModel.toString()}');
+        contactTracingDataBox.add(newModel);
+      }
+      return newModel;
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(contactTracingDataBox.values.toString());
+      final model = contactTracingDataBox.get(contactTracingDataBox.keyAt(
+          contactTracingDataBox.values
+              .toList()
+              .indexWhere((existingCase) => existingCase.id == id)));
+      if (model != null) {
+        log('Retrieving Contact Tracing Model======================$model'
+            .toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving Contact Tracing Form data',
+          type: Unauthorized(),
+        );
+      }
     } else {
       throw ApplicationError(
-        errorMsg: 'Error Retrieving ContactTracing Form data',
+        errorMsg: 'Error Retrieving Contact Tracing Form data',
         type: Unauthorized(),
       );
     }
   }
 
   Future<List<Case>> getCasesForHealthWorker() async {
+    Box<Case> dataBox = Hive.box<Case>('caseList');
+
     final request = NetworkRequest(
       '$casesForHealthWorkerUrl${AuthCubit.instance.state.user!.mobileNumber}',
       RequestMethod.get,
@@ -753,7 +1299,6 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<dynamic> caseDataList = result.data['data']['cases'];
       final List<Case> cases =
           caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
@@ -774,7 +1319,6 @@ class CaseRepo {
 
       return cases;
     } else {
-      Box<Case> dataBox = Hive.box<Case>('caseList');
       final List<Case> storedData = dataBox.values.toList();
 
       if (result.error != null && result.error?.type is NetworkError) {
@@ -850,7 +1394,11 @@ class CaseRepo {
                   model: updatedModel,
                   tbModel: null,
                   caseModel: null,
-                  mentalHealthScreeningModel: null);
+                  mentalHealthScreeningModel: null,
+                  diagnosisModel: null,
+                  treatmentModel: null,
+                  contactTracingModel: null,
+                  outcomeModel: null);
               // getCaseModel(caseId: updatedModel.caseId);
               DjangoflowAppSnackbar.showInfo(
                   'Successfully updated offline referral models');
@@ -859,6 +1407,30 @@ class CaseRepo {
                   referral.id, AuthCubit.instance.workingCaseId);
               await updateWHODataBox(
                   referral.id, AuthCubit.instance.workingCaseId);
+              await updateDiagnosisDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateTreatmentDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateContactTracingDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateOutcomeDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+
+              // await updateDataBox<TBScreeningModel>(
+              //   boxName: 'tbScreeningModel',
+              //   modelID: referral.id,
+              //   caseId: AuthCubit.instance.workingCaseId,
+              //   updateModelCallback: (model, caseId) =>
+              //       model.copyWith(caseId: caseId),
+              // );
+
+              // await updateDataBox<MentalHealthScreeningModel>(
+              //   boxName: 'mentalHealthScreeningModel',
+              //   modelID: referral.id,
+              //   caseId: AuthCubit.instance.workingCaseId,
+              //   updateModelCallback: (model, caseId) =>
+              //       model.copyWith(caseId: caseId),
+              // );
             } else {
               // Handle error if need
               //
@@ -874,6 +1446,10 @@ class CaseRepo {
     }
     await pushPendingTBScreeningDetails();
     await pushPendingWhoSrqDetails();
+    await pushPendingDiagnosisDetails();
+    await pushPendingTreatmentDetails();
+    await pushPendingContactTracingDetails();
+    await pushPendingOutcomeDetails();
   }
 
   Future<void> pushPendingTBScreeningDetails() async {
@@ -919,7 +1495,11 @@ class CaseRepo {
                   model: null,
                   tbModel: updatedModel,
                   caseModel: null,
-                  mentalHealthScreeningModel: null);
+                  mentalHealthScreeningModel: null,
+                  diagnosisModel: null,
+                  treatmentModel: null,
+                  contactTracingModel: null,
+                  outcomeModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
               DjangoflowAppSnackbar.showInfo(
                   'Succesfully updated offline TB screening Models');
@@ -982,7 +1562,11 @@ class CaseRepo {
                   model: null,
                   tbModel: null,
                   caseModel: null,
-                  mentalHealthScreeningModel: updatedModel);
+                  mentalHealthScreeningModel: updatedModel,
+                  diagnosisModel: null,
+                  treatmentModel: null,
+                  contactTracingModel: null,
+                  outcomeModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
               DjangoflowAppSnackbar.showInfo(
                   'Succesfully updated offline Mental Health Screening Models');
@@ -999,6 +1583,366 @@ class CaseRepo {
           }
         }
       }
+    }
+  }
+
+  Future<void> pushPendingDiagnosisDetails() async {
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
+    List<DiagnosisModel> diagnosisModelsList = diagnosisDataBox.values.toList();
+    for (var diagnosisModel in diagnosisModelsList) {
+      if (diagnosisModel.isUpdated != null) {
+        if (diagnosisModel.isUpdated == false) {
+          final model = (diagnosisModel.isFormIDAssigned == null) ||
+                  (diagnosisModel.isFormIDAssigned == false)
+              ? diagnosisModel.copyWith(id: null)
+              : diagnosisModel;
+          try {
+            log('Pushing Diagnosis Model to the Server:${model.toString()}');
+            // Attempt to push the tbModel details to the server
+            final request = NetworkRequest(
+              '$diagnosisUrl${model.id == null ? '' : '/${model.id}'}',
+              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              isAuthorized: true,
+              data: {
+                ...diagnosisModel.toJson(),
+                'case_id': model.caseId ?? AuthCubit.instance.workingCaseId,
+              },
+            );
+            final result = await NetworkManager.instance.perform(request);
+            if (result.status == Status.ok) {
+              DiagnosisModel updatedModel =
+                  DiagnosisModel.fromJson(result.data['data']);
+              if ((diagnosisModel.isFormIDAssigned == null) ||
+                  (diagnosisModel.isFormIDAssigned == false)) {
+                // Get the key of the existing model
+                var key = diagnosisDataBox.keyAt(
+                    diagnosisDataBox.values.toList().indexOf(diagnosisModel));
+                // Print the details of the record being deleted
+                log('Deleting Diagnosis Model: ${diagnosisDataBox.get(key)}');
+                // Delete the old model
+                await diagnosisDataBox.delete(key);
+              }
+              // Add the new model with the server-assigned ID
+              await diagnosisDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
+              updateCaseBox(
+                  model: null,
+                  tbModel: null,
+                  caseModel: null,
+                  mentalHealthScreeningModel: null,
+                  diagnosisModel: updatedModel,
+                  treatmentModel: null,
+                  contactTracingModel: null,
+                  outcomeModel: null);
+              //getCaseModel(caseId: updatedModel.caseId);
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Diagnosis Models');
+              log('Diagnosis DataBox Contains===========${diagnosisDataBox.values.toList().toString()}');
+            } else {
+              // Handle error if needed
+              throw Exception(
+                  'Failed to push Diagnosis Details from Local Storage');
+            }
+          } catch (e) {
+            // Handle the exception if needed
+            log('Error pushing Diagnosis details: $e');
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> pushPendingTreatmentDetails() async {
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
+    List<TreatmentModel> treatmentModelsList = treatmentDataBox.values.toList();
+    for (var treatmentModel in treatmentModelsList) {
+      if (treatmentModel.isUpdated != null) {
+        if (treatmentModel.isUpdated == false) {
+          final model = (treatmentModel.isFormIDAssigned == null) ||
+                  (treatmentModel.isFormIDAssigned == false)
+              ? treatmentModel.copyWith(id: null)
+              : treatmentModel;
+          try {
+            log('Pushing Treatment Model to the Server:${model.toString()}');
+            // Attempt to push the tbModel details to the server
+            final request = NetworkRequest(
+              '$treatmentUrl${model.id == null ? '' : '/${model.id}'}',
+              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              isAuthorized: true,
+              data: {
+                ...treatmentModel.toJson(),
+                'case_id': model.caseId ?? AuthCubit.instance.workingCaseId,
+              },
+            );
+            final result = await NetworkManager.instance.perform(request);
+            if (result.status == Status.ok) {
+              TreatmentModel updatedModel =
+                  TreatmentModel.fromJson(result.data['data']);
+              if ((treatmentModel.isFormIDAssigned == null) ||
+                  (treatmentModel.isFormIDAssigned == false)) {
+                // Get the key of the existing model
+                var key = treatmentDataBox.keyAt(
+                    treatmentDataBox.values.toList().indexOf(treatmentModel));
+                // Print the details of the record being deleted
+                log('Deleting Treatment Model: ${treatmentDataBox.get(key)}');
+                // Delete the old model
+                await treatmentDataBox.delete(key);
+              }
+              // Add the new model with the server-assigned ID
+              await treatmentDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
+              updateCaseBox(
+                  model: null,
+                  tbModel: null,
+                  caseModel: null,
+                  mentalHealthScreeningModel: null,
+                  diagnosisModel: null,
+                  treatmentModel: updatedModel,
+                  contactTracingModel: null,
+                  outcomeModel: null);
+              //getCaseModel(caseId: updatedModel.caseId);
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Treatment Models');
+              log('Treatment DataBox Contains===========${treatmentDataBox.values.toList().toString()}');
+            } else {
+              // Handle error if needed
+              throw Exception(
+                  'Failed to push Treatment Details from Local Storage');
+            }
+          } catch (e) {
+            // Handle the exception if needed
+            log('Error pushing Treatment details: $e');
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> pushPendingContactTracingDetails() async {
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
+    List<ContactTracingModel> contactTracingModelsList =
+        contactTracingDataBox.values.toList();
+    for (var contactTracingModel in contactTracingModelsList) {
+      if (contactTracingModel.isUpdated != null) {
+        if (contactTracingModel.isUpdated == false) {
+          final model = (contactTracingModel.isFormIDAssigned == null) ||
+                  (contactTracingModel.isFormIDAssigned == false)
+              ? contactTracingModel.copyWith(id: null)
+              : contactTracingModel;
+          try {
+            log('Pushing ContactTracing Model to the Server:${model.toString()}');
+            // Attempt to push the tbModel details to the server
+            final request = NetworkRequest(
+              '$contactTracingUrl${model.id == null ? '' : '/${model.id}'}',
+              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              isAuthorized: true,
+              data: {
+                ...contactTracingModel.toJson(),
+                'case_id': model.caseId ?? AuthCubit.instance.workingCaseId,
+              },
+            );
+            final result = await NetworkManager.instance.perform(request);
+            if (result.status == Status.ok) {
+              ContactTracingModel updatedModel =
+                  ContactTracingModel.fromJson(result.data['data']);
+              if ((contactTracingModel.isFormIDAssigned == null) ||
+                  (contactTracingModel.isFormIDAssigned == false)) {
+                // Get the key of the existing model
+                var key = contactTracingDataBox.keyAt(contactTracingDataBox
+                    .values
+                    .toList()
+                    .indexOf(contactTracingModel));
+                // Print the details of the record being deleted
+                log('Deleting ContactTracing Model: ${contactTracingDataBox.get(key)}');
+                // Delete the old model
+                await contactTracingDataBox.delete(key);
+              }
+              // Add the new model with the server-assigned ID
+              await contactTracingDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
+              updateCaseBox(
+                  model: null,
+                  tbModel: null,
+                  caseModel: null,
+                  mentalHealthScreeningModel: null,
+                  diagnosisModel: null,
+                  contactTracingModel: updatedModel,
+                  treatmentModel: null,
+                  outcomeModel: null);
+              //getCaseModel(caseId: updatedModel.caseId);
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline ContactTracing Models');
+              log('ContactTracing DataBox Contains===========${contactTracingDataBox.values.toList().toString()}');
+            } else {
+              // Handle error if needed
+              throw Exception(
+                  'Failed to push ContactTracing Details from Local Storage');
+            }
+          } catch (e) {
+            // Handle the exception if needed
+            log('Error pushing ContactTracing details: $e');
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  Future<void> pushPendingOutcomeDetails() async {
+    Box<OutcomeModel> outcomeDataBox = Hive.box<OutcomeModel>('outcomeModel');
+    List<OutcomeModel> outcomeModelsList = outcomeDataBox.values.toList();
+    for (var outcomeModel in outcomeModelsList) {
+      if (outcomeModel.isUpdated != null) {
+        if (outcomeModel.isUpdated == false) {
+          final model = (outcomeModel.isFormIDAssigned == null) ||
+                  (outcomeModel.isFormIDAssigned == false)
+              ? outcomeModel.copyWith(id: null)
+              : outcomeModel;
+          try {
+            log('Pushing Outcome Model to the Server:${model.toString()}');
+            // Attempt to push the tbModel details to the server
+            final request = NetworkRequest(
+              '$outcomeUrl${model.id == null ? '' : '/${model.id}'}',
+              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              isAuthorized: true,
+              data: {
+                ...outcomeModel.toJson(),
+                'case_id': model.caseId ?? AuthCubit.instance.workingCaseId,
+              },
+            );
+            final result = await NetworkManager.instance.perform(request);
+            if (result.status == Status.ok) {
+              OutcomeModel updatedModel =
+                  OutcomeModel.fromJson(result.data['data']);
+              if ((outcomeModel.isFormIDAssigned == null) ||
+                  (outcomeModel.isFormIDAssigned == false)) {
+                // Get the key of the existing model
+                var key = outcomeDataBox.keyAt(
+                    outcomeDataBox.values.toList().indexOf(outcomeModel));
+                // Print the details of the record being deleted
+                log('Deleting Outcome Model: ${outcomeDataBox.get(key)}');
+                // Delete the old model
+                await outcomeDataBox.delete(key);
+              }
+              // Add the new model with the server-assigned ID
+              await outcomeDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
+              updateCaseBox(
+                  model: null,
+                  tbModel: null,
+                  caseModel: null,
+                  mentalHealthScreeningModel: null,
+                  diagnosisModel: null,
+                  contactTracingModel: null,
+                  treatmentModel: null,
+                  outcomeModel: updatedModel);
+              //getCaseModel(caseId: updatedModel.caseId);
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Outcome Models');
+              log('Outcome DataBox Contains===========${outcomeDataBox.values.toList().toString()}');
+            } else {
+              // Handle error if needed
+              throw Exception(
+                  'Failed to push Outcome Details from Local Storage');
+            }
+          } catch (e) {
+            // Handle the exception if needed
+            log('Error pushing Outcome details: $e');
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  // Future<void> updateDataBox<T>({
+  //   required String boxName,
+  //   required int? modelID,
+  //   required int? caseId,
+  //   required T Function(T model, int? caseId) updateModelCallback,
+  // }) async {
+  //   Box<T> dataBox = Hive.box<T>(boxName);
+  //   T? model;
+
+  //   final key = dataBox.keyAt(
+  //     dataBox.values.toList().indexWhere(
+  //         (existingCase) => (existingCase as dynamic).id == modelID),
+  //   );
+
+  //   if (key != null) {
+  //     print('Found this Model: ${dataBox.get(key).toString()}');
+  //     model = dataBox.get(key);
+  //   }
+
+  //   if (model != null) {
+  //     T updatedModel = updateModelCallback(model, caseId);
+
+  //     if ((updatedModel as dynamic).id != null) {
+  //       await dataBox.put(
+  //           (updatedModel as dynamic).id.toString(), updatedModel);
+  //       log('Updated Case ID of the Model: ${updatedModel.toString()}');
+
+  //       updateCaseBox(
+  //           model: null,
+  //           tbModel: boxName == 'tbScreeningModel'
+  //               ? updatedModel as TBScreeningModel
+  //               : null,
+  //           caseModel: null,
+  //           mentalHealthScreeningModel: boxName == 'mentalHealthScreeningModel'
+  //               ? updatedModel as MentalHealthScreeningModel
+  //               : null);
+
+  //       log('$boxName Data Box Contains: ${dataBox.values.toList().toString()}');
+  //     } else {
+  //       log('Updated Model ID is null, skipping Hive put operation');
+  //     }
+  //   } else {
+  //     log('$boxName Model is null, skipping update');
+  //   }
+  // }
+
+  Future<void> updateTBDataBox(int? tbModelID, int? caseId) async {
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
+    TBScreeningModel? tbScreeningModel;
+    final model = tbdataBox.keyAt(tbdataBox.values
+        .toList()
+        .indexWhere((existingCase) => existingCase.id == tbModelID));
+
+    if (model != null) {
+      print('Found this Model${tbdataBox.get(model).toString()}');
+      tbScreeningModel = tbdataBox.get(model);
+    }
+
+    if (tbScreeningModel != null) {
+      TBScreeningModel updateModel = tbScreeningModel.copyWith(caseId: caseId);
+
+      if (updateModel.id != null) {
+        await tbdataBox.put(updateModel.id.toString(), updateModel);
+        log('Updated Case ID of the TBScreening Model: ${updateModel.toString()}');
+        updateCaseBox(
+            model: null,
+            tbModel: updateModel,
+            caseModel: null,
+            mentalHealthScreeningModel: null,
+            contactTracingModel: null,
+            diagnosisModel: null,
+            treatmentModel: null,
+            outcomeModel: null);
+        // log('Deleting TB Screening Model======================${tbdataBox.get(model)}'
+        //     .toString());
+        // await tbdataBox.delete(model);
+        log('TB Data Box Contains:${tbdataBox.values.toList().toString()}');
+      } else {
+        log('Update Model ID is null, skipping Hive put operation');
+      }
+    } else {
+      log('TB Screening Model is null, skipping update');
     }
   }
 
@@ -1026,7 +1970,11 @@ class CaseRepo {
             model: null,
             tbModel: null,
             caseModel: null,
-            mentalHealthScreeningModel: updateModel);
+            mentalHealthScreeningModel: updateModel,
+            diagnosisModel: null,
+            treatmentModel: null,
+            contactTracingModel: null,
+            outcomeModel: null);
         // log('Deleting TB Screening Model======================${whodatabox.get(model)}'
         //     .toString());
         // await whodatabox.delete(model);
@@ -1039,39 +1987,165 @@ class CaseRepo {
     }
   }
 
-  Future<void> updateTBDataBox(int? tbModelID, int? caseId) async {
-    Box<TBScreeningModel> tbdataBox =
-        Hive.box<TBScreeningModel>('tbScreeningModel');
-    TBScreeningModel? tbScreeningModel;
-    final model = tbdataBox.keyAt(tbdataBox.values
+  Future<void> updateDiagnosisDataBox(
+      int? diagnosisModelID, int? caseId) async {
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
+    DiagnosisModel? diagnosisModel;
+    final model = diagnosisDataBox.keyAt(diagnosisDataBox.values
         .toList()
-        .indexWhere((existingCase) => existingCase.id == tbModelID));
+        .indexWhere((existingCase) => existingCase.id == diagnosisModelID));
 
     if (model != null) {
-      print('Found this Model${tbdataBox.get(model).toString()}');
-      tbScreeningModel = tbdataBox.get(model);
+      print('Found this Model${diagnosisDataBox.get(model).toString()}');
+      diagnosisModel = diagnosisDataBox.get(model);
     }
 
-    if (tbScreeningModel != null) {
-      TBScreeningModel updateModel = tbScreeningModel.copyWith(caseId: caseId);
+    if (diagnosisModel != null) {
+      DiagnosisModel updateModel = diagnosisModel.copyWith(caseId: caseId);
 
       if (updateModel.id != null) {
-        await tbdataBox.put(updateModel.id.toString(), updateModel);
-        log('Updated Case ID of the TBScreening Model: ${updateModel.toString()}');
+        await diagnosisDataBox.put(updateModel.id.toString(), updateModel);
+        log('Updated Case ID of the Diagnosis model: ${updateModel.toString()}');
         updateCaseBox(
             model: null,
-            tbModel: updateModel,
+            tbModel: null,
             caseModel: null,
-            mentalHealthScreeningModel: null);
-        // log('Deleting TB Screening Model======================${tbdataBox.get(model)}'
+            mentalHealthScreeningModel: null,
+            diagnosisModel: updateModel,
+            treatmentModel: null,
+            contactTracingModel: null,
+            outcomeModel: null);
+        // log('Deleting TB Screening Model======================${diagnosisDataBox.get(model)}'
         //     .toString());
-        // await tbdataBox.delete(model);
-        log('TB Data Box Contains:${tbdataBox.values.toList().toString()}');
+        // await diagnosisDataBox.delete(model);
+        log('Diagnosis Data Box Contains:${diagnosisDataBox.values.toList().toString()}');
       } else {
         log('Update Model ID is null, skipping Hive put operation');
       }
     } else {
-      log('TB Screening Model is null, skipping update');
+      log('Diagnosis model is null, skipping update');
+    }
+  }
+
+  Future<void> updateTreatmentDataBox(int? treatmentID, int? caseId) async {
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
+    TreatmentModel? diagnosisModel;
+    final model = treatmentDataBox.keyAt(treatmentDataBox.values
+        .toList()
+        .indexWhere((existingCase) => existingCase.id == treatmentID));
+
+    if (model != null) {
+      print('Found this Model${treatmentDataBox.get(model).toString()}');
+      diagnosisModel = treatmentDataBox.get(model);
+    }
+
+    if (diagnosisModel != null) {
+      TreatmentModel updateModel = diagnosisModel.copyWith(caseId: caseId);
+
+      if (updateModel.id != null) {
+        await treatmentDataBox.put(updateModel.id.toString(), updateModel);
+        log('Updated Case ID of the Treatment model: ${updateModel.toString()}');
+        updateCaseBox(
+            model: null,
+            tbModel: null,
+            caseModel: null,
+            mentalHealthScreeningModel: null,
+            diagnosisModel: null,
+            treatmentModel: updateModel,
+            contactTracingModel: null,
+            outcomeModel: null);
+        // log('Deleting TB Screening Model======================${diagnosisDataBox.get(model)}'
+        //     .toString());
+        // await diagnosisDataBox.delete(model);
+        log('Treatment Data Box Contains:${treatmentDataBox.values.toList().toString()}');
+      } else {
+        log('Update Model ID is null, skipping Hive put operation');
+      }
+    } else {
+      log('Treatment model is null, skipping update');
+    }
+  }
+
+  Future<void> updateContactTracingDataBox(
+      int? contactTracingID, int? caseId) async {
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
+    ContactTracingModel? contactTracingModel;
+    final model = contactTracingDataBox.keyAt(contactTracingDataBox.values
+        .toList()
+        .indexWhere((existingCase) => existingCase.id == contactTracingID));
+
+    if (model != null) {
+      print('Found this Model${contactTracingDataBox.get(model).toString()}');
+      contactTracingModel = contactTracingDataBox.get(model);
+    }
+
+    if (contactTracingModel != null) {
+      ContactTracingModel updateModel =
+          contactTracingModel.copyWith(caseId: caseId);
+
+      if (updateModel.id != null) {
+        await contactTracingDataBox.put(updateModel.id.toString(), updateModel);
+        log('Updated Case ID of the ContactTracing model: ${updateModel.toString()}');
+        updateCaseBox(
+            model: null,
+            tbModel: null,
+            caseModel: null,
+            mentalHealthScreeningModel: null,
+            diagnosisModel: null,
+            treatmentModel: null,
+            contactTracingModel: updateModel,
+            outcomeModel: null);
+        // log('Deleting TB Screening Model======================${diagnosisDataBox.get(model)}'
+        //     .toString());
+        // await diagnosisDataBox.delete(model);
+        log('ContactTracing Data Box Contains:${contactTracingDataBox.values.toList().toString()}');
+      } else {
+        log('Update Model ID is null, skipping Hive put operation');
+      }
+    } else {
+      log('ContactTracing model is null, skipping update');
+    }
+  }
+
+  Future<void> updateOutcomeDataBox(int? outcomeID, int? caseId) async {
+    Box<OutcomeModel> outcomeDataBox = Hive.box<OutcomeModel>('outcomeModel');
+    OutcomeModel? outcomeModel;
+    final model = outcomeDataBox.keyAt(outcomeDataBox.values
+        .toList()
+        .indexWhere((existingCase) => existingCase.id == outcomeID));
+
+    if (model != null) {
+      print('Found this Model${outcomeDataBox.get(model).toString()}');
+      outcomeModel = outcomeDataBox.get(model);
+    }
+
+    if (outcomeModel != null) {
+      OutcomeModel updateModel = outcomeModel.copyWith(caseId: caseId);
+
+      if (updateModel.id != null) {
+        await outcomeDataBox.put(updateModel.id.toString(), updateModel);
+        log('Updated Case ID of the Outcome model: ${updateModel.toString()}');
+        updateCaseBox(
+            model: null,
+            tbModel: null,
+            caseModel: null,
+            mentalHealthScreeningModel: null,
+            diagnosisModel: null,
+            treatmentModel: null,
+            contactTracingModel: null,
+            outcomeModel: updateModel);
+        // log('Deleting TB Screening Model======================${diagnosisDataBox.get(model)}'
+        //     .toString());
+        // await diagnosisDataBox.delete(model);
+        log('Outcome Data Box Contains:${outcomeDataBox.values.toList().toString()}');
+      } else {
+        log('Update Model ID is null, skipping Hive put operation');
+      }
+    } else {
+      log('Outcome model is null, skipping update');
     }
   }
 
@@ -1090,14 +2164,23 @@ class CaseRepo {
     required ReferralDetailsModel? model,
     required TBScreeningModel? tbModel,
     required MentalHealthScreeningModel? mentalHealthScreeningModel,
+    required DiagnosisModel? diagnosisModel,
+    required TreatmentModel? treatmentModel,
+    required ContactTracingModel? contactTracingModel,
+    required OutcomeModel? outcomeModel,
     required Case? caseModel,
   }) async {
     final context = navigatorKey.currentContext!;
     final sourceCubit = context.read<SourceCubit>();
     Box<Case> caseBox = Hive.box<Case>('caseList');
     Case caseModelToSave;
-    final caseIdToSearch =
-        model?.caseId ?? tbModel?.caseId ?? mentalHealthScreeningModel?.caseId;
+    final caseIdToSearch = model?.caseId ??
+        tbModel?.caseId ??
+        mentalHealthScreeningModel?.caseId ??
+        diagnosisModel?.caseId ??
+        treatmentModel?.caseId ??
+        contactTracingModel?.caseId ??
+        outcomeModel?.caseId;
     final existingCaseIndex = caseBox.values.toList().indexWhere(
           (existingCase) => existingCase.id == caseIdToSearch,
         );
@@ -1204,6 +2287,44 @@ class CaseRepo {
           caseBox.putAt(existingCaseIndex, caseModelToSave);
           print(
               'Updated case in Hive with Mental Health details: $caseModelToSave');
+        }
+        if (diagnosisModel != null) {
+          caseModelToSave = existingCase.copyWith(
+            diagnosis: diagnosisModel.id,
+            diagnosisName: diagnosisModel.diagnosis,
+          );
+
+          caseBox.putAt(existingCaseIndex, caseModelToSave);
+          print(
+              'Updated case in Hive with Diagnosis details: $caseModelToSave');
+        }
+        if (treatmentModel != null) {
+          caseModelToSave = existingCase.copyWith(
+            treatment: treatmentModel.id,
+            statusAfterDx: treatmentModel.diagnosisStatus,
+          );
+
+          caseBox.putAt(existingCaseIndex, caseModelToSave);
+          print(
+              'Updated case in Hive with Treatment details: $caseModelToSave');
+        }
+        if (contactTracingModel != null) {
+          caseModelToSave = existingCase.copyWith(
+            contactTracing: contactTracingModel.id,
+          );
+
+          caseBox.putAt(existingCaseIndex, caseModelToSave);
+          print(
+              'Updated case in Hive with Treatment details: $caseModelToSave');
+        }
+        if (outcomeModel != null) {
+          caseModelToSave = existingCase.copyWith(
+              outcomeValue: outcomeModel.id,
+              treatmentOutcome: outcomeModel.treatmentOutcome);
+
+          caseBox.putAt(existingCaseIndex, caseModelToSave);
+          print(
+              'Updated case in Hive with Treatment details: $caseModelToSave');
         }
       }
     } else {

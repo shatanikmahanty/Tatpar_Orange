@@ -20,139 +20,200 @@ DiagnosisModel _$DiagnosisModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$DiagnosisModel {
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
   @JsonKey(name: 'diagnosis_initiated')
   String? get diagnosisInitiated => throw _privateConstructorUsedError;
+  @HiveField(2)
   @JsonKey(name: 'first_consultation')
   String? get firstConsultation => throw _privateConstructorUsedError;
+  @HiveField(3)
   @JsonKey(
       name: 'first_consultation_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get firstConsultationDate => throw _privateConstructorUsedError;
+  @HiveField(4)
   @JsonKey(name: 'chest_xray')
   String? get chestXray => throw _privateConstructorUsedError;
+  @HiveField(5)
   @JsonKey(
       name: 'chest_xray_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get chestXrayDate => throw _privateConstructorUsedError;
+  @HiveField(6)
   @JsonKey(name: 'chest_xray_result', includeToJson: false)
   String? get chestXrayResult => throw _privateConstructorUsedError;
+  @HiveField(7)
   @JsonKey(name: 'afb_done')
   String? get afbDone => throw _privateConstructorUsedError;
+  @HiveField(8)
   @JsonKey(name: 'afb_lab_number', includeToJson: false)
   String? get afbLabNumber => throw _privateConstructorUsedError;
+  @HiveField(9)
   @JsonKey(includeIfNull: false)
   String? get afb1Result => throw _privateConstructorUsedError;
+  @HiveField(10)
   @JsonKey(name: 'afb_1_result')
   int? get selectedAfb1Result => throw _privateConstructorUsedError;
+  @HiveField(11)
   @JsonKey(
       name: 'afb_1_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get afb1ResultDate => throw _privateConstructorUsedError;
+  @HiveField(12)
   @JsonKey(includeIfNull: false)
   String? get afb2Result => throw _privateConstructorUsedError;
+  @HiveField(13)
   @JsonKey(name: 'afb_2_result')
   int? get selectedAfb2Result => throw _privateConstructorUsedError;
+  @HiveField(14)
   @JsonKey(
       name: 'afb_2_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get afb2ResultDate => throw _privateConstructorUsedError;
+  @HiveField(15)
   @JsonKey(name: 'naat_test')
   String? get naatTest => throw _privateConstructorUsedError;
+  @HiveField(16)
   @JsonKey(includeIfNull: false)
   String? get naatMachine => throw _privateConstructorUsedError;
+  @HiveField(17)
   @JsonKey(name: 'naat_machine')
   int? get selectedNaatMachine => throw _privateConstructorUsedError;
+  @HiveField(18)
   @JsonKey(name: 'naat_site')
   String? get naatSite => throw _privateConstructorUsedError;
+  @HiveField(19)
   @JsonKey(name: 'naat_lab_number')
   String? get naatLabNumber => throw _privateConstructorUsedError;
+  @HiveField(20)
   @JsonKey(
       name: 'sample_collection_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get sampleCollectionDate => throw _privateConstructorUsedError;
+  @HiveField(21)
   @JsonKey(
       name: 'naat_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get naatResultDate => throw _privateConstructorUsedError;
+  @HiveField(22)
   @JsonKey(includeIfNull: false)
   String? get mtbResult => throw _privateConstructorUsedError;
+  @HiveField(23)
   @JsonKey(name: 'mtb_result')
   int? get selectedMtbResult => throw _privateConstructorUsedError;
+  @HiveField(24)
   @JsonKey(name: 'rif_resistance')
   String? get rifResistance => throw _privateConstructorUsedError;
+  @HiveField(25)
   @JsonKey(name: 'xdr_done')
   String? get xdrDone => throw _privateConstructorUsedError;
+  @HiveField(26)
   @JsonKey(includeToJson: false)
   String? get xdrResult => throw _privateConstructorUsedError;
+  @HiveField(27)
   @JsonKey(name: 'xdr_result')
   int? get selectedXdrResult => throw _privateConstructorUsedError;
+  @HiveField(28)
   @JsonKey(
       name: 'xdr_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get xdrResultDate => throw _privateConstructorUsedError;
+  @HiveField(29)
   @JsonKey(name: 'xdr_lab_number')
   String? get xdrLabNumber => throw _privateConstructorUsedError;
+  @HiveField(30)
   @JsonKey(name: 'xdr_site')
   String? get xdrSite => throw _privateConstructorUsedError;
+  @HiveField(31)
   @JsonKey(name: 'inh_resistance')
   String? get inhResistance => throw _privateConstructorUsedError;
+  @HiveField(32)
   @JsonKey(name: 'flq_resistance')
   String? get flqResistance => throw _privateConstructorUsedError;
+  @HiveField(33)
   @JsonKey(name: 'amk_resistance')
   String? get amkResistance => throw _privateConstructorUsedError;
+  @HiveField(34)
   @JsonKey(name: 'kan_resistance')
   String? get kanResistance => throw _privateConstructorUsedError;
+  @HiveField(35)
   @JsonKey(name: 'cap_resistance')
   String? get capResistance => throw _privateConstructorUsedError;
+  @HiveField(36)
   @JsonKey(name: 'eth_resistance')
   String? get ethResistance => throw _privateConstructorUsedError;
+  @HiveField(37)
   @JsonKey(name: 'fnac')
   String? get fnac => throw _privateConstructorUsedError;
+  @HiveField(38)
   @JsonKey(
       name: 'fnac_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get fnacDate => throw _privateConstructorUsedError;
+  @HiveField(39)
   @JsonKey(name: 'fnac_result')
   String? get fnacResult => throw _privateConstructorUsedError;
+  @HiveField(40)
   @JsonKey(name: 'fnac_comments')
   String? get fnacComments => throw _privateConstructorUsedError;
+  @HiveField(41)
   @JsonKey(name: 'usg')
   String? get usg => throw _privateConstructorUsedError;
+  @HiveField(42)
   @JsonKey(
       name: 'usg_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get usgDate => throw _privateConstructorUsedError;
+  @HiveField(43)
   @JsonKey(name: 'usg_result')
   String? get usgResult => throw _privateConstructorUsedError;
+  @HiveField(44)
   @JsonKey(name: 'usg_comments')
   String? get usgComments => throw _privateConstructorUsedError;
+  @HiveField(45)
   @JsonKey(name: 'other_test')
   String? get otherTest => throw _privateConstructorUsedError;
+  @HiveField(46)
   @JsonKey(
       name: 'other_test_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get otherTestDate => throw _privateConstructorUsedError;
+  @HiveField(47)
   @JsonKey(name: 'test_name')
   String? get testName => throw _privateConstructorUsedError;
+  @HiveField(48)
   @JsonKey(name: 'other_test_result')
   String? get otherTestResult => throw _privateConstructorUsedError;
+  @HiveField(49)
   @JsonKey(name: 'diagnosis')
   String? get diagnosis => throw _privateConstructorUsedError;
+  @HiveField(50)
   @JsonKey(name: 'diagnosis_comments')
   String? get diagnosisComments => throw _privateConstructorUsedError;
+  @HiveField(51)
   @JsonKey(
       name: 'diagnosis_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get diagnosisDate => throw _privateConstructorUsedError;
+  @HiveField(52)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated => throw _privateConstructorUsedError;
+  @HiveField(53)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId => throw _privateConstructorUsedError;
+  @HiveField(54)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -167,89 +228,132 @@ abstract class $DiagnosisModelCopyWith<$Res> {
       _$DiagnosisModelCopyWithImpl<$Res, DiagnosisModel>;
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
-      @JsonKey(name: 'diagnosis_initiated') String? diagnosisInitiated,
-      @JsonKey(name: 'first_consultation') String? firstConsultation,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1)
+      @JsonKey(name: 'diagnosis_initiated')
+      String? diagnosisInitiated,
+      @HiveField(2)
+      @JsonKey(name: 'first_consultation')
+      String? firstConsultation,
+      @HiveField(3)
       @JsonKey(
           name: 'first_consultation_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? firstConsultationDate,
-      @JsonKey(name: 'chest_xray') String? chestXray,
-      @JsonKey(name: 'chest_xray_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(4) @JsonKey(name: 'chest_xray') String? chestXray,
+      @HiveField(5)
+      @JsonKey(
+          name: 'chest_xray_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? chestXrayDate,
+      @HiveField(6)
       @JsonKey(name: 'chest_xray_result', includeToJson: false)
       String? chestXrayResult,
-      @JsonKey(name: 'afb_done') String? afbDone,
+      @HiveField(7) @JsonKey(name: 'afb_done') String? afbDone,
+      @HiveField(8)
       @JsonKey(name: 'afb_lab_number', includeToJson: false)
       String? afbLabNumber,
-      @JsonKey(includeIfNull: false) String? afb1Result,
-      @JsonKey(name: 'afb_1_result') int? selectedAfb1Result,
+      @HiveField(9) @JsonKey(includeIfNull: false) String? afb1Result,
+      @HiveField(10) @JsonKey(name: 'afb_1_result') int? selectedAfb1Result,
+      @HiveField(11)
       @JsonKey(
           name: 'afb_1_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? afb1ResultDate,
-      @JsonKey(includeIfNull: false) String? afb2Result,
-      @JsonKey(name: 'afb_2_result') int? selectedAfb2Result,
+      @HiveField(12) @JsonKey(includeIfNull: false) String? afb2Result,
+      @HiveField(13) @JsonKey(name: 'afb_2_result') int? selectedAfb2Result,
+      @HiveField(14)
       @JsonKey(
           name: 'afb_2_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? afb2ResultDate,
-      @JsonKey(name: 'naat_test') String? naatTest,
-      @JsonKey(includeIfNull: false) String? naatMachine,
-      @JsonKey(name: 'naat_machine') int? selectedNaatMachine,
-      @JsonKey(name: 'naat_site') String? naatSite,
-      @JsonKey(name: 'naat_lab_number') String? naatLabNumber,
+      @HiveField(15) @JsonKey(name: 'naat_test') String? naatTest,
+      @HiveField(16) @JsonKey(includeIfNull: false) String? naatMachine,
+      @HiveField(17) @JsonKey(name: 'naat_machine') int? selectedNaatMachine,
+      @HiveField(18) @JsonKey(name: 'naat_site') String? naatSite,
+      @HiveField(19) @JsonKey(name: 'naat_lab_number') String? naatLabNumber,
+      @HiveField(20)
       @JsonKey(
           name: 'sample_collection_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? sampleCollectionDate,
+      @HiveField(21)
       @JsonKey(
           name: 'naat_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? naatResultDate,
-      @JsonKey(includeIfNull: false) String? mtbResult,
-      @JsonKey(name: 'mtb_result') int? selectedMtbResult,
-      @JsonKey(name: 'rif_resistance') String? rifResistance,
-      @JsonKey(name: 'xdr_done') String? xdrDone,
-      @JsonKey(includeToJson: false) String? xdrResult,
-      @JsonKey(name: 'xdr_result') int? selectedXdrResult,
-      @JsonKey(name: 'xdr_result_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(22) @JsonKey(includeIfNull: false) String? mtbResult,
+      @HiveField(23) @JsonKey(name: 'mtb_result') int? selectedMtbResult,
+      @HiveField(24) @JsonKey(name: 'rif_resistance') String? rifResistance,
+      @HiveField(25) @JsonKey(name: 'xdr_done') String? xdrDone,
+      @HiveField(26) @JsonKey(includeToJson: false) String? xdrResult,
+      @HiveField(27) @JsonKey(name: 'xdr_result') int? selectedXdrResult,
+      @HiveField(28)
+      @JsonKey(
+          name: 'xdr_result_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? xdrResultDate,
-      @JsonKey(name: 'xdr_lab_number') String? xdrLabNumber,
-      @JsonKey(name: 'xdr_site') String? xdrSite,
-      @JsonKey(name: 'inh_resistance') String? inhResistance,
-      @JsonKey(name: 'flq_resistance') String? flqResistance,
-      @JsonKey(name: 'amk_resistance') String? amkResistance,
-      @JsonKey(name: 'kan_resistance') String? kanResistance,
-      @JsonKey(name: 'cap_resistance') String? capResistance,
-      @JsonKey(name: 'eth_resistance') String? ethResistance,
-      @JsonKey(name: 'fnac') String? fnac,
-      @JsonKey(name: 'fnac_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(29) @JsonKey(name: 'xdr_lab_number') String? xdrLabNumber,
+      @HiveField(30) @JsonKey(name: 'xdr_site') String? xdrSite,
+      @HiveField(31) @JsonKey(name: 'inh_resistance') String? inhResistance,
+      @HiveField(32) @JsonKey(name: 'flq_resistance') String? flqResistance,
+      @HiveField(33) @JsonKey(name: 'amk_resistance') String? amkResistance,
+      @HiveField(34) @JsonKey(name: 'kan_resistance') String? kanResistance,
+      @HiveField(35) @JsonKey(name: 'cap_resistance') String? capResistance,
+      @HiveField(36) @JsonKey(name: 'eth_resistance') String? ethResistance,
+      @HiveField(37) @JsonKey(name: 'fnac') String? fnac,
+      @HiveField(38)
+      @JsonKey(
+          name: 'fnac_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? fnacDate,
-      @JsonKey(name: 'fnac_result') String? fnacResult,
-      @JsonKey(name: 'fnac_comments') String? fnacComments,
-      @JsonKey(name: 'usg') String? usg,
-      @JsonKey(name: 'usg_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(39) @JsonKey(name: 'fnac_result') String? fnacResult,
+      @HiveField(40) @JsonKey(name: 'fnac_comments') String? fnacComments,
+      @HiveField(41) @JsonKey(name: 'usg') String? usg,
+      @HiveField(42)
+      @JsonKey(
+          name: 'usg_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? usgDate,
-      @JsonKey(name: 'usg_result') String? usgResult,
-      @JsonKey(name: 'usg_comments') String? usgComments,
-      @JsonKey(name: 'other_test') String? otherTest,
+      @HiveField(43) @JsonKey(name: 'usg_result') String? usgResult,
+      @HiveField(44) @JsonKey(name: 'usg_comments') String? usgComments,
+      @HiveField(45) @JsonKey(name: 'other_test') String? otherTest,
+      @HiveField(46)
       @JsonKey(
           name: 'other_test_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? otherTestDate,
-      @JsonKey(name: 'test_name') String? testName,
-      @JsonKey(name: 'other_test_result') String? otherTestResult,
-      @JsonKey(name: 'diagnosis') String? diagnosis,
-      @JsonKey(name: 'diagnosis_comments') String? diagnosisComments,
-      @JsonKey(name: 'diagnosis_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
-      DateTime? diagnosisDate});
+      @HiveField(47) @JsonKey(name: 'test_name') String? testName,
+      @HiveField(48)
+      @JsonKey(name: 'other_test_result')
+      String? otherTestResult,
+      @HiveField(49) @JsonKey(name: 'diagnosis') String? diagnosis,
+      @HiveField(50)
+      @JsonKey(name: 'diagnosis_comments')
+      String? diagnosisComments,
+      @HiveField(51)
+      @JsonKey(
+          name: 'diagnosis_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? diagnosisDate,
+      @HiveField(52) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(53)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      int? caseId,
+      @HiveField(54)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -317,6 +421,9 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
     Object? diagnosis = freezed,
     Object? diagnosisComments = freezed,
     Object? diagnosisDate = freezed,
+    Object? isUpdated = freezed,
+    Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -527,6 +634,18 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
           ? _value.diagnosisDate
           : diagnosisDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ) as $Val);
   }
 }
@@ -540,89 +659,132 @@ abstract class _$$DiagnosisModelImplCopyWith<$Res>
   @override
   @useResult
   $Res call(
-      {@JsonKey(name: 'id', includeToJson: false) int? id,
-      @JsonKey(name: 'diagnosis_initiated') String? diagnosisInitiated,
-      @JsonKey(name: 'first_consultation') String? firstConsultation,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
+      @HiveField(1)
+      @JsonKey(name: 'diagnosis_initiated')
+      String? diagnosisInitiated,
+      @HiveField(2)
+      @JsonKey(name: 'first_consultation')
+      String? firstConsultation,
+      @HiveField(3)
       @JsonKey(
           name: 'first_consultation_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? firstConsultationDate,
-      @JsonKey(name: 'chest_xray') String? chestXray,
-      @JsonKey(name: 'chest_xray_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(4) @JsonKey(name: 'chest_xray') String? chestXray,
+      @HiveField(5)
+      @JsonKey(
+          name: 'chest_xray_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? chestXrayDate,
+      @HiveField(6)
       @JsonKey(name: 'chest_xray_result', includeToJson: false)
       String? chestXrayResult,
-      @JsonKey(name: 'afb_done') String? afbDone,
+      @HiveField(7) @JsonKey(name: 'afb_done') String? afbDone,
+      @HiveField(8)
       @JsonKey(name: 'afb_lab_number', includeToJson: false)
       String? afbLabNumber,
-      @JsonKey(includeIfNull: false) String? afb1Result,
-      @JsonKey(name: 'afb_1_result') int? selectedAfb1Result,
+      @HiveField(9) @JsonKey(includeIfNull: false) String? afb1Result,
+      @HiveField(10) @JsonKey(name: 'afb_1_result') int? selectedAfb1Result,
+      @HiveField(11)
       @JsonKey(
           name: 'afb_1_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? afb1ResultDate,
-      @JsonKey(includeIfNull: false) String? afb2Result,
-      @JsonKey(name: 'afb_2_result') int? selectedAfb2Result,
+      @HiveField(12) @JsonKey(includeIfNull: false) String? afb2Result,
+      @HiveField(13) @JsonKey(name: 'afb_2_result') int? selectedAfb2Result,
+      @HiveField(14)
       @JsonKey(
           name: 'afb_2_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? afb2ResultDate,
-      @JsonKey(name: 'naat_test') String? naatTest,
-      @JsonKey(includeIfNull: false) String? naatMachine,
-      @JsonKey(name: 'naat_machine') int? selectedNaatMachine,
-      @JsonKey(name: 'naat_site') String? naatSite,
-      @JsonKey(name: 'naat_lab_number') String? naatLabNumber,
+      @HiveField(15) @JsonKey(name: 'naat_test') String? naatTest,
+      @HiveField(16) @JsonKey(includeIfNull: false) String? naatMachine,
+      @HiveField(17) @JsonKey(name: 'naat_machine') int? selectedNaatMachine,
+      @HiveField(18) @JsonKey(name: 'naat_site') String? naatSite,
+      @HiveField(19) @JsonKey(name: 'naat_lab_number') String? naatLabNumber,
+      @HiveField(20)
       @JsonKey(
           name: 'sample_collection_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? sampleCollectionDate,
+      @HiveField(21)
       @JsonKey(
           name: 'naat_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? naatResultDate,
-      @JsonKey(includeIfNull: false) String? mtbResult,
-      @JsonKey(name: 'mtb_result') int? selectedMtbResult,
-      @JsonKey(name: 'rif_resistance') String? rifResistance,
-      @JsonKey(name: 'xdr_done') String? xdrDone,
-      @JsonKey(includeToJson: false) String? xdrResult,
-      @JsonKey(name: 'xdr_result') int? selectedXdrResult,
-      @JsonKey(name: 'xdr_result_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(22) @JsonKey(includeIfNull: false) String? mtbResult,
+      @HiveField(23) @JsonKey(name: 'mtb_result') int? selectedMtbResult,
+      @HiveField(24) @JsonKey(name: 'rif_resistance') String? rifResistance,
+      @HiveField(25) @JsonKey(name: 'xdr_done') String? xdrDone,
+      @HiveField(26) @JsonKey(includeToJson: false) String? xdrResult,
+      @HiveField(27) @JsonKey(name: 'xdr_result') int? selectedXdrResult,
+      @HiveField(28)
+      @JsonKey(
+          name: 'xdr_result_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? xdrResultDate,
-      @JsonKey(name: 'xdr_lab_number') String? xdrLabNumber,
-      @JsonKey(name: 'xdr_site') String? xdrSite,
-      @JsonKey(name: 'inh_resistance') String? inhResistance,
-      @JsonKey(name: 'flq_resistance') String? flqResistance,
-      @JsonKey(name: 'amk_resistance') String? amkResistance,
-      @JsonKey(name: 'kan_resistance') String? kanResistance,
-      @JsonKey(name: 'cap_resistance') String? capResistance,
-      @JsonKey(name: 'eth_resistance') String? ethResistance,
-      @JsonKey(name: 'fnac') String? fnac,
-      @JsonKey(name: 'fnac_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(29) @JsonKey(name: 'xdr_lab_number') String? xdrLabNumber,
+      @HiveField(30) @JsonKey(name: 'xdr_site') String? xdrSite,
+      @HiveField(31) @JsonKey(name: 'inh_resistance') String? inhResistance,
+      @HiveField(32) @JsonKey(name: 'flq_resistance') String? flqResistance,
+      @HiveField(33) @JsonKey(name: 'amk_resistance') String? amkResistance,
+      @HiveField(34) @JsonKey(name: 'kan_resistance') String? kanResistance,
+      @HiveField(35) @JsonKey(name: 'cap_resistance') String? capResistance,
+      @HiveField(36) @JsonKey(name: 'eth_resistance') String? ethResistance,
+      @HiveField(37) @JsonKey(name: 'fnac') String? fnac,
+      @HiveField(38)
+      @JsonKey(
+          name: 'fnac_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? fnacDate,
-      @JsonKey(name: 'fnac_result') String? fnacResult,
-      @JsonKey(name: 'fnac_comments') String? fnacComments,
-      @JsonKey(name: 'usg') String? usg,
-      @JsonKey(name: 'usg_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
+      @HiveField(39) @JsonKey(name: 'fnac_result') String? fnacResult,
+      @HiveField(40) @JsonKey(name: 'fnac_comments') String? fnacComments,
+      @HiveField(41) @JsonKey(name: 'usg') String? usg,
+      @HiveField(42)
+      @JsonKey(
+          name: 'usg_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
       DateTime? usgDate,
-      @JsonKey(name: 'usg_result') String? usgResult,
-      @JsonKey(name: 'usg_comments') String? usgComments,
-      @JsonKey(name: 'other_test') String? otherTest,
+      @HiveField(43) @JsonKey(name: 'usg_result') String? usgResult,
+      @HiveField(44) @JsonKey(name: 'usg_comments') String? usgComments,
+      @HiveField(45) @JsonKey(name: 'other_test') String? otherTest,
+      @HiveField(46)
       @JsonKey(
           name: 'other_test_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       DateTime? otherTestDate,
-      @JsonKey(name: 'test_name') String? testName,
-      @JsonKey(name: 'other_test_result') String? otherTestResult,
-      @JsonKey(name: 'diagnosis') String? diagnosis,
-      @JsonKey(name: 'diagnosis_comments') String? diagnosisComments,
-      @JsonKey(name: 'diagnosis_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
-      DateTime? diagnosisDate});
+      @HiveField(47) @JsonKey(name: 'test_name') String? testName,
+      @HiveField(48)
+      @JsonKey(name: 'other_test_result')
+      String? otherTestResult,
+      @HiveField(49) @JsonKey(name: 'diagnosis') String? diagnosis,
+      @HiveField(50)
+      @JsonKey(name: 'diagnosis_comments')
+      String? diagnosisComments,
+      @HiveField(51)
+      @JsonKey(
+          name: 'diagnosis_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? diagnosisDate,
+      @HiveField(52) @JsonKey(name: 'is_updated') bool? isUpdated,
+      @HiveField(53)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      int? caseId,
+      @HiveField(54)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      bool? isFormIDAssigned});
 }
 
 /// @nodoc
@@ -688,6 +850,9 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
     Object? diagnosis = freezed,
     Object? diagnosisComments = freezed,
     Object? diagnosisDate = freezed,
+    Object? isUpdated = freezed,
+    Object? caseId = freezed,
+    Object? isFormIDAssigned = freezed,
   }) {
     return _then(_$DiagnosisModelImpl(
       id: freezed == id
@@ -898,6 +1063,18 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
           ? _value.diagnosisDate
           : diagnosisDate // ignore: cast_nullable_to_non_nullable
               as DateTime?,
+      isUpdated: freezed == isUpdated
+          ? _value.isUpdated
+          : isUpdated // ignore: cast_nullable_to_non_nullable
+              as bool?,
+      caseId: freezed == caseId
+          ? _value.caseId
+          : caseId // ignore: cast_nullable_to_non_nullable
+              as int?,
+      isFormIDAssigned: freezed == isFormIDAssigned
+          ? _value.isFormIDAssigned
+          : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
+              as bool?,
     ));
   }
 }
@@ -906,296 +1083,385 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$DiagnosisModelImpl implements _DiagnosisModel {
   const _$DiagnosisModelImpl(
-      {@JsonKey(name: 'id', includeToJson: false) this.id,
-      @JsonKey(name: 'diagnosis_initiated') this.diagnosisInitiated,
-      @JsonKey(name: 'first_consultation') this.firstConsultation,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) this.id,
+      @HiveField(1)
+      @JsonKey(name: 'diagnosis_initiated')
+      this.diagnosisInitiated,
+      @HiveField(2) @JsonKey(name: 'first_consultation') this.firstConsultation,
+      @HiveField(3)
       @JsonKey(
           name: 'first_consultation_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.firstConsultationDate,
-      @JsonKey(name: 'chest_xray') this.chestXray,
+      @HiveField(4) @JsonKey(name: 'chest_xray') this.chestXray,
+      @HiveField(5)
       @JsonKey(
           name: 'chest_xray_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.chestXrayDate,
+      @HiveField(6)
       @JsonKey(name: 'chest_xray_result', includeToJson: false)
       this.chestXrayResult,
-      @JsonKey(name: 'afb_done') this.afbDone,
-      @JsonKey(name: 'afb_lab_number', includeToJson: false) this.afbLabNumber,
-      @JsonKey(includeIfNull: false) this.afb1Result,
-      @JsonKey(name: 'afb_1_result') this.selectedAfb1Result,
+      @HiveField(7) @JsonKey(name: 'afb_done') this.afbDone,
+      @HiveField(8)
+      @JsonKey(name: 'afb_lab_number', includeToJson: false)
+      this.afbLabNumber,
+      @HiveField(9) @JsonKey(includeIfNull: false) this.afb1Result,
+      @HiveField(10) @JsonKey(name: 'afb_1_result') this.selectedAfb1Result,
+      @HiveField(11)
       @JsonKey(
           name: 'afb_1_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.afb1ResultDate,
-      @JsonKey(includeIfNull: false) this.afb2Result,
-      @JsonKey(name: 'afb_2_result') this.selectedAfb2Result,
+      @HiveField(12) @JsonKey(includeIfNull: false) this.afb2Result,
+      @HiveField(13) @JsonKey(name: 'afb_2_result') this.selectedAfb2Result,
+      @HiveField(14)
       @JsonKey(
           name: 'afb_2_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.afb2ResultDate,
-      @JsonKey(name: 'naat_test') this.naatTest,
-      @JsonKey(includeIfNull: false) this.naatMachine,
-      @JsonKey(name: 'naat_machine') this.selectedNaatMachine,
-      @JsonKey(name: 'naat_site') this.naatSite,
-      @JsonKey(name: 'naat_lab_number') this.naatLabNumber,
+      @HiveField(15) @JsonKey(name: 'naat_test') this.naatTest,
+      @HiveField(16) @JsonKey(includeIfNull: false) this.naatMachine,
+      @HiveField(17) @JsonKey(name: 'naat_machine') this.selectedNaatMachine,
+      @HiveField(18) @JsonKey(name: 'naat_site') this.naatSite,
+      @HiveField(19) @JsonKey(name: 'naat_lab_number') this.naatLabNumber,
+      @HiveField(20)
       @JsonKey(
           name: 'sample_collection_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.sampleCollectionDate,
+      @HiveField(21)
       @JsonKey(
           name: 'naat_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.naatResultDate,
-      @JsonKey(includeIfNull: false) this.mtbResult,
-      @JsonKey(name: 'mtb_result') this.selectedMtbResult,
-      @JsonKey(name: 'rif_resistance') this.rifResistance,
-      @JsonKey(name: 'xdr_done') this.xdrDone,
-      @JsonKey(includeToJson: false) this.xdrResult,
-      @JsonKey(name: 'xdr_result') this.selectedXdrResult,
+      @HiveField(22) @JsonKey(includeIfNull: false) this.mtbResult,
+      @HiveField(23) @JsonKey(name: 'mtb_result') this.selectedMtbResult,
+      @HiveField(24) @JsonKey(name: 'rif_resistance') this.rifResistance,
+      @HiveField(25) @JsonKey(name: 'xdr_done') this.xdrDone,
+      @HiveField(26) @JsonKey(includeToJson: false) this.xdrResult,
+      @HiveField(27) @JsonKey(name: 'xdr_result') this.selectedXdrResult,
+      @HiveField(28)
       @JsonKey(
           name: 'xdr_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.xdrResultDate,
-      @JsonKey(name: 'xdr_lab_number') this.xdrLabNumber,
-      @JsonKey(name: 'xdr_site') this.xdrSite,
-      @JsonKey(name: 'inh_resistance') this.inhResistance,
-      @JsonKey(name: 'flq_resistance') this.flqResistance,
-      @JsonKey(name: 'amk_resistance') this.amkResistance,
-      @JsonKey(name: 'kan_resistance') this.kanResistance,
-      @JsonKey(name: 'cap_resistance') this.capResistance,
-      @JsonKey(name: 'eth_resistance') this.ethResistance,
-      @JsonKey(name: 'fnac') this.fnac,
+      @HiveField(29) @JsonKey(name: 'xdr_lab_number') this.xdrLabNumber,
+      @HiveField(30) @JsonKey(name: 'xdr_site') this.xdrSite,
+      @HiveField(31) @JsonKey(name: 'inh_resistance') this.inhResistance,
+      @HiveField(32) @JsonKey(name: 'flq_resistance') this.flqResistance,
+      @HiveField(33) @JsonKey(name: 'amk_resistance') this.amkResistance,
+      @HiveField(34) @JsonKey(name: 'kan_resistance') this.kanResistance,
+      @HiveField(35) @JsonKey(name: 'cap_resistance') this.capResistance,
+      @HiveField(36) @JsonKey(name: 'eth_resistance') this.ethResistance,
+      @HiveField(37) @JsonKey(name: 'fnac') this.fnac,
+      @HiveField(38)
       @JsonKey(
           name: 'fnac_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.fnacDate,
-      @JsonKey(name: 'fnac_result') this.fnacResult,
-      @JsonKey(name: 'fnac_comments') this.fnacComments,
-      @JsonKey(name: 'usg') this.usg,
+      @HiveField(39) @JsonKey(name: 'fnac_result') this.fnacResult,
+      @HiveField(40) @JsonKey(name: 'fnac_comments') this.fnacComments,
+      @HiveField(41) @JsonKey(name: 'usg') this.usg,
+      @HiveField(42)
       @JsonKey(
           name: 'usg_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.usgDate,
-      @JsonKey(name: 'usg_result') this.usgResult,
-      @JsonKey(name: 'usg_comments') this.usgComments,
-      @JsonKey(name: 'other_test') this.otherTest,
+      @HiveField(43) @JsonKey(name: 'usg_result') this.usgResult,
+      @HiveField(44) @JsonKey(name: 'usg_comments') this.usgComments,
+      @HiveField(45) @JsonKey(name: 'other_test') this.otherTest,
+      @HiveField(46)
       @JsonKey(
           name: 'other_test_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       this.otherTestDate,
-      @JsonKey(name: 'test_name') this.testName,
-      @JsonKey(name: 'other_test_result') this.otherTestResult,
-      @JsonKey(name: 'diagnosis') this.diagnosis,
-      @JsonKey(name: 'diagnosis_comments') this.diagnosisComments,
+      @HiveField(47) @JsonKey(name: 'test_name') this.testName,
+      @HiveField(48) @JsonKey(name: 'other_test_result') this.otherTestResult,
+      @HiveField(49) @JsonKey(name: 'diagnosis') this.diagnosis,
+      @HiveField(50)
+      @JsonKey(name: 'diagnosis_comments')
+      this.diagnosisComments,
+      @HiveField(51)
       @JsonKey(
           name: 'diagnosis_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
-      this.diagnosisDate});
+      this.diagnosisDate,
+      @HiveField(52) @JsonKey(name: 'is_updated') this.isUpdated,
+      @HiveField(53)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      this.caseId,
+      @HiveField(54)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      this.isFormIDAssigned});
 
   factory _$DiagnosisModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DiagnosisModelImplFromJson(json);
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   final int? id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'diagnosis_initiated')
   final String? diagnosisInitiated;
   @override
+  @HiveField(2)
   @JsonKey(name: 'first_consultation')
   final String? firstConsultation;
   @override
+  @HiveField(3)
   @JsonKey(
       name: 'first_consultation_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? firstConsultationDate;
   @override
+  @HiveField(4)
   @JsonKey(name: 'chest_xray')
   final String? chestXray;
   @override
+  @HiveField(5)
   @JsonKey(
       name: 'chest_xray_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? chestXrayDate;
   @override
+  @HiveField(6)
   @JsonKey(name: 'chest_xray_result', includeToJson: false)
   final String? chestXrayResult;
   @override
+  @HiveField(7)
   @JsonKey(name: 'afb_done')
   final String? afbDone;
   @override
+  @HiveField(8)
   @JsonKey(name: 'afb_lab_number', includeToJson: false)
   final String? afbLabNumber;
   @override
+  @HiveField(9)
   @JsonKey(includeIfNull: false)
   final String? afb1Result;
   @override
+  @HiveField(10)
   @JsonKey(name: 'afb_1_result')
   final int? selectedAfb1Result;
   @override
+  @HiveField(11)
   @JsonKey(
       name: 'afb_1_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? afb1ResultDate;
   @override
+  @HiveField(12)
   @JsonKey(includeIfNull: false)
   final String? afb2Result;
   @override
+  @HiveField(13)
   @JsonKey(name: 'afb_2_result')
   final int? selectedAfb2Result;
   @override
+  @HiveField(14)
   @JsonKey(
       name: 'afb_2_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? afb2ResultDate;
   @override
+  @HiveField(15)
   @JsonKey(name: 'naat_test')
   final String? naatTest;
   @override
+  @HiveField(16)
   @JsonKey(includeIfNull: false)
   final String? naatMachine;
   @override
+  @HiveField(17)
   @JsonKey(name: 'naat_machine')
   final int? selectedNaatMachine;
   @override
+  @HiveField(18)
   @JsonKey(name: 'naat_site')
   final String? naatSite;
   @override
+  @HiveField(19)
   @JsonKey(name: 'naat_lab_number')
   final String? naatLabNumber;
   @override
+  @HiveField(20)
   @JsonKey(
       name: 'sample_collection_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? sampleCollectionDate;
   @override
+  @HiveField(21)
   @JsonKey(
       name: 'naat_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? naatResultDate;
   @override
+  @HiveField(22)
   @JsonKey(includeIfNull: false)
   final String? mtbResult;
   @override
+  @HiveField(23)
   @JsonKey(name: 'mtb_result')
   final int? selectedMtbResult;
   @override
+  @HiveField(24)
   @JsonKey(name: 'rif_resistance')
   final String? rifResistance;
   @override
+  @HiveField(25)
   @JsonKey(name: 'xdr_done')
   final String? xdrDone;
   @override
+  @HiveField(26)
   @JsonKey(includeToJson: false)
   final String? xdrResult;
   @override
+  @HiveField(27)
   @JsonKey(name: 'xdr_result')
   final int? selectedXdrResult;
   @override
+  @HiveField(28)
   @JsonKey(
       name: 'xdr_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? xdrResultDate;
   @override
+  @HiveField(29)
   @JsonKey(name: 'xdr_lab_number')
   final String? xdrLabNumber;
   @override
+  @HiveField(30)
   @JsonKey(name: 'xdr_site')
   final String? xdrSite;
   @override
+  @HiveField(31)
   @JsonKey(name: 'inh_resistance')
   final String? inhResistance;
   @override
+  @HiveField(32)
   @JsonKey(name: 'flq_resistance')
   final String? flqResistance;
   @override
+  @HiveField(33)
   @JsonKey(name: 'amk_resistance')
   final String? amkResistance;
   @override
+  @HiveField(34)
   @JsonKey(name: 'kan_resistance')
   final String? kanResistance;
   @override
+  @HiveField(35)
   @JsonKey(name: 'cap_resistance')
   final String? capResistance;
   @override
+  @HiveField(36)
   @JsonKey(name: 'eth_resistance')
   final String? ethResistance;
   @override
+  @HiveField(37)
   @JsonKey(name: 'fnac')
   final String? fnac;
   @override
+  @HiveField(38)
   @JsonKey(
       name: 'fnac_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? fnacDate;
   @override
+  @HiveField(39)
   @JsonKey(name: 'fnac_result')
   final String? fnacResult;
   @override
+  @HiveField(40)
   @JsonKey(name: 'fnac_comments')
   final String? fnacComments;
   @override
+  @HiveField(41)
   @JsonKey(name: 'usg')
   final String? usg;
   @override
+  @HiveField(42)
   @JsonKey(
       name: 'usg_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   final DateTime? usgDate;
   @override
+  @HiveField(43)
   @JsonKey(name: 'usg_result')
   final String? usgResult;
   @override
+  @HiveField(44)
   @JsonKey(name: 'usg_comments')
   final String? usgComments;
   @override
+  @HiveField(45)
   @JsonKey(name: 'other_test')
   final String? otherTest;
   @override
+  @HiveField(46)
   @JsonKey(
       name: 'other_test_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? otherTestDate;
   @override
+  @HiveField(47)
   @JsonKey(name: 'test_name')
   final String? testName;
   @override
+  @HiveField(48)
   @JsonKey(name: 'other_test_result')
   final String? otherTestResult;
   @override
+  @HiveField(49)
   @JsonKey(name: 'diagnosis')
   final String? diagnosis;
   @override
+  @HiveField(50)
   @JsonKey(name: 'diagnosis_comments')
   final String? diagnosisComments;
   @override
+  @HiveField(51)
   @JsonKey(
       name: 'diagnosis_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   final DateTime? diagnosisDate;
+  @override
+  @HiveField(52)
+  @JsonKey(name: 'is_updated')
+  final bool? isUpdated;
+  @override
+  @HiveField(53)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  final int? caseId;
+  @override
+  @HiveField(54)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  final bool? isFormIDAssigned;
 
   @override
   String toString() {
-    return 'DiagnosisModel(id: $id, diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, selectedXdrResult: $selectedXdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, otherTestDate: $otherTestDate, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate)';
+    return 'DiagnosisModel(id: $id, diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, selectedXdrResult: $selectedXdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, otherTestDate: $otherTestDate, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
   }
 
   @override
@@ -1297,7 +1563,10 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
             (identical(other.diagnosis, diagnosis) ||
                 other.diagnosis == diagnosis) &&
             (identical(other.diagnosisComments, diagnosisComments) || other.diagnosisComments == diagnosisComments) &&
-            (identical(other.diagnosisDate, diagnosisDate) || other.diagnosisDate == diagnosisDate));
+            (identical(other.diagnosisDate, diagnosisDate) || other.diagnosisDate == diagnosisDate) &&
+            (identical(other.isUpdated, isUpdated) || other.isUpdated == isUpdated) &&
+            (identical(other.caseId, caseId) || other.caseId == caseId) &&
+            (identical(other.isFormIDAssigned, isFormIDAssigned) || other.isFormIDAssigned == isFormIDAssigned));
   }
 
   @JsonKey(ignore: true)
@@ -1355,7 +1624,10 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
         otherTestResult,
         diagnosis,
         diagnosisComments,
-        diagnosisDate
+        diagnosisDate,
+        isUpdated,
+        caseId,
+        isFormIDAssigned
       ]);
 
   @JsonKey(ignore: true)
@@ -1375,293 +1647,409 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
 
 abstract class _DiagnosisModel implements DiagnosisModel {
   const factory _DiagnosisModel(
-      {@JsonKey(name: 'id', includeToJson: false) final int? id,
-      @JsonKey(name: 'diagnosis_initiated') final String? diagnosisInitiated,
-      @JsonKey(name: 'first_consultation') final String? firstConsultation,
+      {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) final int? id,
+      @HiveField(1)
+      @JsonKey(name: 'diagnosis_initiated')
+      final String? diagnosisInitiated,
+      @HiveField(2)
+      @JsonKey(name: 'first_consultation')
+      final String? firstConsultation,
+      @HiveField(3)
       @JsonKey(
           name: 'first_consultation_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? firstConsultationDate,
-      @JsonKey(name: 'chest_xray') final String? chestXray,
+      @HiveField(4) @JsonKey(name: 'chest_xray') final String? chestXray,
+      @HiveField(5)
       @JsonKey(
           name: 'chest_xray_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? chestXrayDate,
+      @HiveField(6)
       @JsonKey(name: 'chest_xray_result', includeToJson: false)
       final String? chestXrayResult,
-      @JsonKey(name: 'afb_done') final String? afbDone,
+      @HiveField(7) @JsonKey(name: 'afb_done') final String? afbDone,
+      @HiveField(8)
       @JsonKey(name: 'afb_lab_number', includeToJson: false)
       final String? afbLabNumber,
-      @JsonKey(includeIfNull: false) final String? afb1Result,
-      @JsonKey(name: 'afb_1_result') final int? selectedAfb1Result,
+      @HiveField(9) @JsonKey(includeIfNull: false) final String? afb1Result,
+      @HiveField(10)
+      @JsonKey(name: 'afb_1_result')
+      final int? selectedAfb1Result,
+      @HiveField(11)
       @JsonKey(
           name: 'afb_1_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? afb1ResultDate,
-      @JsonKey(includeIfNull: false) final String? afb2Result,
-      @JsonKey(name: 'afb_2_result') final int? selectedAfb2Result,
+      @HiveField(12) @JsonKey(includeIfNull: false) final String? afb2Result,
+      @HiveField(13)
+      @JsonKey(name: 'afb_2_result')
+      final int? selectedAfb2Result,
+      @HiveField(14)
       @JsonKey(
           name: 'afb_2_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? afb2ResultDate,
-      @JsonKey(name: 'naat_test') final String? naatTest,
-      @JsonKey(includeIfNull: false) final String? naatMachine,
-      @JsonKey(name: 'naat_machine') final int? selectedNaatMachine,
-      @JsonKey(name: 'naat_site') final String? naatSite,
-      @JsonKey(name: 'naat_lab_number') final String? naatLabNumber,
+      @HiveField(15) @JsonKey(name: 'naat_test') final String? naatTest,
+      @HiveField(16) @JsonKey(includeIfNull: false) final String? naatMachine,
+      @HiveField(17)
+      @JsonKey(name: 'naat_machine')
+      final int? selectedNaatMachine,
+      @HiveField(18) @JsonKey(name: 'naat_site') final String? naatSite,
+      @HiveField(19)
+      @JsonKey(name: 'naat_lab_number')
+      final String? naatLabNumber,
+      @HiveField(20)
       @JsonKey(
           name: 'sample_collection_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? sampleCollectionDate,
+      @HiveField(21)
       @JsonKey(
           name: 'naat_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? naatResultDate,
-      @JsonKey(includeIfNull: false) final String? mtbResult,
-      @JsonKey(name: 'mtb_result') final int? selectedMtbResult,
-      @JsonKey(name: 'rif_resistance') final String? rifResistance,
-      @JsonKey(name: 'xdr_done') final String? xdrDone,
-      @JsonKey(includeToJson: false) final String? xdrResult,
-      @JsonKey(name: 'xdr_result') final int? selectedXdrResult,
+      @HiveField(22) @JsonKey(includeIfNull: false) final String? mtbResult,
+      @HiveField(23) @JsonKey(name: 'mtb_result') final int? selectedMtbResult,
+      @HiveField(24)
+      @JsonKey(name: 'rif_resistance')
+      final String? rifResistance,
+      @HiveField(25) @JsonKey(name: 'xdr_done') final String? xdrDone,
+      @HiveField(26) @JsonKey(includeToJson: false) final String? xdrResult,
+      @HiveField(27) @JsonKey(name: 'xdr_result') final int? selectedXdrResult,
+      @HiveField(28)
       @JsonKey(
           name: 'xdr_result_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? xdrResultDate,
-      @JsonKey(name: 'xdr_lab_number') final String? xdrLabNumber,
-      @JsonKey(name: 'xdr_site') final String? xdrSite,
-      @JsonKey(name: 'inh_resistance') final String? inhResistance,
-      @JsonKey(name: 'flq_resistance') final String? flqResistance,
-      @JsonKey(name: 'amk_resistance') final String? amkResistance,
-      @JsonKey(name: 'kan_resistance') final String? kanResistance,
-      @JsonKey(name: 'cap_resistance') final String? capResistance,
-      @JsonKey(name: 'eth_resistance') final String? ethResistance,
-      @JsonKey(name: 'fnac') final String? fnac,
+      @HiveField(29)
+      @JsonKey(name: 'xdr_lab_number')
+      final String? xdrLabNumber,
+      @HiveField(30) @JsonKey(name: 'xdr_site') final String? xdrSite,
+      @HiveField(31)
+      @JsonKey(name: 'inh_resistance')
+      final String? inhResistance,
+      @HiveField(32)
+      @JsonKey(name: 'flq_resistance')
+      final String? flqResistance,
+      @HiveField(33)
+      @JsonKey(name: 'amk_resistance')
+      final String? amkResistance,
+      @HiveField(34)
+      @JsonKey(name: 'kan_resistance')
+      final String? kanResistance,
+      @HiveField(35)
+      @JsonKey(name: 'cap_resistance')
+      final String? capResistance,
+      @HiveField(36)
+      @JsonKey(name: 'eth_resistance')
+      final String? ethResistance,
+      @HiveField(37) @JsonKey(name: 'fnac') final String? fnac,
+      @HiveField(38)
       @JsonKey(
           name: 'fnac_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? fnacDate,
-      @JsonKey(name: 'fnac_result') final String? fnacResult,
-      @JsonKey(name: 'fnac_comments') final String? fnacComments,
-      @JsonKey(name: 'usg') final String? usg,
+      @HiveField(39) @JsonKey(name: 'fnac_result') final String? fnacResult,
+      @HiveField(40) @JsonKey(name: 'fnac_comments') final String? fnacComments,
+      @HiveField(41) @JsonKey(name: 'usg') final String? usg,
+      @HiveField(42)
       @JsonKey(
           name: 'usg_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? usgDate,
-      @JsonKey(name: 'usg_result') final String? usgResult,
-      @JsonKey(name: 'usg_comments') final String? usgComments,
-      @JsonKey(name: 'other_test') final String? otherTest,
+      @HiveField(43) @JsonKey(name: 'usg_result') final String? usgResult,
+      @HiveField(44) @JsonKey(name: 'usg_comments') final String? usgComments,
+      @HiveField(45) @JsonKey(name: 'other_test') final String? otherTest,
+      @HiveField(46)
       @JsonKey(
           name: 'other_test_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
       final DateTime? otherTestDate,
-      @JsonKey(name: 'test_name') final String? testName,
-      @JsonKey(name: 'other_test_result') final String? otherTestResult,
-      @JsonKey(name: 'diagnosis') final String? diagnosis,
-      @JsonKey(name: 'diagnosis_comments') final String? diagnosisComments,
+      @HiveField(47) @JsonKey(name: 'test_name') final String? testName,
+      @HiveField(48)
+      @JsonKey(name: 'other_test_result')
+      final String? otherTestResult,
+      @HiveField(49) @JsonKey(name: 'diagnosis') final String? diagnosis,
+      @HiveField(50)
+      @JsonKey(name: 'diagnosis_comments')
+      final String? diagnosisComments,
+      @HiveField(51)
       @JsonKey(
           name: 'diagnosis_date',
           fromJson: fromJsonToDateTime,
           toJson: _dateTimeToJson)
-      final DateTime? diagnosisDate}) = _$DiagnosisModelImpl;
+      final DateTime? diagnosisDate,
+      @HiveField(52) @JsonKey(name: 'is_updated') final bool? isUpdated,
+      @HiveField(53)
+      @JsonKey(name: 'case_id', includeToJson: false)
+      final int? caseId,
+      @HiveField(54)
+      @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+      final bool? isFormIDAssigned}) = _$DiagnosisModelImpl;
 
   factory _DiagnosisModel.fromJson(Map<String, dynamic> json) =
       _$DiagnosisModelImpl.fromJson;
 
   @override
+  @HiveField(0)
   @JsonKey(name: 'id', includeToJson: false)
   int? get id;
   @override
+  @HiveField(1)
   @JsonKey(name: 'diagnosis_initiated')
   String? get diagnosisInitiated;
   @override
+  @HiveField(2)
   @JsonKey(name: 'first_consultation')
   String? get firstConsultation;
   @override
+  @HiveField(3)
   @JsonKey(
       name: 'first_consultation_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get firstConsultationDate;
   @override
+  @HiveField(4)
   @JsonKey(name: 'chest_xray')
   String? get chestXray;
   @override
+  @HiveField(5)
   @JsonKey(
       name: 'chest_xray_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get chestXrayDate;
   @override
+  @HiveField(6)
   @JsonKey(name: 'chest_xray_result', includeToJson: false)
   String? get chestXrayResult;
   @override
+  @HiveField(7)
   @JsonKey(name: 'afb_done')
   String? get afbDone;
   @override
+  @HiveField(8)
   @JsonKey(name: 'afb_lab_number', includeToJson: false)
   String? get afbLabNumber;
   @override
+  @HiveField(9)
   @JsonKey(includeIfNull: false)
   String? get afb1Result;
   @override
+  @HiveField(10)
   @JsonKey(name: 'afb_1_result')
   int? get selectedAfb1Result;
   @override
+  @HiveField(11)
   @JsonKey(
       name: 'afb_1_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get afb1ResultDate;
   @override
+  @HiveField(12)
   @JsonKey(includeIfNull: false)
   String? get afb2Result;
   @override
+  @HiveField(13)
   @JsonKey(name: 'afb_2_result')
   int? get selectedAfb2Result;
   @override
+  @HiveField(14)
   @JsonKey(
       name: 'afb_2_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get afb2ResultDate;
   @override
+  @HiveField(15)
   @JsonKey(name: 'naat_test')
   String? get naatTest;
   @override
+  @HiveField(16)
   @JsonKey(includeIfNull: false)
   String? get naatMachine;
   @override
+  @HiveField(17)
   @JsonKey(name: 'naat_machine')
   int? get selectedNaatMachine;
   @override
+  @HiveField(18)
   @JsonKey(name: 'naat_site')
   String? get naatSite;
   @override
+  @HiveField(19)
   @JsonKey(name: 'naat_lab_number')
   String? get naatLabNumber;
   @override
+  @HiveField(20)
   @JsonKey(
       name: 'sample_collection_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get sampleCollectionDate;
   @override
+  @HiveField(21)
   @JsonKey(
       name: 'naat_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get naatResultDate;
   @override
+  @HiveField(22)
   @JsonKey(includeIfNull: false)
   String? get mtbResult;
   @override
+  @HiveField(23)
   @JsonKey(name: 'mtb_result')
   int? get selectedMtbResult;
   @override
+  @HiveField(24)
   @JsonKey(name: 'rif_resistance')
   String? get rifResistance;
   @override
+  @HiveField(25)
   @JsonKey(name: 'xdr_done')
   String? get xdrDone;
   @override
+  @HiveField(26)
   @JsonKey(includeToJson: false)
   String? get xdrResult;
   @override
+  @HiveField(27)
   @JsonKey(name: 'xdr_result')
   int? get selectedXdrResult;
   @override
+  @HiveField(28)
   @JsonKey(
       name: 'xdr_result_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get xdrResultDate;
   @override
+  @HiveField(29)
   @JsonKey(name: 'xdr_lab_number')
   String? get xdrLabNumber;
   @override
+  @HiveField(30)
   @JsonKey(name: 'xdr_site')
   String? get xdrSite;
   @override
+  @HiveField(31)
   @JsonKey(name: 'inh_resistance')
   String? get inhResistance;
   @override
+  @HiveField(32)
   @JsonKey(name: 'flq_resistance')
   String? get flqResistance;
   @override
+  @HiveField(33)
   @JsonKey(name: 'amk_resistance')
   String? get amkResistance;
   @override
+  @HiveField(34)
   @JsonKey(name: 'kan_resistance')
   String? get kanResistance;
   @override
+  @HiveField(35)
   @JsonKey(name: 'cap_resistance')
   String? get capResistance;
   @override
+  @HiveField(36)
   @JsonKey(name: 'eth_resistance')
   String? get ethResistance;
   @override
+  @HiveField(37)
   @JsonKey(name: 'fnac')
   String? get fnac;
   @override
+  @HiveField(38)
   @JsonKey(
       name: 'fnac_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get fnacDate;
   @override
+  @HiveField(39)
   @JsonKey(name: 'fnac_result')
   String? get fnacResult;
   @override
+  @HiveField(40)
   @JsonKey(name: 'fnac_comments')
   String? get fnacComments;
   @override
+  @HiveField(41)
   @JsonKey(name: 'usg')
   String? get usg;
   @override
+  @HiveField(42)
   @JsonKey(
       name: 'usg_date', fromJson: fromJsonToDateTime, toJson: _dateTimeToJson)
   DateTime? get usgDate;
   @override
+  @HiveField(43)
   @JsonKey(name: 'usg_result')
   String? get usgResult;
   @override
+  @HiveField(44)
   @JsonKey(name: 'usg_comments')
   String? get usgComments;
   @override
+  @HiveField(45)
   @JsonKey(name: 'other_test')
   String? get otherTest;
   @override
+  @HiveField(46)
   @JsonKey(
       name: 'other_test_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get otherTestDate;
   @override
+  @HiveField(47)
   @JsonKey(name: 'test_name')
   String? get testName;
   @override
+  @HiveField(48)
   @JsonKey(name: 'other_test_result')
   String? get otherTestResult;
   @override
+  @HiveField(49)
   @JsonKey(name: 'diagnosis')
   String? get diagnosis;
   @override
+  @HiveField(50)
   @JsonKey(name: 'diagnosis_comments')
   String? get diagnosisComments;
   @override
+  @HiveField(51)
   @JsonKey(
       name: 'diagnosis_date',
       fromJson: fromJsonToDateTime,
       toJson: _dateTimeToJson)
   DateTime? get diagnosisDate;
+  @override
+  @HiveField(52)
+  @JsonKey(name: 'is_updated')
+  bool? get isUpdated;
+  @override
+  @HiveField(53)
+  @JsonKey(name: 'case_id', includeToJson: false)
+  int? get caseId;
+  @override
+  @HiveField(54)
+  @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
+  bool? get isFormIDAssigned;
   @override
   @JsonKey(ignore: true)
   _$$DiagnosisModelImplCopyWith<_$DiagnosisModelImpl> get copyWith =>

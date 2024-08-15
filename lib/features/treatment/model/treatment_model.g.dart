@@ -3,6 +3,227 @@
 part of 'treatment_model.dart';
 
 // **************************************************************************
+// TypeAdapterGenerator
+// **************************************************************************
+
+class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
+  @override
+  final int typeId = 19;
+
+  @override
+  TreatmentModel read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return TreatmentModel(
+      id: fields[0] as int?,
+      caseDefinition: fields[1] as String?,
+      tbSite: fields[2] as String?,
+      caseHistory: fields[3] as String?,
+      drugSensitive: fields[4] as String?,
+      diagnosisStatus: fields[5] as String?,
+      ihvDate: fields[6] as DateTime?,
+      treatmentRegimen: fields[7] as String?,
+      patientOccupation: fields[8] as String?,
+      treatmentSupporterName: fields[9] as String?,
+      treatmentSupporterPosition: fields[10] as String?,
+      treatmentSupporterPhone: fields[11] as String?,
+      treatmentSupporterPanchayat: fields[12] as String?,
+      selectedTreatmentSupporterPanchayat: fields[13] as int?,
+      treatmentSupporterWard: fields[14] as int?,
+      ipStartDate: fields[15] as DateTime?,
+      hivDone: fields[16] as String?,
+      hivResult: fields[17] as String?,
+      hivDate: fields[18] as DateTime?,
+      hbDone: fields[19] as String?,
+      hbResult: fields[20] as double?,
+      hbDate: fields[21] as DateTime?,
+      bloodSugarDone: fields[22] as String?,
+      bloodSugarResult: fields[23] as int?,
+      bloodSugarDate: fields[24] as DateTime?,
+      alcohol: fields[25] as String?,
+      tobaccoConsumption: fields[26] as String?,
+      nutritionScreening: fields[27] as String?,
+      nutritionEligibility: fields[28] as String?,
+      screeningDateNutrition: fields[29] as DateTime?,
+      nutritionLinkage: fields[30] as String?,
+      nutritionLinkageDate: fields[31] as DateTime?,
+      height: fields[32] as int?,
+      weight: fields[33] as int?,
+      stage: fields[34] as String?,
+      ipfuDate: fields[35] as DateTime?,
+      ipfuAfbDone: fields[36] as String?,
+      ipfuAfbLabNo: fields[37] as String?,
+      ipfuAfbDate: fields[38] as DateTime?,
+      ipfuAfbResult: fields[39] as String?,
+      selectedIpfuAFBResult: fields[40] as int?,
+      ipfuNaatTest: fields[41] as String?,
+      ipfuNaatResult: fields[42] as String?,
+      selectedIpfuNaatResult: fields[43] as int?,
+      ipfuLabNo: fields[44] as String?,
+      ipfuChestXray: fields[45] as String?,
+      ipfuNutritionSupport: fields[46] as String?,
+      cpDate: fields[47] as DateTime?,
+      cpAfbDone: fields[48] as String?,
+      cpAfbLabNo: fields[49] as String?,
+      cpAfbDate: fields[50] as DateTime?,
+      cpAfbResult: fields[51] as String?,
+      selectedCpAFBResult: fields[52] as int?,
+      cpNaatTest: fields[53] as String?,
+      cpNaatResult: fields[54] as String?,
+      selectedCpNaatResult: fields[55] as int?,
+      cpLabNo: fields[56] as String?,
+      cpChestXray: fields[57] as String?,
+      cpNutritionSupport: fields[58] as String?,
+      isUpdated: fields[59] as bool?,
+      caseId: fields[60] as int?,
+      isFormIDAssigned: fields[61] as bool?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, TreatmentModel obj) {
+    writer
+      ..writeByte(62)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.caseDefinition)
+      ..writeByte(2)
+      ..write(obj.tbSite)
+      ..writeByte(3)
+      ..write(obj.caseHistory)
+      ..writeByte(4)
+      ..write(obj.drugSensitive)
+      ..writeByte(5)
+      ..write(obj.diagnosisStatus)
+      ..writeByte(6)
+      ..write(obj.ihvDate)
+      ..writeByte(7)
+      ..write(obj.treatmentRegimen)
+      ..writeByte(8)
+      ..write(obj.patientOccupation)
+      ..writeByte(9)
+      ..write(obj.treatmentSupporterName)
+      ..writeByte(10)
+      ..write(obj.treatmentSupporterPosition)
+      ..writeByte(11)
+      ..write(obj.treatmentSupporterPhone)
+      ..writeByte(12)
+      ..write(obj.treatmentSupporterPanchayat)
+      ..writeByte(13)
+      ..write(obj.selectedTreatmentSupporterPanchayat)
+      ..writeByte(14)
+      ..write(obj.treatmentSupporterWard)
+      ..writeByte(15)
+      ..write(obj.ipStartDate)
+      ..writeByte(16)
+      ..write(obj.hivDone)
+      ..writeByte(17)
+      ..write(obj.hivResult)
+      ..writeByte(18)
+      ..write(obj.hivDate)
+      ..writeByte(19)
+      ..write(obj.hbDone)
+      ..writeByte(20)
+      ..write(obj.hbResult)
+      ..writeByte(21)
+      ..write(obj.hbDate)
+      ..writeByte(22)
+      ..write(obj.bloodSugarDone)
+      ..writeByte(23)
+      ..write(obj.bloodSugarResult)
+      ..writeByte(24)
+      ..write(obj.bloodSugarDate)
+      ..writeByte(25)
+      ..write(obj.alcohol)
+      ..writeByte(26)
+      ..write(obj.tobaccoConsumption)
+      ..writeByte(27)
+      ..write(obj.nutritionScreening)
+      ..writeByte(28)
+      ..write(obj.nutritionEligibility)
+      ..writeByte(29)
+      ..write(obj.screeningDateNutrition)
+      ..writeByte(30)
+      ..write(obj.nutritionLinkage)
+      ..writeByte(31)
+      ..write(obj.nutritionLinkageDate)
+      ..writeByte(32)
+      ..write(obj.height)
+      ..writeByte(33)
+      ..write(obj.weight)
+      ..writeByte(34)
+      ..write(obj.stage)
+      ..writeByte(35)
+      ..write(obj.ipfuDate)
+      ..writeByte(36)
+      ..write(obj.ipfuAfbDone)
+      ..writeByte(37)
+      ..write(obj.ipfuAfbLabNo)
+      ..writeByte(38)
+      ..write(obj.ipfuAfbDate)
+      ..writeByte(39)
+      ..write(obj.ipfuAfbResult)
+      ..writeByte(40)
+      ..write(obj.selectedIpfuAFBResult)
+      ..writeByte(41)
+      ..write(obj.ipfuNaatTest)
+      ..writeByte(42)
+      ..write(obj.ipfuNaatResult)
+      ..writeByte(43)
+      ..write(obj.selectedIpfuNaatResult)
+      ..writeByte(44)
+      ..write(obj.ipfuLabNo)
+      ..writeByte(45)
+      ..write(obj.ipfuChestXray)
+      ..writeByte(46)
+      ..write(obj.ipfuNutritionSupport)
+      ..writeByte(47)
+      ..write(obj.cpDate)
+      ..writeByte(48)
+      ..write(obj.cpAfbDone)
+      ..writeByte(49)
+      ..write(obj.cpAfbLabNo)
+      ..writeByte(50)
+      ..write(obj.cpAfbDate)
+      ..writeByte(51)
+      ..write(obj.cpAfbResult)
+      ..writeByte(52)
+      ..write(obj.selectedCpAFBResult)
+      ..writeByte(53)
+      ..write(obj.cpNaatTest)
+      ..writeByte(54)
+      ..write(obj.cpNaatResult)
+      ..writeByte(55)
+      ..write(obj.selectedCpNaatResult)
+      ..writeByte(56)
+      ..write(obj.cpLabNo)
+      ..writeByte(57)
+      ..write(obj.cpChestXray)
+      ..writeByte(58)
+      ..write(obj.cpNutritionSupport)
+      ..writeByte(59)
+      ..write(obj.isUpdated)
+      ..writeByte(60)
+      ..write(obj.caseId)
+      ..writeByte(61)
+      ..write(obj.isFormIDAssigned);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TreatmentModelAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
+// **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
@@ -74,6 +295,9 @@ _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
       cpLabNo: json['cp_lab_no'] as String?,
       cpChestXray: json['cp_chest_xray'] as String?,
       cpNutritionSupport: json['cp_nutrition_support'] as String?,
+      isUpdated: json['is_updated'] as bool?,
+      caseId: (json['case_id'] as num?)?.toInt(),
+      isFormIDAssigned: json['is_form_id_assigned'] as bool?,
     );
 
 Map<String, dynamic> _$$TreatmentModelImplToJson(
@@ -134,4 +358,5 @@ Map<String, dynamic> _$$TreatmentModelImplToJson(
       'cp_lab_no': instance.cpLabNo,
       'cp_chest_xray': instance.cpChestXray,
       'cp_nutrition_support': instance.cpNutritionSupport,
+      'is_updated': instance.isUpdated,
     };
