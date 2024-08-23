@@ -115,7 +115,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
               formData['cp_feeling_better_after_linkage'] as String?,
           cptalkToHelpline: formData['cp_talk_to_helpline'] as String?,
           isUpdated: false);
-      caseCubit.updateWHOSRQData(
+      await caseCubit.updateWHOSRQData(
           updatedModel, whoSrqModel, ipfuWhoSrqModel, cpWhoSrqModel);
     } else {
       formGroup.markAllAsTouched();

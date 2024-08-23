@@ -85,23 +85,23 @@ class ContactTracingPage extends StatelessWidget {
       final model =
           cubit.state.contactTracingModel ?? const ContactTracingModel();
       final contactTracingModel = model.copyWith(
-        tbContactName: formData['tb_contact_name'] as String?,
-        age: formData['age'] as int?,
-        screeningOutcome: formData['screening_outcome'] as String?,
-        testConducted: formData['test_conducted'] as String?,
-        cxrDate: formData['cxr_date'] as DateTime?,
-        cxrResult: formData['cxr_result'] as String?,
-        tbiDate: formData['tbi_date'] as DateTime?,
-        tbiResult: formData['tbi_result'] as String?,
-        nikshayID: formData['nikshay_id'] as String?,
-        tptEligible: formData['tpt_eligible'] as String?,
-        selectedTptRegimen: cubit.selectedTPTRegimen,
-        tptStartDate: formData['tpt_start_date'] as DateTime?,
-        weight: formData['weight'] as int?,
-        tptSideEffects: formData['tpt_side_effects'] as String?,
-        tptOutcomeDate: formData['tpt_outcome_date'] as DateTime?,
-        tptOutcome: formData['tpt_outcome'] as String?,
-      );
+          tbContactName: formData['tb_contact_name'] as String?,
+          age: formData['age'] as int?,
+          screeningOutcome: formData['screening_outcome'] as String?,
+          testConducted: formData['test_conducted'] as String?,
+          cxrDate: formData['cxr_date'] as DateTime?,
+          cxrResult: formData['cxr_result'] as String?,
+          tbiDate: formData['tbi_date'] as DateTime?,
+          tbiResult: formData['tbi_result'] as String?,
+          nikshayID: formData['nikshay_id'] as String?,
+          tptEligible: formData['tpt_eligible'] as String?,
+          selectedTptRegimen: cubit.selectedTPTRegimen,
+          tptStartDate: formData['tpt_start_date'] as DateTime?,
+          weight: formData['weight'] as int?,
+          tptSideEffects: formData['tpt_side_effects'] as String?,
+          tptOutcomeDate: formData['tpt_outcome_date'] as DateTime?,
+          tptOutcome: formData['tpt_outcome'] as String?,
+          isUpdated: false);
 
       await cubit.updateContactTracingData(contactTracingModel,
           contactTracingCubit.state.contactTracingModel.id);

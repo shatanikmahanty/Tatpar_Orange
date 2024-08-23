@@ -60,13 +60,13 @@ class OutcomePage extends StatelessWidget {
               orElse: () => const TreatmentOutcome(id: 0))
           .id;
       final outcomeModel = model.copyWith(
-        treatmentCompletionDate:
-            formData['treatment_completion_date'] as DateTime?,
-        nikshayId: formData['nikshay_id'] as String?,
-        nutritionProvided: formData['nutrition_provided'] as String?,
-        selectedtreatmentOutcome: cubit.selectedTreatmentOutcome,
-        treatmentComments: formData['treatment_comments'] as String?,
-      );
+          treatmentCompletionDate:
+              formData['treatment_completion_date'] as DateTime?,
+          nikshayId: formData['nikshay_id'] as String?,
+          nutritionProvided: formData['nutrition_provided'] as String?,
+          selectedtreatmentOutcome: cubit.selectedTreatmentOutcome,
+          treatmentComments: formData['treatment_comments'] as String?,
+          isUpdated: false);
       await cubit.updateOutcomeData(outcomeModel);
     } else {
       formGroup.markAllAsTouched();

@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -319,7 +321,8 @@ class TreatmentPage extends StatelessWidget {
           selectedCpNaatResult: cubit.selectedTreatmentCPFUNaatResult,
           cpLabNo: formData['cp_lab_no'] as String?,
           cpChestXray: formData['cp_chest_xray'] as String?,
-          cpNutritionSupport: formData['cp_nutrition_support'] as String?);
+          cpNutritionSupport: formData['cp_nutrition_support'] as String?,
+          isUpdated: false);
       await cubit.updateTreatmentData(treatmentModel);
     } else {
       formGroup.markAllAsTouched();

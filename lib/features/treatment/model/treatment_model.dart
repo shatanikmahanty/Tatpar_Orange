@@ -20,7 +20,7 @@ String? _dateTimeToJson(DateTime? date) =>
     date?.toIso8601String().substring(0, 10);
 
 @freezed
-@HiveType(typeId: 19) // Ensure typeId is unique
+@HiveType(typeId: 19)
 class TreatmentModel with _$TreatmentModel {
   const factory TreatmentModel({
     @HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,

@@ -316,7 +316,7 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> getDiagnosisData(int? formId) async {
     if (state.caseWorkedUpon.diagnosis == null) return;
-    // emit(state.copyWith(isLoading: true));
+    emit(state.copyWith(isLoading: true));
 
     final response = await caseRepo.getDiagnosis(id: formId);
     emit(
@@ -410,6 +410,7 @@ class CaseCubit extends Cubit<CaseState> {
         tbScreeningModel: tbScreeningModel,
         id: state.caseWorkedUpon.tbScreening,
         caseId: state.caseWorkedUpon.id);
+    print(state.caseWorkedUpon.id);
 
     emit(
       state.copyWith(
@@ -450,7 +451,7 @@ class CaseCubit extends Cubit<CaseState> {
         caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(treatment: response.id),
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(diagnosis: response.id),
         diagnsosisModel: response,
       ),
     );

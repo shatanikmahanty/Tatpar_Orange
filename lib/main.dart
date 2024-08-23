@@ -81,40 +81,46 @@ Future<void> main() async {
     ///caseListGetAPI
     Hive.registerAdapter(CaseAdapter());
     await Hive.openBox<Case>('caseList');
-    //await Hive.deleteBoxFromDisk('caseList');
+    // await Hive.deleteBoxFromDisk('caseList');
 
     ///ReferralDetailsUpdateAPI
     Hive.registerAdapter(ReferralDetailsModelAdapter());
     await Hive.openBox<ReferralDetailsModel>('referralDetailsModel');
-    //await Hive.deleteBoxFromDisk('referralDetailsModel');
+    // await Hive.deleteBoxFromDisk('referralDetailsModel');
 
     ///TBScreeningUpdateAPI
     Hive.registerAdapter(TBScreeningModelAdapter());
     await Hive.openBox<TBScreeningModel>('tbScreeningModel');
-    //await Hive.deleteBoxFromDisk('tbScreeningModel');
+    // await Hive.deleteBoxFromDisk('tbScreeningModel');
 
     ///MentalHealthScreeningUpdateAPI
     Hive.registerAdapter(MentalHealthScreeningModelAdapter());
     Hive.registerAdapter(WHOSrqModelAdapter());
-    await Hive.openBox<WHOSrqModel>('whoSrqModel');
+    // await Hive.openBox<WHOSrqModel>('whoSrqModel');
+
     await Hive.openBox<MentalHealthScreeningModel>(
         'mentalHealthScreeningModel');
+    // await Hive.deleteBoxFromDisk('mentalHealthScreeningModel');
 
     ///DiagnosisUpdateAPI
     Hive.registerAdapter(DiagnosisModelAdapter());
     await Hive.openBox<DiagnosisModel>('diagnosisModel');
+    // await Hive.deleteBoxFromDisk('diagnosisModel');
 
     ///TreatmentUpdateAPI
     Hive.registerAdapter(TreatmentModelAdapter());
     await Hive.openBox<TreatmentModel>('treatmentModel');
+    //await Hive.deleteBoxFromDisk('treatmentModel');
 
     ///ContactTracingUpdateAPI
     Hive.registerAdapter(ContactTracingModelAdapter());
     await Hive.openBox<ContactTracingModel>('contactTracingModel');
+    // await Hive.deleteBoxFromDisk('contactTracingModel');
 
     ///OutcomeUpdateAPI
     Hive.registerAdapter(OutcomeModelAdapter());
     await Hive.openBox<OutcomeModel>('outcomeModel');
+    // await Hive.deleteBoxFromDisk('outcomeModel');
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
