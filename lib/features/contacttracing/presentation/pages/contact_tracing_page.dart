@@ -105,6 +105,7 @@ class ContactTracingPage extends StatelessWidget {
 
       await cubit.updateContactTracingData(contactTracingModel,
           contactTracingCubit.state.contactTracingModel.id);
+      contactTracingCubit.updateContact(cubit.state.contactTracingModel);
     } else {
       formGroup.markAllAsTouched();
       // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');

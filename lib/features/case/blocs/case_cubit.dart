@@ -474,15 +474,18 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateContactTracingData(
       ContactTracingModel contactTracingModel, int? id) async {
+    print('id====${id ?? state.caseWorkedUpon.contactTracing}');
     final response = await caseRepo.saveContactTracingData(
         contactTracingModel: contactTracingModel,
         id: id,
         caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon:
-            state.caseWorkedUpon.copyWith(contactTracing: response.id),
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(
+          contactTracing: response.id,
+        ),
         contactTracingModel: response,
+        
       ),
     );
     getContactTracingData(response.id);

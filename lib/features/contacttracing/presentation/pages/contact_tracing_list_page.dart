@@ -126,7 +126,6 @@ class ContactTracingListPage extends StatelessWidget {
                               )
                             : ListView.builder(
                                 itemBuilder: (context, index) {
-                                  log(state.contactTracingList.toString());
                                   final model = state.filteredContacts == null
                                       ? state.contactTracingList[index]
                                       : state.filteredContacts![index];

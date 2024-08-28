@@ -15,6 +15,7 @@ import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
+import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_acf/features/case/data/source_models/referral_districts_model.dart';
 
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
@@ -719,10 +720,13 @@ class CaseRepo {
         final existingModelIndex = modelsList.indexWhere(
           (model) => id != null && model.id == id,
         );
+        print(id);
+        // print('${modelsList.elementAt(existingModelIndex)}');
 
         if (existingModelIndex != -1) {
-          await contactTracingDataBox.put(
-              updateModel.id.toString(), updateModel);
+          // ContactTracingModel updateModel =
+          //     contactTracingModel.copyWith(caseId: caseId);
+          await contactTracingDataBox.putAt(existingModelIndex, updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
           print('Updated Contact Tracing in Hive: $updateModel');
@@ -739,12 +743,18 @@ class CaseRepo {
 
           return updateModel;
         } else {
-          var uuid = const Uuid();
+          await CounterManager.instance.initialize();
+          int counter = await CounterManager.instance.getNextCounter();
+          print(counter);
+          final userMobilePrefix =
+              AuthCubit.instance.state.user!.mobileNumber.substring(0, 5);
+          print(userMobilePrefix);
           final modelToSave = updateModel.copyWith(
-              id: int.tryParse(uuid.v4().replaceAll('-', '')),
+              id: int.tryParse('$userMobilePrefix$counter'),
               caseId: caseId ?? AuthCubit.instance.workingCaseId,
               isFormIDAssigned: false);
-
+          print(
+              '${int.tryParse('$userMobilePrefix$counter')}${modelToSave.toString()}');
           // Save the new model to Hive
           await contactTracingDataBox.put(
               modelToSave.id.toString(), modelToSave);
@@ -1228,7 +1238,7 @@ class CaseRepo {
         print(
             'List Of Contact Tracing Models Stored in Hive============${storedData.toString()}');
 
-        return storedData;
+        return storedData.reversed.toList();
       } else {
         throw ApplicationError(
           errorMsg: 'Error fetching Contact Tracing List data',
@@ -1770,6 +1780,16 @@ class CaseRepo {
                 log('Deleting ContactTracing Model: ${contactTracingDataBox.get(key)}');
                 // Delete the old model
                 await contactTracingDataBox.delete(key);
+                // Remove the contact tracing model ID from the case after deletion
+                updateCaseBox(
+                    contactTracingModel: updatedModel.copyWith(id: null),
+                    model: null,
+                    tbModel: null,
+                    caseModel: null,
+                    mentalHealthScreeningModel: null,
+                    diagnosisModel: null,
+                    treatmentModel: null,
+                    outcomeModel: null);
               }
               // Add the new model with the server-assigned ID
               await contactTracingDataBox.put(
@@ -2087,42 +2107,45 @@ class CaseRepo {
       int? contactTracingID, int? caseId) async {
     Box<ContactTracingModel> contactTracingDataBox =
         Hive.box<ContactTracingModel>('contactTracingModel');
-    ContactTracingModel? contactTracingModel;
-    final model = contactTracingDataBox.keyAt(contactTracingDataBox.values
-        .toList()
-        .indexWhere((existingCase) =>
-            existingCase.id == contactTracingID || existingCase.id == caseId));
 
-    if (model != null) {
-      print('Found this Model${contactTracingDataBox.get(model).toString()}');
-      contactTracingModel = contactTracingDataBox.get(model);
-    }
+    // Find all models that match the given contactTracingID or caseId
+    final matchingModels = contactTracingDataBox.values
+        .where((existingCase) =>
+            existingCase.caseId == contactTracingID ||
+            existingCase.caseId == caseId)
+        .toList();
 
-    if (contactTracingModel != null) {
-      ContactTracingModel updateModel =
-          contactTracingModel.copyWith(caseId: caseId);
+    if (matchingModels.isNotEmpty) {
+      for (var existingModel in matchingModels) {
+        print('Found this Model: ${existingModel.toString()}');
 
-      if (updateModel.id != null) {
-        await contactTracingDataBox.put(updateModel.id.toString(), updateModel);
-        log('Updated Case ID of the ContactTracing model: ${updateModel.toString()}');
-        updateCaseBox(
-            model: null,
-            tbModel: null,
-            caseModel: null,
-            mentalHealthScreeningModel: null,
-            diagnosisModel: null,
-            treatmentModel: null,
-            contactTracingModel: updateModel,
-            outcomeModel: null);
-        // log('Deleting TB Screening Model======================${diagnosisDataBox.get(model)}'
-        //     .toString());
-        // await diagnosisDataBox.delete(model);
-        log('ContactTracing Data Box Contains:${contactTracingDataBox.values.toList().toString()}');
-      } else {
-        log('Update Model ID is null, skipping Hive put operation');
+        // Update the caseId of each matching model
+        ContactTracingModel updatedModel =
+            existingModel.copyWith(caseId: caseId);
+
+        if (updatedModel.id != null) {
+          await contactTracingDataBox.put(
+              updatedModel.id.toString(), updatedModel);
+          log('Updated Case ID of the ContactTracing model: ${updatedModel.toString()}');
+
+          // Assuming `updateCaseBox` function is correctly defined and handles the update
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: updatedModel,
+              outcomeModel: null);
+
+          log('ContactTracing Data Box Contains: ${contactTracingDataBox.values.toList().toString()}');
+        } else {
+          log('Update Model ID is null, skipping Hive put operation');
+        }
       }
     } else {
-      log('ContactTracing model is null, skipping update');
+      log('No matching ContactTracing models found, skipping update');
     }
   }
 
@@ -2324,18 +2347,53 @@ class CaseRepo {
               'Updated case in Hive with Treatment details: $caseModelToSave');
         }
         if (contactTracingModel != null) {
-          caseModelToSave = existingCase.copyWith(
-            contactTracing: contactTracingModel.id,
-          );
+          Box<ContactTracingModel> contactTracingDataBox =
+              Hive.box<ContactTracingModel>('contactTracingModel');
 
-          caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print(
-              'Updated case in Hive with Contact Tracing details: $caseModelToSave');
+          if (contactTracingModel.id == null) {
+            // Remove invalid IDs or null entries
+            List<int> updatedContactTracingList = List.from(
+              existingCase.contactTracingList ?? [],
+            )..removeWhere((id) =>
+                contactTracingDataBox.values.every((model) => model.id != id));
+
+            caseModelToSave = existingCase.copyWith(
+              contactTracingList: updatedContactTracingList,
+            );
+            caseBox.putAt(existingCaseIndex, caseModelToSave);
+            print(
+                'Removed Contact Tracing ID from case in Hive: $caseModelToSave');
+          } else {
+            // Add only if ID matches the current case ID and is not already in the list
+            List<int> updatedContactTracingList = [
+              ...(existingCase.contactTracingList ?? []),
+              contactTracingModel.id as int,
+            ];
+
+            // Remove duplicates
+            updatedContactTracingList =
+                updatedContactTracingList.toSet().toList();
+
+            caseModelToSave = existingCase.copyWith(
+              contactTracing: contactTracingModel.id,
+              contactTracingList: updatedContactTracingList,
+            );
+            caseBox.putAt(existingCaseIndex, caseModelToSave);
+            print(
+                'Updated case in Hive with Contact Tracing details: $caseModelToSave');
+          }
         }
         if (outcomeModel != null) {
+          final treatmentOutcome = outcomeModel.selectedtreatmentOutcome;
+          final treatmentOutcomeData =
+              sourceCubit.state.diagnosisData?.treatmentOutcome?.firstWhere(
+            (element) => element.id == treatmentOutcome,
+            orElse: () => const TreatmentOutcome(name: null),
+          );
+          final String? treatmentOutcomeName = treatmentOutcomeData?.name;
           caseModelToSave = existingCase.copyWith(
               outcomeValue: outcomeModel.id,
-              treatmentOutcome: outcomeModel.treatmentOutcome);
+              treatmentOutcome: treatmentOutcomeName);
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
           print('Updated case in Hive with Outcome details: $caseModelToSave');

@@ -115,7 +115,7 @@ Future<void> main() async {
     ///ContactTracingUpdateAPI
     Hive.registerAdapter(ContactTracingModelAdapter());
     await Hive.openBox<ContactTracingModel>('contactTracingModel');
-    // await Hive.deleteBoxFromDisk('contactTracingModel');
+    //await Hive.deleteBoxFromDisk('contactTracingModel');
 
     ///OutcomeUpdateAPI
     Hive.registerAdapter(OutcomeModelAdapter());

@@ -36,4 +36,9 @@ class ContactTracingCubit extends Cubit<ContactTracingState> {
       state.copyWith(contactTracingList: contactCopy),
     );
   }
+
+  void updateContact(ContactTracingModel? updatedContact) {
+    emit(state.copyWith(
+        contactTracingModel: updatedContact ?? const ContactTracingModel()));
+  }
 }
