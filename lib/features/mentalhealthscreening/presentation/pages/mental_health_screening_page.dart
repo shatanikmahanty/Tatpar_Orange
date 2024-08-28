@@ -254,8 +254,6 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                               if (value != null && value is Map<String, dynamic>) {
                                                                                 whoSrqModel = value['whoSrqModel'] as WHOSrqModel;
                                                                                 yesCounter = value['yesCounter'] as String;
-                                                                                print(whoSrqModel.toString());
-                                                                                print(yesCounter.toString());
 
                                                                                 screeningStatus = value['screeningStatus'] as String;
 

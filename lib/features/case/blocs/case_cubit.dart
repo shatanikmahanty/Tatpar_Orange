@@ -410,7 +410,6 @@ class CaseCubit extends Cubit<CaseState> {
         tbScreeningModel: tbScreeningModel,
         id: state.caseWorkedUpon.tbScreening,
         caseId: state.caseWorkedUpon.id);
-    print(state.caseWorkedUpon.id);
 
     emit(
       state.copyWith(
@@ -474,7 +473,6 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateContactTracingData(
       ContactTracingModel contactTracingModel, int? id) async {
-    print('id====${id ?? state.caseWorkedUpon.contactTracing}');
     final response = await caseRepo.saveContactTracingData(
         contactTracingModel: contactTracingModel,
         id: id,
@@ -485,7 +483,6 @@ class CaseCubit extends Cubit<CaseState> {
           contactTracing: response.id,
         ),
         contactTracingModel: response,
-        
       ),
     );
     getContactTracingData(response.id);

@@ -11,7 +11,6 @@ class AppProvider extends ChangeNotifier {
   }
 
   void checkAppUpdate() async {
-    print('in Check for Update');
     if (!Platform.isAndroid) {
       return;
     }

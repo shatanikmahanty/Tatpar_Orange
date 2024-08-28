@@ -87,7 +87,6 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
             AppBarAction(
               icon: Icons.sync,
               onclick: () {
-                print('Syncing Data');
                 context.read<CaseCubit>().pushLocalData();
               },
             ),

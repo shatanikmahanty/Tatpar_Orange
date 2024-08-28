@@ -96,7 +96,6 @@ class CaseRepo {
           await dataBox.put(updateModel.id.toString(), updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
-          print('Updated Referral in Hive: $updateModel');
           updateCaseBox(
               model: updateModel,
               tbModel: null,
@@ -133,7 +132,6 @@ class CaseRepo {
               treatmentModel: null);
 
           // DjangoflowAppSnackbar.showInfo('Stored data Locally');
-          print('Stored new Referral in Hive: $modelToSave');
           AuthCubit.instance.caseId = modelToSave.caseId;
           log('OFFLINE CASEiD=========${AuthCubit.instance.workingCaseId}');
           return modelToSave;
@@ -224,7 +222,6 @@ class CaseRepo {
           await tbdatabox.put(updateModel.id.toString(), updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
-          print('Updated TBScreening in Hive: $updateModel');
           updateCaseBox(
               model: null,
               tbModel: updateModel,
@@ -256,7 +253,6 @@ class CaseRepo {
               outcomeModel: null);
 
           // DjangoflowAppSnackbar.showInfo('Stored data Locally');
-          print('Stored new TBScreeningModel in Hive: $modelToSave');
           log('TB Data Box Contains:${tbdatabox.values.toList().toString()}');
 
           return modelToSave;
@@ -355,7 +351,6 @@ class CaseRepo {
           await whodatabox.put(updateModel.id.toString(), updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
-          print('Updated Mental Health Screening Model in hive: $updateModel');
           updateCaseBox(
               model: null,
               tbModel: null,
@@ -387,7 +382,6 @@ class CaseRepo {
               outcomeModel: null);
 
           // DjangoflowAppSnackbar.showInfo('Stored data Locally');
-          print('Stored new MentalHealthScreeningModel in Hive: $modelToSave');
           log('Mental Health Data Box Contains:${whodatabox.values.toList().toString()}');
 
           return modelToSave;
@@ -477,7 +471,6 @@ class CaseRepo {
           await diagnosisDataBox.put(updateModel.id.toString(), updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
-          print('Updated Diagnosis in Hive: $updateModel');
           updateCaseBox(
               model: null,
               tbModel: null,
@@ -509,7 +502,6 @@ class CaseRepo {
               outcomeModel: null);
 
           // DjangoflowAppSnackbar.showInfo('Stored data Locally');
-          print('Stored new Diagnosis Model in Hive: $modelToSave');
           log('Diagnosis DataBox Contains:${diagnosisDataBox.values.toList().toString()}');
 
           return modelToSave;
@@ -599,7 +591,6 @@ class CaseRepo {
           await treatmentDataBox.put(updateModel.id.toString(), updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
-          print('Updated Treatment in Hive: $updateModel');
           updateCaseBox(
               model: null,
               tbModel: null,
@@ -631,7 +622,6 @@ class CaseRepo {
               outcomeModel: null);
 
           // DjangoflowAppSnackbar.showInfo('Stored data Locally');
-          print('Stored new TreatmentModel in Hive: $modelToSave');
           log('TreatmentData Box Contains:${treatmentDataBox.values.toList().toString()}');
 
           return modelToSave;
@@ -719,16 +709,11 @@ class CaseRepo {
         final existingModelIndex = modelsList.indexWhere(
           (model) => id != null && model.id == id,
         );
-        print(id);
-        // print('${modelsList.elementAt(existingModelIndex)}');
 
         if (existingModelIndex != -1) {
-          // ContactTracingModel updateModel =
-          //     contactTracingModel.copyWith(caseId: caseId);
           await contactTracingDataBox.putAt(existingModelIndex, updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
-          print('Updated Contact Tracing in Hive: $updateModel');
           updateCaseBox(
               model: null,
               tbModel: null,
@@ -744,16 +729,13 @@ class CaseRepo {
         } else {
           await CounterManager.instance.initialize();
           int counter = await CounterManager.instance.getNextCounter();
-          print(counter);
           final userMobilePrefix =
               AuthCubit.instance.state.user!.mobileNumber.substring(0, 5);
-          print(userMobilePrefix);
           final modelToSave = updateModel.copyWith(
               id: int.tryParse('$userMobilePrefix$counter'),
               caseId: caseId ?? AuthCubit.instance.workingCaseId,
               isFormIDAssigned: false);
-          print(
-              '${int.tryParse('$userMobilePrefix$counter')}${modelToSave.toString()}');
+
           // Save the new model to Hive
           await contactTracingDataBox.put(
               modelToSave.id.toString(), modelToSave);
@@ -768,7 +750,6 @@ class CaseRepo {
               outcomeModel: null);
 
           // DjangoflowAppSnackbar.showInfo('Stored data Locally');
-          print('Stored new ContactTracingModel in Hive: $modelToSave');
           log('Contact Tracing Data Box Contains:${contactTracingDataBox.values.toList().toString()}');
 
           return modelToSave;
@@ -857,7 +838,6 @@ class CaseRepo {
           await outcomeDataBox.put(updateModel.id.toString(), updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
-          print('Updated Outcome in Hive: $updateModel');
           updateCaseBox(
               model: null,
               tbModel: null,
@@ -889,7 +869,6 @@ class CaseRepo {
               outcomeModel: modelToSave);
 
           // DjangoflowAppSnackbar.showInfo('Stored data Locally');
-          print('Stored new OutcomeModel in Hive: $modelToSave');
           log('Outcome Data Box Contains:${outcomeDataBox.values.toList().toString()}');
 
           return modelToSave;
@@ -1340,9 +1319,6 @@ class CaseRepo {
       final List<Case> storedData = dataBox.values.toList();
 
       if (result.error != null && result.error?.type is NetworkError) {
-        print(
-            'List Of Cases Stored in Hive============${storedData.toString()}');
-
         return storedData;
       } else {
         throw ApplicationError(
@@ -1356,7 +1332,6 @@ class CaseRepo {
   Future<void> pushPendingReferralDetails() async {
     Box<ReferralDetailsModel> dataBox =
         Hive.box<ReferralDetailsModel>('referralDetailsModel');
-    print('In method Push pending referral Details');
     // Get all referral details models from the box
     List<ReferralDetailsModel> referralList = dataBox.values.toList();
 
@@ -1605,8 +1580,6 @@ class CaseRepo {
   }
 
   Future<void> pushPendingDiagnosisDetails() async {
-    print('Called pushPendingDiagnosisDetails');
-
     Box<DiagnosisModel> diagnosisDataBox =
         Hive.box<DiagnosisModel>('diagnosisModel');
     List<DiagnosisModel> diagnosisModelsList = diagnosisDataBox.values.toList();
@@ -1675,8 +1648,6 @@ class CaseRepo {
   }
 
   Future<void> pushPendingTreatmentDetails() async {
-    print('Called pushPendingTreatmentDetails');
-
     Box<TreatmentModel> treatmentDataBox =
         Hive.box<TreatmentModel>('treatmentModel');
     List<TreatmentModel> treatmentModelsList = treatmentDataBox.values.toList();
@@ -1947,7 +1918,6 @@ class CaseRepo {
             existingCase.id == tbModelID || existingCase.id == caseId));
 
     if (model != null) {
-      print('Found this Model${tbdataBox.get(model).toString()}');
       tbScreeningModel = tbdataBox.get(model);
     }
 
@@ -1987,7 +1957,6 @@ class CaseRepo {
             existingCase.id == whoModelID || existingCase.id == caseId));
 
     if (model != null) {
-      print('Found this Model${whodatabox.get(model).toString()}');
       mentalHealthScreeningModel = whodatabox.get(model);
     }
 
@@ -2021,8 +1990,6 @@ class CaseRepo {
 
   Future<void> updateDiagnosisDataBox(
       int? diagnosisModelID, int? caseId) async {
-    print('Called updateDiagnosisDataBox');
-
     Box<DiagnosisModel> diagnosisDataBox =
         Hive.box<DiagnosisModel>('diagnosisModel');
     DiagnosisModel? diagnosisModel;
@@ -2032,7 +1999,6 @@ class CaseRepo {
             existingCase.id == diagnosisModelID || existingCase.id == caseId));
 
     if (model != null) {
-      print('Found this Model${diagnosisDataBox.get(model).toString()}');
       diagnosisModel = diagnosisDataBox.get(model);
     }
 
@@ -2064,8 +2030,6 @@ class CaseRepo {
   }
 
   Future<void> updateTreatmentDataBox(int? treatmentID, int? caseId) async {
-    print('Called updateTreatmentDataBox');
-
     Box<TreatmentModel> treatmentDataBox =
         Hive.box<TreatmentModel>('treatmentModel');
     TreatmentModel? treatmentModel;
@@ -2075,7 +2039,6 @@ class CaseRepo {
             existingCase.id == treatmentID || existingCase.id == caseId));
 
     if (model != null) {
-      print('Found this Model${treatmentDataBox.get(model).toString()}');
       treatmentModel = treatmentDataBox.get(model);
     }
 
@@ -2120,8 +2083,6 @@ class CaseRepo {
 
     if (matchingModels.isNotEmpty) {
       for (var existingModel in matchingModels) {
-        print('Found this Model: ${existingModel.toString()}');
-
         // Update the caseId of each matching model
         ContactTracingModel updatedModel =
             existingModel.copyWith(caseId: caseId);
@@ -2161,7 +2122,6 @@ class CaseRepo {
             existingCase.id == outcomeID || existingCase.id == caseId));
 
     if (model != null) {
-      print('Found this Model${outcomeDataBox.get(model).toString()}');
       outcomeModel = outcomeDataBox.get(model);
     }
 
@@ -2226,7 +2186,6 @@ class CaseRepo {
           (existingCase) => existingCase.id == caseIdToSearch,
         );
 
-    print('Searching for caseId: $caseIdToSearch');
     log('Existing case index: $existingCaseIndex');
 
     if (caseModel == null) {
@@ -2265,9 +2224,6 @@ class CaseRepo {
             createdOn: DateTime.now(),
           );
           caseBox.add(caseModelToSave);
-          print('Added new case to Hive: $caseModelToSave');
-        } else {
-          print('No model provided to create a new case.');
         }
       } else {
         // Existing case found, update the relevant fields
@@ -2307,7 +2263,6 @@ class CaseRepo {
             createdOn: DateTime.now(),
           );
           caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print('Updated case in Hive with referral details: $caseModelToSave');
         }
 
         if (tbModel != null) {
@@ -2318,7 +2273,6 @@ class CaseRepo {
           );
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print('Updated case in Hive with TB details: $caseModelToSave');
         }
         if (mentalHealthScreeningModel != null) {
           caseModelToSave = existingCase.copyWith(
@@ -2326,8 +2280,6 @@ class CaseRepo {
           );
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print(
-              'Updated case in Hive with Mental Health details: $caseModelToSave');
         }
         if (diagnosisModel != null) {
           caseModelToSave = existingCase.copyWith(
@@ -2336,8 +2288,6 @@ class CaseRepo {
           );
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print(
-              'Updated case in Hive with Diagnosis details: $caseModelToSave');
         }
         if (treatmentModel != null) {
           caseModelToSave = existingCase.copyWith(
@@ -2346,8 +2296,6 @@ class CaseRepo {
           );
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print(
-              'Updated case in Hive with Treatment details: $caseModelToSave');
         }
         if (contactTracingModel != null) {
           Box<ContactTracingModel> contactTracingDataBox =
@@ -2364,8 +2312,6 @@ class CaseRepo {
               contactTracingList: updatedContactTracingList,
             );
             caseBox.putAt(existingCaseIndex, caseModelToSave);
-            print(
-                'Removed Contact Tracing ID from case in Hive: $caseModelToSave');
           } else {
             // Add only if ID matches the current case ID and is not already in the list
             List<int> updatedContactTracingList = [
@@ -2382,8 +2328,6 @@ class CaseRepo {
               contactTracingList: updatedContactTracingList,
             );
             caseBox.putAt(existingCaseIndex, caseModelToSave);
-            print(
-                'Updated case in Hive with Contact Tracing details: $caseModelToSave');
           }
         }
         if (outcomeModel != null) {
@@ -2399,7 +2343,6 @@ class CaseRepo {
               treatmentOutcome: treatmentOutcomeName);
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
-          print('Updated case in Hive with Outcome details: $caseModelToSave');
         }
       }
     } else {
@@ -2410,10 +2353,8 @@ class CaseRepo {
 
       if (existingCaseIndex != -1) {
         caseBox.putAt(existingCaseIndex, caseModelToSave);
-        print('Updated existing case in Hive: $caseModelToSave');
       } else {
         caseBox.add(caseModelToSave);
-        print('Added new case to Hive: $caseModelToSave');
       }
     }
   }

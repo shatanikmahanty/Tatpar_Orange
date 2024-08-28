@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -517,59 +515,6 @@ class TreatmentPage extends StatelessWidget {
                                                                       'On Treatment',
                                                                   child: Column(
                                                                       children: [
-                                                                        // TextFieldWithList(
-                                                                        //   controlName:
-                                                                        //       'previously_tb_treated',
-                                                                        //   label:
-                                                                        //       'Previously TB treated',
-                                                                        //   padding:
-                                                                        //       EdgeInsets.zero,
-                                                                        //   prefixIcon: Icons
-                                                                        //       .account_circle_outlined,
-                                                                        //   listData: const [
-                                                                        //     'Item 1',
-                                                                        //     'Item 2',
-                                                                        //     'Item 3'
-                                                                        //   ],
-                                                                        //   allowMultiSelection:
-                                                                        //       false,
-                                                                        //   onSelected: (value) {
-                                                                        //     formGroup
-                                                                        //         .control(
-                                                                        //             'previously_tb_treated')
-                                                                        //         .value = value[0];
-                                                                        //   },
-                                                                        //   emptyString: '',
-                                                                        // ),
-                                                                        // const SizedBox(
-                                                                        //     height:
-                                                                        //         kPadding * 2),
-                                                                        // TextFieldWithList(
-                                                                        //   controlName:
-                                                                        //       'rif_sensitivity',
-                                                                        //   label:
-                                                                        //       'RIF Sensitivity',
-                                                                        //   padding:
-                                                                        //       EdgeInsets.zero,
-                                                                        //   prefixIcon: Icons
-                                                                        //       .account_circle_outlined,
-                                                                        //   listData: const [
-                                                                        //     'Sensitive',
-                                                                        //     'Resistant'
-                                                                        //   ],
-                                                                        //   allowMultiSelection:
-                                                                        //       false,
-                                                                        //   onSelected: (value) {
-                                                                        //     formGroup
-                                                                        //         .control(
-                                                                        //             'rif_sensitivity')
-                                                                        //         .value = value[0];
-                                                                        //   },
-                                                                        //   emptyString: '',
-                                                                        // ),
-                                                                        // const SizedBox(
-                                                                        //     height:
-                                                                        //         kPadding * 2),
                                                                         DateTextInput(
                                                                           firstDate:
                                                                               DateTime(2002),
@@ -750,7 +695,6 @@ class TreatmentPage extends StatelessWidget {
                                                                         const SizedBox(
                                                                             height:
                                                                                 kPadding * 2),
-
                                                                         ChipRadioButtons(
                                                                           label:
                                                                               AppLocalizations.of(context)!.stage,
@@ -773,7 +717,6 @@ class TreatmentPage extends StatelessWidget {
                                                                         const SizedBox(
                                                                             height:
                                                                                 kPadding * 2),
-
                                                                         ReactiveValueListenableBuilder<
                                                                                 String>(
                                                                             formControlName:
@@ -995,7 +938,6 @@ class TreatmentPage extends StatelessWidget {
                                                                                             const SizedBox(height: kPadding * 2),
                                                                                           ]))),
                                                                                 ]))),
-
                                                                         ReactiveValueListenableBuilder<
                                                                                 String>(
                                                                             formControlName:
