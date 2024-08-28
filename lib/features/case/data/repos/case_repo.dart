@@ -27,7 +27,6 @@ import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
 import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 import 'package:internet_connection_checker_plus/internet_connection_checker_plus.dart';
-import 'package:uuid/uuid.dart';
 
 class CaseRepo {
   Future<ReferralDetailsModel> saveReferralDetails({
@@ -1235,10 +1234,14 @@ class CaseRepo {
           contactTracingDataBox.values.toList();
 
       if (result.error != null && result.error?.type is NetworkError) {
-        print(
-            'List Of Contact Tracing Models Stored in Hive============${storedData.toString()}');
+        final caseIdToFilter = caseId ?? AuthCubit.instance.workingCaseId;
 
-        return storedData.reversed.toList();
+        // Filter the stored data based on the caseId
+        final filteredData = storedData
+            .where((model) => model.caseId == caseIdToFilter)
+            .toList();
+
+        return filteredData.reversed.toList();
       } else {
         throw ApplicationError(
           errorMsg: 'Error fetching Contact Tracing List data',

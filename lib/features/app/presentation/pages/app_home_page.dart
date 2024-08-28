@@ -57,26 +57,29 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
         return AppBar(
           title: activeIndex == 0
               ? Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Welcome',
-                      // style: AppTextStyle.titleMedium.copyWith(
-                      //     fontWeight: FontWeight.w400,
-                      //     height: 2,
-                      //     color: AppColors.grey50),
+                      'Welcome ',
                       style: AppTextStyle.titleLarge.copyWith(
-                          fontSize: 20,
-                          height: 1.2,
-                          fontWeight: FontWeight.w600),
+                        fontSize: 20,
+                        height: 1.8,
+                        fontWeight: FontWeight.w600,
+                      ),
+                      // style: AppTextStyle.titleMedium.copyWith(
+                      //   fontSize: 20,
+                      //   // height: 1.2,
+                      //   fontWeight: FontWeight.w600,
+                      // ),
                     ),
-                    // Text(
-                    //   context.watch<AuthCubit>().state.user?.firstName ?? '',
-                    //   style: AppTextStyle.titleLarge.copyWith(
-                    //       fontSize: 20,
-                    //       height: 1.2,
-                    //       fontWeight: FontWeight.w600),
-                    // ),
+                    Text(
+                      context.watch<AuthCubit>().state.user?.firstName ?? '',
+                      style: AppTextStyle.titleSmall.copyWith(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w400,
+                      ),
+                    ),
                   ],
                 )
               : const Offstage(),
