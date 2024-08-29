@@ -11,6 +11,7 @@ class AppProvider extends ChangeNotifier {
   }
 
   void checkAppUpdate() async {
+    print('IN CheckAppUpdate Function');
     if (!Platform.isAndroid) {
       return;
     }
@@ -32,6 +33,7 @@ class AppProvider extends ChangeNotifier {
           InAppUpdate.performImmediateUpdate();
         } else {
           InAppUpdate.startFlexibleUpdate().then((_) {
+            print('Performing Update');
             InAppUpdate.completeFlexibleUpdate().then((_) {
               DjangoflowAppSnackbar.showInfo(
                   'New version installed successfully');

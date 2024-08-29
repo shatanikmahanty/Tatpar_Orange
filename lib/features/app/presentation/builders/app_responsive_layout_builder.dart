@@ -18,26 +18,16 @@ class AppResponsiveLayoutBuilder extends StatelessWidget {
   final List<Breakpoint> breakpoints;
 
   @override
-  Widget build(BuildContext context) {
-    return ResponsiveBreakpoints.builder(
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-          return ResponsiveScaledBox(
-            width: constraints.maxWidth, // Use parent's constraints for width
-            child: kIsWeb
-                ? Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: constraints.maxWidth > 1200
-                          ? 200
-                          : 50, // Adjust padding based on width
-                    ),
-                    child: child,
-                  )
-                : child,
-          );
-        },
-      ),
-      breakpoints: breakpoints,
-    );
-  }
+  Widget build(BuildContext context) => ResponsiveBreakpoints.builder(
+        child: ResponsiveScaledBox(
+          width: MediaQuery.of(context).size.width,
+          child: kIsWeb
+              ? Padding(
+                  padding: const EdgeInsets.only(left: 200, right: 200),
+                  child: child,
+                )
+              : child,
+        ),
+        breakpoints: breakpoints,
+      );
 }

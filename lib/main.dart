@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
 import 'package:tatpar_acf/configurations/network/application_error.dart';
+import 'package:tatpar_acf/features/appProvider/app_provider.dart';
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data.dart';
 import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data_fields.dart';
@@ -148,12 +149,17 @@ Future<void> main() async {
     }, builder: (context, child) {
       final provider = Provider.of<LanguageProvider>(context);
 
-      return TatparAcfAppBuilder(
-        appRouter: router,
-        initialDeepLink: initialDeepLink,
-        appLinksRepository: appLinksRepository,
-        provider: provider,
-      );
+      return ChangeNotifierProvider<AppProvider>(create: (_) {
+        return AppProvider();
+      }, builder: (context, child) {
+        Provider.of<AppProvider>(context);
+        return TatparAcfAppBuilder(
+          appRouter: router,
+          initialDeepLink: initialDeepLink,
+          appLinksRepository: appLinksRepository,
+          provider: provider,
+        );
+      });
     });
   });
 }
