@@ -38,16 +38,16 @@ class CaseRepo {
     final existingModelIndex =
         dataBox.values.toList().indexWhere((model) => model.id == id);
 
+    ///checking for inernet connection
     bool hasInternet = await InternetConnection().hasInternetAccess;
     if ((referralDetailsModel.isCaseUpdated == false ||
             referralDetailsModel.isCaseUpdated == null) &&
         hasInternet &&
         existingModelIndex != -1) {
-      log('Pushing data to Server because network is available while trying to update in Local${referralDetailsModel.toString()}');
+      log('Pushing data to Server because network is available while trying to update in Local Storage${referralDetailsModel.toString()}');
 
-      // Print the details of the record being deleted
       log('Deleting ReferralModel: ${dataBox.getAt(existingModelIndex)}');
-      // Delete the old model
+      // Delete the old model in local storage
       await dataBox.deleteAt(existingModelIndex);
 
       deleteCase(referralDetailsModel.caseId);
@@ -67,16 +67,14 @@ class CaseRepo {
     if (result.status == Status.ok) {
       final savedModel = ReferralDetailsModel.fromJson(result.data['data']);
 
+      /// save the model to local storage with its new server id
       await dataBox.put(savedModel.id.toString(), savedModel);
 
+      ///push the locally stored data
       pushPendingReferralDetails();
 
       AuthCubit.instance.caseId = result.data['data']['case_id'];
-      // TBScreeningModel? tbScreeningModel =
-      //  a   getTBDataBox(referralDetailsModel.id);
 
-      // updateTBDataBox(referralDetailsModel.id, tbScreeningModel,
-      //     AuthCubit.instance.workingCaseId);
       return savedModel;
     } else {
       if (result.error != null && result.error?.type is NetworkError) {
@@ -96,6 +94,9 @@ class CaseRepo {
           await dataBox.put(updateModel.id.toString(), updateModel);
 
           // DjangoflowAppSnackbar.showInfo('Updated data Locally');
+
+          /// Update the case model of local storage
+
           updateCaseBox(
               model: updateModel,
               tbModel: null,
@@ -727,6 +728,7 @@ class CaseRepo {
 
           return updateModel;
         } else {
+          ///Assigning new id for evey new model
           await CounterManager.instance.initialize();
           int counter = await CounterManager.instance.getNextCounter();
           final userMobilePrefix =

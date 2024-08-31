@@ -75,24 +75,6 @@ class BasicDetails extends StatelessWidget {
     });
   }
 
-  // String? _getPanchayatName(List<Block>? blocks, int? panchayat) {
-  //   String? panchayatName;
-  //   if (blocks != null) {
-  //     for (var block in blocks) {
-  //       var panchayatData = block.panchayat?.firstWhere(
-  //           (p) => p.id == panchayat,
-  //           orElse: () => const Panchayat(panchayat: null));
-  //       if (panchayatData != null) {
-  //         panchayatName = panchayatData.panchayat;
-  //         break;
-  //       }
-  //     }
-  //     return panchayatName;
-  //   } else {
-  //     return null;
-  //   }
-  // }
-
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     if (formGroup.valid) {
       final formData = formGroup.value;
@@ -104,13 +86,6 @@ class BasicDetails extends StatelessWidget {
                   formGroup.control('caste_category').value.split(':')[0])
               : null;
 
-      // context.read<CaseCubit>().selectKeyPopulation =
-      //     formGroup.control('key_population').isNotNull
-      //         ? formGroup.control('key_population').value.split(',').map((e) {
-      //             final parts = e.split(':');
-      //             return int.parse(parts[0]);
-      //           }).toList()
-      //         : null;
       context.read<CaseCubit>().selectTrimester =
           (formGroup.control('trimester').value) != null
               ? int.tryParse(formGroup.control('trimester').value.split(':')[0])
@@ -196,7 +171,6 @@ class BasicDetails extends StatelessWidget {
       await caseCubit.updateReferralDetailsData(referralDetailsData);
     } else {
       formGroup.markAllAsTouched();
-      // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
       final fields = [];
       formGroup.controls.forEach((key, value) {
         if (value.invalid) {
@@ -423,19 +397,6 @@ class BasicDetails extends StatelessWidget {
                                                 return;
                                               }
 
-                                              // final List<int> listOfIds =
-                                              //     value.split(',').map((e) {
-                                              //   final parts = e.split(':');
-                                              //   return int.parse(parts[0]);
-                                              // }).toList();
-                                              // final List<String> values =
-                                              //     value.split(',').map((e) {
-                                              //   final parts = e.split(':');
-                                              //   return (parts[1]);
-                                              // }).toList();
-                                              // context
-                                              //     .read<SourceCubit>()
-                                              //     .selectKeyPopulation = listOfIds;
                                               final listOfValues =
                                                   value.split(',');
 
@@ -634,12 +595,6 @@ class BasicDetails extends StatelessWidget {
                                       ],
                                     ),
                                     const SizedBox(height: kPadding * 2),
-                                    // const PrimaryTextField(
-                                    //   formControlName: 'source',
-                                    //   label: 'Source',
-                                    //   prefixIcon: Icons.location_city_outlined,
-                                    // ),
-                                    // const SizedBox(height: kPadding * 2)
                                   ],
                                 ),
                               ),

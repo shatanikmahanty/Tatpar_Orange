@@ -57,6 +57,7 @@ Future<void> main() async {
     AppCubit.initialState = const AppState(
       themeMode: ThemeMode.light,
     );
+
     await Hive.initFlutter();
 
     ///ReferralDetailsGetApi

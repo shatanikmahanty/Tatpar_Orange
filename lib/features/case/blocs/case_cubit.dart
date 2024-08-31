@@ -58,8 +58,6 @@ class CaseCubit extends Cubit<CaseState> {
       getReferralDetailsData(caseModel.referralDetails);
     }
     if (caseModel.tbScreening != null) {
-      log(caseModel.toString());
-      log('Calling GET TBSCREENING');
       getTBScreeningData(caseModel.tbScreening);
     }
     if (caseModel.whoSrq != null) {
@@ -386,11 +384,7 @@ class CaseCubit extends Cubit<CaseState> {
     final response = await caseRepo.saveReferralDetails(
         referralDetailsModel: referralDetailsModel,
         id: state.caseWorkedUpon.referralDetails);
-    // log('CASE CUBIT : ReferralDetailsModel===========${referralDetailsModel.toString()}');
-    // log('CASE CUBIT : ReferralDetailsID===========${state.caseWorkedUpon.referralDetails.toString()}');
     selectCase = await getCaseModel(response.caseId);
-    // print('Fetched Case Model: ${selectedCase.toString()}');
-    log('CASE CUBIT : state.caseWorkedUpon===========${selectedCase.toString()}');
 
     emit(
       state.copyWith(

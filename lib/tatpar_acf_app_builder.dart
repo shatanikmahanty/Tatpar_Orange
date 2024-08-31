@@ -8,7 +8,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
 import 'package:tatpar_acf/features/app/presentation/builders/app_responsive_layout_builder.dart';
-import 'package:tatpar_acf/features/appProvider/app_provider.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/repo/auth_repo.dart';
 import 'package:tatpar_acf/features/authentication/presentation/listeners/login_listener_wrapper.dart';
@@ -63,10 +62,6 @@ class TatparAcfAppBuilder extends AppBuilder {
                 ),
               lazy: false,
             ),
-
-            // BlocProvider<TBScreeningStateCubit>(
-            //   create: (context) => TBScreeningStateCubit(),
-            // ),
             BlocProvider<AppLinksCubit>(
               create: (context) => AppLinksCubit(
                 null,
@@ -79,18 +74,6 @@ class TatparAcfAppBuilder extends AppBuilder {
                 context.read<SourceRepo>(),
               ),
             ),
-            // BlocProvider<SubordinatesCaseCubit>(
-            //     create: (context) => SubordinatesCaseCubit()),
-            // BlocProvider(
-            //   create: (_) => SplashBloc(),
-            // ),
-            // BlocProvider<ContactTracingCubit>(
-            //   create: (context) => ContactTracingCubit(
-            //     repo: context.read<CaseRepo>(),
-            //     contactTracingModel: const ContactTracingModel(),
-            //   ),
-            // ),
-
             BlocProvider<CaseListCubit>(
               create: (context) => CaseListCubit(
                 caseRepo: context.read<CaseRepo>(),
@@ -113,8 +96,6 @@ class TatparAcfAppBuilder extends AppBuilder {
               context.read<CaseListCubit>().getCasesForHealthWorker();
             },
             onLogout: (context) {},
-            // child: ChangeNotifierProvider<AppProvider>(
-            //   create: (_) => AppProvider(),
             child: AppCubitConsumer(
                 listenWhen: (previous, current) =>
                     previous.environment != current.environment,
@@ -182,5 +163,4 @@ class TatparAcfAppBuilder extends AppBuilder {
                 }),
           ),
         );
-  //);
 }
