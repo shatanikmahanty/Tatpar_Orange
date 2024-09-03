@@ -46,7 +46,7 @@
     "otherTestComments":"Other test_comments",
     "diagnosis":"Dx",
     "diagnosisDate":"Dx_date",
-    "diagnosisComments":"Dx_date",
+    "diagnosisComments":"Dx_comments",
     "referralID":"Referral_ID",
     "referralDate":"Referral Date",
     "referralName":"Referral Name",

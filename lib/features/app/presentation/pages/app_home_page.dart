@@ -1,3 +1,4 @@
+import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -89,6 +90,8 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
               icon: Icons.sync,
               onclick: () {
                 context.read<CaseCubit>().pushLocalData();
+                DjangoflowAppSnackbar.showInfo(
+                    'No Offline Data available to sync');
               },
             ),
             const SizedBox(
