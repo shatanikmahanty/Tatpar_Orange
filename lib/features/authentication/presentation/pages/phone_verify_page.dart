@@ -62,7 +62,6 @@ class PhoneVerifyPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      // ReactivePinCodeTextField(),
                       ReactivePinCodeTextField(
                         autofocus: true,
                         formControlName: 'otp',

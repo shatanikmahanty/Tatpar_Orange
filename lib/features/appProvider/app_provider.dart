@@ -2,7 +2,7 @@ import 'dart:io';
 
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:djangoflow_app/djangoflow_app.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:in_app_update/in_app_update.dart';
 
 class AppProvider extends ChangeNotifier {
@@ -11,13 +11,12 @@ class AppProvider extends ChangeNotifier {
   }
 
   void checkAppUpdate() async {
-    print('IN CheckAppUpdate Function');
     if (!Platform.isAndroid) {
       return;
     }
 
     final androidInfo = await DeviceInfoPlugin().androidInfo;
-    if (!androidInfo.isPhysicalDevice) {
+    if (!androidInfo.isPhysicalDevice || kDebugMode) {
       return;
     }
 
@@ -33,17 +32,13 @@ class AppProvider extends ChangeNotifier {
           InAppUpdate.performImmediateUpdate();
         } else {
           InAppUpdate.startFlexibleUpdate().then((_) {
-            print('Performing Update');
             InAppUpdate.completeFlexibleUpdate().then((_) {
-              DjangoflowAppSnackbar.showInfo(
-                  'New version installed successfully');
+              DjangoflowAppSnackbar.showInfo('New version installed successfully');
             }).catchError((e) {
-              DjangoflowAppSnackbar.showError(
-                  'Update failed with error code: $e');
+              DjangoflowAppSnackbar.showError('Update failed with error code: $e');
             });
           }).catchError((e) {
-            DjangoflowAppSnackbar.showError(
-                'Update failed with error code: $e');
+            DjangoflowAppSnackbar.showError('Update failed with error code: $e');
           });
         }
       });

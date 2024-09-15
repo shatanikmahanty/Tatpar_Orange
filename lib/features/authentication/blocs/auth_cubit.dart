@@ -19,8 +19,7 @@ class AuthState with _$AuthState {
       @Default(false) bool isNewUser,
       @Default(false) bool isOtpRequested}) = _AuthState;
 
-  factory AuthState.fromJson(Map<String, dynamic> json) =>
-      _$AuthStateFromJson(json);
+  factory AuthState.fromJson(Map<String, dynamic> json) => _$AuthStateFromJson(json);
 }
 
 class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
@@ -62,15 +61,16 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
   }
 
   Future<void> loginWithPhone(String phone) async {
-    emit(state.copyWith(phoneNumber: phone));
-    emit(state.copyWith(isOtpRequested: true));
+    emit(
+      state.copyWith(
+        phoneNumber: phone,
+        isOtpRequested: true,
+      ),
+    );
     await _authRepo.sendOtp(
         phone,
         (resendToken) => emit(
-              state.copyWith(
-                  phoneNumber: phone,
-                  isOtpRequested: false,
-                  resendToken: resendToken),
+              state.copyWith(phoneNumber: phone, isOtpRequested: false, resendToken: resendToken),
             ),
         () => emit(
               state.copyWith(
@@ -104,10 +104,7 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
     await _authRepo.sendOtp(
       state.phoneNumber!,
       (resendToken) => emit(
-        state.copyWith(
-            phoneNumber: state.phoneNumber,
-            isOtpRequested: false,
-            resendToken: resendToken),
+        state.copyWith(phoneNumber: state.phoneNumber, isOtpRequested: false, resendToken: resendToken),
       ),
       () => emit(
         state.copyWith(
@@ -118,7 +115,10 @@ class AuthCubit extends HydratedCubit<AuthState> with CubitMaybeEmit {
   }
 
   Future<void> loadUserDetails() async {
-    final model = await _authRepo.getUserDetails();
-    emit(state.copyWith(user: model));
+    final user = await _authRepo.getUserDetails();
+
+    if (user != null) {
+      emit(state.copyWith(user: user));
+    }
   }
 }
