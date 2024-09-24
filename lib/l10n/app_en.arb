@@ -66,7 +66,7 @@
     "referredWard":"Referred Ward",
     "referrerPanchayatCode":"Referrer Panchayat Code",
     "source":"Source",
-    "screeningDate":"Screening Date",
+    "tbScreeningDate":"Screening Date",
     "screenedBy":"Screened By",
     "cough":"1.1 Cough for 2 weeks ?",
     "sputum":"1.2 Sputum for 2 weeks ?",

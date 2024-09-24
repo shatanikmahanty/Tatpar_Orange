@@ -171,7 +171,7 @@ class TBScreeningPage extends StatelessWidget {
                                     firstDate: DateTime(2002),
                                     controlName: 'screening_date',
                                     label: AppLocalizations.of(context)!
-                                        .screeningDate,
+                                        .tbScreeningDate,
                                   ),
                                   const SizedBox(height: kPadding * 2),
                                   PrimaryTextField(

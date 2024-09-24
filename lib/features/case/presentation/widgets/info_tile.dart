@@ -33,11 +33,14 @@ class InfoTile extends StatelessWidget {
             dashGapRadius: 0.0,
           )),
           const SizedBox(width: kPadding),
-          Text(
-            fieldValue,
-            softWrap: true,
-            style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                height: 2, letterSpacing: 0.5, fontWeight: FontWeight.w600),
+          Flexible(
+            child: Text(
+              fieldValue,
+              softWrap: true,
+              style: Theme.of(context).textTheme.labelMedium?.copyWith(
+                  height: 2, letterSpacing: 0.5, fontWeight: FontWeight.w600),
+              overflow: TextOverflow.ellipsis,
+            ),
           ),
         ],
       );
