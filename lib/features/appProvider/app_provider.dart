@@ -11,6 +11,10 @@ class AppProvider extends ChangeNotifier {
   }
 
   void checkAppUpdate() async {
+    if (kIsWeb) {
+      return;
+    }
+
     if (!Platform.isAndroid) {
       return;
     }
