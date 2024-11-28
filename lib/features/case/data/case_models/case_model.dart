@@ -10,8 +10,7 @@ DateTime? fromJsonToDateTime(String? date) {
   }
   final dateCleaned = date.split('T')[0];
   final dateParts = dateCleaned.split('-');
-  return DateTime(int.parse(dateParts[0]), int.parse(dateParts[1]),
-      int.parse(dateParts[2]));
+  return DateTime(int.parse(dateParts[0]), int.parse(dateParts[1]), int.parse(dateParts[2]));
 }
 
 String? _dateTimeToJson(DateTime? date) => date?.toIso8601String();
@@ -29,9 +28,7 @@ class Case with _$Case {
     @HiveField(5) @JsonKey(name: 'panchayat') String? panchayat,
     @HiveField(6) @JsonKey(name: 'screened_by') String? screenedBy,
     @HiveField(7) @JsonKey(name: 'referred_by') String? referredBy,
-    @HiveField(8)
-    @JsonKey(name: 'referral_mobile_number')
-    String? referralMobileNumber,
+    @HiveField(8) @JsonKey(name: 'referral_mobile_number') String? referralMobileNumber,
     @HiveField(9) @JsonKey(name: 'assigned_to') String? assignedTo,
     @HiveField(10) @JsonKey(name: 'tb_screening') String? tbScreeningOutcome,
     @HiveField(11) @JsonKey(name: 'diagnosis') String? diagnosisName,
@@ -55,15 +52,14 @@ class Case with _$Case {
     @HiveField(17) @JsonKey(name: 'whosrq_id') int? whoSrq,
     @HiveField(18) @JsonKey(name: 'diagnosis_id') int? diagnosis,
     @HiveField(19) @JsonKey(name: 'outcome_id') int? outcomeValue,
-    @HiveField(20)
-    @JsonKey(name: 'contact_tracing_id')
-    List<int>? contactTracingList,
+    @HiveField(20) @JsonKey(name: 'contact_tracing_id') List<int>? contactTracingList,
     @HiveField(21) @JsonKey(name: 'treatment_id') int? treatment,
     @HiveField(22) @JsonKey(name: 'referral_block') String? referralBlock,
     @HiveField(23) @JsonKey(includeToJson: false) int? contactTracing,
     @HiveField(24) @JsonKey(name: 'is_updated') bool? isUpdated,
     @HiveField(25) @JsonKey(name: 'diagnosis_status') String? statusAfterDx,
     @HiveField(26) @JsonKey(name: 'treatment_outcome') String? treatmentOutcome,
+    @HiveField(27) @JsonKey(name: 'patient_referral_id') String? referralId,
   }) = _Case;
 
   factory Case.fromJson(Map<String, dynamic> json) => _$CaseFromJson(json);

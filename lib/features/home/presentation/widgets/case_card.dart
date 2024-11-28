@@ -134,14 +134,14 @@ class CaseCard extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        // const SizedBox(height: kPadding * 0.75),
-                        // Text(
-                        //   'ID: ${caseModel.}',
-                        //   style: textTheme.labelMedium?.copyWith(
-                        //     fontWeight: FontWeight.w600,
-                        //     color: Colors.black,
-                        //   ),
-                        // ),
+                        const SizedBox(height: kPadding * 0.75),
+                        Text(
+                          'ID: ${caseModel.referralId}',
+                          style: textTheme.labelMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black,
+                          ),
+                        ),
                         const SizedBox(height: kPadding * 0.75),
                         Text(
                           '${caseModel.panchayat}',

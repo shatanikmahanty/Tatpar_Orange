@@ -46,7 +46,7 @@ class CaseListCubit extends Cubit<CaseListState> {
         final queryLower = filters.searchWord!.toLowerCase();
         final patientName = element.referralName;
         final patientNumber = element.referralMobileNumber;
-        final referralId = (element.id ?? '').toString();
+        final referralId = (element.referralId ?? '').toString();
         return patientName!.toLowerCase().contains(queryLower) ||
             patientNumber!.contains(queryLower) ||
             referralId.contains(queryLower);
