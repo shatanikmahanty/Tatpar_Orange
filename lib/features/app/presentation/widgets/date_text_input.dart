@@ -46,21 +46,18 @@ class DateTextInput extends StatelessWidget {
               ),
             ),
             child: ReactiveDatePicker<DateTime>(
-              initialDate: initialDate ?? DateTime.now(),
+              initialDate: initialDate,
               formControlName: controlName,
               firstDate: firstDate,
               lastDate: lastDate,
-              builder: (BuildContext context,
-                  ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
+              builder: (BuildContext context, ReactiveDatePickerDelegate<dynamic> picker, Widget? child) {
                 final DateFormat formatter = DateFormat('dd/MM/yyyy');
                 return TextField(
                   inputFormatters: [
                     LengthLimitingTextInputFormatter(10),
                   ],
-                  controller: TextEditingController(
-                      text: (picker.value != null)
-                          ? formatter.format(picker.value!)
-                          : null),
+                  controller:
+                      TextEditingController(text: (picker.value != null) ? formatter.format(picker.value!) : null),
                   maxLines: 1,
                   decoration: InputDecoration(
                     hintText: 'DD/MM/YYYY',
@@ -114,16 +111,11 @@ class TimeTextInput extends StatelessWidget {
             ),
             child: ReactiveTimePicker(
               formControlName: controlName,
-              builder: (BuildContext context, ReactiveTimePickerDelegate picker,
-                      Widget? child) =>
-                  TextField(
+              builder: (BuildContext context, ReactiveTimePickerDelegate picker, Widget? child) => TextField(
                 inputFormatters: [
                   LengthLimitingTextInputFormatter(5),
                 ],
-                controller: TextEditingController(
-                    text: (picker.value != null)
-                        ? picker.value!.format(context)
-                        : null),
+                controller: TextEditingController(text: (picker.value != null) ? picker.value!.format(context) : null),
                 maxLines: 1,
                 decoration: InputDecoration(
                   hintText: 'HH:MM',

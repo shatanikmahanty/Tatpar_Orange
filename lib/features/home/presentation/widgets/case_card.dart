@@ -1,8 +1,10 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:flutter/material.dart';
-import 'package:tatpar_acf/configurations/configurations.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:tatpar_acf/configurations/configurations.dart';
+import 'package:tatpar_acf/features/case/blocs/case_list_cubit.dart';
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/disease_chips.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -41,18 +43,12 @@ class CaseCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(
-                  left: kPadding,
-                  top: kPadding,
-                  right: kPadding,
-                  bottom: kPadding),
+              padding: const EdgeInsets.only(left: kPadding, top: kPadding, right: kPadding, bottom: kPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   DiseaseChip(calculateScreeningStatus(),
-                      color: calculateScreeningStatus() == 'Scr Neg'
-                          ? AppColors.redLight
-                          : AppColors.blueLight),
+                      color: calculateScreeningStatus() == 'Scr Neg' ? AppColors.redLight : AppColors.blueLight),
                   const Spacer(),
                   Text(
                     getFormattedDate(caseModel.createdOn),
@@ -138,7 +134,14 @@ class CaseCard extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-
+                        // const SizedBox(height: kPadding * 0.75),
+                        // Text(
+                        //   'ID: ${caseModel.}',
+                        //   style: textTheme.labelMedium?.copyWith(
+                        //     fontWeight: FontWeight.w600,
+                        //     color: Colors.black,
+                        //   ),
+                        // ),
                         const SizedBox(height: kPadding * 0.75),
                         Text(
                           '${caseModel.panchayat}',
@@ -158,10 +161,8 @@ class CaseCard extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: 'Scr by:\t',
-                                style: textTheme.bodyMedium?.copyWith(
-                                    height: 1.33,
-                                    letterSpacing: 0.2,
-                                    fontWeight: FontWeight.w600),
+                                style: textTheme.bodyMedium
+                                    ?.copyWith(height: 1.33, letterSpacing: 0.2, fontWeight: FontWeight.w600),
                               ),
                               TextSpan(
                                 text: '${caseModel.screenedBy} \t \t',
@@ -172,10 +173,8 @@ class CaseCard extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: 'Ref by:\t',
-                                style: textTheme.bodyMedium?.copyWith(
-                                    height: 1.33,
-                                    letterSpacing: 0.2,
-                                    fontWeight: FontWeight.w600),
+                                style: textTheme.bodyMedium
+                                    ?.copyWith(height: 1.33, letterSpacing: 0.2, fontWeight: FontWeight.w600),
                               ),
                               TextSpan(
                                 text: '${caseModel.referredBy}',
@@ -197,17 +196,29 @@ class CaseCard extends StatelessWidget {
                       ],
                     ),
                   )),
-                  IconButton(
-                      onPressed: () async {
-                        String url = '${caseModel.referralMobileNumber}';
-                        final Uri launchUri = Uri(
-                          scheme: 'tel',
-                          path: url,
-                        );
-                        await launchUrl(launchUri);
-                      },
-                      icon:
-                          const Icon(Icons.phone, color: AppColors.blueMedium))
+                  Column(
+                    children: [
+                      IconButton(
+                        onPressed: () async {
+                          String url = '${caseModel.referralMobileNumber}';
+                          final Uri launchUri = Uri(
+                            scheme: 'tel',
+                            path: url,
+                          );
+                          await launchUrl(launchUri);
+                        },
+                        icon: const Icon(Icons.phone, color: AppColors.blueMedium),
+                      ),
+                      IconButton(
+                        onPressed: () async {
+                          final caseID = caseModel.id;
+                          final caseListCubit = context.read<CaseListCubit>();
+                          await caseListCubit.deleteCase(caseID!);
+                        },
+                        icon: const Icon(Icons.delete, color: AppColors.redDark),
+                      ),
+                    ],
+                  )
                 ],
               ),
             ),

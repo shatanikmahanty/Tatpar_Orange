@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:responsive_framework/responsive_framework.dart';
 
@@ -19,14 +18,9 @@ class AppResponsiveLayoutBuilder extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) => ResponsiveBreakpoints.builder(
-        child: ResponsiveScaledBox(
-          width: MediaQuery.of(context).size.width,
-          child: kIsWeb
-              ? Padding(
-                  padding: const EdgeInsets.only(left: 200, right: 200),
-                  child: child,
-                )
-              : child,
+        child: MaxWidthBox(
+          maxWidth: 800,
+          child: child,
         ),
         breakpoints: breakpoints,
       );

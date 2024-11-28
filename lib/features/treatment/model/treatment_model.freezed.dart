@@ -98,7 +98,7 @@ mixin _$TreatmentModel {
   String? get bloodSugarDone => throw _privateConstructorUsedError;
   @HiveField(23)
   @JsonKey(name: 'blood_sugar_result')
-  int? get bloodSugarResult => throw _privateConstructorUsedError;
+  double? get bloodSugarResult => throw _privateConstructorUsedError;
   @HiveField(24)
   @JsonKey(
       name: 'blood_sugar_date',
@@ -303,7 +303,9 @@ abstract class $TreatmentModelCopyWith<$Res> {
           toJson: _dateTimeToJson)
       DateTime? hbDate,
       @HiveField(22) @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
-      @HiveField(23) @JsonKey(name: 'blood_sugar_result') int? bloodSugarResult,
+      @HiveField(23)
+      @JsonKey(name: 'blood_sugar_result')
+      double? bloodSugarResult,
       @HiveField(24)
       @JsonKey(
           name: 'blood_sugar_date',
@@ -576,7 +578,7 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
       bloodSugarResult: freezed == bloodSugarResult
           ? _value.bloodSugarResult
           : bloodSugarResult // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       bloodSugarDate: freezed == bloodSugarDate
           ? _value.bloodSugarDate
           : bloodSugarDate // ignore: cast_nullable_to_non_nullable
@@ -801,7 +803,9 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
           toJson: _dateTimeToJson)
       DateTime? hbDate,
       @HiveField(22) @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
-      @HiveField(23) @JsonKey(name: 'blood_sugar_result') int? bloodSugarResult,
+      @HiveField(23)
+      @JsonKey(name: 'blood_sugar_result')
+      double? bloodSugarResult,
       @HiveField(24)
       @JsonKey(
           name: 'blood_sugar_date',
@@ -1072,7 +1076,7 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
       bloodSugarResult: freezed == bloodSugarResult
           ? _value.bloodSugarResult
           : bloodSugarResult // ignore: cast_nullable_to_non_nullable
-              as int?,
+              as double?,
       bloodSugarDate: freezed == bloodSugarDate
           ? _value.bloodSugarDate
           : bloodSugarDate // ignore: cast_nullable_to_non_nullable
@@ -1485,7 +1489,7 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @override
   @HiveField(23)
   @JsonKey(name: 'blood_sugar_result')
-  final int? bloodSugarResult;
+  final double? bloodSugarResult;
   @override
   @HiveField(24)
   @JsonKey(
@@ -1910,7 +1914,7 @@ abstract class _TreatmentModel implements TreatmentModel {
       final String? bloodSugarDone,
       @HiveField(23)
       @JsonKey(name: 'blood_sugar_result')
-      final int? bloodSugarResult,
+      final double? bloodSugarResult,
       @HiveField(24)
       @JsonKey(
           name: 'blood_sugar_date',
@@ -2125,7 +2129,7 @@ abstract class _TreatmentModel implements TreatmentModel {
   @override
   @HiveField(23)
   @JsonKey(name: 'blood_sugar_result')
-  int? get bloodSugarResult;
+  double? get bloodSugarResult;
   @override
   @HiveField(24)
   @JsonKey(

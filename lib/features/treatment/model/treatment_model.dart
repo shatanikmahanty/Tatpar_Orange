@@ -12,12 +12,10 @@ DateTime? fromJsonToDateTime(String? date) {
   }
   final dateCleaned = date.split('T')[0];
   final dateParts = dateCleaned.split('-');
-  return DateTime(int.parse(dateParts[0]), int.parse(dateParts[1]),
-      int.parse(dateParts[2]));
+  return DateTime(int.parse(dateParts[0]), int.parse(dateParts[1]), int.parse(dateParts[2]));
 }
 
-String? _dateTimeToJson(DateTime? date) =>
-    date?.toIso8601String().substring(0, 10);
+String? _dateTimeToJson(DateTime? date) => date?.toIso8601String().substring(0, 10);
 
 @freezed
 @HiveType(typeId: 19)
@@ -37,27 +35,13 @@ class TreatmentModel with _$TreatmentModel {
     )
     DateTime? ihvDate,
     @HiveField(7) @JsonKey(name: 'treatment_regimen') String? treatmentRegimen,
-    @HiveField(8)
-    @JsonKey(name: 'patient_occupation')
-    String? patientOccupation,
-    @HiveField(9)
-    @JsonKey(name: 'treatment_supporter_name')
-    String? treatmentSupporterName,
-    @HiveField(10)
-    @JsonKey(name: 'treatment_supporter_position')
-    String? treatmentSupporterPosition,
-    @HiveField(11)
-    @JsonKey(name: 'treatment_supporter_phone')
-    String? treatmentSupporterPhone,
-    @HiveField(12)
-    @JsonKey(includeToJson: false)
-    String? treatmentSupporterPanchayat,
-    @HiveField(13)
-    @JsonKey(name: 'treatment_supporter_panchayat')
-    int? selectedTreatmentSupporterPanchayat,
-    @HiveField(14)
-    @JsonKey(name: 'treatment_supporter_ward')
-    int? treatmentSupporterWard,
+    @HiveField(8) @JsonKey(name: 'patient_occupation') String? patientOccupation,
+    @HiveField(9) @JsonKey(name: 'treatment_supporter_name') String? treatmentSupporterName,
+    @HiveField(10) @JsonKey(name: 'treatment_supporter_position') String? treatmentSupporterPosition,
+    @HiveField(11) @JsonKey(name: 'treatment_supporter_phone') String? treatmentSupporterPhone,
+    @HiveField(12) @JsonKey(includeToJson: false) String? treatmentSupporterPanchayat,
+    @HiveField(13) @JsonKey(name: 'treatment_supporter_panchayat') int? selectedTreatmentSupporterPanchayat,
+    @HiveField(14) @JsonKey(name: 'treatment_supporter_ward') int? treatmentSupporterWard,
     @HiveField(15)
     @JsonKey(
       name: 'ipt_start_date',
@@ -84,7 +68,7 @@ class TreatmentModel with _$TreatmentModel {
     )
     DateTime? hbDate,
     @HiveField(22) @JsonKey(name: 'blood_sugar_done') String? bloodSugarDone,
-    @HiveField(23) @JsonKey(name: 'blood_sugar_result') int? bloodSugarResult,
+    @HiveField(23) @JsonKey(name: 'blood_sugar_result') double? bloodSugarResult,
     @HiveField(24)
     @JsonKey(
       name: 'blood_sugar_date',
@@ -94,12 +78,8 @@ class TreatmentModel with _$TreatmentModel {
     DateTime? bloodSugarDate,
     @HiveField(25) @JsonKey(name: 'alcohol') String? alcohol,
     @HiveField(26) @JsonKey(name: 'tb_consumption') String? tobaccoConsumption,
-    @HiveField(27)
-    @JsonKey(name: 'nutrition_screening')
-    String? nutritionScreening,
-    @HiveField(28)
-    @JsonKey(name: 'nutrition_eligibility')
-    String? nutritionEligibility,
+    @HiveField(27) @JsonKey(name: 'nutrition_screening') String? nutritionScreening,
+    @HiveField(28) @JsonKey(name: 'nutrition_eligibility') String? nutritionEligibility,
     @HiveField(29)
     @JsonKey(
       name: 'nutrition_screening_date',
@@ -126,9 +106,7 @@ class TreatmentModel with _$TreatmentModel {
     )
     DateTime? ipfuDate,
     @HiveField(36) @JsonKey(name: 'ipfu_afb_done') String? ipfuAfbDone,
-    @HiveField(37)
-    @JsonKey(name: 'ip_followup_afb_lab_number')
-    String? ipfuAfbLabNo,
+    @HiveField(37) @JsonKey(name: 'ip_followup_afb_lab_number') String? ipfuAfbLabNo,
     @HiveField(38)
     @JsonKey(
       name: 'ipfu_afb_date',
@@ -140,14 +118,10 @@ class TreatmentModel with _$TreatmentModel {
     @HiveField(40) @JsonKey(name: 'ipfu_afb_result') int? selectedIpfuAFBResult,
     @HiveField(41) @JsonKey(name: 'ip_followup_nat_test') String? ipfuNaatTest,
     @HiveField(42) @JsonKey(includeToJson: false) String? ipfuNaatResult,
-    @HiveField(43)
-    @JsonKey(name: 'ip_followup_naat_result')
-    int? selectedIpfuNaatResult,
+    @HiveField(43) @JsonKey(name: 'ip_followup_naat_result') int? selectedIpfuNaatResult,
     @HiveField(44) @JsonKey(name: 'ip_followup_lab_number') String? ipfuLabNo,
     @HiveField(45) @JsonKey(name: 'ipfu_chest_xray') String? ipfuChestXray,
-    @HiveField(46)
-    @JsonKey(name: 'ipfu_nutrition_support')
-    String? ipfuNutritionSupport,
+    @HiveField(46) @JsonKey(name: 'ipfu_nutrition_support') String? ipfuNutritionSupport,
     @HiveField(47)
     @JsonKey(
       name: 'cp_date',
@@ -171,16 +145,11 @@ class TreatmentModel with _$TreatmentModel {
     @HiveField(55) @JsonKey(name: 'cp_naat_result') int? selectedCpNaatResult,
     @HiveField(56) @JsonKey(name: 'cp_lab_no') String? cpLabNo,
     @HiveField(57) @JsonKey(name: 'cp_chest_xray') String? cpChestXray,
-    @HiveField(58)
-    @JsonKey(name: 'cp_nutrition_support')
-    String? cpNutritionSupport,
+    @HiveField(58) @JsonKey(name: 'cp_nutrition_support') String? cpNutritionSupport,
     @HiveField(59) @JsonKey(name: 'is_updated') bool? isUpdated,
     @HiveField(60) @JsonKey(name: 'case_id', includeToJson: false) int? caseId,
-    @HiveField(61)
-    @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-    bool? isFormIDAssigned,
+    @HiveField(61) @JsonKey(name: 'is_form_id_assigned', includeToJson: false) bool? isFormIDAssigned,
   }) = _TreatmentModel;
 
-  factory TreatmentModel.fromJson(Map<String, dynamic> json) =>
-      _$TreatmentModelFromJson(json);
+  factory TreatmentModel.fromJson(Map<String, dynamic> json) => _$TreatmentModelFromJson(json);
 }

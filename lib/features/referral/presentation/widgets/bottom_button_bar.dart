@@ -37,10 +37,7 @@ class BottomButtonBar extends StatelessWidget {
                 builder: (context, action, error) => FormActionButton(
                   text: 'Save',
                   icon: null,
-                  onPressed: enableValidator &&
-                          !(ReactiveForm.of(context)?.valid ?? false)
-                      ? null
-                      : action,
+                  onPressed: enableValidator && !(ReactiveForm.of(context)?.valid ?? false) ? null : action,
                 ),
               ),
             ),
@@ -54,6 +51,8 @@ class BottomButtonBar extends StatelessWidget {
                 action: onSave,
                 onSuccess: () {
                   if (ReactiveForm.of(context)?.valid ?? false) {
+                    DjangoflowAppSnackbar.showInfo(onSaveMessage);
+
                     if (nextPage != null) {
                       context.router.navigate(nextPage!);
                     } else {
@@ -62,10 +61,7 @@ class BottomButtonBar extends StatelessWidget {
                   }
                 },
                 builder: (context, action, error) => FormActionButton(
-                    onPressed: enableValidator &&
-                            !(ReactiveForm.of(context)?.valid ?? false)
-                        ? null
-                        : action),
+                    onPressed: enableValidator && !(ReactiveForm.of(context)?.valid ?? false) ? null : action),
               ),
             ),
           ),

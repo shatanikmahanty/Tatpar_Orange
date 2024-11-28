@@ -4,9 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:provider/provider.dart';
-
 import 'package:tatpar_acf/features/app/presentation/builders/app_responsive_layout_builder.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/repo/auth_repo.dart';
@@ -17,12 +16,11 @@ import 'package:tatpar_acf/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_acf/features/case/data/repos/source_repo.dart';
-
 import 'package:tatpar_acf/features/referral/repository/referraldetails_repository.dart';
 import 'package:tatpar_acf/l10n/l10n.dart';
 import 'package:tatpar_acf/l10n/language_provider.dart';
+
 import 'configurations/configurations.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 class TatparAcfAppBuilder extends AppBuilder {
   TatparAcfAppBuilder({
@@ -51,7 +49,7 @@ class TatparAcfAppBuilder extends AppBuilder {
               create: (context) => ReferralDetailsRepository(),
             )
           ],
-          providers: [
+          blocProviders: [
             BlocProvider<AppCubit>(
               create: (context) => AppCubit.instance,
             ),
@@ -80,8 +78,7 @@ class TatparAcfAppBuilder extends AppBuilder {
               ),
             ),
             BlocProvider<CaseCubit>(
-              create: (context) => CaseCubit(
-                  caseRepo: context.read<CaseRepo>(), caseModel: const Case()),
+              create: (context) => CaseCubit(caseRepo: context.read<CaseRepo>(), caseModel: const Case()),
             )
           ],
           builder: (context) => LoginListenerWrapper(
@@ -97,14 +94,12 @@ class TatparAcfAppBuilder extends AppBuilder {
             },
             onLogout: (context) {},
             child: AppCubitConsumer(
-                listenWhen: (previous, current) =>
-                    previous.environment != current.environment,
+                listenWhen: (previous, current) => previous.environment != current.environment,
                 listener: (context, state) async {},
                 builder: (context, appState) {
                   return MaterialApp.router(
                     debugShowCheckedModeBanner: false,
-                    scaffoldMessengerKey:
-                        DjangoflowAppSnackbar.scaffoldMessengerKey,
+                    scaffoldMessengerKey: DjangoflowAppSnackbar.scaffoldMessengerKey,
                     title: appName,
                     routeInformationParser: appRouter.defaultRouteParser(),
                     theme: AppTheme.light,
@@ -133,14 +128,12 @@ class TatparAcfAppBuilder extends AppBuilder {
                     ),
                     builder: (context, child) => AppResponsiveLayoutBuilder(
                       child: SandboxBanner(
-                        isSandbox:
-                            appState.environment == AppEnvironment.sandbox,
+                        isSandbox: appState.environment == AppEnvironment.sandbox,
                         child: child != null
                             ? kIsWeb
                                 ? child
                                 : AppLinksCubitListener(
-                                    listenWhen: (previous, current) =>
-                                        current != null,
+                                    listenWhen: (previous, current) => current != null,
                                     listener: (context, appLink) {
                                       final path = appLink?.path;
                                       if (path != null) {

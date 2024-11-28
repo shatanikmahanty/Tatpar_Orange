@@ -2,14 +2,12 @@ import 'dart:developer';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import 'package:tatpar_acf/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_acf/features/case/data/repos/case_repo.dart';
 
 import '../data/case_models/cases_filter_model.dart';
 
 part 'case_list_cubit.freezed.dart';
-
 part 'case_list_cubit.g.dart';
 
 @freezed
@@ -22,20 +20,18 @@ class CaseListState with _$CaseListState {
     @Default(false) bool showAssignedToMeOnly,
   }) = _CaseListState;
 
-  factory CaseListState.fromJson(Map<String, dynamic> json) =>
-      _$CaseListStateFromJson(json);
+  factory CaseListState.fromJson(Map<String, dynamic> json) => _$CaseListStateFromJson(json);
 }
 
 class CaseListCubit extends Cubit<CaseListState> {
   final CaseRepo caseRepo;
 
-  CaseListCubit({required this.caseRepo})
-      : super(const CaseListState(casesFilter: CasesFilterModel()));
+  CaseListCubit({required this.caseRepo}) : super(const CaseListState(casesFilter: CasesFilterModel()));
 
   void searchCases(String query) {
     applyFilters(
-        caseFilter: state.casesFilter
-            .copyWith(searchWord: query.isEmpty ? null : query));
+      caseFilter: state.casesFilter.copyWith(searchWord: query.isEmpty ? null : query),
+    );
   }
 
   void applyFilters({CasesFilterModel? caseFilter}) {
@@ -50,8 +46,10 @@ class CaseListCubit extends Cubit<CaseListState> {
         final queryLower = filters.searchWord!.toLowerCase();
         final patientName = element.referralName;
         final patientNumber = element.referralMobileNumber;
+        final referralId = (element.id ?? '').toString();
         return patientName!.toLowerCase().contains(queryLower) ||
-            patientNumber!.contains(queryLower);
+            patientNumber!.contains(queryLower) ||
+            referralId.contains(queryLower);
       }).toList();
     }
     // if (filters.assignedTo.isNotEmpty) {
@@ -144,6 +142,21 @@ class CaseListCubit extends Cubit<CaseListState> {
 
     emit(
       state.copyWith(cases: copyCases),
+    );
+  }
+
+  Future<void> deleteCase(int caseId) async {
+    await caseRepo.deleteCaseLocal(caseId);
+    await caseRepo.deleteCaseRemote(caseId);
+    final cases = state.cases;
+    final index = cases.indexWhere((element) => element.id == caseId);
+    if (index == -1) return;
+    List<Case> copyCases = List.from(cases);
+    copyCases.removeAt(index);
+    emit(
+      state.copyWith(
+        cases: copyCases,
+      ),
     );
   }
 }

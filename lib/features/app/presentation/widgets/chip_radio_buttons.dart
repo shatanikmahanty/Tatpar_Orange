@@ -48,98 +48,89 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
   }
 
   @override
-  Widget build(BuildContext context) => Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(widget.label,
-              style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  // color: Theme.of(context).primaryColorDark
-                  )),
-          const SizedBox(
-            height: kPadding,
+  Widget build(BuildContext context) {
+    final width = MediaQuery.sizeOf(context).width;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          widget.label,
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(
+          height: kPadding,
+        ),
+        GridView.builder(
+          shrinkWrap: true,
+          physics: const NeverScrollableScrollPhysics(),
+          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+            crossAxisCount: width > 700 ? 4 : widget.crossAxisCount,
+            crossAxisSpacing: kPadding,
+            mainAxisSpacing: kPadding,
+            childAspectRatio: widget.crossAxisCount == 3
+                ? 2.7
+                : widget.crossAxisCount == 2
+                    ? 4
+                    : 8,
           ),
-          GridView.builder(
-            shrinkWrap: true,
-            physics: const NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: widget.crossAxisCount,
-              crossAxisSpacing: kPadding,
-              mainAxisSpacing: kPadding,
-              childAspectRatio: widget.crossAxisCount == 3
-                  ? 2.7
-                  : widget.crossAxisCount == 2
-                      ? 4
-                      : 8,
-            ),
-            itemBuilder: (context, index) {
-              final isSelected = _selected.contains(widget.options[index]);
-              return GestureDetector(
-                onTap: () {
-                  if (widget.allowMultiSelect) {
-                    setState(() {
-                      if (isSelected) {
-                        _selected.remove(widget.options[index]);
-                      } else {
-                        _selected.add(widget.options[index]);
-                      }
+          itemBuilder: (context, index) {
+            final isSelected = _selected.contains(widget.options[index]);
+            return GestureDetector(
+              onTap: () {
+                if (widget.allowMultiSelect) {
+                  setState(() {
+                    if (isSelected) {
+                      _selected.remove(widget.options[index]);
+                    } else {
+                      _selected.add(widget.options[index]);
+                    }
 
-                      widget.onChanged?.call(_selected.join(','));
-                    });
-                  } else {
-                    _selected.clear();
-                    _selected.add(widget.options[index]);
-                    setState(() {});
-                    widget.onChanged?.call(widget.options[index]);
-                  }
-                },
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: isSelected
-                        ? AppColors.blueLight
-                        : AppColors.blackPrimary,
-                    borderRadius: BorderRadius.circular(kPadding * 0.5),
-                    border: Border.all(
-                        color: isSelected
-                            ? AppColors.blueDark
-                            : AppColors.grayDark),
-                  ),
-                  alignment: Alignment.center,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (widget.optionIcons != null)
-                        Padding(
-                          padding: const EdgeInsets.only(right: kPadding),
-                          child: Icon(
-                            widget.optionIcons![index],
-                            color: isSelected
-                                ? AppColors.blueDark
-                                : AppColors.grey30,
-                          ),
-                        ),
-                      Expanded(
-                        child: Text(
-                          widget.options[index],
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context)
-                              .textTheme
-                              .bodyMedium
-                              ?.copyWith(
-                                  fontWeight: FontWeight.w600,
-                                  height: 1.5,
-                                  letterSpacing: 0.2,
-                                  color: isSelected
-                                      ? AppColors.blueDark
-                                      : AppColors.grey30),
+                    widget.onChanged?.call(_selected.join(','));
+                  });
+                } else {
+                  _selected.clear();
+                  _selected.add(widget.options[index]);
+                  setState(() {});
+                  widget.onChanged?.call(widget.options[index]);
+                }
+              },
+              child: Container(
+                decoration: BoxDecoration(
+                  color: isSelected ? AppColors.blueLight : AppColors.blackPrimary,
+                  borderRadius: BorderRadius.circular(kPadding * 0.5),
+                  border: Border.all(color: isSelected ? AppColors.blueDark : AppColors.grayDark),
+                ),
+                alignment: Alignment.center,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    if (widget.optionIcons != null)
+                      Padding(
+                        padding: const EdgeInsets.only(right: kPadding),
+                        child: Icon(
+                          widget.optionIcons![index],
+                          color: isSelected ? AppColors.blueDark : AppColors.grey30,
                         ),
                       ),
-                    ],
-                  ),
+                    Expanded(
+                      child: Text(
+                        widget.options[index],
+                        textAlign: TextAlign.center,
+                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w600,
+                            height: 1.5,
+                            letterSpacing: 0.2,
+                            color: isSelected ? AppColors.blueDark : AppColors.grey30),
+                      ),
+                    ),
+                  ],
                 ),
-              );
-            },
-            itemCount: widget.options.length,
-          ),
-        ],
-      );
+              ),
+            );
+          },
+          itemCount: widget.options.length,
+        ),
+      ],
+    );
+  }
 }
