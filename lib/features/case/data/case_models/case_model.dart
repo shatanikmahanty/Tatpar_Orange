@@ -66,24 +66,3 @@ class Case with _$Case {
 }
 
 enum FormStatus { notStarted, started, completed }
-
-extension Casex on Case {
-  // bool isCaseNeedToCompete(FilterShortCut stage) => switch (stage) {
-  //       FilterShortCut.referralDetails => !referralDetailsStatus,
-  //       FilterShortCut.tbScreening => !tbScreeningStatus,
-  //       FilterShortCut.mentalHealthScreening => !mentalHealthScreeningStatus,
-  //       FilterShortCut.diagnosis => !diagnosisStatus,
-  //       FilterShortCut.treatment => !treatmentStatus,
-  //       FilterShortCut.outcome => !outcomeStatus,
-  //       FilterShortCut.contactTracing => !contactTracingStatus,
-  //       FilterShortCut.all => !referralDetailsStatus &&
-  //           !tbScreeningStatus &&
-  //           !mentalHealthScreeningStatus &&
-  //           !diagnosisStatus &&
-  //           !outcomeStatus &&
-  //           !contactTracingStatus &&
-  //           !treatmentStatus,
-  //     };
-
-//  bool isCaseFormCompeted(FilterShortCut stage) => isCaseNeedToCompete(stage);
-}
