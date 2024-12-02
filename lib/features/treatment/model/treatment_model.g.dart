@@ -20,7 +20,6 @@ class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
       id: fields[0] as int?,
       caseDefinition: fields[1] as String?,
       tbSite: fields[2] as String?,
-      caseHistory: fields[3] as String?,
       drugSensitive: fields[4] as String?,
       diagnosisStatus: fields[5] as String?,
       ihvDate: fields[6] as DateTime?,
@@ -79,21 +78,22 @@ class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
       isUpdated: fields[59] as bool?,
       caseId: fields[60] as int?,
       isFormIDAssigned: fields[61] as bool?,
+      nikshayId: fields[62] as String?,
+      treatmentHistory: fields[64] as String?,
+      selectedTreatmentHistoryResult: fields[63] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TreatmentModel obj) {
     writer
-      ..writeByte(62)
+      ..writeByte(64)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
       ..write(obj.caseDefinition)
       ..writeByte(2)
       ..write(obj.tbSite)
-      ..writeByte(3)
-      ..write(obj.caseHistory)
       ..writeByte(4)
       ..write(obj.drugSensitive)
       ..writeByte(5)
@@ -209,7 +209,13 @@ class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
       ..writeByte(60)
       ..write(obj.caseId)
       ..writeByte(61)
-      ..write(obj.isFormIDAssigned);
+      ..write(obj.isFormIDAssigned)
+      ..writeByte(62)
+      ..write(obj.nikshayId)
+      ..writeByte(64)
+      ..write(obj.treatmentHistory)
+      ..writeByte(63)
+      ..write(obj.selectedTreatmentHistoryResult);
   }
 
   @override
@@ -232,7 +238,6 @@ _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
       id: (json['id'] as num?)?.toInt(),
       caseDefinition: json['case_definition'] as String?,
       tbSite: json['tb_site'] as String?,
-      caseHistory: json['case_history'] as String?,
       drugSensitive: json['drug_sensitive'] as String?,
       diagnosisStatus: json['diagnosis_status'] as String?,
       ihvDate: fromJsonToDateTime(json['ihv_date'] as String?),
@@ -298,6 +303,9 @@ _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
       isUpdated: json['is_updated'] as bool?,
       caseId: (json['case_id'] as num?)?.toInt(),
       isFormIDAssigned: json['is_form_id_assigned'] as bool?,
+      nikshayId: json['nikshay_id'] as String?,
+      treatmentHistory: json['treatmentHistory'] as String?,
+      selectedTreatmentHistoryResult: (json['case_history'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$TreatmentModelImplToJson(
@@ -305,7 +313,6 @@ Map<String, dynamic> _$$TreatmentModelImplToJson(
     <String, dynamic>{
       'case_definition': instance.caseDefinition,
       'tb_site': instance.tbSite,
-      'case_history': instance.caseHistory,
       'drug_sensitive': instance.drugSensitive,
       'diagnosis_status': instance.diagnosisStatus,
       'ihv_date': _dateTimeToJson(instance.ihvDate),
@@ -359,4 +366,6 @@ Map<String, dynamic> _$$TreatmentModelImplToJson(
       'cp_chest_xray': instance.cpChestXray,
       'cp_nutrition_support': instance.cpNutritionSupport,
       'is_updated': instance.isUpdated,
+      'nikshay_id': instance.nikshayId,
+      'case_history': instance.selectedTreatmentHistoryResult,
     };

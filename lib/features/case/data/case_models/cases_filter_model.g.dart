@@ -28,24 +28,16 @@ _$CasesFilterModelImpl _$$CasesFilterModelImplFromJson(
     );
 
 Map<String, dynamic> _$$CasesFilterModelImplToJson(
-    _$CasesFilterModelImpl instance) {
-  final val = <String, dynamic>{
-    'selectedShortCut': _$FilterShortCutEnumMap[instance.selectedShortCut],
-    'assignedTo': instance.assignedTo,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('assignedOn', _dateTimeToJson(instance.assignedOn));
-  val['state'] = instance.state;
-  val['district'] = instance.district;
-  val['searchWord'] = instance.searchWord;
-  return val;
-}
+        _$CasesFilterModelImpl instance) =>
+    <String, dynamic>{
+      'selectedShortCut': _$FilterShortCutEnumMap[instance.selectedShortCut],
+      'assignedTo': instance.assignedTo,
+      if (_dateTimeToJson(instance.assignedOn) case final value?)
+        'assignedOn': value,
+      'state': instance.state,
+      'district': instance.district,
+      'searchWord': instance.searchWord,
+    };
 
 const _$FilterShortCutEnumMap = {
   FilterShortCut.all: 'all',

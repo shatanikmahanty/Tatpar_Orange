@@ -27,8 +27,12 @@ mixin _$TreatmentOutcome {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
+  /// Serializes this TreatmentOutcome to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TreatmentOutcome
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TreatmentOutcomeCopyWith<TreatmentOutcome> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$TreatmentOutcomeCopyWithImpl<$Res, $Val extends TreatmentOutcome>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TreatmentOutcome
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,6 +100,8 @@ class __$$TreatmentOutcomeImplCopyWithImpl<$Res>
       $Res Function(_$TreatmentOutcomeImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TreatmentOutcome
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,11 +154,13 @@ class _$TreatmentOutcomeImpl implements _TreatmentOutcome {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TreatmentOutcome
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TreatmentOutcomeImplCopyWith<_$TreatmentOutcomeImpl> get copyWith =>
@@ -182,8 +192,11 @@ abstract class _TreatmentOutcome implements TreatmentOutcome {
   @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
+
+  /// Create a copy of TreatmentOutcome
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TreatmentOutcomeImplCopyWith<_$TreatmentOutcomeImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -201,8 +214,12 @@ mixin _$TPTRegimen {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
+  /// Serializes this TPTRegimen to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TPTRegimen
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TPTRegimenCopyWith<TPTRegimen> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -228,6 +245,8 @@ class _$TPTRegimenCopyWithImpl<$Res, $Val extends TPTRegimen>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TPTRegimen
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -268,6 +287,8 @@ class __$$TPTRegimenImplCopyWithImpl<$Res>
       _$TPTRegimenImpl _value, $Res Function(_$TPTRegimenImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TPTRegimen
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -320,11 +341,13 @@ class _$TPTRegimenImpl implements _TPTRegimen {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TPTRegimen
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TPTRegimenImplCopyWith<_$TPTRegimenImpl> get copyWith =>
@@ -355,8 +378,11 @@ abstract class _TPTRegimen implements TPTRegimen {
   @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
+
+  /// Create a copy of TPTRegimen
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TPTRegimenImplCopyWith<_$TPTRegimenImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -374,8 +400,12 @@ mixin _$MTBResult {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
+  /// Serializes this MTBResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MTBResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MTBResultCopyWith<MTBResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -400,6 +430,8 @@ class _$MTBResultCopyWithImpl<$Res, $Val extends MTBResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MTBResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -440,6 +472,8 @@ class __$$MTBResultImplCopyWithImpl<$Res>
       _$MTBResultImpl _value, $Res Function(_$MTBResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MTBResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -492,11 +526,13 @@ class _$MTBResultImpl implements _MTBResult {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MTBResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MTBResultImplCopyWith<_$MTBResultImpl> get copyWith =>
@@ -527,8 +563,11 @@ abstract class _MTBResult implements MTBResult {
   @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
+
+  /// Create a copy of MTBResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MTBResultImplCopyWith<_$MTBResultImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -546,8 +585,12 @@ mixin _$NaatMachine {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
+  /// Serializes this NaatMachine to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of NaatMachine
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $NaatMachineCopyWith<NaatMachine> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -573,6 +616,8 @@ class _$NaatMachineCopyWithImpl<$Res, $Val extends NaatMachine>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of NaatMachine
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -613,6 +658,8 @@ class __$$NaatMachineImplCopyWithImpl<$Res>
       _$NaatMachineImpl _value, $Res Function(_$NaatMachineImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of NaatMachine
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -665,11 +712,13 @@ class _$NaatMachineImpl implements _NaatMachine {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of NaatMachine
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$NaatMachineImplCopyWith<_$NaatMachineImpl> get copyWith =>
@@ -700,8 +749,11 @@ abstract class _NaatMachine implements NaatMachine {
   @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
+
+  /// Create a copy of NaatMachine
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$NaatMachineImplCopyWith<_$NaatMachineImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -719,8 +771,12 @@ mixin _$AFBResult {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
+  /// Serializes this AFBResult to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AFBResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AFBResultCopyWith<AFBResult> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -745,6 +801,8 @@ class _$AFBResultCopyWithImpl<$Res, $Val extends AFBResult>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AFBResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -785,6 +843,8 @@ class __$$AFBResultImplCopyWithImpl<$Res>
       _$AFBResultImpl _value, $Res Function(_$AFBResultImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AFBResult
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -837,11 +897,13 @@ class _$AFBResultImpl implements _AFBResult {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AFBResult
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AFBResultImplCopyWith<_$AFBResultImpl> get copyWith =>
@@ -872,8 +934,198 @@ abstract class _AFBResult implements AFBResult {
   @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
+
+  /// Create a copy of AFBResult
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AFBResultImplCopyWith<_$AFBResultImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+TreatmentHistory _$TreatmentHistoryFromJson(Map<String, dynamic> json) {
+  return _TreatmentHistory.fromJson(json);
+}
+
+/// @nodoc
+mixin _$TreatmentHistory {
+  @HiveField(0)
+  @JsonKey(name: 'id')
+  int? get id => throw _privateConstructorUsedError;
+  @HiveField(1)
+  @JsonKey(name: 'name')
+  String? get name => throw _privateConstructorUsedError;
+
+  /// Serializes this TreatmentHistory to a JSON map.
+  Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
+
+  /// Create a copy of TreatmentHistory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  $TreatmentHistoryCopyWith<TreatmentHistory> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class $TreatmentHistoryCopyWith<$Res> {
+  factory $TreatmentHistoryCopyWith(
+          TreatmentHistory value, $Res Function(TreatmentHistory) then) =
+      _$TreatmentHistoryCopyWithImpl<$Res, TreatmentHistory>;
+  @useResult
+  $Res call(
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
+}
+
+/// @nodoc
+class _$TreatmentHistoryCopyWithImpl<$Res, $Val extends TreatmentHistory>
+    implements $TreatmentHistoryCopyWith<$Res> {
+  _$TreatmentHistoryCopyWithImpl(this._value, this._then);
+
+  // ignore: unused_field
+  final $Val _value;
+  // ignore: unused_field
+  final $Res Function($Val) _then;
+
+  /// Create a copy of TreatmentHistory
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_value.copyWith(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ) as $Val);
+  }
+}
+
+/// @nodoc
+abstract class _$$TreatmentHistoryImplCopyWith<$Res>
+    implements $TreatmentHistoryCopyWith<$Res> {
+  factory _$$TreatmentHistoryImplCopyWith(_$TreatmentHistoryImpl value,
+          $Res Function(_$TreatmentHistoryImpl) then) =
+      __$$TreatmentHistoryImplCopyWithImpl<$Res>;
+  @override
+  @useResult
+  $Res call(
+      {@HiveField(0) @JsonKey(name: 'id') int? id,
+      @HiveField(1) @JsonKey(name: 'name') String? name});
+}
+
+/// @nodoc
+class __$$TreatmentHistoryImplCopyWithImpl<$Res>
+    extends _$TreatmentHistoryCopyWithImpl<$Res, _$TreatmentHistoryImpl>
+    implements _$$TreatmentHistoryImplCopyWith<$Res> {
+  __$$TreatmentHistoryImplCopyWithImpl(_$TreatmentHistoryImpl _value,
+      $Res Function(_$TreatmentHistoryImpl) _then)
+      : super(_value, _then);
+
+  /// Create a copy of TreatmentHistory
+  /// with the given fields replaced by the non-null parameter values.
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? id = freezed,
+    Object? name = freezed,
+  }) {
+    return _then(_$TreatmentHistoryImpl(
+      id: freezed == id
+          ? _value.id
+          : id // ignore: cast_nullable_to_non_nullable
+              as int?,
+      name: freezed == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+@JsonSerializable()
+class _$TreatmentHistoryImpl implements _TreatmentHistory {
+  const _$TreatmentHistoryImpl(
+      {@HiveField(0) @JsonKey(name: 'id') this.id,
+      @HiveField(1) @JsonKey(name: 'name') this.name});
+
+  factory _$TreatmentHistoryImpl.fromJson(Map<String, dynamic> json) =>
+      _$$TreatmentHistoryImplFromJson(json);
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: 'id')
+  final int? id;
+  @override
+  @HiveField(1)
+  @JsonKey(name: 'name')
+  final String? name;
+
+  @override
+  String toString() {
+    return 'TreatmentHistory(id: $id, name: $name)';
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return identical(this, other) ||
+        (other.runtimeType == runtimeType &&
+            other is _$TreatmentHistoryImpl &&
+            (identical(other.id, id) || other.id == id) &&
+            (identical(other.name, name) || other.name == name));
+  }
+
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  int get hashCode => Object.hash(runtimeType, id, name);
+
+  /// Create a copy of TreatmentHistory
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$TreatmentHistoryImplCopyWith<_$TreatmentHistoryImpl> get copyWith =>
+      __$$TreatmentHistoryImplCopyWithImpl<_$TreatmentHistoryImpl>(
+          this, _$identity);
+
+  @override
+  Map<String, dynamic> toJson() {
+    return _$$TreatmentHistoryImplToJson(
+      this,
+    );
+  }
+}
+
+abstract class _TreatmentHistory implements TreatmentHistory {
+  const factory _TreatmentHistory(
+          {@HiveField(0) @JsonKey(name: 'id') final int? id,
+          @HiveField(1) @JsonKey(name: 'name') final String? name}) =
+      _$TreatmentHistoryImpl;
+
+  factory _TreatmentHistory.fromJson(Map<String, dynamic> json) =
+      _$TreatmentHistoryImpl.fromJson;
+
+  @override
+  @HiveField(0)
+  @JsonKey(name: 'id')
+  int? get id;
+  @override
+  @HiveField(1)
+  @JsonKey(name: 'name')
+  String? get name;
+
+  /// Create a copy of TreatmentHistory
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
+  _$$TreatmentHistoryImplCopyWith<_$TreatmentHistoryImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

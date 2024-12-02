@@ -43,12 +43,18 @@ class CaseCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
-              padding: const EdgeInsets.only(left: kPadding, top: kPadding, right: kPadding, bottom: kPadding),
+              padding: const EdgeInsets.only(
+                  left: kPadding,
+                  top: kPadding,
+                  right: kPadding,
+                  bottom: kPadding),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   DiseaseChip(calculateScreeningStatus(),
-                      color: calculateScreeningStatus() == 'Scr Neg' ? AppColors.redLight : AppColors.blueLight),
+                      color: calculateScreeningStatus() == 'Scr Neg'
+                          ? AppColors.redLight
+                          : AppColors.blueLight),
                   const Spacer(),
                   Text(
                     getFormattedDate(caseModel.createdOn),
@@ -161,8 +167,10 @@ class CaseCard extends StatelessWidget {
                             children: [
                               TextSpan(
                                 text: 'Scr by:\t',
-                                style: textTheme.bodyMedium
-                                    ?.copyWith(height: 1.33, letterSpacing: 0.2, fontWeight: FontWeight.w600),
+                                style: textTheme.bodyMedium?.copyWith(
+                                    height: 1.33,
+                                    letterSpacing: 0.2,
+                                    fontWeight: FontWeight.w600),
                               ),
                               TextSpan(
                                 text: '${caseModel.screenedBy} \t \t',
@@ -173,8 +181,10 @@ class CaseCard extends StatelessWidget {
                               ),
                               TextSpan(
                                 text: 'Ref by:\t',
-                                style: textTheme.bodyMedium
-                                    ?.copyWith(height: 1.33, letterSpacing: 0.2, fontWeight: FontWeight.w600),
+                                style: textTheme.bodyMedium?.copyWith(
+                                    height: 1.33,
+                                    letterSpacing: 0.2,
+                                    fontWeight: FontWeight.w600),
                               ),
                               TextSpan(
                                 text: '${caseModel.referredBy}',
@@ -207,15 +217,46 @@ class CaseCard extends StatelessWidget {
                           );
                           await launchUrl(launchUri);
                         },
-                        icon: const Icon(Icons.phone, color: AppColors.blueMedium),
+                        icon: const Icon(Icons.phone,
+                            color: AppColors.blueMedium),
                       ),
                       IconButton(
                         onPressed: () async {
-                          final caseID = caseModel.id;
-                          final caseListCubit = context.read<CaseListCubit>();
-                          await caseListCubit.deleteCase(caseID!);
+                          showDialog(
+                            context: context,
+                            builder: (context) => SizedBox(
+                              width: kPadding * 40,
+                              height: kPadding * 50,
+                              child: AlertDialog(
+                                actions: [
+                                  ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.pop(context);
+                                    },
+                                    child: const Text('Cancel'),
+                                  ),
+                                  const SizedBox(height: kPadding),
+                                  ElevatedButton(
+                                    onPressed: () async {
+                                      final caseID = caseModel.id;
+                                      final caseListCubit =
+                                          context.read<CaseListCubit>();
+                                      await caseListCubit.deleteCase(caseID!);
+                                      WidgetsBinding.instance
+                                          .addPostFrameCallback(
+                                              (_) => Navigator.pop(context));
+                                    },
+                                    child: const Text('Yes'),
+                                  ),
+                                ],
+                                title: const Text(
+                                    'Are you sure you want to Delete?'),
+                              ),
+                            ),
+                          );
                         },
-                        icon: const Icon(Icons.delete, color: AppColors.redDark),
+                        icon:
+                            const Icon(Icons.delete, color: AppColors.redDark),
                       ),
                     ],
                   )

@@ -36,9 +36,17 @@ mixin _$DiagnosisData {
   @JsonKey(name: 'treatment_outcome')
   List<TreatmentOutcome>? get treatmentOutcome =>
       throw _privateConstructorUsedError;
+  @HiveField(14)
+  @JsonKey(name: 'treatment_history')
+  List<TreatmentHistory>? get treatmentHistory =>
+      throw _privateConstructorUsedError;
 
+  /// Serializes this DiagnosisData to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DiagnosisData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DiagnosisDataCopyWith<DiagnosisData> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,7 +66,10 @@ abstract class $DiagnosisDataCopyWith<$Res> {
       @HiveField(12) @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
       @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
-      List<TreatmentOutcome>? treatmentOutcome});
+      List<TreatmentOutcome>? treatmentOutcome,
+      @HiveField(14)
+      @JsonKey(name: 'treatment_history')
+      List<TreatmentHistory>? treatmentHistory});
 }
 
 /// @nodoc
@@ -71,6 +82,8 @@ class _$DiagnosisDataCopyWithImpl<$Res, $Val extends DiagnosisData>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DiagnosisData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,6 +92,7 @@ class _$DiagnosisDataCopyWithImpl<$Res, $Val extends DiagnosisData>
     Object? mtbResult = freezed,
     Object? tptRegimen = freezed,
     Object? treatmentOutcome = freezed,
+    Object? treatmentHistory = freezed,
   }) {
     return _then(_value.copyWith(
       afbResult: freezed == afbResult
@@ -101,6 +115,10 @@ class _$DiagnosisDataCopyWithImpl<$Res, $Val extends DiagnosisData>
           ? _value.treatmentOutcome
           : treatmentOutcome // ignore: cast_nullable_to_non_nullable
               as List<TreatmentOutcome>?,
+      treatmentHistory: freezed == treatmentHistory
+          ? _value.treatmentHistory
+          : treatmentHistory // ignore: cast_nullable_to_non_nullable
+              as List<TreatmentHistory>?,
     ) as $Val);
   }
 }
@@ -122,7 +140,10 @@ abstract class _$$DiagnosisDataImplCopyWith<$Res>
       @HiveField(12) @JsonKey(name: 'tpt_regimen') List<TPTRegimen>? tptRegimen,
       @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
-      List<TreatmentOutcome>? treatmentOutcome});
+      List<TreatmentOutcome>? treatmentOutcome,
+      @HiveField(14)
+      @JsonKey(name: 'treatment_history')
+      List<TreatmentHistory>? treatmentHistory});
 }
 
 /// @nodoc
@@ -133,6 +154,8 @@ class __$$DiagnosisDataImplCopyWithImpl<$Res>
       _$DiagnosisDataImpl _value, $Res Function(_$DiagnosisDataImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiagnosisData
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -141,6 +164,7 @@ class __$$DiagnosisDataImplCopyWithImpl<$Res>
     Object? mtbResult = freezed,
     Object? tptRegimen = freezed,
     Object? treatmentOutcome = freezed,
+    Object? treatmentHistory = freezed,
   }) {
     return _then(_$DiagnosisDataImpl(
       afbResult: freezed == afbResult
@@ -163,6 +187,10 @@ class __$$DiagnosisDataImplCopyWithImpl<$Res>
           ? _value._treatmentOutcome
           : treatmentOutcome // ignore: cast_nullable_to_non_nullable
               as List<TreatmentOutcome>?,
+      treatmentHistory: freezed == treatmentHistory
+          ? _value._treatmentHistory
+          : treatmentHistory // ignore: cast_nullable_to_non_nullable
+              as List<TreatmentHistory>?,
     ));
   }
 }
@@ -185,12 +213,16 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
       final List<TPTRegimen>? tptRegimen,
       @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
-      final List<TreatmentOutcome>? treatmentOutcome})
+      final List<TreatmentOutcome>? treatmentOutcome,
+      @HiveField(14)
+      @JsonKey(name: 'treatment_history')
+      final List<TreatmentHistory>? treatmentHistory})
       : _afbResult = afbResult,
         _naatMachine = naatMachine,
         _mtbResult = mtbResult,
         _tptRegimen = tptRegimen,
-        _treatmentOutcome = treatmentOutcome;
+        _treatmentOutcome = treatmentOutcome,
+        _treatmentHistory = treatmentHistory;
 
   factory _$DiagnosisDataImpl.fromJson(Map<String, dynamic> json) =>
       _$$DiagnosisDataImplFromJson(json);
@@ -256,9 +288,22 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
     return EqualUnmodifiableListView(value);
   }
 
+  final List<TreatmentHistory>? _treatmentHistory;
+  @override
+  @HiveField(14)
+  @JsonKey(name: 'treatment_history')
+  List<TreatmentHistory>? get treatmentHistory {
+    final value = _treatmentHistory;
+    if (value == null) return null;
+    if (_treatmentHistory is EqualUnmodifiableListView)
+      return _treatmentHistory;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
   @override
   String toString() {
-    return 'DiagnosisData(afbResult: $afbResult, naatMachine: $naatMachine, mtbResult: $mtbResult, tptRegimen: $tptRegimen, treatmentOutcome: $treatmentOutcome)';
+    return 'DiagnosisData(afbResult: $afbResult, naatMachine: $naatMachine, mtbResult: $mtbResult, tptRegimen: $tptRegimen, treatmentOutcome: $treatmentOutcome, treatmentHistory: $treatmentHistory)';
   }
 
   @override
@@ -275,10 +320,12 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
             const DeepCollectionEquality()
                 .equals(other._tptRegimen, _tptRegimen) &&
             const DeepCollectionEquality()
-                .equals(other._treatmentOutcome, _treatmentOutcome));
+                .equals(other._treatmentOutcome, _treatmentOutcome) &&
+            const DeepCollectionEquality()
+                .equals(other._treatmentHistory, _treatmentHistory));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -286,9 +333,12 @@ class _$DiagnosisDataImpl implements _DiagnosisData {
       const DeepCollectionEquality().hash(_naatMachine),
       const DeepCollectionEquality().hash(_mtbResult),
       const DeepCollectionEquality().hash(_tptRegimen),
-      const DeepCollectionEquality().hash(_treatmentOutcome));
+      const DeepCollectionEquality().hash(_treatmentOutcome),
+      const DeepCollectionEquality().hash(_treatmentHistory));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiagnosisData
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DiagnosisDataImplCopyWith<_$DiagnosisDataImpl> get copyWith =>
@@ -318,7 +368,10 @@ abstract class _DiagnosisData implements DiagnosisData {
       final List<TPTRegimen>? tptRegimen,
       @HiveField(13)
       @JsonKey(name: 'treatment_outcome')
-      final List<TreatmentOutcome>? treatmentOutcome}) = _$DiagnosisDataImpl;
+      final List<TreatmentOutcome>? treatmentOutcome,
+      @HiveField(14)
+      @JsonKey(name: 'treatment_history')
+      final List<TreatmentHistory>? treatmentHistory}) = _$DiagnosisDataImpl;
 
   factory _DiagnosisData.fromJson(Map<String, dynamic> json) =
       _$DiagnosisDataImpl.fromJson;
@@ -344,7 +397,14 @@ abstract class _DiagnosisData implements DiagnosisData {
   @JsonKey(name: 'treatment_outcome')
   List<TreatmentOutcome>? get treatmentOutcome;
   @override
-  @JsonKey(ignore: true)
+  @HiveField(14)
+  @JsonKey(name: 'treatment_history')
+  List<TreatmentHistory>? get treatmentHistory;
+
+  /// Create a copy of DiagnosisData
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DiagnosisDataImplCopyWith<_$DiagnosisDataImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

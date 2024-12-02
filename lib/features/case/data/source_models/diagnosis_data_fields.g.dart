@@ -191,6 +191,43 @@ class AFBResultAdapter extends TypeAdapter<AFBResult> {
           typeId == other.typeId;
 }
 
+class TreatmentHistoryAdapter extends TypeAdapter<TreatmentHistory> {
+  @override
+  final int typeId = 23;
+
+  @override
+  TreatmentHistory read(BinaryReader reader) {
+    final numOfFields = reader.readByte();
+    final fields = <int, dynamic>{
+      for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
+    };
+    return TreatmentHistory(
+      id: fields[0] as int?,
+      name: fields[1] as String?,
+    );
+  }
+
+  @override
+  void write(BinaryWriter writer, TreatmentHistory obj) {
+    writer
+      ..writeByte(2)
+      ..writeByte(0)
+      ..write(obj.id)
+      ..writeByte(1)
+      ..write(obj.name);
+  }
+
+  @override
+  int get hashCode => typeId.hashCode;
+
+  @override
+  bool operator ==(Object other) =>
+      identical(this, other) ||
+      other is TreatmentHistoryAdapter &&
+          runtimeType == other.runtimeType &&
+          typeId == other.typeId;
+}
+
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
@@ -252,6 +289,20 @@ _$AFBResultImpl _$$AFBResultImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$AFBResultImplToJson(_$AFBResultImpl instance) =>
+    <String, dynamic>{
+      'id': instance.id,
+      'name': instance.name,
+    };
+
+_$TreatmentHistoryImpl _$$TreatmentHistoryImplFromJson(
+        Map<String, dynamic> json) =>
+    _$TreatmentHistoryImpl(
+      id: (json['id'] as num?)?.toInt(),
+      name: json['name'] as String?,
+    );
+
+Map<String, dynamic> _$$TreatmentHistoryImplToJson(
+        _$TreatmentHistoryImpl instance) =>
     <String, dynamic>{
       'id': instance.id,
       'name': instance.name,

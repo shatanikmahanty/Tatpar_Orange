@@ -177,7 +177,7 @@
     "tpt_regimen":"टीपीटी उपचार योजना",
     "tpt_start_date":"टीपीटी प्रारंभ तिथि",
     "weight":"प्रारंभिक वजन ",
-    "tpt_side_effects":"टीपीटी परिणाम तिथि",
+    "tpt_side_effects":"टीपीटी दुष्प्रभाव परिणाम तिथि",
     "tpt_outcome_date":"टीपीटी आउटकम दिनाँक",
     "tpt_outcome":"टीपीटी आउटकम"
 }

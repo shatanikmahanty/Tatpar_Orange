@@ -47,8 +47,12 @@ mixin _$AppUser {
   @JsonKey(name: 'email')
   String? get email => throw _privateConstructorUsedError;
 
+  /// Serializes this AppUser to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $AppUserCopyWith<AppUser> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -83,6 +87,8 @@ class _$AppUserCopyWithImpl<$Res, $Val extends AppUser>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,6 +194,8 @@ class __$$AppUserImplCopyWithImpl<$Res>
       _$AppUserImpl _value, $Res Function(_$AppUserImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -354,7 +362,7 @@ class _$AppUserImpl implements _AppUser {
             (identical(other.email, email) || other.email == email));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -372,7 +380,9 @@ class _$AppUserImpl implements _AppUser {
       address,
       email);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$AppUserImplCopyWith<_$AppUserImpl> get copyWith =>
@@ -443,8 +453,11 @@ abstract class _AppUser implements AppUser {
   @override
   @JsonKey(name: 'email')
   String? get email;
+
+  /// Create a copy of AppUser
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$AppUserImplCopyWith<_$AppUserImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

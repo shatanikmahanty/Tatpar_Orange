@@ -109,8 +109,12 @@ mixin _$Case {
   @JsonKey(name: 'patient_referral_id')
   String? get referralId => throw _privateConstructorUsedError;
 
+  /// Serializes this Case to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Case
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CaseCopyWith<Case> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -176,6 +180,8 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Case
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -386,6 +392,8 @@ class __$$CaseImplCopyWithImpl<$Res>
   __$$CaseImplCopyWithImpl(_$CaseImpl _value, $Res Function(_$CaseImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Case
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -775,7 +783,7 @@ class _$CaseImpl implements _Case {
                 other.referralId == referralId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -809,7 +817,9 @@ class _$CaseImpl implements _Case {
         referralId
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Case
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CaseImplCopyWith<_$CaseImpl> get copyWith =>
@@ -996,8 +1006,11 @@ abstract class _Case implements Case {
   @HiveField(27)
   @JsonKey(name: 'patient_referral_id')
   String? get referralId;
+
+  /// Create a copy of Case
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CaseImplCopyWith<_$CaseImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

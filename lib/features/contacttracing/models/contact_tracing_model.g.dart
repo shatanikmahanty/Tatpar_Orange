@@ -38,13 +38,14 @@ class ContactTracingModelAdapter extends TypeAdapter<ContactTracingModel> {
       isUpdated: fields[18] as bool?,
       caseId: fields[19] as int?,
       isFormIDAssigned: fields[20] as bool?,
+      contactTracingReferralId: fields[21] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, ContactTracingModel obj) {
     writer
-      ..writeByte(21)
+      ..writeByte(22)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -86,7 +87,9 @@ class ContactTracingModelAdapter extends TypeAdapter<ContactTracingModel> {
       ..writeByte(19)
       ..write(obj.caseId)
       ..writeByte(20)
-      ..write(obj.isFormIDAssigned);
+      ..write(obj.isFormIDAssigned)
+      ..writeByte(21)
+      ..write(obj.contactTracingReferralId);
   }
 
   @override
@@ -128,36 +131,29 @@ _$ContactTracingModelImpl _$$ContactTracingModelImplFromJson(
       isUpdated: json['is_updated'] as bool?,
       caseId: (json['case_id'] as num?)?.toInt(),
       isFormIDAssigned: json['is_form_id_assigned'] as bool?,
+      contactTracingReferralId: json['contact_tracing_referral_id'] as String?,
     );
 
 Map<String, dynamic> _$$ContactTracingModelImplToJson(
-    _$ContactTracingModelImpl instance) {
-  final val = <String, dynamic>{
-    'tb_contact_name': instance.tbContactName,
-    'age': instance.age,
-    'screening_outcome': instance.screeningOutcome,
-    'test_conducted': instance.testConducted,
-    'cxr_date': _dateTimeToJson(instance.cxrDate),
-    'cxr_result': instance.cxrResult,
-    'tbi_date': _dateTimeToJson(instance.tbiDate),
-    'tbi_result': instance.tbiResult,
-    'nikshay_id': instance.nikshayID,
-    'tpt_eligible': instance.tptEligible,
-    'tpt_regimen': instance.selectedTptRegimen,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('tptRegimen', instance.tptRegimen);
-  val['tpt_start_date'] = _dateTimeToJson(instance.tptStartDate);
-  val['weight'] = instance.weight;
-  val['side_effects'] = instance.tptSideEffects;
-  val['tpt_outcome_date'] = _dateTimeToJson(instance.tptOutcomeDate);
-  val['tpt_outcome'] = instance.tptOutcome;
-  val['is_updated'] = instance.isUpdated;
-  return val;
-}
+        _$ContactTracingModelImpl instance) =>
+    <String, dynamic>{
+      'tb_contact_name': instance.tbContactName,
+      'age': instance.age,
+      'screening_outcome': instance.screeningOutcome,
+      'test_conducted': instance.testConducted,
+      'cxr_date': _dateTimeToJson(instance.cxrDate),
+      'cxr_result': instance.cxrResult,
+      'tbi_date': _dateTimeToJson(instance.tbiDate),
+      'tbi_result': instance.tbiResult,
+      'nikshay_id': instance.nikshayID,
+      'tpt_eligible': instance.tptEligible,
+      'tpt_regimen': instance.selectedTptRegimen,
+      if (instance.tptRegimen case final value?) 'tptRegimen': value,
+      'tpt_start_date': _dateTimeToJson(instance.tptStartDate),
+      'weight': instance.weight,
+      'side_effects': instance.tptSideEffects,
+      'tpt_outcome_date': _dateTimeToJson(instance.tptOutcomeDate),
+      'tpt_outcome': instance.tptOutcome,
+      'is_updated': instance.isUpdated,
+      'contact_tracing_referral_id': instance.contactTracingReferralId,
+    };

@@ -40,8 +40,12 @@ mixin _$DataModel {
   @JsonKey(name: 'blocks')
   List<Block>? get blocks => throw _privateConstructorUsedError;
 
+  /// Serializes this DataModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DataModelCopyWith<DataModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -78,6 +82,8 @@ class _$DataModelCopyWithImpl<$Res, $Val extends DataModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -150,6 +156,8 @@ class __$$DataModelImplCopyWithImpl<$Res>
       _$DataModelImpl _value, $Res Function(_$DataModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DataModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -313,7 +321,7 @@ class _$DataModelImpl implements _DataModel {
             const DeepCollectionEquality().equals(other._blocks, _blocks));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -324,7 +332,9 @@ class _$DataModelImpl implements _DataModel {
       const DeepCollectionEquality().hash(_districts),
       const DeepCollectionEquality().hash(_blocks));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DataModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DataModelImplCopyWith<_$DataModelImpl> get copyWith =>
@@ -384,8 +394,11 @@ abstract class _DataModel implements DataModel {
   @HiveField(5)
   @JsonKey(name: 'blocks')
   List<Block>? get blocks;
+
+  /// Create a copy of DataModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DataModelImplCopyWith<_$DataModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

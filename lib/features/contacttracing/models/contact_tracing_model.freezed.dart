@@ -91,9 +91,16 @@ mixin _$ContactTracingModel {
   @HiveField(20)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned => throw _privateConstructorUsedError;
+  @HiveField(21)
+  @JsonKey(name: 'contact_tracing_referral_id')
+  String? get contactTracingReferralId => throw _privateConstructorUsedError;
 
+  /// Serializes this ContactTracingModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ContactTracingModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ContactTracingModelCopyWith<ContactTracingModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -151,7 +158,10 @@ abstract class $ContactTracingModelCopyWith<$Res> {
       int? caseId,
       @HiveField(20)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(21)
+      @JsonKey(name: 'contact_tracing_referral_id')
+      String? contactTracingReferralId});
 }
 
 /// @nodoc
@@ -164,6 +174,8 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ContactTracingModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -188,6 +200,7 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? contactTracingReferralId = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -274,6 +287,10 @@ class _$ContactTracingModelCopyWithImpl<$Res, $Val extends ContactTracingModel>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      contactTracingReferralId: freezed == contactTracingReferralId
+          ? _value.contactTracingReferralId
+          : contactTracingReferralId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -333,7 +350,10 @@ abstract class _$$ContactTracingModelImplCopyWith<$Res>
       int? caseId,
       @HiveField(20)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(21)
+      @JsonKey(name: 'contact_tracing_referral_id')
+      String? contactTracingReferralId});
 }
 
 /// @nodoc
@@ -344,6 +364,8 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
       $Res Function(_$ContactTracingModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ContactTracingModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -368,6 +390,7 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? contactTracingReferralId = freezed,
   }) {
     return _then(_$ContactTracingModelImpl(
       id: freezed == id
@@ -454,6 +477,10 @@ class __$$ContactTracingModelImplCopyWithImpl<$Res>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      contactTracingReferralId: freezed == contactTracingReferralId
+          ? _value.contactTracingReferralId
+          : contactTracingReferralId // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -506,7 +533,10 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
       this.caseId,
       @HiveField(20)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      this.isFormIDAssigned});
+      this.isFormIDAssigned,
+      @HiveField(21)
+      @JsonKey(name: 'contact_tracing_referral_id')
+      this.contactTracingReferralId});
 
   factory _$ContactTracingModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$ContactTracingModelImplFromJson(json);
@@ -603,10 +633,14 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
   @HiveField(20)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   final bool? isFormIDAssigned;
+  @override
+  @HiveField(21)
+  @JsonKey(name: 'contact_tracing_referral_id')
+  final String? contactTracingReferralId;
 
   @override
   String toString() {
-    return 'ContactTracingModel(id: $id, tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, cxrDate: $cxrDate, cxrResult: $cxrResult, tbiDate: $tbiDate, tbiResult: $tbiResult, nikshayID: $nikshayID, tptEligible: $tptEligible, selectedTptRegimen: $selectedTptRegimen, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
+    return 'ContactTracingModel(id: $id, tbContactName: $tbContactName, age: $age, screeningOutcome: $screeningOutcome, testConducted: $testConducted, cxrDate: $cxrDate, cxrResult: $cxrResult, tbiDate: $tbiDate, tbiResult: $tbiResult, nikshayID: $nikshayID, tptEligible: $tptEligible, selectedTptRegimen: $selectedTptRegimen, tptRegimen: $tptRegimen, tptStartDate: $tptStartDate, weight: $weight, tptSideEffects: $tptSideEffects, tptOutcomeDate: $tptOutcomeDate, tptOutcome: $tptOutcome, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned, contactTracingReferralId: $contactTracingReferralId)';
   }
 
   @override
@@ -649,10 +683,13 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
                 other.isUpdated == isUpdated) &&
             (identical(other.caseId, caseId) || other.caseId == caseId) &&
             (identical(other.isFormIDAssigned, isFormIDAssigned) ||
-                other.isFormIDAssigned == isFormIDAssigned));
+                other.isFormIDAssigned == isFormIDAssigned) &&
+            (identical(
+                    other.contactTracingReferralId, contactTracingReferralId) ||
+                other.contactTracingReferralId == contactTracingReferralId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -676,10 +713,13 @@ class _$ContactTracingModelImpl implements _ContactTracingModel {
         tptOutcome,
         isUpdated,
         caseId,
-        isFormIDAssigned
+        isFormIDAssigned,
+        contactTracingReferralId
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ContactTracingModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ContactTracingModelImplCopyWith<_$ContactTracingModelImpl> get copyWith =>
@@ -750,7 +790,10 @@ abstract class _ContactTracingModel implements ContactTracingModel {
       final int? caseId,
       @HiveField(20)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      final bool? isFormIDAssigned}) = _$ContactTracingModelImpl;
+      final bool? isFormIDAssigned,
+      @HiveField(21)
+      @JsonKey(name: 'contact_tracing_referral_id')
+      final String? contactTracingReferralId}) = _$ContactTracingModelImpl;
 
   factory _ContactTracingModel.fromJson(Map<String, dynamic> json) =
       _$ContactTracingModelImpl.fromJson;
@@ -848,7 +891,14 @@ abstract class _ContactTracingModel implements ContactTracingModel {
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned;
   @override
-  @JsonKey(ignore: true)
+  @HiveField(21)
+  @JsonKey(name: 'contact_tracing_referral_id')
+  String? get contactTracingReferralId;
+
+  /// Create a copy of ContactTracingModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ContactTracingModelImplCopyWith<_$ContactTracingModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -176,42 +176,34 @@ _$ReferralDetailsModelImpl _$$ReferralDetailsModelImplFromJson(
     );
 
 Map<String, dynamic> _$$ReferralDetailsModelImplToJson(
-    _$ReferralDetailsModelImpl instance) {
-  final val = <String, dynamic>{
-    'referral_id': instance.referralID,
-    'referral_date': _dateTimeToJson(instance.referralDate),
-    'referral_name': instance.referralName,
-    'age': instance.age,
-    'gender': instance.gender,
-    'referral_district': instance.selectedDistrict,
-    'referral_block': instance.selectedBlock,
-    'referral_panchayat': instance.selectedPanchayatCode,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('district', instance.district);
-  writeNotNull('block', instance.block);
-  writeNotNull('panchayatCode', instance.panchayatCode);
-  val['referral_ward'] = instance.ward;
-  val['guardian_name'] = instance.guardianName;
-  val['guardian_phone_number'] = instance.guardianPhoneNumber;
-  val['caste_category'] = instance.selectedCasteCategory;
-  writeNotNull('casteCategory', instance.casteCategory);
-  val['key_population'] = instance.selectedKeyPopulation;
-  writeNotNull('keyPopulation', instance.keyPopulation);
-  val['trimester_of_pw'] = instance.selectedTrimester;
-  writeNotNull('trimester', instance.trimester);
-  val['referred_by_name'] = instance.referredBy;
-  val['referrer_source'] = instance.selectedrReferrerSource;
-  writeNotNull('referrerSource', instance.referrerSource);
-  val['referred_ward'] = instance.referredWard;
-  val['referrer_panchayat_code'] = instance.selectedReferrerPanchayatCode;
-  writeNotNull('referrerPanchayatCode', instance.referrerPanchayatCode);
-  val['is_updated'] = instance.isUpdated;
-  return val;
-}
+        _$ReferralDetailsModelImpl instance) =>
+    <String, dynamic>{
+      'referral_id': instance.referralID,
+      'referral_date': _dateTimeToJson(instance.referralDate),
+      'referral_name': instance.referralName,
+      'age': instance.age,
+      'gender': instance.gender,
+      'referral_district': instance.selectedDistrict,
+      'referral_block': instance.selectedBlock,
+      'referral_panchayat': instance.selectedPanchayatCode,
+      if (instance.district case final value?) 'district': value,
+      if (instance.block case final value?) 'block': value,
+      if (instance.panchayatCode case final value?) 'panchayatCode': value,
+      'referral_ward': instance.ward,
+      'guardian_name': instance.guardianName,
+      'guardian_phone_number': instance.guardianPhoneNumber,
+      'caste_category': instance.selectedCasteCategory,
+      if (instance.casteCategory case final value?) 'casteCategory': value,
+      'key_population': instance.selectedKeyPopulation,
+      if (instance.keyPopulation case final value?) 'keyPopulation': value,
+      'trimester_of_pw': instance.selectedTrimester,
+      if (instance.trimester case final value?) 'trimester': value,
+      'referred_by_name': instance.referredBy,
+      'referrer_source': instance.selectedrReferrerSource,
+      if (instance.referrerSource case final value?) 'referrerSource': value,
+      'referred_ward': instance.referredWard,
+      'referrer_panchayat_code': instance.selectedReferrerPanchayatCode,
+      if (instance.referrerPanchayatCode case final value?)
+        'referrerPanchayatCode': value,
+      'is_updated': instance.isUpdated,
+    };

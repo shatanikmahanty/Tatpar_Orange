@@ -84,8 +84,12 @@ mixin _$TBScreeningModel {
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned => throw _privateConstructorUsedError;
 
+  /// Serializes this TBScreeningModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TBScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TBScreeningModelCopyWith<TBScreeningModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -140,6 +144,8 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TBScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -299,6 +305,8 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
       $Res Function(_$TBScreeningModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TBScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -576,7 +584,7 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
                 other.isFormIDAssigned == isFormIDAssigned));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -602,7 +610,9 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
         isFormIDAssigned
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TBScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TBScreeningModelImplCopyWith<_$TBScreeningModelImpl> get copyWith =>
@@ -747,8 +757,11 @@ abstract class _TBScreeningModel implements TBScreeningModel {
   @HiveField(19)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned;
+
+  /// Create a copy of TBScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TBScreeningModelImplCopyWith<_$TBScreeningModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

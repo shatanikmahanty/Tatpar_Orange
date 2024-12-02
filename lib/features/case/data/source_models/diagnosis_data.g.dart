@@ -22,13 +22,14 @@ class DiagnosisDataAdapter extends TypeAdapter<DiagnosisData> {
       mtbResult: (fields[11] as List?)?.cast<MTBResult>(),
       tptRegimen: (fields[12] as List?)?.cast<TPTRegimen>(),
       treatmentOutcome: (fields[13] as List?)?.cast<TreatmentOutcome>(),
+      treatmentHistory: (fields[14] as List?)?.cast<TreatmentHistory>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, DiagnosisData obj) {
     writer
-      ..writeByte(5)
+      ..writeByte(6)
       ..writeByte(9)
       ..write(obj.afbResult)
       ..writeByte(10)
@@ -38,7 +39,9 @@ class DiagnosisDataAdapter extends TypeAdapter<DiagnosisData> {
       ..writeByte(12)
       ..write(obj.tptRegimen)
       ..writeByte(13)
-      ..write(obj.treatmentOutcome);
+      ..write(obj.treatmentOutcome)
+      ..writeByte(14)
+      ..write(obj.treatmentHistory);
   }
 
   @override
@@ -73,6 +76,9 @@ _$DiagnosisDataImpl _$$DiagnosisDataImplFromJson(Map<String, dynamic> json) =>
       treatmentOutcome: (json['treatment_outcome'] as List<dynamic>?)
           ?.map((e) => TreatmentOutcome.fromJson(e as Map<String, dynamic>))
           .toList(),
+      treatmentHistory: (json['treatment_history'] as List<dynamic>?)
+          ?.map((e) => TreatmentHistory.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$$DiagnosisDataImplToJson(_$DiagnosisDataImpl instance) =>
@@ -82,4 +88,5 @@ Map<String, dynamic> _$$DiagnosisDataImplToJson(_$DiagnosisDataImpl instance) =>
       'mtb_result': instance.mtbResult,
       'tpt_regimen': instance.tptRegimen,
       'treatment_outcome': instance.treatmentOutcome,
+      'treatment_history': instance.treatmentHistory,
     };

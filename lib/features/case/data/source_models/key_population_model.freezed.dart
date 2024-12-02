@@ -27,8 +27,12 @@ mixin _$KeyPopulation {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
+  /// Serializes this KeyPopulation to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of KeyPopulation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $KeyPopulationCopyWith<KeyPopulation> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -54,6 +58,8 @@ class _$KeyPopulationCopyWithImpl<$Res, $Val extends KeyPopulation>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of KeyPopulation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -94,6 +100,8 @@ class __$$KeyPopulationImplCopyWithImpl<$Res>
       _$KeyPopulationImpl _value, $Res Function(_$KeyPopulationImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of KeyPopulation
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -146,11 +154,13 @@ class _$KeyPopulationImpl implements _KeyPopulation {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of KeyPopulation
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$KeyPopulationImplCopyWith<_$KeyPopulationImpl> get copyWith =>
@@ -181,8 +191,11 @@ abstract class _KeyPopulation implements KeyPopulation {
   @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
+
+  /// Create a copy of KeyPopulation
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$KeyPopulationImplCopyWith<_$KeyPopulationImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -77,6 +77,7 @@ Future<void> main() async {
     Hive.registerAdapter(MTBResultAdapter());
     Hive.registerAdapter(TPTRegimenAdapter());
     Hive.registerAdapter(TreatmentOutcomeAdapter());
+    Hive.registerAdapter(TreatmentHistoryAdapter());
     Hive.registerAdapter(DiagnosisDataAdapter());
     await Hive.openBox<DiagnosisData>('diagnosisData');
 

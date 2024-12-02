@@ -33,8 +33,12 @@ mixin _$District {
   @JsonKey(name: 'district')
   String? get district => throw _privateConstructorUsedError;
 
+  /// Serializes this District to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of District
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DistrictCopyWith<District> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -61,6 +65,8 @@ class _$DistrictCopyWithImpl<$Res, $Val extends District>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of District
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -113,6 +119,8 @@ class __$$DistrictImplCopyWithImpl<$Res>
       _$DistrictImpl _value, $Res Function(_$DistrictImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of District
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -197,12 +205,14 @@ class _$DistrictImpl implements _District {
                 other.district == district));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, state,
       const DeepCollectionEquality().hash(_block), district);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of District
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DistrictImplCopyWith<_$DistrictImpl> get copyWith =>
@@ -243,8 +253,11 @@ abstract class _District implements District {
   @HiveField(3)
   @JsonKey(name: 'district')
   String? get district;
+
+  /// Create a copy of District
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DistrictImplCopyWith<_$DistrictImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -265,8 +278,12 @@ mixin _$Block {
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat => throw _privateConstructorUsedError;
 
+  /// Serializes this Block to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Block
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $BlockCopyWith<Block> get copyWith => throw _privateConstructorUsedError;
 }
 
@@ -291,6 +308,8 @@ class _$BlockCopyWithImpl<$Res, $Val extends Block>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Block
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -336,6 +355,8 @@ class __$$BlockImplCopyWithImpl<$Res>
       _$BlockImpl _value, $Res Function(_$BlockImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Block
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -410,12 +431,14 @@ class _$BlockImpl implements _Block {
                 .equals(other._panchayat, _panchayat));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, id, block, const DeepCollectionEquality().hash(_panchayat));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Block
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$BlockImplCopyWith<_$BlockImpl> get copyWith =>
@@ -451,8 +474,11 @@ abstract class _Block implements Block {
   @HiveField(7)
   @JsonKey(name: 'panchayat')
   List<Panchayat>? get panchayat;
+
+  /// Create a copy of Block
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$BlockImplCopyWith<_$BlockImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -470,8 +496,12 @@ mixin _$Panchayat {
   @JsonKey(name: 'panchayat')
   String? get panchayat => throw _privateConstructorUsedError;
 
+  /// Serializes this Panchayat to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Panchayat
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $PanchayatCopyWith<Panchayat> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -496,6 +526,8 @@ class _$PanchayatCopyWithImpl<$Res, $Val extends Panchayat>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Panchayat
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -536,6 +568,8 @@ class __$$PanchayatImplCopyWithImpl<$Res>
       _$PanchayatImpl _value, $Res Function(_$PanchayatImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Panchayat
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -589,11 +623,13 @@ class _$PanchayatImpl implements _Panchayat {
                 other.panchayat == panchayat));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, panchayat);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Panchayat
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$PanchayatImplCopyWith<_$PanchayatImpl> get copyWith =>
@@ -624,8 +660,11 @@ abstract class _Panchayat implements Panchayat {
   @HiveField(1)
   @JsonKey(name: 'panchayat')
   String? get panchayat;
+
+  /// Create a copy of Panchayat
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$PanchayatImplCopyWith<_$PanchayatImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

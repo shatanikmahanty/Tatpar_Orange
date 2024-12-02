@@ -81,8 +81,12 @@ mixin _$WHOSrqModel {
   @JsonKey(name: 'ip_easily_tired')
   String? get easilyTired => throw _privateConstructorUsedError;
 
+  /// Serializes this WHOSrqModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WHOSrqModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WHOSrqModelCopyWith<WHOSrqModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -136,6 +140,8 @@ class _$WHOSrqModelCopyWithImpl<$Res, $Val extends WHOSrqModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WHOSrqModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -294,6 +300,8 @@ class __$$WHOSrqModelImplCopyWithImpl<$Res>
       _$WHOSrqModelImpl _value, $Res Function(_$WHOSrqModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WHOSrqModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -561,7 +569,7 @@ class _$WHOSrqModelImpl implements _WHOSrqModel {
                 other.easilyTired == easilyTired));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -587,7 +595,9 @@ class _$WHOSrqModelImpl implements _WHOSrqModel {
         easilyTired
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WHOSrqModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WHOSrqModelImplCopyWith<_$WHOSrqModelImpl> get copyWith =>
@@ -731,8 +741,11 @@ abstract class _WHOSrqModel implements WHOSrqModel {
   @HiveField(19)
   @JsonKey(name: 'ip_easily_tired')
   String? get easilyTired;
+
+  /// Create a copy of WHOSrqModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WHOSrqModelImplCopyWith<_$WHOSrqModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

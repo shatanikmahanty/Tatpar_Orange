@@ -117,8 +117,12 @@ mixin _$ReferralDetailsModel {
   @JsonKey(name: 'is_case_updated', includeToJson: false)
   bool? get isCaseUpdated => throw _privateConstructorUsedError;
 
+  /// Serializes this ReferralDetailsModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of ReferralDetailsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $ReferralDetailsModelCopyWith<ReferralDetailsModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -197,6 +201,8 @@ class _$ReferralDetailsModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of ReferralDetailsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -434,6 +440,8 @@ class __$$ReferralDetailsModelImplCopyWithImpl<$Res>
       $Res Function(_$ReferralDetailsModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of ReferralDetailsModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -877,7 +885,7 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
                 other.isCaseUpdated == isCaseUpdated));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -914,7 +922,9 @@ class _$ReferralDetailsModelImpl implements _ReferralDetailsModel {
         isCaseUpdated
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of ReferralDetailsModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$ReferralDetailsModelImplCopyWith<_$ReferralDetailsModelImpl>
@@ -1127,8 +1137,11 @@ abstract class _ReferralDetailsModel implements ReferralDetailsModel {
   @HiveField(30)
   @JsonKey(name: 'is_case_updated', includeToJson: false)
   bool? get isCaseUpdated;
+
+  /// Create a copy of ReferralDetailsModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$ReferralDetailsModelImplCopyWith<_$ReferralDetailsModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

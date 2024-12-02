@@ -268,65 +268,56 @@ _$DiagnosisModelImpl _$$DiagnosisModelImplFromJson(Map<String, dynamic> json) =>
     );
 
 Map<String, dynamic> _$$DiagnosisModelImplToJson(
-    _$DiagnosisModelImpl instance) {
-  final val = <String, dynamic>{
-    'diagnosis_initiated': instance.diagnosisInitiated,
-    'first_consultation': instance.firstConsultation,
-    'first_consultation_date': _dateTimeToJson(instance.firstConsultationDate),
-    'chest_xray': instance.chestXray,
-    'chest_xray_date': _dateTimeToJson(instance.chestXrayDate),
-    'afb_done': instance.afbDone,
-  };
-
-  void writeNotNull(String key, dynamic value) {
-    if (value != null) {
-      val[key] = value;
-    }
-  }
-
-  writeNotNull('afb1Result', instance.afb1Result);
-  val['afb_1_result'] = instance.selectedAfb1Result;
-  val['afb_1_result_date'] = _dateTimeToJson(instance.afb1ResultDate);
-  writeNotNull('afb2Result', instance.afb2Result);
-  val['afb_2_result'] = instance.selectedAfb2Result;
-  val['afb_2_result_date'] = _dateTimeToJson(instance.afb2ResultDate);
-  val['naat_test'] = instance.naatTest;
-  writeNotNull('naatMachine', instance.naatMachine);
-  val['naat_machine'] = instance.selectedNaatMachine;
-  val['naat_site'] = instance.naatSite;
-  val['naat_lab_number'] = instance.naatLabNumber;
-  val['sample_collection_date'] =
-      _dateTimeToJson(instance.sampleCollectionDate);
-  val['naat_result_date'] = _dateTimeToJson(instance.naatResultDate);
-  writeNotNull('mtbResult', instance.mtbResult);
-  val['mtb_result'] = instance.selectedMtbResult;
-  val['rif_resistance'] = instance.rifResistance;
-  val['xdr_done'] = instance.xdrDone;
-  val['xdr_result'] = instance.selectedXdrResult;
-  val['xdr_result_date'] = _dateTimeToJson(instance.xdrResultDate);
-  val['xdr_lab_number'] = instance.xdrLabNumber;
-  val['xdr_site'] = instance.xdrSite;
-  val['inh_resistance'] = instance.inhResistance;
-  val['flq_resistance'] = instance.flqResistance;
-  val['amk_resistance'] = instance.amkResistance;
-  val['kan_resistance'] = instance.kanResistance;
-  val['cap_resistance'] = instance.capResistance;
-  val['eth_resistance'] = instance.ethResistance;
-  val['fnac'] = instance.fnac;
-  val['fnac_date'] = _dateTimeToJson(instance.fnacDate);
-  val['fnac_result'] = instance.fnacResult;
-  val['fnac_comments'] = instance.fnacComments;
-  val['usg'] = instance.usg;
-  val['usg_date'] = _dateTimeToJson(instance.usgDate);
-  val['usg_result'] = instance.usgResult;
-  val['usg_comments'] = instance.usgComments;
-  val['other_test'] = instance.otherTest;
-  val['other_test_date'] = _dateTimeToJson(instance.otherTestDate);
-  val['test_name'] = instance.testName;
-  val['other_test_result'] = instance.otherTestResult;
-  val['diagnosis'] = instance.diagnosis;
-  val['diagnosis_comments'] = instance.diagnosisComments;
-  val['diagnosis_date'] = _dateTimeToJson(instance.diagnosisDate);
-  val['is_updated'] = instance.isUpdated;
-  return val;
-}
+        _$DiagnosisModelImpl instance) =>
+    <String, dynamic>{
+      'diagnosis_initiated': instance.diagnosisInitiated,
+      'first_consultation': instance.firstConsultation,
+      'first_consultation_date':
+          _dateTimeToJson(instance.firstConsultationDate),
+      'chest_xray': instance.chestXray,
+      'chest_xray_date': _dateTimeToJson(instance.chestXrayDate),
+      'afb_done': instance.afbDone,
+      if (instance.afb1Result case final value?) 'afb1Result': value,
+      'afb_1_result': instance.selectedAfb1Result,
+      'afb_1_result_date': _dateTimeToJson(instance.afb1ResultDate),
+      if (instance.afb2Result case final value?) 'afb2Result': value,
+      'afb_2_result': instance.selectedAfb2Result,
+      'afb_2_result_date': _dateTimeToJson(instance.afb2ResultDate),
+      'naat_test': instance.naatTest,
+      if (instance.naatMachine case final value?) 'naatMachine': value,
+      'naat_machine': instance.selectedNaatMachine,
+      'naat_site': instance.naatSite,
+      'naat_lab_number': instance.naatLabNumber,
+      'sample_collection_date': _dateTimeToJson(instance.sampleCollectionDate),
+      'naat_result_date': _dateTimeToJson(instance.naatResultDate),
+      if (instance.mtbResult case final value?) 'mtbResult': value,
+      'mtb_result': instance.selectedMtbResult,
+      'rif_resistance': instance.rifResistance,
+      'xdr_done': instance.xdrDone,
+      'xdr_result': instance.selectedXdrResult,
+      'xdr_result_date': _dateTimeToJson(instance.xdrResultDate),
+      'xdr_lab_number': instance.xdrLabNumber,
+      'xdr_site': instance.xdrSite,
+      'inh_resistance': instance.inhResistance,
+      'flq_resistance': instance.flqResistance,
+      'amk_resistance': instance.amkResistance,
+      'kan_resistance': instance.kanResistance,
+      'cap_resistance': instance.capResistance,
+      'eth_resistance': instance.ethResistance,
+      'fnac': instance.fnac,
+      'fnac_date': _dateTimeToJson(instance.fnacDate),
+      'fnac_result': instance.fnacResult,
+      'fnac_comments': instance.fnacComments,
+      'usg': instance.usg,
+      'usg_date': _dateTimeToJson(instance.usgDate),
+      'usg_result': instance.usgResult,
+      'usg_comments': instance.usgComments,
+      'other_test': instance.otherTest,
+      'other_test_date': _dateTimeToJson(instance.otherTestDate),
+      'test_name': instance.testName,
+      'other_test_result': instance.otherTestResult,
+      'diagnosis': instance.diagnosis,
+      'diagnosis_comments': instance.diagnosisComments,
+      'diagnosis_date': _dateTimeToJson(instance.diagnosisDate),
+      'is_updated': instance.isUpdated,
+    };

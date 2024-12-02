@@ -46,7 +46,7 @@ class CaseProfilePage extends StatelessWidget {
                       padding: const EdgeInsets.only(top: kPadding),
                       alignment: Alignment.centerRight,
                       child: Text(
-                        'Referral ID:\t${caseCubit.state.caseWorkedUpon.referralDetails}',
+                        'Referral ID:\t${caseCubit.state.caseWorkedUpon.referralId}',
                         style: Theme.of(context)
                             .textTheme
                             .headlineSmall

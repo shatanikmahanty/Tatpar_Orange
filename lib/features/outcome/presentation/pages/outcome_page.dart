@@ -31,9 +31,6 @@ class OutcomePage extends StatelessWidget {
       'treatment_completion_date': FormControl<DateTime>(
         value: outcomeModel?.treatmentCompletionDate,
       ),
-      'nikshay_id': FormControl<String?>(
-        value: outcomeModel?.nikshayId,
-      ),
       'nutrition_provided': FormControl<String?>(
         value: outcomeModel?.nutritionProvided,
       ),
@@ -135,16 +132,6 @@ class OutcomePage extends StatelessWidget {
                                               label:
                                                   AppLocalizations.of(context)!
                                                       .treatmentCompletionDate,
-                                            ),
-                                            const SizedBox(
-                                                height: kPadding * 2),
-                                            PrimaryTextField(
-                                              formControlName: 'nikshay_id',
-                                              label:
-                                                  AppLocalizations.of(context)!
-                                                      .nikshayId,
-                                              prefixIcon:
-                                                  Icons.account_circle_outlined,
                                             ),
                                             const SizedBox(
                                                 height: kPadding * 2),

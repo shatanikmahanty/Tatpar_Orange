@@ -42,8 +42,12 @@ mixin _$CaseState {
   List<ContactTracingModel>? get filteredContacts =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this CaseState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CaseStateCopyWith<CaseState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -94,6 +98,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -182,6 +188,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     ) as $Val);
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CaseCopyWith<$Res> get caseWorkedUpon {
@@ -190,6 +198,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DataModelCopyWith<$Res>? get dataModel {
@@ -202,6 +212,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ReferralDetailsModelCopyWith<$Res>? get referralDetailsModel {
@@ -215,6 +227,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TBScreeningModelCopyWith<$Res>? get tbScreeningModel {
@@ -227,6 +241,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel {
@@ -239,6 +255,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MentalHealthScreeningModelCopyWith<$Res>? get mentalHealthScreeningModel {
@@ -252,6 +270,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DiagnosisModelCopyWith<$Res>? get diagnsosisModel {
@@ -264,6 +284,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DiagnosisDataCopyWith<$Res>? get diagnosisData {
@@ -276,6 +298,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $TreatmentModelCopyWith<$Res>? get treatmentModel {
@@ -288,6 +312,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $ContactTracingModelCopyWith<$Res>? get contactTracingModel {
@@ -301,6 +327,8 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     });
   }
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $OutcomeModelCopyWith<$Res>? get outcomeModel {
@@ -372,6 +400,8 @@ class __$$CaseStateImplCopyWithImpl<$Res>
       _$CaseStateImpl _value, $Res Function(_$CaseStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -583,7 +613,7 @@ class _$CaseStateImpl implements _CaseState {
                 .equals(other._filteredContacts, _filteredContacts));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -604,7 +634,9 @@ class _$CaseStateImpl implements _CaseState {
       outcomeModel,
       const DeepCollectionEquality().hash(_filteredContacts));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CaseStateImplCopyWith<_$CaseStateImpl> get copyWith =>
@@ -672,8 +704,11 @@ abstract class _CaseState implements CaseState {
   OutcomeModel? get outcomeModel;
   @override
   List<ContactTracingModel>? get filteredContacts;
+
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CaseStateImplCopyWith<_$CaseStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

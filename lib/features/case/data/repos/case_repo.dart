@@ -26,16 +26,19 @@ import 'package:tatpar_acf/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_acf/features/treatment/model/treatment_model.dart';
 
 class CaseRepo {
-  Future<ReferralDetailsModel> saveReferralDetails({
-    required ReferralDetailsModel referralDetailsModel,
-    required int? id,
-  }) async {
-    Box<ReferralDetailsModel> dataBox = Hive.box<ReferralDetailsModel>('referralDetailsModel');
-    final existingModelIndex = dataBox.values.toList().indexWhere((model) => model.id == id);
+  Future<ReferralDetailsModel> saveReferralDetails(
+      {required ReferralDetailsModel referralDetailsModel,
+      required int? id,
+      required String referralId}) async {
+    Box<ReferralDetailsModel> dataBox =
+        Hive.box<ReferralDetailsModel>('referralDetailsModel');
+    final existingModelIndex =
+        dataBox.values.toList().indexWhere((model) => model.id == id);
 
     ///checking for inernet connection
     bool hasInternet = await InternetConnection().hasInternetAccess;
-    if ((referralDetailsModel.isCaseUpdated == false || referralDetailsModel.isCaseUpdated == null) &&
+    if ((referralDetailsModel.isCaseUpdated == false ||
+            referralDetailsModel.isCaseUpdated == null) &&
         hasInternet &&
         existingModelIndex != -1) {
       log('Pushing data to Server because network is available while trying to update in Local Storage${referralDetailsModel.toString()}');
@@ -49,7 +52,9 @@ class CaseRepo {
     }
     final request = NetworkRequest(
       '$referralDetailsUrl${id == null ? '' : '/$id'}',
-      id == null ? RequestMethod.post : RequestMethod.patch,
+      id == null && (referralDetailsModel.referralID != referralId)
+          ? RequestMethod.post
+          : RequestMethod.patch,
       isAuthorized: true,
       data: {
         ...referralDetailsModel.toJson(),
@@ -110,7 +115,8 @@ class CaseRepo {
           final modelToSave = updateModel.copyWith(
             isCaseUpdated: false,
             caseId: int.tryParse('$userMobilePrefix$counter'),
-            id: int.tryParse('$userMobilePrefix$counter'), // Assign unique referral form id
+            id: int.tryParse(
+                '$userMobilePrefix$counter'), // Assign unique referral form id
           );
 
           // Save the new model to Hive
@@ -140,13 +146,18 @@ class CaseRepo {
   }
 
   Future<TBScreeningModel> saveTbScreeningData(
-      {required TBScreeningModel tbScreeningModel, required int? id, required int? caseId}) async {
-    Box<TBScreeningModel> tbdatabox = Hive.box<TBScreeningModel>('tbScreeningModel');
-    final existingModelIndex = tbdatabox.values.toList().indexWhere((model) => model.id == id);
+      {required TBScreeningModel tbScreeningModel,
+      required int? id,
+      required int? caseId}) async {
+    Box<TBScreeningModel> tbdatabox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
+    final existingModelIndex =
+        tbdatabox.values.toList().indexWhere((model) => model.id == id);
 
     bool hasInternet = await InternetConnection().hasInternetAccess;
 
-    if ((tbScreeningModel.isFormIDAssigned == null || tbScreeningModel.isFormIDAssigned == false) &&
+    if ((tbScreeningModel.isFormIDAssigned == null ||
+            tbScreeningModel.isFormIDAssigned == false) &&
         hasInternet &&
         existingModelIndex != -1) {
       await tbdatabox.put(tbScreeningModel.id.toString(), tbScreeningModel);
@@ -200,7 +211,8 @@ class CaseRepo {
     } else {
       if (result.error != null && result.error?.type is NetworkError) {
         final modelsList = tbdatabox.values.toList();
-        TBScreeningModel updateModel = tbScreeningModel.copyWith(caseId: caseId);
+        TBScreeningModel updateModel =
+            tbScreeningModel.copyWith(caseId: caseId);
 
         final existingModelIndex = modelsList.indexWhere(
           (model) => id != null && model.id == id,
@@ -261,15 +273,19 @@ class CaseRepo {
       required WHOSrqModel? cpWhoSrqModel,
       required int? id,
       required int? caseId}) async {
-    Box<MentalHealthScreeningModel> whodatabox = Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
-    final existingModelIndex = whodatabox.values.toList().indexWhere((model) => model.id == id);
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    final existingModelIndex =
+        whodatabox.values.toList().indexWhere((model) => model.id == id);
 
     bool hasInternet = await InternetConnection().hasInternetAccess;
 
-    if ((mentalHealthScreeningModel.isFormIDAssigned == null || mentalHealthScreeningModel.isFormIDAssigned == false) &&
+    if ((mentalHealthScreeningModel.isFormIDAssigned == null ||
+            mentalHealthScreeningModel.isFormIDAssigned == false) &&
         hasInternet &&
         existingModelIndex != -1) {
-      await whodatabox.put(mentalHealthScreeningModel.id.toString(), mentalHealthScreeningModel);
+      await whodatabox.put(
+          mentalHealthScreeningModel.id.toString(), mentalHealthScreeningModel);
 
       updateCaseBox(
           model: null,
@@ -305,7 +321,8 @@ class CaseRepo {
     );
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
-      final savedModel = MentalHealthScreeningModel.fromJson(result.data['data']);
+      final savedModel =
+          MentalHealthScreeningModel.fromJson(result.data['data']);
       await whodatabox.put(savedModel.id.toString(), savedModel);
 
       updateCaseBox(
@@ -323,7 +340,8 @@ class CaseRepo {
     } else {
       if (result.error != null && result.error?.type is NetworkError) {
         final modelsList = whodatabox.values.toList();
-        MentalHealthScreeningModel updateModel = mentalHealthScreeningModel.copyWith(caseId: caseId);
+        MentalHealthScreeningModel updateModel =
+            mentalHealthScreeningModel.copyWith(caseId: caseId);
 
         final existingModelIndex = modelsList.indexWhere(
           (model) => id != null && model.id == id,
@@ -378,13 +396,18 @@ class CaseRepo {
   }
 
   Future<DiagnosisModel> saveDiagnosisData(
-      {required DiagnosisModel diagnosisModel, required int? id, required int? caseId}) async {
-    Box<DiagnosisModel> diagnosisDataBox = Hive.box<DiagnosisModel>('diagnosisModel');
-    final existingModelIndex = diagnosisDataBox.values.toList().indexWhere((model) => model.id == id);
+      {required DiagnosisModel diagnosisModel,
+      required int? id,
+      required int? caseId}) async {
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
+    final existingModelIndex =
+        diagnosisDataBox.values.toList().indexWhere((model) => model.id == id);
 
     bool hasInternet = await InternetConnection().hasInternetAccess;
 
-    if ((diagnosisModel.isFormIDAssigned == null || diagnosisModel.isFormIDAssigned == false) &&
+    if ((diagnosisModel.isFormIDAssigned == null ||
+            diagnosisModel.isFormIDAssigned == false) &&
         hasInternet &&
         existingModelIndex != -1) {
       await diagnosisDataBox.put(diagnosisModel.id.toString(), diagnosisModel);
@@ -493,13 +516,18 @@ class CaseRepo {
   }
 
   Future<TreatmentModel> saveTreatmentData(
-      {required TreatmentModel treatmentModel, required int? id, required int? caseId}) async {
-    Box<TreatmentModel> treatmentDataBox = Hive.box<TreatmentModel>('treatmentModel');
-    final existingModelIndex = treatmentDataBox.values.toList().indexWhere((model) => model.id == id);
+      {required TreatmentModel treatmentModel,
+      required int? id,
+      required int? caseId}) async {
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
+    final existingModelIndex =
+        treatmentDataBox.values.toList().indexWhere((model) => model.id == id);
 
     bool hasInternet = await InternetConnection().hasInternetAccess;
 
-    if ((treatmentModel.isFormIDAssigned == null || treatmentModel.isFormIDAssigned == false) &&
+    if ((treatmentModel.isFormIDAssigned == null ||
+            treatmentModel.isFormIDAssigned == false) &&
         hasInternet &&
         existingModelIndex != -1) {
       await treatmentDataBox.put(treatmentModel.id.toString(), treatmentModel);
@@ -608,16 +636,23 @@ class CaseRepo {
   }
 
   Future<ContactTracingModel> saveContactTracingData(
-      {required ContactTracingModel contactTracingModel, required int? id, required int? caseId}) async {
-    Box<ContactTracingModel> contactTracingDataBox = Hive.box<ContactTracingModel>('contactTracingModel');
-    final existingModelIndex = contactTracingDataBox.values.toList().indexWhere((model) => model.id == id);
+      {required ContactTracingModel contactTracingModel,
+      required int? id,
+      required int? caseId}) async {
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
+    final existingModelIndex = contactTracingDataBox.values
+        .toList()
+        .indexWhere((model) => model.id == id);
 
     bool hasInternet = await InternetConnection().hasInternetAccess;
 
-    if ((contactTracingModel.isFormIDAssigned == null || contactTracingModel.isFormIDAssigned == false) &&
+    if ((contactTracingModel.isFormIDAssigned == null ||
+            contactTracingModel.isFormIDAssigned == false) &&
         hasInternet &&
         existingModelIndex != -1) {
-      await contactTracingDataBox.put(contactTracingModel.id.toString(), contactTracingModel);
+      await contactTracingDataBox.put(
+          contactTracingModel.id.toString(), contactTracingModel);
 
       updateCaseBox(
           model: null,
@@ -668,7 +703,8 @@ class CaseRepo {
     } else {
       if (result.error != null && result.error?.type is NetworkError) {
         final modelsList = contactTracingDataBox.values.toList();
-        ContactTracingModel updateModel = contactTracingModel.copyWith(caseId: caseId);
+        ContactTracingModel updateModel =
+            contactTracingModel.copyWith(caseId: caseId);
 
         final existingModelIndex = modelsList.indexWhere(
           (model) => id != null && model.id == id,
@@ -694,14 +730,16 @@ class CaseRepo {
           ///Assigning new id for evey new model
           await CounterManager.instance.initialize();
           int counter = await CounterManager.instance.getNextCounter();
-          final userMobilePrefix = AuthCubit.instance.state.user!.mobileNumber.substring(0, 5);
+          final userMobilePrefix =
+              AuthCubit.instance.state.user!.mobileNumber.substring(0, 5);
           final modelToSave = updateModel.copyWith(
               id: int.tryParse('$userMobilePrefix$counter'),
               caseId: caseId ?? AuthCubit.instance.workingCaseId,
               isFormIDAssigned: false);
 
           // Save the new model to Hive
-          await contactTracingDataBox.put(modelToSave.id.toString(), modelToSave);
+          await contactTracingDataBox.put(
+              modelToSave.id.toString(), modelToSave);
           updateCaseBox(
               model: null,
               tbModel: null,
@@ -727,13 +765,17 @@ class CaseRepo {
   }
 
   Future<OutcomeModel> saveOutcomeData(
-      {required OutcomeModel outcomeModel, required int? id, required int? caseId}) async {
+      {required OutcomeModel outcomeModel,
+      required int? id,
+      required int? caseId}) async {
     Box<OutcomeModel> outcomeDataBox = Hive.box<OutcomeModel>('outcomeModel');
-    final existingModelIndex = outcomeDataBox.values.toList().indexWhere((model) => model.id == id);
+    final existingModelIndex =
+        outcomeDataBox.values.toList().indexWhere((model) => model.id == id);
 
     bool hasInternet = await InternetConnection().hasInternetAccess;
 
-    if ((outcomeModel.isFormIDAssigned == null || outcomeModel.isFormIDAssigned == false) &&
+    if ((outcomeModel.isFormIDAssigned == null ||
+            outcomeModel.isFormIDAssigned == false) &&
         hasInternet &&
         existingModelIndex != -1) {
       await outcomeDataBox.put(outcomeModel.id.toString(), outcomeModel);
@@ -855,7 +897,9 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       final newCase = Case.fromJson(result.data['data']);
-      final existingCaseIndex = dataBox.values.toList().indexWhere((existingCase) => existingCase.id == newCase.id);
+      final existingCaseIndex = dataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == newCase.id);
       if (existingCaseIndex != -1) {
         log('Updating Server Case Model=======================${newCase.toString()}');
 
@@ -867,8 +911,9 @@ class CaseRepo {
       return newCase;
     } else {
       if (result.error != null && result.error?.type is NetworkError) {
-        final existingCase =
-            dataBox.get(dataBox.keyAt(dataBox.values.toList().indexWhere((existingCase) => existingCase.id == caseId)));
+        final existingCase = dataBox.get(dataBox.keyAt(dataBox.values
+            .toList()
+            .indexWhere((existingCase) => existingCase.id == caseId)));
         if (existingCase != null) {
           log('Getting Case Model=======================${existingCase.toString()}');
 
@@ -891,8 +936,10 @@ class CaseRepo {
   Future<ReferralDetailsModel> getReferralDetails({
     required int? id,
   }) async {
-    Box<ReferralDetailsModel> dataBox = Hive.box<ReferralDetailsModel>('referralDetailsModel');
-    log(' ReferralModel Box Contains======================${dataBox.values.toList()}'.toString());
+    Box<ReferralDetailsModel> dataBox =
+        Hive.box<ReferralDetailsModel>('referralDetailsModel');
+    log(' ReferralModel Box Contains======================${dataBox.values.toList()}'
+        .toString());
 
     final request = NetworkRequest(
       '$referralDetailsUrl/$id',
@@ -906,8 +953,9 @@ class CaseRepo {
       return ReferralDetailsModel.fromJson(result.data['data']);
     } else if (result.error != null && result.error?.type is NetworkError) {
       log(dataBox.values.toString());
-      final model =
-          dataBox.get(dataBox.keyAt(dataBox.values.toList().indexWhere((existingCase) => existingCase.id == id)));
+      final model = dataBox.get(dataBox.keyAt(dataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
         log('Retrieving ReferralModel======================$model'.toString());
 
@@ -929,8 +977,10 @@ class CaseRepo {
   Future<TBScreeningModel> getTBScreening({
     required int? id,
   }) async {
-    Box<TBScreeningModel> tbdataBox = Hive.box<TBScreeningModel>('tbScreeningModel');
-    log(' TBScreening Box Contains======================${tbdataBox.values.toList()}'.toString());
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
+    log(' TBScreening Box Contains======================${tbdataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$tbScreeningUrl/$id',
       RequestMethod.get,
@@ -942,10 +992,12 @@ class CaseRepo {
       return TBScreeningModel.fromJson(result.data['data']);
     } else if (result.error != null && result.error?.type is NetworkError) {
       log(tbdataBox.values.toString());
-      final model =
-          tbdataBox.get(tbdataBox.keyAt(tbdataBox.values.toList().indexWhere((existingCase) => existingCase.id == id)));
+      final model = tbdataBox.get(tbdataBox.keyAt(tbdataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
-        log('Retrieving TB Screening Model======================$model'.toString());
+        log('Retrieving TB Screening Model======================$model'
+            .toString());
 
         return model;
       } else {
@@ -965,8 +1017,10 @@ class CaseRepo {
   Future<MentalHealthScreeningModel> getWhoSrq({
     required int? id,
   }) async {
-    Box<MentalHealthScreeningModel> whodatabox = Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
-    log(' Mental Health Screening Box Contains======================${whodatabox.values.toList()}'.toString());
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    log(' Mental Health Screening Box Contains======================${whodatabox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$whoSrqUrl/$id',
       RequestMethod.get,
@@ -978,10 +1032,12 @@ class CaseRepo {
       return MentalHealthScreeningModel.fromJson(result.data['data']);
     } else if (result.error != null && result.error?.type is NetworkError) {
       log(whodatabox.values.toString());
-      final model = whodatabox
-          .get(whodatabox.keyAt(whodatabox.values.toList().indexWhere((existingCase) => existingCase.id == id)));
+      final model = whodatabox.get(whodatabox.keyAt(whodatabox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
-        log('Retrieving Mental Health Screening Model======================$model'.toString());
+        log('Retrieving Mental Health Screening Model======================$model'
+            .toString());
 
         return model;
       } else {
@@ -1001,8 +1057,10 @@ class CaseRepo {
   Future<DiagnosisModel> getDiagnosis({
     required int? id,
   }) async {
-    Box<DiagnosisModel> diagnosisDataBox = Hive.box<DiagnosisModel>('diagnosisModel');
-    log('Diagnosis Box Contains======================${diagnosisDataBox.values.toList()}'.toString());
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
+    log('Diagnosis Box Contains======================${diagnosisDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$diagnosisUrl/$id',
       RequestMethod.get,
@@ -1014,10 +1072,13 @@ class CaseRepo {
       return DiagnosisModel.fromJson(result.data['data']);
     } else if (result.error != null && result.error?.type is NetworkError) {
       log(diagnosisDataBox.values.toString());
-      final model = diagnosisDataBox.get(
-          diagnosisDataBox.keyAt(diagnosisDataBox.values.toList().indexWhere((existingCase) => existingCase.id == id)));
+      final model = diagnosisDataBox.get(diagnosisDataBox.keyAt(diagnosisDataBox
+          .values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
-        log('Retrieving Diagnosis Model======================$model'.toString());
+        log('Retrieving Diagnosis Model======================$model'
+            .toString());
 
         return model;
       } else {
@@ -1037,8 +1098,10 @@ class CaseRepo {
   Future<TreatmentModel> getTreatment({
     required int? id,
   }) async {
-    Box<TreatmentModel> treatmentDataBox = Hive.box<TreatmentModel>('treatmentModel');
-    log(' Treatment Box Contains======================${treatmentDataBox.values.toList()}'.toString());
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
+    log(' Treatment Box Contains======================${treatmentDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$treatmentUrl/$id',
       RequestMethod.get,
@@ -1050,10 +1113,13 @@ class CaseRepo {
       return TreatmentModel.fromJson(result.data['data']);
     } else if (result.error != null && result.error?.type is NetworkError) {
       log(treatmentDataBox.values.toString());
-      final model = treatmentDataBox.get(
-          treatmentDataBox.keyAt(treatmentDataBox.values.toList().indexWhere((existingCase) => existingCase.id == id)));
+      final model = treatmentDataBox.get(treatmentDataBox.keyAt(treatmentDataBox
+          .values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
-        log('Retrieving Treatment Model======================$model'.toString());
+        log('Retrieving Treatment Model======================$model'
+            .toString());
 
         return model;
       } else {
@@ -1074,7 +1140,8 @@ class CaseRepo {
     required int? id,
   }) async {
     Box<OutcomeModel> outcomeDataBox = Hive.box<OutcomeModel>('outcomeModel');
-    log(' Outcome Box Contains======================${outcomeDataBox.values.toList()}'.toString());
+    log(' Outcome Box Contains======================${outcomeDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$outcomeUrl/$id',
       RequestMethod.get,
@@ -1086,8 +1153,10 @@ class CaseRepo {
       return OutcomeModel.fromJson(result.data['data']);
     } else if (result.error != null && result.error?.type is NetworkError) {
       log(outcomeDataBox.values.toString());
-      final model = outcomeDataBox.get(
-          outcomeDataBox.keyAt(outcomeDataBox.values.toList().indexWhere((existingCase) => existingCase.id == id)));
+      final model = outcomeDataBox.get(outcomeDataBox.keyAt(outcomeDataBox
+          .values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
         log('Retrieving Outcome Model======================$model'.toString());
 
@@ -1109,7 +1178,8 @@ class CaseRepo {
   Future<List<ContactTracingModel>> getContactTracingList({
     required int? caseId,
   }) async {
-    Box<ContactTracingModel> contactTracingDataBox = Hive.box<ContactTracingModel>('contactTracingModel');
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
     final request = NetworkRequest(
       '$contactTracingListUrl/$caseId',
       RequestMethod.get,
@@ -1119,14 +1189,16 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       final List<dynamic> contactData = result.data['data'];
-      final List<ContactTracingModel> contactDataList =
-          contactData.map<ContactTracingModel>((e) => ContactTracingModel.fromJson(e)).toList();
+      final List<ContactTracingModel> contactDataList = contactData
+          .map<ContactTracingModel>((e) => ContactTracingModel.fromJson(e))
+          .toList();
       contactDataList.sort((a, b) => b.id!.compareTo(a.id!));
       // Iterate through the cases fetched from the network
       for (final contact in contactDataList) {
         // Check if the case with the same ID already exists in the Hive box
-        final existingCaseIndex =
-            contactTracingDataBox.values.toList().indexWhere((existingCase) => existingCase.id == contact.id);
+        final existingCaseIndex = contactTracingDataBox.values
+            .toList()
+            .indexWhere((existingCase) => existingCase.id == contact.id);
         if (existingCaseIndex != -1) {
           // If case with the same ID exists, update it
           contactTracingDataBox.putAt(existingCaseIndex, contact);
@@ -1138,13 +1210,16 @@ class CaseRepo {
 
       return contactDataList;
     } else {
-      final List<ContactTracingModel> storedData = contactTracingDataBox.values.toList();
+      final List<ContactTracingModel> storedData =
+          contactTracingDataBox.values.toList();
 
       if (result.error != null && result.error?.type is NetworkError) {
         final caseIdToFilter = caseId ?? AuthCubit.instance.workingCaseId;
 
         // Filter the stored data based on the caseId
-        final filteredData = storedData.where((model) => model.caseId == caseIdToFilter).toList();
+        final filteredData = storedData
+            .where((model) => model.caseId == caseIdToFilter)
+            .toList();
 
         return filteredData.reversed.toList();
       } else {
@@ -1159,8 +1234,10 @@ class CaseRepo {
   Future<ContactTracingModel> getContactTracing({
     required int? id,
   }) async {
-    Box<ContactTracingModel> contactTracingDataBox = Hive.box<ContactTracingModel>('contactTracingModel');
-    log(' Contact Tracing Box Contains======================${contactTracingDataBox.values.toList()}'.toString());
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
+    log(' Contact Tracing Box Contains======================${contactTracingDataBox.values.toList()}'
+        .toString());
     final request = NetworkRequest(
       '$contactTracingUrl/$id',
       RequestMethod.get,
@@ -1170,8 +1247,9 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       final newModel = ContactTracingModel.fromJson(result.data['data']);
-      final existingCaseIndex =
-          contactTracingDataBox.values.toList().indexWhere((existingCase) => existingCase.id == newModel.id);
+      final existingCaseIndex = contactTracingDataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == newModel.id);
       if (existingCaseIndex != -1) {
         log('Updating Server ContactTracing Model=======================${newModel.toString()}');
 
@@ -1183,10 +1261,13 @@ class CaseRepo {
       return newModel;
     } else if (result.error != null && result.error?.type is NetworkError) {
       log(contactTracingDataBox.values.toString());
-      final model = contactTracingDataBox.get(contactTracingDataBox
-          .keyAt(contactTracingDataBox.values.toList().indexWhere((existingCase) => existingCase.id == id)));
+      final model = contactTracingDataBox.get(contactTracingDataBox.keyAt(
+          contactTracingDataBox.values
+              .toList()
+              .indexWhere((existingCase) => existingCase.id == id)));
       if (model != null) {
-        log('Retrieving Contact Tracing Model======================$model'.toString());
+        log('Retrieving Contact Tracing Model======================$model'
+            .toString());
 
         return model;
       } else {
@@ -1217,11 +1298,14 @@ class CaseRepo {
     final result = await NetworkManager.instance.perform(request);
     if (result.status == Status.ok) {
       final List<dynamic> caseDataList = result.data['data']['cases'];
-      final List<Case> cases = caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
+      final List<Case> cases =
+          caseDataList.map<Case>((e) => Case.fromJson(e)).toList();
       // Iterate through the cases fetched from the network
       for (final caseItem in cases) {
         // Check if the case with the same ID already exists in the Hive box
-        final existingCaseIndex = dataBox.values.toList().indexWhere((existingCase) => existingCase.id == caseItem.id);
+        final existingCaseIndex = dataBox.values
+            .toList()
+            .indexWhere((existingCase) => existingCase.id == caseItem.id);
         if (existingCaseIndex != -1) {
           // If case with the same ID exists, update it
           dataBox.putAt(existingCaseIndex, caseItem);
@@ -1247,14 +1331,16 @@ class CaseRepo {
   }
 
   Future<void> pushPendingReferralDetails() async {
-    Box<ReferralDetailsModel> dataBox = Hive.box<ReferralDetailsModel>('referralDetailsModel');
+    Box<ReferralDetailsModel> dataBox =
+        Hive.box<ReferralDetailsModel>('referralDetailsModel');
     // Get all referral details models from the box
     List<ReferralDetailsModel> referralList = dataBox.values.toList();
 
     for (var referral in referralList) {
       if (referral.isUpdated != null) {
         if (referral.isUpdated == false) {
-          final model = (referral.isCaseUpdated == null) || (referral.isCaseUpdated == false)
+          final model = (referral.isCaseUpdated == null) ||
+                  (referral.isCaseUpdated == false)
               ? referral.copyWith(caseId: null, id: null)
               : referral;
           try {
@@ -1262,7 +1348,9 @@ class CaseRepo {
             // Attempt to push the referral details to the server
             final request = NetworkRequest(
               '$referralDetailsUrl${model.id == null ? '' : '/${model.id}'}',
-              model.id == null ? RequestMethod.post : RequestMethod.patch,
+              model.id == null && (model.referralID != referral.referralID)
+                  ? RequestMethod.post
+                  : RequestMethod.patch,
               isAuthorized: true,
               data: {
                 ...model.toJson(),
@@ -1272,10 +1360,13 @@ class CaseRepo {
             final result = await NetworkManager.instance.perform(request);
 
             if (result.status == Status.ok) {
-              ReferralDetailsModel updatedModel = ReferralDetailsModel.fromJson(result.data['data']);
-              if ((referral.isCaseUpdated == null) || (referral.isCaseUpdated == false)) {
+              ReferralDetailsModel updatedModel =
+                  ReferralDetailsModel.fromJson(result.data['data']);
+              if ((referral.isCaseUpdated == null) ||
+                  (referral.isCaseUpdated == false)) {
                 // Get the key of the existing model
-                final modelIndex = dataBox.values.toList().indexWhere((existingCase) => existingCase.id == referral.id);
+                final modelIndex = dataBox.values.toList().indexWhere(
+                    (existingCase) => existingCase.id == referral.id);
                 if (modelIndex != -1) {
                   final modelKey = dataBox.keyAt(modelIndex);
                   log('Retrieving Referral Model Key: ${dataBox.get(modelKey)}');
@@ -1305,14 +1396,21 @@ class CaseRepo {
                   contactTracingModel: null,
                   outcomeModel: null);
               // getCaseModel(caseId: updatedModel.caseId);
-              DjangoflowAppSnackbar.showInfo('Successfully updated offline referral models');
+              DjangoflowAppSnackbar.showInfo(
+                  'Successfully updated offline referral models');
 
-              await updateTBDataBox(referral.id, AuthCubit.instance.workingCaseId);
-              await updateWHODataBox(referral.id, AuthCubit.instance.workingCaseId);
-              await updateDiagnosisDataBox(referral.id, AuthCubit.instance.workingCaseId);
-              await updateTreatmentDataBox(referral.id, AuthCubit.instance.workingCaseId);
-              await updateContactTracingDataBox(referral.id, AuthCubit.instance.workingCaseId);
-              await updateOutcomeDataBox(referral.id, AuthCubit.instance.workingCaseId);
+              await updateTBDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateWHODataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateDiagnosisDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateTreatmentDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateContactTracingDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
+              await updateOutcomeDataBox(
+                  referral.id, AuthCubit.instance.workingCaseId);
 
               // await updateDataBox<TBScreeningModel>(
               //   boxName: 'tbScreeningModel',
@@ -1332,7 +1430,8 @@ class CaseRepo {
             } else {
               // Handle error if need
               //
-              throw Exception('Failed to push referral details from Local Storage');
+              throw Exception(
+                  'Failed to push referral details from Local Storage');
             }
           } catch (e, stackTrace) {
             log('Error pushing referral details: $e\nStackTrace: $stackTrace');
@@ -1350,12 +1449,14 @@ class CaseRepo {
   }
 
   Future<void> pushPendingTBScreeningDetails() async {
-    Box<TBScreeningModel> tbdataBox = Hive.box<TBScreeningModel>('tbScreeningModel');
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
     List<TBScreeningModel> tbModelsList = tbdataBox.values.toList();
     for (var tbModel in tbModelsList) {
       if (tbModel.isUpdated != null) {
         if (tbModel.isUpdated == false) {
-          final model = (tbModel.isFormIDAssigned == null) || (tbModel.isFormIDAssigned == false)
+          final model = (tbModel.isFormIDAssigned == null) ||
+                  (tbModel.isFormIDAssigned == false)
               ? tbModel.copyWith(id: null)
               : tbModel;
           try {
@@ -1372,10 +1473,13 @@ class CaseRepo {
             );
             final result = await NetworkManager.instance.perform(request);
             if (result.status == Status.ok) {
-              TBScreeningModel updatedModel = TBScreeningModel.fromJson(result.data['data']);
-              if ((tbModel.isFormIDAssigned == null) || (tbModel.isFormIDAssigned == false)) {
+              TBScreeningModel updatedModel =
+                  TBScreeningModel.fromJson(result.data['data']);
+              if ((tbModel.isFormIDAssigned == null) ||
+                  (tbModel.isFormIDAssigned == false)) {
                 // Get the key of the existing model
-                var key = tbdataBox.keyAt(tbdataBox.values.toList().indexOf(tbModel));
+                var key =
+                    tbdataBox.keyAt(tbdataBox.values.toList().indexOf(tbModel));
                 // Print the details of the record being deleted
                 log('Deleting TBScreening Model: ${tbdataBox.get(key)}');
                 // Delete the old model
@@ -1393,11 +1497,13 @@ class CaseRepo {
                   contactTracingModel: null,
                   outcomeModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
-              DjangoflowAppSnackbar.showInfo('Succesfully updated offline TB screening Models');
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline TB screening Models');
               log('TBScreening DataBox Contains===========${tbdataBox.values.toList().toString()}');
             } else {
               // Handle error if needed
-              throw Exception('Failed to push tbModel details from Local Storage');
+              throw Exception(
+                  'Failed to push tbModel details from Local Storage');
             }
           } catch (e) {
             // Handle the exception if needed
@@ -1410,12 +1516,14 @@ class CaseRepo {
   }
 
   Future<void> pushPendingWhoSrqDetails() async {
-    Box<MentalHealthScreeningModel> whodatabox = Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
     List<MentalHealthScreeningModel> whoModelsList = whodatabox.values.toList();
     for (var mentalHealthModel in whoModelsList) {
       if (mentalHealthModel.isUpdated != null) {
         if (mentalHealthModel.isUpdated == false) {
-          final model = (mentalHealthModel.isFormIDAssigned == null) || (mentalHealthModel.isFormIDAssigned == false)
+          final model = (mentalHealthModel.isFormIDAssigned == null) ||
+                  (mentalHealthModel.isFormIDAssigned == false)
               ? mentalHealthModel.copyWith(id: null)
               : mentalHealthModel;
           try {
@@ -1432,10 +1540,13 @@ class CaseRepo {
             );
             final result = await NetworkManager.instance.perform(request);
             if (result.status == Status.ok) {
-              MentalHealthScreeningModel updatedModel = MentalHealthScreeningModel.fromJson(result.data['data']);
-              if ((mentalHealthModel.isFormIDAssigned == null) || (mentalHealthModel.isFormIDAssigned == false)) {
+              MentalHealthScreeningModel updatedModel =
+                  MentalHealthScreeningModel.fromJson(result.data['data']);
+              if ((mentalHealthModel.isFormIDAssigned == null) ||
+                  (mentalHealthModel.isFormIDAssigned == false)) {
                 // Get the key of the existing model
-                var key = whodatabox.keyAt(whodatabox.values.toList().indexOf(mentalHealthModel));
+                var key = whodatabox.keyAt(
+                    whodatabox.values.toList().indexOf(mentalHealthModel));
                 // Print the details of the record being deleted
                 log('Deleting MentalHealthScreening Model: ${whodatabox.get(key)}');
                 // Delete the old model
@@ -1453,11 +1564,13 @@ class CaseRepo {
                   contactTracingModel: null,
                   outcomeModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
-              DjangoflowAppSnackbar.showInfo('Succesfully updated offline Mental Health Screening Models');
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Mental Health Screening Models');
               log('MentalHealthScreening DataBox Contains===========${whodatabox.values.toList().toString()}');
             } else {
               // Handle error if needed
-              throw Exception('Failed to push Mental Health details from Local Storage');
+              throw Exception(
+                  'Failed to push Mental Health details from Local Storage');
             }
           } catch (e) {
             // Handle the exception if needed
@@ -1470,12 +1583,14 @@ class CaseRepo {
   }
 
   Future<void> pushPendingDiagnosisDetails() async {
-    Box<DiagnosisModel> diagnosisDataBox = Hive.box<DiagnosisModel>('diagnosisModel');
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
     List<DiagnosisModel> diagnosisModelsList = diagnosisDataBox.values.toList();
     for (var diagnosisModel in diagnosisModelsList) {
       if (diagnosisModel.isUpdated != null) {
         if (diagnosisModel.isUpdated == false) {
-          final model = (diagnosisModel.isFormIDAssigned == null) || (diagnosisModel.isFormIDAssigned == false)
+          final model = (diagnosisModel.isFormIDAssigned == null) ||
+                  (diagnosisModel.isFormIDAssigned == false)
               ? diagnosisModel.copyWith(id: null)
               : diagnosisModel;
           try {
@@ -1492,17 +1607,21 @@ class CaseRepo {
             );
             final result = await NetworkManager.instance.perform(request);
             if (result.status == Status.ok) {
-              DiagnosisModel updatedModel = DiagnosisModel.fromJson(result.data['data']);
-              if ((diagnosisModel.isFormIDAssigned == null) || (diagnosisModel.isFormIDAssigned == false)) {
+              DiagnosisModel updatedModel =
+                  DiagnosisModel.fromJson(result.data['data']);
+              if ((diagnosisModel.isFormIDAssigned == null) ||
+                  (diagnosisModel.isFormIDAssigned == false)) {
                 // Get the key of the existing model
-                var key = diagnosisDataBox.keyAt(diagnosisDataBox.values.toList().indexOf(diagnosisModel));
+                var key = diagnosisDataBox.keyAt(
+                    diagnosisDataBox.values.toList().indexOf(diagnosisModel));
                 // Print the details of the record being deleted
                 log('Deleting Diagnosis Model: ${diagnosisDataBox.get(key)}');
                 // Delete the old model
                 await diagnosisDataBox.delete(key);
               }
               // Add the new model with the server-assigned ID
-              await diagnosisDataBox.put(updatedModel.id.toString(), updatedModel);
+              await diagnosisDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
               updateCaseBox(
                   model: null,
                   tbModel: null,
@@ -1513,11 +1632,13 @@ class CaseRepo {
                   contactTracingModel: null,
                   outcomeModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
-              DjangoflowAppSnackbar.showInfo('Succesfully updated offline Diagnosis Models');
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Diagnosis Models');
               log('Diagnosis DataBox Contains===========${diagnosisDataBox.values.toList().toString()}');
             } else {
               // Handle error if needed
-              throw Exception('Failed to push Diagnosis Details from Local Storage');
+              throw Exception(
+                  'Failed to push Diagnosis Details from Local Storage');
             }
           } catch (e) {
             // Handle the exception if needed
@@ -1530,12 +1651,14 @@ class CaseRepo {
   }
 
   Future<void> pushPendingTreatmentDetails() async {
-    Box<TreatmentModel> treatmentDataBox = Hive.box<TreatmentModel>('treatmentModel');
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
     List<TreatmentModel> treatmentModelsList = treatmentDataBox.values.toList();
     for (var treatmentModel in treatmentModelsList) {
       if (treatmentModel.isUpdated != null) {
         if (treatmentModel.isUpdated == false) {
-          final model = (treatmentModel.isFormIDAssigned == null) || (treatmentModel.isFormIDAssigned == false)
+          final model = (treatmentModel.isFormIDAssigned == null) ||
+                  (treatmentModel.isFormIDAssigned == false)
               ? treatmentModel.copyWith(id: null)
               : treatmentModel;
           try {
@@ -1552,17 +1675,21 @@ class CaseRepo {
             );
             final result = await NetworkManager.instance.perform(request);
             if (result.status == Status.ok) {
-              TreatmentModel updatedModel = TreatmentModel.fromJson(result.data['data']);
-              if ((treatmentModel.isFormIDAssigned == null) || (treatmentModel.isFormIDAssigned == false)) {
+              TreatmentModel updatedModel =
+                  TreatmentModel.fromJson(result.data['data']);
+              if ((treatmentModel.isFormIDAssigned == null) ||
+                  (treatmentModel.isFormIDAssigned == false)) {
                 // Get the key of the existing model
-                var key = treatmentDataBox.keyAt(treatmentDataBox.values.toList().indexOf(treatmentModel));
+                var key = treatmentDataBox.keyAt(
+                    treatmentDataBox.values.toList().indexOf(treatmentModel));
                 // Print the details of the record being deleted
                 log('Deleting Treatment Model: ${treatmentDataBox.get(key)}');
                 // Delete the old model
                 await treatmentDataBox.delete(key);
               }
               // Add the new model with the server-assigned ID
-              await treatmentDataBox.put(updatedModel.id.toString(), updatedModel);
+              await treatmentDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
               updateCaseBox(
                   model: null,
                   tbModel: null,
@@ -1573,11 +1700,13 @@ class CaseRepo {
                   contactTracingModel: null,
                   outcomeModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
-              DjangoflowAppSnackbar.showInfo('Succesfully updated offline Treatment Models');
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Treatment Models');
               log('Treatment DataBox Contains===========${treatmentDataBox.values.toList().toString()}');
             } else {
               // Handle error if needed
-              throw Exception('Failed to push Treatment Details from Local Storage');
+              throw Exception(
+                  'Failed to push Treatment Details from Local Storage');
             }
           } catch (e) {
             // Handle the exception if needed
@@ -1590,15 +1719,17 @@ class CaseRepo {
   }
 
   Future<void> pushPendingContactTracingDetails() async {
-    Box<ContactTracingModel> contactTracingDataBox = Hive.box<ContactTracingModel>('contactTracingModel');
-    List<ContactTracingModel> contactTracingModelsList = contactTracingDataBox.values.toList();
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
+    List<ContactTracingModel> contactTracingModelsList =
+        contactTracingDataBox.values.toList();
     for (var contactTracingModel in contactTracingModelsList) {
       if (contactTracingModel.isUpdated != null) {
         if (contactTracingModel.isUpdated == false) {
-          final model =
-              (contactTracingModel.isFormIDAssigned == null) || (contactTracingModel.isFormIDAssigned == false)
-                  ? contactTracingModel.copyWith(id: null)
-                  : contactTracingModel;
+          final model = (contactTracingModel.isFormIDAssigned == null) ||
+                  (contactTracingModel.isFormIDAssigned == false)
+              ? contactTracingModel.copyWith(id: null)
+              : contactTracingModel;
           try {
             log('Pushing ContactTracing Model to the Server:${model.toString()}');
             // Attempt to push the tbModel details to the server
@@ -1613,11 +1744,15 @@ class CaseRepo {
             );
             final result = await NetworkManager.instance.perform(request);
             if (result.status == Status.ok) {
-              ContactTracingModel updatedModel = ContactTracingModel.fromJson(result.data['data']);
-              if ((contactTracingModel.isFormIDAssigned == null) || (contactTracingModel.isFormIDAssigned == false)) {
+              ContactTracingModel updatedModel =
+                  ContactTracingModel.fromJson(result.data['data']);
+              if ((contactTracingModel.isFormIDAssigned == null) ||
+                  (contactTracingModel.isFormIDAssigned == false)) {
                 // Get the key of the existing model
-                var key =
-                    contactTracingDataBox.keyAt(contactTracingDataBox.values.toList().indexOf(contactTracingModel));
+                var key = contactTracingDataBox.keyAt(contactTracingDataBox
+                    .values
+                    .toList()
+                    .indexOf(contactTracingModel));
                 // Print the details of the record being deleted
                 log('Deleting ContactTracing Model: ${contactTracingDataBox.get(key)}');
                 // Delete the old model
@@ -1634,7 +1769,8 @@ class CaseRepo {
                     outcomeModel: null);
               }
               // Add the new model with the server-assigned ID
-              await contactTracingDataBox.put(updatedModel.id.toString(), updatedModel);
+              await contactTracingDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
               updateCaseBox(
                   model: null,
                   tbModel: null,
@@ -1645,11 +1781,13 @@ class CaseRepo {
                   treatmentModel: null,
                   outcomeModel: null);
               //getCaseModel(caseId: updatedModel.caseId);
-              DjangoflowAppSnackbar.showInfo('Succesfully updated offline ContactTracing Models');
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline ContactTracing Models');
               log('ContactTracing DataBox Contains===========${contactTracingDataBox.values.toList().toString()}');
             } else {
               // Handle error if needed
-              throw Exception('Failed to push ContactTracing Details from Local Storage');
+              throw Exception(
+                  'Failed to push ContactTracing Details from Local Storage');
             }
           } catch (e) {
             // Handle the exception if needed
@@ -1667,7 +1805,8 @@ class CaseRepo {
     for (var outcomeModel in outcomeModelsList) {
       if (outcomeModel.isUpdated != null) {
         if (outcomeModel.isUpdated == false) {
-          final model = (outcomeModel.isFormIDAssigned == null) || (outcomeModel.isFormIDAssigned == false)
+          final model = (outcomeModel.isFormIDAssigned == null) ||
+                  (outcomeModel.isFormIDAssigned == false)
               ? outcomeModel.copyWith(id: null)
               : outcomeModel;
           try {
@@ -1684,17 +1823,21 @@ class CaseRepo {
             );
             final result = await NetworkManager.instance.perform(request);
             if (result.status == Status.ok) {
-              OutcomeModel updatedModel = OutcomeModel.fromJson(result.data['data']);
-              if ((outcomeModel.isFormIDAssigned == null) || (outcomeModel.isFormIDAssigned == false)) {
+              OutcomeModel updatedModel =
+                  OutcomeModel.fromJson(result.data['data']);
+              if ((outcomeModel.isFormIDAssigned == null) ||
+                  (outcomeModel.isFormIDAssigned == false)) {
                 // Get the key of the existing model
-                var key = outcomeDataBox.keyAt(outcomeDataBox.values.toList().indexOf(outcomeModel));
+                var key = outcomeDataBox.keyAt(
+                    outcomeDataBox.values.toList().indexOf(outcomeModel));
                 // Print the details of the record being deleted
                 log('Deleting Outcome Model: ${outcomeDataBox.get(key)}');
                 // Delete the old model
                 await outcomeDataBox.delete(key);
               }
               // Add the new model with the server-assigned ID
-              await outcomeDataBox.put(updatedModel.id.toString(), updatedModel);
+              await outcomeDataBox.put(
+                  updatedModel.id.toString(), updatedModel);
               updateCaseBox(
                   model: null,
                   tbModel: null,
@@ -1705,11 +1848,13 @@ class CaseRepo {
                   treatmentModel: null,
                   outcomeModel: updatedModel);
               //getCaseModel(caseId: updatedModel.caseId);
-              DjangoflowAppSnackbar.showInfo('Succesfully updated offline Outcome Models');
+              DjangoflowAppSnackbar.showInfo(
+                  'Succesfully updated offline Outcome Models');
               log('Outcome DataBox Contains===========${outcomeDataBox.values.toList().toString()}');
             } else {
               // Handle error if needed
-              throw Exception('Failed to push Outcome Details from Local Storage');
+              throw Exception(
+                  'Failed to push Outcome Details from Local Storage');
             }
           } catch (e) {
             // Handle the exception if needed
@@ -1768,11 +1913,12 @@ class CaseRepo {
   // }
 
   Future<void> updateTBDataBox(int? tbModelID, int? caseId) async {
-    Box<TBScreeningModel> tbdataBox = Hive.box<TBScreeningModel>('tbScreeningModel');
+    Box<TBScreeningModel> tbdataBox =
+        Hive.box<TBScreeningModel>('tbScreeningModel');
     TBScreeningModel? tbScreeningModel;
-    final model = tbdataBox.keyAt(tbdataBox.values
-        .toList()
-        .indexWhere((existingCase) => existingCase.id == tbModelID || existingCase.id == caseId));
+    final model = tbdataBox.keyAt(tbdataBox.values.toList().indexWhere(
+        (existingCase) =>
+            existingCase.id == tbModelID || existingCase.id == caseId));
 
     if (model != null) {
       tbScreeningModel = tbdataBox.get(model);
@@ -1806,18 +1952,20 @@ class CaseRepo {
   }
 
   Future<void> updateWHODataBox(int? whoModelID, int? caseId) async {
-    Box<MentalHealthScreeningModel> whodatabox = Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
+    Box<MentalHealthScreeningModel> whodatabox =
+        Hive.box<MentalHealthScreeningModel>('mentalHealthScreeningModel');
     MentalHealthScreeningModel? mentalHealthScreeningModel;
-    final model = whodatabox.keyAt(whodatabox.values
-        .toList()
-        .indexWhere((existingCase) => existingCase.id == whoModelID || existingCase.id == caseId));
+    final model = whodatabox.keyAt(whodatabox.values.toList().indexWhere(
+        (existingCase) =>
+            existingCase.id == whoModelID || existingCase.id == caseId));
 
     if (model != null) {
       mentalHealthScreeningModel = whodatabox.get(model);
     }
 
     if (mentalHealthScreeningModel != null) {
-      MentalHealthScreeningModel updateModel = mentalHealthScreeningModel.copyWith(caseId: caseId);
+      MentalHealthScreeningModel updateModel =
+          mentalHealthScreeningModel.copyWith(caseId: caseId);
 
       if (updateModel.id != null) {
         await whodatabox.put(updateModel.id.toString(), updateModel);
@@ -1843,12 +1991,15 @@ class CaseRepo {
     }
   }
 
-  Future<void> updateDiagnosisDataBox(int? diagnosisModelID, int? caseId) async {
-    Box<DiagnosisModel> diagnosisDataBox = Hive.box<DiagnosisModel>('diagnosisModel');
+  Future<void> updateDiagnosisDataBox(
+      int? diagnosisModelID, int? caseId) async {
+    Box<DiagnosisModel> diagnosisDataBox =
+        Hive.box<DiagnosisModel>('diagnosisModel');
     DiagnosisModel? diagnosisModel;
     final model = diagnosisDataBox.keyAt(diagnosisDataBox.values
         .toList()
-        .indexWhere((existingCase) => existingCase.id == diagnosisModelID || existingCase.id == caseId));
+        .indexWhere((existingCase) =>
+            existingCase.id == diagnosisModelID || existingCase.id == caseId));
 
     if (model != null) {
       diagnosisModel = diagnosisDataBox.get(model);
@@ -1882,11 +2033,13 @@ class CaseRepo {
   }
 
   Future<void> updateTreatmentDataBox(int? treatmentID, int? caseId) async {
-    Box<TreatmentModel> treatmentDataBox = Hive.box<TreatmentModel>('treatmentModel');
+    Box<TreatmentModel> treatmentDataBox =
+        Hive.box<TreatmentModel>('treatmentModel');
     TreatmentModel? treatmentModel;
     final model = treatmentDataBox.keyAt(treatmentDataBox.values
         .toList()
-        .indexWhere((existingCase) => existingCase.id == treatmentID || existingCase.id == caseId));
+        .indexWhere((existingCase) =>
+            existingCase.id == treatmentID || existingCase.id == caseId));
 
     if (model != null) {
       treatmentModel = treatmentDataBox.get(model);
@@ -1919,21 +2072,27 @@ class CaseRepo {
     }
   }
 
-  Future<void> updateContactTracingDataBox(int? contactTracingID, int? caseId) async {
-    Box<ContactTracingModel> contactTracingDataBox = Hive.box<ContactTracingModel>('contactTracingModel');
+  Future<void> updateContactTracingDataBox(
+      int? contactTracingID, int? caseId) async {
+    Box<ContactTracingModel> contactTracingDataBox =
+        Hive.box<ContactTracingModel>('contactTracingModel');
 
     // Find all models that match the given contactTracingID or caseId
     final matchingModels = contactTracingDataBox.values
-        .where((existingCase) => existingCase.caseId == contactTracingID || existingCase.caseId == caseId)
+        .where((existingCase) =>
+            existingCase.caseId == contactTracingID ||
+            existingCase.caseId == caseId)
         .toList();
 
     if (matchingModels.isNotEmpty) {
       for (var existingModel in matchingModels) {
         // Update the caseId of each matching model
-        ContactTracingModel updatedModel = existingModel.copyWith(caseId: caseId);
+        ContactTracingModel updatedModel =
+            existingModel.copyWith(caseId: caseId);
 
         if (updatedModel.id != null) {
-          await contactTracingDataBox.put(updatedModel.id.toString(), updatedModel);
+          await contactTracingDataBox.put(
+              updatedModel.id.toString(), updatedModel);
           log('Updated Case ID of the ContactTracing model: ${updatedModel.toString()}');
 
           // Assuming `updateCaseBox` function is correctly defined and handles the update
@@ -1962,7 +2121,8 @@ class CaseRepo {
     OutcomeModel? outcomeModel;
     final model = outcomeDataBox.keyAt(outcomeDataBox.values
         .toList()
-        .indexWhere((existingCase) => existingCase.id == outcomeID || existingCase.id == caseId));
+        .indexWhere((existingCase) =>
+            existingCase.id == outcomeID || existingCase.id == caseId));
 
     if (model != null) {
       outcomeModel = outcomeDataBox.get(model);
@@ -1995,7 +2155,8 @@ class CaseRepo {
 
   Future<void> deleteCaseLocal(int? caseId) async {
     Box<Case> caseBox = Hive.box<Case>('caseList');
-    int caseKey = caseBox.keys.firstWhere((key) => caseBox.get(key)?.id == caseId, orElse: () => -1);
+    int caseKey = caseBox.keys
+        .firstWhere((key) => caseBox.get(key)?.id == caseId, orElse: () => -1);
 
     if (caseKey != -1) {
       log('Deleting CaseModel: ${caseBox.get(caseKey)}');
@@ -2038,12 +2199,14 @@ class CaseRepo {
           final block = model.selectedBlock;
 
           final panchayat = model.selectedPanchayatCode;
-          final districtData = sourceCubit.state.dataModel?.districts?.firstWhere(
+          final districtData =
+              sourceCubit.state.dataModel?.districts?.firstWhere(
             (element) => element.id == district,
             orElse: () => const District(district: null),
           );
           final String? districtName = districtData?.district;
-          String? panchayatName = _getPanchayatName(sourceCubit.state.dataModel?.blocks!, panchayat);
+          String? panchayatName = _getPanchayatName(
+              sourceCubit.state.dataModel?.blocks!, panchayat);
           final blockData = sourceCubit.state.dataModel?.blocks?.firstWhere(
             (element) => element.id == block,
             orElse: () => const Block(block: null),
@@ -2075,12 +2238,14 @@ class CaseRepo {
 
           final district = model.selectedDistrict;
           final panchayat = model.selectedPanchayatCode;
-          final districtData = sourceCubit.state.dataModel?.districts?.firstWhere(
+          final districtData =
+              sourceCubit.state.dataModel?.districts?.firstWhere(
             (element) => element.id == district,
             orElse: () => const District(district: null),
           );
           final String? districtName = districtData?.district;
-          String? panchayatName = _getPanchayatName(sourceCubit.state.dataModel?.blocks!, panchayat);
+          String? panchayatName = _getPanchayatName(
+              sourceCubit.state.dataModel?.blocks!, panchayat);
           final blockData = sourceCubit.state.dataModel?.blocks?.firstWhere(
             (element) => element.id == block,
             orElse: () => const Block(block: null),
@@ -2136,13 +2301,15 @@ class CaseRepo {
           caseBox.putAt(existingCaseIndex, caseModelToSave);
         }
         if (contactTracingModel != null) {
-          Box<ContactTracingModel> contactTracingDataBox = Hive.box<ContactTracingModel>('contactTracingModel');
+          Box<ContactTracingModel> contactTracingDataBox =
+              Hive.box<ContactTracingModel>('contactTracingModel');
 
           if (contactTracingModel.id == null) {
             // Remove invalid IDs or null entries
             List<int> updatedContactTracingList = List.from(
               existingCase.contactTracingList ?? [],
-            )..removeWhere((id) => contactTracingDataBox.values.every((model) => model.id != id));
+            )..removeWhere((id) =>
+                contactTracingDataBox.values.every((model) => model.id != id));
 
             caseModelToSave = existingCase.copyWith(
               contactTracingList: updatedContactTracingList,
@@ -2156,7 +2323,8 @@ class CaseRepo {
             ];
 
             // Remove duplicates
-            updatedContactTracingList = updatedContactTracingList.toSet().toList();
+            updatedContactTracingList =
+                updatedContactTracingList.toSet().toList();
 
             caseModelToSave = existingCase.copyWith(
               contactTracing: contactTracingModel.id,
@@ -2167,20 +2335,24 @@ class CaseRepo {
         }
         if (outcomeModel != null) {
           final treatmentOutcome = outcomeModel.selectedtreatmentOutcome;
-          final treatmentOutcomeData = sourceCubit.state.diagnosisData?.treatmentOutcome?.firstWhere(
+          final treatmentOutcomeData =
+              sourceCubit.state.diagnosisData?.treatmentOutcome?.firstWhere(
             (element) => element.id == treatmentOutcome,
             orElse: () => const TreatmentOutcome(name: null),
           );
           final String? treatmentOutcomeName = treatmentOutcomeData?.name;
-          caseModelToSave =
-              existingCase.copyWith(outcomeValue: outcomeModel.id, treatmentOutcome: treatmentOutcomeName);
+          caseModelToSave = existingCase.copyWith(
+              outcomeValue: outcomeModel.id,
+              treatmentOutcome: treatmentOutcomeName);
 
           caseBox.putAt(existingCaseIndex, caseModelToSave);
         }
       }
     } else {
       caseModelToSave = caseModel;
-      final existingCaseIndex = caseBox.values.toList().indexWhere((existingCase) => existingCase.id == caseModel.id);
+      final existingCaseIndex = caseBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == caseModel.id);
 
       if (existingCaseIndex != -1) {
         caseBox.putAt(existingCaseIndex, caseModelToSave);
@@ -2214,7 +2386,8 @@ String? _getPanchayatName(List<Block>? blocks, int? panchayat) {
   String? panchayatName;
   if (blocks != null) {
     for (var block in blocks) {
-      var panchayatData = block.panchayat?.firstWhere((p) => p.id == panchayat, orElse: () => const Panchayat(id: 0));
+      var panchayatData = block.panchayat?.firstWhere((p) => p.id == panchayat,
+          orElse: () => const Panchayat(id: 0));
       if (panchayatData?.id != 0) {
         panchayatName = panchayatData?.panchayat;
         break;
@@ -2235,25 +2408,16 @@ class CounterManager {
 
   int _counter = 1;
 
+  late SharedPreferences _prefs;
+
   Future<void> initialize() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _counter = prefs.getInt(_counterKey) ?? 1;
+    _prefs = await SharedPreferences.getInstance();
+    _counter = _prefs.getInt(_counterKey) ?? 1;
   }
 
   Future<int> getNextCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
     _counter++;
-    await prefs.setInt(_counterKey, _counter);
-    return _counter;
-  }
-
-  Future<void> resetCounter() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    _counter = 1;
-    await prefs.setInt(_counterKey, _counter);
-  }
-
-  int getCurrentCounter() {
+    await _prefs.setInt(_counterKey, _counter);
     return _counter;
   }
 }

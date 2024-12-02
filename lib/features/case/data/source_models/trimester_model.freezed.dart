@@ -27,8 +27,12 @@ mixin _$Trimester {
   @JsonKey(name: 'name')
   String? get name => throw _privateConstructorUsedError;
 
+  /// Serializes this Trimester to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of Trimester
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TrimesterCopyWith<Trimester> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -53,6 +57,8 @@ class _$TrimesterCopyWithImpl<$Res, $Val extends Trimester>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of Trimester
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -93,6 +99,8 @@ class __$$TrimesterImplCopyWithImpl<$Res>
       _$TrimesterImpl _value, $Res Function(_$TrimesterImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of Trimester
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -145,11 +153,13 @@ class _$TrimesterImpl implements _Trimester {
             (identical(other.name, name) || other.name == name));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(runtimeType, id, name);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of Trimester
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TrimesterImplCopyWith<_$TrimesterImpl> get copyWith =>
@@ -180,8 +190,11 @@ abstract class _Trimester implements Trimester {
   @HiveField(1)
   @JsonKey(name: 'name')
   String? get name;
+
+  /// Create a copy of Trimester
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TrimesterImplCopyWith<_$TrimesterImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

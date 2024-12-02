@@ -64,3 +64,15 @@ class AFBResult with _$AFBResult {
   factory AFBResult.fromJson(Map<String, dynamic> json) =>
       _$AFBResultFromJson(json);
 }
+
+@freezed
+@HiveType(typeId: 23)
+class TreatmentHistory with _$TreatmentHistory {
+  const factory TreatmentHistory({
+    @HiveField(0) @JsonKey(name: 'id') int? id,
+    @HiveField(1) @JsonKey(name: 'name') String? name,
+  }) = _TreatmentHistory;
+
+  factory TreatmentHistory.fromJson(Map<String, dynamic> json) =>
+      _$TreatmentHistoryFromJson(json);
+}

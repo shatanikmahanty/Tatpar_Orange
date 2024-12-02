@@ -111,6 +111,7 @@ class CaseCubit extends Cubit<CaseState> {
   int? _selectedCPAFBResult;
   int? _selectedTreatmentIPFUNaatResult;
   int? _selectedTreatmentCPFUNaatResult;
+  int? _selectedTreatmentHistoryResult;
 
   ///ContactTracingPage
   int? _selectedTPTRegimen;
@@ -158,6 +159,8 @@ class CaseCubit extends Cubit<CaseState> {
       _selectedTreatmentIPFUNaatResult = selectedTreatmentIPFUNaatResult;
   set selectTreatmentCPFUNaatResult(int? selectedTreatmentCPFUNaatResult) =>
       _selectedTreatmentCPFUNaatResult = selectedTreatmentCPFUNaatResult;
+  set selectTreatmentHistoryResult(int? selectedTreatmentHistoryResult) =>
+      _selectedTreatmentHistoryResult = selectedTreatmentHistoryResult;
 
   set selectTPTRegimen(int? selectedTPTRegimen) =>
       _selectedTPTRegimen = selectedTPTRegimen;
@@ -192,6 +195,7 @@ class CaseCubit extends Cubit<CaseState> {
   int? get selectedCPAFBResult => _selectedCPAFBResult;
   int? get selectedTreatmentIPFUNaatResult => _selectedTreatmentIPFUNaatResult;
   int? get selectedTreatmentCPFUNaatResult => _selectedTreatmentCPFUNaatResult;
+  int? get selectedTreatmentHistoryResult => _selectedTreatmentHistoryResult;
 
   String? updateScreeningOutcome(FormGroup formGroup) {
     final cough = formGroup.control('cough').value;
@@ -383,7 +387,8 @@ class CaseCubit extends Cubit<CaseState> {
       ReferralDetailsModel referralDetailsModel) async {
     final response = await caseRepo.saveReferralDetails(
         referralDetailsModel: referralDetailsModel,
-        id: state.caseWorkedUpon.referralDetails);
+        id: state.caseWorkedUpon.referralDetails,
+        referralId: state.caseWorkedUpon.referralId ?? '');
     selectCase = await getCaseModel(response.caseId);
 
     emit(

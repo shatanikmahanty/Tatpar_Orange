@@ -192,7 +192,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                   AppLocalizations.of(context)!
                                                       .stage,
                                               options: const [
-                                                'IP',
+                                                'IHV',
                                                 'IPFU',
                                                 'CP'
                                               ],
@@ -219,7 +219,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                       'stage')
                                                                   .value
                                                                   .toString() ==
-                                                              'IP',
+                                                              'IHV',
                                                           child: Column(
                                                             children: [
                                                               DateTextInput(

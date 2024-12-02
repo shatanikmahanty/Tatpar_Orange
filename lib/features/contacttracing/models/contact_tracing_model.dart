@@ -70,6 +70,9 @@ class ContactTracingModel with _$ContactTracingModel {
     @HiveField(20)
     @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
     bool? isFormIDAssigned,
+    @HiveField(21)
+    @JsonKey(name: 'contact_tracing_referral_id')
+    String? contactTracingReferralId,
   }) = _ContactTracingModel;
 
   factory ContactTracingModel.fromJson(Map<String, dynamic> json) =>

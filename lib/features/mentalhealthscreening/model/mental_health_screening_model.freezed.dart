@@ -139,8 +139,12 @@ mixin _$MentalHealthScreeningModel {
   @JsonKey(name: 'case_id', includeToJson: false)
   int? get caseId => throw _privateConstructorUsedError;
 
+  /// Serializes this MentalHealthScreeningModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of MentalHealthScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $MentalHealthScreeningModelCopyWith<MentalHealthScreeningModel>
       get copyWith => throw _privateConstructorUsedError;
 }
@@ -261,6 +265,8 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of MentalHealthScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -419,6 +425,8 @@ class _$MentalHealthScreeningModelCopyWithImpl<$Res,
     ) as $Val);
   }
 
+  /// Create a copy of MentalHealthScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel {
@@ -550,6 +558,8 @@ class __$$MentalHealthScreeningModelImplCopyWithImpl<$Res>
       $Res Function(_$MentalHealthScreeningModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of MentalHealthScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1024,7 +1034,7 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
             (identical(other.caseId, caseId) || other.caseId == caseId));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1060,7 +1070,9 @@ class _$MentalHealthScreeningModelImpl implements _MentalHealthScreeningModel {
         caseId
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of MentalHealthScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$MentalHealthScreeningModelImplCopyWith<_$MentalHealthScreeningModelImpl>
@@ -1330,8 +1342,11 @@ abstract class _MentalHealthScreeningModel
   @HiveField(29)
   @JsonKey(name: 'case_id', includeToJson: false)
   int? get caseId;
+
+  /// Create a copy of MentalHealthScreeningModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$MentalHealthScreeningModelImplCopyWith<_$MentalHealthScreeningModelImpl>
       get copyWith => throw _privateConstructorUsedError;
 }

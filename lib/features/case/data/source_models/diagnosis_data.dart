@@ -19,6 +19,9 @@ class DiagnosisData with _$DiagnosisData {
     @HiveField(13)
     @JsonKey(name: 'treatment_outcome')
     List<TreatmentOutcome>? treatmentOutcome,
+    @HiveField(14)
+    @JsonKey(name: 'treatment_history')
+    List<TreatmentHistory>? treatmentHistory,
   }) = _DiagnosisData;
 
   factory DiagnosisData.fromJson(Map<String, dynamic> json) =>

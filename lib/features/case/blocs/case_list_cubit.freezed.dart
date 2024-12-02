@@ -26,8 +26,12 @@ mixin _$CaseListState {
   CasesFilterModel get casesFilter => throw _privateConstructorUsedError;
   bool get showAssignedToMeOnly => throw _privateConstructorUsedError;
 
+  /// Serializes this CaseListState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CaseListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CaseListStateCopyWith<CaseListState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -58,6 +62,8 @@ class _$CaseListStateCopyWithImpl<$Res, $Val extends CaseListState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CaseListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -91,6 +97,8 @@ class _$CaseListStateCopyWithImpl<$Res, $Val extends CaseListState>
     ) as $Val);
   }
 
+  /// Create a copy of CaseListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $CasesFilterModelCopyWith<$Res> get casesFilter {
@@ -127,6 +135,8 @@ class __$$CaseListStateImplCopyWithImpl<$Res>
       _$CaseListStateImpl _value, $Res Function(_$CaseListStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CaseListState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -225,7 +235,7 @@ class _$CaseListStateImpl implements _CaseListState {
                 other.showAssignedToMeOnly == showAssignedToMeOnly));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -235,7 +245,9 @@ class _$CaseListStateImpl implements _CaseListState {
       casesFilter,
       showAssignedToMeOnly);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CaseListState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CaseListStateImplCopyWith<_$CaseListStateImpl> get copyWith =>
@@ -270,8 +282,11 @@ abstract class _CaseListState implements CaseListState {
   CasesFilterModel get casesFilter;
   @override
   bool get showAssignedToMeOnly;
+
+  /// Create a copy of CaseListState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CaseListStateImplCopyWith<_$CaseListStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

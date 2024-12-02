@@ -215,8 +215,12 @@ mixin _$DiagnosisModel {
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned => throw _privateConstructorUsedError;
 
+  /// Serializes this DiagnosisModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of DiagnosisModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $DiagnosisModelCopyWith<DiagnosisModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -366,6 +370,8 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of DiagnosisModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -795,6 +801,8 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
       _$DiagnosisModelImpl _value, $Res Function(_$DiagnosisModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of DiagnosisModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -1569,7 +1577,7 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
             (identical(other.isFormIDAssigned, isFormIDAssigned) || other.isFormIDAssigned == isFormIDAssigned));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
@@ -1630,7 +1638,9 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
         isFormIDAssigned
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of DiagnosisModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$DiagnosisModelImplCopyWith<_$DiagnosisModelImpl> get copyWith =>
@@ -2050,8 +2060,11 @@ abstract class _DiagnosisModel implements DiagnosisModel {
   @HiveField(54)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned;
+
+  /// Create a copy of DiagnosisModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$DiagnosisModelImplCopyWith<_$DiagnosisModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

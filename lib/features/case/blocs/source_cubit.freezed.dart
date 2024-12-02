@@ -26,8 +26,12 @@ mixin _$SourceState {
   List<String>? get panchayatList => throw _privateConstructorUsedError;
   List<String>? get blockList => throw _privateConstructorUsedError;
 
+  /// Serializes this SourceState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of SourceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $SourceStateCopyWith<SourceState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -59,6 +63,8 @@ class _$SourceStateCopyWithImpl<$Res, $Val extends SourceState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of SourceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -92,6 +98,8 @@ class _$SourceStateCopyWithImpl<$Res, $Val extends SourceState>
     ) as $Val);
   }
 
+  /// Create a copy of SourceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DataModelCopyWith<$Res>? get dataModel {
@@ -104,6 +112,8 @@ class _$SourceStateCopyWithImpl<$Res, $Val extends SourceState>
     });
   }
 
+  /// Create a copy of SourceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $DiagnosisDataCopyWith<$Res>? get diagnosisData {
@@ -146,6 +156,8 @@ class __$$SourceStateImplCopyWithImpl<$Res>
       _$SourceStateImpl _value, $Res Function(_$SourceStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of SourceState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -243,7 +255,7 @@ class _$SourceStateImpl implements _SourceState {
                 .equals(other._blockList, _blockList));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -253,7 +265,9 @@ class _$SourceStateImpl implements _SourceState {
       const DeepCollectionEquality().hash(_panchayatList),
       const DeepCollectionEquality().hash(_blockList));
 
-  @JsonKey(ignore: true)
+  /// Create a copy of SourceState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$SourceStateImplCopyWith<_$SourceStateImpl> get copyWith =>
@@ -288,8 +302,11 @@ abstract class _SourceState implements SourceState {
   List<String>? get panchayatList;
   @override
   List<String>? get blockList;
+
+  /// Create a copy of SourceState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$SourceStateImplCopyWith<_$SourceStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

@@ -31,8 +31,12 @@ mixin _$CasesFilterModel {
   List<String?> get district => throw _privateConstructorUsedError;
   String? get searchWord => throw _privateConstructorUsedError;
 
+  /// Serializes this CasesFilterModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of CasesFilterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $CasesFilterModelCopyWith<CasesFilterModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -66,6 +70,8 @@ class _$CasesFilterModelCopyWithImpl<$Res, $Val extends CasesFilterModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of CasesFilterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -134,6 +140,8 @@ class __$$CasesFilterModelImplCopyWithImpl<$Res>
       $Res Function(_$CasesFilterModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of CasesFilterModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -256,7 +264,7 @@ class _$CasesFilterModelImpl implements _CasesFilterModel {
                 other.searchWord == searchWord));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType,
@@ -267,7 +275,9 @@ class _$CasesFilterModelImpl implements _CasesFilterModel {
       const DeepCollectionEquality().hash(_district),
       searchWord);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of CasesFilterModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$CasesFilterModelImplCopyWith<_$CasesFilterModelImpl> get copyWith =>
@@ -314,8 +324,11 @@ abstract class _CasesFilterModel implements CasesFilterModel {
   List<String?> get district;
   @override
   String? get searchWord;
+
+  /// Create a copy of CasesFilterModel
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$CasesFilterModelImplCopyWith<_$CasesFilterModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

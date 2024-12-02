@@ -25,8 +25,12 @@ mixin _$WHOSrqState {
   MentalHealthScreeningModel? get mentalHealthScreeningModel =>
       throw _privateConstructorUsedError;
 
+  /// Serializes this WHOSrqState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of WHOSrqState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $WHOSrqStateCopyWith<WHOSrqState> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -56,6 +60,8 @@ class _$WHOSrqStateCopyWithImpl<$Res, $Val extends WHOSrqState>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of WHOSrqState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -79,6 +85,8 @@ class _$WHOSrqStateCopyWithImpl<$Res, $Val extends WHOSrqState>
     ) as $Val);
   }
 
+  /// Create a copy of WHOSrqState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel {
@@ -91,6 +99,8 @@ class _$WHOSrqStateCopyWithImpl<$Res, $Val extends WHOSrqState>
     });
   }
 
+  /// Create a copy of WHOSrqState
+  /// with the given fields replaced by the non-null parameter values.
   @override
   @pragma('vm:prefer-inline')
   $MentalHealthScreeningModelCopyWith<$Res>? get mentalHealthScreeningModel {
@@ -132,6 +142,8 @@ class __$$WHOSrqStateImplCopyWithImpl<$Res>
       _$WHOSrqStateImpl _value, $Res Function(_$WHOSrqStateImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of WHOSrqState
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
@@ -194,12 +206,14 @@ class _$WHOSrqStateImpl implements _WHOSrqState {
                     mentalHealthScreeningModel));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
       runtimeType, isLoading, whoSrqModel, mentalHealthScreeningModel);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of WHOSrqState
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$WHOSrqStateImplCopyWith<_$WHOSrqStateImpl> get copyWith =>
@@ -229,8 +243,11 @@ abstract class _WHOSrqState implements WHOSrqState {
   WHOSrqModel? get whoSrqModel;
   @override
   MentalHealthScreeningModel? get mentalHealthScreeningModel;
+
+  /// Create a copy of WHOSrqState
+  /// with the given fields replaced by the non-null parameter values.
   @override
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$WHOSrqStateImplCopyWith<_$WHOSrqStateImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }

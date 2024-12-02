@@ -29,9 +29,6 @@ mixin _$TreatmentModel {
   @HiveField(2)
   @JsonKey(name: 'tb_site')
   String? get tbSite => throw _privateConstructorUsedError;
-  @HiveField(3)
-  @JsonKey(name: 'case_history')
-  String? get caseHistory => throw _privateConstructorUsedError;
   @HiveField(4)
   @JsonKey(name: 'drug_sensitive')
   String? get drugSensitive => throw _privateConstructorUsedError;
@@ -230,9 +227,22 @@ mixin _$TreatmentModel {
   @HiveField(61)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned => throw _privateConstructorUsedError;
+  @HiveField(62)
+  @JsonKey(name: 'nikshay_id')
+  String? get nikshayId => throw _privateConstructorUsedError;
+  @HiveField(64)
+  @JsonKey(includeToJson: false)
+  String? get treatmentHistory => throw _privateConstructorUsedError;
+  @HiveField(63)
+  @JsonKey(name: 'case_history')
+  int? get selectedTreatmentHistoryResult => throw _privateConstructorUsedError;
 
+  /// Serializes this TreatmentModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
-  @JsonKey(ignore: true)
+
+  /// Create a copy of TreatmentModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   $TreatmentModelCopyWith<TreatmentModel> get copyWith =>
       throw _privateConstructorUsedError;
 }
@@ -247,7 +257,6 @@ abstract class $TreatmentModelCopyWith<$Res> {
       {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
       @HiveField(1) @JsonKey(name: 'case_definition') String? caseDefinition,
       @HiveField(2) @JsonKey(name: 'tb_site') String? tbSite,
-      @HiveField(3) @JsonKey(name: 'case_history') String? caseHistory,
       @HiveField(4) @JsonKey(name: 'drug_sensitive') String? drugSensitive,
       @HiveField(5) @JsonKey(name: 'diagnosis_status') String? diagnosisStatus,
       @HiveField(6)
@@ -402,7 +411,12 @@ abstract class $TreatmentModelCopyWith<$Res> {
       int? caseId,
       @HiveField(61)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(62) @JsonKey(name: 'nikshay_id') String? nikshayId,
+      @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
+      @HiveField(63)
+      @JsonKey(name: 'case_history')
+      int? selectedTreatmentHistoryResult});
 }
 
 /// @nodoc
@@ -415,13 +429,14 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
   // ignore: unused_field
   final $Res Function($Val) _then;
 
+  /// Create a copy of TreatmentModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
     Object? caseDefinition = freezed,
     Object? tbSite = freezed,
-    Object? caseHistory = freezed,
     Object? drugSensitive = freezed,
     Object? diagnosisStatus = freezed,
     Object? ihvDate = freezed,
@@ -480,6 +495,9 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? nikshayId = freezed,
+    Object? treatmentHistory = freezed,
+    Object? selectedTreatmentHistoryResult = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -493,10 +511,6 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
       tbSite: freezed == tbSite
           ? _value.tbSite
           : tbSite // ignore: cast_nullable_to_non_nullable
-              as String?,
-      caseHistory: freezed == caseHistory
-          ? _value.caseHistory
-          : caseHistory // ignore: cast_nullable_to_non_nullable
               as String?,
       drugSensitive: freezed == drugSensitive
           ? _value.drugSensitive
@@ -731,6 +745,18 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      nikshayId: freezed == nikshayId
+          ? _value.nikshayId
+          : nikshayId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      treatmentHistory: freezed == treatmentHistory
+          ? _value.treatmentHistory
+          : treatmentHistory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedTreatmentHistoryResult: freezed == selectedTreatmentHistoryResult
+          ? _value.selectedTreatmentHistoryResult
+          : selectedTreatmentHistoryResult // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -747,7 +773,6 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) int? id,
       @HiveField(1) @JsonKey(name: 'case_definition') String? caseDefinition,
       @HiveField(2) @JsonKey(name: 'tb_site') String? tbSite,
-      @HiveField(3) @JsonKey(name: 'case_history') String? caseHistory,
       @HiveField(4) @JsonKey(name: 'drug_sensitive') String? drugSensitive,
       @HiveField(5) @JsonKey(name: 'diagnosis_status') String? diagnosisStatus,
       @HiveField(6)
@@ -902,7 +927,12 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       int? caseId,
       @HiveField(61)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(62) @JsonKey(name: 'nikshay_id') String? nikshayId,
+      @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
+      @HiveField(63)
+      @JsonKey(name: 'case_history')
+      int? selectedTreatmentHistoryResult});
 }
 
 /// @nodoc
@@ -913,13 +943,14 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
       _$TreatmentModelImpl _value, $Res Function(_$TreatmentModelImpl) _then)
       : super(_value, _then);
 
+  /// Create a copy of TreatmentModel
+  /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
   $Res call({
     Object? id = freezed,
     Object? caseDefinition = freezed,
     Object? tbSite = freezed,
-    Object? caseHistory = freezed,
     Object? drugSensitive = freezed,
     Object? diagnosisStatus = freezed,
     Object? ihvDate = freezed,
@@ -978,6 +1009,9 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? nikshayId = freezed,
+    Object? treatmentHistory = freezed,
+    Object? selectedTreatmentHistoryResult = freezed,
   }) {
     return _then(_$TreatmentModelImpl(
       id: freezed == id
@@ -991,10 +1025,6 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
       tbSite: freezed == tbSite
           ? _value.tbSite
           : tbSite // ignore: cast_nullable_to_non_nullable
-              as String?,
-      caseHistory: freezed == caseHistory
-          ? _value.caseHistory
-          : caseHistory // ignore: cast_nullable_to_non_nullable
               as String?,
       drugSensitive: freezed == drugSensitive
           ? _value.drugSensitive
@@ -1229,6 +1259,18 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      nikshayId: freezed == nikshayId
+          ? _value.nikshayId
+          : nikshayId // ignore: cast_nullable_to_non_nullable
+              as String?,
+      treatmentHistory: freezed == treatmentHistory
+          ? _value.treatmentHistory
+          : treatmentHistory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      selectedTreatmentHistoryResult: freezed == selectedTreatmentHistoryResult
+          ? _value.selectedTreatmentHistoryResult
+          : selectedTreatmentHistoryResult // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -1240,7 +1282,6 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       {@HiveField(0) @JsonKey(name: 'id', includeToJson: false) this.id,
       @HiveField(1) @JsonKey(name: 'case_definition') this.caseDefinition,
       @HiveField(2) @JsonKey(name: 'tb_site') this.tbSite,
-      @HiveField(3) @JsonKey(name: 'case_history') this.caseHistory,
       @HiveField(4) @JsonKey(name: 'drug_sensitive') this.drugSensitive,
       @HiveField(5) @JsonKey(name: 'diagnosis_status') this.diagnosisStatus,
       @HiveField(6)
@@ -1383,7 +1424,12 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       this.caseId,
       @HiveField(61)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      this.isFormIDAssigned});
+      this.isFormIDAssigned,
+      @HiveField(62) @JsonKey(name: 'nikshay_id') this.nikshayId,
+      @HiveField(64) @JsonKey(includeToJson: false) this.treatmentHistory,
+      @HiveField(63)
+      @JsonKey(name: 'case_history')
+      this.selectedTreatmentHistoryResult});
 
   factory _$TreatmentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TreatmentModelImplFromJson(json);
@@ -1400,10 +1446,6 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @HiveField(2)
   @JsonKey(name: 'tb_site')
   final String? tbSite;
-  @override
-  @HiveField(3)
-  @JsonKey(name: 'case_history')
-  final String? caseHistory;
   @override
   @HiveField(4)
   @JsonKey(name: 'drug_sensitive')
@@ -1659,10 +1701,22 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @HiveField(61)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   final bool? isFormIDAssigned;
+  @override
+  @HiveField(62)
+  @JsonKey(name: 'nikshay_id')
+  final String? nikshayId;
+  @override
+  @HiveField(64)
+  @JsonKey(includeToJson: false)
+  final String? treatmentHistory;
+  @override
+  @HiveField(63)
+  @JsonKey(name: 'case_history')
+  final int? selectedTreatmentHistoryResult;
 
   @override
   String toString() {
-    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, tbSite: $tbSite, caseHistory: $caseHistory, drugSensitive: $drugSensitive, diagnosisStatus: $diagnosisStatus, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat: $selectedTreatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, ipStartDate: $ipStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tobaccoConsumption: $tobaccoConsumption, nutritionScreening: $nutritionScreening, nutritionEligibility: $nutritionEligibility, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, nutritionLinkageDate: $nutritionLinkageDate, height: $height, weight: $weight, stage: $stage, ipfuDate: $ipfuDate, ipfuAfbDone: $ipfuAfbDone, ipfuAfbLabNo: $ipfuAfbLabNo, ipfuAfbDate: $ipfuAfbDate, ipfuAfbResult: $ipfuAfbResult, selectedIpfuAFBResult: $selectedIpfuAFBResult, ipfuNaatTest: $ipfuNaatTest, ipfuNaatResult: $ipfuNaatResult, selectedIpfuNaatResult: $selectedIpfuNaatResult, ipfuLabNo: $ipfuLabNo, ipfuChestXray: $ipfuChestXray, ipfuNutritionSupport: $ipfuNutritionSupport, cpDate: $cpDate, cpAfbDone: $cpAfbDone, cpAfbLabNo: $cpAfbLabNo, cpAfbDate: $cpAfbDate, cpAfbResult: $cpAfbResult, selectedCpAFBResult: $selectedCpAFBResult, cpNaatTest: $cpNaatTest, cpNaatResult: $cpNaatResult, selectedCpNaatResult: $selectedCpNaatResult, cpLabNo: $cpLabNo, cpChestXray: $cpChestXray, cpNutritionSupport: $cpNutritionSupport, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
+    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, tbSite: $tbSite, drugSensitive: $drugSensitive, diagnosisStatus: $diagnosisStatus, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat: $selectedTreatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, ipStartDate: $ipStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tobaccoConsumption: $tobaccoConsumption, nutritionScreening: $nutritionScreening, nutritionEligibility: $nutritionEligibility, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, nutritionLinkageDate: $nutritionLinkageDate, height: $height, weight: $weight, stage: $stage, ipfuDate: $ipfuDate, ipfuAfbDone: $ipfuAfbDone, ipfuAfbLabNo: $ipfuAfbLabNo, ipfuAfbDate: $ipfuAfbDate, ipfuAfbResult: $ipfuAfbResult, selectedIpfuAFBResult: $selectedIpfuAFBResult, ipfuNaatTest: $ipfuNaatTest, ipfuNaatResult: $ipfuNaatResult, selectedIpfuNaatResult: $selectedIpfuNaatResult, ipfuLabNo: $ipfuLabNo, ipfuChestXray: $ipfuChestXray, ipfuNutritionSupport: $ipfuNutritionSupport, cpDate: $cpDate, cpAfbDone: $cpAfbDone, cpAfbLabNo: $cpAfbLabNo, cpAfbDate: $cpAfbDate, cpAfbResult: $cpAfbResult, selectedCpAFBResult: $selectedCpAFBResult, cpNaatTest: $cpNaatTest, cpNaatResult: $cpNaatResult, selectedCpNaatResult: $selectedCpNaatResult, cpLabNo: $cpLabNo, cpChestXray: $cpChestXray, cpNutritionSupport: $cpNutritionSupport, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned, nikshayId: $nikshayId, treatmentHistory: $treatmentHistory, selectedTreatmentHistoryResult: $selectedTreatmentHistoryResult)';
   }
 
   @override
@@ -1674,8 +1728,6 @@ class _$TreatmentModelImpl implements _TreatmentModel {
             (identical(other.caseDefinition, caseDefinition) ||
                 other.caseDefinition == caseDefinition) &&
             (identical(other.tbSite, tbSite) || other.tbSite == tbSite) &&
-            (identical(other.caseHistory, caseHistory) ||
-                other.caseHistory == caseHistory) &&
             (identical(other.drugSensitive, drugSensitive) ||
                 other.drugSensitive == drugSensitive) &&
             (identical(other.diagnosisStatus, diagnosisStatus) ||
@@ -1727,7 +1779,8 @@ class _$TreatmentModelImpl implements _TreatmentModel {
                 other.screeningDateNutrition == screeningDateNutrition) &&
             (identical(other.nutritionLinkage, nutritionLinkage) ||
                 other.nutritionLinkage == nutritionLinkage) &&
-            (identical(other.nutritionLinkageDate, nutritionLinkageDate) || other.nutritionLinkageDate == nutritionLinkageDate) &&
+            (identical(other.nutritionLinkageDate, nutritionLinkageDate) ||
+                other.nutritionLinkageDate == nutritionLinkageDate) &&
             (identical(other.height, height) || other.height == height) &&
             (identical(other.weight, weight) || other.weight == weight) &&
             (identical(other.stage, stage) || other.stage == stage) &&
@@ -1757,17 +1810,19 @@ class _$TreatmentModelImpl implements _TreatmentModel {
             (identical(other.cpNutritionSupport, cpNutritionSupport) || other.cpNutritionSupport == cpNutritionSupport) &&
             (identical(other.isUpdated, isUpdated) || other.isUpdated == isUpdated) &&
             (identical(other.caseId, caseId) || other.caseId == caseId) &&
-            (identical(other.isFormIDAssigned, isFormIDAssigned) || other.isFormIDAssigned == isFormIDAssigned));
+            (identical(other.isFormIDAssigned, isFormIDAssigned) || other.isFormIDAssigned == isFormIDAssigned) &&
+            (identical(other.nikshayId, nikshayId) || other.nikshayId == nikshayId) &&
+            (identical(other.treatmentHistory, treatmentHistory) || other.treatmentHistory == treatmentHistory) &&
+            (identical(other.selectedTreatmentHistoryResult, selectedTreatmentHistoryResult) || other.selectedTreatmentHistoryResult == selectedTreatmentHistoryResult));
   }
 
-  @JsonKey(ignore: true)
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hashAll([
         runtimeType,
         id,
         caseDefinition,
         tbSite,
-        caseHistory,
         drugSensitive,
         diagnosisStatus,
         ihvDate,
@@ -1825,10 +1880,15 @@ class _$TreatmentModelImpl implements _TreatmentModel {
         cpNutritionSupport,
         isUpdated,
         caseId,
-        isFormIDAssigned
+        isFormIDAssigned,
+        nikshayId,
+        treatmentHistory,
+        selectedTreatmentHistoryResult
       ]);
 
-  @JsonKey(ignore: true)
+  /// Create a copy of TreatmentModel
+  /// with the given fields replaced by the non-null parameter values.
+  @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   @pragma('vm:prefer-inline')
   _$$TreatmentModelImplCopyWith<_$TreatmentModelImpl> get copyWith =>
@@ -1850,7 +1910,6 @@ abstract class _TreatmentModel implements TreatmentModel {
       @JsonKey(name: 'case_definition')
       final String? caseDefinition,
       @HiveField(2) @JsonKey(name: 'tb_site') final String? tbSite,
-      @HiveField(3) @JsonKey(name: 'case_history') final String? caseHistory,
       @HiveField(4)
       @JsonKey(name: 'drug_sensitive')
       final String? drugSensitive,
@@ -2023,7 +2082,14 @@ abstract class _TreatmentModel implements TreatmentModel {
       final int? caseId,
       @HiveField(61)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      final bool? isFormIDAssigned}) = _$TreatmentModelImpl;
+      final bool? isFormIDAssigned,
+      @HiveField(62) @JsonKey(name: 'nikshay_id') final String? nikshayId,
+      @HiveField(64)
+      @JsonKey(includeToJson: false)
+      final String? treatmentHistory,
+      @HiveField(63)
+      @JsonKey(name: 'case_history')
+      final int? selectedTreatmentHistoryResult}) = _$TreatmentModelImpl;
 
   factory _TreatmentModel.fromJson(Map<String, dynamic> json) =
       _$TreatmentModelImpl.fromJson;
@@ -2040,10 +2106,6 @@ abstract class _TreatmentModel implements TreatmentModel {
   @HiveField(2)
   @JsonKey(name: 'tb_site')
   String? get tbSite;
-  @override
-  @HiveField(3)
-  @JsonKey(name: 'case_history')
-  String? get caseHistory;
   @override
   @HiveField(4)
   @JsonKey(name: 'drug_sensitive')
@@ -2300,7 +2362,22 @@ abstract class _TreatmentModel implements TreatmentModel {
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned;
   @override
-  @JsonKey(ignore: true)
+  @HiveField(62)
+  @JsonKey(name: 'nikshay_id')
+  String? get nikshayId;
+  @override
+  @HiveField(64)
+  @JsonKey(includeToJson: false)
+  String? get treatmentHistory;
+  @override
+  @HiveField(63)
+  @JsonKey(name: 'case_history')
+  int? get selectedTreatmentHistoryResult;
+
+  /// Create a copy of TreatmentModel
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @JsonKey(includeFromJson: false, includeToJson: false)
   _$$TreatmentModelImplCopyWith<_$TreatmentModelImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
