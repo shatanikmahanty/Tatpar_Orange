@@ -70,7 +70,7 @@ class TBScreeningPage extends StatelessWidget {
 
       final model = cubit.state.tbScreeningModel ?? const TBScreeningModel();
       final tbScreeningModel = model.copyWith(
-          screeningDate: formData['screening_date'] as DateTime,
+          screeningDate: formData['screening_date'] as DateTime?,
           screenedBy: formData['screened_by'] as String?,
           selectedTrimester: cubit.selectedTBTrimester,
           cough: formData['cough'] as String?,
