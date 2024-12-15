@@ -56,7 +56,7 @@ dependencies:
   url_launcher: ^6.2.6
   flutter_debouncer: ^2.0.0
   dotted_border: ^2.1.0
-  timelines: ^0.1.0
+  timelines_plus: ^1.0.4
   dotted_line: ^3.2.2
   equatable: ^2.0.5
   json_annotation: ^4.8.1

@@ -3,7 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/case/presentation/widgets/case_profile_card.dart';
 import 'package:tatpar_acf/features/referral/presentation/widgets/case_app_bar.dart';
-import 'package:timelines/timelines.dart';
+import 'package:timelines_plus/timelines_plus.dart';
 
 import '../../../../configurations/configurations.dart';
 import '../widgets/workflow_connector.dart';
@@ -21,18 +21,22 @@ class CaseProfilePage extends StatelessWidget {
       onPopInvoked: (didPop) {
         WidgetsBinding.instance.addPostFrameCallback((_) {
           context.router.pushAndPopUntil(
-              const AppHomeRoute(children: [CasesRoute()]),
-              predicate: (Route<dynamic> route) => false);
+            const AppHomeRoute(children: [CasesRoute()]),
+            predicate: (Route<dynamic> route) => false,
+          );
         });
       },
       child: Scaffold(
-        appBar: CaseAppBar('Case Profile', onClick: () {
-          WidgetsBinding.instance.addPostFrameCallback((_) {
-            context.router.pushAndPopUntil(
-                const AppHomeRoute(children: [CasesRoute()]),
-                predicate: (Route<dynamic> route) => false);
-          });
-        }),
+        appBar: CaseAppBar(
+          'Case Profile',
+          onClick: () {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              context.router.pushAndPopUntil(
+                  const AppHomeRoute(children: [CasesRoute()]),
+                  predicate: (Route<dynamic> route) => false);
+            });
+          },
+        ),
         body: Padding(
           padding: const EdgeInsets.symmetric(horizontal: kPadding * 2),
           child: Column(

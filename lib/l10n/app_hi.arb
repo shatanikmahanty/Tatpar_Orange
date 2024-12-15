@@ -124,7 +124,7 @@
   "patientOccupation": "रोगी का occupation",
   "height": "लम्बाई (CM)",
   "weight": "वजन (KG)",
-  "ipStartDate": "IP शुरू दिनाँक",
+  "ipStartDate": "IHV शुरू दिनाँक",
   "hivDone": "HIV Done?",
   "hivResult": "HIV रिजल्ट",
   "hivDate": "HIV दिनाँक",

@@ -124,7 +124,7 @@
     "patientOccupation":"Occupation of patient",
     "height":"Height (CM)",
     "weight":"weight (KG)",
-    "ipStartDate":"IP_start_date",
+    "ipStartDate":"IHV_start_date",
     "hivDone":"HIV Done?",
     "hivResult":"HIV result",
     "hivDate":"HIV Date",
