@@ -4,6 +4,7 @@ import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 
 part 'treatment_model.freezed.dart';
+
 part 'treatment_model.g.dart';
 
 DateTime? fromJsonToDateTime(String? date) {
@@ -181,10 +182,15 @@ class TreatmentModel with _$TreatmentModel {
     @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
     bool? isFormIDAssigned,
     @HiveField(62) @JsonKey(name: 'nikshay_id') String? nikshayId,
-    @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
     @HiveField(63)
     @JsonKey(name: 'case_history')
     int? selectedTreatmentHistoryResult,
+    @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
+    @HiveField(65)
+    @JsonKey(
+      name: 'ihv_checklist',
+    )
+    List<bool>? ihvChecklist,
   }) = _TreatmentModel;
 
   factory TreatmentModel.fromJson(Map<String, dynamic> json) =>

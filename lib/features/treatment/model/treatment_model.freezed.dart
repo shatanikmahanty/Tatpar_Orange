@@ -230,12 +230,15 @@ mixin _$TreatmentModel {
   @HiveField(62)
   @JsonKey(name: 'nikshay_id')
   String? get nikshayId => throw _privateConstructorUsedError;
-  @HiveField(64)
-  @JsonKey(includeToJson: false)
-  String? get treatmentHistory => throw _privateConstructorUsedError;
   @HiveField(63)
   @JsonKey(name: 'case_history')
   int? get selectedTreatmentHistoryResult => throw _privateConstructorUsedError;
+  @HiveField(64)
+  @JsonKey(includeToJson: false)
+  String? get treatmentHistory => throw _privateConstructorUsedError;
+  @HiveField(65)
+  @JsonKey(name: 'ihv_checklist')
+  List<bool>? get ihvChecklist => throw _privateConstructorUsedError;
 
   /// Serializes this TreatmentModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -413,10 +416,11 @@ abstract class $TreatmentModelCopyWith<$Res> {
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
       bool? isFormIDAssigned,
       @HiveField(62) @JsonKey(name: 'nikshay_id') String? nikshayId,
-      @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
       @HiveField(63)
       @JsonKey(name: 'case_history')
-      int? selectedTreatmentHistoryResult});
+      int? selectedTreatmentHistoryResult,
+      @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
+      @HiveField(65) @JsonKey(name: 'ihv_checklist') List<bool>? ihvChecklist});
 }
 
 /// @nodoc
@@ -496,8 +500,9 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
     Object? nikshayId = freezed,
-    Object? treatmentHistory = freezed,
     Object? selectedTreatmentHistoryResult = freezed,
+    Object? treatmentHistory = freezed,
+    Object? ihvChecklist = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -749,14 +754,18 @@ class _$TreatmentModelCopyWithImpl<$Res, $Val extends TreatmentModel>
           ? _value.nikshayId
           : nikshayId // ignore: cast_nullable_to_non_nullable
               as String?,
-      treatmentHistory: freezed == treatmentHistory
-          ? _value.treatmentHistory
-          : treatmentHistory // ignore: cast_nullable_to_non_nullable
-              as String?,
       selectedTreatmentHistoryResult: freezed == selectedTreatmentHistoryResult
           ? _value.selectedTreatmentHistoryResult
           : selectedTreatmentHistoryResult // ignore: cast_nullable_to_non_nullable
               as int?,
+      treatmentHistory: freezed == treatmentHistory
+          ? _value.treatmentHistory
+          : treatmentHistory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ihvChecklist: freezed == ihvChecklist
+          ? _value.ihvChecklist
+          : ihvChecklist // ignore: cast_nullable_to_non_nullable
+              as List<bool>?,
     ) as $Val);
   }
 }
@@ -929,10 +938,11 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
       bool? isFormIDAssigned,
       @HiveField(62) @JsonKey(name: 'nikshay_id') String? nikshayId,
-      @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
       @HiveField(63)
       @JsonKey(name: 'case_history')
-      int? selectedTreatmentHistoryResult});
+      int? selectedTreatmentHistoryResult,
+      @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
+      @HiveField(65) @JsonKey(name: 'ihv_checklist') List<bool>? ihvChecklist});
 }
 
 /// @nodoc
@@ -1010,8 +1020,9 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
     Object? nikshayId = freezed,
-    Object? treatmentHistory = freezed,
     Object? selectedTreatmentHistoryResult = freezed,
+    Object? treatmentHistory = freezed,
+    Object? ihvChecklist = freezed,
   }) {
     return _then(_$TreatmentModelImpl(
       id: freezed == id
@@ -1263,14 +1274,18 @@ class __$$TreatmentModelImplCopyWithImpl<$Res>
           ? _value.nikshayId
           : nikshayId // ignore: cast_nullable_to_non_nullable
               as String?,
-      treatmentHistory: freezed == treatmentHistory
-          ? _value.treatmentHistory
-          : treatmentHistory // ignore: cast_nullable_to_non_nullable
-              as String?,
       selectedTreatmentHistoryResult: freezed == selectedTreatmentHistoryResult
           ? _value.selectedTreatmentHistoryResult
           : selectedTreatmentHistoryResult // ignore: cast_nullable_to_non_nullable
               as int?,
+      treatmentHistory: freezed == treatmentHistory
+          ? _value.treatmentHistory
+          : treatmentHistory // ignore: cast_nullable_to_non_nullable
+              as String?,
+      ihvChecklist: freezed == ihvChecklist
+          ? _value._ihvChecklist
+          : ihvChecklist // ignore: cast_nullable_to_non_nullable
+              as List<bool>?,
     ));
   }
 }
@@ -1426,10 +1441,14 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
       this.isFormIDAssigned,
       @HiveField(62) @JsonKey(name: 'nikshay_id') this.nikshayId,
-      @HiveField(64) @JsonKey(includeToJson: false) this.treatmentHistory,
       @HiveField(63)
       @JsonKey(name: 'case_history')
-      this.selectedTreatmentHistoryResult});
+      this.selectedTreatmentHistoryResult,
+      @HiveField(64) @JsonKey(includeToJson: false) this.treatmentHistory,
+      @HiveField(65)
+      @JsonKey(name: 'ihv_checklist')
+      final List<bool>? ihvChecklist})
+      : _ihvChecklist = ihvChecklist;
 
   factory _$TreatmentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TreatmentModelImplFromJson(json);
@@ -1706,17 +1725,28 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   @JsonKey(name: 'nikshay_id')
   final String? nikshayId;
   @override
-  @HiveField(64)
-  @JsonKey(includeToJson: false)
-  final String? treatmentHistory;
-  @override
   @HiveField(63)
   @JsonKey(name: 'case_history')
   final int? selectedTreatmentHistoryResult;
+  @override
+  @HiveField(64)
+  @JsonKey(includeToJson: false)
+  final String? treatmentHistory;
+  final List<bool>? _ihvChecklist;
+  @override
+  @HiveField(65)
+  @JsonKey(name: 'ihv_checklist')
+  List<bool>? get ihvChecklist {
+    final value = _ihvChecklist;
+    if (value == null) return null;
+    if (_ihvChecklist is EqualUnmodifiableListView) return _ihvChecklist;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
 
   @override
   String toString() {
-    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, tbSite: $tbSite, drugSensitive: $drugSensitive, diagnosisStatus: $diagnosisStatus, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat: $selectedTreatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, ipStartDate: $ipStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tobaccoConsumption: $tobaccoConsumption, nutritionScreening: $nutritionScreening, nutritionEligibility: $nutritionEligibility, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, nutritionLinkageDate: $nutritionLinkageDate, height: $height, weight: $weight, stage: $stage, ipfuDate: $ipfuDate, ipfuAfbDone: $ipfuAfbDone, ipfuAfbLabNo: $ipfuAfbLabNo, ipfuAfbDate: $ipfuAfbDate, ipfuAfbResult: $ipfuAfbResult, selectedIpfuAFBResult: $selectedIpfuAFBResult, ipfuNaatTest: $ipfuNaatTest, ipfuNaatResult: $ipfuNaatResult, selectedIpfuNaatResult: $selectedIpfuNaatResult, ipfuLabNo: $ipfuLabNo, ipfuChestXray: $ipfuChestXray, ipfuNutritionSupport: $ipfuNutritionSupport, cpDate: $cpDate, cpAfbDone: $cpAfbDone, cpAfbLabNo: $cpAfbLabNo, cpAfbDate: $cpAfbDate, cpAfbResult: $cpAfbResult, selectedCpAFBResult: $selectedCpAFBResult, cpNaatTest: $cpNaatTest, cpNaatResult: $cpNaatResult, selectedCpNaatResult: $selectedCpNaatResult, cpLabNo: $cpLabNo, cpChestXray: $cpChestXray, cpNutritionSupport: $cpNutritionSupport, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned, nikshayId: $nikshayId, treatmentHistory: $treatmentHistory, selectedTreatmentHistoryResult: $selectedTreatmentHistoryResult)';
+    return 'TreatmentModel(id: $id, caseDefinition: $caseDefinition, tbSite: $tbSite, drugSensitive: $drugSensitive, diagnosisStatus: $diagnosisStatus, ihvDate: $ihvDate, treatmentRegimen: $treatmentRegimen, patientOccupation: $patientOccupation, treatmentSupporterName: $treatmentSupporterName, treatmentSupporterPosition: $treatmentSupporterPosition, treatmentSupporterPhone: $treatmentSupporterPhone, treatmentSupporterPanchayat: $treatmentSupporterPanchayat, selectedTreatmentSupporterPanchayat: $selectedTreatmentSupporterPanchayat, treatmentSupporterWard: $treatmentSupporterWard, ipStartDate: $ipStartDate, hivDone: $hivDone, hivResult: $hivResult, hivDate: $hivDate, hbDone: $hbDone, hbResult: $hbResult, hbDate: $hbDate, bloodSugarDone: $bloodSugarDone, bloodSugarResult: $bloodSugarResult, bloodSugarDate: $bloodSugarDate, alcohol: $alcohol, tobaccoConsumption: $tobaccoConsumption, nutritionScreening: $nutritionScreening, nutritionEligibility: $nutritionEligibility, screeningDateNutrition: $screeningDateNutrition, nutritionLinkage: $nutritionLinkage, nutritionLinkageDate: $nutritionLinkageDate, height: $height, weight: $weight, stage: $stage, ipfuDate: $ipfuDate, ipfuAfbDone: $ipfuAfbDone, ipfuAfbLabNo: $ipfuAfbLabNo, ipfuAfbDate: $ipfuAfbDate, ipfuAfbResult: $ipfuAfbResult, selectedIpfuAFBResult: $selectedIpfuAFBResult, ipfuNaatTest: $ipfuNaatTest, ipfuNaatResult: $ipfuNaatResult, selectedIpfuNaatResult: $selectedIpfuNaatResult, ipfuLabNo: $ipfuLabNo, ipfuChestXray: $ipfuChestXray, ipfuNutritionSupport: $ipfuNutritionSupport, cpDate: $cpDate, cpAfbDone: $cpAfbDone, cpAfbLabNo: $cpAfbLabNo, cpAfbDate: $cpAfbDate, cpAfbResult: $cpAfbResult, selectedCpAFBResult: $selectedCpAFBResult, cpNaatTest: $cpNaatTest, cpNaatResult: $cpNaatResult, selectedCpNaatResult: $selectedCpNaatResult, cpLabNo: $cpLabNo, cpChestXray: $cpChestXray, cpNutritionSupport: $cpNutritionSupport, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned, nikshayId: $nikshayId, selectedTreatmentHistoryResult: $selectedTreatmentHistoryResult, treatmentHistory: $treatmentHistory, ihvChecklist: $ihvChecklist)';
   }
 
   @override
@@ -1812,8 +1842,9 @@ class _$TreatmentModelImpl implements _TreatmentModel {
             (identical(other.caseId, caseId) || other.caseId == caseId) &&
             (identical(other.isFormIDAssigned, isFormIDAssigned) || other.isFormIDAssigned == isFormIDAssigned) &&
             (identical(other.nikshayId, nikshayId) || other.nikshayId == nikshayId) &&
+            (identical(other.selectedTreatmentHistoryResult, selectedTreatmentHistoryResult) || other.selectedTreatmentHistoryResult == selectedTreatmentHistoryResult) &&
             (identical(other.treatmentHistory, treatmentHistory) || other.treatmentHistory == treatmentHistory) &&
-            (identical(other.selectedTreatmentHistoryResult, selectedTreatmentHistoryResult) || other.selectedTreatmentHistoryResult == selectedTreatmentHistoryResult));
+            const DeepCollectionEquality().equals(other._ihvChecklist, _ihvChecklist));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1882,8 +1913,9 @@ class _$TreatmentModelImpl implements _TreatmentModel {
         caseId,
         isFormIDAssigned,
         nikshayId,
+        selectedTreatmentHistoryResult,
         treatmentHistory,
-        selectedTreatmentHistoryResult
+        const DeepCollectionEquality().hash(_ihvChecklist)
       ]);
 
   /// Create a copy of TreatmentModel
@@ -2084,12 +2116,15 @@ abstract class _TreatmentModel implements TreatmentModel {
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
       final bool? isFormIDAssigned,
       @HiveField(62) @JsonKey(name: 'nikshay_id') final String? nikshayId,
+      @HiveField(63)
+      @JsonKey(name: 'case_history')
+      final int? selectedTreatmentHistoryResult,
       @HiveField(64)
       @JsonKey(includeToJson: false)
       final String? treatmentHistory,
-      @HiveField(63)
-      @JsonKey(name: 'case_history')
-      final int? selectedTreatmentHistoryResult}) = _$TreatmentModelImpl;
+      @HiveField(65)
+      @JsonKey(name: 'ihv_checklist')
+      final List<bool>? ihvChecklist}) = _$TreatmentModelImpl;
 
   factory _TreatmentModel.fromJson(Map<String, dynamic> json) =
       _$TreatmentModelImpl.fromJson;
@@ -2366,13 +2401,17 @@ abstract class _TreatmentModel implements TreatmentModel {
   @JsonKey(name: 'nikshay_id')
   String? get nikshayId;
   @override
+  @HiveField(63)
+  @JsonKey(name: 'case_history')
+  int? get selectedTreatmentHistoryResult;
+  @override
   @HiveField(64)
   @JsonKey(includeToJson: false)
   String? get treatmentHistory;
   @override
-  @HiveField(63)
-  @JsonKey(name: 'case_history')
-  int? get selectedTreatmentHistoryResult;
+  @HiveField(65)
+  @JsonKey(name: 'ihv_checklist')
+  List<bool>? get ihvChecklist;
 
   /// Create a copy of TreatmentModel
   /// with the given fields replaced by the non-null parameter values.

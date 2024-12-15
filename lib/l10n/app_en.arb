@@ -81,7 +81,10 @@
     "screeningOutcome":"Screening Outcome",
     "comments":"Comments",
     "stage":"Stage",
-    "screeningDate":" TB Screening Date",    
+    "ihvChecklist":"IHV Checklist",
+    "ihvChecklistItems":
+        "It is mandatory to take adequate nutrition along with the medicine and do not consume any kind of intoxicant during treatment.",
+    "screeningDate":" TB Screening Date",
     "screeningScore":"Screening Score",
     "screeningStatus":"Screening Status",
     "counsellingLinked":"Counselling Linked",

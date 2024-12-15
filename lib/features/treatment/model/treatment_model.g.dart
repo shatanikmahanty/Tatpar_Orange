@@ -79,15 +79,16 @@ class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
       caseId: fields[60] as int?,
       isFormIDAssigned: fields[61] as bool?,
       nikshayId: fields[62] as String?,
-      treatmentHistory: fields[64] as String?,
       selectedTreatmentHistoryResult: fields[63] as int?,
+      treatmentHistory: fields[64] as String?,
+      ihvChecklist: (fields[65] as List?)?.cast<bool>(),
     );
   }
 
   @override
   void write(BinaryWriter writer, TreatmentModel obj) {
     writer
-      ..writeByte(64)
+      ..writeByte(65)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -212,10 +213,12 @@ class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
       ..write(obj.isFormIDAssigned)
       ..writeByte(62)
       ..write(obj.nikshayId)
+      ..writeByte(63)
+      ..write(obj.selectedTreatmentHistoryResult)
       ..writeByte(64)
       ..write(obj.treatmentHistory)
-      ..writeByte(63)
-      ..write(obj.selectedTreatmentHistoryResult);
+      ..writeByte(65)
+      ..write(obj.ihvChecklist);
   }
 
   @override
@@ -304,8 +307,11 @@ _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
       caseId: (json['case_id'] as num?)?.toInt(),
       isFormIDAssigned: json['is_form_id_assigned'] as bool?,
       nikshayId: json['nikshay_id'] as String?,
-      treatmentHistory: json['treatmentHistory'] as String?,
       selectedTreatmentHistoryResult: (json['case_history'] as num?)?.toInt(),
+      treatmentHistory: json['treatmentHistory'] as String?,
+      ihvChecklist: (json['ihv_checklist'] as List<dynamic>?)
+          ?.map((e) => e as bool)
+          .toList(),
     );
 
 Map<String, dynamic> _$$TreatmentModelImplToJson(
@@ -368,4 +374,5 @@ Map<String, dynamic> _$$TreatmentModelImplToJson(
       'is_updated': instance.isUpdated,
       'nikshay_id': instance.nikshayId,
       'case_history': instance.selectedTreatmentHistoryResult,
+      'ihv_checklist': instance.ihvChecklist,
     };
