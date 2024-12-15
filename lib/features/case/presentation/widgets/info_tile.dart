@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
 
 class InfoTile extends StatelessWidget {
-  const InfoTile(this.fieldName, {super.key, required this.fieldValue});
+  const InfoTile(this.fieldName,
+      {super.key, required this.fieldValue, this.fieldColor});
 
   final String fieldName;
   final String fieldValue;
+  final Color? fieldColor;
 
   @override
   Widget build(BuildContext context) => Row(
@@ -38,7 +40,11 @@ class InfoTile extends StatelessWidget {
               fieldValue,
               softWrap: true,
               style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                  height: 2, letterSpacing: 0.5, fontWeight: FontWeight.w600),
+                    height: 2,
+                    letterSpacing: 0.5,
+                    fontWeight: FontWeight.w600,
+                    color: fieldColor,
+                  ),
               overflow: TextOverflow.ellipsis,
             ),
           ),

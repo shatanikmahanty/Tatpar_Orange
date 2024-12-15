@@ -162,7 +162,8 @@ class MentalHealthScreeningPage extends StatelessWidget {
                           state.mentalHealthScreeningModel == null)
                   ? Center(
                       child: Lottie.asset(
-                        'assets/lottie/registration_loading.json', // Path to your Lottie animation
+                        'assets/lottie/registration_loading.json',
+                        // Path to your Lottie animation
                         width: 200,
                         height: 200,
                         fit: BoxFit.cover,
@@ -224,8 +225,8 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                             children: [
                                                               DateTextInput(
                                                                 firstDate:
-                                                                    DateTime
-                                                                        .now(),
+                                                                    DateTime(
+                                                                        2002),
                                                                 controlName:
                                                                     'screening_date',
                                                                 label: AppLocalizations.of(
@@ -597,8 +598,8 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                             //             2),
                                                             DateTextInput(
                                                               firstDate:
-                                                                  DateTime
-                                                                      .now(),
+                                                                  DateTime(
+                                                                      2002),
                                                               controlName:
                                                                   'cp_screening_date',
                                                               label: AppLocalizations

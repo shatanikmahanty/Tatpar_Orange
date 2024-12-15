@@ -9,6 +9,7 @@ import '../../../../configurations/configurations.dart';
 @RoutePage()
 class ProfilePage extends StatelessWidget {
   const ProfilePage({super.key});
+
   FormGroup _profileFormBuilder({required AppUser? appUserModel}) {
     return fb.group({
       'id': FormControl<int>(value: appUserModel?.id),
@@ -37,141 +38,114 @@ class ProfilePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<AuthCubit, AuthState>(
-        buildWhen: (previous, current) =>
-            (previous != current) || (previous.user != current.user),
-        builder: (context, state) {
-          return Scaffold(
-              appBar: AppBar(
-                title: Text(
-                  'Profile',
-                  style: AppTextStyle.titleLarge.copyWith(
-                      fontSize: 20, height: 1.2, fontWeight: FontWeight.w600),
-                ),
-              ),
-              body: ReactiveFormBuilder(
-                  form: () => _profileFormBuilder(
-                        appUserModel: state.user,
+      buildWhen: (previous, current) =>
+          (previous != current) || (previous.user != current.user),
+      builder: (context, state) {
+        return ReactiveFormBuilder(
+          form: () => _profileFormBuilder(
+            appUserModel: state.user,
+          ),
+          builder: (BuildContext context, FormGroup formGroup, Widget? child) =>
+              const AutofillGroup(
+            child: Column(
+              children: [
+                Expanded(
+                  child: SingleChildScrollView(
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: kPadding * 2),
+                      child: Column(
+                        spacing: kPadding * 2,
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          PrimaryTextField<int>(
+                            formControlName: 'id',
+                            label: 'User ID',
+                            prefixIcon: Icons.account_circle_outlined,
+                            keyboardType: TextInputType.number,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'status',
+                            label: 'Status',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'mobile_number',
+                            label: 'Mobile Number',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'alternate_number',
+                            label: 'Alternate Number',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'aadhar_number',
+                            label: 'Aadhar Number',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'first_name',
+                            label: 'First Name',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'last_name',
+                            label: 'Last Name',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'city',
+                            label: 'City',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'district',
+                            label: 'District',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'state',
+                            label: 'State',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'pincode',
+                            label: 'Pin Code',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'address',
+                            label: 'Address',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          PrimaryTextField(
+                            formControlName: 'email',
+                            label: 'Email',
+                            prefixIcon: Icons.account_circle_outlined,
+                            readOnly: true,
+                          ),
+                          SizedBox(height: kPadding * 2),
+                        ],
                       ),
-                  builder: (BuildContext context, FormGroup formGroup,
-                          Widget? child) =>
-                      const AutofillGroup(
-                          child: Column(children: [
-                        Expanded(
-                          child: SingleChildScrollView(
-                              child: Padding(
-                                  padding: EdgeInsets.symmetric(
-                                      horizontal: kPadding * 2),
-                                  child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        PrimaryTextField<int>(
-                                          formControlName: 'id',
-                                          label: 'User ID',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          keyboardType: TextInputType.number,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'status',
-                                          label: 'Status',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'mobile_number',
-                                          label: 'Mobile Number',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'alternate_number',
-                                          label: 'Alternate Number',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'aadhar_number',
-                                          label: 'Aadhar Number',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'first_name',
-                                          label: 'First Name',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'last_name',
-                                          label: 'Last Name',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'city',
-                                          label: 'City',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'district',
-                                          label: 'District',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'state',
-                                          label: 'State',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'pincode',
-                                          label: 'Pin Code',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'address',
-                                          label: 'Address',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                        PrimaryTextField(
-                                          formControlName: 'email',
-                                          label: 'Email',
-                                          prefixIcon:
-                                              Icons.account_circle_outlined,
-                                          readOnly: true,
-                                        ),
-                                        SizedBox(height: kPadding * 2),
-                                      ]))),
-                        )
-                      ]))));
-        });
+                    ),
+                  ),
+                )
+              ],
+            ),
+          ),
+        );
+      },
+    );
   }
 }

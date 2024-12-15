@@ -69,11 +69,6 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                         height: 1.8,
                         fontWeight: FontWeight.w600,
                       ),
-                      // style: AppTextStyle.titleMedium.copyWith(
-                      //   fontSize: 20,
-                      //   // height: 1.2,
-                      //   fontWeight: FontWeight.w600,
-                      // ),
                     ),
                     Text(
                       context.watch<AuthCubit>().state.user?.firstName ?? '',
@@ -84,7 +79,16 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                     ),
                   ],
                 )
-              : const Offstage(),
+              : activeIndex == 2
+                  ? Text(
+                      'Profile',
+                      style: AppTextStyle.titleLarge.copyWith(
+                        fontSize: 20,
+                        height: 1.8,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    )
+                  : const Offstage(),
           actions: [
             AppBarAction(
               icon: Icons.sync,

@@ -1100,106 +1100,110 @@ class TreatmentPage extends StatelessWidget {
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 ReactiveValueListenableBuilder<
-                                                        String>(
-                                                    formControlName:
-                                                        'ipfu_afb_done',
-                                                    builder: (context, control,
-                                                            child) =>
-                                                        Visibility(
-                                                            visible: (formGroup
-                                                                    .control(
-                                                                        'ipfu_afb_done')
-                                                                    .value) ==
-                                                                'Yes',
-                                                            child: Column(
-                                                                children: [
-                                                                  DateTextInput(
-                                                                    firstDate:
-                                                                        DateTime(
-                                                                            2002),
-                                                                    controlName:
-                                                                        'ipfu_afb_date',
-                                                                    label: AppLocalizations.of(
-                                                                            context)!
-                                                                        .ipfuAfbDate,
+                                                    String>(
+                                                  formControlName:
+                                                      'ipfu_afb_done',
+                                                  builder: (context, control,
+                                                          child) =>
+                                                      Visibility(
+                                                    visible: (formGroup
+                                                            .control(
+                                                                'ipfu_afb_done')
+                                                            .value) ==
+                                                        'Yes',
+                                                    child: Column(
+                                                      children: [
+                                                        DateTextInput(
+                                                          firstDate:
+                                                              DateTime(2002),
+                                                          controlName:
+                                                              'ipfu_afb_date',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .ipfuAfbDate,
+                                                        ),
+                                                        const SizedBox(
+                                                            height:
+                                                                kPadding * 2),
+                                                        PrimaryTextField(
+                                                          formControlName:
+                                                              'ipfu_afb_lab_no',
+                                                          label: AppLocalizations
+                                                                  .of(context)!
+                                                              .ipfuAfbLabNo,
+                                                          prefixIcon: Icons
+                                                              .account_circle_outlined,
+                                                        ),
+                                                        const SizedBox(
+                                                            height:
+                                                                kPadding * 2),
+                                                        BlocBuilder<SourceCubit,
+                                                                SourceState>(
+                                                            buildWhen: ((previous,
+                                                                    current) =>
+                                                                (previous
+                                                                        .isLoading !=
+                                                                    current
+                                                                        .isLoading) ||
+                                                                previous.diagnosisData !=
+                                                                    current
+                                                                        .diagnosisData),
+                                                            builder: (context,
+                                                                state) {
+                                                              List<
+                                                                  String> list = (state
+                                                                          .diagnosisData !=
+                                                                      null)
+                                                                  ? state
+                                                                      .diagnosisData!
+                                                                      .afbResult!
+                                                                      .map((e) =>
+                                                                          '${e.name}')
+                                                                      .toList()
+                                                                  : [];
+                                                              if (state
+                                                                      .isLoading ??
+                                                                  false) {
+                                                                return const SizedBox(
+                                                                  height: 15,
+                                                                  width: 15,
+                                                                  child: Center(
+                                                                    child:
+                                                                        CircularProgressIndicator(),
                                                                   ),
-                                                                  const SizedBox(
-                                                                      height:
-                                                                          kPadding *
-                                                                              2),
-                                                                  PrimaryTextField(
-                                                                    formControlName:
-                                                                        'ipfu_afb_lab_no',
-                                                                    label: AppLocalizations.of(
-                                                                            context)!
-                                                                        .ipfuAfbLabNo,
-                                                                    prefixIcon:
-                                                                        Icons
-                                                                            .account_circle_outlined,
-                                                                  ),
-                                                                  const SizedBox(
-                                                                      height:
-                                                                          kPadding *
-                                                                              2),
-                                                                  BlocBuilder<
-                                                                          SourceCubit,
-                                                                          SourceState>(
-                                                                      buildWhen: ((previous,
-                                                                              current) =>
-                                                                          (previous.isLoading !=
-                                                                              current
-                                                                                  .isLoading) ||
-                                                                          previous.diagnosisData !=
-                                                                              current
-                                                                                  .diagnosisData),
-                                                                      builder:
-                                                                          (context,
-                                                                              state) {
-                                                                        List<String>
-                                                                            list =
-                                                                            (state.diagnosisData != null)
-                                                                                ? state.diagnosisData!.afbResult!.map((e) => '${e.name}').toList()
-                                                                                : [];
-                                                                        if (state.isLoading ??
-                                                                            false) {
-                                                                          return const SizedBox(
-                                                                            height:
-                                                                                15,
-                                                                            width:
-                                                                                15,
-                                                                            child:
-                                                                                Center(
-                                                                              child: CircularProgressIndicator(),
-                                                                            ),
-                                                                          );
-                                                                        }
-                                                                        return TextFieldWithList(
-                                                                          controlName:
-                                                                              'ipfu_afb_result',
-                                                                          label:
-                                                                              AppLocalizations.of(context)!.ipfuAFBResult,
-                                                                          padding:
-                                                                              EdgeInsets.zero,
-                                                                          prefixIcon:
-                                                                              Icons.account_circle_outlined,
-                                                                          listData:
-                                                                              list,
-                                                                          allowMultiSelection:
-                                                                              false,
-                                                                          onSelected:
-                                                                              (value) {
-                                                                            formGroup.control('ipfu_afb_result').value =
-                                                                                value[0];
-                                                                          },
-                                                                          emptyString:
-                                                                              '',
-                                                                        );
-                                                                      }),
-                                                                  const SizedBox(
-                                                                      height:
-                                                                          kPadding *
-                                                                              2),
-                                                                ]))),
+                                                                );
+                                                              }
+                                                              return TextFieldWithList(
+                                                                controlName:
+                                                                    'ipfu_afb_result',
+                                                                label: AppLocalizations.of(
+                                                                        context)!
+                                                                    .ipfuAFBResult,
+                                                                padding:
+                                                                    EdgeInsets
+                                                                        .zero,
+                                                                prefixIcon: Icons
+                                                                    .account_circle_outlined,
+                                                                listData: list,
+                                                                allowMultiSelection:
+                                                                    false,
+                                                                onSelected:
+                                                                    (value) {
+                                                                  formGroup
+                                                                      .control(
+                                                                          'ipfu_afb_result')
+                                                                      .value = value[0];
+                                                                },
+                                                                emptyString: '',
+                                                              );
+                                                            }),
+                                                        const SizedBox(
+                                                            height:
+                                                                kPadding * 2),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ),
                                                 ChipRadioButtons(
                                                   label: AppLocalizations.of(
                                                           context)!
@@ -1219,59 +1223,59 @@ class TreatmentPage extends StatelessWidget {
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 BlocBuilder<SourceCubit,
-                                                        SourceState>(
-                                                    buildWhen: ((previous,
-                                                            current) =>
-                                                        (previous.isLoading !=
-                                                            current
-                                                                .isLoading) ||
-                                                        previous.diagnosisData !=
-                                                            current
-                                                                .diagnosisData),
-                                                    builder: (context, state) {
-                                                      List<String> list = (state
-                                                                  .diagnosisData !=
-                                                              null)
-                                                          ? state.diagnosisData!
-                                                              .mtbResult!
-                                                              .map((e) =>
-                                                                  '${e.name}')
-                                                              .toList()
-                                                          : [];
-                                                      if (state.isLoading ??
-                                                          false) {
-                                                        return const SizedBox(
-                                                          height: 15,
-                                                          width: 15,
-                                                          child: Center(
-                                                            child:
-                                                                CircularProgressIndicator(),
-                                                          ),
-                                                        );
-                                                      }
-                                                      return TextFieldWithList(
-                                                        controlName:
-                                                            'ipfu_naat_result',
-                                                        label:
-                                                            AppLocalizations.of(
-                                                                    context)!
-                                                                .ipfuNaatResult,
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        prefixIcon: Icons
-                                                            .account_circle_outlined,
-                                                        listData: list,
-                                                        allowMultiSelection:
-                                                            false,
-                                                        onSelected: (value) {
-                                                          formGroup
-                                                              .control(
-                                                                  'ipfu_naat_result')
-                                                              .value = value[0];
-                                                        },
-                                                        emptyString: '',
+                                                    SourceState>(
+                                                  buildWhen: ((previous,
+                                                          current) =>
+                                                      (previous.isLoading !=
+                                                          current.isLoading) ||
+                                                      previous.diagnosisData !=
+                                                          current
+                                                              .diagnosisData),
+                                                  builder: (context, state) {
+                                                    List<String> list =
+                                                        (state.diagnosisData !=
+                                                                null)
+                                                            ? state
+                                                                .diagnosisData!
+                                                                .mtbResult!
+                                                                .map((e) =>
+                                                                    '${e.name}')
+                                                                .toList()
+                                                            : [];
+                                                    if (state.isLoading ??
+                                                        false) {
+                                                      return const SizedBox(
+                                                        height: 15,
+                                                        width: 15,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
+                                                        ),
                                                       );
-                                                    }),
+                                                    }
+                                                    return TextFieldWithList(
+                                                      controlName:
+                                                          'ipfu_naat_result',
+                                                      label:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .ipfuNaatResult,
+                                                      padding: EdgeInsets.zero,
+                                                      prefixIcon: Icons
+                                                          .account_circle_outlined,
+                                                      listData: list,
+                                                      allowMultiSelection:
+                                                          false,
+                                                      onSelected: (value) {
+                                                        formGroup
+                                                            .control(
+                                                                'ipfu_naat_result')
+                                                            .value = value[0];
+                                                      },
+                                                      emptyString: '',
+                                                    );
+                                                  },
+                                                ),
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 PrimaryTextField(
