@@ -17,17 +17,18 @@ class CaseProfileCard extends StatelessWidget {
     required this.treatmentOutcome,
   });
 
-  final String patientName,
-      mobileNumber,
-      panchayat,
-      district,
-      screeningStatus,
-      diagnosisStatus,
-      statusAfterDx,
-      treatmentOutcome;
+  final String patientName;
+  final String mobileNumber;
+  final String panchayat;
+  final String district;
+  final String screeningStatus;
+  final String diagnosisStatus;
+  final String statusAfterDx;
+  final String treatmentOutcome;
 
   @override
   Widget build(BuildContext context) {
+    final isPresumptive = screeningStatus.contains('Presumptive');
     return Container(
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
@@ -40,35 +41,47 @@ class CaseProfileCard extends StatelessWidget {
       ),
       child: Column(
         children: [
-          InfoTile('Patient name', fieldValue: patientName),
-          InfoTile('Mobile Number', fieldValue: mobileNumber),
-          InfoTile('Panchayat', fieldValue: panchayat),
-          InfoTile('District', fieldValue: district),
+          InfoTile(
+            'Patient name',
+            fieldValue: patientName,
+          ),
+          InfoTile(
+            'Mobile Number',
+            fieldValue: mobileNumber,
+          ),
+          InfoTile(
+            'Panchayat',
+            fieldValue: panchayat,
+          ),
+          InfoTile(
+            'District',
+            fieldValue: district,
+          ),
           InfoTile(
             'Screening Status',
-            fieldValue: screeningStatus.isEmpty ? 'Not Filled' : screeningStatus,
+            fieldValue:
+                screeningStatus.isEmpty ? 'Not Filled' : screeningStatus,
             fieldColor: screeningStatus.isEmpty ? Colors.red : Colors.green,
           ),
-          InfoTile('Diagnosis Status', fieldValue: diagnosisStatus),
-          InfoTile('Status after Dx', fieldValue: statusAfterDx),
-          InfoTile('Treatment Outcome', fieldValue: treatmentOutcome),
+          InfoTile(
+            'Diagnosis Status',
+            fieldValue: diagnosisStatus,
+          ),
+          InfoTile(
+            'Diagnosis Initiation',
+            fieldValue: isPresumptive ? 'Not Initiated' : 'In Progress',
+            fieldColor: isPresumptive ? Colors.red : Colors.green,
+          ),
+          InfoTile(
+            'Status after Dx',
+            fieldValue: statusAfterDx,
+          ),
+          InfoTile(
+            'Treatment Outcome',
+            fieldValue: treatmentOutcome,
+          ),
         ],
       ),
     );
   }
-
-// getDoctorFromSources(BuildContext context, int docId) {
-//   try {
-//     final doctorName = context.select(
-//       (SourceCubit sourceCubit) => sourceCubit.state.sources
-//           .where((element) => element.id == docId)
-//           .first
-//           .name
-//           .toString(),
-//     );
-//     return doctorName;
-//   } catch (e) {
-//     return '$docId Not assigned to health worker';
-//   }
-// }
 }

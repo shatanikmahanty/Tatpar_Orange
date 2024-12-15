@@ -305,6 +305,7 @@ class TreatmentPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final appLocalization = AppLocalizations.of(context)!;
     return BlocBuilder<CaseCubit, CaseState>(
       builder: (context, state) => Scaffold(
         appBar: CaseAppBar(
@@ -352,8 +353,7 @@ class TreatmentPage extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 ChipRadioButtons(
-                                  label: AppLocalizations.of(context)!
-                                      .caseDefinition,
+                                  label: appLocalization.caseDefinition,
                                   options: const ['MCB', 'CD'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
@@ -366,7 +366,7 @@ class TreatmentPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: kPadding * 2),
                                 ChipRadioButtons(
-                                  label: AppLocalizations.of(context)!.tbSite,
+                                  label: appLocalization.tbSite,
                                   options: const ['PTB', 'EPTB'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
@@ -399,8 +399,7 @@ class TreatmentPage extends StatelessWidget {
                                         );
                                       }
                                       return ChipRadioButtons(
-                                        label: AppLocalizations.of(context)!
-                                            .caseHistory,
+                                        label: appLocalization.caseHistory,
                                         options: list,
                                         crossAxisCount: 2,
                                         onChanged: (value) {
@@ -415,8 +414,7 @@ class TreatmentPage extends StatelessWidget {
                                     }),
                                 const SizedBox(height: kPadding * 2),
                                 ChipRadioButtons(
-                                  label: AppLocalizations.of(context)!
-                                      .drugSensitive,
+                                  label: appLocalization.drugSensitive,
                                   options: const ['Sensitive', 'Resistant'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
@@ -428,8 +426,7 @@ class TreatmentPage extends StatelessWidget {
                                 ),
                                 const SizedBox(height: kPadding * 2),
                                 ChipRadioButtons(
-                                  label: AppLocalizations.of(context)!
-                                      .diagnosisStatus,
+                                  label: appLocalization.diagnosisStatus,
                                   options: const ['PTLFU', 'On Treatment'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
@@ -454,8 +451,7 @@ class TreatmentPage extends StatelessWidget {
                                       children: [
                                         PrimaryTextField(
                                           formControlName: 'nikshay_id',
-                                          label: AppLocalizations.of(context)!
-                                              .nikshayId,
+                                          label: appLocalization.nikshayId,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                         ),
@@ -463,13 +459,12 @@ class TreatmentPage extends StatelessWidget {
                                         DateTextInput(
                                           firstDate: DateTime(2002),
                                           controlName: 'ihv_date',
-                                          label: AppLocalizations.of(context)!
-                                              .ihvDate,
+                                          label: appLocalization.ihvDate,
                                         ),
                                         const SizedBox(height: kPadding * 2),
                                         ChipRadioButtons(
-                                          label: AppLocalizations.of(context)!
-                                              .treatmentRegimen,
+                                          label:
+                                              appLocalization.treatmentRegimen,
                                           options: const ['New', 'Previous'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
@@ -484,8 +479,8 @@ class TreatmentPage extends StatelessWidget {
                                         const SizedBox(height: kPadding * 2),
                                         PrimaryTextField(
                                           formControlName: 'patient_occupation',
-                                          label: AppLocalizations.of(context)!
-                                              .patientOccupation,
+                                          label:
+                                              appLocalization.patientOccupation,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                         ),
@@ -493,7 +488,7 @@ class TreatmentPage extends StatelessWidget {
                                         PrimaryTextField(
                                           formControlName:
                                               'treatment_supporter_name',
-                                          label: AppLocalizations.of(context)!
+                                          label: appLocalization
                                               .treatmentSupporterName,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
@@ -502,7 +497,7 @@ class TreatmentPage extends StatelessWidget {
                                         TextFieldWithList(
                                           controlName:
                                               'treatment_supporter_position',
-                                          label: AppLocalizations.of(context)!
+                                          label: appLocalization
                                               .treatmentSupporterPosition,
                                           padding: EdgeInsets.zero,
                                           prefixIcon:
@@ -524,7 +519,7 @@ class TreatmentPage extends StatelessWidget {
                                         PrimaryTextField(
                                           formControlName:
                                               'treatment_supporter_phone',
-                                          label: AppLocalizations.of(context)!
+                                          label: appLocalization
                                               .treatmentSupporterPhone,
                                           keyboardType: TextInputType.number,
                                           maxLength: 10,
@@ -571,8 +566,7 @@ class TreatmentPage extends StatelessWidget {
                                               return TextFieldWithList(
                                                 controlName:
                                                     'treatment_supporter_panchayat',
-                                                label: AppLocalizations.of(
-                                                        context)!
+                                                label: appLocalization
                                                     .treatmentSupporterPanchayat,
                                                 padding: EdgeInsets.zero,
                                                 prefixIcon: Icons
@@ -593,7 +587,7 @@ class TreatmentPage extends StatelessWidget {
                                         PrimaryTextField<int>(
                                           formControlName:
                                               'treatment_supporter_ward',
-                                          label: AppLocalizations.of(context)!
+                                          label: appLocalization
                                               .treatmentSupporterWard,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
@@ -601,8 +595,7 @@ class TreatmentPage extends StatelessWidget {
                                         const SizedBox(height: kPadding * 2),
                                         PrimaryTextField(
                                           formControlName: 'height',
-                                          label: AppLocalizations.of(context)!
-                                              .height,
+                                          label: appLocalization.height,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                           keyboardType: TextInputType.number,
@@ -615,8 +608,7 @@ class TreatmentPage extends StatelessWidget {
                                         const SizedBox(height: kPadding * 2),
                                         PrimaryTextField(
                                           formControlName: 'weight',
-                                          label: AppLocalizations.of(context)!
-                                              .weight,
+                                          label: appLocalization.weight,
                                           prefixIcon:
                                               Icons.account_circle_outlined,
                                           keyboardType: TextInputType.number,
@@ -628,8 +620,7 @@ class TreatmentPage extends StatelessWidget {
                                         ),
                                         const SizedBox(height: kPadding * 2),
                                         ChipRadioButtons(
-                                          label: AppLocalizations.of(context)!
-                                              .stage,
+                                          label: appLocalization.stage,
                                           options: const ['IHV', 'IPFU', 'CP'],
                                           crossAxisCount: 3,
                                           onChanged: (value) {
@@ -654,16 +645,14 @@ class TreatmentPage extends StatelessWidget {
                                                         controlName:
                                                             'ip_start_date',
                                                         label:
-                                                            AppLocalizations.of(
-                                                                    context)!
+                                                        appLocalization
                                                                 .ipStartDate,
                                                       ),
                                                       const SizedBox(
                                                           height: kPadding * 2),
                                                       ChipRadioButtons(
                                                         label:
-                                                            AppLocalizations.of(
-                                                                    context)!
+                                                        appLocalization
                                                                 .hivDone,
                                                         options: const [
                                                           'Yes',
@@ -696,8 +685,7 @@ class TreatmentPage extends StatelessWidget {
                                                           child: Column(
                                                             children: [
                                                               ChipRadioButtons(
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .hivResult,
                                                                 options: const [
                                                                   'Reactive',
@@ -727,8 +715,7 @@ class TreatmentPage extends StatelessWidget {
                                                                         2002),
                                                                 controlName:
                                                                     'hiv_date',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .hivDate,
                                                               ),
                                                               const SizedBox(
@@ -741,8 +728,7 @@ class TreatmentPage extends StatelessWidget {
                                                       ),
                                                       ChipRadioButtons(
                                                         label:
-                                                            AppLocalizations.of(
-                                                                    context)!
+                                                        appLocalization
                                                                 .hbDone,
                                                         options: const [
                                                           'Yes',
@@ -778,8 +764,7 @@ class TreatmentPage extends StatelessWidget {
                                                                   double>(
                                                                 formControlName:
                                                                     'hb_result',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .hbResult,
                                                                 prefixIcon: Icons
                                                                     .account_circle_outlined,
@@ -804,8 +789,7 @@ class TreatmentPage extends StatelessWidget {
                                                                         2002),
                                                                 controlName:
                                                                     'hb_date',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .hbDate,
                                                               ),
                                                               const SizedBox(
@@ -818,8 +802,7 @@ class TreatmentPage extends StatelessWidget {
                                                       ),
                                                       ChipRadioButtons(
                                                         label:
-                                                            AppLocalizations.of(
-                                                                    context)!
+                                                        appLocalization
                                                                 .bloodSugarDone,
                                                         options: const [
                                                           'Yes',
@@ -855,8 +838,7 @@ class TreatmentPage extends StatelessWidget {
                                                               PrimaryTextField(
                                                                 formControlName:
                                                                     'blood_sugar_result',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .bloodSugarResult,
                                                                 prefixIcon: Icons
                                                                     .account_circle_outlined,
@@ -882,8 +864,7 @@ class TreatmentPage extends StatelessWidget {
                                                                         2002),
                                                                 controlName:
                                                                     'blood_sugar_date',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .bloodSugarDate,
                                                               ),
                                                               const SizedBox(
@@ -896,8 +877,7 @@ class TreatmentPage extends StatelessWidget {
                                                       ),
                                                       ChipRadioButtons(
                                                         label:
-                                                            AppLocalizations.of(
-                                                                    context)!
+                                                        appLocalization
                                                                 .alcohol,
                                                         options: const [
                                                           'Yes',
@@ -917,8 +897,7 @@ class TreatmentPage extends StatelessWidget {
                                                       const SizedBox(
                                                           height: kPadding * 2),
                                                       ChipRadioButtons(
-                                                        label: AppLocalizations
-                                                                .of(context)!
+                                                        label: appLocalization
                                                             .tobaccoConsumption,
                                                         options: const [
                                                           'Yes',
@@ -939,8 +918,7 @@ class TreatmentPage extends StatelessWidget {
                                                       const SizedBox(
                                                           height: kPadding * 2),
                                                       ChipRadioButtons(
-                                                        label: AppLocalizations
-                                                                .of(context)!
+                                                        label: appLocalization
                                                             .screeningForNutrition,
                                                         options: const [
                                                           'Yes',
@@ -979,8 +957,7 @@ class TreatmentPage extends StatelessWidget {
                                                                         2002),
                                                                 controlName:
                                                                     'screening_date_nutrition',
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .nutritionScreeningDate,
                                                               ),
                                                               const SizedBox(
@@ -988,8 +965,7 @@ class TreatmentPage extends StatelessWidget {
                                                                       kPadding *
                                                                           2),
                                                               ChipRadioButtons(
-                                                                label: AppLocalizations.of(
-                                                                        context)!
+                                                                label: appLocalization
                                                                     .nutritionEligibility,
                                                                 options: const [
                                                                   'Yes',
@@ -1018,8 +994,7 @@ class TreatmentPage extends StatelessWidget {
                                                         ),
                                                       ),
                                                       ChipRadioButtons(
-                                                        label: AppLocalizations
-                                                                .of(context)!
+                                                        label: appLocalization
                                                             .nutritionLinkage,
                                                         options: const [
                                                           'Yes',
@@ -1058,7 +1033,7 @@ class TreatmentPage extends StatelessWidget {
                                                                           controlName:
                                                                               'nutrition_linkage_date',
                                                                           label:
-                                                                              AppLocalizations.of(context)!.nutritionLinkageDate,
+                                                                              appLocalization.nutritionLinkageDate,
                                                                         ),
                                                                         const SizedBox(
                                                                             height:
@@ -1075,15 +1050,13 @@ class TreatmentPage extends StatelessWidget {
                                                 DateTextInput(
                                                   firstDate: DateTime(2002),
                                                   controlName: 'ipfu_date',
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .ipfuDate,
                                                 ),
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .ipfuAfbDone,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
@@ -1205,8 +1178,7 @@ class TreatmentPage extends StatelessWidget {
                                                   ),
                                                 ),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .ipfuNaatTest,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
@@ -1281,8 +1253,7 @@ class TreatmentPage extends StatelessWidget {
                                                 PrimaryTextField(
                                                   formControlName:
                                                       'ipfu_lab_no',
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .ipfuLabNo,
                                                   prefixIcon: Icons
                                                       .account_circle_outlined,
@@ -1290,8 +1261,7 @@ class TreatmentPage extends StatelessWidget {
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .ipfuChestXray,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
@@ -1309,8 +1279,7 @@ class TreatmentPage extends StatelessWidget {
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .ipfuNutritionSupport,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
@@ -1339,15 +1308,13 @@ class TreatmentPage extends StatelessWidget {
                                                 DateTextInput(
                                                   firstDate: DateTime(2002),
                                                   controlName: 'cp_date',
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .cpDate,
                                                 ),
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .cpAfbDone,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
@@ -1470,8 +1437,7 @@ class TreatmentPage extends StatelessWidget {
                                                   ),
                                                 ),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .cpNaatTest,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
@@ -1544,8 +1510,7 @@ class TreatmentPage extends StatelessWidget {
                                                     height: kPadding * 2),
                                                 PrimaryTextField(
                                                   formControlName: 'cp_lab_no',
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .cpLabNo,
                                                   prefixIcon: Icons
                                                       .account_circle_outlined,
@@ -1553,8 +1518,7 @@ class TreatmentPage extends StatelessWidget {
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .cpChestXray,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
@@ -1571,8 +1535,7 @@ class TreatmentPage extends StatelessWidget {
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
+                                                  label: appLocalization
                                                       .cpNutritionSupport,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
