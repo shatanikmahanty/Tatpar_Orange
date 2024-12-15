@@ -2,6 +2,7 @@
 
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:tatpar_acf/configurations/configurations.dart';
 
 part 'treatment_model.freezed.dart';
 
@@ -16,6 +17,35 @@ DateTime? fromJsonToDateTime(String? date) {
   return DateTime(int.parse(dateParts[0]), int.parse(dateParts[1]),
       int.parse(dateParts[2]));
 }
+
+List<bool> ihvChecklistFromJson(List<dynamic>? json) {
+  final List<bool> checklist = List.generate(10, (index) => false);
+  if(json == null){
+    return checklist;
+  }
+  for (final item in json) {
+    if(item.toString().startsWith('Q')){
+      final index = int.parse(item.toString().substring(1));
+      checklist[index - 1] = true;
+    }
+  }
+  return checklist;
+}
+
+List<String> ihvChecklistToJson(List<bool>? checklist) {
+  final List<String> json = [];
+  if(checklist == null){
+    return json;
+  }
+  for (var i = 0; i < checklist.length; i++) {
+    if(checklist[i]){
+      json.add('Q${i + 1}');
+    }
+  }
+  return json;
+}
+
+
 
 String? _dateTimeToJson(DateTime? date) =>
     date?.toIso8601String().substring(0, 10);
@@ -189,16 +219,18 @@ class TreatmentModel with _$TreatmentModel {
     @HiveField(65)
     @JsonKey(
       name: 'ihv_checklist',
+      fromJson: ihvChecklistFromJson,
+      toJson: ihvChecklistToJson,
     )
     List<bool>? ihvChecklist,
     @HiveField(66)
     @JsonKey(
-      name: 'ipfu_Gx_Rr',
+      name: 'ipfu_gx_rr',
     )
     String? ipfuGxRr,
     @HiveField(67)
     @JsonKey(
-      name: 'cp_Gx_Rr',
+      name: 'cpfu_gx_rr',
     )
     String? cpGxRr,
   }) = _TreatmentModel;

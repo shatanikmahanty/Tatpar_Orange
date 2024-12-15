@@ -27,6 +27,16 @@ class _AppCheckListState extends State<AppCheckList> {
   final scrollController = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    for(int i = 0; i < widget.items.length; i++){
+      if(widget.selectedList[i]){
+        selectedList.add(widget.items[i]);
+      }
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
     final listData = widget.items;
     final textTheme = Theme.of(context).textTheme;

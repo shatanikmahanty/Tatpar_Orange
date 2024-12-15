@@ -127,8 +127,7 @@ class TreatmentPage extends StatelessWidget {
           FormControl<String>(value: treatmentModel?.ipfuNaatTest),
       'ipfu_naat_result': FormControl<String>(
           value: ipfuNaatResultName ?? treatmentModel?.ipfuNaatResult),
-      'ipfu_gx_rr': FormControl<String>(
-          value: treatmentModel?.ipfuGxRr),
+      'ipfu_gx_rr': FormControl<String>(value: treatmentModel?.ipfuGxRr),
       'ipfu_lab_no': FormControl<String>(value: treatmentModel?.ipfuLabNo),
       'ipfu_chest_xray':
           FormControl<String>(value: treatmentModel?.ipfuChestXray),
@@ -143,8 +142,7 @@ class TreatmentPage extends StatelessWidget {
       'cp_naat_test': FormControl<String>(value: treatmentModel?.cpNaatTest),
       'cp_naat_result': FormControl<String>(
           value: cpNaatResultName ?? treatmentModel?.cpNaatResult),
-      'cp_gx_rr': FormControl<String>(
-          value: treatmentModel?.cpGxRr),
+      'cp_gx_rr': FormControl<String>(value: treatmentModel?.cpGxRr),
       'cp_lab_no': FormControl<String>(value: treatmentModel?.cpLabNo),
       'cp_chest_xray': FormControl<String>(value: treatmentModel?.cpChestXray),
       'cp_nutrition_support':
@@ -248,66 +246,69 @@ class TreatmentPage extends StatelessWidget {
 
       final model = cubit.state.treatmentModel ?? const TreatmentModel();
       final treatmentModel = model.copyWith(
-          caseDefinition: formData['case_definition'] as String?,
-          tbSite: formData['tb_site'] as String?,
-          drugSensitive: formData['drug_sensitive'] as String?,
-          diagnosisStatus: formData['diagnosis_status'] as String?,
-          ihvDate: formData['ihv_date'] as DateTime?,
-          treatmentRegimen: formData['treatment_regimen'] as String?,
-          patientOccupation: formData['patient_occupation'] as String?,
-          treatmentSupporterName:
-              formData['treatment_supporter_name'] as String?,
-          treatmentSupporterPosition:
-              formData['treatment_supporter_position'] as String?,
-          treatmentSupporterPhone:
-              formData['treatment_supporter_phone'] as String?,
-          selectedTreatmentSupporterPanchayat:
-              cubit.selectedTreatmentPanchayatCodeId,
-          treatmentSupporterWard: formData['treatment_supporter_ward'] as int?,
-          height: formData['height'] as int?,
-          weight: formData['weight'] as int?,
-          stage: formData['stage'] as String?,
-          ipStartDate: formData['ip_start_date'] as DateTime?,
-          hivDone: formData['hiv_done'] as String?,
-          hivResult: formData['hiv_result'] as String?,
-          hivDate: formData['hiv_date'] as DateTime?,
-          hbDone: formData['hb_done'] as String?,
-          hbResult: formData['hb_result'] as double?,
-          hbDate: formData['hb_date'] as DateTime?,
-          bloodSugarDone: formData['blood_sugar_done'] as String?,
-          bloodSugarResult: formData['blood_sugar_result'] as double?,
-          bloodSugarDate: formData['blood_sugar_date'] as DateTime?,
-          alcohol: formData['alcohol'] as String?,
-          tobaccoConsumption: formData['tobacco_consumption'] as String?,
-          nutritionScreening: formData['nutrition'] as String?,
-          screeningDateNutrition:
-              formData['screening_date_nutrition'] as DateTime?,
-          nutritionEligibility: formData['nutrition_eligibility'] as String?,
-          nutritionLinkage: formData['nutrition_linkage'] as String?,
-          nutritionLinkageDate: formData['nutrition_linkage_date'] as DateTime?,
-          ipfuDate: formData['ipfu_date'] as DateTime?,
-          ipfuAfbDone: formData['ipfu_afb_done'] as String?,
-          ipfuAfbDate: formData['ipfu_afb_date'] as DateTime?,
-          ipfuAfbLabNo: formData['ipfu_afb_lab_no'] as String?,
-          selectedIpfuAFBResult: cubit.selectedIPFUAFBResult,
-          ipfuNaatTest: formData['ipfu_naat_test'] as String?,
-          selectedIpfuNaatResult: cubit.selectedTreatmentIPFUNaatResult,
-          ipfuLabNo: formData['ipfu_lab_no'] as String?,
-          ipfuChestXray: formData['ipfu_chest_xray'] as String?,
-          ipfuNutritionSupport: formData['ipfu_nutrition_support'] as String?,
-          cpDate: formData['cp_date'] as DateTime?,
-          cpAfbDone: formData['cp_afb_done'] as String?,
-          cpAfbDate: formData['cp_afb_date'] as DateTime?,
-          cpAfbLabNo: formData['cp_afb_lab_no'] as String?,
-          selectedCpAFBResult: cubit.selectedIPFUAFBResult,
-          cpNaatTest: formData['cp_naat_test'] as String?,
-          selectedCpNaatResult: cubit.selectedTreatmentCPFUNaatResult,
-          cpLabNo: formData['cp_lab_no'] as String?,
-          cpChestXray: formData['cp_chest_xray'] as String?,
-          cpNutritionSupport: formData['cp_nutrition_support'] as String?,
-          selectedTreatmentHistoryResult: cubit.selectedTreatmentHistoryResult,
-          nikshayId: formData['nikshay_id'] as String?,
-          isUpdated: false);
+        caseDefinition: formData['case_definition'] as String?,
+        tbSite: formData['tb_site'] as String?,
+        drugSensitive: formData['drug_sensitive'] as String?,
+        diagnosisStatus: formData['diagnosis_status'] as String?,
+        ihvDate: formData['ihv_date'] as DateTime?,
+        treatmentRegimen: formData['treatment_regimen'] as String?,
+        patientOccupation: formData['patient_occupation'] as String?,
+        treatmentSupporterName: formData['treatment_supporter_name'] as String?,
+        treatmentSupporterPosition:
+            formData['treatment_supporter_position'] as String?,
+        treatmentSupporterPhone:
+            formData['treatment_supporter_phone'] as String?,
+        selectedTreatmentSupporterPanchayat:
+            cubit.selectedTreatmentPanchayatCodeId,
+        treatmentSupporterWard: formData['treatment_supporter_ward'] as int?,
+        height: formData['height'] as int?,
+        weight: formData['weight'] as int?,
+        stage: formData['stage'] as String?,
+        ipStartDate: formData['ip_start_date'] as DateTime?,
+        hivDone: formData['hiv_done'] as String?,
+        hivResult: formData['hiv_result'] as String?,
+        hivDate: formData['hiv_date'] as DateTime?,
+        hbDone: formData['hb_done'] as String?,
+        hbResult: formData['hb_result'] as double?,
+        hbDate: formData['hb_date'] as DateTime?,
+        bloodSugarDone: formData['blood_sugar_done'] as String?,
+        bloodSugarResult: formData['blood_sugar_result'] as double?,
+        bloodSugarDate: formData['blood_sugar_date'] as DateTime?,
+        alcohol: formData['alcohol'] as String?,
+        tobaccoConsumption: formData['tobacco_consumption'] as String?,
+        nutritionScreening: formData['nutrition'] as String?,
+        screeningDateNutrition:
+            formData['screening_date_nutrition'] as DateTime?,
+        nutritionEligibility: formData['nutrition_eligibility'] as String?,
+        nutritionLinkage: formData['nutrition_linkage'] as String?,
+        nutritionLinkageDate: formData['nutrition_linkage_date'] as DateTime?,
+        ipfuDate: formData['ipfu_date'] as DateTime?,
+        ipfuAfbDone: formData['ipfu_afb_done'] as String?,
+        ipfuAfbDate: formData['ipfu_afb_date'] as DateTime?,
+        ipfuAfbLabNo: formData['ipfu_afb_lab_no'] as String?,
+        selectedIpfuAFBResult: cubit.selectedIPFUAFBResult,
+        ipfuNaatTest: formData['ipfu_naat_test'] as String?,
+        selectedIpfuNaatResult: cubit.selectedTreatmentIPFUNaatResult,
+        ipfuLabNo: formData['ipfu_lab_no'] as String?,
+        ipfuChestXray: formData['ipfu_chest_xray'] as String?,
+        ipfuNutritionSupport: formData['ipfu_nutrition_support'] as String?,
+        cpDate: formData['cp_date'] as DateTime?,
+        cpAfbDone: formData['cp_afb_done'] as String?,
+        cpAfbDate: formData['cp_afb_date'] as DateTime?,
+        cpAfbLabNo: formData['cp_afb_lab_no'] as String?,
+        selectedCpAFBResult: cubit.selectedIPFUAFBResult,
+        cpNaatTest: formData['cp_naat_test'] as String?,
+        selectedCpNaatResult: cubit.selectedTreatmentCPFUNaatResult,
+        cpLabNo: formData['cp_lab_no'] as String?,
+        cpChestXray: formData['cp_chest_xray'] as String?,
+        cpNutritionSupport: formData['cp_nutrition_support'] as String?,
+        selectedTreatmentHistoryResult: cubit.selectedTreatmentHistoryResult,
+        nikshayId: formData['nikshay_id'] as String?,
+        isUpdated: false,
+        ihvChecklist: formData['ihv_checklist'] as List<bool>?,
+        ipfuGxRr: formData['ipfu_gx_rr'] as String?,
+        cpGxRr: formData['cp_gx_rr'] as String?,
+      );
       await cubit.updateTreatmentData(treatmentModel);
     } else {
       formGroup.markAllAsTouched();
@@ -1294,14 +1295,14 @@ class TreatmentPage extends StatelessWidget {
                                                   prefixIcon: Icons
                                                       .account_circle_outlined,
                                                   listData: const [
-                                                    'Detected', 'Non Detected', 'Indeterminate',
+                                                    'Detected',
+                                                    'Non Detected',
+                                                    'Indeterminate',
                                                   ],
-                                                  allowMultiSelection:
-                                                  false,
+                                                  allowMultiSelection: false,
                                                   onSelected: (value) {
                                                     formGroup
-                                                        .control(
-                                                        'ipfu_gx_rr')
+                                                        .control('ipfu_gx_rr')
                                                         .value = value[0];
                                                   },
                                                   emptyString: '',
@@ -1511,81 +1512,80 @@ class TreatmentPage extends StatelessWidget {
                                                 const SizedBox(
                                                     height: kPadding * 2),
                                                 BlocBuilder<SourceCubit,
-                                                        SourceState>(
-                                                    buildWhen: ((previous,
-                                                            current) =>
-                                                        (previous.isLoading !=
-                                                            current
-                                                                .isLoading) ||
-                                                        previous.diagnosisData !=
-                                                            current
-                                                                .diagnosisData),
-                                                    builder: (context, state) {
-                                                      List<String> list = (state
-                                                                  .diagnosisData !=
-                                                              null)
-                                                          ? state.diagnosisData!
-                                                              .mtbResult!
-                                                              .map((e) =>
-                                                                  '${e.name}')
-                                                              .toList()
-                                                          : [];
-                                                      if (state.isLoading ??
-                                                          false) {
-                                                        return const SizedBox(
-                                                          height: 15,
-                                                          width: 15,
-                                                          child: Center(
-                                                            child:
-                                                                CircularProgressIndicator(),
-                                                          ),
-                                                        );
-                                                      }
-                                                      return TextFieldWithList(
-                                                        controlName:
-                                                            'cp_naat_result',
-                                                        label:
-                                                            AppLocalizations.of(
-                                                                    context)!
-                                                                .cpNaatResult,
-                                                        padding:
-                                                            EdgeInsets.zero,
-                                                        prefixIcon: Icons
-                                                            .account_circle_outlined,
-                                                        listData: list,
-                                                        allowMultiSelection:
-                                                            false,
-                                                        onSelected: (value) {
-                                                          formGroup
-                                                              .control(
-                                                                  'cp_naat_result')
-                                                              .value = value[0];
-                                                        },
-                                                        emptyString: '',
+                                                    SourceState>(
+                                                  buildWhen: ((previous,
+                                                          current) =>
+                                                      (previous.isLoading !=
+                                                          current.isLoading) ||
+                                                      previous.diagnosisData !=
+                                                          current
+                                                              .diagnosisData),
+                                                  builder: (context, state) {
+                                                    List<String> list =
+                                                        (state.diagnosisData !=
+                                                                null)
+                                                            ? state
+                                                                .diagnosisData!
+                                                                .mtbResult!
+                                                                .map((e) =>
+                                                                    '${e.name}')
+                                                                .toList()
+                                                            : [];
+                                                    if (state.isLoading ??
+                                                        false) {
+                                                      return const SizedBox(
+                                                        height: 15,
+                                                        width: 15,
+                                                        child: Center(
+                                                          child:
+                                                              CircularProgressIndicator(),
+                                                        ),
                                                       );
-                                                    },),
+                                                    }
+                                                    return TextFieldWithList(
+                                                      controlName:
+                                                          'cp_naat_result',
+                                                      label:
+                                                          AppLocalizations.of(
+                                                                  context)!
+                                                              .cpNaatResult,
+                                                      padding: EdgeInsets.zero,
+                                                      prefixIcon: Icons
+                                                          .account_circle_outlined,
+                                                      listData: list,
+                                                      allowMultiSelection:
+                                                          false,
+                                                      onSelected: (value) {
+                                                        formGroup
+                                                            .control(
+                                                                'cp_naat_result')
+                                                            .value = value[0];
+                                                      },
+                                                      emptyString: '',
+                                                    );
+                                                  },
+                                                ),
                                                 const SizedBox(
                                                     height: kPadding * 2),
-
                                                 TextFieldWithList(
                                                   controlName: 'cp_gx_rr',
-                                                  label:
-                                                  appLocalization.cpGxRR,
+                                                  label: appLocalization.cpGxRR,
                                                   prefixIcon: Icons
                                                       .account_circle_outlined,
                                                   listData: const [
-                                                    'Detected', 'Non Detected', 'Indeterminate',
+                                                    'Detected',
+                                                    'Non Detected',
+                                                    'Indeterminate',
                                                   ],
-                                                  allowMultiSelection:
-                                                  false,
+                                                  allowMultiSelection: false,
                                                   onSelected: (value) {
                                                     formGroup
-                                                        .control(
-                                                        'cp_gx_rr')
+                                                        .control('cp_gx_rr')
                                                         .value = value[0];
                                                   },
                                                   emptyString: '',
-                                                ),const SizedBox(
+                                                ),
+                                                const SizedBox(
                                                     height: kPadding * 2),
                                                 PrimaryTextField(
                                                   formControlName: 'cp_lab_no',

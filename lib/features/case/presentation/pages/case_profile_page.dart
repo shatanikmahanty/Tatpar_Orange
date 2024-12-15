@@ -77,9 +77,11 @@ class CaseProfilePage extends StatelessWidget {
                               screeningStatus:
                                   (caseWorkedUpon.tbScreeningOutcome ?? '')
                                       .toString(),
-                              diagnosisStatus:
-                                  (caseWorkedUpon.diagnosisName ?? '')
-                                      .toString(),
+                              rifResistance:
+                                  (caseWorkedUpon.dstRifResistanceResult ==
+                                              'Detected'
+                                          ? 'RR'
+                                          : ''),
                               statusAfterDx:
                                   (caseWorkedUpon.statusAfterDx ?? '')
                                       .toString(),

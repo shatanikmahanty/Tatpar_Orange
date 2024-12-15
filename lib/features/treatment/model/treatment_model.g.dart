@@ -315,11 +315,9 @@ _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
       nikshayId: json['nikshay_id'] as String?,
       selectedTreatmentHistoryResult: (json['case_history'] as num?)?.toInt(),
       treatmentHistory: json['treatmentHistory'] as String?,
-      ihvChecklist: (json['ihv_checklist'] as List<dynamic>?)
-          ?.map((e) => e as bool)
-          .toList(),
-      ipfuGxRr: json['ipfu_Gx_Rr'] as String?,
-      cpGxRr: json['cp_Gx_Rr'] as String?,
+      ihvChecklist: ihvChecklistFromJson(json['ihv_checklist'] as List?),
+      ipfuGxRr: json['ipfu_gx_rr'] as String?,
+      cpGxRr: json['cpfu_gx_rr'] as String?,
     );
 
 Map<String, dynamic> _$$TreatmentModelImplToJson(
@@ -382,7 +380,7 @@ Map<String, dynamic> _$$TreatmentModelImplToJson(
       'is_updated': instance.isUpdated,
       'nikshay_id': instance.nikshayId,
       'case_history': instance.selectedTreatmentHistoryResult,
-      'ihv_checklist': instance.ihvChecklist,
-      'ipfu_Gx_Rr': instance.ipfuGxRr,
-      'cp_Gx_Rr': instance.cpGxRr,
+      'ihv_checklist': ihvChecklistToJson(instance.ihvChecklist),
+      'ipfu_gx_rr': instance.ipfuGxRr,
+      'cpfu_gx_rr': instance.cpGxRr,
     };

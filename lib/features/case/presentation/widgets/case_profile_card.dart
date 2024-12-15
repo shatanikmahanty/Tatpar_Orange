@@ -12,7 +12,7 @@ class CaseProfileCard extends StatelessWidget {
     required this.panchayat,
     required this.district,
     required this.screeningStatus,
-    required this.diagnosisStatus,
+    required this.rifResistance,
     required this.statusAfterDx,
     required this.treatmentOutcome,
   });
@@ -22,7 +22,7 @@ class CaseProfileCard extends StatelessWidget {
   final String panchayat;
   final String district;
   final String screeningStatus;
-  final String diagnosisStatus;
+  final String rifResistance;
   final String statusAfterDx;
   final String treatmentOutcome;
 
@@ -67,8 +67,8 @@ class CaseProfileCard extends StatelessWidget {
             useExpandedDots: false,
           ),
           InfoTile(
-            'Diagnosis Status',
-            fieldValue: diagnosisStatus,
+            'Rif Resistance',
+            fieldValue: rifResistance,
           ),
           InfoTile(
             'Diagnosis Initiation',

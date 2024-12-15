@@ -237,13 +237,16 @@ mixin _$TreatmentModel {
   @JsonKey(includeToJson: false)
   String? get treatmentHistory => throw _privateConstructorUsedError;
   @HiveField(65)
-  @JsonKey(name: 'ihv_checklist')
+  @JsonKey(
+      name: 'ihv_checklist',
+      fromJson: ihvChecklistFromJson,
+      toJson: ihvChecklistToJson)
   List<bool>? get ihvChecklist => throw _privateConstructorUsedError;
   @HiveField(66)
-  @JsonKey(name: 'ipfu_Gx_Rr')
+  @JsonKey(name: 'ipfu_gx_rr')
   String? get ipfuGxRr => throw _privateConstructorUsedError;
   @HiveField(67)
-  @JsonKey(name: 'cp_Gx_Rr')
+  @JsonKey(name: 'cpfu_gx_rr')
   String? get cpGxRr => throw _privateConstructorUsedError;
 
   /// Serializes this TreatmentModel to a JSON map.
@@ -426,9 +429,14 @@ abstract class $TreatmentModelCopyWith<$Res> {
       @JsonKey(name: 'case_history')
       int? selectedTreatmentHistoryResult,
       @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
-      @HiveField(65) @JsonKey(name: 'ihv_checklist') List<bool>? ihvChecklist,
-      @HiveField(66) @JsonKey(name: 'ipfu_Gx_Rr') String? ipfuGxRr,
-      @HiveField(67) @JsonKey(name: 'cp_Gx_Rr') String? cpGxRr});
+      @HiveField(65)
+      @JsonKey(
+          name: 'ihv_checklist',
+          fromJson: ihvChecklistFromJson,
+          toJson: ihvChecklistToJson)
+      List<bool>? ihvChecklist,
+      @HiveField(66) @JsonKey(name: 'ipfu_gx_rr') String? ipfuGxRr,
+      @HiveField(67) @JsonKey(name: 'cpfu_gx_rr') String? cpGxRr});
 }
 
 /// @nodoc
@@ -960,9 +968,14 @@ abstract class _$$TreatmentModelImplCopyWith<$Res>
       @JsonKey(name: 'case_history')
       int? selectedTreatmentHistoryResult,
       @HiveField(64) @JsonKey(includeToJson: false) String? treatmentHistory,
-      @HiveField(65) @JsonKey(name: 'ihv_checklist') List<bool>? ihvChecklist,
-      @HiveField(66) @JsonKey(name: 'ipfu_Gx_Rr') String? ipfuGxRr,
-      @HiveField(67) @JsonKey(name: 'cp_Gx_Rr') String? cpGxRr});
+      @HiveField(65)
+      @JsonKey(
+          name: 'ihv_checklist',
+          fromJson: ihvChecklistFromJson,
+          toJson: ihvChecklistToJson)
+      List<bool>? ihvChecklist,
+      @HiveField(66) @JsonKey(name: 'ipfu_gx_rr') String? ipfuGxRr,
+      @HiveField(67) @JsonKey(name: 'cpfu_gx_rr') String? cpGxRr});
 }
 
 /// @nodoc
@@ -1476,10 +1489,13 @@ class _$TreatmentModelImpl implements _TreatmentModel {
       this.selectedTreatmentHistoryResult,
       @HiveField(64) @JsonKey(includeToJson: false) this.treatmentHistory,
       @HiveField(65)
-      @JsonKey(name: 'ihv_checklist')
+      @JsonKey(
+          name: 'ihv_checklist',
+          fromJson: ihvChecklistFromJson,
+          toJson: ihvChecklistToJson)
       final List<bool>? ihvChecklist,
-      @HiveField(66) @JsonKey(name: 'ipfu_Gx_Rr') this.ipfuGxRr,
-      @HiveField(67) @JsonKey(name: 'cp_Gx_Rr') this.cpGxRr})
+      @HiveField(66) @JsonKey(name: 'ipfu_gx_rr') this.ipfuGxRr,
+      @HiveField(67) @JsonKey(name: 'cpfu_gx_rr') this.cpGxRr})
       : _ihvChecklist = ihvChecklist;
 
   factory _$TreatmentModelImpl.fromJson(Map<String, dynamic> json) =>
@@ -1767,7 +1783,10 @@ class _$TreatmentModelImpl implements _TreatmentModel {
   final List<bool>? _ihvChecklist;
   @override
   @HiveField(65)
-  @JsonKey(name: 'ihv_checklist')
+  @JsonKey(
+      name: 'ihv_checklist',
+      fromJson: ihvChecklistFromJson,
+      toJson: ihvChecklistToJson)
   List<bool>? get ihvChecklist {
     final value = _ihvChecklist;
     if (value == null) return null;
@@ -1778,11 +1797,11 @@ class _$TreatmentModelImpl implements _TreatmentModel {
 
   @override
   @HiveField(66)
-  @JsonKey(name: 'ipfu_Gx_Rr')
+  @JsonKey(name: 'ipfu_gx_rr')
   final String? ipfuGxRr;
   @override
   @HiveField(67)
-  @JsonKey(name: 'cp_Gx_Rr')
+  @JsonKey(name: 'cpfu_gx_rr')
   final String? cpGxRr;
 
   @override
@@ -2168,11 +2187,14 @@ abstract class _TreatmentModel implements TreatmentModel {
       @JsonKey(includeToJson: false)
       final String? treatmentHistory,
       @HiveField(65)
-      @JsonKey(name: 'ihv_checklist')
+      @JsonKey(
+          name: 'ihv_checklist',
+          fromJson: ihvChecklistFromJson,
+          toJson: ihvChecklistToJson)
       final List<bool>? ihvChecklist,
-      @HiveField(66) @JsonKey(name: 'ipfu_Gx_Rr') final String? ipfuGxRr,
+      @HiveField(66) @JsonKey(name: 'ipfu_gx_rr') final String? ipfuGxRr,
       @HiveField(67)
-      @JsonKey(name: 'cp_Gx_Rr')
+      @JsonKey(name: 'cpfu_gx_rr')
       final String? cpGxRr}) = _$TreatmentModelImpl;
 
   factory _TreatmentModel.fromJson(Map<String, dynamic> json) =
@@ -2459,15 +2481,18 @@ abstract class _TreatmentModel implements TreatmentModel {
   String? get treatmentHistory;
   @override
   @HiveField(65)
-  @JsonKey(name: 'ihv_checklist')
+  @JsonKey(
+      name: 'ihv_checklist',
+      fromJson: ihvChecklistFromJson,
+      toJson: ihvChecklistToJson)
   List<bool>? get ihvChecklist;
   @override
   @HiveField(66)
-  @JsonKey(name: 'ipfu_Gx_Rr')
+  @JsonKey(name: 'ipfu_gx_rr')
   String? get ipfuGxRr;
   @override
   @HiveField(67)
-  @JsonKey(name: 'cp_Gx_Rr')
+  @JsonKey(name: 'cpfu_gx_rr')
   String? get cpGxRr;
 
   /// Create a copy of TreatmentModel
