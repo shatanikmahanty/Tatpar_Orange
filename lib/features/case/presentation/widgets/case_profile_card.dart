@@ -30,6 +30,7 @@ class CaseProfileCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final isPresumptive = screeningStatus.contains('Presumptive');
     return Container(
+      width: MediaQuery.sizeOf(context).width,
       decoration: BoxDecoration(
         color: Theme.of(context).colorScheme.secondary,
         borderRadius: BorderRadius.circular(kPadding),
@@ -44,6 +45,7 @@ class CaseProfileCard extends StatelessWidget {
           InfoTile(
             'Patient name',
             fieldValue: patientName,
+            useExpandedDots: false,
           ),
           InfoTile(
             'Mobile Number',
@@ -62,6 +64,7 @@ class CaseProfileCard extends StatelessWidget {
             fieldValue:
                 screeningStatus.isEmpty ? 'Not Filled' : screeningStatus,
             fieldColor: screeningStatus.isEmpty ? Colors.red : Colors.green,
+            useExpandedDots: false,
           ),
           InfoTile(
             'Diagnosis Status',
@@ -71,6 +74,7 @@ class CaseProfileCard extends StatelessWidget {
             'Diagnosis Initiation',
             fieldValue: isPresumptive ? 'Not Initiated' : 'In Progress',
             fieldColor: isPresumptive ? Colors.red : Colors.green,
+            useExpandedDots: false,
           ),
           InfoTile(
             'Status after Dx',
