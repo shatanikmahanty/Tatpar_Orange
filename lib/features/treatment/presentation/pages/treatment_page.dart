@@ -127,6 +127,8 @@ class TreatmentPage extends StatelessWidget {
           FormControl<String>(value: treatmentModel?.ipfuNaatTest),
       'ipfu_naat_result': FormControl<String>(
           value: ipfuNaatResultName ?? treatmentModel?.ipfuNaatResult),
+      'ipfu_gx_rr': FormControl<String>(
+          value: treatmentModel?.ipfuGxRr),
       'ipfu_lab_no': FormControl<String>(value: treatmentModel?.ipfuLabNo),
       'ipfu_chest_xray':
           FormControl<String>(value: treatmentModel?.ipfuChestXray),
@@ -141,6 +143,8 @@ class TreatmentPage extends StatelessWidget {
       'cp_naat_test': FormControl<String>(value: treatmentModel?.cpNaatTest),
       'cp_naat_result': FormControl<String>(
           value: cpNaatResultName ?? treatmentModel?.cpNaatResult),
+      'cp_gx_rr': FormControl<String>(
+          value: treatmentModel?.cpGxRr),
       'cp_lab_no': FormControl<String>(value: treatmentModel?.cpLabNo),
       'cp_chest_xray': FormControl<String>(value: treatmentModel?.cpChestXray),
       'cp_nutrition_support':
@@ -1281,7 +1285,30 @@ class TreatmentPage extends StatelessWidget {
                                                   },
                                                 ),
                                                 const SizedBox(
-                                                    height: kPadding * 2),
+                                                  height: kPadding * 2,
+                                                ),
+                                                TextFieldWithList(
+                                                  controlName: 'ipfu_gx_rr',
+                                                  label:
+                                                      appLocalization.ipfuGxRR,
+                                                  prefixIcon: Icons
+                                                      .account_circle_outlined,
+                                                  listData: const [
+                                                    'Detected', 'Non Detected', 'Indeterminate',
+                                                  ],
+                                                  allowMultiSelection:
+                                                  false,
+                                                  onSelected: (value) {
+                                                    formGroup
+                                                        .control(
+                                                        'ipfu_gx_rr')
+                                                        .value = value[0];
+                                                  },
+                                                  emptyString: '',
+                                                ),
+                                                const SizedBox(
+                                                  height: kPadding * 2,
+                                                ),
                                                 PrimaryTextField(
                                                   formControlName:
                                                       'ipfu_lab_no',
@@ -1536,8 +1563,29 @@ class TreatmentPage extends StatelessWidget {
                                                         },
                                                         emptyString: '',
                                                       );
-                                                    }),
+                                                    },),
                                                 const SizedBox(
+                                                    height: kPadding * 2),
+
+                                                TextFieldWithList(
+                                                  controlName: 'cp_gx_rr',
+                                                  label:
+                                                  appLocalization.cpGxRR,
+                                                  prefixIcon: Icons
+                                                      .account_circle_outlined,
+                                                  listData: const [
+                                                    'Detected', 'Non Detected', 'Indeterminate',
+                                                  ],
+                                                  allowMultiSelection:
+                                                  false,
+                                                  onSelected: (value) {
+                                                    formGroup
+                                                        .control(
+                                                        'cp_gx_rr')
+                                                        .value = value[0];
+                                                  },
+                                                  emptyString: '',
+                                                ),const SizedBox(
                                                     height: kPadding * 2),
                                                 PrimaryTextField(
                                                   formControlName: 'cp_lab_no',

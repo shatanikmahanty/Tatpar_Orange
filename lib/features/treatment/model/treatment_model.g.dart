@@ -82,13 +82,15 @@ class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
       selectedTreatmentHistoryResult: fields[63] as int?,
       treatmentHistory: fields[64] as String?,
       ihvChecklist: (fields[65] as List?)?.cast<bool>(),
+      ipfuGxRr: fields[66] as String?,
+      cpGxRr: fields[67] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TreatmentModel obj) {
     writer
-      ..writeByte(65)
+      ..writeByte(67)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -218,7 +220,11 @@ class TreatmentModelAdapter extends TypeAdapter<TreatmentModel> {
       ..writeByte(64)
       ..write(obj.treatmentHistory)
       ..writeByte(65)
-      ..write(obj.ihvChecklist);
+      ..write(obj.ihvChecklist)
+      ..writeByte(66)
+      ..write(obj.ipfuGxRr)
+      ..writeByte(67)
+      ..write(obj.cpGxRr);
   }
 
   @override
@@ -312,6 +318,8 @@ _$TreatmentModelImpl _$$TreatmentModelImplFromJson(Map<String, dynamic> json) =>
       ihvChecklist: (json['ihv_checklist'] as List<dynamic>?)
           ?.map((e) => e as bool)
           .toList(),
+      ipfuGxRr: json['ipfu_Gx_Rr'] as String?,
+      cpGxRr: json['cp_Gx_Rr'] as String?,
     );
 
 Map<String, dynamic> _$$TreatmentModelImplToJson(
@@ -375,4 +383,6 @@ Map<String, dynamic> _$$TreatmentModelImplToJson(
       'nikshay_id': instance.nikshayId,
       'case_history': instance.selectedTreatmentHistoryResult,
       'ihv_checklist': instance.ihvChecklist,
+      'ipfu_Gx_Rr': instance.ipfuGxRr,
+      'cp_Gx_Rr': instance.cpGxRr,
     };

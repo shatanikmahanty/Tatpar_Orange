@@ -191,6 +191,16 @@ class TreatmentModel with _$TreatmentModel {
       name: 'ihv_checklist',
     )
     List<bool>? ihvChecklist,
+    @HiveField(66)
+    @JsonKey(
+      name: 'ipfu_Gx_Rr',
+    )
+    String? ipfuGxRr,
+    @HiveField(67)
+    @JsonKey(
+      name: 'cp_Gx_Rr',
+    )
+    String? cpGxRr,
   }) = _TreatmentModel;
 
   factory TreatmentModel.fromJson(Map<String, dynamic> json) =>
