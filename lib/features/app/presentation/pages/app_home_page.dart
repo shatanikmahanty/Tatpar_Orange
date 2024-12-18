@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:tatpar_acf/configurations/configurations.dart';
-import 'package:tatpar_acf/features/appProvider/app_provider.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/case/blocs/case_cubit.dart';
 import 'package:tatpar_acf/features/home/presentation/widgets/app_bar_action.dart';
@@ -28,8 +27,7 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
         const end = Offset.zero;
         const curve = Curves.fastOutSlowIn;
 
-        if ((context.tabsRouter.previousIndex ?? 0) <
-            context.tabsRouter.activeIndex) {
+        if ((context.tabsRouter.previousIndex ?? 0) < context.tabsRouter.activeIndex) {
           return SlideTransition(
             position: animation.drive(
               Tween(begin: begin, end: end).chain(
@@ -92,10 +90,11 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
           actions: [
             AppBarAction(
               icon: Icons.sync,
-              onclick: () {
-                context.read<CaseCubit>().pushLocalData();
-                DjangoflowAppSnackbar.showInfo(
-                    'No Offline Data available to sync');
+              onclick: () async {
+                final result = await context.read<CaseCubit>().pushLocalData();
+                if (!result) {
+                  DjangoflowAppSnackbar.showInfo('No Offline Data available to sync');
+                }
               },
             ),
             const SizedBox(
@@ -159,15 +158,11 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
               type: BottomNavigationBarType.fixed,
               items: [
                 _BottomNavBarItem(
-                  icon: activeIndex == 0
-                      ? CupertinoIcons.house_fill
-                      : CupertinoIcons.house,
+                  icon: activeIndex == 0 ? CupertinoIcons.house_fill : CupertinoIcons.house,
                   label: 'Home',
                 ),
                 _BottomNavBarItem(
-                  icon: activeIndex == 1
-                      ? CupertinoIcons.doc_text_fill
-                      : CupertinoIcons.doc_text,
+                  icon: activeIndex == 1 ? CupertinoIcons.doc_text_fill : CupertinoIcons.doc_text,
                   label: 'Cases',
                 ),
                 // _BottomNavBarItem(
@@ -177,15 +172,11 @@ class AppHomePage extends StatelessWidget implements AutoRouteWrapper {
                 //   label: 'Tasks',
                 // ),
                 _BottomNavBarItem(
-                  icon: activeIndex == 2
-                      ? CupertinoIcons.person_fill
-                      : CupertinoIcons.person,
+                  icon: activeIndex == 2 ? CupertinoIcons.person_fill : CupertinoIcons.person,
                   label: 'Profile',
                 ),
                 _BottomNavBarItem(
-                  icon: activeIndex == 3
-                      ? CupertinoIcons.settings_solid
-                      : CupertinoIcons.settings,
+                  icon: activeIndex == 3 ? CupertinoIcons.settings_solid : CupertinoIcons.settings,
                   label: 'Settings',
                 ),
               ],
