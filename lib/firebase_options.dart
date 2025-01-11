@@ -27,10 +27,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.macOS:
         return macos;
       case TargetPlatform.windows:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for windows - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return windows;
       case TargetPlatform.linux:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for linux - '
@@ -44,38 +41,49 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyAZFRmdzCbpqvHF9SG9tKbdNtnTnx6JeC8',
-    appId: '1:555188132765:web:524a6e50dd6906cd712d74',
-    messagingSenderId: '555188132765',
-    projectId: 'tatpar-acf-flutter',
-    authDomain: 'tatpar-acf-flutter.firebaseapp.com',
-    storageBucket: 'tatpar-acf-flutter.appspot.com',
-    measurementId: 'G-WBGWK8FYTL',
+    apiKey: 'AIzaSyBy8y_KWLRo8KTU_DOLclQMGhBNH9isRU4',
+    appId: '1:449590885521:web:fcee136c1e4fc6258b1330',
+    messagingSenderId: '449590885521',
+    projectId: 'tatpar-orange',
+    authDomain: 'tatpar-orange.firebaseapp.com',
+    storageBucket: 'tatpar-orange.firebasestorage.app',
+    measurementId: 'G-41GVPQF4EJ',
   );
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyBtrN9Ndltn3s4mb8EC0MymPJbJEoDKcxw',
-    appId: '1:555188132765:android:106dd6fb1d71e741712d74',
-    messagingSenderId: '555188132765',
-    projectId: 'tatpar-acf-flutter',
-    storageBucket: 'tatpar-acf-flutter.appspot.com',
+    apiKey: 'AIzaSyADiOLR_xmDceXGlKaTd4sPLRIYzeOYMPM',
+    appId: '1:449590885521:android:4638020c226f94838b1330',
+    messagingSenderId: '449590885521',
+    projectId: 'tatpar-orange',
+    storageBucket: 'tatpar-orange.firebasestorage.app',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyBdHGUcLViZ8s8bhphsabFwiikmVZVZ3WY',
-    appId: '1:555188132765:ios:c375390fbb00e665712d74',
-    messagingSenderId: '555188132765',
-    projectId: 'tatpar-acf-flutter',
-    storageBucket: 'tatpar-acf-flutter.appspot.com',
+    apiKey: 'AIzaSyCEPOwrMyRhnWKbtWuE6tkgmFep4t3HKrE',
+    appId: '1:449590885521:ios:837423bebde0dd188b1330',
+    messagingSenderId: '449590885521',
+    projectId: 'tatpar-orange',
+    storageBucket: 'tatpar-orange.firebasestorage.app',
     iosBundleId: 'com.mylabs.tatparAcf',
   );
 
   static const FirebaseOptions macos = FirebaseOptions(
-    apiKey: 'AIzaSyAhaXTbuzjYfQHxCpSwJGAggywncVGaOAI',
-    appId: '1:762173822440:ios:bb5708a5fc834ccb80805d',
-    messagingSenderId: '762173822440',
-    projectId: 'tatpar-acf',
-    storageBucket: 'tatpar-acf.appspot.com',
-    iosBundleId: 'com.example.tatparAcf.RunnerTests',
+    apiKey: 'AIzaSyCEPOwrMyRhnWKbtWuE6tkgmFep4t3HKrE',
+    appId: '1:449590885521:ios:837423bebde0dd188b1330',
+    messagingSenderId: '449590885521',
+    projectId: 'tatpar-orange',
+    storageBucket: 'tatpar-orange.firebasestorage.app',
+    iosBundleId: 'com.mylabs.tatparAcf',
   );
+
+  static const FirebaseOptions windows = FirebaseOptions(
+    apiKey: 'AIzaSyBy8y_KWLRo8KTU_DOLclQMGhBNH9isRU4',
+    appId: '1:449590885521:web:698b2f46d7bd980f8b1330',
+    messagingSenderId: '449590885521',
+    projectId: 'tatpar-orange',
+    authDomain: 'tatpar-orange.firebaseapp.com',
+    storageBucket: 'tatpar-orange.firebasestorage.app',
+    measurementId: 'G-BH48RXH8PZ',
+  );
+
 }

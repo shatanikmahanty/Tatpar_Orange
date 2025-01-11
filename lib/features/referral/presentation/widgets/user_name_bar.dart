@@ -12,7 +12,7 @@ class UserNameBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      color: theme.colorScheme.secondary,
+      color: theme.colorScheme.primaryContainer,
       width: double.infinity,
       padding: const EdgeInsets.symmetric(horizontal: kPadding * 2),
       child: Text(

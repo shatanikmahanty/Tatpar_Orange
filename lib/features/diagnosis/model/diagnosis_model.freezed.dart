@@ -214,6 +214,18 @@ mixin _$DiagnosisModel {
   @HiveField(54)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned => throw _privateConstructorUsedError;
+  @HiveField(55)
+  @JsonKey(name: 'spirometry')
+  String? get spirometry => throw _privateConstructorUsedError;
+  @HiveField(56)
+  @JsonKey(name: 'fev')
+  double? get fev => throw _privateConstructorUsedError;
+  @HiveField(57)
+  @JsonKey(name: 'fec')
+  double? get fec => throw _privateConstructorUsedError;
+  @HiveField(58)
+  @JsonKey(name: 'ratio')
+  double? get ratio => throw _privateConstructorUsedError;
 
   /// Serializes this DiagnosisModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -357,7 +369,11 @@ abstract class $DiagnosisModelCopyWith<$Res> {
       int? caseId,
       @HiveField(54)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(55) @JsonKey(name: 'spirometry') String? spirometry,
+      @HiveField(56) @JsonKey(name: 'fev') double? fev,
+      @HiveField(57) @JsonKey(name: 'fec') double? fec,
+      @HiveField(58) @JsonKey(name: 'ratio') double? ratio});
 }
 
 /// @nodoc
@@ -430,6 +446,10 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? spirometry = freezed,
+    Object? fev = freezed,
+    Object? fec = freezed,
+    Object? ratio = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -652,6 +672,22 @@ class _$DiagnosisModelCopyWithImpl<$Res, $Val extends DiagnosisModel>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      spirometry: freezed == spirometry
+          ? _value.spirometry
+          : spirometry // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fev: freezed == fev
+          ? _value.fev
+          : fev // ignore: cast_nullable_to_non_nullable
+              as double?,
+      fec: freezed == fec
+          ? _value.fec
+          : fec // ignore: cast_nullable_to_non_nullable
+              as double?,
+      ratio: freezed == ratio
+          ? _value.ratio
+          : ratio // ignore: cast_nullable_to_non_nullable
+              as double?,
     ) as $Val);
   }
 }
@@ -790,7 +826,11 @@ abstract class _$$DiagnosisModelImplCopyWith<$Res>
       int? caseId,
       @HiveField(54)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(55) @JsonKey(name: 'spirometry') String? spirometry,
+      @HiveField(56) @JsonKey(name: 'fev') double? fev,
+      @HiveField(57) @JsonKey(name: 'fec') double? fec,
+      @HiveField(58) @JsonKey(name: 'ratio') double? ratio});
 }
 
 /// @nodoc
@@ -861,6 +901,10 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? spirometry = freezed,
+    Object? fev = freezed,
+    Object? fec = freezed,
+    Object? ratio = freezed,
   }) {
     return _then(_$DiagnosisModelImpl(
       id: freezed == id
@@ -1083,6 +1127,22 @@ class __$$DiagnosisModelImplCopyWithImpl<$Res>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      spirometry: freezed == spirometry
+          ? _value.spirometry
+          : spirometry // ignore: cast_nullable_to_non_nullable
+              as String?,
+      fev: freezed == fev
+          ? _value.fev
+          : fev // ignore: cast_nullable_to_non_nullable
+              as double?,
+      fec: freezed == fec
+          ? _value.fec
+          : fec // ignore: cast_nullable_to_non_nullable
+              as double?,
+      ratio: freezed == ratio
+          ? _value.ratio
+          : ratio // ignore: cast_nullable_to_non_nullable
+              as double?,
     ));
   }
 }
@@ -1212,7 +1272,11 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
       this.caseId,
       @HiveField(54)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      this.isFormIDAssigned});
+      this.isFormIDAssigned,
+      @HiveField(55) @JsonKey(name: 'spirometry') this.spirometry,
+      @HiveField(56) @JsonKey(name: 'fev') this.fev,
+      @HiveField(57) @JsonKey(name: 'fec') this.fec,
+      @HiveField(58) @JsonKey(name: 'ratio') this.ratio});
 
   factory _$DiagnosisModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$DiagnosisModelImplFromJson(json);
@@ -1466,10 +1530,26 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
   @HiveField(54)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   final bool? isFormIDAssigned;
+  @override
+  @HiveField(55)
+  @JsonKey(name: 'spirometry')
+  final String? spirometry;
+  @override
+  @HiveField(56)
+  @JsonKey(name: 'fev')
+  final double? fev;
+  @override
+  @HiveField(57)
+  @JsonKey(name: 'fec')
+  final double? fec;
+  @override
+  @HiveField(58)
+  @JsonKey(name: 'ratio')
+  final double? ratio;
 
   @override
   String toString() {
-    return 'DiagnosisModel(id: $id, diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, selectedXdrResult: $selectedXdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, otherTestDate: $otherTestDate, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
+    return 'DiagnosisModel(id: $id, diagnosisInitiated: $diagnosisInitiated, firstConsultation: $firstConsultation, firstConsultationDate: $firstConsultationDate, chestXray: $chestXray, chestXrayDate: $chestXrayDate, chestXrayResult: $chestXrayResult, afbDone: $afbDone, afbLabNumber: $afbLabNumber, afb1Result: $afb1Result, selectedAfb1Result: $selectedAfb1Result, afb1ResultDate: $afb1ResultDate, afb2Result: $afb2Result, selectedAfb2Result: $selectedAfb2Result, afb2ResultDate: $afb2ResultDate, naatTest: $naatTest, naatMachine: $naatMachine, selectedNaatMachine: $selectedNaatMachine, naatSite: $naatSite, naatLabNumber: $naatLabNumber, sampleCollectionDate: $sampleCollectionDate, naatResultDate: $naatResultDate, mtbResult: $mtbResult, selectedMtbResult: $selectedMtbResult, rifResistance: $rifResistance, xdrDone: $xdrDone, xdrResult: $xdrResult, selectedXdrResult: $selectedXdrResult, xdrResultDate: $xdrResultDate, xdrLabNumber: $xdrLabNumber, xdrSite: $xdrSite, inhResistance: $inhResistance, flqResistance: $flqResistance, amkResistance: $amkResistance, kanResistance: $kanResistance, capResistance: $capResistance, ethResistance: $ethResistance, fnac: $fnac, fnacDate: $fnacDate, fnacResult: $fnacResult, fnacComments: $fnacComments, usg: $usg, usgDate: $usgDate, usgResult: $usgResult, usgComments: $usgComments, otherTest: $otherTest, otherTestDate: $otherTestDate, testName: $testName, otherTestResult: $otherTestResult, diagnosis: $diagnosis, diagnosisComments: $diagnosisComments, diagnosisDate: $diagnosisDate, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned, spirometry: $spirometry, fev: $fev, fec: $fec, ratio: $ratio)';
   }
 
   @override
@@ -1574,7 +1654,11 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
             (identical(other.diagnosisDate, diagnosisDate) || other.diagnosisDate == diagnosisDate) &&
             (identical(other.isUpdated, isUpdated) || other.isUpdated == isUpdated) &&
             (identical(other.caseId, caseId) || other.caseId == caseId) &&
-            (identical(other.isFormIDAssigned, isFormIDAssigned) || other.isFormIDAssigned == isFormIDAssigned));
+            (identical(other.isFormIDAssigned, isFormIDAssigned) || other.isFormIDAssigned == isFormIDAssigned) &&
+            (identical(other.spirometry, spirometry) || other.spirometry == spirometry) &&
+            (identical(other.fev, fev) || other.fev == fev) &&
+            (identical(other.fec, fec) || other.fec == fec) &&
+            (identical(other.ratio, ratio) || other.ratio == ratio));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -1635,7 +1719,11 @@ class _$DiagnosisModelImpl implements _DiagnosisModel {
         diagnosisDate,
         isUpdated,
         caseId,
-        isFormIDAssigned
+        isFormIDAssigned,
+        spirometry,
+        fev,
+        fec,
+        ratio
       ]);
 
   /// Create a copy of DiagnosisModel
@@ -1806,7 +1894,13 @@ abstract class _DiagnosisModel implements DiagnosisModel {
       final int? caseId,
       @HiveField(54)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      final bool? isFormIDAssigned}) = _$DiagnosisModelImpl;
+      final bool? isFormIDAssigned,
+      @HiveField(55) @JsonKey(name: 'spirometry') final String? spirometry,
+      @HiveField(56) @JsonKey(name: 'fev') final double? fev,
+      @HiveField(57) @JsonKey(name: 'fec') final double? fec,
+      @HiveField(58)
+      @JsonKey(name: 'ratio')
+      final double? ratio}) = _$DiagnosisModelImpl;
 
   factory _DiagnosisModel.fromJson(Map<String, dynamic> json) =
       _$DiagnosisModelImpl.fromJson;
@@ -2060,6 +2154,22 @@ abstract class _DiagnosisModel implements DiagnosisModel {
   @HiveField(54)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned;
+  @override
+  @HiveField(55)
+  @JsonKey(name: 'spirometry')
+  String? get spirometry;
+  @override
+  @HiveField(56)
+  @JsonKey(name: 'fev')
+  double? get fev;
+  @override
+  @HiveField(57)
+  @JsonKey(name: 'fec')
+  double? get fec;
+  @override
+  @HiveField(58)
+  @JsonKey(name: 'ratio')
+  double? get ratio;
 
   /// Create a copy of DiagnosisModel
   /// with the given fields replaced by the non-null parameter values.

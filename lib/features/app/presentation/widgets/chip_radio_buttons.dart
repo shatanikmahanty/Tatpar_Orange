@@ -96,9 +96,12 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color: isSelected ? AppColors.blueLight : AppColors.blackPrimary,
+                  color:
+                      isSelected ? AppColors.secondary : AppColors.blackPrimary,
                   borderRadius: BorderRadius.circular(kPadding * 0.5),
-                  border: Border.all(color: isSelected ? AppColors.blueDark : AppColors.grayDark),
+                  border: Border.all(
+                      color:
+                          isSelected ? AppColors.primary : AppColors.grayDark),
                 ),
                 alignment: Alignment.center,
                 child: Row(
@@ -109,7 +112,9 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
                         padding: const EdgeInsets.only(right: kPadding),
                         child: Icon(
                           widget.optionIcons![index],
-                          color: isSelected ? AppColors.blueDark : AppColors.grey30,
+                          color: isSelected
+                              ? AppColors.secondary
+                              : AppColors.grey30,
                         ),
                       ),
                     Expanded(
@@ -120,7 +125,9 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
                             fontWeight: FontWeight.w600,
                             height: 1.5,
                             letterSpacing: 0.2,
-                            color: isSelected ? AppColors.blueDark : AppColors.grey30),
+                            color: isSelected
+                                ? AppColors.primary
+                                : AppColors.grey30),
                       ),
                     ),
                   ],

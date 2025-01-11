@@ -37,13 +37,22 @@ class TBScreeningModelAdapter extends TypeAdapter<TBScreeningModel> {
       isUpdated: fields[17] as bool?,
       caseId: fields[18] as int?,
       isFormIDAssigned: fields[19] as bool?,
+      wheezing: fields[20] as String?,
+      shortnessBreath: fields[21] as String?,
+      tightnessChest: fields[22] as String?,
+      swasaScreening: fields[23] as String?,
+      swasaScreeningDate: fields[24] as DateTime?,
+      swasaScreeningResult: fields[25] as String?,
+      cxrScreening: fields[26] as String?,
+      cxrScreeningDate: fields[27] as DateTime?,
+      cxrScreeningResult: fields[28] as String?,
     );
   }
 
   @override
   void write(BinaryWriter writer, TBScreeningModel obj) {
     writer
-      ..writeByte(20)
+      ..writeByte(29)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -83,7 +92,25 @@ class TBScreeningModelAdapter extends TypeAdapter<TBScreeningModel> {
       ..writeByte(18)
       ..write(obj.caseId)
       ..writeByte(19)
-      ..write(obj.isFormIDAssigned);
+      ..write(obj.isFormIDAssigned)
+      ..writeByte(20)
+      ..write(obj.wheezing)
+      ..writeByte(21)
+      ..write(obj.shortnessBreath)
+      ..writeByte(22)
+      ..write(obj.tightnessChest)
+      ..writeByte(23)
+      ..write(obj.swasaScreening)
+      ..writeByte(24)
+      ..write(obj.swasaScreeningDate)
+      ..writeByte(25)
+      ..write(obj.swasaScreeningResult)
+      ..writeByte(26)
+      ..write(obj.cxrScreening)
+      ..writeByte(27)
+      ..write(obj.cxrScreeningDate)
+      ..writeByte(28)
+      ..write(obj.cxrScreeningResult);
   }
 
   @override
@@ -124,6 +151,17 @@ _$TBScreeningModelImpl _$$TBScreeningModelImplFromJson(
       isUpdated: json['is_updated'] as bool?,
       caseId: (json['case_id'] as num?)?.toInt(),
       isFormIDAssigned: json['is_form_id_assigned'] as bool?,
+      wheezing: json['wheezing'] as String?,
+      shortnessBreath: json['shortness_breath'] as String?,
+      tightnessChest: json['tightness_chest'] as String?,
+      swasaScreening: json['screened_with_swasa'] as String?,
+      swasaScreeningDate:
+          fromJsonToDateTime(json['swasa_screening_date'] as String?),
+      swasaScreeningResult: json['swasa_screening_result'] as String?,
+      cxrScreening: json['screening_cxr_ai'] as String?,
+      cxrScreeningDate:
+          fromJsonToDateTime(json['cxr_screening_date'] as String?),
+      cxrScreeningResult: json['cxr_screening_result'] as String?,
     );
 
 Map<String, dynamic> _$$TBScreeningModelImplToJson(
@@ -145,4 +183,13 @@ Map<String, dynamic> _$$TBScreeningModelImplToJson(
       'screening_outcome': instance.screeningOutcome,
       'comments': instance.comments,
       'is_updated': instance.isUpdated,
+      'wheezing': instance.wheezing,
+      'shortness_breath': instance.shortnessBreath,
+      'tightness_chest': instance.tightnessChest,
+      'screened_with_swasa': instance.swasaScreening,
+      'swasa_screening_date': _dateTimeToJson(instance.swasaScreeningDate),
+      'swasa_screening_result': instance.swasaScreeningResult,
+      'screening_cxr_ai': instance.cxrScreening,
+      'cxr_screening_date': _dateTimeToJson(instance.cxrScreeningDate),
+      'cxr_screening_result': instance.cxrScreeningResult,
     };

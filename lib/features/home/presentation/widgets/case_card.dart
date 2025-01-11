@@ -54,7 +54,7 @@ class CaseCard extends StatelessWidget {
                   DiseaseChip(calculateScreeningStatus(),
                       color: calculateScreeningStatus() == 'Scr Neg'
                           ? AppColors.redLight
-                          : AppColors.blueLight),
+                          : AppColors.primary),
                   const Spacer(),
                   Text(
                     getFormattedDate(caseModel.createdOn),
@@ -217,8 +217,7 @@ class CaseCard extends StatelessWidget {
                           );
                           await launchUrl(launchUri);
                         },
-                        icon: const Icon(Icons.phone,
-                            color: AppColors.blueMedium),
+                        icon: const Icon(Icons.phone, color: AppColors.primary),
                       ),
                       IconButton(
                         onPressed: () async {

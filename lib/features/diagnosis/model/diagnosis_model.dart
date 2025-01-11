@@ -156,6 +156,10 @@ class DiagnosisModel with _$DiagnosisModel {
     @HiveField(54)
     @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
     bool? isFormIDAssigned,
+    @HiveField(55) @JsonKey(name: 'spirometry') String? spirometry,
+    @HiveField(56) @JsonKey(name: 'fev') double? fev,
+    @HiveField(57) @JsonKey(name: 'fec') double? fec,
+    @HiveField(58) @JsonKey(name: 'ratio') double? ratio,
   }) = _DiagnosisModel;
 
   factory DiagnosisModel.fromJson(Map<String, dynamic> json) =>

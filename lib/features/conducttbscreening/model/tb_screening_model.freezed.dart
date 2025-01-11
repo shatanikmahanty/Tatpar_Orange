@@ -83,6 +83,39 @@ mixin _$TBScreeningModel {
   @HiveField(19)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned => throw _privateConstructorUsedError;
+  @HiveField(20)
+  @JsonKey(name: 'wheezing')
+  String? get wheezing => throw _privateConstructorUsedError;
+  @HiveField(21)
+  @JsonKey(name: 'shortness_breath')
+  String? get shortnessBreath => throw _privateConstructorUsedError;
+  @HiveField(22)
+  @JsonKey(name: 'tightness_chest')
+  String? get tightnessChest => throw _privateConstructorUsedError;
+  @HiveField(23)
+  @JsonKey(name: 'screened_with_swasa')
+  String? get swasaScreening => throw _privateConstructorUsedError;
+  @HiveField(24)
+  @JsonKey(
+      name: 'swasa_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get swasaScreeningDate => throw _privateConstructorUsedError;
+  @HiveField(25)
+  @JsonKey(name: 'swasa_screening_result')
+  String? get swasaScreeningResult => throw _privateConstructorUsedError;
+  @HiveField(26)
+  @JsonKey(name: 'screening_cxr_ai')
+  String? get cxrScreening => throw _privateConstructorUsedError;
+  @HiveField(27)
+  @JsonKey(
+      name: 'cxr_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get cxrScreeningDate => throw _privateConstructorUsedError;
+  @HiveField(28)
+  @JsonKey(name: 'cxr_screening_result')
+  String? get cxrScreeningResult => throw _privateConstructorUsedError;
 
   /// Serializes this TBScreeningModel to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -131,7 +164,32 @@ abstract class $TBScreeningModelCopyWith<$Res> {
       int? caseId,
       @HiveField(19)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(20) @JsonKey(name: 'wheezing') String? wheezing,
+      @HiveField(21) @JsonKey(name: 'shortness_breath') String? shortnessBreath,
+      @HiveField(22) @JsonKey(name: 'tightness_chest') String? tightnessChest,
+      @HiveField(23)
+      @JsonKey(name: 'screened_with_swasa')
+      String? swasaScreening,
+      @HiveField(24)
+      @JsonKey(
+          name: 'swasa_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? swasaScreeningDate,
+      @HiveField(25)
+      @JsonKey(name: 'swasa_screening_result')
+      String? swasaScreeningResult,
+      @HiveField(26) @JsonKey(name: 'screening_cxr_ai') String? cxrScreening,
+      @HiveField(27)
+      @JsonKey(
+          name: 'cxr_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? cxrScreeningDate,
+      @HiveField(28)
+      @JsonKey(name: 'cxr_screening_result')
+      String? cxrScreeningResult});
 }
 
 /// @nodoc
@@ -169,6 +227,15 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? wheezing = freezed,
+    Object? shortnessBreath = freezed,
+    Object? tightnessChest = freezed,
+    Object? swasaScreening = freezed,
+    Object? swasaScreeningDate = freezed,
+    Object? swasaScreeningResult = freezed,
+    Object? cxrScreening = freezed,
+    Object? cxrScreeningDate = freezed,
+    Object? cxrScreeningResult = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -251,6 +318,42 @@ class _$TBScreeningModelCopyWithImpl<$Res, $Val extends TBScreeningModel>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      wheezing: freezed == wheezing
+          ? _value.wheezing
+          : wheezing // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shortnessBreath: freezed == shortnessBreath
+          ? _value.shortnessBreath
+          : shortnessBreath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tightnessChest: freezed == tightnessChest
+          ? _value.tightnessChest
+          : tightnessChest // ignore: cast_nullable_to_non_nullable
+              as String?,
+      swasaScreening: freezed == swasaScreening
+          ? _value.swasaScreening
+          : swasaScreening // ignore: cast_nullable_to_non_nullable
+              as String?,
+      swasaScreeningDate: freezed == swasaScreeningDate
+          ? _value.swasaScreeningDate
+          : swasaScreeningDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      swasaScreeningResult: freezed == swasaScreeningResult
+          ? _value.swasaScreeningResult
+          : swasaScreeningResult // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cxrScreening: freezed == cxrScreening
+          ? _value.cxrScreening
+          : cxrScreening // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cxrScreeningDate: freezed == cxrScreeningDate
+          ? _value.cxrScreeningDate
+          : cxrScreeningDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      cxrScreeningResult: freezed == cxrScreeningResult
+          ? _value.cxrScreeningResult
+          : cxrScreeningResult // ignore: cast_nullable_to_non_nullable
+              as String?,
     ) as $Val);
   }
 }
@@ -294,7 +397,32 @@ abstract class _$$TBScreeningModelImplCopyWith<$Res>
       int? caseId,
       @HiveField(19)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      bool? isFormIDAssigned});
+      bool? isFormIDAssigned,
+      @HiveField(20) @JsonKey(name: 'wheezing') String? wheezing,
+      @HiveField(21) @JsonKey(name: 'shortness_breath') String? shortnessBreath,
+      @HiveField(22) @JsonKey(name: 'tightness_chest') String? tightnessChest,
+      @HiveField(23)
+      @JsonKey(name: 'screened_with_swasa')
+      String? swasaScreening,
+      @HiveField(24)
+      @JsonKey(
+          name: 'swasa_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? swasaScreeningDate,
+      @HiveField(25)
+      @JsonKey(name: 'swasa_screening_result')
+      String? swasaScreeningResult,
+      @HiveField(26) @JsonKey(name: 'screening_cxr_ai') String? cxrScreening,
+      @HiveField(27)
+      @JsonKey(
+          name: 'cxr_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      DateTime? cxrScreeningDate,
+      @HiveField(28)
+      @JsonKey(name: 'cxr_screening_result')
+      String? cxrScreeningResult});
 }
 
 /// @nodoc
@@ -330,6 +458,15 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
     Object? isUpdated = freezed,
     Object? caseId = freezed,
     Object? isFormIDAssigned = freezed,
+    Object? wheezing = freezed,
+    Object? shortnessBreath = freezed,
+    Object? tightnessChest = freezed,
+    Object? swasaScreening = freezed,
+    Object? swasaScreeningDate = freezed,
+    Object? swasaScreeningResult = freezed,
+    Object? cxrScreening = freezed,
+    Object? cxrScreeningDate = freezed,
+    Object? cxrScreeningResult = freezed,
   }) {
     return _then(_$TBScreeningModelImpl(
       id: freezed == id
@@ -412,6 +549,42 @@ class __$$TBScreeningModelImplCopyWithImpl<$Res>
           ? _value.isFormIDAssigned
           : isFormIDAssigned // ignore: cast_nullable_to_non_nullable
               as bool?,
+      wheezing: freezed == wheezing
+          ? _value.wheezing
+          : wheezing // ignore: cast_nullable_to_non_nullable
+              as String?,
+      shortnessBreath: freezed == shortnessBreath
+          ? _value.shortnessBreath
+          : shortnessBreath // ignore: cast_nullable_to_non_nullable
+              as String?,
+      tightnessChest: freezed == tightnessChest
+          ? _value.tightnessChest
+          : tightnessChest // ignore: cast_nullable_to_non_nullable
+              as String?,
+      swasaScreening: freezed == swasaScreening
+          ? _value.swasaScreening
+          : swasaScreening // ignore: cast_nullable_to_non_nullable
+              as String?,
+      swasaScreeningDate: freezed == swasaScreeningDate
+          ? _value.swasaScreeningDate
+          : swasaScreeningDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      swasaScreeningResult: freezed == swasaScreeningResult
+          ? _value.swasaScreeningResult
+          : swasaScreeningResult // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cxrScreening: freezed == cxrScreening
+          ? _value.cxrScreening
+          : cxrScreening // ignore: cast_nullable_to_non_nullable
+              as String?,
+      cxrScreeningDate: freezed == cxrScreeningDate
+          ? _value.cxrScreeningDate
+          : cxrScreeningDate // ignore: cast_nullable_to_non_nullable
+              as DateTime?,
+      cxrScreeningResult: freezed == cxrScreeningResult
+          ? _value.cxrScreeningResult
+          : cxrScreeningResult // ignore: cast_nullable_to_non_nullable
+              as String?,
     ));
   }
 }
@@ -448,7 +621,30 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
       this.caseId,
       @HiveField(19)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      this.isFormIDAssigned});
+      this.isFormIDAssigned,
+      @HiveField(20) @JsonKey(name: 'wheezing') this.wheezing,
+      @HiveField(21) @JsonKey(name: 'shortness_breath') this.shortnessBreath,
+      @HiveField(22) @JsonKey(name: 'tightness_chest') this.tightnessChest,
+      @HiveField(23) @JsonKey(name: 'screened_with_swasa') this.swasaScreening,
+      @HiveField(24)
+      @JsonKey(
+          name: 'swasa_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.swasaScreeningDate,
+      @HiveField(25)
+      @JsonKey(name: 'swasa_screening_result')
+      this.swasaScreeningResult,
+      @HiveField(26) @JsonKey(name: 'screening_cxr_ai') this.cxrScreening,
+      @HiveField(27)
+      @JsonKey(
+          name: 'cxr_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      this.cxrScreeningDate,
+      @HiveField(28)
+      @JsonKey(name: 'cxr_screening_result')
+      this.cxrScreeningResult});
 
   factory _$TBScreeningModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$TBScreeningModelImplFromJson(json);
@@ -536,10 +732,52 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
   @HiveField(19)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   final bool? isFormIDAssigned;
+  @override
+  @HiveField(20)
+  @JsonKey(name: 'wheezing')
+  final String? wheezing;
+  @override
+  @HiveField(21)
+  @JsonKey(name: 'shortness_breath')
+  final String? shortnessBreath;
+  @override
+  @HiveField(22)
+  @JsonKey(name: 'tightness_chest')
+  final String? tightnessChest;
+  @override
+  @HiveField(23)
+  @JsonKey(name: 'screened_with_swasa')
+  final String? swasaScreening;
+  @override
+  @HiveField(24)
+  @JsonKey(
+      name: 'swasa_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  final DateTime? swasaScreeningDate;
+  @override
+  @HiveField(25)
+  @JsonKey(name: 'swasa_screening_result')
+  final String? swasaScreeningResult;
+  @override
+  @HiveField(26)
+  @JsonKey(name: 'screening_cxr_ai')
+  final String? cxrScreening;
+  @override
+  @HiveField(27)
+  @JsonKey(
+      name: 'cxr_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  final DateTime? cxrScreeningDate;
+  @override
+  @HiveField(28)
+  @JsonKey(name: 'cxr_screening_result')
+  final String? cxrScreeningResult;
 
   @override
   String toString() {
-    return 'TBScreeningModel(id: $id, screeningDate: $screeningDate, screenedBy: $screenedBy, pregnant: $pregnant, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned)';
+    return 'TBScreeningModel(id: $id, screeningDate: $screeningDate, screenedBy: $screenedBy, pregnant: $pregnant, selectedTrimester: $selectedTrimester, trimester: $trimester, cough: $cough, sputum: $sputum, hemoptysis: $hemoptysis, fever: $fever, nightSweats: $nightSweats, chestPain: $chestPain, weightLoss: $weightLoss, swollenGland: $swollenGland, tbMedicine: $tbMedicine, screeningOutcome: $screeningOutcome, comments: $comments, isUpdated: $isUpdated, caseId: $caseId, isFormIDAssigned: $isFormIDAssigned, wheezing: $wheezing, shortnessBreath: $shortnessBreath, tightnessChest: $tightnessChest, swasaScreening: $swasaScreening, swasaScreeningDate: $swasaScreeningDate, swasaScreeningResult: $swasaScreeningResult, cxrScreening: $cxrScreening, cxrScreeningDate: $cxrScreeningDate, cxrScreeningResult: $cxrScreeningResult)';
   }
 
   @override
@@ -581,7 +819,25 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
                 other.isUpdated == isUpdated) &&
             (identical(other.caseId, caseId) || other.caseId == caseId) &&
             (identical(other.isFormIDAssigned, isFormIDAssigned) ||
-                other.isFormIDAssigned == isFormIDAssigned));
+                other.isFormIDAssigned == isFormIDAssigned) &&
+            (identical(other.wheezing, wheezing) ||
+                other.wheezing == wheezing) &&
+            (identical(other.shortnessBreath, shortnessBreath) ||
+                other.shortnessBreath == shortnessBreath) &&
+            (identical(other.tightnessChest, tightnessChest) ||
+                other.tightnessChest == tightnessChest) &&
+            (identical(other.swasaScreening, swasaScreening) ||
+                other.swasaScreening == swasaScreening) &&
+            (identical(other.swasaScreeningDate, swasaScreeningDate) ||
+                other.swasaScreeningDate == swasaScreeningDate) &&
+            (identical(other.swasaScreeningResult, swasaScreeningResult) ||
+                other.swasaScreeningResult == swasaScreeningResult) &&
+            (identical(other.cxrScreening, cxrScreening) ||
+                other.cxrScreening == cxrScreening) &&
+            (identical(other.cxrScreeningDate, cxrScreeningDate) ||
+                other.cxrScreeningDate == cxrScreeningDate) &&
+            (identical(other.cxrScreeningResult, cxrScreeningResult) ||
+                other.cxrScreeningResult == cxrScreeningResult));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -607,7 +863,16 @@ class _$TBScreeningModelImpl implements _TBScreeningModel {
         comments,
         isUpdated,
         caseId,
-        isFormIDAssigned
+        isFormIDAssigned,
+        wheezing,
+        shortnessBreath,
+        tightnessChest,
+        swasaScreening,
+        swasaScreeningDate,
+        swasaScreeningResult,
+        cxrScreening,
+        cxrScreeningDate,
+        cxrScreeningResult
       ]);
 
   /// Create a copy of TBScreeningModel
@@ -669,7 +934,38 @@ abstract class _TBScreeningModel implements TBScreeningModel {
       final int? caseId,
       @HiveField(19)
       @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
-      final bool? isFormIDAssigned}) = _$TBScreeningModelImpl;
+      final bool? isFormIDAssigned,
+      @HiveField(20) @JsonKey(name: 'wheezing') final String? wheezing,
+      @HiveField(21)
+      @JsonKey(name: 'shortness_breath')
+      final String? shortnessBreath,
+      @HiveField(22)
+      @JsonKey(name: 'tightness_chest')
+      final String? tightnessChest,
+      @HiveField(23)
+      @JsonKey(name: 'screened_with_swasa')
+      final String? swasaScreening,
+      @HiveField(24)
+      @JsonKey(
+          name: 'swasa_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? swasaScreeningDate,
+      @HiveField(25)
+      @JsonKey(name: 'swasa_screening_result')
+      final String? swasaScreeningResult,
+      @HiveField(26)
+      @JsonKey(name: 'screening_cxr_ai')
+      final String? cxrScreening,
+      @HiveField(27)
+      @JsonKey(
+          name: 'cxr_screening_date',
+          fromJson: fromJsonToDateTime,
+          toJson: _dateTimeToJson)
+      final DateTime? cxrScreeningDate,
+      @HiveField(28)
+      @JsonKey(name: 'cxr_screening_result')
+      final String? cxrScreeningResult}) = _$TBScreeningModelImpl;
 
   factory _TBScreeningModel.fromJson(Map<String, dynamic> json) =
       _$TBScreeningModelImpl.fromJson;
@@ -757,6 +1053,48 @@ abstract class _TBScreeningModel implements TBScreeningModel {
   @HiveField(19)
   @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
   bool? get isFormIDAssigned;
+  @override
+  @HiveField(20)
+  @JsonKey(name: 'wheezing')
+  String? get wheezing;
+  @override
+  @HiveField(21)
+  @JsonKey(name: 'shortness_breath')
+  String? get shortnessBreath;
+  @override
+  @HiveField(22)
+  @JsonKey(name: 'tightness_chest')
+  String? get tightnessChest;
+  @override
+  @HiveField(23)
+  @JsonKey(name: 'screened_with_swasa')
+  String? get swasaScreening;
+  @override
+  @HiveField(24)
+  @JsonKey(
+      name: 'swasa_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get swasaScreeningDate;
+  @override
+  @HiveField(25)
+  @JsonKey(name: 'swasa_screening_result')
+  String? get swasaScreeningResult;
+  @override
+  @HiveField(26)
+  @JsonKey(name: 'screening_cxr_ai')
+  String? get cxrScreening;
+  @override
+  @HiveField(27)
+  @JsonKey(
+      name: 'cxr_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson)
+  DateTime? get cxrScreeningDate;
+  @override
+  @HiveField(28)
+  @JsonKey(name: 'cxr_screening_result')
+  String? get cxrScreeningResult;
 
   /// Create a copy of TBScreeningModel
   /// with the given fields replaced by the non-null parameter values.

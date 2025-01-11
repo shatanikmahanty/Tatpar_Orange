@@ -50,6 +50,31 @@ class TBScreeningModel with _$TBScreeningModel {
     @HiveField(19)
     @JsonKey(name: 'is_form_id_assigned', includeToJson: false)
     bool? isFormIDAssigned,
+    @HiveField(20) @JsonKey(name: 'wheezing') String? wheezing,
+    @HiveField(21) @JsonKey(name: 'shortness_breath') String? shortnessBreath,
+    @HiveField(22) @JsonKey(name: 'tightness_chest') String? tightnessChest,
+    @HiveField(23) @JsonKey(name: 'screened_with_swasa') String? swasaScreening,
+    @HiveField(24)
+    @JsonKey(
+      name: 'swasa_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson,
+    )
+    DateTime? swasaScreeningDate,
+    @HiveField(25)
+    @JsonKey(name: 'swasa_screening_result')
+    String? swasaScreeningResult,
+    @HiveField(26) @JsonKey(name: 'screening_cxr_ai') String? cxrScreening,
+    @HiveField(27)
+    @JsonKey(
+      name: 'cxr_screening_date',
+      fromJson: fromJsonToDateTime,
+      toJson: _dateTimeToJson,
+    )
+    DateTime? cxrScreeningDate,
+    @HiveField(28)
+    @JsonKey(name: 'cxr_screening_result')
+    String? cxrScreeningResult,
   }) = _TBScreeningModel;
 
   factory TBScreeningModel.fromJson(Map<String, dynamic> json) =>

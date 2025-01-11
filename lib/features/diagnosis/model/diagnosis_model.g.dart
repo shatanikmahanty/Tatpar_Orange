@@ -72,13 +72,17 @@ class DiagnosisModelAdapter extends TypeAdapter<DiagnosisModel> {
       isUpdated: fields[52] as bool?,
       caseId: fields[53] as int?,
       isFormIDAssigned: fields[54] as bool?,
+      spirometry: fields[55] as String?,
+      fev: fields[56] as double?,
+      fec: fields[57] as double?,
+      ratio: fields[58] as double?,
     );
   }
 
   @override
   void write(BinaryWriter writer, DiagnosisModel obj) {
     writer
-      ..writeByte(55)
+      ..writeByte(59)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -188,7 +192,15 @@ class DiagnosisModelAdapter extends TypeAdapter<DiagnosisModel> {
       ..writeByte(53)
       ..write(obj.caseId)
       ..writeByte(54)
-      ..write(obj.isFormIDAssigned);
+      ..write(obj.isFormIDAssigned)
+      ..writeByte(55)
+      ..write(obj.spirometry)
+      ..writeByte(56)
+      ..write(obj.fev)
+      ..writeByte(57)
+      ..write(obj.fec)
+      ..writeByte(58)
+      ..write(obj.ratio);
   }
 
   @override
@@ -265,6 +277,10 @@ _$DiagnosisModelImpl _$$DiagnosisModelImplFromJson(Map<String, dynamic> json) =>
       isUpdated: json['is_updated'] as bool?,
       caseId: (json['case_id'] as num?)?.toInt(),
       isFormIDAssigned: json['is_form_id_assigned'] as bool?,
+      spirometry: json['spirometry'] as String?,
+      fev: (json['fev'] as num?)?.toDouble(),
+      fec: (json['fec'] as num?)?.toDouble(),
+      ratio: (json['ratio'] as num?)?.toDouble(),
     );
 
 Map<String, dynamic> _$$DiagnosisModelImplToJson(
@@ -320,4 +336,8 @@ Map<String, dynamic> _$$DiagnosisModelImplToJson(
       'diagnosis_comments': instance.diagnosisComments,
       'diagnosis_date': _dateTimeToJson(instance.diagnosisDate),
       'is_updated': instance.isUpdated,
+      'spirometry': instance.spirometry,
+      'fev': instance.fev,
+      'fec': instance.fec,
+      'ratio': instance.ratio,
     };

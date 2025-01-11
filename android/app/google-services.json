@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "555188132765",
-    "project_id": "tatpar-acf-flutter",
-    "storage_bucket": "tatpar-acf-flutter.appspot.com"
+    "project_number": "449590885521",
+    "project_id": "tatpar-orange",
+    "storage_bucket": "tatpar-orange.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:555188132765:android:106dd6fb1d71e741712d74",
+        "mobilesdk_app_id": "1:449590885521:android:4638020c226f94838b1330",
         "android_client_info": {
           "package_name": "com.mylabs.tatpar_acf"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyBtrN9Ndltn3s4mb8EC0MymPJbJEoDKcxw"
+          "current_key": "AIzaSyADiOLR_xmDceXGlKaTd4sPLRIYzeOYMPM"
         }
       ],
       "services": {

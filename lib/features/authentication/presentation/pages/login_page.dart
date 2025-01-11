@@ -22,7 +22,7 @@ class LoginPage extends StatelessWidget {
               Expanded(
                 flex: 3, // Take 20% of the available height
                 child: ColoredBox(
-                  color: const Color.fromARGB(255, 25, 118, 210),
+                  color: AppColors.primary,
                   child: Padding(
                     padding: EdgeInsets.symmetric(
                         horizontal: constraints.maxHeight * 0.02),

@@ -27,7 +27,8 @@ class CasesPage extends StatelessWidget {
               child: Column(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.symmetric(vertical: kPadding, horizontal: kPadding * 2),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: kPadding, horizontal: kPadding * 2),
                     child: TextField(
                       decoration: InputDecoration(
                         prefixIcon: const Icon(Icons.search),
@@ -60,7 +61,9 @@ class CasesPage extends StatelessWidget {
                   //     ),
                   //   ),
                   // ),
-                  if (state.cases.isEmpty || (state.filteredCases != null && state.filteredCases!.isEmpty))
+                  if (state.cases.isEmpty ||
+                      (state.filteredCases != null &&
+                          state.filteredCases!.isEmpty))
                     Container(
                       padding: const EdgeInsets.symmetric(
                         vertical: kPadding * 10,
@@ -85,7 +88,8 @@ class CasesPage extends StatelessWidget {
                   Expanded(
                     child: state.filteredCases == null
                         ? ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: kPadding * 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: kPadding * 2),
                             itemBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.only(
                                 bottom: kPadding * 2,
@@ -97,7 +101,8 @@ class CasesPage extends StatelessWidget {
                             itemCount: state.cases.length,
                           )
                         : ListView.builder(
-                            padding: const EdgeInsets.symmetric(horizontal: kPadding * 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: kPadding * 2),
                             itemBuilder: (context, index) => Padding(
                               padding: const EdgeInsets.only(
                                 bottom: kPadding * 2,

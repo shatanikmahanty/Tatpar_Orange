@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class AppColors {
   static ColorScheme get lightColorScheme => ColorScheme(
-        primary: primary,
+        primary: primary, // Brighter orange primary color
         primaryContainer: primaryContainer,
         onPrimary: onPrimary,
         onPrimaryContainer: onPrimaryContainer,
-        secondary: secondary,
+        secondary: secondary, // Very light orange for secondary
         onSecondary: onSecondary,
         secondaryContainer: secondaryContainer,
         onSecondaryContainer: onSecondaryContainer,
@@ -31,11 +31,12 @@ class AppColors {
 
   static ColorScheme get darkColorScheme => const ColorScheme(
         brightness: Brightness.dark,
-        primary: primaryDark,
+        primary: primaryDark, // Brighter orange primary color for dark theme
         primaryContainer: primaryContainerDark,
         onPrimary: onPrimaryDark,
         onPrimaryContainer: onPrimaryContainerDark,
-        secondary: secondaryDark,
+        secondary:
+            secondaryDark, // Very light orange for secondary in dark theme
         onSecondary: onSecondaryDark,
         secondaryContainer: secondaryContainerDark,
         onSecondaryContainer: onSecondaryContainerDark,
@@ -57,7 +58,7 @@ class AppColors {
         onBackground: onBackgroundDark,
       );
 
-  // colors from figma design
+  // Colors from Figma design
   static const Color blueDark = Color(0xff1172E3);
   static const Color blueMedium = Color(0xff3F8CE7);
   static const Color blueLight = Color(0xffD4E0F3); // inactive icons
@@ -76,15 +77,21 @@ class AppColors {
   static const Color grey90 = Color(0xffCCCCCC);
   static const Color neutralBlack = Color(0xff20102B);
 
-  // Light theme colors
-  static const Color primary = Color(0xff1172E3);
+  // **Light theme colors with brighter orange as primary**
+  static const Color primary = Color.fromARGB(255, 255, 162, 54);
   static const Color onPrimary = Colors.white;
-  static const Color primaryContainer = Color(0xff3F8CE7);
+  static const Color primaryContainer =
+      Color.fromARGB(255, 255, 204, 77); // Lighter orange for container
   static const Color onPrimaryContainer = Color(0xffffffff);
-  static const Color secondary = Color(0xffD4E0F3);
-  static const Color onSecondary = Colors.white;
-  static const Color secondaryContainer = Color(0xffE9DDFF);
-  static const Color onSecondaryContainer = Color(0xff005c0c);
+
+  static const Color secondary = Color.fromARGB(255, 255, 234, 209);
+  // Very light pale orange
+  static const Color onSecondary =
+      Colors.black; // Black text on light secondary
+  static const Color secondaryContainer = Color.fromARGB(255, 204, 119, 51);
+  static const Color onSecondaryContainer =
+      Color(0xff6A4F1F); // Text color for secondary container
+
   static const Color tertiary = Color(0xff006D37);
   static const Color onTertiary = Colors.white;
   static const Color tertiaryContainer = Color(0xff2e2488);
@@ -102,12 +109,17 @@ class AppColors {
   static const Color outline = Color(0xff74777F);
   static const Color outlineVariant = Color(0xffC4C6D0);
 
-  // Dark theme colors
-  static const Color primaryDark = Color(0xff1172E3);
-  static const Color onPrimaryDark = Color(0xffE5DEFF);
-  static const Color primaryContainerDark = Colors.green;
-  static const Color onPrimaryContainerDark = Color(0xffE5DEFF);
-  static const Color secondaryDark = Color(0xffF1C048);
+  // **Dark theme colors with brighter orange as primary**
+  static const Color primaryDark =
+      Color(0xFFFFB200); // Brighter orange primary color for dark theme
+  static const Color onPrimaryDark =
+      Color(0xffE5DEFF); // Light color for text on orange in dark mode
+  static const Color primaryContainerDark =
+      Color(0xFFFFC04D); // Lighter orange for dark theme container
+  static const Color onPrimaryContainerDark =
+      Color(0xffE5DEFF); // Text color on container in dark theme
+  static const Color secondaryDark =
+      Color(0xFFFFD58D); // Very light pale orange for dark theme
   static const Color onSecondaryDark = Color(0xff3F2E00);
   static const Color secondaryContainerDark = Color(0xff5B4300);
   static const Color onSecondaryContainerDark = Color(0xffFFDF9B);

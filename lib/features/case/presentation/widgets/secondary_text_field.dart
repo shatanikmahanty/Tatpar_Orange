@@ -27,9 +27,9 @@ class SecondaryTextField extends StatelessWidget {
             kPadding / 2,
           ),
           decoration: BoxDecoration(
-            color: AppColors.blueLight,
+            color: AppColors.secondary,
             borderRadius: BorderRadius.circular(kPadding * 0.5),
-            border: Border.all(color: AppColors.blueDark),
+            border: Border.all(color: AppColors.primary),
           ),
           alignment: Alignment.center,
           child: Row(
@@ -41,7 +41,7 @@ class SecondaryTextField extends StatelessWidget {
                     fontSize: 15,
                     height: 2.2,
                     wordSpacing: 0.2,
-                    color: AppColors.blueDark),
+                    color: AppColors.onSecondaryDark),
               ),
             ],
           ),
