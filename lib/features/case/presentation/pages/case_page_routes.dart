@@ -30,6 +30,10 @@ final caseRoutes = [
     page: TreatmentRoute.page,
   ),
   AutoRoute(
+    path: 'faq_checklist_page',
+    page: FaqChecklistRoute.page,
+  ),
+  AutoRoute(
     path: 'outcome_page',
     page: OutcomeRoute.page,
   ),

@@ -58,6 +58,10 @@ _$CaseStateImpl _$$CaseStateImplFromJson(Map<String, dynamic> json) =>
       filteredContacts: (json['filteredContacts'] as List<dynamic>?)
           ?.map((e) => ContactTracingModel.fromJson(e as Map<String, dynamic>))
           .toList(),
+      faqCheckListModel: json['faqCheckListModel'] == null
+          ? null
+          : FaqChecklistModel.fromJson(
+              json['faqCheckListModel'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$CaseStateImplToJson(_$CaseStateImpl instance) =>
@@ -78,4 +82,5 @@ Map<String, dynamic> _$$CaseStateImplToJson(_$CaseStateImpl instance) =>
       'contactTracingModel': instance.contactTracingModel,
       'outcomeModel': instance.outcomeModel,
       'filteredContacts': instance.filteredContacts,
+      'faqCheckListModel': instance.faqCheckListModel,
     };

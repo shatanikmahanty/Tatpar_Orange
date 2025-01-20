@@ -197,5 +197,15 @@
     "weight":"Weight at Start",
     "tpt_side_effects":"Side Effects of TPT(If any)",
     "tpt_outcome_date":"TPT Outcome Date",
-    "tpt_outcome":"TPT Outcome"
+    "tpt_outcome":"TPT Outcome",
+    "worriedEnough": "1. You were worried you would not have enough food to eat?",
+    "unableToEat": "2. You were unable to eat healthy and nutritious food?",
+    "fewFoods": "3. You ate only a few kinds of foods?",
+    "skipMeal": "4. You had to skip a meal?",
+    "ateLess": "5. You ate less than you thought you should?",
+    "householdFood": "6. Your household ran out of food?",
+    "hungryButDidNotEat": "7. You were hungry but did not eat?",
+    "wentWithoutEating": "8. You went without eating for a whole day?",
+    "linkageDate": "Date of Linkage",
+    "faqChecklist":"FAQ Checklist" 
 }

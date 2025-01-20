@@ -46,13 +46,14 @@ class CaseAdapter extends TypeAdapter<Case> {
       treatmentOutcome: fields[26] as String?,
       referralId: fields[27] as String?,
       dstRifResistanceResult: fields[28] as String?,
+      faqChecklist: fields[29] as int?,
     );
   }
 
   @override
   void write(BinaryWriter writer, Case obj) {
     writer
-      ..writeByte(29)
+      ..writeByte(30)
       ..writeByte(0)
       ..write(obj.id)
       ..writeByte(1)
@@ -110,7 +111,9 @@ class CaseAdapter extends TypeAdapter<Case> {
       ..writeByte(27)
       ..write(obj.referralId)
       ..writeByte(28)
-      ..write(obj.dstRifResistanceResult);
+      ..write(obj.dstRifResistanceResult)
+      ..writeByte(29)
+      ..write(obj.faqChecklist);
   }
 
   @override
@@ -160,6 +163,7 @@ _$CaseImpl _$$CaseImplFromJson(Map<String, dynamic> json) => _$CaseImpl(
       treatmentOutcome: json['treatment_outcome'] as String?,
       referralId: json['patient_referral_id'] as String?,
       dstRifResistanceResult: json['dst_rif_resistance_result'] as String?,
+      faqChecklist: (json['faq_checklist_id'] as num?)?.toInt(),
     );
 
 Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
@@ -192,4 +196,5 @@ Map<String, dynamic> _$$CaseImplToJson(_$CaseImpl instance) =>
       'treatment_outcome': instance.treatmentOutcome,
       'patient_referral_id': instance.referralId,
       'dst_rif_resistance_result': instance.dstRifResistanceResult,
+      'faq_checklist_id': instance.faqChecklist,
     };

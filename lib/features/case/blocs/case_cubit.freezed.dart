@@ -41,6 +41,8 @@ mixin _$CaseState {
   OutcomeModel? get outcomeModel => throw _privateConstructorUsedError;
   List<ContactTracingModel>? get filteredContacts =>
       throw _privateConstructorUsedError;
+  FaqChecklistModel? get faqCheckListModel =>
+      throw _privateConstructorUsedError;
 
   /// Serializes this CaseState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -73,7 +75,8 @@ abstract class $CaseStateCopyWith<$Res> {
       TreatmentModel? treatmentModel,
       ContactTracingModel? contactTracingModel,
       OutcomeModel? outcomeModel,
-      List<ContactTracingModel>? filteredContacts});
+      List<ContactTracingModel>? filteredContacts,
+      FaqChecklistModel? faqCheckListModel});
 
   $CaseCopyWith<$Res> get caseWorkedUpon;
   $DataModelCopyWith<$Res>? get dataModel;
@@ -86,6 +89,7 @@ abstract class $CaseStateCopyWith<$Res> {
   $TreatmentModelCopyWith<$Res>? get treatmentModel;
   $ContactTracingModelCopyWith<$Res>? get contactTracingModel;
   $OutcomeModelCopyWith<$Res>? get outcomeModel;
+  $FaqChecklistModelCopyWith<$Res>? get faqCheckListModel;
 }
 
 /// @nodoc
@@ -119,6 +123,7 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     Object? contactTracingModel = freezed,
     Object? outcomeModel = freezed,
     Object? filteredContacts = freezed,
+    Object? faqCheckListModel = freezed,
   }) {
     return _then(_value.copyWith(
       isLoading: null == isLoading
@@ -185,6 +190,10 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
           ? _value.filteredContacts
           : filteredContacts // ignore: cast_nullable_to_non_nullable
               as List<ContactTracingModel>?,
+      faqCheckListModel: freezed == faqCheckListModel
+          ? _value.faqCheckListModel
+          : faqCheckListModel // ignore: cast_nullable_to_non_nullable
+              as FaqChecklistModel?,
     ) as $Val);
   }
 
@@ -340,6 +349,20 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
       return _then(_value.copyWith(outcomeModel: value) as $Val);
     });
   }
+
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $FaqChecklistModelCopyWith<$Res>? get faqCheckListModel {
+    if (_value.faqCheckListModel == null) {
+      return null;
+    }
+
+    return $FaqChecklistModelCopyWith<$Res>(_value.faqCheckListModel!, (value) {
+      return _then(_value.copyWith(faqCheckListModel: value) as $Val);
+    });
+  }
 }
 
 /// @nodoc
@@ -366,7 +389,8 @@ abstract class _$$CaseStateImplCopyWith<$Res>
       TreatmentModel? treatmentModel,
       ContactTracingModel? contactTracingModel,
       OutcomeModel? outcomeModel,
-      List<ContactTracingModel>? filteredContacts});
+      List<ContactTracingModel>? filteredContacts,
+      FaqChecklistModel? faqCheckListModel});
 
   @override
   $CaseCopyWith<$Res> get caseWorkedUpon;
@@ -390,6 +414,8 @@ abstract class _$$CaseStateImplCopyWith<$Res>
   $ContactTracingModelCopyWith<$Res>? get contactTracingModel;
   @override
   $OutcomeModelCopyWith<$Res>? get outcomeModel;
+  @override
+  $FaqChecklistModelCopyWith<$Res>? get faqCheckListModel;
 }
 
 /// @nodoc
@@ -421,6 +447,7 @@ class __$$CaseStateImplCopyWithImpl<$Res>
     Object? contactTracingModel = freezed,
     Object? outcomeModel = freezed,
     Object? filteredContacts = freezed,
+    Object? faqCheckListModel = freezed,
   }) {
     return _then(_$CaseStateImpl(
       isLoading: null == isLoading
@@ -487,6 +514,10 @@ class __$$CaseStateImplCopyWithImpl<$Res>
           ? _value._filteredContacts
           : filteredContacts // ignore: cast_nullable_to_non_nullable
               as List<ContactTracingModel>?,
+      faqCheckListModel: freezed == faqCheckListModel
+          ? _value.faqCheckListModel
+          : faqCheckListModel // ignore: cast_nullable_to_non_nullable
+              as FaqChecklistModel?,
     ));
   }
 }
@@ -510,7 +541,8 @@ class _$CaseStateImpl implements _CaseState {
       this.treatmentModel,
       this.contactTracingModel,
       this.outcomeModel,
-      final List<ContactTracingModel>? filteredContacts})
+      final List<ContactTracingModel>? filteredContacts,
+      this.faqCheckListModel})
       : _contactTracingList = contactTracingList,
         _filteredContacts = filteredContacts;
 
@@ -568,8 +600,11 @@ class _$CaseStateImpl implements _CaseState {
   }
 
   @override
+  final FaqChecklistModel? faqCheckListModel;
+
+  @override
   String toString() {
-    return 'CaseState(isLoading: $isLoading, contactTracingList: $contactTracingList, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, contactTracingId: $contactTracingId, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel, filteredContacts: $filteredContacts)';
+    return 'CaseState(isLoading: $isLoading, contactTracingList: $contactTracingList, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, contactTracingId: $contactTracingId, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel, filteredContacts: $filteredContacts, faqCheckListModel: $faqCheckListModel)';
   }
 
   @override
@@ -610,7 +645,9 @@ class _$CaseStateImpl implements _CaseState {
             (identical(other.outcomeModel, outcomeModel) ||
                 other.outcomeModel == outcomeModel) &&
             const DeepCollectionEquality()
-                .equals(other._filteredContacts, _filteredContacts));
+                .equals(other._filteredContacts, _filteredContacts) &&
+            (identical(other.faqCheckListModel, faqCheckListModel) ||
+                other.faqCheckListModel == faqCheckListModel));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -632,7 +669,8 @@ class _$CaseStateImpl implements _CaseState {
       treatmentModel,
       contactTracingModel,
       outcomeModel,
-      const DeepCollectionEquality().hash(_filteredContacts));
+      const DeepCollectionEquality().hash(_filteredContacts),
+      faqCheckListModel);
 
   /// Create a copy of CaseState
   /// with the given fields replaced by the non-null parameter values.
@@ -667,7 +705,8 @@ abstract class _CaseState implements CaseState {
       final TreatmentModel? treatmentModel,
       final ContactTracingModel? contactTracingModel,
       final OutcomeModel? outcomeModel,
-      final List<ContactTracingModel>? filteredContacts}) = _$CaseStateImpl;
+      final List<ContactTracingModel>? filteredContacts,
+      final FaqChecklistModel? faqCheckListModel}) = _$CaseStateImpl;
 
   factory _CaseState.fromJson(Map<String, dynamic> json) =
       _$CaseStateImpl.fromJson;
@@ -704,6 +743,8 @@ abstract class _CaseState implements CaseState {
   OutcomeModel? get outcomeModel;
   @override
   List<ContactTracingModel>? get filteredContacts;
+  @override
+  FaqChecklistModel? get faqCheckListModel;
 
   /// Create a copy of CaseState
   /// with the given fields replaced by the non-null parameter values.

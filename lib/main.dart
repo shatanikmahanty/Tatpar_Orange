@@ -24,6 +24,7 @@ import 'package:tatpar_acf/features/case/data/source_models/trimester_model.dart
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
+import 'package:tatpar_acf/features/faochecklist/models/faq_checklist_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
@@ -81,7 +82,7 @@ Future<void> main() async {
     Hive.registerAdapter(DiagnosisDataAdapter());
     await Hive.openBox<DiagnosisData>('diagnosisData');
 
-    ///caseListGetAPI
+    ///caseListGetAPI -14
     Hive.registerAdapter(CaseAdapter());
     await Hive.openBox<Case>('caseList');
     // await Hive.deleteBoxFromDisk('caseList');
@@ -124,6 +125,11 @@ Future<void> main() async {
     Hive.registerAdapter(OutcomeModelAdapter());
     await Hive.openBox<OutcomeModel>('outcomeModel');
     // await Hive.deleteBoxFromDisk('outcomeModel');
+
+    ///FaqChecklistUpdateAPI
+    Hive.registerAdapter(FaqChecklistModelAdapter());
+    await Hive.openBox<FaqChecklistModel>('faqCheckListModel');
+    // await Hive.deleteBoxFromDisk('faqCheckListModel');
 
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,

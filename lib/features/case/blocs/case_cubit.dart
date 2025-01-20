@@ -11,6 +11,7 @@ import 'package:tatpar_acf/features/case/data/source_models/diagnosis_data.dart'
 import 'package:tatpar_acf/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_acf/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_acf/features/diagnosis/model/diagnosis_model.dart';
+import 'package:tatpar_acf/features/faochecklist/models/faq_checklist_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/mental_health_screening_model.dart';
 import 'package:tatpar_acf/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_acf/features/outcome/model/outcome_model.dart';
@@ -24,26 +25,27 @@ part 'case_cubit.g.dart';
 
 @freezed
 class CaseState with _$CaseState {
-  const factory CaseState({
-    @Default(false) bool isLoading,
-    @Default([]) List<ContactTracingModel> contactTracingList,
-    required Case caseWorkedUpon,
-    DataModel? dataModel,
-    ReferralDetailsModel? referralDetailsModel,
-    TBScreeningModel? tbScreeningModel,
-    WHOSrqModel? whoSrqModel,
-    MentalHealthScreeningModel? mentalHealthScreeningModel,
-    String? screeningOutcome,
-    int? contactTracingId,
-    DiagnosisModel? diagnsosisModel,
-    DiagnosisData? diagnosisData,
-    TreatmentModel? treatmentModel,
-    ContactTracingModel? contactTracingModel,
-    OutcomeModel? outcomeModel,
-    List<ContactTracingModel>? filteredContacts,
-  }) = _CaseState;
+  const factory CaseState(
+      {@Default(false) bool isLoading,
+      @Default([]) List<ContactTracingModel> contactTracingList,
+      required Case caseWorkedUpon,
+      DataModel? dataModel,
+      ReferralDetailsModel? referralDetailsModel,
+      TBScreeningModel? tbScreeningModel,
+      WHOSrqModel? whoSrqModel,
+      MentalHealthScreeningModel? mentalHealthScreeningModel,
+      String? screeningOutcome,
+      int? contactTracingId,
+      DiagnosisModel? diagnsosisModel,
+      DiagnosisData? diagnosisData,
+      TreatmentModel? treatmentModel,
+      ContactTracingModel? contactTracingModel,
+      OutcomeModel? outcomeModel,
+      List<ContactTracingModel>? filteredContacts,
+      FaqChecklistModel? faqCheckListModel}) = _CaseState;
 
-  factory CaseState.fromJson(Map<String, dynamic> json) => _$CaseStateFromJson(json);
+  factory CaseState.fromJson(Map<String, dynamic> json) =>
+      _$CaseStateFromJson(json);
 }
 
 class CaseCubit extends Cubit<CaseState> {
@@ -72,7 +74,12 @@ class CaseCubit extends Cubit<CaseState> {
     if (caseModel.outcomeValue != null) {
       getOutcomeData(caseModel.outcomeValue);
     }
-    if (caseModel.id != null && caseModel.contactTracingList != null && caseModel.contactTracingList!.isNotEmpty) {
+    if (caseModel.faqChecklist != null) {
+      getFaqCheckListData(caseModel.faqChecklist);
+    }
+    if (caseModel.id != null &&
+        caseModel.contactTracingList != null &&
+        caseModel.contactTracingList!.isNotEmpty) {
       getContactTracingListData();
     }
   }
@@ -116,28 +123,42 @@ class CaseCubit extends Cubit<CaseState> {
   ///OutcomePage
   int? _selectedTreatmentOutcome;
 
-  set selectDistrictId(int? selectedDistrictId) => _selectedDistrictId = selectedDistrictId;
+  set selectDistrictId(int? selectedDistrictId) =>
+      _selectedDistrictId = selectedDistrictId;
   set selectBlockId(int? selectedBlockId) => _selectedBlockId = selectedBlockId;
-  set selectPanchayatCodeId(int? selectedPanchayatCodeId) => _selectedPanchayatCodeId = selectedPanchayatCodeId;
+  set selectPanchayatCodeId(int? selectedPanchayatCodeId) =>
+      _selectedPanchayatCodeId = selectedPanchayatCodeId;
   set selectReferrerPanchayatCodeId(int? selectedReferrerPanchayatCodeId) =>
       _selectedReferrerPanchayatCodeId = selectedReferrerPanchayatCodeId;
-  set selectCasteCategory(int? selectedCasteCategory) => _selectedCasteCategory = selectedCasteCategory;
-  set selectKeyPopulation(List<int>? selectedKeyPopulation) => _selectedKeyPopulation = selectedKeyPopulation;
-  set selectTrimester(int? selectedTrimester) => _selectedTrimester = selectedTrimester;
-  set selectReferrerSource(int? selectedReferrerSource) => _selectedReferrerSource = selectedReferrerSource;
+  set selectCasteCategory(int? selectedCasteCategory) =>
+      _selectedCasteCategory = selectedCasteCategory;
+  set selectKeyPopulation(List<int>? selectedKeyPopulation) =>
+      _selectedKeyPopulation = selectedKeyPopulation;
+  set selectTrimester(int? selectedTrimester) =>
+      _selectedTrimester = selectedTrimester;
+  set selectReferrerSource(int? selectedReferrerSource) =>
+      _selectedReferrerSource = selectedReferrerSource;
 
-  set selectTBTrimester(int? selectedTBTrimester) => _selectedTBTrimester = selectedTBTrimester;
+  set selectTBTrimester(int? selectedTBTrimester) =>
+      _selectedTBTrimester = selectedTBTrimester;
 
-  set selectAFB1Result(int? selectedAFB1Result) => _selectedAFB1Result = selectedAFB1Result;
-  set selectAFB2Result(int? selectedAFB2Result) => _selectedAFB2Result = selectedAFB2Result;
-  set selectNAATMachine(int? selectedNAATMachine) => _selectedNAATMachine = selectedNAATMachine;
-  set selectMTBResult(int? selectedMTBResult) => _selectedMTBResult = selectedMTBResult;
-  set selectXDRResult(int? selectedXDRResult) => _selectedXDRResult = selectedXDRResult;
+  set selectAFB1Result(int? selectedAFB1Result) =>
+      _selectedAFB1Result = selectedAFB1Result;
+  set selectAFB2Result(int? selectedAFB2Result) =>
+      _selectedAFB2Result = selectedAFB2Result;
+  set selectNAATMachine(int? selectedNAATMachine) =>
+      _selectedNAATMachine = selectedNAATMachine;
+  set selectMTBResult(int? selectedMTBResult) =>
+      _selectedMTBResult = selectedMTBResult;
+  set selectXDRResult(int? selectedXDRResult) =>
+      _selectedXDRResult = selectedXDRResult;
 
   set selectTreatmentPanchayatCodeId(int? selectedTreatmentPanchayatCodeId) =>
       _selectedTreatmentPanchayatCodeId = selectedTreatmentPanchayatCodeId;
-  set selectIPFUAFBResult(int? selectedIPFUAFBResult) => _selectedIPFUAFBResult = selectedIPFUAFBResult;
-  set selectCPAFBResult(int? selectedCPAFBResult) => _selectedCPAFBResult = selectedCPAFBResult;
+  set selectIPFUAFBResult(int? selectedIPFUAFBResult) =>
+      _selectedIPFUAFBResult = selectedIPFUAFBResult;
+  set selectCPAFBResult(int? selectedCPAFBResult) =>
+      _selectedCPAFBResult = selectedCPAFBResult;
   set selectTreatmentIPFUNaatResult(int? selectedTreatmentIPFUNaatResult) =>
       _selectedTreatmentIPFUNaatResult = selectedTreatmentIPFUNaatResult;
   set selectTreatmentCPFUNaatResult(int? selectedTreatmentCPFUNaatResult) =>
@@ -145,9 +166,11 @@ class CaseCubit extends Cubit<CaseState> {
   set selectTreatmentHistoryResult(int? selectedTreatmentHistoryResult) =>
       _selectedTreatmentHistoryResult = selectedTreatmentHistoryResult;
 
-  set selectTPTRegimen(int? selectedTPTRegimen) => _selectedTPTRegimen = selectedTPTRegimen;
+  set selectTPTRegimen(int? selectedTPTRegimen) =>
+      _selectedTPTRegimen = selectedTPTRegimen;
 
-  set selectTreatmentOutcome(int? selectedTreatmentOutcome) => _selectedTreatmentOutcome = selectedTreatmentOutcome;
+  set selectTreatmentOutcome(int? selectedTreatmentOutcome) =>
+      _selectedTreatmentOutcome = selectedTreatmentOutcome;
 
   int? get selectedBlockId => _selectedBlockId;
   int? get selectedDistrictId => _selectedDistrictId;
@@ -166,7 +189,8 @@ class CaseCubit extends Cubit<CaseState> {
   int? get selectedMTBResult => _selectedMTBResult;
   int? get selectedXDRResult => _selectedXDRResult;
 
-  int? get selectedTreatmentPanchayatCodeId => _selectedTreatmentPanchayatCodeId;
+  int? get selectedTreatmentPanchayatCodeId =>
+      _selectedTreatmentPanchayatCodeId;
 
   int? get selectedTPTRegimen => _selectedTPTRegimen;
 
@@ -226,7 +250,8 @@ class CaseCubit extends Cubit<CaseState> {
     }
   }
 
-  Map<String, dynamic> calculateYesCounter(FormGroup formGroup, WHOSrqModel whoSrqModel) {
+  Map<String, dynamic> calculateYesCounter(
+      FormGroup formGroup, WHOSrqModel whoSrqModel) {
     int numberOfYes = 0;
     String screeningStatus;
     formGroup.controls.forEach((key, control) {
@@ -234,13 +259,19 @@ class CaseCubit extends Cubit<CaseState> {
         numberOfYes++;
       }
     });
-    if (numberOfYes > 14 || (formGroup.control('ending_your_life').value == 'Yes' && numberOfYes < 15)) {
+    if (numberOfYes > 14 ||
+        (formGroup.control('ending_your_life').value == 'Yes' &&
+            numberOfYes < 15)) {
       screeningStatus = 'Positive';
     } else {
       screeningStatus = 'Negative';
     }
     String yesCounter = '$numberOfYes/20'.toString();
-    return {'yesCounter': yesCounter, 'screeningStatus': screeningStatus, 'whoSrqModel': whoSrqModel};
+    return {
+      'yesCounter': yesCounter,
+      'screeningStatus': screeningStatus,
+      'whoSrqModel': whoSrqModel
+    };
   }
 
   Future<Case?> getCaseModel(int? caseId) async {
@@ -328,8 +359,22 @@ class CaseCubit extends Cubit<CaseState> {
     );
   }
 
+  Future<void> getFaqCheckListData(int? formId) async {
+    if (state.caseWorkedUpon.faqChecklist == null) return;
+    emit(state.copyWith(isLoading: true));
+
+    final response = await caseRepo.getFaqChecklist(id: formId);
+    emit(
+      state.copyWith(
+        isLoading: false,
+        faqCheckListModel: response,
+      ),
+    );
+  }
+
   Future<void> getContactTracingListData() async {
-    final response = await caseRepo.getContactTracingList(caseId: state.caseWorkedUpon.id);
+    final response =
+        await caseRepo.getContactTracingList(caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
         contactTracingList: response,
@@ -355,7 +400,8 @@ class CaseCubit extends Cubit<CaseState> {
     emit(state.copyWith(caseWorkedUpon: const Case()));
   }
 
-  Future<int?> updateReferralDetailsData(ReferralDetailsModel referralDetailsModel) async {
+  Future<int?> updateReferralDetailsData(
+      ReferralDetailsModel referralDetailsModel) async {
     final response = await caseRepo.saveReferralDetails(
         referralDetailsModel: referralDetailsModel,
         id: state.caseWorkedUpon.referralDetails,
@@ -364,7 +410,8 @@ class CaseCubit extends Cubit<CaseState> {
 
     emit(
       state.copyWith(
-        caseWorkedUpon: (selectedCase ?? state.caseWorkedUpon).copyWith(referralDetails: response.id),
+        caseWorkedUpon: (selectedCase ?? state.caseWorkedUpon)
+            .copyWith(referralDetails: response.id),
         referralDetailsModel: response,
       ),
     );
@@ -376,7 +423,9 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateTbScreeningData(TBScreeningModel tbScreeningModel) async {
     final response = await caseRepo.saveTbScreeningData(
-        tbScreeningModel: tbScreeningModel, id: state.caseWorkedUpon.tbScreening, caseId: state.caseWorkedUpon.id);
+        tbScreeningModel: tbScreeningModel,
+        id: state.caseWorkedUpon.tbScreening,
+        caseId: state.caseWorkedUpon.id);
 
     emit(
       state.copyWith(
@@ -389,8 +438,11 @@ class CaseCubit extends Cubit<CaseState> {
     getCaseModel(state.caseWorkedUpon.id);
   }
 
-  Future<void> updateWHOSRQData(MentalHealthScreeningModel mentalHealthScreeningModel, WHOSrqModel? whoSrqModel,
-      WHOSrqModel? ipfuWhoSrqModel, WHOSrqModel? cpWhoSrqModel) async {
+  Future<void> updateWHOSRQData(
+      MentalHealthScreeningModel mentalHealthScreeningModel,
+      WHOSrqModel? whoSrqModel,
+      WHOSrqModel? ipfuWhoSrqModel,
+      WHOSrqModel? cpWhoSrqModel) async {
     final response = await caseRepo.saveWHOSRQData(
         mentalHealthScreeningModel: mentalHealthScreeningModel,
         whoSrqModel: whoSrqModel,
@@ -409,7 +461,9 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateDiagnosisData(DiagnosisModel diagnosisModel) async {
     final response = await caseRepo.saveDiagnosisData(
-        diagnosisModel: diagnosisModel, id: state.caseWorkedUpon.diagnosis, caseId: state.caseWorkedUpon.id);
+        diagnosisModel: diagnosisModel,
+        id: state.caseWorkedUpon.diagnosis,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon.copyWith(diagnosis: response.id),
@@ -421,7 +475,9 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateTreatmentData(TreatmentModel treatmentModel) async {
     final response = await caseRepo.saveTreatmentData(
-        treatmentModel: treatmentModel, id: state.caseWorkedUpon.treatment, caseId: state.caseWorkedUpon.id);
+        treatmentModel: treatmentModel,
+        id: state.caseWorkedUpon.treatment,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon.copyWith(treatment: response.id),
@@ -431,9 +487,12 @@ class CaseCubit extends Cubit<CaseState> {
     getTreatmentData(state.caseWorkedUpon.treatment);
   }
 
-  Future<void> updateContactTracingData(ContactTracingModel contactTracingModel, int? id) async {
+  Future<void> updateContactTracingData(
+      ContactTracingModel contactTracingModel, int? id) async {
     final response = await caseRepo.saveContactTracingData(
-        contactTracingModel: contactTracingModel, id: id, caseId: state.caseWorkedUpon.id);
+        contactTracingModel: contactTracingModel,
+        id: id,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
         caseWorkedUpon: state.caseWorkedUpon.copyWith(
@@ -448,14 +507,33 @@ class CaseCubit extends Cubit<CaseState> {
 
   Future<void> updateOutcomeData(OutcomeModel outcomeModel) async {
     final response = await caseRepo.saveOutcomeData(
-        outcomeModel: outcomeModel, id: state.caseWorkedUpon.outcomeValue, caseId: state.caseWorkedUpon.id);
+        outcomeModel: outcomeModel,
+        id: state.caseWorkedUpon.outcomeValue,
+        caseId: state.caseWorkedUpon.id);
     emit(
       state.copyWith(
-        caseWorkedUpon: state.caseWorkedUpon.copyWith(outcomeValue: response.id),
+        caseWorkedUpon:
+            state.caseWorkedUpon.copyWith(outcomeValue: response.id),
         outcomeModel: response,
       ),
     );
     getOutcomeData(state.caseWorkedUpon.outcomeValue);
+  }
+
+  Future<void> updateFaqChecklistData(
+      FaqChecklistModel faqChecklistModel) async {
+    final response = await caseRepo.saveFaqChecklistData(
+        model: faqChecklistModel,
+        id: state.caseWorkedUpon.outcomeValue,
+        caseId: state.caseWorkedUpon.id);
+    emit(
+      state.copyWith(
+        caseWorkedUpon:
+            state.caseWorkedUpon.copyWith(faqChecklist: response.id),
+        faqCheckListModel: response,
+      ),
+    );
+    getFaqCheckListData(state.caseWorkedUpon.outcomeValue);
   }
 
   List<WorkflowItem> workflows(Case workingCase) {
@@ -485,6 +563,13 @@ class CaseCubit extends Cubit<CaseState> {
         title: 'Diagnosis',
         description: 'Steps of diagnosis',
         backendKey: 'nikshay_status',
+        status: false,
+      ),
+      WorkflowItem(
+        route: const FaqChecklistRoute(),
+        title: 'Faq Checklist',
+        description: 'Faq Checklist',
+        backendKey: 'faq_checklist',
         status: false,
       ),
       WorkflowItem(
@@ -545,7 +630,8 @@ class CaseCubit extends Cubit<CaseState> {
   // }
   void updateSingleCase(ContactTracingModel updatedContact) {
     final contactList = state.contactTracingList;
-    final index = contactList.indexWhere((element) => element.id == updatedContact.id);
+    final index =
+        contactList.indexWhere((element) => element.id == updatedContact.id);
 
     if (index == -1) return;
     List<ContactTracingModel> contactCopy = List.from(contactList);
