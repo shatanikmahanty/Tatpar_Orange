@@ -7,111 +7,39 @@ import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tatpar_acf/configurations/network/api_constants.dart';
 import 'package:tatpar_acf/configurations/network/api_response.dart';
+import 'package:tatpar_acf/configurations/network/application_error.dart';
 import 'package:tatpar_acf/configurations/network/network_manager.dart';
 import 'package:tatpar_acf/configurations/network/network_request.dart';
 import 'package:tatpar_acf/features/authentication/blocs/auth_cubit.dart';
 import 'package:tatpar_acf/features/authentication/data/models/app_user_model.dart';
+import 'package:tatpar_acf/features/authentication/data/models/login_model.dart';
 
 class AuthRepo {
-  final FirebaseAuth _auth;
-  int? _resendToken;
-  String? _verificationId;
-  ConfirmationResult? _confirmationResult;
+  AuthRepo();
 
-  AuthRepo(this._auth);
-
-  // Send OTP for web
-  Future<void> sentOtpForWeb(String phoneNo) async {
+  Future<Map<String, dynamic>> logout() async {
     try {
-      _confirmationResult = await _auth.signInWithPhoneNumber(
-        '+91${phoneNo.trim()}',
+      final request = NetworkRequest(
+        logoutUrl,
+        RequestMethod.post,
+        data: {},
+        isAuthorized: true,
       );
-      log(_confirmationResult.toString());
-    } catch (e) {
-      log('Error sending OTP for web: $e');
-    }
-  }
-
-  // Send OTP for mobile
-  Future<void> sendOtp(
-    String phoneNo,
-    Function(int resendToken) isCodeSent,
-    VoidCallback onError,
-  ) async {
-    try {
-      await _auth.verifyPhoneNumber(
-        phoneNumber: '+91${phoneNo.trim()}',
-        timeout: const Duration(seconds: 30),
-        verificationCompleted: (PhoneAuthCredential phoneAuthCredential) async {
-          final userCredentials = await _auth.signInWithCredential(phoneAuthCredential);
-          handlePostLogin(userCredentials);
-        },
-        verificationFailed: (FirebaseAuthException error) {
-          onError();
-          throw error;
-        },
-        codeSent: (String verificationId, int? forceResendingToken) {
-          _resendToken = forceResendingToken;
-          _verificationId = verificationId;
-          if (_resendToken != null) {
-            isCodeSent(_resendToken!);
-          }
-        },
-        codeAutoRetrievalTimeout: (String verificationId) {
-          _verificationId = verificationId;
-        },
-        forceResendingToken: _resendToken,
-      );
-    } catch (e) {
-      log('Error sending OTP: $e');
-    }
-  }
-
-  // Verify OTP
-  Future<void> verifyOtp(String otp) async {
-    try {
-      if (kIsWeb) {
-        final userCredential = await _confirmationResult!.confirm(otp);
-        handlePostLogin(userCredential);
-        return;
+      final result = await NetworkManager.instance.perform(request);
+      if (result.status == Status.ok && result.response!.statusCode == 200) {
+        final Map<String, dynamic> data = result.data;
+        return data;
+      } else {
+        return result.response?.data ?? {};
       }
-      final credential = PhoneAuthProvider.credential(verificationId: _verificationId ?? '', smsCode: otp);
-      final userCredential = await _auth.signInWithCredential(credential);
-      handlePostLogin(userCredential);
     } catch (e) {
-      log('Error verifying OTP: $e');
+      log('Error logging in: $e');
+      return {};
     }
   }
-
-  // Handle post verification actions for web
-  Future<void> handlePostVerificationWeb(UserCredential userCredential) async {
-    if (userCredential.user != null) {
-      String? token = await _auth.currentUser!.getIdToken();
-      final user = await getUserDetails();
-      if (user == null) {
-        return;
-      }
-      AuthCubit.instance.login(user);
-    }
-  }
-
-  // Handle post login actions
-  Future<void> handlePostLogin(UserCredential userCredential) async {
-    if (userCredential.user != null) {
-      String? token = await _auth.currentUser!.getIdToken();
-      final user = await getUserDetails();
-      if (user == null) {
-        return;
-      }
-      AuthCubit.instance.login(user);
-    }
-  }
-
-  // Logout
-  Future<void> logout() => _auth.signOut();
 
   // Get user details
-  Future<AppUser?> getUserDetails() async {
+  Future<AppUser?> getUserDetails(String phone) async {
     final prefs = await SharedPreferences.getInstance();
     final userJson = prefs.getString('user');
 
@@ -120,12 +48,6 @@ class AuthRepo {
       return AppUser.fromJson(userMap);
     } else {
       try {
-        // WidgetsBinding.instance.addPostFrameCallback((_) {
-        //   DjangoflowAppSnackbar.showInfo(
-        //     'Loading User Details',
-        //   );
-        // });
-
         final request = NetworkRequest(
           usersUrl,
           RequestMethod.get,
@@ -135,7 +57,7 @@ class AuthRepo {
         if (result.status == Status.ok && result.response!.statusCode == 200) {
           final List<dynamic> usersList = result.data['data']['users'];
           final user = usersList.firstWhere(
-            (user) => user['mobile_number'] == _auth.currentUser!.phoneNumber!.replaceFirst('+91', ''),
+            (user) => user['mobile_number'] == phone.replaceFirst('+91', ''),
             orElse: () => null,
           );
           if (user != null) {
@@ -148,13 +70,38 @@ class AuthRepo {
             DjangoflowAppSnackbar.showError(
               'User not registered',
             );
-            log("User with mobile number ${_auth.currentUser!.phoneNumber}, not found.");
+            log("User with mobile number $phone, not found.");
           }
         }
       } catch (e) {
         log('Error fetching user details: $e');
       }
       return null;
+    }
+  }
+
+  Future<Map<String, dynamic>> loginWithPhoneAndPassword(
+      String phone, String password) async {
+    try {
+      final request = NetworkRequest(
+        loginUrl,
+        RequestMethod.post,
+        data: {
+          'mobile_number': phone,
+          'password': password,
+        },
+      );
+      final result = await NetworkManager.instance.perform(request);
+      print('Data: ${result.data}');
+      if (result.status == Status.ok && result.response!.statusCode == 200) {
+        final Map<String, dynamic> data = result.data;
+        return data;
+      } else {
+        return {};
+      }
+    } catch (e) {
+      log('Error logging in: $e');
+      return {};
     }
   }
 }

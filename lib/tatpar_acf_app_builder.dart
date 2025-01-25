@@ -1,6 +1,5 @@
 import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:djangoflow_app_links/djangoflow_app_links.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -43,7 +42,7 @@ class TatparAcfAppBuilder extends AppBuilder {
               create: (context) => SourceRepo(),
             ),
             RepositoryProvider<AuthRepo>(
-              create: (context) => AuthRepo(FirebaseAuth.instance),
+              create: (context) => AuthRepo(),
             ),
             RepositoryProvider<ReferralDetailsRepository>(
               create: (context) => ReferralDetailsRepository(),
@@ -78,7 +77,8 @@ class TatparAcfAppBuilder extends AppBuilder {
               ),
             ),
             BlocProvider<CaseCubit>(
-              create: (context) => CaseCubit(caseRepo: context.read<CaseRepo>(), caseModel: const Case()),
+              create: (context) => CaseCubit(
+                  caseRepo: context.read<CaseRepo>(), caseModel: const Case()),
             )
           ],
           builder: (context) => LoginListenerWrapper(
@@ -94,12 +94,14 @@ class TatparAcfAppBuilder extends AppBuilder {
             },
             onLogout: (context) {},
             child: AppCubitConsumer(
-                listenWhen: (previous, current) => previous.environment != current.environment,
+                listenWhen: (previous, current) =>
+                    previous.environment != current.environment,
                 listener: (context, state) async {},
                 builder: (context, appState) {
                   return MaterialApp.router(
                     debugShowCheckedModeBanner: false,
-                    scaffoldMessengerKey: DjangoflowAppSnackbar.scaffoldMessengerKey,
+                    scaffoldMessengerKey:
+                        DjangoflowAppSnackbar.scaffoldMessengerKey,
                     title: appName,
                     routeInformationParser: appRouter.defaultRouteParser(),
                     theme: AppTheme.light,
@@ -128,12 +130,14 @@ class TatparAcfAppBuilder extends AppBuilder {
                     ),
                     builder: (context, child) => AppResponsiveLayoutBuilder(
                       child: SandboxBanner(
-                        isSandbox: appState.environment == AppEnvironment.sandbox,
+                        isSandbox:
+                            appState.environment == AppEnvironment.sandbox,
                         child: child != null
                             ? kIsWeb
                                 ? child
                                 : AppLinksCubitListener(
-                                    listenWhen: (previous, current) => current != null,
+                                    listenWhen: (previous, current) =>
+                                        current != null,
                                     listener: (context, appLink) {
                                       final path = appLink?.path;
                                       if (path != null) {

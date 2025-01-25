@@ -10,9 +10,9 @@ class LoginPage extends StatelessWidget {
     return Scaffold(
       body: LayoutBuilder(
         builder: (context, constraints) {
-          // Check for infinite or invalid constraints
-          if (constraints.maxHeight == double.infinity ||
-              constraints.maxWidth == double.infinity) {
+          const infinity = double.infinity;
+          if (constraints.maxHeight == infinity ||
+              constraints.maxWidth == infinity) {
             return const Center(child: Text('Something went wrong'));
           }
 
@@ -61,7 +61,7 @@ class LoginPage extends StatelessWidget {
                 ),
               ),
               const Expanded(
-                flex: 3,
+                flex: 4,
                 child: AutoRouter(),
               ),
             ],

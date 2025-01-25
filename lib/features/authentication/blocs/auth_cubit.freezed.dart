@@ -21,10 +21,7 @@ AuthState _$AuthStateFromJson(Map<String, dynamic> json) {
 /// @nodoc
 mixin _$AuthState {
   AppUser? get user => throw _privateConstructorUsedError;
-  String? get phoneNumber => throw _privateConstructorUsedError;
-  int? get resendToken => throw _privateConstructorUsedError;
-  bool get isNewUser => throw _privateConstructorUsedError;
-  bool get isOtpRequested => throw _privateConstructorUsedError;
+  String? get authToken => throw _privateConstructorUsedError;
 
   /// Serializes this AuthState to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -41,12 +38,7 @@ abstract class $AuthStateCopyWith<$Res> {
   factory $AuthStateCopyWith(AuthState value, $Res Function(AuthState) then) =
       _$AuthStateCopyWithImpl<$Res, AuthState>;
   @useResult
-  $Res call(
-      {AppUser? user,
-      String? phoneNumber,
-      int? resendToken,
-      bool isNewUser,
-      bool isOtpRequested});
+  $Res call({AppUser? user, String? authToken});
 
   $AppUserCopyWith<$Res>? get user;
 }
@@ -67,32 +59,17 @@ class _$AuthStateCopyWithImpl<$Res, $Val extends AuthState>
   @override
   $Res call({
     Object? user = freezed,
-    Object? phoneNumber = freezed,
-    Object? resendToken = freezed,
-    Object? isNewUser = null,
-    Object? isOtpRequested = null,
+    Object? authToken = freezed,
   }) {
     return _then(_value.copyWith(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as AppUser?,
-      phoneNumber: freezed == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      authToken: freezed == authToken
+          ? _value.authToken
+          : authToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      resendToken: freezed == resendToken
-          ? _value.resendToken
-          : resendToken // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isNewUser: null == isNewUser
-          ? _value.isNewUser
-          : isNewUser // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isOtpRequested: null == isOtpRequested
-          ? _value.isOtpRequested
-          : isOtpRequested // ignore: cast_nullable_to_non_nullable
-              as bool,
     ) as $Val);
   }
 
@@ -119,12 +96,7 @@ abstract class _$$AuthStateImplCopyWith<$Res>
       __$$AuthStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {AppUser? user,
-      String? phoneNumber,
-      int? resendToken,
-      bool isNewUser,
-      bool isOtpRequested});
+  $Res call({AppUser? user, String? authToken});
 
   @override
   $AppUserCopyWith<$Res>? get user;
@@ -144,32 +116,17 @@ class __$$AuthStateImplCopyWithImpl<$Res>
   @override
   $Res call({
     Object? user = freezed,
-    Object? phoneNumber = freezed,
-    Object? resendToken = freezed,
-    Object? isNewUser = null,
-    Object? isOtpRequested = null,
+    Object? authToken = freezed,
   }) {
     return _then(_$AuthStateImpl(
       user: freezed == user
           ? _value.user
           : user // ignore: cast_nullable_to_non_nullable
               as AppUser?,
-      phoneNumber: freezed == phoneNumber
-          ? _value.phoneNumber
-          : phoneNumber // ignore: cast_nullable_to_non_nullable
+      authToken: freezed == authToken
+          ? _value.authToken
+          : authToken // ignore: cast_nullable_to_non_nullable
               as String?,
-      resendToken: freezed == resendToken
-          ? _value.resendToken
-          : resendToken // ignore: cast_nullable_to_non_nullable
-              as int?,
-      isNewUser: null == isNewUser
-          ? _value.isNewUser
-          : isNewUser // ignore: cast_nullable_to_non_nullable
-              as bool,
-      isOtpRequested: null == isOtpRequested
-          ? _value.isOtpRequested
-          : isOtpRequested // ignore: cast_nullable_to_non_nullable
-              as bool,
     ));
   }
 }
@@ -177,12 +134,7 @@ class __$$AuthStateImplCopyWithImpl<$Res>
 /// @nodoc
 @JsonSerializable()
 class _$AuthStateImpl implements _AuthState {
-  const _$AuthStateImpl(
-      {this.user,
-      this.phoneNumber,
-      this.resendToken,
-      this.isNewUser = false,
-      this.isOtpRequested = false});
+  const _$AuthStateImpl({this.user, this.authToken});
 
   factory _$AuthStateImpl.fromJson(Map<String, dynamic> json) =>
       _$$AuthStateImplFromJson(json);
@@ -190,19 +142,11 @@ class _$AuthStateImpl implements _AuthState {
   @override
   final AppUser? user;
   @override
-  final String? phoneNumber;
-  @override
-  final int? resendToken;
-  @override
-  @JsonKey()
-  final bool isNewUser;
-  @override
-  @JsonKey()
-  final bool isOtpRequested;
+  final String? authToken;
 
   @override
   String toString() {
-    return 'AuthState(user: $user, phoneNumber: $phoneNumber, resendToken: $resendToken, isNewUser: $isNewUser, isOtpRequested: $isOtpRequested)';
+    return 'AuthState(user: $user, authToken: $authToken)';
   }
 
   @override
@@ -211,20 +155,13 @@ class _$AuthStateImpl implements _AuthState {
         (other.runtimeType == runtimeType &&
             other is _$AuthStateImpl &&
             (identical(other.user, user) || other.user == user) &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
-            (identical(other.resendToken, resendToken) ||
-                other.resendToken == resendToken) &&
-            (identical(other.isNewUser, isNewUser) ||
-                other.isNewUser == isNewUser) &&
-            (identical(other.isOtpRequested, isOtpRequested) ||
-                other.isOtpRequested == isOtpRequested));
+            (identical(other.authToken, authToken) ||
+                other.authToken == authToken));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
-  int get hashCode => Object.hash(
-      runtimeType, user, phoneNumber, resendToken, isNewUser, isOtpRequested);
+  int get hashCode => Object.hash(runtimeType, user, authToken);
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.
@@ -243,12 +180,8 @@ class _$AuthStateImpl implements _AuthState {
 }
 
 abstract class _AuthState implements AuthState {
-  const factory _AuthState(
-      {final AppUser? user,
-      final String? phoneNumber,
-      final int? resendToken,
-      final bool isNewUser,
-      final bool isOtpRequested}) = _$AuthStateImpl;
+  const factory _AuthState({final AppUser? user, final String? authToken}) =
+      _$AuthStateImpl;
 
   factory _AuthState.fromJson(Map<String, dynamic> json) =
       _$AuthStateImpl.fromJson;
@@ -256,13 +189,7 @@ abstract class _AuthState implements AuthState {
   @override
   AppUser? get user;
   @override
-  String? get phoneNumber;
-  @override
-  int? get resendToken;
-  @override
-  bool get isNewUser;
-  @override
-  bool get isOtpRequested;
+  String? get authToken;
 
   /// Create a copy of AuthState
   /// with the given fields replaced by the non-null parameter values.

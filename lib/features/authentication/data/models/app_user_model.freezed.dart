@@ -274,19 +274,19 @@ class __$$AppUserImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$AppUserImpl implements _AppUser {
   const _$AppUserImpl(
-      {@JsonKey(name: 'id') required this.id,
-      @JsonKey(name: 'status') required this.status,
+      {@JsonKey(name: 'id') this.id,
+      @JsonKey(name: 'status') this.status,
       @JsonKey(name: 'mobile_number') required this.mobileNumber,
-      @JsonKey(name: 'alternate_number') required this.alternateNumber,
-      @JsonKey(name: 'aadhar_number') required this.aadhaarNumber,
-      @JsonKey(name: 'first_name') required this.firstName,
-      @JsonKey(name: 'last_name') required this.lastName,
-      @JsonKey(name: 'city') required this.city,
-      @JsonKey(name: 'district') required this.district,
-      @JsonKey(name: 'state') required this.state,
-      @JsonKey(name: 'pincode') required this.pinCode,
-      @JsonKey(name: 'address') required this.address,
-      @JsonKey(name: 'email') required this.email});
+      @JsonKey(name: 'alternate_number') this.alternateNumber,
+      @JsonKey(name: 'aadhar_number') this.aadhaarNumber,
+      @JsonKey(name: 'first_name') this.firstName,
+      @JsonKey(name: 'last_name') this.lastName,
+      @JsonKey(name: 'city') this.city,
+      @JsonKey(name: 'district') this.district,
+      @JsonKey(name: 'state') this.state,
+      @JsonKey(name: 'pincode') this.pinCode,
+      @JsonKey(name: 'address') this.address,
+      @JsonKey(name: 'email') this.email});
 
   factory _$AppUserImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppUserImplFromJson(json);
@@ -398,19 +398,19 @@ class _$AppUserImpl implements _AppUser {
 
 abstract class _AppUser implements AppUser {
   const factory _AppUser(
-      {@JsonKey(name: 'id') required final int? id,
-      @JsonKey(name: 'status') required final String? status,
+      {@JsonKey(name: 'id') final int? id,
+      @JsonKey(name: 'status') final String? status,
       @JsonKey(name: 'mobile_number') required final String mobileNumber,
-      @JsonKey(name: 'alternate_number') required final String? alternateNumber,
-      @JsonKey(name: 'aadhar_number') required final String? aadhaarNumber,
-      @JsonKey(name: 'first_name') required final String? firstName,
-      @JsonKey(name: 'last_name') required final String? lastName,
-      @JsonKey(name: 'city') required final String? city,
-      @JsonKey(name: 'district') required final String? district,
-      @JsonKey(name: 'state') required final String? state,
-      @JsonKey(name: 'pincode') required final String? pinCode,
-      @JsonKey(name: 'address') required final String? address,
-      @JsonKey(name: 'email') required final String? email}) = _$AppUserImpl;
+      @JsonKey(name: 'alternate_number') final String? alternateNumber,
+      @JsonKey(name: 'aadhar_number') final String? aadhaarNumber,
+      @JsonKey(name: 'first_name') final String? firstName,
+      @JsonKey(name: 'last_name') final String? lastName,
+      @JsonKey(name: 'city') final String? city,
+      @JsonKey(name: 'district') final String? district,
+      @JsonKey(name: 'state') final String? state,
+      @JsonKey(name: 'pincode') final String? pinCode,
+      @JsonKey(name: 'address') final String? address,
+      @JsonKey(name: 'email') final String? email}) = _$AppUserImpl;
 
   factory _AppUser.fromJson(Map<String, dynamic> json) = _$AppUserImpl.fromJson;
 

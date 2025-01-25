@@ -5,28 +5,30 @@ import 'package:tatpar_acf/configurations/constants/constants.dart';
 import 'package:tatpar_acf/configurations/theme/size_constants.dart';
 
 class PrimaryTextField<T> extends StatelessWidget {
-  const PrimaryTextField({
-    super.key,
-    required this.formControlName,
-    this.label,
-    this.placeholder,
-    this.prefixIcon,
-    this.hint,
-    this.onSubmitted,
-    this.maxLength,
-    this.keyboardType,
-    this.minLines = 1,
-    this.maxLines = 1,
-    this.inputFormatter,
-    this.autoFocus = false,
-    this.padding = const EdgeInsets.all(
-      kPadding / 2,
-    ),
-    this.validationMessages,
-    this.focusNode,
-    this.autofillHints,
-    this.readOnly = false, // Added readOnly parameter
-  });
+  const PrimaryTextField(
+      {super.key,
+      required this.formControlName,
+      this.label,
+      this.placeholder,
+      this.prefixIcon,
+      this.suffixIcon,
+      this.hint,
+      this.onSubmitted,
+      this.maxLength,
+      this.keyboardType,
+      this.minLines = 1,
+      this.maxLines = 1,
+      this.inputFormatter,
+      this.autoFocus = false,
+      this.padding = const EdgeInsets.all(
+        kPadding / 2,
+      ),
+      this.validationMessages,
+      this.focusNode,
+      this.autofillHints,
+      this.readOnly = false,
+      this.obscureText = false // Added readOnly parameter
+      });
 
   final String formControlName;
   final String? label;
@@ -44,7 +46,9 @@ class PrimaryTextField<T> extends StatelessWidget {
   final Map<String, String Function(Object)>? validationMessages;
   final FocusNode? focusNode;
   final List<String>? autofillHints;
-  final bool readOnly; // Added readOnly parameter
+  final bool readOnly;
+  final bool obscureText;
+  final Widget? suffixIcon;
 
   @override
   Widget build(BuildContext context) => Padding(
@@ -72,10 +76,12 @@ class PrimaryTextField<T> extends StatelessWidget {
                 ...reactiveFormValidators(label: label, maxLength: maxLength),
                 ...validationMessages ?? {},
               },
+              obscureText: obscureText,
               readOnly: readOnly,
               textAlignVertical: TextAlignVertical.top,
               decoration: InputDecoration(
                 hintText: placeholder,
+                suffixIcon: suffixIcon,
                 prefixIcon: prefixIcon == null
                     ? null
                     : Container(

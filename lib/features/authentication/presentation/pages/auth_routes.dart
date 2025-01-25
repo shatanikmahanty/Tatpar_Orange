@@ -12,10 +12,6 @@ final authRoutes = [
         page: PhoneLoginRoute.page,
         initial: true,
       ),
-      slideTransitionCustomRoute(
-        path: 'phone_verify',
-        page: PhoneVerifyRoute.page,
-      ),
     ],
   ),
   AutoRoute(

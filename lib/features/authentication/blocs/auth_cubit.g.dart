@@ -11,17 +11,11 @@ _$AuthStateImpl _$$AuthStateImplFromJson(Map<String, dynamic> json) =>
       user: json['user'] == null
           ? null
           : AppUser.fromJson(json['user'] as Map<String, dynamic>),
-      phoneNumber: json['phoneNumber'] as String?,
-      resendToken: (json['resendToken'] as num?)?.toInt(),
-      isNewUser: json['isNewUser'] as bool? ?? false,
-      isOtpRequested: json['isOtpRequested'] as bool? ?? false,
+      authToken: json['authToken'] as String?,
     );
 
 Map<String, dynamic> _$$AuthStateImplToJson(_$AuthStateImpl instance) =>
     <String, dynamic>{
       'user': instance.user,
-      'phoneNumber': instance.phoneNumber,
-      'resendToken': instance.resendToken,
-      'isNewUser': instance.isNewUser,
-      'isOtpRequested': instance.isOtpRequested,
+      'authToken': instance.authToken,
     };
