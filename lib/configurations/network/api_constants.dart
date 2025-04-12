@@ -1,7 +1,7 @@
 import 'package:flutter/foundation.dart';
 
 const baseUrl =
-    kDebugMode ? 'http://3.110.217.238:8000' : 'http://3.110.217.238:8000';
+    kDebugMode ? 'https://tatparorange.pallinos.in:8000' : 'https://tatparorange.pallinos.in:8000/';
 
 const usersApiUrl = '$baseUrl/users/api/users';
 const loginUrl = '$usersApiUrl/login';

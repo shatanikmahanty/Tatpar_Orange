@@ -38,8 +38,8 @@ class BasicDetails extends StatelessWidget {
           Validators.max(40),
         ],
       ),
+      'patient_phone_number': FormControl<String?>(validators: [Validators.required]),
       'guardian_name': FormControl<String>(),
-      'guardian_phone_number': FormControl<String?>(validators: [Validators.required]),
       'caste_category': FormControl<String?>(),
       'key_population': FormControl<List<String>>(),
       'trimester': FormControl<String?>(),
@@ -121,7 +121,7 @@ class BasicDetails extends StatelessWidget {
           selectedPanchayatCode: caseCubit.selectedPanchayatCodeId,
           ward: formData['ward'] as int?,
           guardianName: formData['guardian_name'] as String?,
-          guardianPhoneNumber: formData['guardian_phone_number'] as String?,
+          guardianPhoneNumber: formData['patient_phone_number'] as String?,
           selectedCasteCategory: caseCubit.selectedCasteCategory,
           selectedKeyPopulation: caseCubit.selectedKeyPopulation,
           selectedTrimester: caseCubit.selectedTrimester,
@@ -246,14 +246,8 @@ class BasicDetails extends StatelessWidget {
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     PrimaryTextField(
-                                      formControlName: 'guardian_name',
-                                      label: AppLocalizations.of(context)!.guardianName,
-                                      prefixIcon: Icons.account_circle_outlined,
-                                    ),
-                                    const SizedBox(height: kPadding * 2),
-                                    PrimaryTextField(
-                                      formControlName: 'guardian_phone_number',
-                                      label: AppLocalizations.of(context)!.guardianPhoneNumber,
+                                      formControlName: 'patient_phone_number',
+                                      label: AppLocalizations.of(context)!.patientPhoneNumber,
                                       maxLength: 10,
                                       prefixIcon: Icons.phone_outlined,
                                       keyboardType: TextInputType.number,
@@ -261,6 +255,12 @@ class BasicDetails extends StatelessWidget {
                                         FilteringTextInputFormatter.digitsOnly,
                                         LengthLimitingTextInputFormatter(10)
                                       ],
+                                    ),
+                                    const SizedBox(height: kPadding * 2),
+                                    PrimaryTextField(
+                                      formControlName: 'guardian_name',
+                                      label: AppLocalizations.of(context)!.guardianName,
+                                      prefixIcon: Icons.account_circle_outlined,
                                     ),
                                     BlocBuilder<SourceCubit, SourceState>(
                                         buildWhen: ((previous, current) =>

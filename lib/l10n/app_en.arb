@@ -207,5 +207,21 @@
     "hungryButDidNotEat": "7. You were hungry but did not eat?",
     "wentWithoutEating": "8. You went without eating for a whole day?",
     "linkageDate": "Date of Linkage",
-    "faqChecklist":"FAQ Checklist" 
+    "faqChecklist":"FAQ Checklist",
+    "patientPhoneNumber": "Patient Phone Number",
+    "daytimeSymptoms": "Daytime symptoms more than twice/week?",
+    "nightWaking": "Any night waking due to asthma?",
+    "sabaReliever": "SABA reliever needed more than twice/week?",
+    "activityLimitation": "Any activity limitation due to asthma?",
+    "outcome": "Outcome",
+    "dateOfScreeningForNutrition": "Date of screening for nutrition",
+    "eligibleForNutritionSupport": "Eligible for nutrition support",
+    "dateOfNutritionLinkageDone": "Date of Nutrition Linkage Done",
+    "nutritionSource": "Nutrition Source",
+    "srqScreeningDate": "SRQ Screening Date",
+    "srqScore": "SRQ Score",
+    "srqScreeningStatus": "SRQ Screening Status",
+    "counsellingLinkageDate": "Counselling Linkage Date",
+    "psychiatristLinkageDate": "Psychiatrist Linkage Date",
+    "ihvAsthma": "IHV Asthma"
 }

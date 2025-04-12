@@ -89,7 +89,7 @@ class ReferralDetailsPage extends StatelessWidget {
         Validators.max(40),
       ], value: referralDetailsModel?.ward),
       'guardian_name': FormControl<String>(value: referralDetailsModel?.guardianName),
-      'guardian_phone_number':
+      'patient_phone_number':
           FormControl<String?>(validators: [Validators.required], value: referralDetailsModel?.guardianPhoneNumber),
       'caste_category': FormControl<String?>(
           value:
@@ -198,7 +198,7 @@ class ReferralDetailsPage extends StatelessWidget {
           selectedPanchayatCode: caseCubit.selectedPanchayatCodeId,
           ward: formData['ward'] as int?,
           guardianName: formData['guardian_name'] as String?,
-          guardianPhoneNumber: formData['guardian_phone_number'] as String?,
+          guardianPhoneNumber: formData['patient_phone_number'] as String?,
           selectedCasteCategory: caseCubit.selectedCasteCategory,
           selectedKeyPopulation: caseCubit.selectedKeyPopulation,
           selectedTrimester: caseCubit.selectedTrimester,
@@ -344,8 +344,8 @@ class ReferralDetailsPage extends StatelessWidget {
                                         ),
                                         const SizedBox(height: kPadding * 2),
                                         PrimaryTextField(
-                                          formControlName: 'guardian_phone_number',
-                                          label: AppLocalizations.of(context)!.guardianPhoneNumber,
+                                          formControlName: 'patient_phone_number',
+                                          label: AppLocalizations.of(context)!.patientPhoneNumber,
                                           maxLength: 10,
                                           prefixIcon: Icons.phone_outlined,
                                           keyboardType: TextInputType.number,

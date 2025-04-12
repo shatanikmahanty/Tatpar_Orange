@@ -45,4 +45,8 @@ final caseRoutes = [
     path: 'contact_tracing_page',
     page: ContactTracingRouter.page,
   ),
+  AutoRoute(
+    path: 'ihv_asthma',
+    page: AsthmaRoute.page,
+  )
 ];
