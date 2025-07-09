@@ -2,7 +2,7 @@ import 'package:djangoflow_app/djangoflow_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_orange/l10n/app_localizations.dart';
 import 'package:reactive_forms/reactive_forms.dart';
 import 'package:tatpar_orange/configurations/configurations.dart';
 import 'package:tatpar_orange/features/app/presentation/widgets/chip_radio_buttons.dart';

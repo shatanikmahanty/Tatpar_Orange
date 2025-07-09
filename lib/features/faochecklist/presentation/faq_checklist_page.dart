@@ -8,7 +8,7 @@ import 'package:tatpar_orange/features/app/presentation/widgets/chip_radio_butto
 import 'package:tatpar_orange/features/app/presentation/widgets/date_text_input.dart';
 
 import 'package:tatpar_orange/features/case/blocs/case_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_orange/l10n/app_localizations.dart';
 import 'package:tatpar_orange/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_orange/features/faochecklist/models/faq_checklist_model.dart';
 

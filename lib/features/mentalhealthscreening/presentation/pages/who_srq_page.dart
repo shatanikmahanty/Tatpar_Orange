@@ -5,7 +5,7 @@ import 'package:tatpar_orange/configurations/configurations.dart';
 import 'package:tatpar_orange/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_orange/features/authentication/presentation/widgets/auth_button.dart';
 import 'package:tatpar_orange/features/case/blocs/case_cubit.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_orange/l10n/app_localizations.dart';
 
 import 'package:tatpar_orange/features/mentalhealthscreening/model/who_srq_model.dart';
 import 'package:tatpar_orange/features/referral/presentation/widgets/case_app_bar.dart';

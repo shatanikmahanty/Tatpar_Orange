@@ -12,7 +12,7 @@ import 'package:tatpar_orange/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_orange/features/case/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_orange/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_orange/features/outcome/model/outcome_model.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_orange/l10n/app_localizations.dart';
 import 'package:tatpar_orange/features/referral/presentation/widgets/case_app_bar.dart';
 
 @RoutePage()

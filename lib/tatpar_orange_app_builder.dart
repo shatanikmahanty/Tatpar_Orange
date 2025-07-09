@@ -3,7 +3,7 @@ import 'package:djangoflow_app_links/djangoflow_app_links.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gen/gen_l10n/app_localizations.dart';
+import 'package:tatpar_orange/l10n/app_localizations.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:tatpar_orange/features/app/presentation/builders/app_responsive_layout_builder.dart';
 import 'package:tatpar_orange/features/authentication/blocs/auth_cubit.dart';
