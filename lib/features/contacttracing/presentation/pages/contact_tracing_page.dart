@@ -216,7 +216,7 @@ class ContactTracingPage extends StatelessWidget {
                                         onChanged: (value) {
                                           formGroup
                                               .control('test_conducted')
-                                              .value = value;
+                                              .value = value.isNotEmpty ? value[0] : null;
                                         },
                                         selected: formGroup
                                             .control('test_conducted')
@@ -254,7 +254,7 @@ class ContactTracingPage extends StatelessWidget {
                                                         formGroup
                                                             .control(
                                                                 'cxr_result')
-                                                            .value = value;
+                                                            .value = value.isNotEmpty ? value[0] : null;
                                                       },
                                                       selected: formGroup
                                                           .control('cxr_result')
@@ -286,7 +286,7 @@ class ContactTracingPage extends StatelessWidget {
                                                         formGroup
                                                             .control(
                                                                 'tbi_result')
-                                                            .value = value;
+                                                            .value = value.isNotEmpty ? value[0] : null;
                                                       },
                                                       selected: formGroup
                                                           .control('tbi_result')
@@ -303,7 +303,7 @@ class ContactTracingPage extends StatelessWidget {
                                         onChanged: (value) {
                                           formGroup
                                               .control('tpt_eligible')
-                                              .value = value;
+                                              .value = value.isNotEmpty ? value[0] : null;
                                         },
                                         selected: formGroup
                                             .control('tpt_eligible')
@@ -345,7 +345,7 @@ class ContactTracingPage extends StatelessWidget {
                                               onChanged: (value) {
                                                 formGroup
                                                     .control('tpt_regimen')
-                                                    .value = value;
+                                                    .value = value.isNotEmpty ? value[0] : null;
                                               },
                                               selected: formGroup
                                                   .control('tpt_regimen')

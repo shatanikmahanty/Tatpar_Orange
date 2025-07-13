@@ -188,7 +188,7 @@ class OutcomePage extends StatelessWidget {
                                                       formGroup
                                                           .control(
                                                               'treatment_outcome')
-                                                          .value = value;
+                                                          .value = value.isNotEmpty ? value[0] : null;
                                                     },
                                                     selected: formGroup
                                                         .control(

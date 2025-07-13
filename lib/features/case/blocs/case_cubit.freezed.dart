@@ -28,6 +28,7 @@ mixin _$CaseState {
   ReferralDetailsModel? get referralDetailsModel =>
       throw _privateConstructorUsedError;
   TBScreeningModel? get tbScreeningModel => throw _privateConstructorUsedError;
+  AsthmaModel? get asthmaModel => throw _privateConstructorUsedError;
   WHOSrqModel? get whoSrqModel => throw _privateConstructorUsedError;
   MentalHealthScreeningModel? get mentalHealthScreeningModel =>
       throw _privateConstructorUsedError;
@@ -66,6 +67,7 @@ abstract class $CaseStateCopyWith<$Res> {
       DataModel? dataModel,
       ReferralDetailsModel? referralDetailsModel,
       TBScreeningModel? tbScreeningModel,
+      AsthmaModel? asthmaModel,
       WHOSrqModel? whoSrqModel,
       MentalHealthScreeningModel? mentalHealthScreeningModel,
       String? screeningOutcome,
@@ -82,6 +84,7 @@ abstract class $CaseStateCopyWith<$Res> {
   $DataModelCopyWith<$Res>? get dataModel;
   $ReferralDetailsModelCopyWith<$Res>? get referralDetailsModel;
   $TBScreeningModelCopyWith<$Res>? get tbScreeningModel;
+  $AsthmaModelCopyWith<$Res>? get asthmaModel;
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
   $MentalHealthScreeningModelCopyWith<$Res>? get mentalHealthScreeningModel;
   $DiagnosisModelCopyWith<$Res>? get diagnsosisModel;
@@ -113,6 +116,7 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
     Object? dataModel = freezed,
     Object? referralDetailsModel = freezed,
     Object? tbScreeningModel = freezed,
+    Object? asthmaModel = freezed,
     Object? whoSrqModel = freezed,
     Object? mentalHealthScreeningModel = freezed,
     Object? screeningOutcome = freezed,
@@ -150,6 +154,10 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
           ? _value.tbScreeningModel
           : tbScreeningModel // ignore: cast_nullable_to_non_nullable
               as TBScreeningModel?,
+      asthmaModel: freezed == asthmaModel
+          ? _value.asthmaModel
+          : asthmaModel // ignore: cast_nullable_to_non_nullable
+              as AsthmaModel?,
       whoSrqModel: freezed == whoSrqModel
           ? _value.whoSrqModel
           : whoSrqModel // ignore: cast_nullable_to_non_nullable
@@ -247,6 +255,20 @@ class _$CaseStateCopyWithImpl<$Res, $Val extends CaseState>
 
     return $TBScreeningModelCopyWith<$Res>(_value.tbScreeningModel!, (value) {
       return _then(_value.copyWith(tbScreeningModel: value) as $Val);
+    });
+  }
+
+  /// Create a copy of CaseState
+  /// with the given fields replaced by the non-null parameter values.
+  @override
+  @pragma('vm:prefer-inline')
+  $AsthmaModelCopyWith<$Res>? get asthmaModel {
+    if (_value.asthmaModel == null) {
+      return null;
+    }
+
+    return $AsthmaModelCopyWith<$Res>(_value.asthmaModel!, (value) {
+      return _then(_value.copyWith(asthmaModel: value) as $Val);
     });
   }
 
@@ -380,6 +402,7 @@ abstract class _$$CaseStateImplCopyWith<$Res>
       DataModel? dataModel,
       ReferralDetailsModel? referralDetailsModel,
       TBScreeningModel? tbScreeningModel,
+      AsthmaModel? asthmaModel,
       WHOSrqModel? whoSrqModel,
       MentalHealthScreeningModel? mentalHealthScreeningModel,
       String? screeningOutcome,
@@ -400,6 +423,8 @@ abstract class _$$CaseStateImplCopyWith<$Res>
   $ReferralDetailsModelCopyWith<$Res>? get referralDetailsModel;
   @override
   $TBScreeningModelCopyWith<$Res>? get tbScreeningModel;
+  @override
+  $AsthmaModelCopyWith<$Res>? get asthmaModel;
   @override
   $WHOSrqModelCopyWith<$Res>? get whoSrqModel;
   @override
@@ -437,6 +462,7 @@ class __$$CaseStateImplCopyWithImpl<$Res>
     Object? dataModel = freezed,
     Object? referralDetailsModel = freezed,
     Object? tbScreeningModel = freezed,
+    Object? asthmaModel = freezed,
     Object? whoSrqModel = freezed,
     Object? mentalHealthScreeningModel = freezed,
     Object? screeningOutcome = freezed,
@@ -474,6 +500,10 @@ class __$$CaseStateImplCopyWithImpl<$Res>
           ? _value.tbScreeningModel
           : tbScreeningModel // ignore: cast_nullable_to_non_nullable
               as TBScreeningModel?,
+      asthmaModel: freezed == asthmaModel
+          ? _value.asthmaModel
+          : asthmaModel // ignore: cast_nullable_to_non_nullable
+              as AsthmaModel?,
       whoSrqModel: freezed == whoSrqModel
           ? _value.whoSrqModel
           : whoSrqModel // ignore: cast_nullable_to_non_nullable
@@ -532,6 +562,7 @@ class _$CaseStateImpl implements _CaseState {
       this.dataModel,
       this.referralDetailsModel,
       this.tbScreeningModel,
+      this.asthmaModel,
       this.whoSrqModel,
       this.mentalHealthScreeningModel,
       this.screeningOutcome,
@@ -571,6 +602,8 @@ class _$CaseStateImpl implements _CaseState {
   @override
   final TBScreeningModel? tbScreeningModel;
   @override
+  final AsthmaModel? asthmaModel;
+  @override
   final WHOSrqModel? whoSrqModel;
   @override
   final MentalHealthScreeningModel? mentalHealthScreeningModel;
@@ -604,7 +637,7 @@ class _$CaseStateImpl implements _CaseState {
 
   @override
   String toString() {
-    return 'CaseState(isLoading: $isLoading, contactTracingList: $contactTracingList, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, contactTracingId: $contactTracingId, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel, filteredContacts: $filteredContacts, faqCheckListModel: $faqCheckListModel)';
+    return 'CaseState(isLoading: $isLoading, contactTracingList: $contactTracingList, caseWorkedUpon: $caseWorkedUpon, dataModel: $dataModel, referralDetailsModel: $referralDetailsModel, tbScreeningModel: $tbScreeningModel, asthmaModel: $asthmaModel, whoSrqModel: $whoSrqModel, mentalHealthScreeningModel: $mentalHealthScreeningModel, screeningOutcome: $screeningOutcome, contactTracingId: $contactTracingId, diagnsosisModel: $diagnsosisModel, diagnosisData: $diagnosisData, treatmentModel: $treatmentModel, contactTracingModel: $contactTracingModel, outcomeModel: $outcomeModel, filteredContacts: $filteredContacts, faqCheckListModel: $faqCheckListModel)';
   }
 
   @override
@@ -624,6 +657,8 @@ class _$CaseStateImpl implements _CaseState {
                 other.referralDetailsModel == referralDetailsModel) &&
             (identical(other.tbScreeningModel, tbScreeningModel) ||
                 other.tbScreeningModel == tbScreeningModel) &&
+            (identical(other.asthmaModel, asthmaModel) ||
+                other.asthmaModel == asthmaModel) &&
             (identical(other.whoSrqModel, whoSrqModel) ||
                 other.whoSrqModel == whoSrqModel) &&
             (identical(other.mentalHealthScreeningModel,
@@ -660,6 +695,7 @@ class _$CaseStateImpl implements _CaseState {
       dataModel,
       referralDetailsModel,
       tbScreeningModel,
+      asthmaModel,
       whoSrqModel,
       mentalHealthScreeningModel,
       screeningOutcome,
@@ -696,6 +732,7 @@ abstract class _CaseState implements CaseState {
       final DataModel? dataModel,
       final ReferralDetailsModel? referralDetailsModel,
       final TBScreeningModel? tbScreeningModel,
+      final AsthmaModel? asthmaModel,
       final WHOSrqModel? whoSrqModel,
       final MentalHealthScreeningModel? mentalHealthScreeningModel,
       final String? screeningOutcome,
@@ -723,6 +760,8 @@ abstract class _CaseState implements CaseState {
   ReferralDetailsModel? get referralDetailsModel;
   @override
   TBScreeningModel? get tbScreeningModel;
+  @override
+  AsthmaModel? get asthmaModel;
   @override
   WHOSrqModel? get whoSrqModel;
   @override

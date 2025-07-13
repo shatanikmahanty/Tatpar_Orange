@@ -114,6 +114,9 @@ mixin _$Case {
   @HiveField(29)
   @JsonKey(name: 'faq_checklist_id')
   int? get faqChecklist => throw _privateConstructorUsedError;
+  @HiveField(30)
+  @JsonKey(name: 'asthma_ihv_id')
+  int? get asthmaIhv => throw _privateConstructorUsedError;
 
   /// Serializes this Case to a JSON map.
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
@@ -177,7 +180,8 @@ abstract class $CaseCopyWith<$Res> {
       @HiveField(28)
       @JsonKey(name: 'dst_rif_resistance_result')
       String? dstRifResistanceResult,
-      @HiveField(29) @JsonKey(name: 'faq_checklist_id') int? faqChecklist});
+      @HiveField(29) @JsonKey(name: 'faq_checklist_id') int? faqChecklist,
+      @HiveField(30) @JsonKey(name: 'asthma_ihv_id') int? asthmaIhv});
 }
 
 /// @nodoc
@@ -225,6 +229,7 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
     Object? referralId = freezed,
     Object? dstRifResistanceResult = freezed,
     Object? faqChecklist = freezed,
+    Object? asthmaIhv = freezed,
   }) {
     return _then(_value.copyWith(
       id: freezed == id
@@ -347,6 +352,10 @@ class _$CaseCopyWithImpl<$Res, $Val extends Case>
           ? _value.faqChecklist
           : faqChecklist // ignore: cast_nullable_to_non_nullable
               as int?,
+      asthmaIhv: freezed == asthmaIhv
+          ? _value.asthmaIhv
+          : asthmaIhv // ignore: cast_nullable_to_non_nullable
+              as int?,
     ) as $Val);
   }
 }
@@ -406,7 +415,8 @@ abstract class _$$CaseImplCopyWith<$Res> implements $CaseCopyWith<$Res> {
       @HiveField(28)
       @JsonKey(name: 'dst_rif_resistance_result')
       String? dstRifResistanceResult,
-      @HiveField(29) @JsonKey(name: 'faq_checklist_id') int? faqChecklist});
+      @HiveField(29) @JsonKey(name: 'faq_checklist_id') int? faqChecklist,
+      @HiveField(30) @JsonKey(name: 'asthma_ihv_id') int? asthmaIhv});
 }
 
 /// @nodoc
@@ -451,6 +461,7 @@ class __$$CaseImplCopyWithImpl<$Res>
     Object? referralId = freezed,
     Object? dstRifResistanceResult = freezed,
     Object? faqChecklist = freezed,
+    Object? asthmaIhv = freezed,
   }) {
     return _then(_$CaseImpl(
       id: freezed == id
@@ -573,6 +584,10 @@ class __$$CaseImplCopyWithImpl<$Res>
           ? _value.faqChecklist
           : faqChecklist // ignore: cast_nullable_to_non_nullable
               as int?,
+      asthmaIhv: freezed == asthmaIhv
+          ? _value.asthmaIhv
+          : asthmaIhv // ignore: cast_nullable_to_non_nullable
+              as int?,
     ));
   }
 }
@@ -626,7 +641,8 @@ class _$CaseImpl implements _Case {
       @HiveField(28)
       @JsonKey(name: 'dst_rif_resistance_result')
       this.dstRifResistanceResult,
-      @HiveField(29) @JsonKey(name: 'faq_checklist_id') this.faqChecklist})
+      @HiveField(29) @JsonKey(name: 'faq_checklist_id') this.faqChecklist,
+      @HiveField(30) @JsonKey(name: 'asthma_ihv_id') this.asthmaIhv})
       : _contactTracingList = contactTracingList;
 
   factory _$CaseImpl.fromJson(Map<String, dynamic> json) =>
@@ -765,10 +781,14 @@ class _$CaseImpl implements _Case {
   @HiveField(29)
   @JsonKey(name: 'faq_checklist_id')
   final int? faqChecklist;
+  @override
+  @HiveField(30)
+  @JsonKey(name: 'asthma_ihv_id')
+  final int? asthmaIhv;
 
   @override
   String toString() {
-    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, district: $district, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, outcomeValue: $outcomeValue, contactTracingList: $contactTracingList, treatment: $treatment, referralBlock: $referralBlock, contactTracing: $contactTracing, isUpdated: $isUpdated, statusAfterDx: $statusAfterDx, treatmentOutcome: $treatmentOutcome, referralId: $referralId, dstRifResistanceResult: $dstRifResistanceResult, faqChecklist: $faqChecklist)';
+    return 'Case(id: $id, referralName: $referralName, gender: $gender, age: $age, district: $district, panchayat: $panchayat, screenedBy: $screenedBy, referredBy: $referredBy, referralMobileNumber: $referralMobileNumber, assignedTo: $assignedTo, tbScreeningOutcome: $tbScreeningOutcome, diagnosisName: $diagnosisName, status: $status, assignedOn: $assignedOn, createdOn: $createdOn, referralDetails: $referralDetails, tbScreening: $tbScreening, whoSrq: $whoSrq, diagnosis: $diagnosis, outcomeValue: $outcomeValue, contactTracingList: $contactTracingList, treatment: $treatment, referralBlock: $referralBlock, contactTracing: $contactTracing, isUpdated: $isUpdated, statusAfterDx: $statusAfterDx, treatmentOutcome: $treatmentOutcome, referralId: $referralId, dstRifResistanceResult: $dstRifResistanceResult, faqChecklist: $faqChecklist, asthmaIhv: $asthmaIhv)';
   }
 
   @override
@@ -830,7 +850,9 @@ class _$CaseImpl implements _Case {
             (identical(other.dstRifResistanceResult, dstRifResistanceResult) ||
                 other.dstRifResistanceResult == dstRifResistanceResult) &&
             (identical(other.faqChecklist, faqChecklist) ||
-                other.faqChecklist == faqChecklist));
+                other.faqChecklist == faqChecklist) &&
+            (identical(other.asthmaIhv, asthmaIhv) ||
+                other.asthmaIhv == asthmaIhv));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
@@ -866,7 +888,8 @@ class _$CaseImpl implements _Case {
         treatmentOutcome,
         referralId,
         dstRifResistanceResult,
-        faqChecklist
+        faqChecklist,
+        asthmaIhv
       ]);
 
   /// Create a copy of Case
@@ -942,9 +965,10 @@ abstract class _Case implements Case {
       @HiveField(28)
       @JsonKey(name: 'dst_rif_resistance_result')
       final String? dstRifResistanceResult,
-      @HiveField(29)
-      @JsonKey(name: 'faq_checklist_id')
-      final int? faqChecklist}) = _$CaseImpl;
+      @HiveField(29) @JsonKey(name: 'faq_checklist_id') final int? faqChecklist,
+      @HiveField(30)
+      @JsonKey(name: 'asthma_ihv_id')
+      final int? asthmaIhv}) = _$CaseImpl;
 
   factory _Case.fromJson(Map<String, dynamic> json) = _$CaseImpl.fromJson;
 
@@ -1072,6 +1096,10 @@ abstract class _Case implements Case {
   @HiveField(29)
   @JsonKey(name: 'faq_checklist_id')
   int? get faqChecklist;
+  @override
+  @HiveField(30)
+  @JsonKey(name: 'asthma_ihv_id')
+  int? get asthmaIhv;
 
   /// Create a copy of Case
   /// with the given fields replaced by the non-null parameter values.

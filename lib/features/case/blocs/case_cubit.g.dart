@@ -27,6 +27,9 @@ _$CaseStateImpl _$$CaseStateImplFromJson(Map<String, dynamic> json) =>
           ? null
           : TBScreeningModel.fromJson(
               json['tbScreeningModel'] as Map<String, dynamic>),
+      asthmaModel: json['asthmaModel'] == null
+          ? null
+          : AsthmaModel.fromJson(json['asthmaModel'] as Map<String, dynamic>),
       whoSrqModel: json['whoSrqModel'] == null
           ? null
           : WHOSrqModel.fromJson(json['whoSrqModel'] as Map<String, dynamic>),
@@ -72,6 +75,7 @@ Map<String, dynamic> _$$CaseStateImplToJson(_$CaseStateImpl instance) =>
       'dataModel': instance.dataModel,
       'referralDetailsModel': instance.referralDetailsModel,
       'tbScreeningModel': instance.tbScreeningModel,
+      'asthmaModel': instance.asthmaModel,
       'whoSrqModel': instance.whoSrqModel,
       'mentalHealthScreeningModel': instance.mentalHealthScreeningModel,
       'screeningOutcome': instance.screeningOutcome,

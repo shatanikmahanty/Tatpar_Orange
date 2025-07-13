@@ -21,6 +21,7 @@ import 'package:tatpar_orange/features/case/data/source_models/key_population_mo
 import 'package:tatpar_orange/features/case/data/source_models/referral_districts_model.dart';
 import 'package:tatpar_orange/features/case/data/source_models/referrer_source_model.dart';
 import 'package:tatpar_orange/features/case/data/source_models/trimester_model.dart';
+import 'package:tatpar_orange/features/asthma/model/asthma_model.dart';
 import 'package:tatpar_orange/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_orange/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_orange/features/diagnosis/model/diagnosis_model.dart';
@@ -96,6 +97,11 @@ Future<void> main() async {
     Hive.registerAdapter(TBScreeningModelAdapter());
     await Hive.openBox<TBScreeningModel>('tbScreeningModel');
     // await Hive.deleteBoxFromDisk('tbScreeningModel');
+
+    ///AsthmaUpdateAPI
+    Hive.registerAdapter(AsthmaModelAdapter());
+    await Hive.openBox<AsthmaModel>('asthmaModel');
+    // await Hive.deleteBoxFromDisk('asthmaModel');
 
     ///MentalHealthScreeningUpdateAPI
     Hive.registerAdapter(MentalHealthScreeningModelAdapter());

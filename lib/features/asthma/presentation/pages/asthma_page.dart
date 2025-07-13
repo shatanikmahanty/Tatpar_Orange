@@ -9,11 +9,8 @@ import 'package:tatpar_orange/configurations/configurations.dart';
 import 'package:tatpar_orange/features/app/presentation/widgets/chip_radio_buttons.dart';
 import 'package:tatpar_orange/features/app/presentation/widgets/date_text_input.dart';
 import 'package:tatpar_orange/features/app/presentation/widgets/primary_text_field.dart';
-import 'package:tatpar_orange/features/app/presentation/widgets/text_field_with_list.dart';
+import 'package:tatpar_orange/features/asthma/model/asthma_model.dart';
 import 'package:tatpar_orange/features/case/blocs/case_cubit.dart';
-import 'package:tatpar_orange/features/case/blocs/source_cubit.dart';
-import 'package:tatpar_orange/features/case/data/source_models/referral_districts_model.dart';
-import 'package:tatpar_orange/features/referral/model/referral_details_model.dart';
 import 'package:tatpar_orange/features/referral/presentation/widgets/bottom_button_bar.dart';
 import 'package:tatpar_orange/features/referral/presentation/widgets/case_app_bar.dart';
 
@@ -22,47 +19,6 @@ class AsthmaPage extends StatelessWidget {
   const AsthmaPage({super.key});
 
   FormGroup _basicDetailsFormBuilder() {
-//Fields:
-//Daytime symptoms more than twice/ Yes / No
-
-// IHV_Any night waking due to asthma?
-// Yes / No
-
-// IHV-SABA reliever needed more than twice/week?
-// Yes / No
-
-//IHV_Any activity limitation due to asthma?
-// Yes / No
-
-//IHV_Outcome
-// Well Controlled / Partially Controlled / Uncontrolled
-
-// IHV_Date of screening for nutrition
-// DatePicker
-
-// IH_Eligible for nutrition support
-// Yes / No
-
-// IHV_Date of nutrition linkage done
-// DatePicker
-
-// IHV_Nutrition source
-// Public Nutrition Screme /Milj Cooperative / Private Nutrition Scheme / Community
-
-// IHV_SRQ screening date
-// DatePicker
-
-// IHV_SRQ scroe
-// Comes from WHO SRQ
-
-// IHV_ SRQ screening status
-// Yes / No
-
-// IHV_Counselling linkage date
-// DatePicker
-
-// IHV_Psychiatrist linkage date
-// DatePicker
 
     return fb.group({
       'daytime_symptoms_twice': FormControl<String>(),
@@ -86,90 +42,37 @@ class AsthmaPage extends StatelessWidget {
     if (formGroup.valid) {
       final formData = formGroup.value;
       final caseCubit = context.read<CaseCubit>();
-      final sourceCubit = context.read<SourceCubit>();
-      context.read<CaseCubit>().selectCasteCategory = formGroup.control('caste_category').value != null
-          ? int.tryParse(formGroup.control('caste_category').value.split(':')[0])
-          : null;
 
-      context.read<CaseCubit>().selectTrimester = (formGroup.control('trimester').value) != null
-          ? int.tryParse(formGroup.control('trimester').value.split(':')[0])
-          : null;
-      context.read<CaseCubit>().selectReferrerSource = formGroup.control('referrer_source').value != null
-          ? int.tryParse(formGroup.control('referrer_source').value.split(':')[0])
-          : null;
-      for (var block in sourceCubit.state.dataModel!.blocks!) {
-        var panchayat = block.panchayat!.firstWhere(
-            (p) => p.panchayat == formGroup.control('referrer_panchayat_code').value,
-            orElse: () => const Panchayat(id: 0));
-        if (panchayat.id != 0) {
-          context.read<CaseCubit>().selectReferrerPanchayatCodeId = panchayat.id;
-          break;
-        }
-      }
-      context.read<CaseCubit>().selectDistrictId = sourceCubit.state.dataModel!.districts!
-          .firstWhere((element) => element.district == formGroup.control('district').value,
-              orElse: () => const District(id: null))
-          .id;
-      context.read<CaseCubit>().selectBlockId = sourceCubit.state.dataModel!.blocks!
-          .firstWhere((element) => element.block == formGroup.control('referral_block').value,
-              orElse: () => const Block(id: null))
-          .id;
-      for (var block in sourceCubit.state.dataModel!.blocks!) {
-        var panchayat = block.panchayat!.firstWhere((p) => p.panchayat == formGroup.control('panchayat_code').value,
-            orElse: () => const Panchayat(id: null));
-        if (panchayat.id != null) {
-          context.read<CaseCubit>().selectPanchayatCodeId = panchayat.id;
-          break;
-        }
-      }
+      // Create asthma model with the form values
+      final asthmaModel = AsthmaModel(
+        daytimeSymptomsTwice: formData['daytime_symptoms_twice'] as String?,
+        nightWakingDueToAsthma: formData['night_waking_due_to_asthma'] as String?,
+        sabaReliverNeeded: formData['saba_reliver_needed'] as String?,
+        activityLimitationDueToAsthma: formData['activity_limitation_due_to_asthma'] as String?,
+        outcome: formData['outcome'] as String?,
+        dateOfScreeningForNutrition: formData['date_of_screening_for_nutrition'] as DateTime?,
+        eligibleForNutritionSupport: formData['eligible_for_nutrition_support'] as String?,
+        dateOfNutritionLinkageDone: formData['date_of_nutrition_linkage_done'] as DateTime?,
+        nutritionSource: formData['nutrition_source'] as String?,
+        srqScreeningDate: formData['srq_screening_date'] as DateTime?,
+        srqScore: formData['srq_score'] as String?,
+        srqScreeningStatus: formData['srq_screening_status'] as String?,
+        counsellingLinkageDate: formData['counselling_linkage_date'] as DateTime?,
+        psychiatristLinkageDate: formData['psychiatrist_linkage_date'] as DateTime?,
+        isUpdated: false,
+      );
 
-      final List<String>? value = formGroup.control('key_population').value;
-
-      context.read<CaseCubit>().selectKeyPopulation = (value) != null
-          ? value
-              .join(',')
-              .split(',')
-              .map((e) => RegExp(r'\d+').firstMatch(e))
-              .where((match) => match != null)
-              .map((match) => int.parse(match!.group(0)!))
-              .toList()
-          : [];
-
-      final model = caseCubit.state.referralDetailsModel ?? const ReferralDetailsModel();
-
-      final referralDetailsData = model.copyWith(
-          referralID: formData['referral_id'] as String?,
-          referralDate: formData['referral_date'] as DateTime,
-          referralName: formData['referral_name'] as String?,
-          age: formData['age'] as int?,
-          gender: formData['gender'] as String?,
-          selectedDistrict: caseCubit.selectedDistrictId,
-          selectedBlock: caseCubit.selectedBlockId,
-          selectedPanchayatCode: caseCubit.selectedPanchayatCodeId,
-          ward: formData['ward'] as int?,
-          guardianName: formData['guardian_name'] as String?,
-          guardianPhoneNumber: formData['patient_phone_number'] as String?,
-          selectedCasteCategory: caseCubit.selectedCasteCategory,
-          selectedKeyPopulation: caseCubit.selectedKeyPopulation,
-          selectedTrimester: caseCubit.selectedTrimester,
-          referredBy: formData['referred_by'] as String?,
-          selectedrReferrerSource: caseCubit.selectedReferrerSource,
-          referredWard: formData['referred_ward'] as int?,
-          selectedReferrerPanchayatCode: caseCubit.selectedReferrerPanchayatCodeId,
-          source: formData['source'] as String?,
-          isUpdated: false);
-
-      await caseCubit.updateReferralDetailsData(referralDetailsData);
+      // Update the case with asthma data
+      await caseCubit.updateAsthmaData(asthmaModel);
     } else {
       formGroup.markAllAsTouched();
-      // DjangoflowAppSnackbar.showError('Something went wrong.Please try again.');
-      final fields = [];
+      final fields = <String>[];
       formGroup.controls.forEach((key, value) {
         if (value.invalid) {
-          fields.add(key.replaceFirst('patient_', ''));
+          fields.add(key.replaceAll('_', ' '));
         }
       });
-      DjangoflowAppSnackbar.showError('please enter the fields: ${fields.join(', ')}');
+      DjangoflowAppSnackbar.showError('Please enter the fields: ${fields.join(', ')}');
     }
   }
 
@@ -224,7 +127,7 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('daytime_symptoms_twice').value = value;
+                                            formGroup.control('daytime_symptoms_twice').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('daytime_symptoms_twice').value,
                                         ),
@@ -234,7 +137,7 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('night_waking_due_to_asthma').value = value;
+                                            formGroup.control('night_waking_due_to_asthma').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('night_waking_due_to_asthma').value,
                                         ),
@@ -244,7 +147,7 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('saba_reliver_needed').value = value;
+                                            formGroup.control('saba_reliver_needed').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('saba_reliver_needed').value,
                                         ),
@@ -254,7 +157,7 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('activity_limitation_due_to_asthma').value = value;
+                                            formGroup.control('activity_limitation_due_to_asthma').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('activity_limitation_due_to_asthma').value,
                                         ),
@@ -264,7 +167,7 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Well Controlled', 'Partially Controlled', 'Uncontrolled'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('outcome').value = value;
+                                            formGroup.control('outcome').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('outcome').value,
                                         ),
@@ -280,7 +183,7 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('eligible_for_nutrition_support').value = value;
+                                            formGroup.control('eligible_for_nutrition_support').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('eligible_for_nutrition_support').value,
                                         ),
@@ -301,7 +204,7 @@ class AsthmaPage extends StatelessWidget {
                                           ],
                                           crossAxisCount: 1,
                                           onChanged: (value) {
-                                            formGroup.control('nutrition_source').value = value;
+                                            formGroup.control('nutrition_source').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('nutrition_source').value,
                                         ),
@@ -328,7 +231,7 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('srq_screening_status').value = value;
+                                            formGroup.control('srq_screening_status').value = value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('srq_screening_status').value,
                                         ),
@@ -367,123 +270,4 @@ class AsthmaPage extends StatelessWidget {
                         );
                       }))));
   }
-}
-
-_loadDistricts(FormGroup formGroup, BuildContext context) {
-  return Column(
-    children: [
-      BlocBuilder<SourceCubit, SourceState>(
-          buildWhen: ((previous, current) =>
-              (previous.isLoading != current.isLoading) || previous.dataModel != current.dataModel),
-          builder: (context, state) {
-            List<String> districts =
-                (state.dataModel != null) ? state.dataModel!.districts!.map((e) => '${e.district}').toList() : [];
-
-            if (state.isLoading ?? false) {
-              return const SizedBox(
-                height: 15,
-                width: 15,
-                child: Center(
-                  child: CircularProgressIndicator(),
-                ),
-              );
-            }
-
-            return TextFieldWithList(
-              controlName: 'district',
-              label: AppLocalizations.of(context)!.district,
-              padding: EdgeInsets.zero,
-              prefixIcon: Icons.account_circle_outlined,
-              listData: districts,
-              allowMultiSelection: false,
-              onSelected: (value) {
-                formGroup.control('district').value = value[0];
-                context.read<SourceCubit>().selectDistrict = value[0];
-              },
-              emptyString: 'No Districts available',
-            );
-          }),
-      ReactiveValueListenableBuilder<String>(
-          formControlName: 'district',
-          builder: (context, control, child) => Visibility(
-                visible: (formGroup.control('district').value) != null,
-                child: BlocBuilder<SourceCubit, SourceState>(
-                    buildWhen: ((previous, current) =>
-                        (previous.isLoading != current.isLoading) ||
-                        (previous.dataModel != current.dataModel) ||
-                        (previous.blockList != current.blockList)),
-                    builder: (context, state) {
-                      List<String> blockList = state.blockList ?? [];
-                      if (state.isLoading ?? false) {
-                        return const SizedBox(
-                          height: 15,
-                          width: 15,
-                          child: Center(
-                            child: CircularProgressIndicator(),
-                          ),
-                        );
-                      }
-                      return Column(
-                        children: [
-                          const SizedBox(height: kPadding * 2),
-                          TextFieldWithList(
-                            controlName: 'referral_block',
-                            label: AppLocalizations.of(context)!.block,
-                            padding: EdgeInsets.zero,
-                            prefixIcon: Icons.account_circle_outlined,
-                            listData: blockList,
-                            allowMultiSelection: false,
-                            onSelected: (value) {
-                              formGroup.control('referral_block').value = value[0];
-                              context.read<SourceCubit>().selectBlock = value[0];
-                            },
-                            emptyString: 'No Blocks available',
-                          ),
-                        ],
-                      );
-                    }),
-              )),
-      ReactiveValueListenableBuilder<String>(
-          formControlName: 'referral_block',
-          builder: (context, control, child) => Visibility(
-              visible: (formGroup.control('referral_block').value) != null,
-              child: BlocBuilder<SourceCubit, SourceState>(
-                  buildWhen: ((previous, current) =>
-                      (previous.isLoading != current.isLoading) ||
-                      (previous.dataModel != current.dataModel) ||
-                      (previous.panchayatList != current.panchayatList)),
-                  builder: (context, state) {
-                    List<String> panchayatList = state.panchayatList ?? [];
-
-                    if (state.isLoading ?? false) {
-                      return const SizedBox(
-                        height: 15,
-                        width: 15,
-                        child: Center(
-                          child: CircularProgressIndicator(),
-                        ),
-                      );
-                    }
-                    return Column(
-                      children: [
-                        const SizedBox(height: kPadding * 2),
-                        TextFieldWithList(
-                          controlName: 'panchayat_code',
-                          label: AppLocalizations.of(context)!.panchayatCode,
-                          padding: EdgeInsets.zero,
-                          prefixIcon: Icons.account_circle_outlined,
-                          listData: panchayatList,
-                          allowMultiSelection: false,
-                          onSelected: (value) {
-                            formGroup.control('panchayat_code').value = value[0];
-                            context.read<SourceCubit>().selectPanchayatCode = value[0];
-                          },
-                          emptyString: 'No Panchayats available',
-                        ),
-                      ],
-                    );
-                  }))),
-      const SizedBox(height: kPadding * 2),
-    ],
-  );
 }

@@ -8,6 +8,7 @@ import 'package:tatpar_orange/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_orange/features/case/data/repos/case_repo.dart';
 import 'package:tatpar_orange/features/case/data/source_models/data_model.dart';
 import 'package:tatpar_orange/features/case/data/source_models/diagnosis_data.dart';
+import 'package:tatpar_orange/features/asthma/model/asthma_model.dart';
 import 'package:tatpar_orange/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_orange/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_orange/features/diagnosis/model/diagnosis_model.dart';
@@ -32,6 +33,7 @@ class CaseState with _$CaseState {
       DataModel? dataModel,
       ReferralDetailsModel? referralDetailsModel,
       TBScreeningModel? tbScreeningModel,
+      AsthmaModel? asthmaModel,
       WHOSrqModel? whoSrqModel,
       MentalHealthScreeningModel? mentalHealthScreeningModel,
       String? screeningOutcome,
@@ -436,6 +438,36 @@ class CaseCubit extends Cubit<CaseState> {
 
     getTBScreeningData(state.caseWorkedUpon.tbScreening);
     getCaseModel(state.caseWorkedUpon.id);
+  }
+
+  Future<void> updateAsthmaData(AsthmaModel asthmaModel) async {
+    final response = await caseRepo.saveAsthmaData(
+        asthmaModel: asthmaModel,
+        id: state.caseWorkedUpon.asthmaIhv,
+        caseId: state.caseWorkedUpon.id);
+
+    emit(
+      state.copyWith(
+        caseWorkedUpon: state.caseWorkedUpon.copyWith(asthmaIhv: response.id),
+        asthmaModel: response,
+      ),
+    );
+
+    getAsthmaData(state.caseWorkedUpon.asthmaIhv);
+    getCaseModel(state.caseWorkedUpon.id);
+  }
+
+  Future<void> getAsthmaData(int? formId) async {
+    if (state.caseWorkedUpon.asthmaIhv == null) return;
+    emit(state.copyWith(isLoading: true));
+
+    final response = await caseRepo.getAsthma(id: formId);
+    emit(
+      state.copyWith(
+        isLoading: false,
+        asthmaModel: response,
+      ),
+    );
   }
 
   Future<void> updateWHOSRQData(

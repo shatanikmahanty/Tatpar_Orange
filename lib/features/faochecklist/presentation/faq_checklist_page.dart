@@ -18,28 +18,19 @@ import 'package:tatpar_orange/features/referral/presentation/widgets/case_app_ba
 class FaqChecklistPage extends StatelessWidget {
   const FaqChecklistPage({super.key});
 
-  FormGroup _faqChecklistFormBuilder(
-      {required FaqChecklistModel? faqChecklistModel}) {
+  FormGroup _faqChecklistFormBuilder({required FaqChecklistModel? faqChecklistModel}) {
     return fb.group({
-      'worried_enough':
-          FormControl<String?>(value: faqChecklistModel?.worriedEnough),
-      'unable_to_eat':
-          FormControl<String>(value: faqChecklistModel?.unableToEat),
+      'worried_enough': FormControl<String?>(value: faqChecklistModel?.worriedEnough),
+      'unable_to_eat': FormControl<String>(value: faqChecklistModel?.unableToEat),
       'few_foods': FormControl<String>(value: faqChecklistModel?.fewFoods),
       'skip_meal': FormControl<String>(value: faqChecklistModel?.skipMeal),
       'ate_less': FormControl<String>(value: faqChecklistModel?.ateLess),
-      'household_food':
-          FormControl<String>(value: faqChecklistModel?.householdFood),
-      'hungry_but_did_not_eat':
-          FormControl<String>(value: faqChecklistModel?.hungryButDidNotEat),
-      'went_without_eating':
-          FormControl<String>(value: faqChecklistModel?.wentWithoutEating),
-      'nutrition_linked':
-          FormControl<String>(value: faqChecklistModel?.nutritionLinked),
-      'score_result':
-          FormControl<String>(value: faqChecklistModel?.scoreResult),
-      'linkage_date':
-          FormControl<DateTime>(value: faqChecklistModel?.linkageDate),
+      'household_food': FormControl<String>(value: faqChecklistModel?.householdFood),
+      'hungry_but_did_not_eat': FormControl<String>(value: faqChecklistModel?.hungryButDidNotEat),
+      'went_without_eating': FormControl<String>(value: faqChecklistModel?.wentWithoutEating),
+      'nutrition_linked': FormControl<String>(value: faqChecklistModel?.nutritionLinked),
+      'score_result': FormControl<String>(value: faqChecklistModel?.scoreResult),
+      'linkage_date': FormControl<DateTime>(value: faqChecklistModel?.linkageDate),
       'yes_field': FormControl<bool>(value: faqChecklistModel?.yesField),
     });
   }
@@ -47,8 +38,7 @@ class FaqChecklistPage extends StatelessWidget {
   Future<void> _onSave(BuildContext context, FormGroup formGroup) async {
     final caseCubit = context.read<CaseCubit>();
     if (formGroup.valid) {
-      final model =
-          caseCubit.state.faqCheckListModel ?? const FaqChecklistModel();
+      final model = caseCubit.state.faqCheckListModel ?? const FaqChecklistModel();
       final updatedModel = model.copyWith(
         worriedEnough: formGroup.control('worried_enough').value as String?,
         unableToEat: formGroup.control('unable_to_eat').value as String?,
@@ -56,10 +46,8 @@ class FaqChecklistPage extends StatelessWidget {
         skipMeal: formGroup.control('skip_meal').value as String?,
         ateLess: formGroup.control('ate_less').value as String?,
         householdFood: formGroup.control('household_food').value as String?,
-        hungryButDidNotEat:
-            formGroup.control('hungry_but_did_not_eat').value as String?,
-        wentWithoutEating:
-            formGroup.control('went_without_eating').value as String?,
+        hungryButDidNotEat: formGroup.control('hungry_but_did_not_eat').value as String?,
+        wentWithoutEating: formGroup.control('went_without_eating').value as String?,
         nutritionLinked: formGroup.control('nutrition_linked').value as String?,
         scoreResult: formGroup.control('score_result').value as String?,
         linkageDate: formGroup.control('linkage_date').value as DateTime?,
@@ -75,8 +63,7 @@ class FaqChecklistPage extends StatelessWidget {
           fields.add(key.replaceFirst('patient_', ''));
         }
       });
-      DjangoflowAppSnackbar.showError(
-          'please enter the fields: ${fields.join(', ')}');
+      DjangoflowAppSnackbar.showError('please enter the fields: ${fields.join(', ')}');
     }
   }
 
@@ -98,12 +85,9 @@ class FaqChecklistPage extends StatelessWidget {
       ),
       body: BlocBuilder<CaseCubit, CaseState>(
         buildWhen: (previous, current) =>
-            (previous.isLoading != current.isLoading) ||
-            (previous.faqCheckListModel != current.faqCheckListModel),
+            (previous.isLoading != current.isLoading) || (previous.faqCheckListModel != current.faqCheckListModel),
         builder: (context, state) {
-          return (state.isLoading) ||
-                  (state.caseWorkedUpon.faqChecklist != null &&
-                      state.faqCheckListModel == null)
+          return (state.isLoading) || (state.caseWorkedUpon.faqChecklist != null && state.faqCheckListModel == null)
               ? Center(
                   child: Lottie.asset(
                     'assets/lottie/registration_loading.json',
@@ -113,24 +97,17 @@ class FaqChecklistPage extends StatelessWidget {
                   ),
                 )
               : ReactiveFormBuilder(
-                  form: () => _faqChecklistFormBuilder(
-                      faqChecklistModel: state.faqCheckListModel),
-                  builder: (BuildContext context, FormGroup formGroup,
-                      Widget? child) {
+                  form: () => _faqChecklistFormBuilder(faqChecklistModel: state.faqCheckListModel),
+                  builder: (BuildContext context, FormGroup formGroup, Widget? child) {
                     formGroup.valueChanges.listen((_) {
-                      formGroup.control('yes_field').value = (formGroup
-                                  .control('worried_enough')
-                                  .value ==
-                              'Yes' ||
+                      formGroup.control('yes_field').value = (formGroup.control('worried_enough').value == 'Yes' ||
                           formGroup.control('unable_to_eat').value == 'Yes' ||
                           formGroup.control('few_foods').value == 'Yes' ||
                           formGroup.control('skip_meal').value == 'Yes' ||
                           formGroup.control('ate_less').value == 'Yes' ||
                           formGroup.control('household_food').value == 'Yes' ||
-                          formGroup.control('hungry_but_did_not_eat').value ==
-                              'Yes' ||
-                          formGroup.control('went_without_eating').value ==
-                              'Yes');
+                          formGroup.control('hungry_but_did_not_eat').value == 'Yes' ||
+                          formGroup.control('went_without_eating').value == 'Yes');
                     });
 
                     return AutofillGroup(
@@ -139,159 +116,114 @@ class FaqChecklistPage extends StatelessWidget {
                         Expanded(
                           child: SingleChildScrollView(
                               child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: kPadding * 2),
+                                  padding: const EdgeInsets.symmetric(horizontal: kPadding * 2),
                                   child: Column(children: [
                                     ChipRadioButtons(
-                                      label: AppLocalizations.of(context)!
-                                          .worriedEnough,
+                                      label: AppLocalizations.of(context)!.worriedEnough,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup
-                                            .control('worried_enough')
-                                            .value = value;
+                                        formGroup.control('worried_enough').value = value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected: formGroup
-                                          .control('worried_enough')
-                                          .value,
+                                      selected: formGroup.control('worried_enough').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ChipRadioButtons(
-                                      label: AppLocalizations.of(context)!
-                                          .unableToEat,
+                                      label: AppLocalizations.of(context)!.unableToEat,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup
-                                            .control('unable_to_eat')
-                                            .value = value;
+                                        formGroup.control('unable_to_eat').value = value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected: formGroup
-                                          .control('unable_to_eat')
-                                          .value,
+                                      selected: formGroup.control('unable_to_eat').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ChipRadioButtons(
-                                      label: AppLocalizations.of(context)!
-                                          .fewFoods,
+                                      label: AppLocalizations.of(context)!.fewFoods,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup.control('few_foods').value =
-                                            value;
+                                        formGroup.control('few_foods').value = value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected:
-                                          formGroup.control('few_foods').value,
+                                      selected: formGroup.control('few_foods').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ChipRadioButtons(
-                                      label: AppLocalizations.of(context)!
-                                          .skipMeal,
+                                      label: AppLocalizations.of(context)!.skipMeal,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup.control('skip_meal').value =
-                                            value;
+                                        formGroup.control('skip_meal').value = value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected:
-                                          formGroup.control('skip_meal').value,
+                                      selected: formGroup.control('skip_meal').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ChipRadioButtons(
-                                      label:
-                                          AppLocalizations.of(context)!.ateLess,
+                                      label: AppLocalizations.of(context)!.ateLess,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup.control('ate_less').value =
-                                            value;
+                                        formGroup.control('ate_less').value = value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected:
-                                          formGroup.control('ate_less').value,
+                                      selected: formGroup.control('ate_less').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ChipRadioButtons(
-                                      label: AppLocalizations.of(context)!
-                                          .householdFood,
+                                      label: AppLocalizations.of(context)!.householdFood,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup
-                                            .control('household_food')
-                                            .value = value;
+                                        formGroup.control('household_food').value = value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected: formGroup
-                                          .control('household_food')
-                                          .value,
+                                      selected: formGroup.control('household_food').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ChipRadioButtons(
-                                      label: AppLocalizations.of(context)!
-                                          .hungryButDidNotEat,
+                                      label: AppLocalizations.of(context)!.hungryButDidNotEat,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup
-                                            .control('hungry_but_did_not_eat')
-                                            .value = value;
+                                        formGroup.control('hungry_but_did_not_eat').value =
+                                            value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected: formGroup
-                                          .control('hungry_but_did_not_eat')
-                                          .value,
+                                      selected: formGroup.control('hungry_but_did_not_eat').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ChipRadioButtons(
-                                      label: AppLocalizations.of(context)!
-                                          .wentWithoutEating,
+                                      label: AppLocalizations.of(context)!.wentWithoutEating,
                                       options: const ['Yes', 'No'],
                                       crossAxisCount: 2,
                                       onChanged: (value) {
-                                        formGroup
-                                            .control('went_without_eating')
-                                            .value = value;
+                                        formGroup.control('went_without_eating').value =
+                                            value.isNotEmpty ? value[0] : null;
                                       },
-                                      selected: formGroup
-                                          .control('went_without_eating')
-                                          .value,
+                                      selected: formGroup.control('went_without_eating').value,
                                     ),
                                     const SizedBox(height: kPadding * 2),
                                     ReactiveValueListenableBuilder<bool?>(
                                         formControlName: 'yes_field',
                                         builder: (context, control, child) {
                                           return Visibility(
-                                            visible: formGroup
-                                                    .control('yes_field')
-                                                    .value ??
-                                                false,
+                                            visible: formGroup.control('yes_field').value ?? false,
                                             child: Column(
                                               children: [
                                                 ChipRadioButtons(
-                                                  label: AppLocalizations.of(
-                                                          context)!
-                                                      .nutritionLinkage,
+                                                  label: AppLocalizations.of(context)!.nutritionLinkage,
                                                   options: const ['Yes', 'No'],
                                                   crossAxisCount: 2,
                                                   onChanged: (value) {
-                                                    formGroup
-                                                        .control('score_result')
-                                                        .value = value;
+                                                    formGroup.control('score_result').value =
+                                                        value.isNotEmpty ? value[0] : null;
                                                   },
-                                                  selected: formGroup
-                                                      .control('score_result')
-                                                      .value,
+                                                  selected: formGroup.control('score_result').value,
                                                 ),
-                                                const SizedBox(
-                                                    height: kPadding * 2),
+                                                const SizedBox(height: kPadding * 2),
                                                 DateTextInput(
-                                                  label: AppLocalizations.of(
-                                                          context)!
-                                                      .linkageDate,
+                                                  label: AppLocalizations.of(context)!.linkageDate,
                                                   firstDate: DateTime(2002),
                                                   controlName: 'linkage_date',
                                                 ),
-                                                const SizedBox(
-                                                    height: kPadding * 2),
+                                                const SizedBox(height: kPadding * 2),
                                               ],
                                             ),
                                           );

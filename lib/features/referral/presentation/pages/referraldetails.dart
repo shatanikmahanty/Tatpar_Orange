@@ -24,6 +24,7 @@ import 'package:tatpar_orange/features/referral/presentation/widgets/case_app_ba
 @RoutePage()
 class ReferralDetailsPage extends StatelessWidget {
   const ReferralDetailsPage({super.key});
+
   FormGroup _basicDetailsFormBuilder(
       {required ReferralDetailsModel? referralDetailsModel, required SourceCubit cubit}) {
     final district = referralDetailsModel?.selectedDistrict;
@@ -333,7 +334,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                           options: const ['Male', 'Female', 'Other'],
                                           selected: formGroup.control('gender').value,
                                           onChanged: (value) {
-                                            formGroup.control('gender').value = value;
+                                            formGroup.control('gender').value = value.isNotEmpty ? value[0] : null;
                                           },
                                         ),
                                         const SizedBox(height: kPadding * 2),
@@ -379,7 +380,8 @@ class ReferralDetailsPage extends StatelessWidget {
                                                 options: list,
                                                 selected: formGroup.control('caste_category').value,
                                                 onChanged: (value) {
-                                                  formGroup.control('caste_category').value = value;
+                                                  formGroup.control('caste_category').value =
+                                                      value.isNotEmpty ? value[0] : null;
                                                 },
                                               );
                                             }),
@@ -415,22 +417,7 @@ class ReferralDetailsPage extends StatelessWidget {
                                                     return;
                                                   }
 
-                                                  // final List<int> listOfIds =
-                                                  //     value.split(',').map((e) {
-                                                  //   final parts = e.split(':');
-                                                  //   return int.parse(parts[0]);
-                                                  // }).toList();
-                                                  // final List<String> values =
-                                                  //     value.split(',').map((e) {
-                                                  //   final parts = e.split(':');
-                                                  //   return (parts[1]);
-                                                  // }).toList();
-                                                  // context
-                                                  //     .read<CaseCubit>()
-                                                  //     .selectKeyPopulation = listOfIds;
-                                                  final listOfValues = value.split(',');
-
-                                                  formGroup.control('key_population').value = listOfValues;
+                                                  formGroup.control('key_population').value = list;
                                                 },
                                               );
                                             }),
@@ -468,7 +455,8 @@ class ReferralDetailsPage extends StatelessWidget {
                                                               options: list,
                                                               selected: formGroup.control('trimester').value,
                                                               onChanged: (value) {
-                                                                formGroup.control('trimester').value = value;
+                                                                formGroup.control('trimester').value =
+                                                                    value.isNotEmpty ? value[0] : null;
                                                               },
                                                             ),
                                                             const SizedBox(height: kPadding * 2),
@@ -507,7 +495,9 @@ class ReferralDetailsPage extends StatelessWidget {
                                                 options: list,
                                                 selected: formGroup.control('referrer_source').value,
                                                 onChanged: (value) {
-                                                  formGroup.control('referrer_source').value = value;
+                                                  formGroup.control('referrer_source').value = value.isNotEmpty
+                                                      ? value[0]
+                                                      : null;
                                                 },
                                               );
                                             }),

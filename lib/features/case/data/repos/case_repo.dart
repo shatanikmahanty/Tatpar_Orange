@@ -16,6 +16,7 @@ import 'package:tatpar_orange/features/case/blocs/source_cubit.dart';
 import 'package:tatpar_orange/features/case/data/case_models/case_model.dart';
 import 'package:tatpar_orange/features/case/data/source_models/diagnosis_data_fields.dart';
 import 'package:tatpar_orange/features/case/data/source_models/referral_districts_model.dart';
+import 'package:tatpar_orange/features/asthma/model/asthma_model.dart';
 import 'package:tatpar_orange/features/conducttbscreening/model/tb_screening_model.dart';
 import 'package:tatpar_orange/features/contacttracing/models/contact_tracing_model.dart';
 import 'package:tatpar_orange/features/diagnosis/model/diagnosis_model.dart';
@@ -265,6 +266,129 @@ class CaseRepo {
       } else {
         throw ApplicationError(
           errorMsg: 'Error fetching data',
+          type: UnExpected(),
+        );
+      }
+    }
+  }
+
+  Future<AsthmaModel> saveAsthmaData(
+      {required AsthmaModel asthmaModel,
+      required int? id,
+      required int? caseId}) async {
+    Box<AsthmaModel> asthmaDataBox = Hive.box<AsthmaModel>('asthmaModel');
+    final existingModelIndex =
+        asthmaDataBox.values.toList().indexWhere((model) => model.id == id);
+
+    bool hasInternet = await InternetConnection().hasInternetAccess;
+
+    if ((asthmaModel.isFormIDAssigned == null ||
+            asthmaModel.isFormIDAssigned == false) &&
+        hasInternet &&
+        existingModelIndex != -1) {
+      await asthmaDataBox.put(asthmaModel.id.toString(), asthmaModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null,
+          faqCheckListModel: null);
+      log('Asthma Data Box Contains:${asthmaDataBox.values.toList().toString()}');
+      log('Updating asthma data to local Server because network is available while trying to update in Local${asthmaModel.toString()}');
+      if (hasInternet) {
+        await pushPendingReferralDetails();
+      }
+      return asthmaDataBox.getAt(existingModelIndex)!;
+    }
+    if (hasInternet) {
+      await pushPendingReferralDetails();
+    }
+    final request = NetworkRequest(
+      '$asthmaUrl${id == null ? '' : '/$id'}',
+      id == null ? RequestMethod.post : RequestMethod.patch,
+      isAuthorized: true,
+      data: {
+        ...asthmaModel.toJson(),
+        'case_id': caseId ?? AuthCubit.instance.workingCaseId,
+      },
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      final savedModel = AsthmaModel.fromJson(result.data['data']);
+
+      await asthmaDataBox.put(savedModel.id.toString(), savedModel);
+
+      updateCaseBox(
+          model: null,
+          tbModel: null,
+          caseModel: null,
+          mentalHealthScreeningModel: null,
+          diagnosisModel: null,
+          treatmentModel: null,
+          contactTracingModel: null,
+          outcomeModel: null,
+          faqCheckListModel: null);
+      log('Asthma Data Box Contains:${asthmaDataBox.values.toList().toString()}');
+
+      return savedModel;
+    } else {
+      if (result.error != null && result.error?.type is NetworkError) {
+        final modelsList = asthmaDataBox.values.toList();
+        AsthmaModel updateModel = asthmaModel.copyWith(caseId: caseId);
+
+        final existingModelIndex = modelsList.indexWhere(
+          (model) => id != null && model.id == id,
+        );
+
+        if (existingModelIndex != -1) {
+          await asthmaDataBox.put(updateModel.id.toString(), updateModel);
+
+          // DjangoflowAppSnackbar.showInfo('Updated data Locally');
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null,
+              faqCheckListModel: null);
+          log('Asthma Data Box Contains:${modelsList.toString()}');
+
+          return updateModel;
+        } else {
+          final modelToSave = updateModel.copyWith(
+              id: caseId ?? AuthCubit.instance.workingCaseId,
+              caseId: caseId ?? AuthCubit.instance.workingCaseId,
+              isFormIDAssigned: false);
+
+          // Save the new model to Hive
+          await asthmaDataBox.put(modelToSave.id.toString(), modelToSave);
+          updateCaseBox(
+              model: null,
+              tbModel: null,
+              caseModel: null,
+              mentalHealthScreeningModel: null,
+              diagnosisModel: null,
+              treatmentModel: null,
+              contactTracingModel: null,
+              outcomeModel: null,
+              faqCheckListModel: null);
+
+          // DjangoflowAppSnackbar.showInfo('Stored data Locally');
+          log('Asthma Data Box Contains:${asthmaDataBox.values.toList().toString()}');
+
+          return modelToSave;
+        }
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error fetching asthma data',
           type: UnExpected(),
         );
       }
@@ -1158,6 +1282,45 @@ class CaseRepo {
     } else {
       throw ApplicationError(
         errorMsg: 'Error Retrieving TB Screening Form data',
+        type: Unauthorized(),
+      );
+    }
+  }
+
+  Future<AsthmaModel> getAsthma({
+    required int? id,
+  }) async {
+    Box<AsthmaModel> asthmaDataBox = Hive.box<AsthmaModel>('asthmaModel');
+    log(' Asthma Box Contains======================${asthmaDataBox.values.toList()}'
+        .toString());
+    final request = NetworkRequest(
+      '$asthmaUrl/$id',
+      RequestMethod.get,
+      isAuthorized: true,
+      data: {},
+    );
+    final result = await NetworkManager.instance.perform(request);
+    if (result.status == Status.ok) {
+      return AsthmaModel.fromJson(result.data['data']);
+    } else if (result.error != null && result.error?.type is NetworkError) {
+      log(asthmaDataBox.values.toString());
+      final model = asthmaDataBox.get(asthmaDataBox.keyAt(asthmaDataBox.values
+          .toList()
+          .indexWhere((existingCase) => existingCase.id == id)));
+      if (model != null) {
+        log('Retrieving Asthma Model======================$model'
+            .toString());
+
+        return model;
+      } else {
+        throw ApplicationError(
+          errorMsg: 'Error Retrieving Asthma Form data',
+          type: Unauthorized(),
+        );
+      }
+    } else {
+      throw ApplicationError(
+        errorMsg: 'Error Retrieving Asthma Form data',
         type: Unauthorized(),
       );
     }

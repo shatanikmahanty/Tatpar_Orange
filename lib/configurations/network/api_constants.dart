@@ -9,6 +9,7 @@ const logoutUrl = '$usersApiUrl/logout';
 const districtsUrl = '$baseUrl/api/referral-data';
 const referralDetailsUrl = '$baseUrl/api/referral';
 const tbScreeningUrl = '$baseUrl/api/tb-screening';
+const asthmaUrl = '$baseUrl/api/asthma';
 const whoSrqUrl = '$baseUrl/api/whosrq';
 const diagnosisDataUrl = '$baseUrl/api/diagnosis-data';
 const diagnosisUrl = '$baseUrl/api/diagnosis';

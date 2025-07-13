@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../../../configurations/configurations.dart';
 
-class ChipRadioButtons extends StatefulWidget {
+class ChipRadioButtons<T> extends StatefulWidget {
   const ChipRadioButtons({
     super.key,
     required this.label,
@@ -14,34 +14,38 @@ class ChipRadioButtons extends StatefulWidget {
     this.allowMultiSelect = false,
     this.validationMessages,
     this.selectedList,
+    this.itemToString,
   });
-  final List<String> options;
+
+  final List<T> options;
   final List<IconData>? optionIcons;
-  final List<String>? selectedList;
-  final String? selected;
+  final List<T>? selectedList;
+  final T? selected;
   final String label;
   final int crossAxisCount;
-  final void Function(String)? onChanged;
+  final void Function(List<T>)? onChanged;
   final bool allowMultiSelect;
   final Map<String, String Function(Object)>? validationMessages;
+  final Function(T)? itemToString;
 
   @override
-  State<ChipRadioButtons> createState() => _ChipRadioButtonsState();
+  State<ChipRadioButtons> createState() => _ChipRadioButtonsState<T>();
 }
 
-class _ChipRadioButtonsState extends State<ChipRadioButtons> {
-  final List<String> _selected = [];
+class _ChipRadioButtonsState<T> extends State<ChipRadioButtons<T>> {
+  final List<T> _selected = [];
 
   bool hasError = false;
 
   @override
   void initState() {
+    final selectedList = widget.selectedList;
     final selected = widget.selected;
     if (selected != null) {
       _selected.add(selected);
     }
-    if (widget.selectedList != null) {
-      _selected.addAll(widget.selectedList as Iterable<String>);
+    if (selectedList != null) {
+      _selected.addAll(selectedList);
     }
     setState(() {});
     super.initState();
@@ -62,7 +66,6 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
         ),
         GridView.builder(
           shrinkWrap: true,
-          padding: EdgeInsets.zero,
           physics: const NeverScrollableScrollPhysics(),
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: width > 700 ? 4 : widget.crossAxisCount,
@@ -71,38 +74,39 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
             childAspectRatio: widget.crossAxisCount == 3
                 ? 2.7
                 : widget.crossAxisCount == 2
-                    ? 4
-                    : 8,
+                ? 4
+                : 8,
           ),
+          padding: EdgeInsets.zero,
           itemBuilder: (context, index) {
-            final isSelected = _selected.contains(widget.options[index]);
+            final option = widget.options[index];
+            final isSelected = _selected.contains(option);
             return GestureDetector(
               onTap: () {
                 if (widget.allowMultiSelect) {
                   setState(() {
                     if (isSelected) {
-                      _selected.remove(widget.options[index]);
+                      _selected.remove(option);
                     } else {
-                      _selected.add(widget.options[index]);
+                      _selected.add(option);
                     }
-
-                    widget.onChanged?.call(_selected.join(','));
+                    widget.onChanged?.call(_selected);
                   });
                 } else {
-                  _selected.clear();
-                  _selected.add(widget.options[index]);
-                  setState(() {});
-                  widget.onChanged?.call(widget.options[index]);
+                  setState(() {
+                    _selected.clear();
+                    if (!isSelected) {
+                      _selected.add(option);
+                    }
+                  });
+                  widget.onChanged?.call(_selected);
                 }
               },
               child: Container(
                 decoration: BoxDecoration(
-                  color:
-                      isSelected ? AppColors.secondary : AppColors.blackPrimary,
+                  color: isSelected ? AppColors.redLight : AppColors.blackPrimary,
                   borderRadius: BorderRadius.circular(kPadding * 0.5),
-                  border: Border.all(
-                      color:
-                          isSelected ? AppColors.primary : AppColors.grayDark),
+                  border: Border.all(color: isSelected ? AppColors.redDark : AppColors.grayDark),
                 ),
                 alignment: Alignment.center,
                 child: Row(
@@ -113,22 +117,18 @@ class _ChipRadioButtonsState extends State<ChipRadioButtons> {
                         padding: const EdgeInsets.only(right: kPadding),
                         child: Icon(
                           widget.optionIcons![index],
-                          color: isSelected
-                              ? AppColors.secondary
-                              : AppColors.grey30,
+                          color: isSelected ? AppColors.redDark : AppColors.grey30,
                         ),
                       ),
                     Expanded(
                       child: Text(
-                        widget.options[index],
+                        widget.itemToString?.call(option) ?? option.toString(),
                         textAlign: TextAlign.center,
                         style: Theme.of(context).textTheme.bodyMedium?.copyWith(
                             fontWeight: FontWeight.w600,
                             height: 1.5,
                             letterSpacing: 0.2,
-                            color: isSelected
-                                ? AppColors.primary
-                                : AppColors.grey30),
+                            color: isSelected ? AppColors.redDark : AppColors.grey30),
                       ),
                     ),
                   ],

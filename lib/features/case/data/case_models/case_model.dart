@@ -69,6 +69,7 @@ class Case with _$Case {
     @JsonKey(name: 'dst_rif_resistance_result')
     String? dstRifResistanceResult,
     @HiveField(29) @JsonKey(name: 'faq_checklist_id') int? faqChecklist,
+    @HiveField(30) @JsonKey(name: 'asthma_ihv_id') int? asthmaIhv,
   }) = _Case;
 
   factory Case.fromJson(Map<String, dynamic> json) => _$CaseFromJson(json);

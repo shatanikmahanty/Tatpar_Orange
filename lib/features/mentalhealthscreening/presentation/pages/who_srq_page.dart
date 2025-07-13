@@ -112,7 +112,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('headache').value = value;
+                                    formGroup.control('headache').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup.control('headache').value,
                                 ),
@@ -122,7 +122,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('apetite').value = value;
+                                    formGroup.control('apetite').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup.control('apetite').value,
                                 ),
@@ -132,7 +132,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('sleep').value = value;
+                                    formGroup.control('sleep').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup.control('sleep').value,
                                 ),
@@ -143,8 +143,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('frightened').value =
-                                        value;
+                                    formGroup.control('frightened').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected:
                                       formGroup.control('frightened').value,
@@ -156,8 +155,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('hands_shake').value =
-                                        value;
+                                    formGroup.control('hands_shake').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected:
                                       formGroup.control('hands_shake').value,
@@ -168,7 +166,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('nervous').value = value;
+                                    formGroup.control('nervous').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup.control('nervous').value,
                                 ),
@@ -179,8 +177,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('digestion_poor').value =
-                                        value;
+                                    formGroup.control('digestion_poor').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected:
                                       formGroup.control('digestion_poor').value,
@@ -194,7 +191,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('trouble_thinking')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('trouble_thinking')
@@ -206,7 +203,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('unhappy').value = value;
+                                    formGroup.control('unhappy').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup.control('unhappy').value,
                                 ),
@@ -216,7 +213,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('cry_more').value = value;
+                                    formGroup.control('cry_more').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup.control('cry_more').value,
                                 ),
@@ -229,7 +226,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('daily_activities')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('daily_activities')
@@ -242,8 +239,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('decision_making').value =
-                                        value;
+                                    formGroup.control('decision_making').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('decision_making')
@@ -258,7 +254,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('daily_work_suffering')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('daily_work_suffering')
@@ -273,7 +269,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('play_a_useful_part')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('play_a_useful_part')
@@ -286,8 +282,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('lost_interest').value =
-                                        value;
+                                    formGroup.control('lost_interest').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected:
                                       formGroup.control('lost_interest').value,
@@ -301,7 +296,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('worthless_person')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('worthless_person')
@@ -316,7 +311,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('ending_your_life')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('ending_your_life')
@@ -331,7 +326,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('tired_all_the_time')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('tired_all_the_time')
@@ -346,7 +341,7 @@ class WHOSRQPage extends StatelessWidget {
                                   onChanged: (value) {
                                     formGroup
                                         .control('uncomfortable_feelings')
-                                        .value = value;
+                                        .value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected: formGroup
                                       .control('uncomfortable_feelings')
@@ -359,8 +354,7 @@ class WHOSRQPage extends StatelessWidget {
                                   options: const ['Yes', 'No'],
                                   crossAxisCount: 2,
                                   onChanged: (value) {
-                                    formGroup.control('easily_tired').value =
-                                        value;
+                                    formGroup.control('easily_tired').value = value.isNotEmpty ? value[0] : null;
                                   },
                                   selected:
                                       formGroup.control('easily_tired').value,

@@ -241,7 +241,7 @@ class BasicDetails extends StatelessWidget {
                                       options: const ['Male', 'Female', 'Other'],
                                       selected: formGroup.control('gender').value,
                                       onChanged: (value) {
-                                        formGroup.control('gender').value = value;
+                                        formGroup.control('gender').value = value.isNotEmpty ? value[0] : null;
                                       },
                                     ),
                                     const SizedBox(height: kPadding * 2),
@@ -287,7 +287,7 @@ class BasicDetails extends StatelessWidget {
                                             options: list,
                                             selected: formGroup.control('caste_category').value,
                                             onChanged: (value) {
-                                              formGroup.control('caste_category').value = value;
+                                              formGroup.control('caste_category').value = value.isNotEmpty ? value[0] : null;
                                             },
                                           );
                                         }),
@@ -312,7 +312,7 @@ class BasicDetails extends StatelessWidget {
                                             );
                                           }
                                           return ChipRadioButtons(
-                                            allowMultiSelect: false,
+                                            allowMultiSelect: true,
                                             crossAxisCount: 2,
                                             label: AppLocalizations.of(context)!.keyPopulation,
                                             selectedList: formGroup.control('key_population').value,
@@ -323,9 +323,7 @@ class BasicDetails extends StatelessWidget {
                                                 return;
                                               }
 
-                                              final listOfValues = value.split(',');
-
-                                              formGroup.control('key_population').value = listOfValues;
+                                              formGroup.control('key_population').value = value;
                                             },
                                           );
                                         }),
@@ -361,7 +359,7 @@ class BasicDetails extends StatelessWidget {
                                             options: list,
                                             selected: formGroup.control('referrer_source').value,
                                             onChanged: (value) {
-                                              formGroup.control('referrer_source').value = value;
+                                              formGroup.control('referrer_source').value = value.isNotEmpty ? value[0] : null;
                                             },
                                           );
                                         }),

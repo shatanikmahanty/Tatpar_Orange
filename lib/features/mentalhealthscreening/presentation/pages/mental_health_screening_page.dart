@@ -201,7 +201,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                               onChanged: (value) {
                                                 formGroup
                                                     .control('stage')
-                                                    .value = value;
+                                                    .value = value.isNotEmpty ? value[0] : null;
                                               },
                                               selected: formGroup
                                                   .control('stage')
@@ -529,7 +529,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                 ],
                                                                                 crossAxisCount: 2,
                                                                                 onChanged: (value) {
-                                                                                  formGroup.control('ipfu_feeling_better_after_linkage').value = value;
+                                                                                  formGroup.control('ipfu_feeling_better_after_linkage').value = value.isNotEmpty ? value[0] : null;
                                                                                 },
                                                                                 selected: formGroup.control('ipfu_feeling_better_after_linkage').value,
                                                                               ),
@@ -542,7 +542,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                                 ],
                                                                                 crossAxisCount: 2,
                                                                                 onChanged: (value) {
-                                                                                  formGroup.control('ipfu_talk_to_helpline').value = value;
+                                                                                  formGroup.control('ipfu_talk_to_helpline').value = value.isNotEmpty ? value[0] : null;
                                                                                 },
                                                                                 selected: formGroup.control('ipfu_talk_to_helpline').value,
                                                                               ),
@@ -758,7 +758,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                               ],
                                                                               crossAxisCount: 2,
                                                                               onChanged: (value) {
-                                                                                formGroup.control('cp_feeling_better_after_linkage').value = value;
+                                                                                formGroup.control('cp_feeling_better_after_linkage').value = value.isNotEmpty ? value[0] : null;
                                                                               },
                                                                               selected: formGroup.control('cp_feeling_better_after_linkage').value,
                                                                             ),
@@ -771,7 +771,7 @@ class MentalHealthScreeningPage extends StatelessWidget {
                                                                               ],
                                                                               crossAxisCount: 2,
                                                                               onChanged: (value) {
-                                                                                formGroup.control('cp_talk_to_helpline').value = value;
+                                                                                formGroup.control('cp_talk_to_helpline').value = value.isNotEmpty ? value[0] : null;
                                                                               },
                                                                               selected: formGroup.control('cp_talk_to_helpline').value,
                                                                             ),
