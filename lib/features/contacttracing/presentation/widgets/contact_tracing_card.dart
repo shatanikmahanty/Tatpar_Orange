@@ -28,7 +28,7 @@ class ContactTracingCard extends StatelessWidget {
         },
         child: Container(
           decoration: BoxDecoration(
-            color: theme.colorScheme.background,
+            color: theme.colorScheme.surface,
             borderRadius: BorderRadius.circular(kPadding),
             border: Border.all(color: AppColors.grey90, width: 0.5),
             boxShadow: [

@@ -90,11 +90,16 @@ abstract class $AppRouter extends _i31.RootStackRouter {
       );
     },
     AsthmaRoute.name: (routeData) {
+      final args = routeData.argsAs<AsthmaRouteArgs>(
+          orElse: () => const AsthmaRouteArgs());
       return _i31.AutoRoutePage<dynamic>(
         routeData: routeData,
         child: _i31.DeferredWidget(
           _i2.loadLibrary,
-          () => _i2.AsthmaPage(),
+          () => _i2.AsthmaPage(
+            key: args.key,
+            followUpNumber: args.followUpNumber,
+          ),
         ),
       );
     },
@@ -384,16 +389,40 @@ class AppHomeRoute extends _i31.PageRouteInfo<void> {
 
 /// generated route for
 /// [_i2.AsthmaPage]
-class AsthmaRoute extends _i31.PageRouteInfo<void> {
-  const AsthmaRoute({List<_i31.PageRouteInfo>? children})
-      : super(
+class AsthmaRoute extends _i31.PageRouteInfo<AsthmaRouteArgs> {
+  AsthmaRoute({
+    _i32.Key? key,
+    int followUpNumber = 0,
+    List<_i31.PageRouteInfo>? children,
+  }) : super(
           AsthmaRoute.name,
+          args: AsthmaRouteArgs(
+            key: key,
+            followUpNumber: followUpNumber,
+          ),
           initialChildren: children,
         );
 
   static const String name = 'AsthmaRoute';
 
-  static const _i31.PageInfo<void> page = _i31.PageInfo<void>(name);
+  static const _i31.PageInfo<AsthmaRouteArgs> page =
+      _i31.PageInfo<AsthmaRouteArgs>(name);
+}
+
+class AsthmaRouteArgs {
+  const AsthmaRouteArgs({
+    this.key,
+    this.followUpNumber = 0,
+  });
+
+  final _i32.Key? key;
+
+  final int followUpNumber;
+
+  @override
+  String toString() {
+    return 'AsthmaRouteArgs{key: $key, followUpNumber: $followUpNumber}';
+  }
 }
 
 /// generated route for

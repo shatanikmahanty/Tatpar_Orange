@@ -20,7 +20,7 @@ class SuccessDialogPage extends StatelessWidget {
           height: 300,
           alignment: Alignment.center,
           decoration: BoxDecoration(
-            color: Theme.of(context).colorScheme.background,
+            color: Theme.of(context).colorScheme.surface,
             borderRadius: BorderRadius.circular(kPadding),
           ),
           padding: const EdgeInsets.all(kPadding * 3),

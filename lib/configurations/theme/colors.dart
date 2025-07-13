@@ -20,12 +20,10 @@ class AppColors {
         onErrorContainer: onErrorContainer,
         surface: surface,
         onSurface: onSurface,
-        surfaceVariant: surfaceVariant,
+        surfaceContainerHighest: surfaceVariant,
         onSurfaceVariant: onSurfaceVariant,
         outline: outline,
         outlineVariant: outlineVariant,
-        background: background,
-        onBackground: onBackground,
         brightness: Brightness.light,
       );
 
@@ -50,12 +48,10 @@ class AppColors {
         onErrorContainer: onErrorContainerDark,
         surface: surfaceDark,
         onSurface: onSurfaceDark,
-        surfaceVariant: surfaceVariantDark,
+        surfaceContainerHighest: surfaceVariantDark,
         onSurfaceVariant: onSurfaceVariantDark,
         outline: outlineDark,
         outlineVariant: outlineVariantDark,
-        background: backgroundDark,
-        onBackground: onBackgroundDark,
       );
 
   // Colors from Figma design

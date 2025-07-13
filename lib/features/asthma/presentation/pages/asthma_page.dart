@@ -16,10 +16,14 @@ import 'package:tatpar_orange/features/referral/presentation/widgets/case_app_ba
 
 @RoutePage()
 class AsthmaPage extends StatelessWidget {
-  const AsthmaPage({super.key});
+  const AsthmaPage({
+    super.key,
+    this.followUpNumber = 0,
+  });
+
+  final int followUpNumber;
 
   FormGroup _basicDetailsFormBuilder() {
-
     return fb.group({
       'daytime_symptoms_twice': FormControl<String>(),
       'night_waking_due_to_asthma': FormControl<String>(),
@@ -87,7 +91,7 @@ class AsthmaPage extends StatelessWidget {
         child: BlocBuilder<CaseCubit, CaseState>(
             builder: (context, state) => Scaffold(
                 appBar: CaseAppBar(
-                  AppLocalizations.of(context)!.ihvAsthma,
+                  '${AppLocalizations.of(context)!.ihvAsthma} ${followUpNumber.toString()}',
                   onClick: () {
                     // Navigate after the current frame
                     WidgetsBinding.instance.addPostFrameCallback((_) {
@@ -127,7 +131,8 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('daytime_symptoms_twice').value = value.isNotEmpty ? value[0] : null;
+                                            formGroup.control('daytime_symptoms_twice').value =
+                                                value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('daytime_symptoms_twice').value,
                                         ),
@@ -137,7 +142,8 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('night_waking_due_to_asthma').value = value.isNotEmpty ? value[0] : null;
+                                            formGroup.control('night_waking_due_to_asthma').value =
+                                                value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('night_waking_due_to_asthma').value,
                                         ),
@@ -147,7 +153,8 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('saba_reliver_needed').value = value.isNotEmpty ? value[0] : null;
+                                            formGroup.control('saba_reliver_needed').value =
+                                                value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('saba_reliver_needed').value,
                                         ),
@@ -157,7 +164,8 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('activity_limitation_due_to_asthma').value = value.isNotEmpty ? value[0] : null;
+                                            formGroup.control('activity_limitation_due_to_asthma').value =
+                                                value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('activity_limitation_due_to_asthma').value,
                                         ),
@@ -183,7 +191,8 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('eligible_for_nutrition_support').value = value.isNotEmpty ? value[0] : null;
+                                            formGroup.control('eligible_for_nutrition_support').value =
+                                                value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('eligible_for_nutrition_support').value,
                                         ),
@@ -204,7 +213,8 @@ class AsthmaPage extends StatelessWidget {
                                           ],
                                           crossAxisCount: 1,
                                           onChanged: (value) {
-                                            formGroup.control('nutrition_source').value = value.isNotEmpty ? value[0] : null;
+                                            formGroup.control('nutrition_source').value =
+                                                value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('nutrition_source').value,
                                         ),
@@ -231,7 +241,8 @@ class AsthmaPage extends StatelessWidget {
                                           options: const ['Yes', 'No'],
                                           crossAxisCount: 2,
                                           onChanged: (value) {
-                                            formGroup.control('srq_screening_status').value = value.isNotEmpty ? value[0] : null;
+                                            formGroup.control('srq_screening_status').value =
+                                                value.isNotEmpty ? value[0] : null;
                                           },
                                           selected: formGroup.control('srq_screening_status').value,
                                         ),

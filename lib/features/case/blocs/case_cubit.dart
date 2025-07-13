@@ -568,105 +568,119 @@ class CaseCubit extends Cubit<CaseState> {
     getFaqCheckListData(state.caseWorkedUpon.outcomeValue);
   }
 
-  List<WorkflowItem> workflows(Case workingCase) {
-    final workflows = [
-      WorkflowItem(
-        route: const ReferralDetailsRoute(),
-        title: 'Referral Details',
-        description: '',
-        backendKey: 'patient_details_status',
-        status: false,
-      ),
-      WorkflowItem(
-          route: const TBScreeningRoute(),
-          title: 'TB Screening',
+  Map<String, List<WorkflowItem>> workflows(Case workingCase) {
+    final workflowMap = {
+      'Core': [
+        WorkflowItem(
+          route: const ReferralDetailsRoute(),
+          title: 'Referral Details',
           description: '',
-          backendKey: 'xray_status',
-          status: false),
-      WorkflowItem(
-        route: const MentalHealthRouterRoute(),
-        title: 'Mental Health Screening',
-        description: '',
-        backendKey: 'udst_status',
-        status: false,
-      ),
-      WorkflowItem(
-        route: const DiagnosisRoute(),
-        title: 'TB Diagnosis',
-        description: '',
-        backendKey: 'nikshay_status',
-        status: false,
-      ),
-      WorkflowItem(
-        route: const FaqChecklistRoute(),
-        title: 'FAO Checklist',
-        description: '',
-        backendKey: 'fao_checklist',
-        status: false,
-      ),
-      WorkflowItem(
-        route: const TreatmentRoute(),
-        title: 'TB Treatment',
-        description: '',
-        backendKey: 'comorbidity_status',
-        status: false,
-      ),
-      WorkflowItem(
-        route: const ContactTracingListRoute(),
-        title: 'TB Contact Tracing',
-        description: '',
-        backendKey: 'contract_casing_status',
-        status: false,
-      ),
-      WorkflowItem(
-        route: const OutcomeRoute(),
-        title: 'TB Outcome',
-        description: '',
-        backendKey: 'dbt_status',
-        status: false,
-      ),
-      WorkflowItem(
-        route: const AsthmaRoute(),
-        title: 'IHV - Asthma',
-        description: '',
-        backendKey: 'asthma_ihv_status',
-        status: false,
-      )
-    ];
+          backendKey: 'patient_details_status',
+          status: false,
+        ),
+        WorkflowItem(
+            route: const TBScreeningRoute(),
+            title: 'TB Screening',
+            description: '',
+            backendKey: 'xray_status',
+            status: false),
+        WorkflowItem(
+          route: const DiagnosisRoute(),
+          title: 'TB Diagnosis',
+          description: '',
+          backendKey: 'nikshay_status',
+          status: false,
+        ),
+      ],
+      'Disease Specific': [
+        WorkflowItem(
+          route: const TreatmentRoute(),
+          title: 'TB Treatment',
+          description: '',
+          backendKey: 'treatment_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: const ContactTracingListRoute(),
+          title: 'TB Contact Tracing',
+          description: '',
+          backendKey: 'contact_tracing_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: const OutcomeRoute(),
+          title: 'TB Outcome',
+          description: '',
+          backendKey: 'outcome_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: AsthmaRoute(
+            followUpNumber: 1,
+          ),
+          title: 'IHV - Asthma 1',
+          description: '',
+          backendKey: 'asthma_ihv_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: AsthmaRoute(
+            followUpNumber: 2,
+          ),
+          title: 'IHV - Asthma 2',
+          description: '',
+          backendKey: 'asthma_ihv_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: AsthmaRoute(
+            followUpNumber: 3,
+          ),
+          title: 'IHV - Asthma 3',
+          description: '',
+          backendKey: 'asthma_ihv_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: AsthmaRoute(
+            followUpNumber: 4,
+          ),
+          title: 'IHV - Asthma 4',
+          description: '',
+          backendKey: 'asthma_ihv_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: AsthmaRoute(
+            followUpNumber: 5,
+          ),
+          title: 'IHV - Asthma 5',
+          description: '',
+          backendKey: 'asthma_ihv_status',
+          status: false,
+        )
+      ],
+      'Supplement': [
+        WorkflowItem(
+          route: const MentalHealthScreeningRoute(),
+          title: 'Mental Health Screening',
+          description: '',
+          backendKey: 'mental_health_screening_status',
+          status: false,
+        ),
+        WorkflowItem(
+          route: const FaqChecklistRoute(),
+          title: 'FAO Checklist',
+          description: '',
+          backendKey: 'fao_checklist',
+          status: false,
+        ),
+      ],
+    };
 
-    return workflows;
+    return workflowMap;
   }
 
-  // Future<void> closeCase(String value) async {
-  //   final response = await caseRepo.closeCase(
-  //     caseId: state.caseWorkedUpon.id!,
-  //     outcome: value,
-  //   );
-
-  //   if (response.status == Status.ok) {
-  //     // emit(
-  //     //   state.copyWith(
-  //     //     caseWorkedUpon: state.caseWorkedUpon.copyWith(
-  //     //       outcome: value,
-  //     //     ),
-  //     //   ),
-  //     // );
-  //   }
-  // }
-
-  // Future<void> updateComorbidity(ComorbidityModel model) async {
-  //   final newComorbidity = await caseRepo.saveComorbidity(
-  //     caseId: state.caseWorkedUpon.id!,
-  //     comorbidityId: state.caseWorkedUpon.comorbidity,
-  //     comorbidity: model,
-  //   );
-  //   emit(
-  //     state.copyWith(
-  //       caseWorkedUpon: state.caseWorkedUpon.copyWith(comorbidity: newComorbidity.id),
-  //       comorbidityFormData: newComorbidity,
-  //     ),
-  //   );
-  // }
   void updateSingleCase(ContactTracingModel updatedContact) {
     final contactList = state.contactTracingList;
     final index =

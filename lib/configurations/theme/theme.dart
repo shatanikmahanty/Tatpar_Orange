@@ -10,7 +10,7 @@ export 'size_constants.dart';
 export 'typography.dart';
 
 class AppTheme {
-  static final buttonTextStyle = MaterialStatePropertyAll(
+  static final buttonTextStyle = WidgetStatePropertyAll(
     AppTextStyle.bodyLarge.copyWith(fontWeight: FontWeight.w600, fontSize: 15, wordSpacing: 0.2, height: 1.06),
   );
 
@@ -112,15 +112,15 @@ class AppTheme {
       inputDecorationTheme: AppTheme.inputDecorationTheme,
       textButtonTheme: TextButtonThemeData(
         style: theme.textButtonTheme.style?.copyWith(
-          backgroundColor: MaterialStateProperty.resolveWith(
+          backgroundColor: WidgetStateProperty.resolveWith(
             (states) {
-              if (states.contains(MaterialState.disabled)) {
+              if (states.contains(WidgetState.disabled)) {
                 return AppColors.primary.withOpacity(0.4);
               }
               return AppColors.primary;
             },
           ),
-          foregroundColor: const MaterialStatePropertyAll(
+          foregroundColor: const WidgetStatePropertyAll(
             AppColors.onPrimary,
           ),
         ),
