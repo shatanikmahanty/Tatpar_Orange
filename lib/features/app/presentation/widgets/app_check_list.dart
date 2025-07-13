@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../../../../configurations/theme/size_constants.dart';
 
 class AppCheckList extends StatefulWidget {
   const AppCheckList({
